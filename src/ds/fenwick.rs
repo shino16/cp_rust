@@ -1,14 +1,14 @@
 pub use crate::alg::*;
 use crate::bit::*;
 
-pub struct FenwickTree<T, Alg> {
-    data: Vec<T>,
-    alg: Alg,
+pub struct FenwickTree<A: Alg> {
+    data: Vec<A::Item>,
+    alg: A,
 }
 
-// Alg: Commutative
-impl<Alg: Monoid> FenwickTree<Alg::Item, Alg> {
-    pub fn new(mut data: Vec<Alg::Item>, alg: Alg) -> Self {
+// A: Commutative
+impl<A: Monoid> FenwickTree<A> {
+    pub fn new(mut data: Vec<A::Item>, alg: A) -> Self {
         let len = data.len();
         data.insert(0, alg.unit());
         for i in 1..=len {
@@ -18,18 +18,18 @@ impl<Alg: Monoid> FenwickTree<Alg::Item, Alg> {
         }
         Self { data, alg }
     }
-    pub fn add(&mut self, pos: usize, v: Alg::Item) {
+    pub fn add(&mut self, pos: usize, v: A::Item) {
         let mut pos = pos + 1;
         while pos < self.data.len() {
             self.data[pos] = self.alg.op(self.data[pos], v);
             pos += pos.lsb();
         }
     }
-    pub fn push(&mut self, v: Alg::Item) {
+    pub fn push(&mut self, v: A::Item) {
         self.data.push(self.alg.unit());
         self.add(self.data.len() - 1, v);
     }
-    pub fn ask_prefix(&self, mut r: usize) -> Alg::Item {
+    pub fn ask_prefix(&self, mut r: usize) -> A::Item {
         let mut res = self.alg.unit();
         while r != 0 {
             res = self.alg.op(self.data[r], res);
@@ -38,7 +38,7 @@ impl<Alg: Monoid> FenwickTree<Alg::Item, Alg> {
         res
     }
     // unverified
-    pub fn partition_point<F: FnMut(Alg::Item) -> bool>(&self, mut pred: F) -> usize {
+    pub fn partition_point<F: FnMut(A::Item) -> bool>(&self, mut pred: F) -> usize {
         let mut x = 0; // pred(&self.ask_prefix(x)) == true
         let mut w = (self.data.len() - 1).msb();
         let mut l = self.alg.unit();
@@ -51,22 +51,22 @@ impl<Alg: Monoid> FenwickTree<Alg::Item, Alg> {
         }
         x + 1
     }
-    pub fn lower_bound(&self, v: Alg::Item) -> usize
+    pub fn lower_bound(&self, v: A::Item) -> usize
     where
-        Alg::Item: Ord,
+        A::Item: Ord,
     {
         self.partition_point(|x| x < v)
     }
-    pub fn upper_bound(&self, v: Alg::Item) -> usize
+    pub fn upper_bound(&self, v: A::Item) -> usize
     where
-        Alg::Item: Ord,
+        A::Item: Ord,
     {
         self.partition_point(|x| x <= v)
     }
 }
 
-impl<Alg: Group> FenwickTree<Alg::Item, Alg> {
-    pub fn ask(&self, l: usize, r: usize) -> Alg::Item {
+impl<A: Group> FenwickTree<A> {
+    pub fn ask(&self, l: usize, r: usize) -> A::Item {
         self.alg
             .op(self.alg.inv(self.ask_prefix(l)), self.ask_prefix(r))
     }

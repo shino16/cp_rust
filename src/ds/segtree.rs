@@ -1,15 +1,15 @@
 pub use crate::alg::*;
 
-pub struct SegmentTree<T, Alg: 'static> {
+pub struct SegmentTree<A: Alg + 'static> {
     len: usize,
-    data: Box<[T]>,
-    alg: &'static Alg,
+    data: Box<[A::Item]>,
+    pub alg: A,
 }
 
-impl<Alg: Monoid> SegmentTree<Alg::Item, Alg> {
-    pub fn new(data: &[Alg::Item], alg: Alg) -> Self {
+impl<A: Monoid> SegmentTree<A> {
+    pub fn new(data: &[A::Item], alg: A) -> Self {
         let len = data.len();
-        let data: Vec<Alg::Item> = (0..len)
+        let data: Vec<A::Item> = (0..len)
             .map(|_| alg.unit())
             .chain(data.iter().copied())
             .collect();
@@ -20,23 +20,27 @@ impl<Alg: Monoid> SegmentTree<Alg::Item, Alg> {
         Self {
             len,
             data,
-            alg: Box::leak(Box::new(alg)),
+            alg,
         }
     }
-    pub fn add(&mut self, pos: usize, v: Alg::Item) {
-        let alg = self.alg;
-        self.exec(pos, |x| alg.op(x, v));
-    }
-    pub fn exec<F: FnOnce(Alg::Item) -> Alg::Item>(&mut self, mut pos: usize, f: F) {
-        pos += self.len;
-        self.data[pos] = f(self.data[pos]);
-        pos >>= 1;
-        while pos != 0 {
-            self.data[pos] = self.alg.op(self.data[pos << 1], self.data[pos << 1 | 1]);
-            pos >>= 1;
+    fn build(&mut self, mut p: usize) {
+        p >>= 1;
+        while p != 0 {
+            self.data[p] = self.alg.op(self.data[p << 1], self.data[p << 1 | 1]);
+            p >>= 1;
         }
     }
-    pub fn ask(&self, mut l: usize, mut r: usize) -> Alg::Item {
+    pub fn add(&mut self, pos: usize, v: A::Item) {
+        let p = pos +self.len;
+        self.data[p] = self.alg.op(self.data[p], v);
+        self.build(p);
+    }
+    pub fn exec<F: FnOnce(A::Item) -> A::Item>(&mut self, pos: usize, f: F) {
+        let p = pos + self.len;
+        self.data[p] = f(self.data[p]);
+        self.build(p);
+    }
+    pub fn ask(&self, mut l: usize, mut r: usize) -> A::Item {
         let (mut resl, mut resr) = (self.alg.unit(), self.alg.unit());
         l += self.len;
         r += self.len;

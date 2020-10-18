@@ -2,13 +2,13 @@ pub use crate::alg::*;
 use crate::bit::*;
 
 // unverified
-pub struct DisjointSparseTable<T, Alg> {
-    data: Vec<Vec<T>>,
-    alg: Alg,
+pub struct DisjointSparseTable<A: Alg> {
+    data: Vec<Vec<A::Item>>,
+    alg: A,
 }
 
-impl<Alg: Monoid> DisjointSparseTable<Alg::Item, Alg> {
-    pub fn new(data: Vec<Alg::Item>, alg: Alg) -> Self {
+impl<A: Monoid> DisjointSparseTable<A> {
+    pub fn new(data: Vec<A::Item>, alg: A) -> Self {
         let len = data.len();
         let height = len.ilog2() as usize;
         let mut data = vec![data];
@@ -30,7 +30,7 @@ impl<Alg: Monoid> DisjointSparseTable<Alg::Item, Alg> {
         }
         Self { data, alg }
     }
-    pub fn ask(&self, l: usize, r: usize) -> Alg::Item {
+    pub fn ask(&self, l: usize, r: usize) -> A::Item {
         if l == r {
             self.alg.unit()
         } else if l + 1 == r {

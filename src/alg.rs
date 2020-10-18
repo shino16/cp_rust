@@ -1,8 +1,8 @@
-pub trait Algebraic {
+pub trait Alg {
     type Item: Copy;
 }
 
-pub trait Monoid: Algebraic {
+pub trait Monoid: Alg {
     fn unit(&self) -> Self::Item;
     fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item;
 }
@@ -11,37 +11,56 @@ pub trait Group: Monoid {
     fn inv(&self, x: Self::Item) -> Self::Item;
 }
 
-pub struct MonoidImpl<T, F>(pub T, pub F);
+pub struct MonoidImpl<Unit, Op>(pub Unit, pub Op);
 
-impl<T: Copy, F> Algebraic for MonoidImpl<T, F> {
+impl<T: Copy, Unit, Op> Alg for MonoidImpl<Unit, Op>
+where
+    Unit: Fn() -> T,
+{
     type Item = T;
 }
 
-impl<T: Copy, F: Fn(T, T) -> T> Monoid for MonoidImpl<T, F> {
+impl<T: Copy, Unit, Op> Monoid for MonoidImpl<Unit, Op>
+where
+    Unit: Fn() -> T,
+    Op: Fn(T, T) -> T,
+{
     fn unit(&self) -> Self::Item {
-        self.0
+        (self.0)()
     }
     fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
         (self.1)(x, y)
     }
 }
 
-pub struct GroupImpl<T, F, G>(pub T, pub F, pub G);
+pub struct GroupImpl<Unit, Op, Inv>(pub Unit, pub Op, pub Inv);
 
-impl<T: Copy, F, G> Algebraic for GroupImpl<T, F, G> {
+impl<T: Copy, Unit, Op, Inv> Alg for GroupImpl<Unit, Op, Inv>
+where
+    Unit: Fn() -> T,
+{
     type Item = T;
 }
 
-impl<T: Copy, F: Fn(T, T) -> T, G> Monoid for GroupImpl<T, F, G> {
+impl<T: Copy, Unit, Op, Inv> Monoid for GroupImpl<Unit, Op, Inv>
+where
+    Unit: Fn() -> T,
+    Op: Fn(T, T) -> T,
+{
     fn unit(&self) -> Self::Item {
-        self.0
+        (self.0)()
     }
     fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
         (self.1)(x, y)
     }
 }
 
-impl<T: Copy, F: Fn(T, T) -> T, G: Fn(T) -> T> Group for GroupImpl<T, F, G> {
+impl<T: Copy, Unit, Op, Inv> Group for GroupImpl<Unit, Op, Inv>
+where
+    Unit: Fn() -> T,
+    Op: Fn(T, T) -> T,
+    Inv: Fn(T) -> T,
+{
     fn inv(&self, x: Self::Item) -> Self::Item {
         (self.2)(x)
     }

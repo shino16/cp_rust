@@ -1,31 +1,14 @@
+use crate::alg::*;
 use crate::bit::*;
 
-/// op(x, x) == x
-pub trait Band {
-    type Item: Copy;
-    fn unit(&self) -> Self::Item;
-    fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item;
+pub struct SparseTable<A: Alg> {
+    data: Vec<Vec<A::Item>>,
+    alg: A,
 }
 
-pub struct BandImpl<T, F>(pub T, pub F);
-
-impl<T: Copy, F: Fn(T, T) -> T> Band for BandImpl<T, F> {
-    type Item = T;
-    fn unit(&self) -> Self::Item {
-        self.0
-    }
-    fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
-        (self.1)(x, y)
-    }
-}
-
-pub struct SparseTable<T, Alg> {
-    data: Vec<Vec<T>>,
-    alg: Alg,
-}
-
-impl<Alg: Band> SparseTable<Alg::Item, Alg> {
-    pub fn new(data: Vec<Alg::Item>, alg: Alg) -> Self {
+// A: Band (x * x == x)
+impl<A: Monoid> SparseTable<A> {
+    pub fn new(data: Vec<A::Item>, alg: A) -> Self {
         let len = data.len();
         let height = len.ilog2() as usize;
         let mut data = vec![data];
@@ -39,7 +22,7 @@ impl<Alg: Band> SparseTable<Alg::Item, Alg> {
         }
         Self { data, alg }
     }
-    pub fn ask(&self, l: usize, r: usize) -> Alg::Item {
+    pub fn ask(&self, l: usize, r: usize) -> A::Item {
         if l == r {
             self.alg.unit()
         } else {
