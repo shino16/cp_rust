@@ -20,11 +20,10 @@ impl IO {
             out_buf: BufWriter::new(Box::leak(out).lock()),
         }
     }
-    fn scan_raw(&mut self) -> &[u8] {
+    fn scan_bytes(&mut self) -> &[u8] {
         loop {
             if self.pos == self.input.len() {
                 self.input.clear();
-                self.flush();
                 self.in_buf.read_until(b'\n', &mut self.input).unwrap();
                 self.pos = 0;
             } else if self.input[self.pos].is_ascii_whitespace() {
@@ -114,7 +113,7 @@ macro_rules! impl_parse_int {
             impl Scan for $t {
                 fn scan(s: &mut IO) -> Self {
                     let mut res = 0;
-                    for d in s.scan_raw() {
+                    for d in s.scan_bytes() {
                         res *= 10;
                         res += (*d - b'0') as $t;
                     }
@@ -129,9 +128,15 @@ impl_parse_int!(i32, i64, isize, u32, u64, usize);
 
 impl Scan for u8 {
     fn scan(s: &mut IO) -> Self {
-        let bytes = s.scan_raw();
+        let bytes = s.scan_bytes();
         debug_assert_eq!(bytes.len(), 1);
         bytes[0]
+    }
+}
+
+impl Scan for Vec<u8> {
+    fn scan(s: &mut IO) -> Self {
+        s.scan_bytes().to_owned()
     }
 }
 
@@ -165,12 +170,6 @@ impl<T: Scan> Scan for [T; 4] {
     }
 }
 
-impl Scan for Vec<u8> {
-    fn scan(s: &mut IO) -> Self {
-        s.scan_raw().to_owned()
-    }
-}
-
 pub trait Print {
     fn print(w: &mut IO, x: Self);
 }
@@ -189,15 +188,21 @@ macro_rules! impl_print_int {
 
 impl_print_int!(i32, i64, isize, u32, u64, usize);
 
-impl Print for &str {
-    fn print(w: &mut IO, x: Self) {
-        w.out_buf.write_all(x.as_bytes()).unwrap();
-    }
-}
-
 impl Print for u8 {
     fn print(w: &mut IO, x: Self) {
         w.out_buf.write_all(&[x]).unwrap();
+    }
+}
+
+impl Print for &[u8] {
+    fn print(w: &mut IO, x: Self) {
+        w.out_buf.write_all(x).unwrap();
+    }
+}
+
+impl Print for &str {
+    fn print(w: &mut IO, x: Self) {
+        w.print(x.as_bytes());
     }
 }
 

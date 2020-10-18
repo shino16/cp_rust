@@ -1,12 +1,13 @@
 pub use crate::alg::*;
 use crate::bit::*;
 
-pub struct Fenwick<T, Alg> {
+pub struct FenwickTree<T, Alg> {
     data: Vec<T>,
     alg: Alg,
 }
 
-impl<Alg: Monoid> Fenwick<Alg::Item, Alg> {
+// Alg: Commutative
+impl<Alg: Monoid> FenwickTree<Alg::Item, Alg> {
     pub fn new(mut data: Vec<Alg::Item>, alg: Alg) -> Self {
         let len = data.len();
         data.insert(0, alg.unit());
@@ -50,15 +51,21 @@ impl<Alg: Monoid> Fenwick<Alg::Item, Alg> {
         }
         x + 1
     }
-    pub fn lower_bound(&self, v: Alg::Item) -> usize where Alg::Item: Ord {
+    pub fn lower_bound(&self, v: Alg::Item) -> usize
+    where
+        Alg::Item: Ord,
+    {
         self.partition_point(|x| x < v)
     }
-    pub fn upper_bound(&self, v: Alg::Item) -> usize where Alg::Item: Ord {
+    pub fn upper_bound(&self, v: Alg::Item) -> usize
+    where
+        Alg::Item: Ord,
+    {
         self.partition_point(|x| x <= v)
     }
 }
 
-impl<Alg: Group> Fenwick<Alg::Item, Alg> {
+impl<Alg: Group> FenwickTree<Alg::Item, Alg> {
     pub fn ask(&self, l: usize, r: usize) -> Alg::Item {
         self.alg
             .op(self.alg.inv(self.ask_prefix(l)), self.ask_prefix(r))

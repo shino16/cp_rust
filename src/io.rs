@@ -1,39 +1,34 @@
 use std::io::{stdout, BufWriter, Read, StdoutLock, Write};
 
 pub struct IO {
-    input: Vec<u8>,
-    pos: usize,
+    iter: std::str::SplitAsciiWhitespace<'static>,
     buf: BufWriter<StdoutLock<'static>>,
 }
 
 impl IO {
     pub fn new() -> Self {
-        let mut input = Vec::new();
-        std::io::stdin().read_to_end(&mut input).unwrap();
+        let mut input = String::new();
+        std::io::stdin().read_to_string(&mut input).unwrap();
+        let input = Box::leak(input.into_boxed_str());
         let out = Box::new(stdout());
         IO {
-            input,
-            pos: 0,
+            iter: input.split_ascii_whitespace(),
             buf: BufWriter::new(Box::leak(out).lock()),
         }
     }
-    fn scan_raw(&mut self) -> &[u8] {
-        while self.input[self.pos].is_ascii_whitespace() {
-            self.pos += 1;
-        }
-        let i = self.pos;
-        while self.pos != self.input.len() && !self.input[self.pos].is_ascii_whitespace() {
-            self.pos += 1;
-        }
-        &self.input[i..self.pos]
+    fn scan_str(&mut self) -> &'static str {
+        self.iter.next().unwrap()
+    }
+    fn scan_raw(&mut self) -> &'static [u8] {
+        self.scan_str().as_bytes()
     }
     pub fn scan<T: Scan>(&mut self) -> T {
         T::scan(self)
     }
-    pub fn vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
+    pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
         (0..n).map(|_| self.scan()).collect()
     }
-    pub fn graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
+    pub fn scan_graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
         let n = self.scan();
         let m = self.scan();
         let mut graph = vec![Vec::new(); n];
@@ -45,7 +40,7 @@ impl IO {
         }
         (n, m, graph)
     }
-    pub fn digraph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
+    pub fn scan_digraph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
         let n = self.scan();
         let m = self.scan();
         let mut graph = vec![Vec::new(); n];
@@ -56,7 +51,7 @@ impl IO {
         }
         (n, m, graph)
     }
-    pub fn tree(&mut self) -> (usize, Vec<Vec<usize>>) {
+    pub fn scan_tree(&mut self) -> (usize, Vec<Vec<usize>>) {
         let n = self.scan();
         let mut graph = vec![Vec::new(); n];
         for _ in 0..n - 1 {
@@ -123,6 +118,12 @@ impl Scan for u8 {
     }
 }
 
+impl Scan for &[u8] {
+    fn scan(s: &mut IO) -> Self {
+        s.scan_raw()
+    }
+}
+
 impl<T: Scan, U: Scan> Scan for (T, U) {
     fn scan(s: &mut IO) -> Self {
         (T::scan(s), U::scan(s))
@@ -153,12 +154,6 @@ impl<T: Scan> Scan for [T; 4] {
     }
 }
 
-impl Scan for Vec<u8> {
-    fn scan(s: &mut IO) -> Self {
-        s.scan_raw().to_owned()
-    }
-}
-
 pub trait Print {
     fn print(w: &mut IO, x: Self);
 }
@@ -177,15 +172,21 @@ macro_rules! impl_print_int {
 
 impl_print_int!(i32, i64, isize, u32, u64, usize);
 
-impl Print for &str {
-    fn print(w: &mut IO, x: Self) {
-        w.buf.write_all(x.as_bytes()).unwrap();
-    }
-}
-
 impl Print for u8 {
     fn print(w: &mut IO, x: Self) {
         w.buf.write_all(&[x]).unwrap();
+    }
+}
+
+impl Print for &[u8] {
+    fn print(w: &mut IO, x: Self) {
+        w.buf.write_all(x).unwrap();
+    }
+}
+
+impl Print for &str {
+    fn print(w: &mut IO, x: Self) {
+        w.print(x.as_bytes());
     }
 }
 

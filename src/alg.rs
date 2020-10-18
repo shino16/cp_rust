@@ -1,5 +1,8 @@
-pub trait Monoid {
+pub trait Algebraic {
     type Item: Copy;
+}
+
+pub trait Monoid: Algebraic {
     fn unit(&self) -> Self::Item;
     fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item;
 }
@@ -10,8 +13,11 @@ pub trait Group: Monoid {
 
 pub struct MonoidImpl<T, F>(pub T, pub F);
 
-impl<T: Copy, F: Fn(T, T) -> T> Monoid for MonoidImpl<T, F> {
+impl<T: Copy, F> Algebraic for MonoidImpl<T, F> {
     type Item = T;
+}
+
+impl<T: Copy, F: Fn(T, T) -> T> Monoid for MonoidImpl<T, F> {
     fn unit(&self) -> Self::Item {
         self.0
     }
@@ -20,11 +26,13 @@ impl<T: Copy, F: Fn(T, T) -> T> Monoid for MonoidImpl<T, F> {
     }
 }
 
-
 pub struct GroupImpl<T, F, G>(pub T, pub F, pub G);
 
-impl<T: Copy, F: Fn(T, T) -> T, G> Monoid for GroupImpl<T, F, G> {
+impl<T: Copy, F, G> Algebraic for GroupImpl<T, F, G> {
     type Item = T;
+}
+
+impl<T: Copy, F: Fn(T, T) -> T, G> Monoid for GroupImpl<T, F, G> {
     fn unit(&self) -> Self::Item {
         self.0
     }

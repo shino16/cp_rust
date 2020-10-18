@@ -17,7 +17,11 @@ impl<Alg: Monoid> SegmentTree<Alg::Item, Alg> {
         for i in (1..len).rev() {
             data[i] = alg.op(data[i << 1], data[i << 1 | 1]);
         }
-        Self { len, data, alg: Box::leak(Box::new(alg)) }
+        Self {
+            len,
+            data,
+            alg: Box::leak(Box::new(alg)),
+        }
     }
     pub fn add(&mut self, pos: usize, v: Alg::Item) {
         let alg = self.alg;

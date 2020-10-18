@@ -168,10 +168,10 @@ where
     X::State: Eq + Hash + Copy,
 {
     let mut dp = HashMap::new();
-  	let mut dp2 = HashMap::new();
+    let mut dp2 = HashMap::new();
     dp.insert(dfa.init(), 1_u64);
     for i in 0..n {
-      	dp2.clear();
+        dp2.clear();
         for (s, k) in dp.drain() {
             let k = k % modulo as u64;
             for &a in alphabet {
@@ -182,7 +182,7 @@ where
                 *dp2.entry(s1).or_insert(0) += k;
             }
         }
-     	std::mem::swap(&mut dp, &mut dp2);
+        std::mem::swap(&mut dp, &mut dp2);
     }
     let mut sum = 0;
     let cap = dp.capacity().max(dp2.capacity());
