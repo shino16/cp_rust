@@ -7,11 +7,11 @@ pub struct SegmentTree<T, Alg: 'static> {
 }
 
 impl<Alg: Monoid> SegmentTree<Alg::Item, Alg> {
-    pub fn new(data: Vec<Alg::Item>, alg: Alg) -> Self {
+    pub fn new(data: &[Alg::Item], alg: Alg) -> Self {
         let len = data.len();
         let data: Vec<Alg::Item> = (0..len)
             .map(|_| alg.unit())
-            .chain(data.into_iter())
+            .chain(data.iter().copied())
             .collect();
         let mut data = data.into_boxed_slice();
         for i in (1..len).rev() {
