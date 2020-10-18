@@ -5,6 +5,7 @@ pub mod comp;
 pub mod ds;
 pub mod graph;
 pub mod io;
+pub mod io_interactive;
 pub mod meaningless;
 pub mod rng;
 pub mod slice;

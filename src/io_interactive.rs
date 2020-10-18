@@ -1,25 +1,37 @@
-use std::io::{stdout, BufWriter, Read, StdoutLock, Write};
+// TODO: integrate with crate::io
+
+use std::io::{stdin, stdout, BufRead, BufReader, BufWriter, StdinLock, StdoutLock, Write};
 
 pub struct IO {
     input: Vec<u8>,
     pos: usize,
-    buf: BufWriter<StdoutLock<'static>>,
+    in_buf: BufReader<StdinLock<'static>>,
+    out_buf: BufWriter<StdoutLock<'static>>,
 }
 
 impl IO {
     pub fn new() -> Self {
-        let mut input = Vec::new();
-        std::io::stdin().read_to_end(&mut input).unwrap();
+        let inp = Box::new(stdin());
         let out = Box::new(stdout());
         IO {
-            input,
+            input: Vec::new(),
             pos: 0,
-            buf: BufWriter::new(Box::leak(out).lock()),
+            in_buf: BufReader::new(Box::leak(inp).lock()),
+            out_buf: BufWriter::new(Box::leak(out).lock()),
         }
     }
     fn scan_raw(&mut self) -> &[u8] {
-        while self.input[self.pos].is_ascii_whitespace() {
-            self.pos += 1;
+        loop {
+            if self.pos == self.input.len() {
+                self.input.clear();
+                self.flush();
+                self.in_buf.read_until(b'\n', &mut self.input).unwrap();
+                self.pos = 0;
+            } else if self.input[self.pos].is_ascii_whitespace() {
+                self.pos += 1;
+            } else {
+                break;
+            }
         }
         let i = self.pos;
         while self.pos != self.input.len() && !self.input[self.pos].is_ascii_whitespace() {
@@ -88,7 +100,7 @@ impl IO {
         self.print("\n");
     }
     pub fn flush(&mut self) {
-        self.buf.flush().unwrap();
+        self.out_buf.flush().unwrap();
     }
 }
 
@@ -168,7 +180,7 @@ macro_rules! impl_print_int {
         $(
             impl Print for $t {
                 fn print(w: &mut IO, x: Self) {
-                    w.buf.write_all(x.to_string().as_bytes()).unwrap();
+                    w.out_buf.write_all(x.to_string().as_bytes()).unwrap();
                 }
             }
         )*
@@ -179,13 +191,13 @@ impl_print_int!(i32, i64, isize, u32, u64, usize);
 
 impl Print for &str {
     fn print(w: &mut IO, x: Self) {
-        w.buf.write_all(x.as_bytes()).unwrap();
+        w.out_buf.write_all(x.as_bytes()).unwrap();
     }
 }
 
 impl Print for u8 {
     fn print(w: &mut IO, x: Self) {
-        w.buf.write_all(&[x]).unwrap();
+        w.out_buf.write_all(&[x]).unwrap();
     }
 }
 
