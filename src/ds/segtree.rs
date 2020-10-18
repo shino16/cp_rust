@@ -3,7 +3,7 @@ pub use crate::alg::*;
 pub struct SegmentTree<A: Alg + 'static> {
     len: usize,
     data: Box<[A::Item]>,
-    pub alg: A,
+    alg: A,
 }
 
 impl<A: Monoid> SegmentTree<A> {
