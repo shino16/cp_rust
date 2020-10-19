@@ -16,7 +16,7 @@ impl<A: Monoid> SparseTable<A> {
             let w = 1 << (s - 1);
             let mut new_row = Vec::with_capacity(data[s - 1].len() - w);
             for i in 0..data[s - 1].len() - w {
-                new_row.push(alg.op(data[s - 1][i], data[s - 1][i + w]));
+                new_row.push(alg.op(&data[s - 1][i], &data[s - 1][i + w]));
             }
             data.push(new_row);
         }
@@ -28,7 +28,7 @@ impl<A: Monoid> SparseTable<A> {
         } else {
             let s = (r - l).ilog2() as usize;
             let w = 1 << s;
-            self.alg.op(self.data[s][l], self.data[s][r - w])
+            self.alg.op(&self.data[s][l], &self.data[s][r - w])
         }
     }
 }

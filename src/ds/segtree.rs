@@ -1,6 +1,6 @@
 pub use crate::alg::*;
 
-pub struct SegmentTree<A: Alg + 'static> {
+pub struct SegmentTree<A: Alg> {
     len: usize,
     data: Box<[A::Item]>,
     alg: A,
@@ -9,13 +9,14 @@ pub struct SegmentTree<A: Alg + 'static> {
 impl<A: Monoid> SegmentTree<A> {
     pub fn new(data: &[A::Item], alg: A) -> Self {
         let len = data.len();
-        let data: Vec<A::Item> = (0..len)
-            .map(|_| alg.unit())
-            .chain(data.iter().copied())
-            .collect();
-        let mut data = data.into_boxed_slice();
+        let mut data = {
+            let mut data1 = Vec::with_capacity(len * 2);
+            data1.extend_from_slice(data);
+            data1.extend_from_slice(data);
+            data1.into_boxed_slice()
+        };
         for i in (1..len).rev() {
-            data[i] = alg.op(data[i << 1], data[i << 1 | 1]);
+            data[i] = alg.op(&data[i << 1], &data[i << 1 | 1]);
         }
         Self {
             len,
@@ -26,18 +27,18 @@ impl<A: Monoid> SegmentTree<A> {
     fn build(&mut self, mut p: usize) {
         p >>= 1;
         while p != 0 {
-            self.data[p] = self.alg.op(self.data[p << 1], self.data[p << 1 | 1]);
+            self.data[p] = self.alg.op(&self.data[p << 1], &self.data[p << 1 | 1]);
             p >>= 1;
         }
     }
-    pub fn add(&mut self, pos: usize, v: A::Item) {
+    pub fn add(&mut self, pos: usize, v: &A::Item) {
         let p = pos +self.len;
-        self.data[p] = self.alg.op(self.data[p], v);
+        self.data[p] = self.alg.op(&self.data[p], v);
         self.build(p);
     }
-    pub fn exec<F: FnOnce(A::Item) -> A::Item>(&mut self, pos: usize, f: F) {
+    pub fn exec<F: FnOnce(&mut A::Item)>(&mut self, pos: usize, f: F) {
         let p = pos + self.len;
-        self.data[p] = f(self.data[p]);
+        f(&mut self.data[p]);
         self.build(p);
     }
     pub fn ask(&self, mut l: usize, mut r: usize) -> A::Item {
@@ -46,16 +47,16 @@ impl<A: Monoid> SegmentTree<A> {
         r += self.len;
         while l < r {
             if l & 1 != 0 {
-                resl = self.alg.op(resl, self.data[l]);
+                resl = self.alg.op(&resl, &self.data[l]);
                 l += 1;
             }
             if r & 1 != 0 {
-                resr = self.alg.op(self.data[r - 1], resr);
+                resr = self.alg.op(&self.data[r - 1], &resr);
                 r -= 1;
             }
             l >>= 1;
             r >>= 1;
         }
-        self.alg.op(resl, resr)
+        self.alg.op(&resl, &resr)
     }
 }
