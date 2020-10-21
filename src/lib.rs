@@ -1,4 +1,4 @@
-#[allow(clippy::new_without_default)]
+#![allow(clippy::new_without_default)]
 
 pub mod alg;
 pub mod bit;
@@ -11,3 +11,4 @@ pub mod io_interactive;
 pub mod rng;
 pub mod slice;
 pub mod string;
+pub mod bitset;
