@@ -1,6 +1,7 @@
 pub struct UnionFind {
     par: Box<[usize]>,
     size: Box<[usize]>,
+    count: usize,
 }
 
 impl UnionFind {
@@ -10,6 +11,7 @@ impl UnionFind {
         Self {
             par: par.into_boxed_slice(),
             size: size.into_boxed_slice(),
+            count: len,
         }
     }
     pub fn find(&mut self, x: usize) -> usize {
@@ -34,6 +36,10 @@ impl UnionFind {
             }
             self.par[y] = x;
             self.size[x] += self.size[y];
+            self.count -= 1;
         }
+    }
+    pub fn count(&self) -> usize {
+        self.count
     }
 }
