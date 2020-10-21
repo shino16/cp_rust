@@ -1,3 +1,5 @@
+#[allow(clippy::new_without_default)]
+
 pub mod alg;
 pub mod bit;
 pub mod cmp;
