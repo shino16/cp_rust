@@ -7,12 +7,16 @@ pub struct Vec2D<T> {
 }
 
 impl<T: Clone> Vec2D<T> {
-    pub fn new(h: usize, w: usize, v: T) -> Self {
+    pub fn fill(h: usize, w: usize, v: T) -> Self {
         Self {
             h,
             w,
             inner: vec![v; h * w],
         }
+    }
+    pub fn resize_from(h: usize, w: usize, inner: Vec<T>) -> Self {
+        debug_assert_eq!(inner.len(), h * w);
+        Self { h, w, inner }
     }
 }
 

@@ -25,7 +25,7 @@ impl<T> Slice for [T] {
     where
         Self::Item: Clone,
     {
-        self.iter_mut().for_each(|elem| elem.clone_from(&value));
+        self.iter_mut().for_each(|e| e.clone_from(&value));
     }
     fn partition_point<F: FnMut(&Self::Item) -> bool>(&self, mut pred: F) -> usize {
         let (mut lb, mut ub) = (0, self.len()); // pred(self[ub]) == false
