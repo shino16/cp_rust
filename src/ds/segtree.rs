@@ -2,7 +2,7 @@ pub use crate::alg::*;
 
 pub struct SegmentTree<A: Alg> {
     len: usize,
-    data: Box<[A::Item]>,
+    data: Vec<A::Item>,
     alg: A,
 }
 
@@ -13,16 +13,12 @@ impl<A: Monoid> SegmentTree<A> {
             let mut data1 = Vec::with_capacity(len * 2);
             data1.extend_from_slice(data);
             data1.extend_from_slice(data);
-            data1.into_boxed_slice()
+            data1
         };
         for i in (1..len).rev() {
             data[i] = alg.op(&data[i << 1], &data[i << 1 | 1]);
         }
-        Self {
-            len,
-            data,
-            alg,
-        }
+        Self { len, data, alg }
     }
     fn build(&mut self, mut p: usize) {
         p >>= 1;
@@ -32,7 +28,7 @@ impl<A: Monoid> SegmentTree<A> {
         }
     }
     pub fn add(&mut self, pos: usize, v: &A::Item) {
-        let p = pos +self.len;
+        let p = pos + self.len;
         self.data[p] = self.alg.op(&self.data[p], v);
         self.build(p);
     }
