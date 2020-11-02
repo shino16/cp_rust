@@ -1,6 +1,6 @@
 pub struct UnionFind {
-    par: Box<[usize]>,
-    size: Box<[usize]>,
+    par: Vec<usize>,
+    size: Vec<usize>,
     count: usize,
 }
 
@@ -8,11 +8,7 @@ impl UnionFind {
     pub fn new(len: usize) -> Self {
         let par: Vec<_> = (0..len).collect();
         let size = vec![1; len];
-        Self {
-            par: par.into_boxed_slice(),
-            size: size.into_boxed_slice(),
-            count: len,
-        }
+        Self { par, size, count: len }
     }
     pub fn find(&mut self, x: usize) -> usize {
         if self.par[x] == x {
@@ -26,7 +22,8 @@ impl UnionFind {
         self.find(x) == self.find(y)
     }
     pub fn size(&mut self, x: usize) -> usize {
-        self.size[self.find(x)]
+        let root = self.find(x);
+        self.size[root]
     }
     pub fn unite(&mut self, x: usize, y: usize) {
         let (mut x, mut y) = (self.find(x), self.find(y));
