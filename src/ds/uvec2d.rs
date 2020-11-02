@@ -1,5 +1,5 @@
-use std::ops::{Index, IndexMut};
 use crate::ds::uvec::*;
+use std::ops::{Index, IndexMut};
 
 pub struct UVec2D<T> {
     pub h: usize,
@@ -9,11 +9,7 @@ pub struct UVec2D<T> {
 
 impl<T: Clone> UVec2D<T> {
     pub fn fill(h: usize, w: usize, v: T) -> Self {
-        Self {
-            h,
-            w,
-            inner: UVec(vec![v; h * w]),
-        }
+        Self { h, w, inner: UVec(vec![v; h * w]) }
     }
     pub fn resize_from(h: usize, w: usize, inner: UVec<T>) -> Self {
         debug_assert_eq!(inner.len(), h * w);
