@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct UnionFind {
     par: Vec<usize>,
     size: Vec<usize>,

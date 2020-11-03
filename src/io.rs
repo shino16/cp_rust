@@ -72,12 +72,13 @@ impl IO {
         self.print(x);
         self.print("\n");
     }
-    pub fn iterln<T: Print, I: Iterator<Item = T>>(&mut self, mut iter: I, delim: &str) {
+    pub fn iterln<T: Print, I: IntoIterator<Item = T>>(&mut self, iter: I, delim: &str) {
+        let mut iter = iter.into_iter();
         if let Some(v) = iter.next() {
             self.print(v);
             for v in iter {
                 self.print(delim);
-                self.println(v);
+                self.print(v);
             }
         }
         self.print("\n");
@@ -92,20 +93,18 @@ pub trait Scan {
 }
 
 macro_rules! impl_parse_int {
-    ($($t:tt),*) => {
-        $(
-            impl Scan for $t {
-                fn scan(s: &mut IO) -> Self {
-                    let mut res = 0;
-                    for d in s.scan_raw() {
-                        res *= 10;
-                        res += (*d - b'0') as $t;
-                    }
-                    res
+    ($($t:tt),*) => { $(
+        impl Scan for $t {
+            fn scan(s: &mut IO) -> Self {
+                let mut res = 0;
+                for d in s.scan_raw() {
+                    res *= 10;
+                    res += (*d - b'0') as $t;
                 }
+                res
             }
-        )*
-    };
+        }
+    )* };
 }
 
 impl_parse_int!(i32, i64, isize, u32, u64, usize);
@@ -159,15 +158,13 @@ pub trait Print {
 }
 
 macro_rules! impl_print_int {
-    ($($t:ty),*) => {
-        $(
-            impl Print for $t {
-                fn print(w: &mut IO, x: Self) {
-                    w.buf.write_all(x.to_string().as_bytes()).unwrap();
-                }
+    ($($t:ty),*) => { $(
+        impl Print for $t {
+            fn print(w: &mut IO, x: Self) {
+                w.buf.write_all(x.to_string().as_bytes()).unwrap();
             }
-        )*
-    };
+        }
+    )* };
 }
 
 impl_print_int!(i32, i64, isize, u32, u64, usize);
