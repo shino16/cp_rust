@@ -63,11 +63,11 @@ impl<M: Mod> Fp<M> {
     pub fn value(self) -> u32 {
         redc::<M>(self.val as u64)
     }
-    pub fn grow(self) -> FpExt<M> {
-        FpExt::from_raw((self.val as u64) << 32)
+    pub fn grow(self) -> FpGrow<M> {
+        FpGrow::from_raw((self.val as u64) << 32)
     }
-    pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> FpExt<M> {
-        FpExt::from_raw(self.val as u64 * rhs.into().val as u64)
+    pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> FpGrow<M> {
+        FpGrow::from_raw(self.val as u64 * rhs.into().val as u64)
     }
     pub fn pow<I>(self, exp: I) -> Self
     where
@@ -109,12 +109,12 @@ impl<M: Mod> Fp<M> {
 }
 
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
-pub struct FpExt<M: Mod> {
+pub struct FpGrow<M: Mod> {
     val: u64,
     _m: PhantomData<M>,
 }
 
-impl<M: Mod> FpExt<M> {
+impl<M: Mod> FpGrow<M> {
     fn from_raw(val: u64) -> Self {
         Self { val, _m: PhantomData }
     }
@@ -126,8 +126,8 @@ impl<M: Mod> FpExt<M> {
     }
 }
 
-impl<M: Mod> From<FpExt<M>> for Fp<M> {
-    fn from(v: FpExt<M>) -> Self {
+impl<M: Mod> From<FpGrow<M>> for Fp<M> {
+    fn from(v: FpGrow<M>) -> Self {
         v.reduce()
     }
 }
@@ -139,7 +139,7 @@ macro_rules! impl_from_int {
                 Self::new((x as $via).rem_euclid(M::M as $via) as u32)
             }
         }
-        impl<M: Mod> From<$ty> for FpExt<M> {
+        impl<M: Mod> From<$ty> for FpGrow<M> {
             fn from(x: $ty) -> Self {
                 Fp::from(x).grow()
             }
@@ -254,14 +254,14 @@ impl<M: Mod> Scan for Fp<M> {
     }
 }
 
-impl<M: Mod> ops::Add<Self> for FpExt<M> {
+impl<M: Mod> ops::Add<Self> for FpGrow<M> {
     type Output = Self;
     fn add(mut self, rhs: Self) -> Self {
         self += rhs;
         self
     }
 }
-impl<M: Mod> ops::AddAssign<Self> for FpExt<M> {
+impl<M: Mod> ops::AddAssign<Self> for FpGrow<M> {
     fn add_assign(&mut self, rhs: Self) {
         self.val += rhs.val;
     }
