@@ -130,11 +130,6 @@ macro_rules! impl_from_int {
                 Self::new((x as $via).rem_euclid(M::P as $via) as u32)
             }
         }
-        impl<M: Mod> From<$ty> for FpGrow<M> {
-            fn from(x: $ty) -> Self {
-                Fp::from(x).grow()
-            }
-        }
     )* };
 }
 
