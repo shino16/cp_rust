@@ -8,11 +8,9 @@ use std::{fmt, iter, ops};
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
     const M: u32;
     const PHI: u32;
-    // -1 / M mod 2^32
-    const K: u32;
-    // 2^64 mod M
-    const R2: u32;
-    // montgomery reduction (x -> x / r mod M)
+    const K: u32; // -1 / M mod 2^32
+    const R2: u32; // 2^64 mod M
+    // montgomery reduction (x -> x / 2^32 mod M)
     fn redc(x: u64) -> u32 {
         let s = Self::K.wrapping_mul(x as u32);
         let t = x + s as u64 * Self::M as u64;
