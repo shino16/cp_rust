@@ -10,13 +10,14 @@ pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
     const PHI: u32;
     const K: u32; // -1 / M mod 2^32
     const R2: u32; // 2^64 mod M
-    // montgomery reduction (x -> x / 2^32 mod M)
-    fn redc(x: u64) -> u32 {
-        let s = Self::K.wrapping_mul(x as u32);
-        let t = x + s as u64 * Self::M as u64;
-        let u = (t >> 32) as u32;
-        if u < Self::M { u } else { u - Self::M }
-    }
+}
+
+// montgomery reduction (x -> x / 2^32 mod M)
+fn redc<M: Mod>(x: u64) -> u32 {
+    let s = M::K.wrapping_mul(x as u32);
+    let t = x + s as u64 * M::M as u64;
+    let u = (t >> 32) as u32;
+    if u < M::M { u } else { u - M::M }
 }
 
 macro_rules! def_mod {
@@ -35,6 +36,11 @@ macro_rules! def_mod {
     };
 }
 
+def_mod!(Mod17, 1_000_000_007, 2_226_617_417, 582_344_008);
+def_mod!(Mod99, 998_244_353, 998_244_351, 932_051_910);
+def_mod!(Mod10, 1_012_924_417, 1_012_924_415, 818_184_550);
+def_mod!(Mod92, 924_844_033, 924844031, 404_973_864);
+
 // modular arithmetics
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
 pub struct Fp<M: Mod> {
@@ -42,23 +48,20 @@ pub struct Fp<M: Mod> {
     _m: PhantomData<M>,
 }
 
-def_mod!(Mod17, 1_000_000_007, 2_226_617_417, 582_344_008);
-def_mod!(Mod99, 998_244_353, 998_244_351, 932_051_910);
-// def_mod!(Mod10, 1_012_924_417, 1_012_924_415, 818_184_550);
-// def_mod!(Mod92, 924_844_033, 924844031, 404_973_864);
-
 pub type Fp17 = Fp<Mod17>;
 pub type Fp99 = Fp<Mod99>;
+pub type Fp10 = Fp<Mod10>;
+pub type Fp92 = Fp<Mod92>;
 
 impl<M: Mod> Fp<M> {
     pub fn new(val: u32) -> Self {
-        Fp::from_raw(M::redc(val as u64 * M::R2 as u64))
+        Fp::from_raw(redc::<M>(val as u64 * M::R2 as u64))
     }
     fn from_raw(val: u32) -> Self {
         Fp { val, _m: PhantomData }
     }
     pub fn value(self) -> u32 {
-        M::redc(self.val as u64)
+        redc::<M>(self.val as u64)
     }
     pub fn grow(self) -> FpExt<M> {
         FpExt::from_raw((self.val as u64) << 32)
@@ -116,7 +119,7 @@ impl<M: Mod> FpExt<M> {
         Self { val, _m: PhantomData }
     }
     pub fn reduce(self) -> Fp<M> {
-        Fp::from_raw(M::redc(self.val))
+        Fp::from_raw(redc::<M>(self.val))
     }
     pub fn value(self) -> u32 {
         self.reduce().value()
