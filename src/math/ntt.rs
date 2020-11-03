@@ -1,9 +1,12 @@
-use crate::fp::*;
+pub trait Conv: Sized {
+    fn conv(lhs: Vec<Self>, rhs: Vec<Self>) -> Vec<Self>;
+}
 
 macro_rules! impl_ntt {
     ($module:ident, $modu:ty, $log2k:expr, $kth_root:expr, $inv_kth_root:expr) => {
         mod $module {
             use super::super::super::fp::*;
+            use super::Conv;
 
             type FpType = Fp<$modu>;
 
@@ -103,11 +106,11 @@ macro_rules! impl_ntt {
                 }
                 a
             }
-        }
 
-        impl Fp<$modu> {
-            pub fn conv(lhs: Vec<Self>, rhs: Vec<Self>) -> Vec<Self> {
-                unsafe { $module::mul(lhs, rhs) }
+            impl Conv for FpType {
+                fn conv(lhs: Vec<Self>, rhs: Vec<Self>) -> Vec<Self> {
+                    unsafe  { mul(lhs, rhs) }
+                }
             }
         }
     };

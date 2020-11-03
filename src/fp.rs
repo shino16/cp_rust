@@ -6,30 +6,25 @@ use std::marker::PhantomData;
 use std::{fmt, iter, ops};
 
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
-    const M: u32;
-    const PHI: u32;
-    const K: u32; // -1 / M mod 2^32
-    const R2: u32; // 2^64 mod M
+    const P: u32;
+    const K: u32; // -1 / P mod 2^32
+    const R2: u32; // 2^64 mod P
 }
 
-// montgomery reduction (x -> x / 2^32 mod M)
+// montgomery reduction (x -> x / 2^32 mod P)
 fn redc<M: Mod>(x: u64) -> u32 {
     let s = M::K.wrapping_mul(x as u32);
-    let t = x + s as u64 * M::M as u64;
+    let t = x + s as u64 * M::P as u64;
     let u = (t >> 32) as u32;
-    if u < M::M { u } else { u - M::M }
+    if u < M::P { u } else { u - M::P }
 }
 
 macro_rules! def_mod {
     ($name:ident, $modu:expr, $k:expr, $r2:expr) => {
-        def_mod!($name, $modu, $modu - 1, $k, $r2);
-    };
-    ($name:ident, $modu:expr, $phi:expr, $k:expr, $r2:expr) => {
         #[derive(Default, Clone, Copy, PartialEq, Eq, Debug)]
         pub struct $name;
         impl Mod for $name {
-            const M: u32 = $modu;
-            const PHI: u32 = $phi;
+            const P: u32 = $modu;
             const K: u32 = $k;
             const R2: u32 = $r2;
         }
@@ -39,7 +34,7 @@ macro_rules! def_mod {
 def_mod!(Mod17, 1_000_000_007, 2_226_617_417, 582_344_008);
 def_mod!(Mod99, 998_244_353, 998_244_351, 932_051_910);
 def_mod!(Mod10, 1_012_924_417, 1_012_924_415, 818_184_550);
-def_mod!(Mod92, 924_844_033, 924844031, 404_973_864);
+def_mod!(Mod92, 924_844_033, 924_844_031, 404_973_864);
 
 // modular arithmetics
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
@@ -69,28 +64,27 @@ impl<M: Mod> Fp<M> {
     pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> FpGrow<M> {
         FpGrow::from_raw(self.val as u64 * rhs.into().val as u64)
     }
-    pub fn pow<I>(self, exp: I) -> Self
+    pub fn pow<I>(self, k: I) -> Self
     where
         I: UInt + AsInt<u64>,
         u32: AsInt<I>,
     {
-        if self.val == 0 && exp.is_zero() {
+        if self.val == 0 && k.is_zero() {
             return Self::new(1);
         }
-        let (mut base, mut exp) = (self.val as u64, exp % M::PHI.as_());
-        let mut res = 1;
-        let m = M::M as u64;
-        while !exp.is_zero() {
-            if !(exp % 2.as_()).is_zero() {
-                res = res * base % m;
+        let (mut e, mut k) = (self, k % (M::P - 1).as_());
+        let mut res = Self::ONE;
+        while !k.is_zero() {
+            if !(k % 2.as_()).is_zero() {
+                res *= e;
             }
-            base = base * base % m;
-            exp >>= 1;
+            e *= e;
+            k >>= 1;
         }
-        res.into()
+        res
     }
     pub fn inv(self) -> Self {
-        let (mut a, mut b, mut u, mut v) = (self.value() as i32, M::M as i32, 1, 0);
+        let (mut a, mut b, mut u, mut v) = (self.value() as i32, M::P as i32, 1, 0);
         while b != 0 {
             let t = a / b;
             a -= t * b;
@@ -99,12 +93,12 @@ impl<M: Mod> Fp<M> {
             std::mem::swap(&mut u, &mut v);
         }
         if u < 0 {
-            u += M::M as i32;
+            u += M::P as i32;
         }
         Self::new(u as u32)
     }
     pub fn modu() -> u32 {
-        M::M
+        M::P
     }
 }
 
@@ -136,7 +130,7 @@ macro_rules! impl_from_int {
     ($(($ty:ty: $via:ty)),*) => { $(
         impl<M: Mod> From<$ty> for Fp<M> {
             fn from(x: $ty) -> Self {
-                Self::new((x as $via).rem_euclid(M::M as $via) as u32)
+                Self::new((x as $via).rem_euclid(M::P as $via) as u32)
             }
         }
         impl<M: Mod> From<$ty> for FpGrow<M> {
@@ -162,15 +156,15 @@ impl<M: Mod, T: Into<Fp<M>>> ops::Add<T> for Fp<M> {
 impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
-        if self.val >= M::M {
-            self.val -= M::M;
+        if self.val >= M::P {
+            self.val -= M::P;
         }
     }
 }
 impl<M: Mod> ops::Neg for Fp<M> {
     type Output = Self;
     fn neg(self) -> Self {
-        Fp::from_raw(M::M - self.val)
+        Fp::from_raw(M::P - self.val)
     }
 }
 impl<M: Mod, T: Into<Fp<M>>> ops::Sub<T> for Fp<M> {
@@ -184,7 +178,7 @@ impl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
         if self.val < rhs.val {
-            self.val += M::M;
+            self.val += M::P;
         }
         self.val -= rhs.val;
     }
@@ -238,7 +232,7 @@ impl<M: Mod> fmt::Display for Fp<M> {
 impl<M: Mod> ZeroOne for Fp<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
     const ONE: Self = Self {
-        val: M::M.wrapping_neg() % M::M,
+        val: M::P.wrapping_neg() % M::P,
         _m: PhantomData,
     };
 }
