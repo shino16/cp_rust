@@ -97,9 +97,6 @@ impl<M: Mod> Fp<M> {
         }
         Self::new(u as u32)
     }
-    pub fn modu() -> u32 {
-        M::P
-    }
 }
 
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
