@@ -1,6 +1,6 @@
 # rustfmt 2.0.0-rc.2-nightly
 unstable_features = true
-chain_width = 97
+chain_width = 89
 condense_wildcard_suffixes = true
 format_macro_matchers = true
 format_strings = true

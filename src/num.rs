@@ -23,23 +23,14 @@ pub trait Num:
 {
 }
 
-pub trait Int:
-    Num
-    + Ord
-    + Rem<Output = Self>
-    + RemAssign
-    + Shl<u32, Output = Self>
-    + ShlAssign<u32>
-    + Shr<u32, Output = Self>
-    + ShrAssign<u32>
-    + Bit
-    + PrimInt
-{
+pub trait INum: Num + Neg<Output = Self> {}
+
+pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + PrimInt {
     type Unsigned: UInt;
     fn rem_euclid(self, other: Self::Unsigned) -> Self::Unsigned;
 }
 
-pub trait IInt: Int + Neg<Output = Self> {}
+pub trait IInt: Int + INum {}
 pub trait UInt: Int {}
 
 macro_rules! impl_int {
@@ -63,6 +54,7 @@ macro_rules! impl_int {
         impl_int!(@num $u);
         impl_int!(@int $i, $u);
         impl_int!(@int $u, $u);
+        impl INum for $i {}
         impl IInt for $i {}
         impl UInt for $u {}
     };

@@ -1,4 +1,8 @@
-pub trait Bit {
+use std::ops::*;
+
+pub trait Bits:
+    Sized + Shl<u32, Output = Self> + ShlAssign<u32> + Shr<u32, Output = Self> + ShrAssign<u32>
+{
     fn trailing_zeros(self) -> u32;
     fn lsb(self) -> Self;
     fn ilog2(self) -> u32;
@@ -7,7 +11,7 @@ pub trait Bit {
 
 macro_rules! impl_bit {
     ($($t:ty), *) => { $(
-        impl Bit for $t {
+        impl Bits for $t {
             fn trailing_zeros(self) -> u32 {
                 <$t>::trailing_zeros(self)
             }
