@@ -13,9 +13,9 @@ impl<T, U: CastTo<T>> CastFrom<U> for T {
 
 macro_rules! impl_prim {
     ($($ts:ty),*) => {
-        pub trait ConvertInt where $(Self: CastTo<$ts>),*, $(Self: CastFrom<$ts>),* {}
+        pub trait CastInt where $(Self: CastTo<$ts>),*, $(Self: CastFrom<$ts>),* {}
         impl_asint!({ $($ts),* } => { $($ts),* });
-        $( impl ConvertInt for $ts {} )*
+        $( impl CastInt for $ts {} )*
     }
 }
 
