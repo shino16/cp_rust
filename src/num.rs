@@ -64,4 +64,4 @@ macro_rules! impl_int {
     }
 }
 
-impl_int!({i32, i64, i128, isize}, {u32, u64, u128, usize});
+impl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize });
