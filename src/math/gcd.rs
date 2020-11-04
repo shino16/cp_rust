@@ -1,4 +1,4 @@
-use crate::int::*;
+use crate::num::*;
 
 // binary gcd
 pub fn gcd<I: Int>(mut a: I, mut b: I) -> I {

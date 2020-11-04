@@ -11,9 +11,9 @@ pub trait Conv: Sized {
 macro_rules! impl_ntt {
     ($module:ident, $modu:ty, $log2k:expr, $kth_root:expr, $inv_kth_root:expr) => {
         mod $module {
+            use super::super::super::ds::uvec::*;
             use super::super::super::fp::*;
             use super::Conv;
-            use super::super::super::ds::uvec::*;
 
             type FpType = Fp<$modu>;
 

@@ -1,7 +1,7 @@
 use crate::as_int::*;
-pub use crate::int::ZeroOne as _;
-use crate::int::*;
 use crate::io::*;
+pub use crate::num::ZeroOne as _;
+use crate::num::*;
 use std::marker::PhantomData;
 use std::{fmt, iter, ops};
 
@@ -64,18 +64,14 @@ impl<M: Mod> Fp<M> {
     pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> FpGrow<M> {
         FpGrow::from_raw(self.val as u64 * rhs.into().val as u64)
     }
-    pub fn pow<I>(self, k: I) -> Self
-    where
-        I: UInt + AsInt<u64>,
-        u32: AsInt<I>,
-    {
+    pub fn pow<I: Int>(self, k: I) -> Self {
         if self.val == 0 && k.is_zero() {
             return Self::new(1);
         }
-        let (mut e, mut k) = (self, k % (M::P - 1).as_());
+        let (mut e, mut k) = (self, k.rem_euclid((M::P - 1).as_by()));
         let mut res = Self::ONE;
         while !k.is_zero() {
-            if !(k % 2.as_()).is_zero() {
+            if !(k % 2.as_by()).is_zero() {
                 res *= e;
             }
             e *= e;
@@ -123,13 +119,9 @@ impl<M: Mod> From<FpGrow<M>> for Fp<M> {
     }
 }
 
-impl<M: Mod, I: Int> From<I> for Fp<M>
-where
-    I: AsInt<u32>,
-    u32: AsInt<I>,
-{
+impl<M: Mod, I: Int> From<I> for Fp<M> {
     fn from(x: I) -> Self {
-        Self::new(x.rem_euclid(M::P.as_()).as_())
+        Self::new(x.rem_euclid(M::P.as_by()).as_::<u32>())
     }
 }
 
@@ -223,6 +215,8 @@ impl<M: Mod> ZeroOne for Fp<M> {
         _m: PhantomData,
     };
 }
+
+impl<M: Mod> Num for Fp<M> {}
 
 impl<M: Mod> Print for Fp<M> {
     fn print(w: &mut IO, x: Self) {
