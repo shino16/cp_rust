@@ -68,10 +68,10 @@ impl<M: Mod> Fp<M> {
         if self.val == 0 && k.is_zero() {
             return Self::new(1);
         }
-        let (mut e, mut k) = (self, k.rem_euclid((M::P - 1).as_by()));
+        let (mut e, mut k) = (self, k.rem_euclid((M::P - 1).as_()));
         let mut res = Self::ONE;
         while !k.is_zero() {
-            if !(k % 2.as_by()).is_zero() {
+            if !(k % 2.as_()).is_zero() {
                 res *= e;
             }
             e *= e;
@@ -121,7 +121,7 @@ impl<M: Mod> From<FpGrow<M>> for Fp<M> {
 
 impl<M: Mod, I: Int> From<I> for Fp<M> {
     fn from(x: I) -> Self {
-        Self::new(x.rem_euclid(M::P.as_by()).as_::<u32>())
+        Self::new(x.rem_euclid(M::P.as_()).as_())
     }
 }
 

@@ -5,6 +5,12 @@ pub trait CastFrom<T> {
     fn cast_from(other: T) -> Self;
 }
 
+impl<T, U: CastTo<T>> CastFrom<U> for T {
+    fn cast_from(other: U) -> Self {
+        U::cast_to(other)
+    }
+}
+
 macro_rules! impl_prim {
     ($($ts:ty),*) => {
         pub trait PrimInt where $(Self: CastTo<$ts>),*, $(Self: CastFrom<$ts>),* {}
@@ -20,11 +26,6 @@ macro_rules! impl_asint {
                 self as $us
             }
         }
-        impl CastFrom<$us> for $t {
-            fn cast_from(other: $us) -> $t {
-                other as $t
-            }
-        }
     )* };
     ({ $t:ty, $($ts:ty),* } => { $($us:ty),* }) => {
         impl_asint!({ $t } => { $($us),* });
@@ -35,19 +36,9 @@ macro_rules! impl_asint {
 impl_prim!(i32, i64, i128, isize, u32, u64, u128, usize);
 
 pub trait As: Sized {
-    fn as_<T>(self) -> T
-    where
-        Self: CastTo<T>,
-    {
-        self.cast_to()
-    }
-}
-
-pub trait AsBy: Sized {
-    fn as_by<T: CastFrom<Self>>(self) -> T {
+    fn as_<T: CastFrom<Self>>(self) -> T {
         T::cast_from(self)
     }
 }
 
 impl<T> As for T {}
-impl<T> AsBy for T {}
