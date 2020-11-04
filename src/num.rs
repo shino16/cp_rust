@@ -25,7 +25,7 @@ pub trait Num:
 
 pub trait INum: Num + Neg<Output = Self> {}
 
-pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + PrimInt {
+pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + ConvertInt {
     type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
     fn rem_euclid(self, other: Self::Unsigned) -> Self::Unsigned;
 }
