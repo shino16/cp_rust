@@ -1,5 +1,11 @@
+pub use crate::ds::uvec as _;
+
 pub trait Conv: Sized {
     fn conv(lhs: Vec<Self>, rhs: Vec<Self>) -> Vec<Self>;
+    fn conv_in_place<'a, 'b>(
+        lhs: &'a mut Vec<Self>,
+        rhs: &'b mut Vec<Self>,
+    ) -> &'a mut Vec<Self>;
 }
 
 macro_rules! impl_ntt {
@@ -7,6 +13,7 @@ macro_rules! impl_ntt {
         mod $module {
             use super::super::super::fp::*;
             use super::Conv;
+            use super::super::super::ds::uvec::*;
 
             type FpType = Fp<$modu>;
 
@@ -16,9 +23,9 @@ macro_rules! impl_ntt {
             const KTH_ROOT: u32 = $kth_root;
             const INV_KTH_ROOT: u32 = $inv_kth_root;
 
-            static mut ROOT: Vec<FpType> = Vec::new(); // [n/2..n): n-th roots
-            static mut INV_ROOT: Vec<FpType> = Vec::new();
-            static mut REV: Vec<usize> = Vec::new(); // bit reversed
+            static mut ROOT: UVec<FpType> = UVec(Vec::new()); // [n/2..n): n-th roots
+            static mut INV_ROOT: UVec<FpType> = UVec(Vec::new());
+            static mut REV: UVec<usize> = UVec(Vec::new()); // bit reversed
 
             fn log2(n: usize) -> u32 {
                 std::mem::size_of::<usize>() as u32 * 8 - (n - 1).leading_zeros()
@@ -62,43 +69,51 @@ macro_rules! impl_ntt {
                 }
             }
 
-            unsafe fn ntt(a: &mut [FpType]) {
-                let n = a.len();
-                let t = ROOT.len().trailing_zeros() - n.trailing_zeros();
-                for i in 0..n {
-                    if i < REV[i] >> t {
-                        a.swap(i, REV[i] >> t);
-                    }
-                }
-
-                let mut m = 1;
-                while m < n {
-                    // merge adjacent subarrays
-                    for k in (0..n).step_by(m * 2) {
-                        for i in 0..m {
-                            // butterfly transform
-                            let u = a[k + i];
-                            let v = a[k + i + m] * ROOT[m + i];
-                            a[k + i] = u + v;
-                            a[k + i + m] = u - v;
+            fn ntt(a: &mut UVec<FpType>) {
+                unsafe {
+                    let n = a.len();
+                    let t = ROOT.len().trailing_zeros() - n.trailing_zeros();
+                    for i in 0..n {
+                        if i < REV[i] >> t {
+                            a.swap(i, REV[i] >> t);
                         }
                     }
-                    m <<= 1;
+
+                    let mut m = 1;
+                    while m < n {
+                        for k in (0..n).step_by(m * 2) {
+                            for i in 0..m {
+                                let u = a[k + i];
+                                let v = a[k + i + m] * ROOT[m + i];
+                                a[k + i] = u + v;
+                                a[k + i + m] = u - v;
+                            }
+                        }
+                        m <<= 1;
+                    }
                 }
             }
 
-            pub unsafe fn mul(mut a: Vec<FpType>, mut b: Vec<FpType>) -> Vec<FpType> {
+            fn mul<'a, 'b>(
+                a: &'a mut UVec<FpType>,
+                b: &'b mut UVec<FpType>,
+            ) -> &'a mut UVec<FpType> {
                 let len = a.len() + b.len() - 1;
                 let n: usize = 1 << log2(len);
                 reserve(n.trailing_zeros());
                 a.resize(n, Default::default());
                 b.resize(n, Default::default());
-                ntt(&mut a);
-                ntt(&mut b);
+                ntt(a);
+                ntt(b);
                 a.iter_mut().zip(b.iter()).for_each(|(a, b)| *a *= *b);
-                std::mem::swap(&mut ROOT, &mut INV_ROOT);
-                ntt(&mut a);
-                std::mem::swap(&mut ROOT, &mut INV_ROOT);
+                b.clear();
+                unsafe {
+                    std::mem::swap(&mut ROOT, &mut INV_ROOT);
+                }
+                ntt(a);
+                unsafe {
+                    std::mem::swap(&mut ROOT, &mut INV_ROOT);
+                }
                 a.truncate(len);
                 let d = FpType::from(1) / FpType::from(n);
                 for a in &mut a[..] {
@@ -108,8 +123,15 @@ macro_rules! impl_ntt {
             }
 
             impl Conv for FpType {
-                fn conv(lhs: Vec<Self>, rhs: Vec<Self>) -> Vec<Self> {
-                    unsafe  { mul(lhs, rhs) }
+                fn conv(mut lhs: Vec<Self>, mut rhs: Vec<Self>) -> Vec<Self> {
+                    mul(lhs.as_mut(), rhs.as_mut());
+                    lhs
+                }
+                fn conv_in_place<'a, 'b>(
+                    lhs: &'a mut Vec<Self>,
+                    rhs: &'b mut Vec<Self>,
+                ) -> &'a mut Vec<Self> {
+                    mul(lhs.as_mut(), rhs.as_mut())
                 }
             }
         }

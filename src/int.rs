@@ -28,6 +28,7 @@ pub trait Int:
     + ShrAssign<u32>
     + Bit
 {
+    fn rem_euclid(self, other: Self) -> Self;
 }
 
 pub trait IInt: Int + Neg<Output = Self> {}
@@ -39,7 +40,11 @@ macro_rules! impl_int {
             const ZERO: Self = 0;
             const ONE: Self = 1;
         }
-        impl Int for $ts {}
+        impl Int for $ts {
+            fn rem_euclid(self, other: Self) -> Self {
+                <$ts>::rem_euclid(self, other)
+            }
+        }
     )* };
     ($tr:ty | $($ts:ty),*) => {
         impl_int!($($ts),*);

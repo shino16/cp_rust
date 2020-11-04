@@ -1,6 +1,31 @@
 use std::ops::{Deref, DerefMut};
 
+#[repr(transparent)]
 pub struct USlice<T>(pub [T]);
+
+impl<T> AsRef<USlice<T>> for [T] {
+    fn as_ref(&self) -> &USlice<T> {
+        unsafe { &*(self as *const [T] as *const USlice<T>) }
+    }
+}
+
+impl<T> AsMut<USlice<T>> for [T] {
+    fn as_mut(&mut self) -> &mut USlice<T> {
+        unsafe { &mut *(self as *mut [T] as *mut USlice<T>) }
+    }
+}
+
+impl<T> AsRef<[T]> for USlice<T> {
+    fn as_ref(&self) -> &[T] {
+        &self.0
+    }
+}
+
+impl<T> AsMut<[T]> for USlice<T> {
+    fn as_mut(&mut self) -> &mut [T] {
+        &mut self.0
+    }
+}
 
 impl<T> Deref for USlice<T> {
     type Target = [T];

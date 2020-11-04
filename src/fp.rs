@@ -123,19 +123,14 @@ impl<M: Mod> From<FpGrow<M>> for Fp<M> {
     }
 }
 
-macro_rules! impl_from_int {
-    ($(($ty:ty: $via:ty)),*) => { $(
-        impl<M: Mod> From<$ty> for Fp<M> {
-            fn from(x: $ty) -> Self {
-                Self::new((x as $via).rem_euclid(M::P as $via) as u32)
-            }
-        }
-    )* };
-}
-
-impl_from_int! {
-    (i8: i32), (i16: i32), (i32: i32), (i64: i64), (isize: isize),
-    (u8: u32), (u16: u32), (u32: u32), (u64: u64), (usize: usize)
+impl<M: Mod, I: Int> From<I> for Fp<M>
+where
+    I: AsInt<u32>,
+    u32: AsInt<I>,
+{
+    fn from(x: I) -> Self {
+        Self::new(x.rem_euclid(M::P.as_()).as_())
+    }
 }
 
 impl<M: Mod, T: Into<Fp<M>>> ops::Add<T> for Fp<M> {
