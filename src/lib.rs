@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 #![allow(clippy::new_without_default)]
 #![allow(clippy::many_single_char_names)]
 
