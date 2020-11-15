@@ -26,7 +26,7 @@ data:
   path: src/rng.rs
   requiredBy:
   - src/lib.rs
-  timestamp: '2020-11-16 03:39:01+09:00'
+  timestamp: '2020-10-18 23:49:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/rng.rs

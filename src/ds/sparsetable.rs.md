@@ -31,7 +31,7 @@ data:
   path: src/ds/sparsetable.rs
   requiredBy:
   - src/lib.rs
-  timestamp: '2020-11-16 03:39:01+09:00'
+  timestamp: '2020-11-15 11:00:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/sparsetable.rs

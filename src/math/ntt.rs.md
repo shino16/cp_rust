@@ -87,7 +87,7 @@ data:
   path: src/math/ntt.rs
   requiredBy:
   - src/lib.rs
-  timestamp: '2020-11-16 03:39:01+09:00'
+  timestamp: '2020-11-04 11:25:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_test.rs

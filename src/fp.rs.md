@@ -101,7 +101,7 @@ data:
   path: src/fp.rs
   requiredBy:
   - src/lib.rs
-  timestamp: '2020-11-16 03:39:01+09:00'
+  timestamp: '2020-11-04 20:37:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_test.rs
