@@ -26,7 +26,7 @@ jobs:
           toolchain: 1.42.0-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt,clippy
+          # components: rustfmt,clippy
 
       - name: Setup Rust (1.43.0)
         uses: actions-rs/toolchain@v1
@@ -34,7 +34,7 @@ jobs:
           toolchain: 1.43.0-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt,clippy
+          # components: rustfmt,clippy
 
       - name: Setup Rust (1.44.1)
         uses: actions-rs/toolchain@v1
@@ -42,49 +42,49 @@ jobs:
           toolchain: 1.44.1-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt,clippy
+          # components: rustfmt,clippy
 
-      - name: cargo-fmt (`crates/`)
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all --manifest-path ./crates/Cargo.toml -- --check
-          toolchain: 1.42.0
+      # - name: cargo-fmt (`crates/`)
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: fmt
+      #     args: --all --manifest-path ./crates/Cargo.toml -- --check
+      #     toolchain: 1.42.0
 
-      - name: cargo-fmt (`verification/library-checker/`)
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --manifest-path ./verification/library-checker/Cargo.toml -- --check
-          toolchain: 1.43.0
+      # - name: cargo-fmt (`verification/library-checker/`)
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: fmt
+      #     args: --manifest-path ./verification/library-checker/Cargo.toml -- --check
+      #     toolchain: 1.43.0
 
-      - name: cargo-fmt (`verification/yukicoder/`)
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --manifest-path ./verification/yukicoder/Cargo.toml -- --check
-          toolchain: 1.44.1
+      # - name: cargo-fmt (`verification/yukicoder/`)
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: fmt
+      #     args: --manifest-path ./verification/yukicoder/Cargo.toml -- --check
+      #     toolchain: 1.44.1
 
-      - name: cargo-clippy (`crates/`)
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --manifest-path ./crates/Cargo.toml -- -D warnings
-          toolchain: 1.42.0
+      # - name: cargo-clippy (`crates/`)
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: clippy
+      #     args: --manifest-path ./crates/Cargo.toml -- -D warnings
+      #     toolchain: 1.42.0
 
-      - name: cargo-clippy (`verification/library-checker/`)
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --manifest-path ./verification/library-checker/Cargo.toml -- -D warnings
-          toolchain: 1.43.0
+      # - name: cargo-clippy (`verification/library-checker/`)
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: clippy
+      #     args: --manifest-path ./verification/library-checker/Cargo.toml -- -D warnings
+      #     toolchain: 1.43.0
 
-      - name: cargo-clippy (`verification/yukicoder/`)
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --manifest-path ./verification/yukicoder/Cargo.toml -- -D warnings
-          toolchain: 1.44.1
+      # - name: cargo-clippy (`verification/yukicoder/`)
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: clippy
+      #     args: --manifest-path ./verification/yukicoder/Cargo.toml -- -D warnings
+      #     toolchain: 1.44.1
 
   verify:
     name: Verify
@@ -100,7 +100,7 @@ jobs:
           toolchain: nightly-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt
+          # components: rustfmt
 
       - name: Setup (1.42.0)
         uses: actions-rs/toolchain@v1
@@ -108,7 +108,7 @@ jobs:
           toolchain: 1.42.0-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt
+          # components: rustfmt
 
       - name: Setup Rust (1.43.0)
         uses: actions-rs/toolchain@v1
@@ -116,7 +116,7 @@ jobs:
           toolchain: 1.43.0-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt
+          # components: rustfmt
 
       - name: Setup Rust (1.44.1)
         uses: actions-rs/toolchain@v1
@@ -124,7 +124,7 @@ jobs:
           toolchain: 1.44.1-x86_64-unknown-linux-gnu
           default: false
           profile: minimal
-          components: rustfmt
+          # components: rustfmt
 
       - name: Install cargo-udeps
         run: |
