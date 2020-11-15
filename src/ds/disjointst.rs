@@ -2,6 +2,7 @@ pub use crate::alg::*;
 use crate::bit::*;
 
 // unverified
+#[derive(Clone)]
 pub struct DisjointSparseTable<A: Alg> {
     data: Vec<Vec<A::Item>>,
     alg: A,

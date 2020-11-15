@@ -1,6 +1,7 @@
 pub use crate::alg::*;
 use crate::bit::*;
 
+#[derive(Clone)]
 pub struct FenwickTree<A: Alg> {
     data: Vec<A::Item>,
     alg: A,

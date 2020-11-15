@@ -1,6 +1,7 @@
 use crate::alg::*;
 use crate::bit::*;
 
+#[derive(Clone)]
 pub struct SparseTable<A: Alg> {
     data: Vec<Vec<A::Item>>,
     alg: A,

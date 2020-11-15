@@ -1,6 +1,7 @@
 use crate::ds::uvec::*;
 use std::ops::{Index, IndexMut};
 
+#[derive(Clone)]
 pub struct UVec2D<T> {
     pub h: usize,
     pub w: usize,

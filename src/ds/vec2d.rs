@@ -1,5 +1,6 @@
 use std::ops::{Index, IndexMut};
 
+#[derive(Clone)]
 pub struct Vec2D<T> {
     pub h: usize,
     pub w: usize,

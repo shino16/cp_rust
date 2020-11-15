@@ -1,5 +1,6 @@
 pub use crate::alg::*;
 
+#[derive(Clone)]
 pub struct SegmentTree<A: Alg> {
     len: usize,
     data: Vec<A::Item>,

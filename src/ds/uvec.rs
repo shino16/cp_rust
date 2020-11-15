@@ -1,5 +1,6 @@
 use std::ops::{Deref, DerefMut};
 
+#[derive(Clone)]
 #[repr(transparent)]
 pub struct UVec<T>(pub Vec<T>);
 
