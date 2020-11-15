@@ -152,7 +152,7 @@ jobs:
         uses: actions/setup-python@v1
 
       - name: Install oj-verify
-        run: pip3 install git+https://github.com/qryxip/verification-helper.git@rust
+        run: pip3 install git+https://github.com/shino16/verification-helper.git@rust
 
       - name: oj-verify
         run: oj-verify all
