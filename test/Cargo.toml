@@ -2,10 +2,10 @@
 name = "aoj"
 version = "0.1.0"
 authors = ["shino16 <masatosinokawa@gmail.com>"]
-edition = "2015"    # caveat
+edition = "2018"    # caveat: AOJ's edition is 2015
 publish = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-lib = { path = "../.." }
+lib = { path = ".." }
