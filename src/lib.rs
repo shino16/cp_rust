@@ -1,6 +1,3 @@
-#![allow(clippy::new_without_default)]
-#![allow(clippy::many_single_char_names)]
-
 pub mod alg;
 pub mod as_int;
 pub mod bit;
