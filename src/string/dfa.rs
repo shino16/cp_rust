@@ -73,13 +73,13 @@ impl Dfa for Lt<'_> {
         s.then(a.cmp(&self.0[i]))
     }
     fn accept(&self, s: Self::State) -> bool {
-        matches!(s, Ordering::Less)
+        s == Ordering::Less
     }
     fn successful(&self, s: Self::State) -> bool {
-        matches!(s, Ordering::Less)
+        s == Ordering::Less
     }
     fn unsuccessful(&self, s: Self::State) -> bool {
-        matches!(s, Ordering::Greater)
+        s == Ordering::Greater
     }
 }
 
