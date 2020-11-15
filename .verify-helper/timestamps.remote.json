@@ -1,3 +1,4 @@
 {
-"test/aoj/src/bin/hello_world_test.rs": "2020-11-15 13:14:12 +0900"
+"test/src/bin/hello_world_test.rs": "2020-11-15 14:18:38 +0900",
+"test/src/bin/union_find_test.rs": "2020-11-15 14:19:53 +0900"
 }
