@@ -1,4 +1,5 @@
 {
-"test/src/bin/hello_world_test.rs": "2020-11-16 02:34:06 +0900",
-"test/src/bin/union_find_test.rs": "2020-11-16 02:34:06 +0900"
+"test/src/bin/hello_world_test.rs": "2020-11-16 02:38:25 +0900",
+"test/src/bin/ntt_test.rs": "2020-11-16 02:38:25 +0900",
+"test/src/bin/union_find_test.rs": "2020-11-16 02:38:25 +0900"
 }
