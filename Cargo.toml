@@ -3,6 +3,8 @@ name = "lib"
 version = "0.1.0"
 authors = ["shino16 <ms_020916@yahoo.co.jp>"]
 edition = "2018"
+license = "CC0-1.0"
+publish = false
 
 [dependencies]
 
