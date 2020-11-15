@@ -50,7 +50,7 @@ jobs:
           profile: minimal
 
       - name: Setup cargo-mod-deps
-        run: cargo install -q --git https://github.com/shino16/cargo-mod-deps.git --branch main
+        run: cargo install --git https://github.com/shino16/cargo-mod-deps.git --branch main
 
 
       - name: oj-verify
