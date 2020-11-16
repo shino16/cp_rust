@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/lib.rs
-    title: src/lib.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -26,9 +23,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/bitset.rs
-  requiredBy:
-  - src/lib.rs
-  timestamp: '2020-11-03 22:42:19+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/bitset.rs

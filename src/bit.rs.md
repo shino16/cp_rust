@@ -1,16 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/lib.rs
-    title: src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_test.rs
-    title: test/src/bin/ntt_test.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -30,12 +24,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/bit.rs
-  requiredBy:
-  - src/lib.rs
-  timestamp: '2020-11-04 11:51:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/src/bin/ntt_test.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/bit.rs
 layout: document
 redirect_from:

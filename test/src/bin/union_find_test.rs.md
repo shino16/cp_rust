@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/ds/uf.rs
-    title: src/ds/uf.rs
-  - icon: ':heavy_check_mark:'
-    path: src/io.rs
-    title: src/io.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -23,13 +17,11 @@ data:
     \ 0_usize..q {\n        let (com, x, y): (u8, _, _) = io.scan();\n        if com\
     \ == b'0' {\n            uf.unite(x, y);\n        } else {\n            io.println(uf.is_same(x,\
     \ y) as u32);\n        }\n    }\n}\n"
-  dependsOn:
-  - src/io.rs
-  - src/ds/uf.rs
+  dependsOn: []
   isVerificationFile: true
   path: test/src/bin/union_find_test.rs
   requiredBy: []
-  timestamp: '2020-11-16 01:31:27+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/union_find_test.rs

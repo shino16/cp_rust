@@ -6,10 +6,10 @@ data:
     - icon: ':warning:'
       path: src/alg.rs
       title: src/alg.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/as_int.rs
       title: src/as_int.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/bit.rs
       title: src/bit.rs
     - icon: ':warning:'
@@ -24,13 +24,13 @@ data:
     - icon: ':warning:'
       path: src/ds.rs
       title: src/ds.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/fp.rs
       title: src/fp.rs
     - icon: ':warning:'
       path: src/graph.rs
       title: src/graph.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -45,7 +45,7 @@ data:
     - icon: ':warning:'
       path: src/math.rs
       title: src/math.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/num.rs
       title: src/num.rs
     - icon: ':warning:'
@@ -81,7 +81,7 @@ data:
     - icon: ':warning:'
       path: src/ds/sparsetable.rs
       title: src/ds/sparsetable.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/ds/uf.rs
       title: src/ds/uf.rs
     - icon: ':warning:'
@@ -109,7 +109,7 @@ data:
     - icon: ':warning:'
       path: src/math/modpow.rs
       title: src/math/modpow.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/math/ntt.rs
       title: src/math/ntt.rs
   - name: src/string
