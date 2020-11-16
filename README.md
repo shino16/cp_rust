@@ -1,7 +1,7 @@
 # cpr
 
-![Actions Status](https://github.com/shino16/cpr/workflows/check/badge.svg)
-![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)
+[![Actions Status](https://github.com/shino16/cpr/workflows/check/badge.svg)](https://github.com/shino16/cpr/actions)
+[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://shino16.github.io/cpr/)
 
 Rust 競プロライブラリ
 
