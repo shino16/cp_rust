@@ -10,9 +10,9 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub use crate::alg::*;\nuse crate::bit::*;\n\n// unverified\n#[derive(Clone)]\n\
-    pub struct DisjointSparseTable<A: Alg> {\n    data: Vec<Vec<A::Item>>,\n    alg:\
-    \ A,\n}\n\nimpl<A: Monoid> DisjointSparseTable<A> {\n    pub fn new(data: Vec<A::Item>,\
+  code: "pub use crate::alg::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub struct\
+    \ DisjointSparseTable<A: Alg> {\n    data: Vec<Vec<A::Item>>,\n    alg: A,\n}\n\
+    \nimpl<A: Monoid> DisjointSparseTable<A> {\n    pub fn new(data: Vec<A::Item>,\
     \ alg: A) -> Self {\n        let len = data.len();\n        let height = len.ilog2()\
     \ as usize;\n        let mut data = vec![data];\n        for s in 1..=height {\n\
     \            for z in (0..len).step_by(1 << (s + 1)) {\n                let m\
@@ -32,7 +32,7 @@ data:
   isVerificationFile: false
   path: src/ds/disjointst.rs
   requiredBy: []
-  timestamp: '2020-11-15 11:00:40+09:00'
+  timestamp: '2020-11-16 23:03:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/disjointst.rs

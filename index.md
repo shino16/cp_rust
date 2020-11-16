@@ -27,9 +27,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fp.rs
       title: src/fp.rs
-    - icon: ':warning:'
-      path: src/graph.rs
-      title: src/graph.rs
     - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs

@@ -24,7 +24,7 @@ data:
     \ - 1, v);\n    }\n    pub fn ask_prefix(&self, mut r: usize) -> A::Item {\n \
     \       let mut res = self.alg.unit();\n        while r != 0 {\n            res\
     \ = self.alg.op(&self.data[r], &res);\n            r -= r.lsb();\n        }\n\
-    \        res\n    }\n    // unverified\n    pub fn partition_point<F: FnMut(A::Item)\
+    \        res\n    }\n    // TODO: test\n    pub fn partition_point<F: FnMut(A::Item)\
     \ -> bool>(&self, mut pred: F) -> usize {\n        let mut x = 0; // pred(&self.ask_prefix(x))\
     \ == true\n        let mut w = (self.data.len() - 1).msb();\n        let mut l\
     \ = self.alg.unit();\n        while w != 0 {\n            if x + w < self.data.len()\
@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2020-11-15 11:00:40+09:00'
+  timestamp: '2020-11-16 23:03:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/fenwick.rs
