@@ -38,7 +38,7 @@ impl<A: Monoid> FenwickTree<A> {
         }
         res
     }
-    // unverified
+    // TODO: test
     pub fn partition_point<F: FnMut(A::Item) -> bool>(&self, mut pred: F) -> usize {
         let mut x = 0; // pred(&self.ask_prefix(x)) == true
         let mut w = (self.data.len() - 1).msb();

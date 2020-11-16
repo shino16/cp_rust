@@ -6,7 +6,6 @@ pub mod cmp;
 pub mod comp;
 pub mod ds;
 pub mod fp;
-pub mod graph;
 pub mod io;
 pub mod io_interactive;
 pub mod math;
