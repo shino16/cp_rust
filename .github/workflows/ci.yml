@@ -49,9 +49,8 @@ jobs:
           toolchain: nightly
           profile: minimal
 
-      - name: Setup cargo-mod-deps
-        run: cargo install --git https://github.com/shino16/cargo-mod-deps.git --branch main
-
+      - name: Setup cargo-auto-bundle
+        run: cargo install --git https://github.com/shino16/cargo-auto-bundle.git
 
       - name: oj-verify
         run: oj-verify all

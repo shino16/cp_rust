@@ -2,4 +2,4 @@
 verification_file_suffix = '_test.rs'
 compile = 'cargo build --release --workspace'
 execute = 'bash ".verify-helper/execute.sh" {path}'
-list_dependencies = 'bash ".verify-helper/list_dependencies.sh" {path}'
+list_dependencies = 'cargo auto-bundle --entry-point {path} --list-deps'
