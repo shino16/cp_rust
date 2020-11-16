@@ -16,14 +16,8 @@ data:
       path: src/bitset.rs
       title: src/bitset.rs
     - icon: ':warning:'
-      path: src/cmp.rs
-      title: src/cmp.rs
-    - icon: ':warning:'
       path: src/comp.rs
       title: src/comp.rs
-    - icon: ':warning:'
-      path: src/ds.rs
-      title: src/ds.rs
     - icon: ':heavy_check_mark:'
       path: src/fp.rs
       title: src/fp.rs
@@ -36,12 +30,6 @@ data:
     - icon: ':warning:'
       path: src/lib.rs
       title: src/lib.rs
-    - icon: ':warning:'
-      path: src/main.rs
-      title: src/main.rs
-    - icon: ':warning:'
-      path: src/math.rs
-      title: src/math.rs
     - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
@@ -51,9 +39,6 @@ data:
     - icon: ':warning:'
       path: src/slice.rs
       title: src/slice.rs
-    - icon: ':warning:'
-      path: src/string.rs
-      title: src/string.rs
   - name: src/cmp
     pages:
     - icon: ':warning:'
