@@ -22,7 +22,7 @@ data:
   isVerificationFile: false
   path: src/rng.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-10-18 23:49:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/rng.rs

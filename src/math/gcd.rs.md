@@ -27,7 +27,7 @@ data:
   isVerificationFile: false
   path: src/math/gcd.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-11-04 11:25:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/gcd.rs

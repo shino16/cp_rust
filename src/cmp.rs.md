@@ -17,7 +17,7 @@ data:
   isVerificationFile: false
   path: src/cmp.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-11-03 08:01:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/cmp.rs
