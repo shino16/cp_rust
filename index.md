@@ -65,6 +65,9 @@ data:
   - name: src/draft
     pages:
     - icon: ':warning:'
+      path: src/draft/iprod.rs
+      title: src/draft/iprod.rs
+    - icon: ':warning:'
       path: src/draft/minimize_dfa.rs
       title: src/draft/minimize_dfa.rs
   - name: src/ds
@@ -96,11 +99,6 @@ data:
     - icon: ':warning:'
       path: src/ds/vec2d.rs
       title: src/ds/vec2d.rs
-  - name: src/macros
-    pages:
-    - icon: ':warning:'
-      path: src/macros/iprod.rs
-      title: src/macros/iprod.rs
   - name: src/math
     pages:
     - icon: ':warning:'

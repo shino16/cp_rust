@@ -15,15 +15,15 @@ data:
     \        })\n    );\n}"
   dependsOn: []
   isVerificationFile: false
-  path: src/macros/iprod.rs
+  path: src/draft/iprod.rs
   requiredBy: []
-  timestamp: '2020-11-03 22:42:19+09:00'
+  timestamp: '2020-11-16 22:35:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/macros/iprod.rs
+documentation_of: src/draft/iprod.rs
 layout: document
 redirect_from:
-- /library/src/macros/iprod.rs
-- /library/src/macros/iprod.rs.html
-title: src/macros/iprod.rs
+- /library/src/draft/iprod.rs
+- /library/src/draft/iprod.rs.html
+title: src/draft/iprod.rs
 ---
