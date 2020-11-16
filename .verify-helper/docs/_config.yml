@@ -1,0 +1,6 @@
+exclude:
+  - src/cmp.rs
+  - src/ds.rs
+  - src/main.rs
+  - src/math.rs
+  - src/string.rs
