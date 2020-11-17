@@ -11,4 +11,4 @@ Rust 競プロライブラリ
 
 ## LICENSE
 
-[CC0](https://creativecommons.org/share-your-work/public-domain/cc0)
+ファイル先頭に特に指定がなければ [CC0](https://creativecommons.org/share-your-work/public-domain/cc0)

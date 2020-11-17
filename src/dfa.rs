@@ -1,6 +1,6 @@
+use crate::fxhash::FxHashMap as HashMap;
 use crate::num::*;
 use std::cmp::Ordering;
-use std::collections::HashMap;
 use std::hash::Hash;
 
 pub trait Dfa {
@@ -158,8 +158,8 @@ where
     X::Alphabet: Copy,
     X::State: Eq + Hash + Copy,
 {
-    let mut dp = HashMap::new();
-    let mut dp2 = HashMap::new();
+    let mut dp = HashMap::default();
+    let mut dp2 = HashMap::default();
     dp.insert(dfa.init(), I::ONE);
     for i in 0..n {
         dp2.clear();
