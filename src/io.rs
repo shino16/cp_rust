@@ -1,4 +1,5 @@
 use std::io::{stdout, BufWriter, Read, StdoutLock, Write};
+use std::marker::PhantomData;
 
 pub struct IO {
     iter: std::str::SplitAsciiWhitespace<'static>,
@@ -16,6 +17,10 @@ impl IO {
     fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }
     fn scan_raw(&mut self) -> &'static [u8] { self.scan_str().as_bytes() }
     pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }
+    pub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> { Iter { io: self, _m: PhantomData } }
+    pub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
+        self.scan_iter().take(n)
+    }
     pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
         (0..n).map(|_| self.scan()).collect()
     }
@@ -53,9 +58,7 @@ impl IO {
         }
         (n, graph)
     }
-}
 
-impl IO {
     pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
     pub fn println<T: Print>(&mut self, x: T) {
         self.print(x);
@@ -73,6 +76,16 @@ impl IO {
         self.print("\n");
     }
     pub fn flush(&mut self) { self.buf.flush().unwrap(); }
+}
+
+pub struct Iter<'a, T> {
+    io: &'a mut IO,
+    _m: PhantomData<T>,
+}
+
+impl<T: Scan> Iterator for Iter<'_, T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> { Some(self.io.scan()) }
 }
 
 pub trait Scan {

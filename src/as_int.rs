@@ -2,12 +2,12 @@ pub trait CastTo<T> {
     fn cast_to(self) -> T;
 }
 pub trait CastFrom<T> {
-    fn cast_from(other: T) -> Self;
+    fn cast_from(src: T) -> Self;
 }
 
 impl<T, U: CastTo<T>> CastFrom<U> for T {
-    fn cast_from(other: U) -> Self {
-        U::cast_to(other)
+    fn cast_from(src: U) -> Self {
+        U::cast_to(src)
     }
 }
 

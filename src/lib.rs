@@ -13,6 +13,7 @@ pub mod fp;
 pub mod hash;
 pub mod io;
 pub mod io_interactive;
+pub mod iter;
 pub mod make_vec;
 pub mod math;
 pub mod modint;
