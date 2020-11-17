@@ -4,7 +4,7 @@ impl Rng32 {
     pub fn new() -> Self {
         Rng32(2_463_534_242)
     }
-    pub fn rand(&mut self) -> u32 {
+    pub fn gen(&mut self) -> u32 {
         let mut x = self.0;
         x ^= x << 13;
         x ^= x >> 17;
@@ -20,7 +20,7 @@ impl Rng64 {
     pub fn new() -> Self {
         Rng64(88_172_645_463_325_252)
     }
-    pub fn rand(&mut self) -> u64 {
+    pub fn gen(&mut self) -> u64 {
         let mut x = self.0;
         x ^= x << 13;
         x ^= x >> 7;

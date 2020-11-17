@@ -80,7 +80,9 @@ impl<M: Mod> Fp<M> {
         res
     }
     pub fn inv(self) -> Self {
-        let (mut a, mut b, mut u, mut v) = (self.value() as i32, M::P as i32, 1, 0);
+        let (mut a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);
+        // Euclidean algorithm by elementary row operations on A_0 = [a, 1, u; b, 0, v]
+        // invariant: Ax = 0 where x = [-1, a, b]
         while b != 0 {
             let t = a / b;
             a -= t * b;
@@ -88,6 +90,7 @@ impl<M: Mod> Fp<M> {
             std::mem::swap(&mut a, &mut b);
             std::mem::swap(&mut u, &mut v);
         }
+        debug_assert_eq!(a, 1);
         if u < 0 {
             u += M::P as i32;
         }

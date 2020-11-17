@@ -26,6 +26,7 @@ pub trait Num:
 pub trait INum: Num + Neg<Output = Self> {}
 
 pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + CastInt {
+    type Signed: IInt + CastFrom<Self> + CastTo<Self>;
     type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
     fn rem_euclid(self, other: Self::Unsigned) -> Self::Unsigned;
 }
@@ -41,8 +42,9 @@ macro_rules! impl_int {
         }
         impl Num for $t {}
     };
-    (@int $t:ty, $u:ty) => {
+    (@int $t:ty, $i:ty, $u:ty) => {
         impl Int for $t {
+            type Signed = $i;
             type Unsigned = $u;
             fn rem_euclid(self, other: Self::Unsigned) -> Self::Unsigned {
                 <$t>::rem_euclid(self, other as $t) as $u
@@ -52,8 +54,8 @@ macro_rules! impl_int {
     ({ $i:ty }, { $u:ty }) => {
         impl_int!(@num $i);
         impl_int!(@num $u);
-        impl_int!(@int $i, $u);
-        impl_int!(@int $u, $u);
+        impl_int!(@int $i, $i, $u);
+        impl_int!(@int $u, $i, $u);
         impl INum for $i {}
         impl IInt for $i {}
         impl UInt for $u {}
