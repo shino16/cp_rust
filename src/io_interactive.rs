@@ -1,5 +1,3 @@
-// TODO: integrate with crate::io
-
 use std::io::{stdin, stdout, BufRead, BufReader, BufWriter, StdinLock, StdoutLock, Write};
 
 pub struct IO {
@@ -11,13 +9,13 @@ pub struct IO {
 
 impl IO {
     pub fn new() -> Self {
-        let inp = Box::new(stdin());
-        let out = Box::new(stdout());
+        let inp = Box::leak(Box::new(stdin()));
+        let out = Box::leak(Box::new(stdout()));
         IO {
             input: Vec::new(),
             pos: 0,
-            in_buf: BufReader::new(Box::leak(inp).lock()),
-            out_buf: BufWriter::new(Box::leak(out).lock()),
+            in_buf: BufReader::new(inp.lock()),
+            out_buf: BufWriter::new(out.lock()),
         }
     }
     fn scan_bytes(&mut self) -> &[u8] {

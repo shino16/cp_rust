@@ -10,8 +10,8 @@ impl IO {
         let mut input = String::new();
         std::io::stdin().read_to_string(&mut input).unwrap();
         let input = Box::leak(input.into_boxed_str());
-        let out = Box::new(stdout());
-        IO { iter: input.split_ascii_whitespace(), buf: BufWriter::new(Box::leak(out).lock()) }
+        let out = Box::leak(Box::new(stdout()));
+        IO { iter: input.split_ascii_whitespace(), buf: BufWriter::new(out.lock()) }
     }
     fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }
     fn scan_raw(&mut self) -> &'static [u8] { self.scan_str().as_bytes() }
