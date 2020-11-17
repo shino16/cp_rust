@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/cargo_test.rs
+    title: test/src/bin/cargo_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
@@ -43,15 +46,17 @@ data:
     \        while !k.is_zero() {\n            if !(k % 2.as_()).is_zero() {\n   \
     \             res *= e;\n            }\n            e *= e;\n            k >>=\
     \ 1;\n        }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let\
-    \ (mut a, mut b, mut u, mut v) = (self.value() as i32, M::P as i32, 1, 0);\n \
-    \       while b != 0 {\n            let t = a / b;\n            a -= t * b;\n\
-    \            u -= t * v;\n            std::mem::swap(&mut a, &mut b);\n      \
-    \      std::mem::swap(&mut u, &mut v);\n        }\n        if u < 0 {\n      \
-    \      u += M::P as i32;\n        }\n        Self::new(u as u32)\n    }\n}\n\n\
-    #[derive(Default, Clone, Copy, PartialEq, Eq)]\npub struct FpGrow<M: Mod> {\n\
-    \    val: u64,\n    _m: PhantomData<M>,\n}\n\nimpl<M: Mod> FpGrow<M> {\n    fn\
-    \ from_raw(val: u64) -> Self {\n        Self { val, _m: PhantomData }\n    }\n\
-    \    pub fn reduce(self) -> Fp<M> {\n        Fp::from_raw(redc::<M>(self.val))\n\
+    \ (mut a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n \
+    \       // Euclidean algorithm by elementary row operations on A_0 = [a, 1, u;\
+    \ b, 0, v]\n        // invariant: Ax = 0 where x = [-1, a, b]\n        while b\
+    \ != 0 {\n            let t = a / b;\n            a -= t * b;\n            u -=\
+    \ t * v;\n            std::mem::swap(&mut a, &mut b);\n            std::mem::swap(&mut\
+    \ u, &mut v);\n        }\n        debug_assert_eq!(a, 1);\n        if u < 0 {\n\
+    \            u += M::P as i32;\n        }\n        Self::new(u as u32)\n    }\n\
+    }\n\n#[derive(Default, Clone, Copy, PartialEq, Eq)]\npub struct FpGrow<M: Mod>\
+    \ {\n    val: u64,\n    _m: PhantomData<M>,\n}\n\nimpl<M: Mod> FpGrow<M> {\n \
+    \   fn from_raw(val: u64) -> Self {\n        Self { val, _m: PhantomData }\n \
+    \   }\n    pub fn reduce(self) -> Fp<M> {\n        Fp::from_raw(redc::<M>(self.val))\n\
     \    }\n    pub fn value(self) -> u32 {\n        self.reduce().value()\n    }\n\
     }\n\nimpl<M: Mod> From<FpGrow<M>> for Fp<M> {\n    fn from(v: FpGrow<M>) -> Self\
     \ {\n        v.reduce()\n    }\n}\n\nimpl<M: Mod, I: Int> From<I> for Fp<M> {\n\
@@ -97,9 +102,10 @@ data:
   isVerificationFile: false
   path: src/fp.rs
   requiredBy: []
-  timestamp: '2020-11-04 20:37:29+09:00'
+  timestamp: '2020-11-17 16:16:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_test.rs
 documentation_of: src/fp.rs
 layout: document

@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/cargo_test.rs
+    title: test/src/bin/cargo_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,7 @@ data:
   timestamp: '2020-11-03 22:42:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_test.rs
   - test/src/bin/union_find_test.rs
 documentation_of: src/io.rs

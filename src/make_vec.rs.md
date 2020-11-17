@@ -13,26 +13,26 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub struct Rng32(u32);\n\nimpl Rng32 {\n    pub fn new() -> Self {\n    \
-    \    Rng32(2_463_534_242)\n    }\n    pub fn gen(&mut self) -> u32 {\n       \
-    \ let mut x = self.0;\n        x ^= x << 13;\n        x ^= x >> 17;\n        x\
-    \ ^= x << 5;\n        self.0 = x;\n        x\n    }\n}\n\npub struct Rng64(u64);\n\
-    \nimpl Rng64 {\n    pub fn new() -> Self {\n        Rng64(88_172_645_463_325_252)\n\
-    \    }\n    pub fn gen(&mut self) -> u64 {\n        let mut x = self.0;\n    \
-    \    x ^= x << 13;\n        x ^= x >> 7;\n        x ^= x << 17;\n        self.0\
-    \ = x;\n        x\n    }\n}\n"
+  code: "pub trait VecDim<Elem> {\n    type Item;\n    fn make_vec(self, elem: Elem)\
+    \ -> Vec<Self::Item>;\n}\n\nimpl<Elem: Clone> VecDim<Elem> for usize {\n    type\
+    \ Item = Elem;\n    fn make_vec(self, elem: Elem) -> Vec<Self::Item> {\n     \
+    \   vec![elem; self]\n    }\n}\n\nimpl<Elem, Dim> VecDim<Elem> for (usize, Dim)\n\
+    where\n    Dim: VecDim<Elem>,\n    Dim::Item: Clone,\n{\n    type Item = Vec<Dim::Item>;\n\
+    \    fn make_vec(self, elem: Elem) -> Vec<Self::Item> {\n        vec![self.1.make_vec(elem);\
+    \ self.0]\n    }\n}\n\npub fn make_vec<Elem, Dim: VecDim<Elem>>(dim: Dim, elem:\
+    \ Elem) -> Vec<Dim::Item> {\n    dim.make_vec(elem)\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/rng.rs
+  path: src/make_vec.rs
   requiredBy: []
   timestamp: '2020-11-17 16:16:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
-documentation_of: src/rng.rs
+documentation_of: src/make_vec.rs
 layout: document
 redirect_from:
-- /library/src/rng.rs
-- /library/src/rng.rs.html
-title: src/rng.rs
+- /library/src/make_vec.rs
+- /library/src/make_vec.rs.html
+title: src/make_vec.rs
 ---

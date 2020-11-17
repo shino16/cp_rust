@@ -30,6 +30,8 @@ data:
 
     pub mod io_interactive;
 
+    pub mod make_vec;
+
     pub mod math;
 
     pub mod num;
@@ -40,12 +42,15 @@ data:
 
     pub mod string;
 
+
+    pub mod tests;
+
     '
   dependsOn: []
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2020-11-16 23:03:27+09:00'
+  timestamp: '2020-11-17 16:16:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

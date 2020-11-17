@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/cargo_test.rs
+    title: test/src/bin/cargo_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
@@ -20,28 +23,30 @@ data:
     \    + SubAssign\n    + Mul<Output = Self>\n    + MulAssign\n    + Div<Output\
     \ = Self>\n    + DivAssign\n{\n}\n\npub trait INum: Num + Neg<Output = Self> {}\n\
     \npub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + CastInt {\n\
-    \    type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;\n    fn rem_euclid(self,\
-    \ other: Self::Unsigned) -> Self::Unsigned;\n}\n\npub trait IInt: Int + INum {}\n\
-    pub trait UInt: Int {}\n\nmacro_rules! impl_int {\n    (@num $t:ty) => {\n   \
-    \     impl ZeroOne for $t {\n            const ZERO: Self = 0;\n            const\
-    \ ONE: Self = 1;\n        }\n        impl Num for $t {}\n    };\n    (@int $t:ty,\
-    \ $u:ty) => {\n        impl Int for $t {\n            type Unsigned = $u;\n  \
-    \          fn rem_euclid(self, other: Self::Unsigned) -> Self::Unsigned {\n  \
-    \              <$t>::rem_euclid(self, other as $t) as $u\n            }\n    \
-    \    }\n    };\n    ({ $i:ty }, { $u:ty }) => {\n        impl_int!(@num $i);\n\
-    \        impl_int!(@num $u);\n        impl_int!(@int $i, $u);\n        impl_int!(@int\
-    \ $u, $u);\n        impl INum for $i {}\n        impl IInt for $i {}\n       \
-    \ impl UInt for $u {}\n    };\n    ({ $i:ty, $($is:ty),* }, { $u:ty, $($us:ty),*\
-    \ }) => {\n        impl_int!({ $i }, { $u });\n        impl_int!({ $($is),* },\
-    \ { $($us),* });\n    }\n}\n\nimpl_int!({ i32, i64, i128, isize }, { u32, u64,\
-    \ u128, usize });\n"
+    \    type Signed: IInt + CastFrom<Self> + CastTo<Self>;\n    type Unsigned: UInt\
+    \ + CastFrom<Self> + CastTo<Self>;\n    fn rem_euclid(self, other: Self::Unsigned)\
+    \ -> Self::Unsigned;\n}\n\npub trait IInt: Int + INum {}\npub trait UInt: Int\
+    \ {}\n\nmacro_rules! impl_int {\n    (@num $t:ty) => {\n        impl ZeroOne for\
+    \ $t {\n            const ZERO: Self = 0;\n            const ONE: Self = 1;\n\
+    \        }\n        impl Num for $t {}\n    };\n    (@int $t:ty, $i:ty, $u:ty)\
+    \ => {\n        impl Int for $t {\n            type Signed = $i;\n           \
+    \ type Unsigned = $u;\n            fn rem_euclid(self, other: Self::Unsigned)\
+    \ -> Self::Unsigned {\n                <$t>::rem_euclid(self, other as $t) as\
+    \ $u\n            }\n        }\n    };\n    ({ $i:ty }, { $u:ty }) => {\n    \
+    \    impl_int!(@num $i);\n        impl_int!(@num $u);\n        impl_int!(@int\
+    \ $i, $i, $u);\n        impl_int!(@int $u, $i, $u);\n        impl INum for $i\
+    \ {}\n        impl IInt for $i {}\n        impl UInt for $u {}\n    };\n    ({\
+    \ $i:ty, $($is:ty),* }, { $u:ty, $($us:ty),* }) => {\n        impl_int!({ $i },\
+    \ { $u });\n        impl_int!({ $($is),* }, { $($us),* });\n    }\n}\n\nimpl_int!({\
+    \ i32, i64, i128, isize }, { u32, u64, u128, usize });"
   dependsOn: []
   isVerificationFile: false
   path: src/num.rs
   requiredBy: []
-  timestamp: '2020-11-04 21:05:29+09:00'
+  timestamp: '2020-11-17 16:16:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_test.rs
 documentation_of: src/num.rs
 layout: document

@@ -31,14 +31,20 @@ data:
       path: src/lib.rs
       title: src/lib.rs
     - icon: ':heavy_check_mark:'
+      path: src/make_vec.rs
+      title: src/make_vec.rs
+    - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/rng.rs
       title: src/rng.rs
     - icon: ':warning:'
       path: src/slice.rs
       title: src/slice.rs
+    - icon: ':heavy_check_mark:'
+      path: src/tests.rs
+      title: src/tests.rs
   - name: src/cmp
     pages:
     - icon: ':warning:'
@@ -83,7 +89,7 @@ data:
       title: src/ds/vec2d.rs
   - name: src/math
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/math/gcd.rs
       title: src/math/gcd.rs
     - icon: ':warning:'
@@ -101,8 +107,8 @@ data:
   - name: test/src/bin
     pages:
     - icon: ':heavy_check_mark:'
-      path: test/src/bin/hello_world_test.rs
-      title: test/src/bin/hello_world_test.rs
+      path: test/src/bin/cargo_test.rs
+      title: test/src/bin/cargo_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_test.rs
       title: test/src/bin/ntt_test.rs
