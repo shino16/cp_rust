@@ -11,7 +11,7 @@ impl<A: Monoid> DisjointSparseTable<A> {
     pub fn new(data: Vec<A::Item>, alg: A) -> Self {
         let len = data.len();
         let height = len.ilog2() as usize;
-        let mut data = vec![data];
+        let mut data = vec![data; height + 1];
         for s in 1..=height {
             for z in (0..len).step_by(1 << (s + 1)) {
                 let m = z + (1 << s);
