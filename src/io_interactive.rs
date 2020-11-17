@@ -38,12 +38,8 @@ impl IO {
         }
         &self.input[i..self.pos]
     }
-    pub fn scan<T: Scan>(&mut self) -> T {
-        T::scan(self)
-    }
-    pub fn vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
-        (0..n).map(|_| self.scan()).collect()
-    }
+    pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }
+    pub fn vec<T: Scan>(&mut self, n: usize) -> Vec<T> { (0..n).map(|_| self.scan()).collect() }
     pub fn graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
         let n = self.scan();
         let m = self.scan();
@@ -81,13 +77,8 @@ impl IO {
 }
 
 impl IO {
-    pub fn print<T: Print>(&mut self, x: T) {
-        T::print(self, x);
-    }
-    pub fn println<T: Print>(&mut self, x: T) {
-        self.print(x);
-        self.print("\n");
-    }
+    pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
+    pub fn println<T: Print>(&mut self, x: T) { self.print(x); self.print("\n"); }
     pub fn iterln<T: Print, I: Iterator<Item = T>>(&mut self, mut iter: I, delim: &str) {
         if let Some(v) = iter.next() {
             self.print(v);
@@ -98,9 +89,7 @@ impl IO {
         }
         self.print("\n");
     }
-    pub fn flush(&mut self) {
-        self.out_buf.flush().unwrap();
-    }
+    pub fn flush(&mut self) { self.out_buf.flush().unwrap(); }
 }
 
 pub trait Scan {
@@ -133,39 +122,27 @@ impl Scan for u8 {
 }
 
 impl Scan for Vec<u8> {
-    fn scan(s: &mut IO) -> Self {
-        s.scan_bytes().to_owned()
-    }
+    fn scan(s: &mut IO) -> Self { s.scan_bytes().to_owned() }
 }
 
 impl<T: Scan, U: Scan> Scan for (T, U) {
-    fn scan(s: &mut IO) -> Self {
-        (T::scan(s), U::scan(s))
-    }
+    fn scan(s: &mut IO) -> Self { (T::scan(s), U::scan(s)) }
 }
 
 impl<T: Scan, U: Scan, V: Scan> Scan for (T, U, V) {
-    fn scan(s: &mut IO) -> Self {
-        (T::scan(s), U::scan(s), V::scan(s))
-    }
+    fn scan(s: &mut IO) -> Self { (T::scan(s), U::scan(s), V::scan(s)) }
 }
 
 impl<T: Scan> Scan for [T; 2] {
-    fn scan(s: &mut IO) -> Self {
-        [s.scan(), s.scan()]
-    }
+    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan()] }
 }
 
 impl<T: Scan> Scan for [T; 3] {
-    fn scan(s: &mut IO) -> Self {
-        [s.scan(), s.scan(), s.scan()]
-    }
+    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(), s.scan()] }
 }
 
 impl<T: Scan> Scan for [T; 4] {
-    fn scan(s: &mut IO) -> Self {
-        [s.scan(), s.scan(), s.scan(), s.scan()]
-    }
+    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(), s.scan(), s.scan()] }
 }
 
 pub trait Print {
@@ -185,29 +162,19 @@ macro_rules! impl_print_int {
 impl_print_int!(i32, i64, isize, u32, u64, usize);
 
 impl Print for u8 {
-    fn print(w: &mut IO, x: Self) {
-        w.out_buf.write_all(&[x]).unwrap();
-    }
+    fn print(w: &mut IO, x: Self) { w.out_buf.write_all(&[x]).unwrap(); }
 }
 
 impl Print for &[u8] {
-    fn print(w: &mut IO, x: Self) {
-        w.out_buf.write_all(x).unwrap();
-    }
+    fn print(w: &mut IO, x: Self) { w.out_buf.write_all(x).unwrap(); }
 }
 
 impl Print for &str {
-    fn print(w: &mut IO, x: Self) {
-        w.print(x.as_bytes());
-    }
+    fn print(w: &mut IO, x: Self) { w.print(x.as_bytes()); }
 }
 
 impl<T: Print, U: Print> Print for (T, U) {
-    fn print(w: &mut IO, (x, y): Self) {
-        w.print(x);
-        w.print(" ");
-        w.print(y);
-    }
+    fn print(w: &mut IO, (x, y): Self) { w.print(x); w.print(" "); w.print(y); }
 }
 
 impl<T: Print, U: Print, V: Print> Print for (T, U, V) {

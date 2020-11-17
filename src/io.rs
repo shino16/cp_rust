@@ -11,20 +11,11 @@ impl IO {
         std::io::stdin().read_to_string(&mut input).unwrap();
         let input = Box::leak(input.into_boxed_str());
         let out = Box::new(stdout());
-        IO {
-            iter: input.split_ascii_whitespace(),
-            buf: BufWriter::new(Box::leak(out).lock()),
-        }
+        IO { iter: input.split_ascii_whitespace(), buf: BufWriter::new(Box::leak(out).lock()) }
     }
-    fn scan_str(&mut self) -> &'static str {
-        self.iter.next().unwrap()
-    }
-    fn scan_raw(&mut self) -> &'static [u8] {
-        self.scan_str().as_bytes()
-    }
-    pub fn scan<T: Scan>(&mut self) -> T {
-        T::scan(self)
-    }
+    fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }
+    fn scan_raw(&mut self) -> &'static [u8] { self.scan_str().as_bytes() }
+    pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }
     pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
         (0..n).map(|_| self.scan()).collect()
     }
@@ -65,9 +56,7 @@ impl IO {
 }
 
 impl IO {
-    pub fn print<T: Print>(&mut self, x: T) {
-        T::print(self, x);
-    }
+    pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
     pub fn println<T: Print>(&mut self, x: T) {
         self.print(x);
         self.print("\n");
@@ -83,9 +72,7 @@ impl IO {
         }
         self.print("\n");
     }
-    pub fn flush(&mut self) {
-        self.buf.flush().unwrap();
-    }
+    pub fn flush(&mut self) { self.buf.flush().unwrap(); }
 }
 
 pub trait Scan {
@@ -118,39 +105,27 @@ impl Scan for u8 {
 }
 
 impl Scan for &[u8] {
-    fn scan(s: &mut IO) -> Self {
-        s.scan_raw()
-    }
+    fn scan(s: &mut IO) -> Self { s.scan_raw() }
 }
 
 impl<T: Scan, U: Scan> Scan for (T, U) {
-    fn scan(s: &mut IO) -> Self {
-        (T::scan(s), U::scan(s))
-    }
+    fn scan(s: &mut IO) -> Self { (T::scan(s), U::scan(s)) }
 }
 
 impl<T: Scan, U: Scan, V: Scan> Scan for (T, U, V) {
-    fn scan(s: &mut IO) -> Self {
-        (T::scan(s), U::scan(s), V::scan(s))
-    }
+    fn scan(s: &mut IO) -> Self { (T::scan(s), U::scan(s), V::scan(s)) }
 }
 
 impl<T: Scan> Scan for [T; 2] {
-    fn scan(s: &mut IO) -> Self {
-        [s.scan(), s.scan()]
-    }
+    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan()] }
 }
 
 impl<T: Scan> Scan for [T; 3] {
-    fn scan(s: &mut IO) -> Self {
-        [s.scan(), s.scan(), s.scan()]
-    }
+    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(), s.scan()] }
 }
 
 impl<T: Scan> Scan for [T; 4] {
-    fn scan(s: &mut IO) -> Self {
-        [s.scan(), s.scan(), s.scan(), s.scan()]
-    }
+    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(), s.scan(), s.scan()] }
 }
 
 pub trait Print {
@@ -170,29 +145,19 @@ macro_rules! impl_print_int {
 impl_print_int!(i32, i64, isize, u32, u64, usize);
 
 impl Print for u8 {
-    fn print(w: &mut IO, x: Self) {
-        w.buf.write_all(&[x]).unwrap();
-    }
+    fn print(w: &mut IO, x: Self) { w.buf.write_all(&[x]).unwrap(); }
 }
 
 impl Print for &[u8] {
-    fn print(w: &mut IO, x: Self) {
-        w.buf.write_all(x).unwrap();
-    }
+    fn print(w: &mut IO, x: Self) { w.buf.write_all(x).unwrap(); }
 }
 
 impl Print for &str {
-    fn print(w: &mut IO, x: Self) {
-        w.print(x.as_bytes());
-    }
+    fn print(w: &mut IO, x: Self) { w.print(x.as_bytes()); }
 }
 
 impl<T: Print, U: Print> Print for (T, U) {
-    fn print(w: &mut IO, (x, y): Self) {
-        w.print(x);
-        w.print(" ");
-        w.print(y);
-    }
+    fn print(w: &mut IO, (x, y): Self) { w.print(x); w.print(" "); w.print(y); }
 }
 
 impl<T: Print, U: Print, V: Print> Print for (T, U, V) {

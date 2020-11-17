@@ -4,11 +4,9 @@ pub fn modpow(e: u32, k: u32, m: u32) -> u32 {
     let mut res = 1;
     while k != 0 {
         if k % 2 != 0 {
-            res *= e;
-            res %= m;
+            res = res * e % m;
         }
-        e *= e;
-        e %= m;
+        e = e * e % m;
         k /= 2;
     }
     res as u32

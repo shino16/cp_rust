@@ -3,13 +3,60 @@ mod tests {
     mod fp {
         use crate::fp::*;
         #[test]
+        fn test_pow() {
+            use crate::rng::*;
+            let mut rng = Rng32::new();
+            assert_eq!(Fp17::from(2).pow(3), Fp17::from(8));
+            for _ in 0..100 {
+                let base: Fp17 = rng.gen().into();
+                let k = rng.gen() % 100;
+                let p = (0..k).map(|_| base).product::<Fp17>();
+                assert_eq!(p, base.pow(k));
+            }
+        }
+        #[test]
         fn test_inv() {
             use crate::rng::*;
             let mut rng = Rng32::new();
             for _ in 0..100 {
-                let a = Fp17::new(rng.gen());
+                let a: Fp17 = rng.gen().into();
                 let b = a.inv();
                 assert!(a * b == Fp17::ONE, "{} {}", a, b);
+            }
+        }
+    }
+
+    mod fp_naive {
+        use crate::modint::*;
+        #[test]
+        fn test_mul() {
+            use crate::rng::*;
+            let mut rng = Rng32::new();
+            for _ in 0..100 {
+                let a = rng.gen() as u64;
+                let b = rng.gen() as u64;
+                assert_eq!(Modint17::from(a) * b, Modint17::from(a * b));
+            }
+        }
+        #[test]
+        fn test_pow() {
+            use crate::rng::*;
+            let mut rng = Rng32::new();
+            for _ in 0..100 {
+                let base: Modint17 = rng.gen().into();
+                let k = rng.gen() % 100;
+                let p = (0..k).map(|_| base).product::<Modint17>();
+                assert_eq!(p, base.pow(k.into()));
+            }
+        }
+        #[test]
+        fn test_inv() {
+            use crate::rng::*;
+            let mut rng = Rng32::new();
+            for _ in 0..100 {
+                let a: Modint17 = rng.gen().into();
+                let b = a.inv();
+                assert!(a * b == Modint17::ONE, "{} * {} = {}", a, b, a * b);
             }
         }
     }

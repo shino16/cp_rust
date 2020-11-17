@@ -49,18 +49,11 @@ pub type Fp10 = Fp<Mod10>;
 pub type Fp92 = Fp<Mod92>;
 
 impl<M: Mod> Fp<M> {
-    pub fn new(val: u32) -> Self {
-        Fp::from_raw(redc::<M>(val as u64 * M::R2 as u64))
-    }
-    fn from_raw(val: u32) -> Self {
-        Fp { val, _m: PhantomData }
-    }
-    pub fn value(self) -> u32 {
-        redc::<M>(self.val as u64)
-    }
-    pub fn grow(self) -> FpGrow<M> {
-        FpGrow::from_raw((self.val as u64) << 32)
-    }
+    pub const MOD: u32 = M::P;
+    pub fn new(val: u32) -> Self { Fp::from_raw(redc::<M>(val as u64 * M::R2 as u64)) }
+    fn from_raw(val: u32) -> Self { Fp { val, _m: PhantomData } }
+    pub fn value(self) -> u32 { redc::<M>(self.val as u64) }
+    pub fn grow(self) -> FpGrow<M> { FpGrow::from_raw((self.val as u64) << 32) }
     pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> FpGrow<M> {
         FpGrow::from_raw(self.val as u64 * rhs.into().val as u64)
     }
@@ -105,35 +98,22 @@ pub struct FpGrow<M: Mod> {
 }
 
 impl<M: Mod> FpGrow<M> {
-    fn from_raw(val: u64) -> Self {
-        Self { val, _m: PhantomData }
-    }
-    pub fn reduce(self) -> Fp<M> {
-        Fp::from_raw(redc::<M>(self.val))
-    }
-    pub fn value(self) -> u32 {
-        self.reduce().value()
-    }
+    fn from_raw(val: u64) -> Self { Self { val, _m: PhantomData } }
+    pub fn reduce(self) -> Fp<M> { Fp::from_raw(redc::<M>(self.val)) }
+    pub fn value(self) -> u32 { self.reduce().value() }
 }
 
 impl<M: Mod> From<FpGrow<M>> for Fp<M> {
-    fn from(v: FpGrow<M>) -> Self {
-        v.reduce()
-    }
+    fn from(v: FpGrow<M>) -> Self { v.reduce() }
 }
 
 impl<M: Mod, I: Int> From<I> for Fp<M> {
-    fn from(x: I) -> Self {
-        Self::new(x.rem_euclid(M::P.as_()).as_())
-    }
+    fn from(x: I) -> Self { Self::new(x.rem_euclid(M::P.as_()).as_()) }
 }
 
 impl<M: Mod, T: Into<Fp<M>>> ops::Add<T> for Fp<M> {
     type Output = Self;
-    fn add(mut self, rhs: T) -> Self {
-        self += rhs;
-        self
-    }
+    fn add(mut self, rhs: T) -> Self { self += rhs; self }
 }
 impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {
@@ -143,19 +123,17 @@ impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
         }
     }
 }
+
 impl<M: Mod> ops::Neg for Fp<M> {
     type Output = Self;
-    fn neg(self) -> Self {
-        Fp::from_raw(M::P - self.val)
-    }
+    fn neg(self) -> Self { Fp::from_raw(M::P - self.val) }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::Sub<T> for Fp<M> {
     type Output = Self;
-    fn sub(mut self, rhs: T) -> Self {
-        self -= rhs;
-        self
-    }
+    fn sub(mut self, rhs: T) -> Self { self -= rhs; self }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
@@ -165,82 +143,64 @@ impl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M> {
         self.val -= rhs.val;
     }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::Mul<T> for Fp<M> {
     type Output = Self;
-    fn mul(self, rhs: T) -> Self {
-        self.mul_unreduced(rhs).reduce()
-    }
+    fn mul(self, rhs: T) -> Self { self.mul_unreduced(rhs).reduce() }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M> {
-    fn mul_assign(&mut self, rhs: T) {
-        *self = *self * rhs;
-    }
+    fn mul_assign(&mut self, rhs: T) { *self = *self * rhs; }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::Div<T> for Fp<M> {
     type Output = Self;
-    fn div(mut self, rhs: T) -> Self {
-        self /= rhs;
-        self
-    }
+    fn div(mut self, rhs: T) -> Self { self /= rhs; self }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {
-    fn div_assign(&mut self, rhs: T) {
-        *self *= rhs.into().inv();
-    }
+    fn div_assign(&mut self, rhs: T) { *self *= rhs.into().inv(); }
 }
 
 impl<M: Mod> iter::Sum for Fp<M> {
     fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::from_raw(0), |b, x| b + x)
+        iter.fold(Self::ZERO, |b, x| b + x)
     }
 }
+
 impl<M: Mod> iter::Product for Fp<M> {
     fn product<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::from_raw(1), |b, x| b * x)
+        iter.fold(Self::ONE, |b, x| b * x)
     }
 }
 
 impl<M: Mod> fmt::Debug for Fp<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        self.value().fmt(f)
-    }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }
 }
+
 impl<M: Mod> fmt::Display for Fp<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        self.value().fmt(f)
-    }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }
 }
 
 impl<M: Mod> ZeroOne for Fp<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
-    const ONE: Self = Self {
-        val: M::P.wrapping_neg() % M::P,
-        _m: PhantomData,
-    };
+    const ONE: Self = Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData };
 }
 
 impl<M: Mod> Num for Fp<M> {}
 
 impl<M: Mod> Print for Fp<M> {
-    fn print(w: &mut IO, x: Self) {
-        w.print(x.value());
-    }
+    fn print(w: &mut IO, x: Self) { w.print(x.value()); }
 }
 impl<M: Mod> Scan for Fp<M> {
-    fn scan(io: &mut IO) -> Self {
-        Self::new(io.scan())
-    }
+    fn scan(io: &mut IO) -> Self { Self::new(io.scan()) }
 }
 
 impl<M: Mod> ops::Add<Self> for FpGrow<M> {
     type Output = Self;
-    fn add(mut self, rhs: Self) -> Self {
-        self += rhs;
-        self
-    }
+    fn add(mut self, rhs: Self) -> Self { self += rhs; self }
 }
+
 impl<M: Mod> ops::AddAssign<Self> for FpGrow<M> {
-    fn add_assign(&mut self, rhs: Self) {
-        self.val += rhs.val;
-    }
+    fn add_assign(&mut self, rhs: Self) { self.val += rhs.val; }
 }
