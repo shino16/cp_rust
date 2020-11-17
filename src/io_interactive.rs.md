@@ -11,8 +11,8 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "use std::io::{stdin, stdout, BufRead, BufReader, BufWriter, StdinLock, StdoutLock,\
-    \ Write};\n\npub struct IO {\n    input: Vec<u8>,\n    pos: usize,\n    in_buf:\
-    \ BufReader<StdinLock<'static>>,\n    out_buf: BufWriter<StdoutLock<'static>>,\n\
+    \ Write};\nuse std::marker::PhantomData;\n\npub struct IO {\n    input: Vec<u8>,\n\
+    \    pos: usize,\n    in_buf: BufReader<StdinLock<'static>>,\n    out_buf: BufWriter<StdoutLock<'static>>,\n\
     }\n\nimpl IO {\n    pub fn new() -> Self {\n        let inp = Box::leak(Box::new(stdin()));\n\
     \        let out = Box::leak(Box::new(stdout()));\n        IO {\n            input:\
     \ Vec::new(),\n            pos: 0,\n            in_buf: BufReader::new(inp.lock()),\n\
@@ -25,47 +25,53 @@ data:
     \        let i = self.pos;\n        while self.pos != self.input.len() && !self.input[self.pos].is_ascii_whitespace()\
     \ {\n            self.pos += 1;\n        }\n        &self.input[i..self.pos]\n\
     \    }\n    pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }\n    pub fn\
-    \ vec<T: Scan>(&mut self, n: usize) -> Vec<T> { (0..n).map(|_| self.scan()).collect()\
-    \ }\n    pub fn graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {\n      \
-    \  let n = self.scan();\n        let m = self.scan();\n        let mut graph =\
-    \ vec![Vec::new(); n];\n        for _ in 0..m {\n            let u: usize = self.scan();\n\
-    \            let v: usize = self.scan();\n            graph[u].push(v);\n    \
-    \        graph[v].push(u);\n        }\n        (n, m, graph)\n    }\n    pub fn\
-    \ digraph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {\n        let n = self.scan();\n\
-    \        let m = self.scan();\n        let mut graph = vec![Vec::new(); n];\n\
-    \        for _ in 0..m {\n            let u: usize = self.scan();\n          \
-    \  let v: usize = self.scan();\n            graph[u].push(v);\n        }\n   \
-    \     (n, m, graph)\n    }\n    pub fn tree(&mut self) -> (usize, Vec<Vec<usize>>)\
+    \ scan_iter<T: Scan>(&mut self) -> Iter<'_, T> { Iter { io: self, _m: PhantomData\
+    \ } }\n    pub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_,\
+    \ T>> {\n        self.scan_iter().take(n)\n    }\n    pub fn scan_vec<T: Scan>(&mut\
+    \ self, n: usize) -> Vec<T> {\n        (0..n).map(|_| self.scan()).collect()\n\
+    \    }\n    pub fn graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {\n   \
+    \     let n = self.scan();\n        let m = self.scan();\n        let mut graph\
+    \ = vec![Vec::new(); n];\n        for _ in 0..m {\n            let u: usize =\
+    \ self.scan();\n            let v: usize = self.scan();\n            graph[u].push(v);\n\
+    \            graph[v].push(u);\n        }\n        (n, m, graph)\n    }\n    pub\
+    \ fn digraph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {\n        let n =\
+    \ self.scan();\n        let m = self.scan();\n        let mut graph = vec![Vec::new();\
+    \ n];\n        for _ in 0..m {\n            let u: usize = self.scan();\n    \
+    \        let v: usize = self.scan();\n            graph[u].push(v);\n        }\n\
+    \        (n, m, graph)\n    }\n    pub fn tree(&mut self) -> (usize, Vec<Vec<usize>>)\
     \ {\n        let n = self.scan();\n        let mut graph = vec![Vec::new(); n];\n\
     \        for _ in 0..n - 1 {\n            let u: usize = self.scan();\n      \
     \      let v: usize = self.scan();\n            graph[u].push(v);\n          \
-    \  graph[v].push(u);\n        }\n        (n, graph)\n    }\n}\n\nimpl IO {\n \
-    \   pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }\n    pub fn\
-    \ println<T: Print>(&mut self, x: T) { self.print(x); self.print(\"\\n\"); }\n\
-    \    pub fn iterln<T: Print, I: Iterator<Item = T>>(&mut self, mut iter: I, delim:\
-    \ &str) {\n        if let Some(v) = iter.next() {\n            self.print(v);\n\
-    \            for v in iter {\n                self.print(delim);\n           \
-    \     self.println(v);\n            }\n        }\n        self.print(\"\\n\");\n\
-    \    }\n    pub fn flush(&mut self) { self.out_buf.flush().unwrap(); }\n}\n\n\
-    pub trait Scan {\n    fn scan(io: &mut IO) -> Self;\n}\n\nmacro_rules! impl_parse_int\
-    \ {\n    ($($t:tt),*) => { $(\n        impl Scan for $t {\n            fn scan(s:\
-    \ &mut IO) -> Self {\n                let mut res = 0;\n                for d\
-    \ in s.scan_bytes() {\n                    res *= 10;\n                    res\
-    \ += (*d - b'0') as $t;\n                }\n                res\n            }\n\
-    \        }\n    )* };\n}\n\nimpl_parse_int!(i32, i64, isize, u32, u64, usize);\n\
-    \nimpl Scan for u8 {\n    fn scan(s: &mut IO) -> Self {\n        let bytes = s.scan_bytes();\n\
-    \        debug_assert_eq!(bytes.len(), 1);\n        bytes[0]\n    }\n}\n\nimpl\
-    \ Scan for Vec<u8> {\n    fn scan(s: &mut IO) -> Self { s.scan_bytes().to_owned()\
-    \ }\n}\n\nimpl<T: Scan, U: Scan> Scan for (T, U) {\n    fn scan(s: &mut IO) ->\
-    \ Self { (T::scan(s), U::scan(s)) }\n}\n\nimpl<T: Scan, U: Scan, V: Scan> Scan\
-    \ for (T, U, V) {\n    fn scan(s: &mut IO) -> Self { (T::scan(s), U::scan(s),\
-    \ V::scan(s)) }\n}\n\nimpl<T: Scan> Scan for [T; 2] {\n    fn scan(s: &mut IO)\
-    \ -> Self { [s.scan(), s.scan()] }\n}\n\nimpl<T: Scan> Scan for [T; 3] {\n   \
-    \ fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(), s.scan()] }\n}\n\nimpl<T:\
-    \ Scan> Scan for [T; 4] {\n    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(),\
-    \ s.scan(), s.scan()] }\n}\n\npub trait Print {\n    fn print(w: &mut IO, x: Self);\n\
-    }\n\nmacro_rules! impl_print_int {\n    ($($t:ty),*) => { $(\n        impl Print\
-    \ for $t {\n            fn print(w: &mut IO, x: Self) {\n                w.out_buf.write_all(x.to_string().as_bytes()).unwrap();\n\
+    \  graph[v].push(u);\n        }\n        (n, graph)\n    }\n\n    pub fn print<T:\
+    \ Print>(&mut self, x: T) { T::print(self, x); }\n    pub fn println<T: Print>(&mut\
+    \ self, x: T) { self.print(x); self.print(\"\\n\"); }\n    pub fn iterln<T: Print,\
+    \ I: Iterator<Item = T>>(&mut self, mut iter: I, delim: &str) {\n        if let\
+    \ Some(v) = iter.next() {\n            self.print(v);\n            for v in iter\
+    \ {\n                self.print(delim);\n                self.println(v);\n  \
+    \          }\n        }\n        self.print(\"\\n\");\n    }\n    pub fn flush(&mut\
+    \ self) { self.out_buf.flush().unwrap(); }\n}\n\npub struct Iter<'a, T> {\n  \
+    \  io: &'a mut IO,\n    _m: PhantomData<T>,\n}\n\nimpl<T: Scan> Iterator for Iter<'_,\
+    \ T> {\n    type Item = T;\n    fn next(&mut self) -> Option<Self::Item> { Some(self.io.scan())\
+    \ }\n}\n\npub trait Scan {\n    fn scan(io: &mut IO) -> Self;\n}\n\nmacro_rules!\
+    \ impl_parse_int {\n    ($($t:tt),*) => { $(\n        impl Scan for $t {\n   \
+    \         fn scan(s: &mut IO) -> Self {\n                let mut res = 0;\n  \
+    \              for d in s.scan_bytes() {\n                    res *= 10;\n   \
+    \                 res += (*d - b'0') as $t;\n                }\n             \
+    \   res\n            }\n        }\n    )* };\n}\n\nimpl_parse_int!(i32, i64, isize,\
+    \ u32, u64, usize);\n\nimpl Scan for u8 {\n    fn scan(s: &mut IO) -> Self {\n\
+    \        let bytes = s.scan_bytes();\n        debug_assert_eq!(bytes.len(), 1);\n\
+    \        bytes[0]\n    }\n}\n\nimpl Scan for Vec<u8> {\n    fn scan(s: &mut IO)\
+    \ -> Self { s.scan_bytes().to_owned() }\n}\n\nimpl<T: Scan, U: Scan> Scan for\
+    \ (T, U) {\n    fn scan(s: &mut IO) -> Self { (T::scan(s), U::scan(s)) }\n}\n\n\
+    impl<T: Scan, U: Scan, V: Scan> Scan for (T, U, V) {\n    fn scan(s: &mut IO)\
+    \ -> Self { (T::scan(s), U::scan(s), V::scan(s)) }\n}\n\nimpl<T: Scan> Scan for\
+    \ [T; 2] {\n    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan()] }\n}\n\nimpl<T:\
+    \ Scan> Scan for [T; 3] {\n    fn scan(s: &mut IO) -> Self { [s.scan(), s.scan(),\
+    \ s.scan()] }\n}\n\nimpl<T: Scan> Scan for [T; 4] {\n    fn scan(s: &mut IO) ->\
+    \ Self { [s.scan(), s.scan(), s.scan(), s.scan()] }\n}\n\npub trait Print {\n\
+    \    fn print(w: &mut IO, x: Self);\n}\n\nmacro_rules! impl_print_int {\n    ($($t:ty),*)\
+    \ => { $(\n        impl Print for $t {\n            fn print(w: &mut IO, x: Self)\
+    \ {\n                w.out_buf.write_all(x.to_string().as_bytes()).unwrap();\n\
     \            }\n        }\n    )* };\n}\n\nimpl_print_int!(i32, i64, isize, u32,\
     \ u64, usize);\n\nimpl Print for u8 {\n    fn print(w: &mut IO, x: Self) { w.out_buf.write_all(&[x]).unwrap();\
     \ }\n}\n\nimpl Print for &[u8] {\n    fn print(w: &mut IO, x: Self) { w.out_buf.write_all(x).unwrap();\
@@ -79,7 +85,7 @@ data:
   isVerificationFile: false
   path: src/io_interactive.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:45:05+09:00'
+  timestamp: '2020-11-17 21:23:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/io_interactive.rs

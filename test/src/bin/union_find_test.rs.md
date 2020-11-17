@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/ds/uf.rs
     title: src/ds/uf.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -29,8 +29,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/union_find_test.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:45:05+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-17 21:23:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/union_find_test.rs
 layout: document

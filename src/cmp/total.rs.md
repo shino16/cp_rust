@@ -12,16 +12,16 @@ data:
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "use std::ops::{Deref, DerefMut};\n\n#[derive(PartialEq, PartialOrd)]\npub\
     \ struct Total<T>(pub T);\n\nimpl<T: PartialEq> Eq for Total<T> {}\n\nimpl<T:\
-    \ PartialOrd> Ord for Total<T> {\n    fn cmp(&self, other: &Self) -> std::cmp::Ordering\
-    \ {\n        self.0.partial_cmp(&other.0).unwrap()\n    }\n}\n\nimpl<T> Deref\
-    \ for Total<T> {\n    type Target = T;\n    fn deref(&self) -> &Self::Target {\n\
-    \        &self.0\n    }\n}\n\nimpl<T> DerefMut for Total<T> {\n    fn deref_mut(&mut\
+    \ PartialOrd> Ord for Total<T> {\n    fn cmp(&self, rhs: &Self) -> std::cmp::Ordering\
+    \ {\n        self.0.partial_cmp(&rhs.0).unwrap()\n    }\n}\n\nimpl<T> Deref for\
+    \ Total<T> {\n    type Target = T;\n    fn deref(&self) -> &Self::Target {\n \
+    \       &self.0\n    }\n}\n\nimpl<T> DerefMut for Total<T> {\n    fn deref_mut(&mut\
     \ self) -> &mut Self::Target {\n        &mut self.0\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/cmp/total.rs
   requiredBy: []
-  timestamp: '2020-11-03 08:01:44+09:00'
+  timestamp: '2020-11-17 21:23:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/cmp/total.rs

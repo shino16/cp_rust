@@ -1,40 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/as_int.rs
     title: src/as_int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: src/iter.rs
+    title: src/iter.rs
+  - icon: ':x:'
+    path: src/iter/prod.rs
+    title: src/iter/prod.rs
+  - icon: ':x:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/math/gcd.rs
     title: src/math/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/modint.rs
     title: src/modint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/rng.rs
     title: src/rng.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -55,6 +61,8 @@ data:
   - src/bit.rs
   - src/fp.rs
   - src/io.rs
+  - src/iter.rs
+  - src/iter/prod.rs
   - src/make_vec.rs
   - src/math/gcd.rs
   - src/modint.rs
@@ -64,8 +72,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:45:05+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-17 21:23:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
 layout: document

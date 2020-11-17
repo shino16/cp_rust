@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -38,14 +38,18 @@ data:
     \            for _ in 0..100 {\n                let a: Modint17 = rng.gen().into();\n\
     \                let b = a.inv();\n                assert!(a * b == Modint17::ONE,\
     \ \"{} * {} = {}\", a, b, a * b);\n            }\n        }\n    }\n\n    mod\
-    \ num {\n        use crate::num::*;\n        #[test]\n        fn types() {\n \
-    \           assert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);\n            assert_eq!(<i32\
-    \ as Int>::Unsigned::ZERO, 0_u32);\n            assert_eq!(<u32 as Int>::Signed::ZERO,\
-    \ 0_i32);\n            assert_eq!(<u32 as Int>::Unsigned::ZERO, 0_u32);\n    \
-    \    }\n    }\n\n    mod make_vec {\n        use crate::make_vec::*;\n       \
-    \ #[test]\n        fn test() {\n            let v = make_vec((3, (5, 8)), \"foo\"\
-    );\n            assert_eq!(v, vec![vec![vec![\"foo\"; 8]; 5]; 3]);\n        }\n\
-    \    }\n\n    mod math {\n        mod gcd {\n            use crate::math::gcd::*;\n\
+    \ iter {\n        use crate::iter::*;\n        use crate::iter::prod::*;\n   \
+    \     #[test]\n        fn test() {\n            let lhs = (0..3).prod(b\"ab\"\
+    .to_vec()).collect_vec();\n            let rhs = vec![(0, b'a'), (0, b'b'), (1,\
+    \ b'a'), (1, b'b'), (2, b'a'), (2, b'b')];\n            assert_eq!(lhs, rhs);\n\
+    \        }\n    }\n\n    mod num {\n        use crate::num::*;\n        #[test]\n\
+    \        fn types() {\n            assert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);\n\
+    \            assert_eq!(<i32 as Int>::Unsigned::ZERO, 0_u32);\n            assert_eq!(<u32\
+    \ as Int>::Signed::ZERO, 0_i32);\n            assert_eq!(<u32 as Int>::Unsigned::ZERO,\
+    \ 0_u32);\n        }\n    }\n\n    mod make_vec {\n        use crate::make_vec::*;\n\
+    \        #[test]\n        fn test() {\n            let v = make_vec((3, (5, 8)),\
+    \ \"foo\");\n            assert_eq!(v, vec![vec![vec![\"foo\"; 8]; 5]; 3]);\n\
+    \        }\n    }\n\n    mod math {\n        mod gcd {\n            use crate::math::gcd::*;\n\
     \            #[test]\n            fn test_gcd() {\n                assert_eq!(gcd(0,\
     \ 0), 0);\n                for a in 0..100 {\n                    for b in 1..100\
     \ {\n                        let g = gcd(a, b);\n                        for c\
@@ -57,8 +61,8 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:39:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-17 21:23:08+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
 documentation_of: src/tests.rs

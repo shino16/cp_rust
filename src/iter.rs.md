@@ -13,26 +13,21 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub struct Rng32(u32);\n\nimpl Rng32 {\n    pub fn new() -> Self {\n    \
-    \    Rng32(2_463_534_242)\n    }\n    pub fn gen(&mut self) -> u32 {\n       \
-    \ let mut x = self.0;\n        x ^= x << 13;\n        x ^= x >> 17;\n        x\
-    \ ^= x << 5;\n        self.0 = x;\n        x\n    }\n}\n\npub struct Rng64(u64);\n\
-    \nimpl Rng64 {\n    pub fn new() -> Self {\n        Rng64(88_172_645_463_325_252)\n\
-    \    }\n    pub fn gen(&mut self) -> u64 {\n        let mut x = self.0;\n    \
-    \    x ^= x << 13;\n        x ^= x >> 7;\n        x ^= x << 17;\n        self.0\
-    \ = x;\n        x\n    }\n}\n"
+  code: "pub mod prod;\n\npub trait Itertools: Iterator {\n    fn collect_vec(self)\
+    \ -> Vec<Self::Item>\n    where\n        Self: Sized,\n    {\n        self.collect()\n\
+    \    }\n}\n\nimpl<I: Iterator> Itertools for I {}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/rng.rs
+  path: src/iter.rs
   requiredBy: []
-  timestamp: '2020-11-17 16:16:39+09:00'
+  timestamp: '2020-11-17 21:23:08+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
-documentation_of: src/rng.rs
+documentation_of: src/iter.rs
 layout: document
 redirect_from:
-- /library/src/rng.rs
-- /library/src/rng.rs.html
-title: src/rng.rs
+- /library/src/iter.rs
+- /library/src/iter.rs.html
+title: src/iter.rs
 ---
