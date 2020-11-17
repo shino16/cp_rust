@@ -20,6 +20,9 @@ data:
     path: src/math/gcd.rs
     title: src/math/gcd.rs
   - icon: ':heavy_check_mark:'
+    path: src/modint.rs
+    title: src/modint.rs
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -54,13 +57,14 @@ data:
   - src/io.rs
   - src/make_vec.rs
   - src/math/gcd.rs
+  - src/modint.rs
   - src/num.rs
   - src/rng.rs
   - src/tests.rs
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2020-11-17 16:16:39+09:00'
+  timestamp: '2020-11-17 18:39:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

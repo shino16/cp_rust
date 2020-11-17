@@ -7,6 +7,9 @@ data:
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/dfa_test.rs
+    title: test/src/bin/dfa_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
@@ -36,6 +39,7 @@ data:
   verifiedWith:
   - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_test.rs
+  - test/src/bin/dfa_test.rs
 documentation_of: src/bit.rs
 layout: document
 redirect_from:

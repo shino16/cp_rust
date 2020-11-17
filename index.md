@@ -15,12 +15,15 @@ data:
     - icon: ':warning:'
       path: src/bitset.rs
       title: src/bitset.rs
-    - icon: ':warning:'
-      path: src/comp.rs
-      title: src/comp.rs
+    - icon: ':heavy_check_mark:'
+      path: src/dfa.rs
+      title: src/dfa.rs
     - icon: ':heavy_check_mark:'
       path: src/fp.rs
       title: src/fp.rs
+    - icon: ':warning:'
+      path: src/hash.rs
+      title: src/hash.rs
     - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
@@ -33,6 +36,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/make_vec.rs
       title: src/make_vec.rs
+    - icon: ':heavy_check_mark:'
+      path: src/modint.rs
+      title: src/modint.rs
     - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
@@ -98,17 +104,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/ntt.rs
       title: src/math/ntt.rs
-  - name: src/string
-    pages:
-    - icon: ':warning:'
-      path: src/string/dfa.rs
-      title: src/string/dfa.rs
   verificationCategories:
   - name: test/src/bin
     pages:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/cargo_test.rs
       title: test/src/bin/cargo_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/dfa_test.rs
+      title: test/src/bin/dfa_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_test.rs
       title: test/src/bin/ntt_test.rs

@@ -10,7 +10,14 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: 'pub mod alg;
+  code: '#![allow(clippy::many_single_char_names)]
+
+    #![allow(clippy::new_without_default)]
+
+    #![allow(clippy::suspicious_op_assign_impl)]
+
+
+    pub mod alg;
 
     pub mod as_int;
 
@@ -20,11 +27,13 @@ data:
 
     pub mod cmp;
 
-    pub mod comp;
+    pub mod dfa;
 
     pub mod ds;
 
     pub mod fp;
+
+    pub mod hash;
 
     pub mod io;
 
@@ -34,13 +43,13 @@ data:
 
     pub mod math;
 
+    pub mod modint;
+
     pub mod num;
 
     pub mod rng;
 
     pub mod slice;
-
-    pub mod string;
 
 
     pub mod tests;
@@ -50,7 +59,7 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2020-11-17 16:16:39+09:00'
+  timestamp: '2020-11-17 18:39:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs
