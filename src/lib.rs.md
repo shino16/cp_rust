@@ -33,6 +33,8 @@ data:
 
     pub mod fp;
 
+    pub mod fxhash;
+
     pub mod hash;
 
     pub mod io;
@@ -61,7 +63,7 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:49:18+09:00'
+  timestamp: '2020-11-17 22:01:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

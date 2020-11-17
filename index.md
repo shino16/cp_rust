@@ -21,6 +21,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fp.rs
       title: src/fp.rs
+    - icon: ':heavy_check_mark:'
+      path: src/fxhash.rs
+      title: src/fxhash.rs
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs

@@ -13,7 +13,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use crate::num::*;\nuse std::cmp::Ordering;\nuse std::collections::HashMap;\n\
+  code: "use crate::fxhash::FxHashMap as HashMap;\nuse crate::num::*;\nuse std::cmp::Ordering;\n\
     use std::hash::Hash;\n\npub trait Dfa {\n    type Alphabet;\n    type State;\n\
     \    fn init(&self) -> Self::State;\n    fn next(&self, s: Self::State, a: Self::Alphabet,\
     \ i: usize) -> Self::State;\n    fn accept(&self, s: Self::State) -> bool;\n \
@@ -69,19 +69,19 @@ data:
     \ }\n    fn accept(&self, s: Self::State) -> bool {\n        s == 0\n    }\n}\n\
     \nfn count<I: Num, X: Dfa + ?Sized>(dfa: &X, n: usize, alphabet: &[X::Alphabet])\
     \ -> I\nwhere\n    X::Alphabet: Copy,\n    X::State: Eq + Hash + Copy,\n{\n  \
-    \  let mut dp = HashMap::new();\n    let mut dp2 = HashMap::new();\n    dp.insert(dfa.init(),\
-    \ I::ONE);\n    for i in 0..n {\n        dp2.clear();\n        for (s, k) in dp.drain()\
-    \ {\n            for &a in alphabet {\n                let s1 = dfa.next(s, a,\
-    \ i);\n                if dfa.unsuccessful(s1) {\n                    continue;\n\
-    \                }\n                *dp2.entry(s1).or_insert(I::ZERO) += k;\n\
-    \            }\n        }\n        std::mem::swap(&mut dp, &mut dp2);\n    }\n\
-    \    let mut sum = I::ZERO;\n    for (s, k) in dp {\n        if dfa.accept(s)\
+    \  let mut dp = HashMap::default();\n    let mut dp2 = HashMap::default();\n \
+    \   dp.insert(dfa.init(), I::ONE);\n    for i in 0..n {\n        dp2.clear();\n\
+    \        for (s, k) in dp.drain() {\n            for &a in alphabet {\n      \
+    \          let s1 = dfa.next(s, a, i);\n                if dfa.unsuccessful(s1)\
+    \ {\n                    continue;\n                }\n                *dp2.entry(s1).or_insert(I::ZERO)\
+    \ += k;\n            }\n        }\n        std::mem::swap(&mut dp, &mut dp2);\n\
+    \    }\n    let mut sum = I::ZERO;\n    for (s, k) in dp {\n        if dfa.accept(s)\
     \ {\n            sum += k;\n        }\n    }\n    sum\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:39:28+09:00'
+  timestamp: '2020-11-17 22:01:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs
