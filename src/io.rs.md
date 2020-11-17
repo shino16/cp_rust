@@ -26,8 +26,8 @@ data:
     \ IO {\n    iter: std::str::SplitAsciiWhitespace<'static>,\n    buf: BufWriter<StdoutLock<'static>>,\n\
     }\n\nimpl IO {\n    pub fn new() -> Self {\n        let mut input = String::new();\n\
     \        std::io::stdin().read_to_string(&mut input).unwrap();\n        let input\
-    \ = Box::leak(input.into_boxed_str());\n        let out = Box::new(stdout());\n\
-    \        IO { iter: input.split_ascii_whitespace(), buf: BufWriter::new(Box::leak(out).lock())\
+    \ = Box::leak(input.into_boxed_str());\n        let out = Box::leak(Box::new(stdout()));\n\
+    \        IO { iter: input.split_ascii_whitespace(), buf: BufWriter::new(out.lock())\
     \ }\n    }\n    fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap()\
     \ }\n    fn scan_raw(&mut self) -> &'static [u8] { self.scan_str().as_bytes()\
     \ }\n    pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }\n    pub fn scan_vec<T:\
@@ -86,7 +86,7 @@ data:
   isVerificationFile: false
   path: src/io.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:39:28+09:00'
+  timestamp: '2020-11-17 18:45:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
