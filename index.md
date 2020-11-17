@@ -6,52 +6,52 @@ data:
     - icon: ':warning:'
       path: src/alg.rs
       title: src/alg.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/as_int.rs
       title: src/as_int.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/bit.rs
       title: src/bit.rs
     - icon: ':warning:'
       path: src/bitset.rs
       title: src/bitset.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/dfa.rs
       title: src/dfa.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/fp.rs
       title: src/fp.rs
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
       path: src/io_interactive.rs
       title: src/io_interactive.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/iter.rs
       title: src/iter.rs
     - icon: ':warning:'
       path: src/lib.rs
       title: src/lib.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/make_vec.rs
       title: src/make_vec.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/modint.rs
       title: src/modint.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/rng.rs
       title: src/rng.rs
     - icon: ':warning:'
       path: src/slice.rs
       title: src/slice.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/tests.rs
       title: src/tests.rs
   - name: src/cmp
@@ -81,13 +81,13 @@ data:
     - icon: ':warning:'
       path: src/ds/sparsetable.rs
       title: src/ds/sparsetable.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/uf.rs
       title: src/ds/uf.rs
     - icon: ':warning:'
       path: src/ds/uslice.rs
       title: src/ds/uslice.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/uvec.rs
       title: src/ds/uvec.rs
     - icon: ':warning:'
@@ -98,33 +98,33 @@ data:
       title: src/ds/vec2d.rs
   - name: src/iter
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/iter/prod.rs
       title: src/iter/prod.rs
   - name: src/math
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/gcd.rs
       title: src/math/gcd.rs
     - icon: ':warning:'
       path: src/math/modpow.rs
       title: src/math/modpow.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/math/ntt.rs
       title: src/math/ntt.rs
   verificationCategories:
   - name: test/src/bin
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/cargo_test.rs
       title: test/src/bin/cargo_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/dfa_test.rs
       title: test/src/bin/dfa_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_test.rs
       title: test/src/bin/ntt_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/union_find_test.rs
       title: test/src/bin/union_find_test.rs
 layout: toppage

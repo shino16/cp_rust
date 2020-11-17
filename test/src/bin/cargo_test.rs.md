@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/as_int.rs
     title: src/as_int.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/iter/prod.rs
     title: src/iter/prod.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/math/gcd.rs
     title: src/math/gcd.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/modint.rs
     title: src/modint.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/rng.rs
     title: src/rng.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -72,8 +72,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:23:08+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-17 21:49:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
 layout: document

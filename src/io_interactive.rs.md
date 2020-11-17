@@ -85,7 +85,7 @@ data:
   isVerificationFile: false
   path: src/io_interactive.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:23:08+09:00'
+  timestamp: '2020-11-17 21:49:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/io_interactive.rs
