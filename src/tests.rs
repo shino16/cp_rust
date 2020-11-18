@@ -62,12 +62,19 @@ mod tests {
     }
 
     mod iter {
-        use crate::iter::*;
         use crate::iter::prod::*;
+        use crate::iter::*;
         #[test]
         fn test() {
             let lhs = (0..3).prod(b"ab".to_vec()).collect_vec();
-            let rhs = vec![(0, b'a'), (0, b'b'), (1, b'a'), (1, b'b'), (2, b'a'), (2, b'b')];
+            let rhs = vec![
+                (0, b'a'),
+                (0, b'b'),
+                (1, b'a'),
+                (1, b'b'),
+                (2, b'a'),
+                (2, b'b'),
+            ];
             assert_eq!(lhs, rhs);
         }
     }
