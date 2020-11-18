@@ -38,10 +38,19 @@ macro_rules! impl_group {
     };
 }
 
-pub struct MonoidImpl<Unit, Op>(pub Unit, pub Op);
-pub struct GroupImpl<Unit, Op, Inv>(pub Unit, pub Op, pub Inv);
+pub struct MonoidImpl<T: Clone, Unit, Op>(pub Unit, pub Op)
+where
+    T: Clone,
+    Unit: Fn() -> T,
+    Op: Fn(&T, &T) -> T;
+pub struct GroupImpl<T, Unit, Op, Inv>(pub Unit, pub Op, pub Inv)
+where
+    T: Clone,
+    Unit: Fn() -> T,
+    Op: Fn(&T, &T) -> T,
+    Inv: Fn(&T) -> T;
 
 // help!
-impl_monoid!(MonoidImpl<Unit, Op>, T: Clone, Unit: (Fn() -> T), Op: (Fn(&T, &T) -> T));
-impl_group!(GroupImpl<Unit, Op, Inv>,
+impl_monoid!(MonoidImpl<T, Unit, Op>, T: Clone, Unit: (Fn() -> T), Op: (Fn(&T, &T) -> T));
+impl_group!(GroupImpl<T, Unit, Op, Inv>,
             T: Clone, Unit: (Fn() -> T), Op: (Fn(&T, &T) -> T), Inv: (Fn(&T) -> T));
