@@ -41,12 +41,12 @@ data:
     \ for $i {}\n        impl UInt for $u {}\n    };\n    ({ $i:ty, $($is:ty),* },\
     \ { $u:ty, $($us:ty),* }) => {\n        impl_int!({ $i }, { $u });\n        impl_int!({\
     \ $($is),* }, { $($us),* });\n    }\n}\n\nimpl_int!({ i32, i64, i128, isize },\
-    \ { u32, u64, u128, usize });"
+    \ { u32, u64, u128, usize });\n"
   dependsOn: []
   isVerificationFile: false
   path: src/num.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:49:18+09:00'
+  timestamp: '2020-11-18 17:40:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

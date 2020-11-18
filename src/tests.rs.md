@@ -38,19 +38,21 @@ data:
     \            for _ in 0..100 {\n                let a: Modint17 = rng.gen().into();\n\
     \                let b = a.inv();\n                assert!(a * b == Modint17::ONE,\
     \ \"{} * {} = {}\", a, b, a * b);\n            }\n        }\n    }\n\n    mod\
-    \ iter {\n        use crate::iter::*;\n        use crate::iter::prod::*;\n   \
+    \ iter {\n        use crate::iter::prod::*;\n        use crate::iter::*;\n   \
     \     #[test]\n        fn test() {\n            let lhs = (0..3).prod(b\"ab\"\
-    .to_vec()).collect_vec();\n            let rhs = vec![(0, b'a'), (0, b'b'), (1,\
-    \ b'a'), (1, b'b'), (2, b'a'), (2, b'b')];\n            assert_eq!(lhs, rhs);\n\
-    \        }\n    }\n\n    mod num {\n        use crate::num::*;\n        #[test]\n\
-    \        fn types() {\n            assert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);\n\
-    \            assert_eq!(<i32 as Int>::Unsigned::ZERO, 0_u32);\n            assert_eq!(<u32\
-    \ as Int>::Signed::ZERO, 0_i32);\n            assert_eq!(<u32 as Int>::Unsigned::ZERO,\
-    \ 0_u32);\n        }\n    }\n\n    mod make_vec {\n        use crate::make_vec::*;\n\
-    \        #[test]\n        fn test() {\n            let v = make_vec((3, (5, 8)),\
-    \ \"foo\");\n            assert_eq!(v, vec![vec![vec![\"foo\"; 8]; 5]; 3]);\n\
-    \        }\n    }\n\n    mod math {\n        mod gcd {\n            use crate::math::gcd::*;\n\
-    \            #[test]\n            fn test_gcd() {\n                assert_eq!(gcd(0,\
+    .to_vec()).collect_vec();\n            let rhs = vec![\n                (0, b'a'),\n\
+    \                (0, b'b'),\n                (1, b'a'),\n                (1, b'b'),\n\
+    \                (2, b'a'),\n                (2, b'b'),\n            ];\n    \
+    \        assert_eq!(lhs, rhs);\n        }\n    }\n\n    mod num {\n        use\
+    \ crate::num::*;\n        #[test]\n        fn types() {\n            assert_eq!(<i32\
+    \ as Int>::Signed::ZERO, 0_i32);\n            assert_eq!(<i32 as Int>::Unsigned::ZERO,\
+    \ 0_u32);\n            assert_eq!(<u32 as Int>::Signed::ZERO, 0_i32);\n      \
+    \      assert_eq!(<u32 as Int>::Unsigned::ZERO, 0_u32);\n        }\n    }\n\n\
+    \    mod make_vec {\n        use crate::make_vec::*;\n        #[test]\n      \
+    \  fn test() {\n            let v = make_vec((3, (5, 8)), \"foo\");\n        \
+    \    assert_eq!(v, vec![vec![vec![\"foo\"; 8]; 5]; 3]);\n        }\n    }\n\n\
+    \    mod math {\n        mod gcd {\n            use crate::math::gcd::*;\n   \
+    \         #[test]\n            fn test_gcd() {\n                assert_eq!(gcd(0,\
     \ 0), 0);\n                for a in 0..100 {\n                    for b in 1..100\
     \ {\n                        let g = gcd(a, b);\n                        for c\
     \ in g + 1..g {\n                            assert!(a % c != 0 || b % c != 0);\n\
@@ -61,7 +63,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:49:18+09:00'
+  timestamp: '2020-11-18 17:40:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
