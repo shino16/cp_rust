@@ -17,7 +17,7 @@ data:
   isVerificationFile: false
   path: src/draft/debug.rs
   requiredBy: []
-  timestamp: '2020-11-18 21:17:05+09:00'
+  timestamp: '2020-11-18 23:11:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/debug.rs

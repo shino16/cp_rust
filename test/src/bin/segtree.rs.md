@@ -35,7 +35,7 @@ data:
   isVerificationFile: false
   path: test/src/bin/segtree.rs
   requiredBy: []
-  timestamp: '2020-11-18 21:51:16+09:00'
+  timestamp: '2020-11-18 23:11:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: test/src/bin/segtree.rs

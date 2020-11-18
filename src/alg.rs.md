@@ -26,17 +26,20 @@ data:
     \ : $bounds:tt),*) => {\n        impl_monoid!($target, $($params : $bounds),*);\n\
     \        impl<$($params : $bounds),*> Group for $target {\n            fn inv(&self,\
     \ x: &Self::Item) -> Self::Item {\n                (self.2)(x)\n            }\n\
-    \        }\n    };\n}\n\npub struct MonoidImpl<Unit, Op>(pub Unit, pub Op);\n\
-    pub struct GroupImpl<Unit, Op, Inv>(pub Unit, pub Op, pub Inv);\n\n// help!\n\
-    impl_monoid!(MonoidImpl<Unit, Op>, T: Clone, Unit: (Fn() -> T), Op: (Fn(&T, &T)\
-    \ -> T));\nimpl_group!(GroupImpl<Unit, Op, Inv>,\n            T: Clone, Unit:\
-    \ (Fn() -> T), Op: (Fn(&T, &T) -> T), Inv: (Fn(&T) -> T));\n"
+    \        }\n    };\n}\n\npub struct MonoidImpl<T: Clone, Unit, Op>(pub Unit, pub\
+    \ Op)\nwhere\n    T: Clone,\n    Unit: Fn() -> T,\n    Op: Fn(&T, &T) -> T;\n\
+    pub struct GroupImpl<T, Unit, Op, Inv>(pub Unit, pub Op, pub Inv)\nwhere\n   \
+    \ T: Clone,\n    Unit: Fn() -> T,\n    Op: Fn(&T, &T) -> T,\n    Inv: Fn(&T) ->\
+    \ T;\n\n// help!\nimpl_monoid!(MonoidImpl<T, Unit, Op>, T: Clone, Unit: (Fn()\
+    \ -> T), Op: (Fn(&T, &T) -> T));\nimpl_group!(GroupImpl<T, Unit, Op, Inv>,\n \
+    \           T: Clone, Unit: (Fn() -> T), Op: (Fn(&T, &T) -> T), Inv: (Fn(&T) ->\
+    \ T));\n"
   dependsOn: []
   isVerificationFile: false
   path: src/alg.rs
   requiredBy:
   - test/src/bin/segtree.rs
-  timestamp: '2020-11-01 20:07:08+09:00'
+  timestamp: '2020-11-18 23:11:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/alg.rs
