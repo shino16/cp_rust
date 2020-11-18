@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/src/bin/segtree.rs
+    title: test/src/bin/segtree.rs
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -36,7 +39,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/ds/segtree.rs
-  requiredBy: []
+  requiredBy:
+  - test/src/bin/segtree.rs
   timestamp: '2020-11-15 11:00:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

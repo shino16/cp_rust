@@ -65,6 +65,9 @@ data:
   - name: src/draft
     pages:
     - icon: ':warning:'
+      path: src/draft/debug.rs
+      title: src/draft/debug.rs
+    - icon: ':warning:'
       path: src/draft/iprod.rs
       title: src/draft/iprod.rs
     - icon: ':warning:'
@@ -115,6 +118,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/math/ntt.rs
       title: src/math/ntt.rs
+  - name: test/src/bin
+    pages:
+    - icon: ':warning:'
+      path: test/src/bin/segtree.rs
+      title: test/src/bin/segtree.rs
   verificationCategories:
   - name: test/src/bin
     pages:
