@@ -13,24 +13,21 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use crate::slice::*;\n\npub struct Hash<T>(Vec<T>);\n\nimpl<T: Copy + Ord>\
-    \ Hash<T> {\n    pub fn from(mut data: Vec<T>) -> Self {\n        data.sort_unstable();\n\
-    \        data.dedup();\n        Self(data)\n    }\n    pub fn run(&self, v: &T)\
-    \ -> usize {\n        debug_assert!(self.0.binary_search(v).is_ok());\n      \
-    \  self.0.lower_bound(v)\n    }\n    pub fn restore(&self, i: usize) -> &T {\n\
-    \        &self.0[i]\n    }\n}\n"
+  code: "use std::mem::ManuallyDrop;\n\npub fn transmute_vec<T, U>(v: Vec<T>) -> Vec<U>\
+    \ {\n    let mut v = ManuallyDrop::new(v);\n    unsafe { Vec::from_raw_parts(v.as_mut_ptr()\
+    \ as *mut _, v.len(), v.capacity()) }\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/hash.rs
+  path: src/vec.rs
   requiredBy: []
-  timestamp: '2020-11-17 18:39:28+09:00'
+  timestamp: '2020-11-24 01:55:32+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/dfa_test.rs
-documentation_of: src/hash.rs
+documentation_of: src/vec.rs
 layout: document
 redirect_from:
-- /library/src/hash.rs
-- /library/src/hash.rs.html
-title: src/hash.rs
+- /library/src/vec.rs
+- /library/src/vec.rs.html
+title: src/vec.rs
 ---

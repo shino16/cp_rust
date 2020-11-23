@@ -6,22 +6,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/ntt_garner_test.rs
+    title: test/src/bin/ntt_garner_test.rs
+  - icon: ':x:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use std::ops::*;\n\npub trait Bits:\n    Sized + Shl<u32, Output = Self>\
-    \ + ShlAssign<u32> + Shr<u32, Output = Self> + ShrAssign<u32>\n{\n    fn trailing_zeros(self)\
-    \ -> u32;\n    fn lsb(self) -> Self;\n    fn ilog2(self) -> u32;\n    fn msb(self)\
+  code: "use std::ops::*;\n\npub trait Bits:\n    Sized\n    + BitAnd<Output = Self>\
+    \ + BitAndAssign\n    + BitOr<Output = Self> + BitOrAssign\n    + BitXor<Output\
+    \ = Self> + BitXorAssign\n    + Shl<u32, Output = Self> + ShlAssign<u32>\n   \
+    \ + Shr<u32, Output = Self> + ShrAssign<u32>\n{\n    fn trailing_zeros(self) ->\
+    \ u32;\n    fn lsb(self) -> Self;\n    fn ilog2(self) -> u32;\n    fn msb(self)\
     \ -> Self;\n}\n\nmacro_rules! impl_bit {\n    ($($t:ty), *) => { $(\n        impl\
     \ Bits for $t {\n            fn trailing_zeros(self) -> u32 {\n              \
     \  <$t>::trailing_zeros(self)\n            }\n            fn lsb(self) -> Self\
@@ -34,12 +39,13 @@ data:
   isVerificationFile: false
   path: src/bit.rs
   requiredBy: []
-  timestamp: '2020-11-04 11:51:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-24 01:55:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
-  - test/src/bin/ntt_test.rs
   - test/src/bin/dfa_test.rs
+  - test/src/bin/ntt_garner_test.rs
+  - test/src/bin/ntt_test.rs
 documentation_of: src/bit.rs
 layout: document
 redirect_from:

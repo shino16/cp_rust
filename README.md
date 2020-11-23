@@ -1,6 +1,6 @@
 # cpr
 
-[![Actions Status](https://github.com/shino16/cpr/workflows/check/badge.svg)](https://github.com/shino16/cpr/actions)
+[![Actions Status](https://github.com/shino16/cpr/workflows/test/badge.svg)](https://github.com/shino16/cpr/actions)
 [![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://shino16.github.io/cpr/)
 
 Rust 競プロライブラリ
@@ -11,4 +11,4 @@ Rust 競プロライブラリ
 
 ## LICENSE
 
-ファイル先頭に特に指定がなければ [CC0](https://creativecommons.org/share-your-work/public-domain/cc0)
+MIT ライセンスとしますが、オンラインジャッジへの提出に特別な表示は必要ありません。

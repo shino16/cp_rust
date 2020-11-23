@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/uf.rs
     title: src/ds/uf.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -29,7 +29,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/union_find_test.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:49:18+09:00'
+  timestamp: '2020-11-24 01:55:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/union_find_test.rs

@@ -6,8 +6,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
+  - icon: ':x:'
+    path: test/src/bin/dfa_test.rs
+    title: test/src/bin/dfa_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -15,28 +18,28 @@ data:
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "#[cfg(test)]\nmod tests {\n    mod fp {\n        use crate::fp::*;\n    \
     \    #[test]\n        fn test_pow() {\n            use crate::rng::*;\n      \
-    \      let mut rng = Rng32::new();\n            assert_eq!(Fp17::from(2).pow(3),\
-    \ Fp17::from(8));\n            for _ in 0..100 {\n                let base: Fp17\
+    \      let mut rng = Rng32::new();\n            assert_eq!(F17::from(2).pow(3),\
+    \ F17::from(8));\n            for _ in 0..100 {\n                let base: F17\
     \ = rng.gen().into();\n                let k = rng.gen() % 100;\n            \
-    \    let p = (0..k).map(|_| base).product::<Fp17>();\n                assert_eq!(p,\
+    \    let p = (0..k).map(|_| base).product::<F17>();\n                assert_eq!(p,\
     \ base.pow(k));\n            }\n        }\n        #[test]\n        fn test_inv()\
     \ {\n            use crate::rng::*;\n            let mut rng = Rng32::new();\n\
-    \            for _ in 0..100 {\n                let a: Fp17 = rng.gen().into();\n\
-    \                let b = a.inv();\n                assert!(a * b == Fp17::ONE,\
+    \            for _ in 0..100 {\n                let a: F17 = rng.gen().into();\n\
+    \                let b = a.inv();\n                assert!(a * b == F17::ONE,\
     \ \"{} {}\", a, b);\n            }\n        }\n    }\n\n    mod fp_naive {\n \
-    \       use crate::modint::*;\n        #[test]\n        fn test_mul() {\n    \
-    \        use crate::rng::*;\n            let mut rng = Rng32::new();\n       \
-    \     for _ in 0..100 {\n                let a = rng.gen() as u64;\n         \
-    \       let b = rng.gen() as u64;\n                assert_eq!(Modint17::from(a)\
-    \ * b, Modint17::from(a * b));\n            }\n        }\n        #[test]\n  \
-    \      fn test_pow() {\n            use crate::rng::*;\n            let mut rng\
-    \ = Rng32::new();\n            for _ in 0..100 {\n                let base: Modint17\
+    \       use crate::mint::*;\n        #[test]\n        fn test_mul() {\n      \
+    \      use crate::rng::*;\n            let mut rng = Rng32::new();\n         \
+    \   for _ in 0..100 {\n                let a = rng.gen() as u64;\n           \
+    \     let b = rng.gen() as u64;\n                assert_eq!(Mint17::from(a) *\
+    \ b, Mint17::from(a * b));\n            }\n        }\n        #[test]\n      \
+    \  fn test_pow() {\n            use crate::rng::*;\n            let mut rng =\
+    \ Rng32::new();\n            for _ in 0..100 {\n                let base: Mint17\
     \ = rng.gen().into();\n                let k = rng.gen() % 100;\n            \
-    \    let p = (0..k).map(|_| base).product::<Modint17>();\n                assert_eq!(p,\
+    \    let p = (0..k).map(|_| base).product::<Mint17>();\n                assert_eq!(p,\
     \ base.pow(k.into()));\n            }\n        }\n        #[test]\n        fn\
     \ test_inv() {\n            use crate::rng::*;\n            let mut rng = Rng32::new();\n\
-    \            for _ in 0..100 {\n                let a: Modint17 = rng.gen().into();\n\
-    \                let b = a.inv();\n                assert!(a * b == Modint17::ONE,\
+    \            for _ in 0..100 {\n                let a: Mint17 = rng.gen().into();\n\
+    \                let b = a.inv();\n                assert!(a * b == Mint17::ONE,\
     \ \"{} * {} = {}\", a, b, a * b);\n            }\n        }\n    }\n\n    mod\
     \ iter {\n        use crate::iter::prod::*;\n        use crate::iter::*;\n   \
     \     #[test]\n        fn test() {\n            let lhs = (0..3).prod(b\"ab\"\
@@ -63,10 +66,11 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2020-11-18 17:40:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-24 01:55:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
+  - test/src/bin/dfa_test.rs
 documentation_of: src/tests.rs
 layout: document
 redirect_from:

@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':warning:'
+  - icon: ':question:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -32,16 +32,16 @@ data:
   - src/alg.rs
   - src/ds/segtree.rs
   - src/io.rs
-  isVerificationFile: false
-  path: test/src/bin/segtree.rs
+  isVerificationFile: true
+  path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2020-11-18 23:11:02+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2020-11-24 01:55:32+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/src/bin/segtree.rs
+documentation_of: test/src/bin/segtree_test.rs
 layout: document
 redirect_from:
-- /library/test/src/bin/segtree.rs
-- /library/test/src/bin/segtree.rs.html
-title: test/src/bin/segtree.rs
+- /verify/test/src/bin/segtree_test.rs
+- /verify/test/src/bin/segtree_test.rs.html
+title: test/src/bin/segtree_test.rs
 ---

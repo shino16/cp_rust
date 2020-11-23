@@ -1,13 +1,16 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/src/bin/segtree.rs
-    title: test/src/bin/segtree.rs
-  _extendedVerifiedWith: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/src/bin/dfa_test.rs
+    title: test/src/bin/dfa_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/segtree_test.rs
+    title: test/src/bin/segtree_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -37,11 +40,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/alg.rs
-  requiredBy:
-  - test/src/bin/segtree.rs
+  requiredBy: []
   timestamp: '2020-11-18 23:11:02+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - test/src/bin/segtree_test.rs
+  - test/src/bin/dfa_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

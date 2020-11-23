@@ -6,8 +6,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
+  - icon: ':x:'
+    path: test/src/bin/dfa_test.rs
+    title: test/src/bin/dfa_test.rs
+  - icon: ':x:'
+    path: test/src/bin/ntt_test.rs
+    title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -22,20 +28,20 @@ data:
     \    return a << shift;\n        }\n        b >>= b.trailing_zeros();\n    }\n\
     }\n\n// (x, y, g) where ax + by = g\npub fn extgcd<I: IInt>(mut a: I, mut b: I)\
     \ -> (I, I, I) {\n    let (mut x, mut y, mut u, mut v) = (I::ONE, I::ZERO, I::ZERO,\
-    \ I::ONE);\n    // Euclidean algorithm by elementary row operations on A_0 = [a,\
-    \ x, y; b, u, v]\n    // invariant: Ax = 0 where x = [-1, a, b]\n    while !b.is_zero()\
-    \ {\n        let t = a / b;\n        a -= t * b;\n        x -= t * u;\n      \
-    \  y -= t * v;\n        std::mem::swap(&mut a, &mut b);\n        std::mem::swap(&mut\
-    \ x, &mut u);\n        std::mem::swap(&mut y, &mut v);\n    }\n    (x, y, a)\n\
-    }\n"
+    \ I::ONE);\n    while !b.is_zero() {\n        let t = a / b;\n        a -= t *\
+    \ b;\n        x -= t * u;\n        y -= t * v;\n        std::mem::swap(&mut a,\
+    \ &mut b);\n        std::mem::swap(&mut x, &mut u);\n        std::mem::swap(&mut\
+    \ y, &mut v);\n    }\n    (x, y, a)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/math/gcd.rs
   requiredBy: []
-  timestamp: '2020-11-17 16:16:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-24 01:55:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
+  - test/src/bin/dfa_test.rs
+  - test/src/bin/ntt_test.rs
 documentation_of: src/math/gcd.rs
 layout: document
 redirect_from:
