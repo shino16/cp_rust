@@ -61,6 +61,6 @@ fn main() {
 
     let dfa = And(ZigZag, And(MultipleOf(m), And(Leq(&b), Not(Lt(&a)))));
     let alphabet = "0123456789".as_bytes();
-    let ans: Modint<Modx> = dfa.count(a.len(), alphabet);
+    let ans: Mint<Modx> = dfa.count(a.len(), alphabet);
     println!("{}", ans);
 }

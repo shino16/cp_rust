@@ -1,7 +1,12 @@
 use std::ops::*;
 
 pub trait Bits:
-    Sized + Shl<u32, Output = Self> + ShlAssign<u32> + Shr<u32, Output = Self> + ShrAssign<u32>
+    Sized
+    + BitAnd<Output = Self> + BitAndAssign
+    + BitOr<Output = Self> + BitOrAssign
+    + BitXor<Output = Self> + BitXorAssign
+    + Shl<u32, Output = Self> + ShlAssign<u32>
+    + Shr<u32, Output = Self> + ShrAssign<u32>
 {
     fn trailing_zeros(self) -> u32;
     fn lsb(self) -> Self;

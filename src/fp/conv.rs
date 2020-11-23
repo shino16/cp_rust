@@ -1,35 +1,24 @@
 pub use crate::ds::uvec as _;
-
-pub trait Conv: Sized {
-    fn conv(lhs: Vec<Self>, rhs: Vec<Self>) -> Vec<Self>;
-    fn conv_in_place<'a, 'b>(
-        lhs: &'a mut Vec<Self>,
-        rhs: &'b mut Vec<Self>,
-    ) -> &'a mut Vec<Self>;
-}
+pub use crate::conv::*;
 
 macro_rules! impl_ntt {
-    ($module:ident, $modu:ty, $log2k:expr, $kth_root:expr, $inv_kth_root:expr) => {
+    ($module:ident, $modu:ty, $kth_root:expr, $inv_kth_root:expr) => {
         mod $module {
             use super::super::super::ds::uvec::*;
-            use super::super::super::fp::*;
+            use super::super::*;
             use super::Conv;
 
             type FpType = Fp<$modu>;
 
-            // modu = c * 2^log2k + 1
-            const LOG2K: u32 = $log2k;
-            // 2^log2k-th root of unity (== g^c where g: primitive root)
+            // modu = c * 2^K + 1
+            const K: u32 = 20;
+            // 2^K-th root of unity (== g^c where g: primitive root)
             const KTH_ROOT: u32 = $kth_root;
             const INV_KTH_ROOT: u32 = $inv_kth_root;
 
             static mut ROOT: UVec<FpType> = UVec(Vec::new()); // [n/2..n): n-th roots
             static mut INV_ROOT: UVec<FpType> = UVec(Vec::new());
             static mut REV: UVec<usize> = UVec(Vec::new()); // bit reversed
-
-            fn log2(n: usize) -> u32 {
-                std::mem::size_of::<usize>() as u32 * 8 - (n - 1).leading_zeros()
-            }
 
             // reserve for n up to 2^k
             pub fn reserve(k: u32) {
@@ -47,7 +36,7 @@ macro_rules! impl_ntt {
                     INV_ROOT.resize(n, Default::default());
                     let mut w = FpType::from(KTH_ROOT);
                     let mut wi = FpType::from(INV_KTH_ROOT);
-                    for _ in 0..(LOG2K - k) {
+                    for _ in 0..(K - k) {
                         w *= w;
                         wi *= wi;
                     }
@@ -99,7 +88,7 @@ macro_rules! impl_ntt {
                 b: &'b mut UVec<FpType>,
             ) -> &'a mut UVec<FpType> {
                 let len = a.len() + b.len() - 1;
-                let n: usize = 1 << log2(len);
+                let n: usize = len.next_power_of_two();
                 reserve(n.trailing_zeros());
                 a.resize(n, Default::default());
                 b.resize(n, Default::default());
@@ -127,15 +116,14 @@ macro_rules! impl_ntt {
                     mul(lhs.as_mut(), rhs.as_mut());
                     lhs
                 }
-                fn conv_in_place<'a, 'b>(
-                    lhs: &'a mut Vec<Self>,
-                    rhs: &'b mut Vec<Self>,
-                ) -> &'a mut Vec<Self> {
-                    mul(lhs.as_mut(), rhs.as_mut())
+                fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {
+                    mul(lhs.as_mut(), rhs.as_mut());
                 }
             }
         }
     };
 }
 
-impl_ntt!(impl99, Mod99, 23, 15_311_432, 469_870_224);
+impl_ntt!(impl_b, ModB, 565_042_129, 950_391_366);
+impl_ntt!(impl_c, ModC, 547_381_916, 603_595_182);
+impl_ntt!(impl_d, ModD, 121_832_176, 323_052_423);

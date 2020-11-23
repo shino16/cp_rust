@@ -24,48 +24,14 @@ impl IO {
     pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
         (0..n).map(|_| self.scan()).collect()
     }
-    pub fn scan_graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
-        let n = self.scan();
-        let m = self.scan();
-        let mut graph = vec![Vec::new(); n];
-        for _ in 0..m {
-            let u: usize = self.scan();
-            let v: usize = self.scan();
-            graph[u].push(v);
-            graph[v].push(u);
-        }
-        (n, m, graph)
-    }
-    pub fn scan_digraph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
-        let n = self.scan();
-        let m = self.scan();
-        let mut graph = vec![Vec::new(); n];
-        for _ in 0..m {
-            let u: usize = self.scan();
-            let v: usize = self.scan();
-            graph[u].push(v);
-        }
-        (n, m, graph)
-    }
-    pub fn scan_tree(&mut self) -> (usize, Vec<Vec<usize>>) {
-        let n = self.scan();
-        let mut graph = vec![Vec::new(); n];
-        for _ in 0..n - 1 {
-            let u: usize = self.scan();
-            let v: usize = self.scan();
-            graph[u].push(v);
-            graph[v].push(u);
-        }
-        (n, graph)
-    }
 
     pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
     pub fn println<T: Print>(&mut self, x: T) {
         self.print(x);
         self.print("\n");
     }
-    pub fn iterln<T: Print, I: IntoIterator<Item = T>>(&mut self, iter: I, delim: &str) {
-        let mut iter = iter.into_iter();
+    pub fn iterln<T: Print, I: IntoIterator<Item = T>>(&mut self, into_iter: I, delim: &str) {
+        let mut iter = into_iter.into_iter();
         if let Some(v) = iter.next() {
             self.print(v);
             for v in iter {
@@ -92,8 +58,29 @@ pub trait Scan {
     fn scan(io: &mut IO) -> Self;
 }
 
-macro_rules! impl_parse_int {
-    ($($t:tt),*) => { $(
+macro_rules! impl_parse_iint {
+    ($($t:ty),*) => { $(
+        impl Scan for $t {
+            fn scan(s: &mut IO) -> Self {
+                let mut res = 0;
+                let mut inp = s.scan_raw();
+                let mut neg = false;
+                if inp[0] == b'-' {
+                    neg = true;
+                    inp = &inp[1..];
+                }
+                for d in inp {
+                    res *= 10;
+                    res += (*d - b'0') as $t;
+                }
+                if neg { -res } else { res }
+            }
+        }
+    )* };
+}
+
+macro_rules! impl_parse_uint {
+    ($($t:ty),*) => { $(
         impl Scan for $t {
             fn scan(s: &mut IO) -> Self {
                 let mut res = 0;
@@ -107,7 +94,8 @@ macro_rules! impl_parse_int {
     )* };
 }
 
-impl_parse_int!(i32, i64, isize, u32, u64, usize);
+impl_parse_iint!(i32, i64, i128, isize);
+impl_parse_uint!(u32, u64, u128, usize);
 
 impl Scan for u8 {
     fn scan(s: &mut IO) -> Self {

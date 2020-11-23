@@ -27,8 +27,6 @@ pub fn gcd<I: Int>(mut a: I, mut b: I) -> I {
 // (x, y, g) where ax + by = g
 pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I, I) {
     let (mut x, mut y, mut u, mut v) = (I::ONE, I::ZERO, I::ZERO, I::ONE);
-    // Euclidean algorithm by elementary row operations on A_0 = [a, x, y; b, u, v]
-    // invariant: Ax = 0 where x = [-1, a, b]
     while !b.is_zero() {
         let t = a / b;
         a -= t * b;

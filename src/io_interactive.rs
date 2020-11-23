@@ -45,40 +45,6 @@ impl IO {
     pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
         (0..n).map(|_| self.scan()).collect()
     }
-    pub fn graph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
-        let n = self.scan();
-        let m = self.scan();
-        let mut graph = vec![Vec::new(); n];
-        for _ in 0..m {
-            let u: usize = self.scan();
-            let v: usize = self.scan();
-            graph[u].push(v);
-            graph[v].push(u);
-        }
-        (n, m, graph)
-    }
-    pub fn digraph(&mut self) -> (usize, usize, Vec<Vec<usize>>) {
-        let n = self.scan();
-        let m = self.scan();
-        let mut graph = vec![Vec::new(); n];
-        for _ in 0..m {
-            let u: usize = self.scan();
-            let v: usize = self.scan();
-            graph[u].push(v);
-        }
-        (n, m, graph)
-    }
-    pub fn tree(&mut self) -> (usize, Vec<Vec<usize>>) {
-        let n = self.scan();
-        let mut graph = vec![Vec::new(); n];
-        for _ in 0..n - 1 {
-            let u: usize = self.scan();
-            let v: usize = self.scan();
-            graph[u].push(v);
-            graph[v].push(u);
-        }
-        (n, graph)
-    }
 
     pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
     pub fn println<T: Print>(&mut self, x: T) { self.print(x); self.print("\n"); }

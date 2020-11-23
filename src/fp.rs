@@ -5,6 +5,8 @@ use crate::num::*;
 use std::marker::PhantomData;
 use std::{fmt, iter, ops};
 
+pub mod conv;
+
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
     const P: u32;
     const K: u32; // -1 / P mod 2^32
@@ -12,7 +14,7 @@ pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
 }
 
 // montgomery reduction (x -> x / 2^32 mod P)
-fn redc<M: Mod>(x: u64) -> u32 {
+fn reduce<M: Mod>(x: u64) -> u32 {
     let s = M::K.wrapping_mul(x as u32);
     let t = x + s as u64 * M::P as u64;
     let u = (t >> 32) as u32;
@@ -20,73 +22,69 @@ fn redc<M: Mod>(x: u64) -> u32 {
 }
 
 macro_rules! def_mod {
-    ($name:ident, $modu:expr, $k:expr, $r2:expr) => {
+    ($name:ident, $modu:expr, $k:expr) => {
         #[derive(Default, Clone, Copy, PartialEq, Eq, Debug)]
         pub struct $name;
         impl Mod for $name {
             const P: u32 = $modu;
             const K: u32 = $k;
-            const R2: u32 = $r2;
+            const R2: u32 = ((1_u128 << 64) % $modu) as u32;
         }
     };
 }
 
-def_mod!(Mod17, 1_000_000_007, 2_226_617_417, 582_344_008);
-def_mod!(Mod99, 998_244_353, 998_244_351, 932_051_910);
-def_mod!(Mod10, 1_012_924_417, 1_012_924_415, 818_184_550);
-def_mod!(Mod92, 924_844_033, 924_844_031, 404_973_864);
+def_mod!(ModA, 1_000_000_007, 2_226_617_417);
+def_mod!(ModB, 998_244_353, 998_244_351);
+def_mod!(ModC, 1_012_924_417, 1_012_924_415);
+def_mod!(ModD, 924_844_033, 924_844_031);
 
 // modular arithmetics
+#[repr(transparent)]
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
 pub struct Fp<M: Mod> {
     val: u32,
     _m: PhantomData<M>,
 }
 
-pub type Fp17 = Fp<Mod17>;
-pub type Fp99 = Fp<Mod99>;
-pub type Fp10 = Fp<Mod10>;
-pub type Fp92 = Fp<Mod92>;
+pub type FpA = Fp<ModA>;
+pub type FpB = Fp<ModB>;
+pub type FpC = Fp<ModC>;
+pub type FpD = Fp<ModD>;
+
+/// mod 1_000_000_007
+pub type F17 = FpA;
+/// mod 998_244_353
+pub type F99 = FpB;
 
 impl<M: Mod> Fp<M> {
-    pub const MOD: u32 = M::P;
-    pub fn new(val: u32) -> Self { Fp::from_raw(redc::<M>(val as u64 * M::R2 as u64)) }
+    pub const P: u32 = M::P;
+    pub fn new(val: u32) -> Self { Fp::from_raw(reduce::<M>(val as u64 * M::R2 as u64)) }
     fn from_raw(val: u32) -> Self { Fp { val, _m: PhantomData } }
-    pub fn value(self) -> u32 { redc::<M>(self.val as u64) }
+    pub fn value(self) -> u32 { reduce::<M>(self.val as u64) }
     pub fn grow(self) -> FpGrow<M> { FpGrow::from_raw((self.val as u64) << 32) }
     pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> FpGrow<M> {
         FpGrow::from_raw(self.val as u64 * rhs.into().val as u64)
     }
     pub fn pow<I: Int>(self, k: I) -> Self {
-        if self.val == 0 && k.is_zero() {
-            return Self::new(1);
-        }
+        if self.val == 0 && k.is_zero() { return Self::new(1); }
         let (mut e, mut k) = (self, k.rem_euclid((M::P - 1).as_()));
         let mut res = Self::ONE;
         while !k.is_zero() {
-            if !(k % 2.as_()).is_zero() {
-                res *= e;
-            }
-            e *= e;
-            k >>= 1;
+            if !(k & 1.as_()).is_zero() { res *= e; }
+            e *= e; k >>= 1;
         }
         res
     }
     pub fn inv(self) -> Self {
         let (mut a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);
-        // Euclidean algorithm by elementary row operations on A_0 = [a, 1, u; b, 0, v]
-        // invariant: Ax = 0 where x = [-1, a, b]
         while b != 0 {
             let t = a / b;
-            a -= t * b;
-            u -= t * v;
+            a -= t * b; u -= t * v;
             std::mem::swap(&mut a, &mut b);
             std::mem::swap(&mut u, &mut v);
         }
         debug_assert_eq!(a, 1);
-        if u < 0 {
-            u += M::P as i32;
-        }
+        if u < 0 { u += M::P as i32; }
         Self::new(u as u32)
     }
 }
@@ -99,8 +97,17 @@ pub struct FpGrow<M: Mod> {
 
 impl<M: Mod> FpGrow<M> {
     fn from_raw(val: u64) -> Self { Self { val, _m: PhantomData } }
-    pub fn reduce(self) -> Fp<M> { Fp::from_raw(redc::<M>(self.val)) }
+    pub fn reduce(self) -> Fp<M> { Fp::from_raw(reduce::<M>(self.val)) }
     pub fn value(self) -> u32 { self.reduce().value() }
+}
+
+impl<M: Mod> ops::Add<Self> for FpGrow<M> {
+    type Output = Self;
+    fn add(mut self, rhs: Self) -> Self { self += rhs; self }
+}
+
+impl<M: Mod> ops::AddAssign<Self> for FpGrow<M> {
+    fn add_assign(&mut self, rhs: Self) { self.val += rhs.val; }
 }
 
 impl<M: Mod> From<FpGrow<M>> for Fp<M> {
@@ -115,12 +122,11 @@ impl<M: Mod, T: Into<Fp<M>>> ops::Add<T> for Fp<M> {
     type Output = Self;
     fn add(mut self, rhs: T) -> Self { self += rhs; self }
 }
+
 impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
-        if self.val >= M::P {
-            self.val -= M::P;
-        }
+        if self.val >= M::P { self.val -= M::P; }
     }
 }
 
@@ -137,9 +143,7 @@ impl<M: Mod, T: Into<Fp<M>>> ops::Sub<T> for Fp<M> {
 impl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
-        if self.val < rhs.val {
-            self.val += M::P;
-        }
+        if self.val < rhs.val { self.val += M::P; }
         self.val -= rhs.val;
     }
 }
@@ -192,15 +196,7 @@ impl<M: Mod> Num for Fp<M> {}
 impl<M: Mod> Print for Fp<M> {
     fn print(w: &mut IO, x: Self) { w.print(x.value()); }
 }
+
 impl<M: Mod> Scan for Fp<M> {
     fn scan(io: &mut IO) -> Self { Self::new(io.scan()) }
-}
-
-impl<M: Mod> ops::Add<Self> for FpGrow<M> {
-    type Output = Self;
-    fn add(mut self, rhs: Self) -> Self { self += rhs; self }
-}
-
-impl<M: Mod> ops::AddAssign<Self> for FpGrow<M> {
-    fn add_assign(&mut self, rhs: Self) { self.val += rhs.val; }
 }

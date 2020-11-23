@@ -12,14 +12,10 @@ pub trait ZeroOne: Copy + Eq {
 
 pub trait Num:
     ZeroOne
-    + Add<Output = Self>
-    + AddAssign
-    + Sub<Output = Self>
-    + SubAssign
-    + Mul<Output = Self>
-    + MulAssign
-    + Div<Output = Self>
-    + DivAssign
+    + Add<Output = Self> + AddAssign
+    + Sub<Output = Self> + SubAssign
+    + Mul<Output = Self> + MulAssign
+    + Div<Output = Self> + DivAssign
 {
 }
 
