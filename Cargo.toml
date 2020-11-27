@@ -1,10 +1,11 @@
 [package]
 name = "lib"
 version = "0.1.0"
-authors = ["shino16 <ms_020916@yahoo.co.jp>"]
+authors = ["shino16 <masatosinokawa@gmail.com>"]
 edition = "2018"
-license = "CC0-1.0"
+license = "MIT"
 publish = false
+default-run = "main"
 
 [dependencies]
 
@@ -13,6 +14,6 @@ name = "lib"
 path = "src/lib.rs"
 
 [[bin]]
-name = "cprbin"
+name = "main"
 path = "src/main.rs"
 doc = false

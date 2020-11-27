@@ -2,20 +2,29 @@ use std::io::{stdout, BufWriter, Read, StdoutLock, Write};
 use std::marker::PhantomData;
 
 pub struct IO {
-	iter: std::str::SplitAsciiWhitespace<'static>,
+	inp: &'static [u8],
+	pos: usize,
 	buf: BufWriter<StdoutLock<'static>>,
 }
 
 impl IO {
 	pub fn new() -> Self {
-		let mut input = String::new();
-		std::io::stdin().read_to_string(&mut input).unwrap();
-		let input = Box::leak(input.into_boxed_str());
+		let mut inp = Vec::new();
+		std::io::stdin().read_to_end(&mut inp).unwrap();
+		let inp = Box::leak(inp.into_boxed_slice());
 		let out = Box::leak(Box::new(stdout()));
-		IO { iter: input.split_ascii_whitespace(), buf: BufWriter::new(out.lock()) }
+		IO { inp, pos: 0, buf: BufWriter::new(out.lock()) }
 	}
-	fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }
-	fn scan_raw(&mut self) -> &'static [u8] { self.scan_str().as_bytes() }
+	fn scan_raw(&mut self) -> &'static [u8] {
+		while self.inp[self.pos].is_ascii_whitespace() {
+			self.pos += 1;
+		}
+		let i = self.pos;
+		while !self.inp[self.pos].is_ascii_whitespace() {
+			self.pos += 1;
+		}
+		&self.inp[i..self.pos]
+	}
 	pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }
 	pub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> { Iter { io: self, _m: PhantomData } }
 	pub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
@@ -26,12 +35,18 @@ impl IO {
 	}
 
 	pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
-	pub fn println<T: Print>(&mut self, x: T) { self.print(x); self.print("\n"); }
+	pub fn println<T: Print>(&mut self, x: T) {
+		self.print(x);
+		self.print("\n");
+	}
 	pub fn iterln<T: Print, I: IntoIterator<Item = T>>(&mut self, into_iter: I, delim: &str) {
 		let mut iter = into_iter.into_iter();
 		if let Some(v) = iter.next() {
 			self.print(v);
-			for v in iter { self.print(delim); self.print(v); }
+			for v in iter {
+				self.print(delim);
+				self.print(v);
+			}
 		}
 		self.print("\n");
 	}
@@ -135,7 +150,9 @@ macro_rules! impl_print_int {
 			}
 		}
 		impl Print for &$t {
-			fn print(w: &mut IO, x: Self) { w.print(*x); }
+			fn print(w: &mut IO, x: Self) {
+				w.buf.write_all(x.to_string().as_bytes()).unwrap();
+			}
 		}
 	)* };
 }
