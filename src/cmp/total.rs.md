@@ -2,12 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
+  _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -15,19 +12,18 @@ data:
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "use std::ops::{Deref, DerefMut};\n\n#[derive(PartialEq, PartialOrd)]\npub\
     \ struct Total<T>(pub T);\n\nimpl<T: PartialEq> Eq for Total<T> {}\n\nimpl<T:\
-    \ PartialOrd> Ord for Total<T> {\n    fn cmp(&self, rhs: &Self) -> std::cmp::Ordering\
-    \ {\n        self.0.partial_cmp(&rhs.0).unwrap()\n    }\n}\n\nimpl<T> Deref for\
-    \ Total<T> {\n    type Target = T;\n    fn deref(&self) -> &Self::Target {\n \
-    \       &self.0\n    }\n}\n\nimpl<T> DerefMut for Total<T> {\n    fn deref_mut(&mut\
-    \ self) -> &mut Self::Target {\n        &mut self.0\n    }\n}\n"
+    \ PartialOrd> Ord for Total<T> {\n\tfn cmp(&self, rhs: &Self) -> std::cmp::Ordering\
+    \ {\n\t\tself.0.partial_cmp(&rhs.0).unwrap()\n\t}\n}\n\nimpl<T> Deref for Total<T>\
+    \ {\n\ttype Target = T;\n\tfn deref(&self) -> &Self::Target {\n\t\t&self.0\n\t\
+    }\n}\n\nimpl<T> DerefMut for Total<T> {\n\tfn deref_mut(&mut self) -> &mut Self::Target\
+    \ {\n\t\t&mut self.0\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/cmp/total.rs
   requiredBy: []
-  timestamp: '2020-11-17 21:49:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/src/bin/dfa_test.rs
+  timestamp: '2020-11-27 14:24:44+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/cmp/total.rs
 layout: document
 redirect_from:

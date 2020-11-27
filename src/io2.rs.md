@@ -4,54 +4,34 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_garner_test.rs
-    title: test/src/bin/ntt_garner_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_mint_garner_test.rs
-    title: test/src/bin/ntt_mint_garner_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_mint_test.rs
-    title: test/src/bin/ntt_mint_test.rs
-  - icon: ':x:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/segtree_test.rs
-    title: test/src/bin/segtree_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/union_find_test.rs
-    title: test/src/bin/union_find_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "use std::io::{stdout, BufWriter, Read, StdoutLock, Write};\nuse std::marker::PhantomData;\n\
-    \npub struct IO {\n\titer: std::str::SplitAsciiWhitespace<'static>,\n\tbuf: BufWriter<StdoutLock<'static>>,\n\
-    }\n\nimpl IO {\n\tpub fn new() -> Self {\n\t\tlet mut input = String::new();\n\
-    \t\tstd::io::stdin().read_to_string(&mut input).unwrap();\n\t\tlet input = Box::leak(input.into_boxed_str());\n\
-    \t\tlet out = Box::leak(Box::new(stdout()));\n\t\tIO { iter: input.split_ascii_whitespace(),\
-    \ buf: BufWriter::new(out.lock()) }\n\t}\n\tfn scan_str(&mut self) -> &'static\
-    \ str { self.iter.next().unwrap() }\n\tfn scan_raw(&mut self) -> &'static [u8]\
-    \ { self.scan_str().as_bytes() }\n\tpub fn scan<T: Scan>(&mut self) -> T { T::scan(self)\
-    \ }\n\tpub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> { Iter { io: self,\
-    \ _m: PhantomData } }\n\tpub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_,\
-    \ T>> {\n\t\tself.scan_iter().take(n)\n\t}\n\tpub fn scan_vec<T: Scan>(&mut self,\
-    \ n: usize) -> Vec<T> {\n\t\t(0..n).map(|_| self.scan()).collect()\n\t}\n\n\t\
-    pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }\n\tpub fn println<T:\
-    \ Print>(&mut self, x: T) { self.print(x); self.print(\"\\n\"); }\n\tpub fn iterln<T:\
-    \ Print, I: IntoIterator<Item = T>>(&mut self, into_iter: I, delim: &str) {\n\t\
-    \tlet mut iter = into_iter.into_iter();\n\t\tif let Some(v) = iter.next() {\n\t\
-    \t\tself.print(v);\n\t\t\tfor v in iter { self.print(delim); self.print(v); }\n\
-    \t\t}\n\t\tself.print(\"\\n\");\n\t}\n\tpub fn flush(&mut self) { self.buf.flush().unwrap();\
+    \npub struct IO {\n\tinp: &'static [u8],\n\tpos: usize,\n\tbuf: BufWriter<StdoutLock<'static>>,\n\
+    }\n\nimpl IO {\n\tpub fn new() -> Self {\n\t\tlet mut inp = Vec::new();\n\t\t\
+    std::io::stdin().read_to_end(&mut inp).unwrap();\n\t\tlet inp = Box::leak(inp.into_boxed_slice());\n\
+    \t\tlet out = Box::leak(Box::new(stdout()));\n\t\tIO { inp, pos: 0, buf: BufWriter::new(out.lock())\
+    \ }\n\t}\n\tfn scan_raw(&mut self) -> &'static [u8] {\n\t\twhile self.inp[self.pos].is_ascii_whitespace()\
+    \ {\n\t\t\tself.pos += 1;\n\t\t}\n\t\tlet i = self.pos;\n\t\twhile !self.inp[self.pos].is_ascii_whitespace()\
+    \ {\n\t\t\tself.pos += 1;\n\t\t}\n\t\t&self.inp[i..self.pos]\n\t}\n\tpub fn scan<T:\
+    \ Scan>(&mut self) -> T { T::scan(self) }\n\tpub fn scan_iter<T: Scan>(&mut self)\
+    \ -> Iter<'_, T> { Iter { io: self, _m: PhantomData } }\n\tpub fn scan_n<T: Scan>(&mut\
+    \ self, n: usize) -> std::iter::Take<Iter<'_, T>> {\n\t\tself.scan_iter().take(n)\n\
+    \t}\n\tpub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {\n\t\t(0..n).map(|_|\
+    \ self.scan()).collect()\n\t}\n\n\tpub fn print<T: Print>(&mut self, x: T) { T::print(self,\
+    \ x); }\n\tpub fn println<T: Print>(&mut self, x: T) {\n\t\tself.print(x);\n\t\
+    \tself.print(\"\\n\");\n\t}\n\tpub fn iterln<T: Print, I: IntoIterator<Item =\
+    \ T>>(&mut self, into_iter: I, delim: &str) {\n\t\tlet mut iter = into_iter.into_iter();\n\
+    \t\tif let Some(v) = iter.next() {\n\t\t\tself.print(v);\n\t\t\tfor v in iter\
+    \ {\n\t\t\t\tself.print(delim);\n\t\t\t\tself.print(v);\n\t\t\t}\n\t\t}\n\t\t\
+    self.print(\"\\n\");\n\t}\n\tpub fn flush(&mut self) { self.buf.flush().unwrap();\
     \ }\n}\n\npub struct Iter<'a, T> {\n\tio: &'a mut IO,\n\t_m: PhantomData<T>,\n\
     }\n\nimpl<T: Scan> Iterator for Iter<'_, T> {\n    type Item = T;\n\tfn next(&mut\
     \ self) -> Option<Self::Item> { Some(self.io.scan()) }\n}\n\npub trait Scan {\n\
@@ -82,31 +62,25 @@ data:
     \    };\n}\n\nimpl_scan_array!(7 6 5 4 3 2 1);\n\nmacro_rules! impl_print_int\
     \ {\n\t($($t:ty),*) => { $(\n\t\timpl Print for $t {\n\t\t\tfn print(w: &mut IO,\
     \ x: Self) {\n\t\t\t\tw.buf.write_all(x.to_string().as_bytes()).unwrap();\n\t\t\
-    \t}\n\t\t}\n\t\timpl Print for &$t {\n\t\t\tfn print(w: &mut IO, x: Self) { w.print(*x);\
-    \ }\n\t\t}\n\t)* };\n}\n\nimpl_print_int!(i32, i64, i128, isize, u32, u64, u128,\
-    \ usize);\n\nimpl Print for u8 {\n\tfn print(w: &mut IO, x: Self) { w.buf.write_all(&[x]).unwrap();\
+    \t}\n\t\t}\n\t\timpl Print for &$t {\n\t\t\tfn print(w: &mut IO, x: Self) {\n\t\
+    \t\t\tw.buf.write_all(x.to_string().as_bytes()).unwrap();\n\t\t\t}\n\t\t}\n\t\
+    )* };\n}\n\nimpl_print_int!(i32, i64, i128, isize, u32, u64, u128, usize);\n\n\
+    impl Print for u8 {\n\tfn print(w: &mut IO, x: Self) { w.buf.write_all(&[x]).unwrap();\
     \ }\n}\n\nimpl Print for &[u8] {\n\tfn print(w: &mut IO, x: Self) { w.buf.write_all(x).unwrap();\
     \ }\n}\n\nimpl Print for &str {\n\tfn print(w: &mut IO, x: Self) { w.print(x.as_bytes());\
     \ }\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/io.rs
+  path: src/io2.rs
   requiredBy: []
   timestamp: '2020-11-27 14:24:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/cargo_test.rs
-  - test/src/bin/segtree_test.rs
-  - test/src/bin/union_find_test.rs
-  - test/src/bin/dfa_test.rs
-  - test/src/bin/ntt_garner_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/ntt_test.rs
-documentation_of: src/io.rs
+documentation_of: src/io2.rs
 layout: document
 redirect_from:
-- /library/src/io.rs
-- /library/src/io.rs.html
-title: src/io.rs
+- /library/src/io2.rs
+- /library/src/io2.rs.html
+title: src/io2.rs
 ---

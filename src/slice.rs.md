@@ -2,40 +2,34 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
+  _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub trait Slice {\n    type Item;\n    fn fill(&mut self, value: Self::Item)\n\
-    \    where\n        Self::Item: Clone;\n    /// min { i | !pred(arr[i]) }\n  \
-    \  fn partition_point<F: FnMut(&Self::Item) -> bool>(&self, pred: F) -> usize;\n\
-    \    fn lower_bound(&self, v: &Self::Item) -> usize\n    where\n        Self::Item:\
-    \ Ord,\n    {\n        self.partition_point(|x| x < v)\n    }\n    fn upper_bound(&self,\
-    \ v: &Self::Item) -> usize\n    where\n        Self::Item: Ord,\n    {\n     \
-    \   self.partition_point(|x| x <= v)\n    }\n}\n\nimpl<T> Slice for [T] {\n  \
-    \  type Item = T;\n    fn fill(&mut self, value: Self::Item)\n    where\n    \
-    \    Self::Item: Clone,\n    {\n        self.iter_mut().for_each(|e| e.clone_from(&value));\n\
-    \    }\n    fn partition_point<F: FnMut(&Self::Item) -> bool>(&self, mut pred:\
-    \ F) -> usize {\n        let (mut lb, mut ub) = (0, self.len()); // pred(self[ub])\
-    \ == false\n        while lb != ub {\n            let mid = (lb + ub) / 2;\n \
-    \           if pred(&self[mid]) {\n                lb = mid + 1;\n           \
-    \ } else {\n                ub = mid;\n            }\n        }\n        ub\n\
-    \    }\n}\n"
+  code: "pub trait Slice {\n\ttype Item;\n\tfn fill(&mut self, value: Self::Item)\n\
+    \twhere\n\t\tSelf::Item: Clone;\n\t/// min { i | !pred(arr[i]) }\n\tfn partition_point<F:\
+    \ FnMut(&Self::Item) -> bool>(&self, pred: F) -> usize;\n\tfn lower_bound(&self,\
+    \ v: &Self::Item) -> usize\n\twhere\n\t\tSelf::Item: Ord,\n\t{\n\t\tself.partition_point(|x|\
+    \ x < v)\n\t}\n\tfn upper_bound(&self, v: &Self::Item) -> usize\n\twhere\n\t\t\
+    Self::Item: Ord,\n\t{\n\t\tself.partition_point(|x| x <= v)\n\t}\n}\n\nimpl<T>\
+    \ Slice for [T] {\n\ttype Item = T;\n\tfn fill(&mut self, value: Self::Item)\n\
+    \twhere\n\t\tSelf::Item: Clone,\n\t{\n\t\tself.iter_mut().for_each(|e| e.clone_from(&value));\n\
+    \t}\n\tfn partition_point<F: FnMut(&Self::Item) -> bool>(&self, mut pred: F) ->\
+    \ usize {\n\t\tlet (mut lb, mut ub) = (0, self.len()); // pred(self[ub]) == false\n\
+    \t\twhile lb != ub {\n\t\t\tlet mid = (lb + ub) / 2;\n\t\t\tif pred(&self[mid])\
+    \ {\n\t\t\t\tlb = mid + 1;\n\t\t\t} else {\n\t\t\t\tub = mid;\n\t\t\t}\n\t\t}\n\
+    \t\tub\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/slice.rs
   requiredBy: []
-  timestamp: '2020-11-01 20:14:05+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/src/bin/dfa_test.rs
+  timestamp: '2020-11-27 14:24:44+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/slice.rs
 layout: document
 redirect_from:

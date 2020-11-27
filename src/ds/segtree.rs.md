@@ -3,51 +3,43 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_test.rs
     title: test/src/bin/segtree_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "pub use crate::alg::*;\n\n#[derive(Clone)]\npub struct SegmentTree<A: Alg>\
-    \ {\n    len: usize,\n    data: Vec<A::Item>,\n    alg: A,\n}\n\nimpl<A: Monoid>\
-    \ SegmentTree<A> {\n    pub fn new(data: &[A::Item], alg: A) -> Self {\n     \
-    \   let len = data.len();\n        let mut data = {\n            let mut data1\
-    \ = Vec::with_capacity(len * 2);\n            data1.extend_from_slice(data);\n\
-    \            data1.extend_from_slice(data);\n            data1\n        };\n \
-    \       for i in (1..len).rev() {\n            data[i] = alg.op(&data[i << 1],\
-    \ &data[i << 1 | 1]);\n        }\n        Self { len, data, alg }\n    }\n   \
-    \ fn build(&mut self, mut p: usize) {\n        p >>= 1;\n        while p != 0\
-    \ {\n            self.data[p] = self.alg.op(&self.data[p << 1], &self.data[p <<\
-    \ 1 | 1]);\n            p >>= 1;\n        }\n    }\n    pub fn add(&mut self,\
-    \ pos: usize, v: &A::Item) {\n        let p = pos + self.len;\n        self.data[p]\
-    \ = self.alg.op(&self.data[p], v);\n        self.build(p);\n    }\n    pub fn\
-    \ exec<F: FnOnce(&mut A::Item)>(&mut self, pos: usize, f: F) {\n        let p\
-    \ = pos + self.len;\n        f(&mut self.data[p]);\n        self.build(p);\n \
-    \   }\n    pub fn ask(&self, mut l: usize, mut r: usize) -> A::Item {\n      \
-    \  let (mut resl, mut resr) = (self.alg.unit(), self.alg.unit());\n        l +=\
-    \ self.len;\n        r += self.len;\n        while l < r {\n            if l &\
-    \ 1 != 0 {\n                resl = self.alg.op(&resl, &self.data[l]);\n      \
-    \          l += 1;\n            }\n            if r & 1 != 0 {\n             \
-    \   resr = self.alg.op(&self.data[r - 1], &resr);\n                r -= 1;\n \
-    \           }\n            l >>= 1;\n            r >>= 1;\n        }\n       \
-    \ self.alg.op(&resl, &resr)\n    }\n}\n"
+    \ {\n\tlen: usize,\n\tdata: Vec<A::Item>,\n\talg: A,\n}\n\nimpl<A: Monoid> SegmentTree<A>\
+    \ {\n\tpub fn new(data: &[A::Item], alg: A) -> Self {\n\t\tlet len = data.len();\n\
+    \t\tlet mut data = {\n\t\t\tlet mut data1 = Vec::with_capacity(len * 2);\n\t\t\
+    \tdata1.extend_from_slice(data);\n\t\t\tdata1.extend_from_slice(data);\n\t\t\t\
+    data1\n\t\t};\n\t\tfor i in (1..len).rev() {\n\t\t\tdata[i] = alg.op(&data[i <<\
+    \ 1], &data[i << 1 | 1]);\n\t\t}\n\t\tSelf { len, data, alg }\n\t}\n\tfn build(&mut\
+    \ self, mut p: usize) {\n\t\tp >>= 1;\n\t\twhile p != 0 {\n\t\t\tself.data[p]\
+    \ = self.alg.op(&self.data[p << 1], &self.data[p << 1 | 1]);\n\t\t\tp >>= 1;\n\
+    \t\t}\n\t}\n\tpub fn add(&mut self, pos: usize, v: &A::Item) {\n\t\tlet p = pos\
+    \ + self.len;\n\t\tself.data[p] = self.alg.op(&self.data[p], v);\n\t\tself.build(p);\n\
+    \t}\n\tpub fn exec<F: FnOnce(&mut A::Item)>(&mut self, pos: usize, f: F) {\n\t\
+    \tlet p = pos + self.len;\n\t\tf(&mut self.data[p]);\n\t\tself.build(p);\n\t}\n\
+    \tpub fn ask(&self, mut l: usize, mut r: usize) -> A::Item {\n\t\tlet (mut resl,\
+    \ mut resr) = (self.alg.unit(), self.alg.unit());\n\t\tl += self.len;\n\t\tr +=\
+    \ self.len;\n\t\twhile l < r {\n\t\t\tif l & 1 != 0 {\n\t\t\t\tresl = self.alg.op(&resl,\
+    \ &self.data[l]);\n\t\t\t\tl += 1;\n\t\t\t}\n\t\t\tif r & 1 != 0 {\n\t\t\t\tresr\
+    \ = self.alg.op(&self.data[r - 1], &resr);\n\t\t\t\tr -= 1;\n\t\t\t}\n\t\t\tl\
+    \ >>= 1;\n\t\t\tr >>= 1;\n\t\t}\n\t\tself.alg.op(&resl, &resr)\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/segtree.rs
   requiredBy: []
-  timestamp: '2020-11-15 11:00:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-11-27 14:24:44+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs
-  - test/src/bin/dfa_test.rs
 documentation_of: src/ds/segtree.rs
 layout: document
 redirect_from:

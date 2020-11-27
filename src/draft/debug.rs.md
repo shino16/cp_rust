@@ -10,14 +10,14 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "#[cfg(debug_assertions)]\nmacro_rules! debug {\n    ($($x:expr),*) => { dbg!($($x),*)\
-    \ }\n}\n\n#[cfg(not(debug_assertions))]\nmacro_rules! debug {\n    ($($x:expr),*)\
+  code: "#[cfg(debug_assertions)]\nmacro_rules! debug {\n\t($($x:expr),*) => { dbg!($($x),*)\
+    \ }\n}\n\n#[cfg(not(debug_assertions))]\nmacro_rules! debug {\n\t($($x:expr),*)\
     \ => { std::convert::identity($($x),*) }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/draft/debug.rs
   requiredBy: []
-  timestamp: '2020-11-18 23:11:02+09:00'
+  timestamp: '2020-11-27 14:24:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/debug.rs

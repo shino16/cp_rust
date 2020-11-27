@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/alg.rs
       title: src/alg.rs
     - icon: ':question:'
@@ -12,37 +12,40 @@ data:
     - icon: ':question:'
       path: src/bit.rs
       title: src/bit.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/bitset.rs
       title: src/bitset.rs
     - icon: ':question:'
       path: src/conv.rs
       title: src/conv.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/dfa.rs
       title: src/dfa.rs
     - icon: ':question:'
       path: src/fp.rs
       title: src/fp.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/fxhash.rs
       title: src/fxhash.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
     - icon: ':question:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':x:'
+      path: src/io2.rs
+      title: src/io2.rs
+    - icon: ':warning:'
       path: src/io_interactive.rs
       title: src/io_interactive.rs
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/iter.rs
       title: src/iter.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/lib.rs
       title: src/lib.rs
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/make_vec.rs
       title: src/make_vec.rs
     - icon: ':question:'
@@ -51,16 +54,16 @@ data:
     - icon: ':question:'
       path: src/num.rs
       title: src/num.rs
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/rng.rs
       title: src/rng.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/slice.rs
       title: src/slice.rs
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/tests.rs
       title: src/tests.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
   - name: src/bump
@@ -70,7 +73,7 @@ data:
       title: src/bump/alloc.rs
   - name: src/cmp
     pages:
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/cmp/total.rs
       title: src/cmp/total.rs
   - name: src/draft
@@ -86,31 +89,31 @@ data:
       title: src/draft/minimize_dfa.rs
   - name: src/ds
     pages:
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/disjointst.rs
       title: src/ds/disjointst.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/fenwick.rs
       title: src/ds/fenwick.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/segtree.rs
       title: src/ds/segtree.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/sparsetable.rs
       title: src/ds/sparsetable.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/uf.rs
       title: src/ds/uf.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/uslice.rs
       title: src/ds/uslice.rs
     - icon: ':question:'
       path: src/ds/uvec.rs
       title: src/ds/uvec.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/uvec2d.rs
       title: src/ds/uvec2d.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/vec2d.rs
       title: src/ds/vec2d.rs
   - name: src/fp
@@ -120,15 +123,15 @@ data:
       title: src/fp/conv.rs
   - name: src/iter
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/iter/prod.rs
       title: src/iter/prod.rs
   - name: src/math
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/math/gcd.rs
       title: src/math/gcd.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/math/modpow.rs
       title: src/math/modpow.rs
   - name: src/mint
@@ -139,15 +142,21 @@ data:
   verificationCategories:
   - name: test/src/bin
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/src/bin/cargo_test.rs
       title: test/src/bin/cargo_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/dfa_test.rs
       title: test/src/bin/dfa_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_garner_test.rs
       title: test/src/bin/ntt_garner_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/ntt_mint_garner_test.rs
+      title: test/src/bin/ntt_mint_garner_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/ntt_mint_test.rs
+      title: test/src/bin/ntt_mint_test.rs
     - icon: ':x:'
       path: test/src/bin/ntt_test.rs
       title: test/src/bin/ntt_test.rs

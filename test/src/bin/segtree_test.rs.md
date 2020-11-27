@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
   - icon: ':question:'
@@ -21,13 +21,12 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A\n\
-    \nuse lib::ds::segtree::*;\nuse lib::io::*;\n\nfn main() {\n    let mut io = IO::new();\n\
-    \    let (n, q): (usize, usize) = io.scan();\n\n    let inf = (1_u32 << 31) -\
-    \ 1;\n\n    let data = vec![inf; n];\n    let mut st = SegmentTree::new(&data,\
-    \ MonoidImpl(|| inf, |a, b| *a.min(b)));\n\n    for _ in 0..q {\n        let [c,\
-    \ x, y]: [usize; 3] = io.scan();\n        if c == 0 {\n            st.exec(x,\
-    \ |v| *v = y as u32);\n        } else {\n            io.println(st.ask(x, y +\
-    \ 1));\n        }\n    }\n}\n"
+    \nuse lib::ds::segtree::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
+    \tlet (n, q): (usize, usize) = io.scan();\n\n\tlet inf = (1_u32 << 31) - 1;\n\n\
+    \tlet data = vec![inf; n];\n\tlet mut st = SegmentTree::new(&data, MonoidImpl(||\
+    \ inf, |a, b| *a.min(b)));\n\n\tfor _ in 0..q {\n\t\tlet [c, x, y]: [usize; 3]\
+    \ = io.scan();\n\t\tif c == 0 {\n\t\t\tst.exec(x, |v| *v = y as u32);\n\t\t} else\
+    \ {\n\t\t\tio.println(st.ask(x, y + 1));\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/alg.rs
   - src/ds/segtree.rs
@@ -35,7 +34,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2020-11-24 01:55:32+09:00'
+  timestamp: '2020-11-27 14:24:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

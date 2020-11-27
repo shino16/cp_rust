@@ -14,17 +14,14 @@ data:
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
   - icon: ':question:'
+    path: src/fp.rs
+    title: src/fp.rs
+  - icon: ':question:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
   - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
-    path: src/mint.rs
-    title: src/mint.rs
-  - icon: ':question:'
-    path: src/mint/conv.rs
-    title: src/mint/conv.rs
   - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
@@ -39,25 +36,23 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "// verify-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod_1000000007\n\
-    \nuse lib::io::*;\nuse lib::mint::*;\nuse lib::fp::conv::*;\n\nfn main() {\n \
-    \   let mut io = IO::new();\n    let (n, m) = io.scan();\n    let a = io.scan_vec::<Mint17>(n);\n\
-    \    let b = io.scan_vec::<Mint17>(m);\n    if (n, m) == (1, 1) {\n        io.println(a[0]\
-    \ * b[0]);\n    } else {\n        io.iterln(Conv::conv(a, b).into_iter(), \" \"\
-    );\n    }\n}\n"
+    \nuse lib::io::*;\nuse lib::fp::conv::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
+    \tlet (n, m) = io.scan();\n\tlet a = io.scan_vec::<F17>(n);\n\tlet b = io.scan_vec::<F17>(m);\n\
+    \tif (n, m) == (1, 1) {\n\t\tio.println(a[0] * b[0]);\n\t} else {\n\t\tio.iterln(Conv::conv(a,\
+    \ b).into_iter(), \" \");\n\t}\n}\n"
   dependsOn:
   - src/as_int.rs
   - src/bit.rs
   - src/conv.rs
   - src/ds/uvec.rs
+  - src/fp.rs
   - src/fp/conv.rs
   - src/io.rs
-  - src/mint.rs
-  - src/mint/conv.rs
   - src/num.rs
   isVerificationFile: true
   path: test/src/bin/ntt_garner_test.rs
   requiredBy: []
-  timestamp: '2020-11-24 01:55:32+09:00'
+  timestamp: '2020-11-27 14:24:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_garner_test.rs

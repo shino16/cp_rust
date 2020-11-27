@@ -2,12 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
+  _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -44,6 +41,8 @@ data:
 
     pub mod io;
 
+    pub mod io2;
+
     pub mod io_interactive;
 
     pub mod iter;
@@ -70,10 +69,9 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2020-11-24 01:55:32+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/src/bin/dfa_test.rs
+  timestamp: '2020-11-27 14:24:44+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/lib.rs
 layout: document
 redirect_from:
