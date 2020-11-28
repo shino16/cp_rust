@@ -3,24 +3,24 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "use crate::as_int::*;\nuse crate::io::*;\npub use crate::num::ZeroOne as\
-    \ _;\nuse crate::num::*;\nuse std::marker::PhantomData;\nuse std::{fmt, iter,\
+    \ _;\nuse crate::num::*;\nuse std::marker::PhantomData;\nuse std::{cmp, fmt, iter,\
     \ ops};\n\npub mod conv;\n\npub trait Mod: Default + Clone + Copy + PartialEq\
     \ + Eq {\n    const P: u32;\n    const K: u32; // -1 / P mod 2^32\n    const R2:\
     \ u32; // 2^64 mod P\n}\n\n// montgomery reduction (x -> x / 2^32 mod P)\nfn reduce<M:\
@@ -32,14 +32,14 @@ data:
     \ R2: u32 = ((1_u128 << 64) % $modu) as u32;\n        }\n    };\n}\n\ndef_mod!(ModA,\
     \ 1_000_000_007, 2_226_617_417);\ndef_mod!(ModB, 998_244_353, 998_244_351);\n\
     def_mod!(ModC, 1_012_924_417, 1_012_924_415);\ndef_mod!(ModD, 924_844_033, 924_844_031);\n\
-    \n// modular arithmetics\n#[repr(transparent)]\n#[derive(Default, Clone, Copy,\
-    \ PartialEq, Eq)]\npub struct Fp<M: Mod> {\n    val: u32,\n    _m: PhantomData<M>,\n\
-    }\n\npub type FpA = Fp<ModA>;\npub type FpB = Fp<ModB>;\npub type FpC = Fp<ModC>;\n\
-    pub type FpD = Fp<ModD>;\n\n/// mod 1_000_000_007\npub type F17 = FpA;\n/// mod\
-    \ 998_244_353\npub type F99 = FpB;\n\nimpl<M: Mod> Fp<M> {\n    pub const P: u32\
-    \ = M::P;\n    pub fn new(val: u32) -> Self { Fp::from_raw(reduce::<M>(val as\
-    \ u64 * M::R2 as u64)) }\n    fn from_raw(val: u32) -> Self { Fp { val, _m: PhantomData\
-    \ } }\n    pub fn value(self) -> u32 {\n        let v = reduce::<M>(self.val as\
+    \n// modular arithmetics\n#[repr(transparent)]\n#[derive(Default, Clone, Copy)]\n\
+    pub struct Fp<M: Mod> {\n    val: u32,\n    _m: PhantomData<M>,\n}\n\npub type\
+    \ FpA = Fp<ModA>;\npub type FpB = Fp<ModB>;\npub type FpC = Fp<ModC>;\npub type\
+    \ FpD = Fp<ModD>;\n\n/// mod 1_000_000_007\npub type F17 = FpA;\n/// mod 998_244_353\n\
+    pub type F99 = FpB;\n\nimpl<M: Mod> Fp<M> {\n    pub const P: u32 = M::P;\n  \
+    \  pub fn new(val: u32) -> Self { Fp::from_raw(reduce::<M>(val as u64 * M::R2\
+    \ as u64)) }\n    fn from_raw(val: u32) -> Self { Fp { val, _m: PhantomData }\
+    \ }\n    pub fn value(self) -> u32 {\n        let v = reduce::<M>(self.val as\
     \ u64);\n        if v >= M::P { v - M::P } else { v }\n    }\n    pub fn grow(self)\
     \ -> FpGrow<M> { FpGrow::from_raw((self.val as u64) << 32) }\n    pub fn mul_unreduced<T:\
     \ Into<Self>>(self, rhs: T) -> FpGrow<M> {\n        FpGrow::from_raw(self.val\
@@ -66,15 +66,18 @@ data:
     \ self.val >= Self::MOD * 2 { self.val -= Self::MOD * 2; }\n    }\n}\n\nimpl<M:\
     \ Mod> From<FpGrow<M>> for Fp<M> {\n    fn from(v: FpGrow<M>) -> Self { v.reduce()\
     \ }\n}\n\nimpl<M: Mod, I: Int> From<I> for Fp<M> {\n    fn from(x: I) -> Self\
-    \ { Self::new(x.rem_euclid(M::P.as_()).as_()) }\n}\n\nimpl<M: Mod, T: Into<Fp<M>>>\
-    \ ops::AddAssign<T> for Fp<M> {\n    fn add_assign(&mut self, rhs: T) {\n    \
-    \    self.val += rhs.into().val;\n        if self.val >= M::P * 2 { self.val -=\
-    \ M::P * 2; }\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M>\
-    \ {\n    fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n \
-    \       if self.val < rhs.val { self.val += M::P * 2; }\n        self.val -= rhs.val;\n\
-    \    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M> {\n    fn\
-    \ mul_assign(&mut self, rhs: T) { *self = self.mul_unreduced(rhs).reduce(); }\n\
-    }\nimpl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {\n    fn div_assign(&mut\
+    \ { Self::new(x.rem_euclid(M::P.as_()).as_()) }\n}\n\nimpl<M: Mod> cmp::PartialEq\
+    \ for Fp<M> {\n    fn eq(&self, other: &Self) -> bool {\n        let val = |obj:\
+    \ &Fp<M>| if obj.val >= M::P  { obj.val - M::P } else { obj.val };\n        val(self)\
+    \ == val(other)\n    }\n}\n\nimpl<M: Mod> cmp::Eq for Fp<M> {}\n\nimpl<M: Mod,\
+    \ T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {\n    fn add_assign(&mut self,\
+    \ rhs: T) {\n        self.val += rhs.into().val;\n        if self.val >= M::P\
+    \ * 2 { self.val -= M::P * 2; }\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T>\
+    \ for Fp<M> {\n    fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n\
+    \        if self.val < rhs.val { self.val += M::P * 2; }\n        self.val -=\
+    \ rhs.val;\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M>\
+    \ {\n    fn mul_assign(&mut self, rhs: T) { *self = self.mul_unreduced(rhs).reduce();\
+    \ }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {\n    fn div_assign(&mut\
     \ self, rhs: T) { *self *= rhs.into().inv(); }\n}\n\nmacro_rules! impl_binop {\n\
     \    ($(($Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),*) => { $(\n\
     \        impl<M: Mod, T: Into<Fp<M>>> ops::$Op<T> for Fp<M> {\n            type\
@@ -101,8 +104,8 @@ data:
   isVerificationFile: false
   path: src/fp.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-11-28 19:21:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_garner_test.rs

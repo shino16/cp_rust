@@ -41,8 +41,6 @@ data:
 
     pub mod io;
 
-    pub mod io2;
-
     pub mod io_interactive;
 
     pub mod iter;
@@ -69,7 +67,7 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-11-28 19:21:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

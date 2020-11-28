@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/as_int.rs
     title: src/as_int.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   _extendedRequiredBy: []
@@ -52,7 +52,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_garner_test.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-11-28 19:21:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_garner_test.rs
