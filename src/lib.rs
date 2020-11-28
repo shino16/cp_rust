@@ -14,7 +14,6 @@ pub mod fp;
 pub mod fxhash;
 pub mod hash;
 pub mod io;
-pub mod io2;
 pub mod io_interactive;
 pub mod iter;
 pub mod make_vec;

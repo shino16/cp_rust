@@ -3,7 +3,7 @@ use crate::io::*;
 pub use crate::num::ZeroOne as _;
 use crate::num::*;
 use std::marker::PhantomData;
-use std::{fmt, iter, ops};
+use std::{cmp, fmt, iter, ops};
 
 pub mod conv;
 
@@ -38,7 +38,7 @@ def_mod!(ModD, 924_844_033, 924_844_031);
 
 // modular arithmetics
 #[repr(transparent)]
-#[derive(Default, Clone, Copy, PartialEq, Eq)]
+#[derive(Default, Clone, Copy)]
 pub struct Fp<M: Mod> {
     val: u32,
     _m: PhantomData<M>,
@@ -130,6 +130,15 @@ impl<M: Mod> From<FpGrow<M>> for Fp<M> {
 impl<M: Mod, I: Int> From<I> for Fp<M> {
     fn from(x: I) -> Self { Self::new(x.rem_euclid(M::P.as_()).as_()) }
 }
+
+impl<M: Mod> cmp::PartialEq for Fp<M> {
+    fn eq(&self, other: &Self) -> bool {
+        let val = |obj: &Fp<M>| if obj.val >= M::P  { obj.val - M::P } else { obj.val };
+        val(self) == val(other)
+    }
+}
+
+impl<M: Mod> cmp::Eq for Fp<M> {}
 
 impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {

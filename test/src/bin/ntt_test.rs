@@ -1,6 +1,6 @@
 // verify-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod
 
-use lib::io2::*;
+use lib::io::*;
 use lib::fp::conv::*;
 
 fn main() {
