@@ -24,7 +24,7 @@ data:
     \nuse lib::ds::segtree::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
     \tlet (n, q): (usize, usize) = io.scan();\n\n\tlet inf = (1_u32 << 31) - 1;\n\n\
     \tlet data = vec![inf; n];\n\tlet mut st = SegmentTree::new(&data, MonoidImpl(||\
-    \ inf, |a, b| *a.min(b)));\n\n\tfor _ in 0..q {\n\t\tlet [c, x, y]: [usize; 3]\
+    \ inf, |a, b| a.min(b)));\n\n\tfor _ in 0..q {\n\t\tlet [c, x, y]: [usize; 3]\
     \ = io.scan();\n\t\tif c == 0 {\n\t\t\tst.exec(x, |v| *v = y as u32);\n\t\t} else\
     \ {\n\t\t\tio.println(st.ask(x, y + 1));\n\t\t}\n\t}\n}\n"
   dependsOn:
@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-01 00:05:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

@@ -18,18 +18,19 @@ data:
     for z in (0..len).step_by(1 << (s + 1)) {\n\t\t\t\tlet m = z + (1 << s);\n\t\t\
     \t\tif m >= len {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tdata[s][m - 1] = data[0][m\
     \ - 1].clone();\n\t\t\t\tdata[s][m] = data[0][m].clone();\n\t\t\t\tfor i in (z..m\
-    \ - 1).rev() {\n\t\t\t\t\tdata[s][i] = alg.op(&data[0][i], &data[s][i + 1]);\n\
-    \t\t\t\t}\n\t\t\t\tfor i in m + 1..(m + (1 << s)).min(len) {\n\t\t\t\t\tdata[s][i]\
-    \ = alg.op(&data[s][i - 1], &data[0][i]);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tSelf\
-    \ { data, alg }\n\t}\n\tpub fn ask(&self, l: usize, r: usize) -> A::Item {\n\t\
-    \tif l == r {\n\t\t\tself.alg.unit()\n\t\t} else if l + 1 == r {\n\t\t\tself.data[0][l].clone()\n\
-    \t\t} else {\n\t\t\tlet s = (l ^ r).ilog2() as usize;\n\t\t\tself.alg.op(&self.data[s][l],\
-    \ &self.data[s][r])\n\t\t}\n\t}\n}\n"
+    \ - 1).rev() {\n\t\t\t\t\tdata[s][i] = alg.op(data[0][i].clone(), data[s][i +\
+    \ 1].clone());\n\t\t\t\t}\n\t\t\t\tfor i in m + 1..(m + (1 << s)).min(len) {\n\
+    \t\t\t\t\tdata[s][i] = alg.op(data[s][i - 1].clone(), data[0][i].clone());\n\t\
+    \t\t\t}\n\t\t\t}\n\t\t}\n\t\tSelf { data, alg }\n\t}\n\tpub fn ask(&self, l: usize,\
+    \ r: usize) -> A::Item {\n\t\tif l == r {\n\t\t\tself.alg.unit()\n\t\t} else if\
+    \ l + 1 == r {\n\t\t\tself.data[0][l].clone()\n\t\t} else {\n\t\t\tlet s = (l\
+    \ ^ r).ilog2() as usize;\n\t\t\tself.alg.op(self.data[s][l].clone(), self.data[s][r].clone())\n\
+    \t\t}\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/disjointst.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-01 00:05:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/disjointst.rs
