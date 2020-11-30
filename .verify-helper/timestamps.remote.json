@@ -5,6 +5,6 @@
 "test/src/bin/ntt_mint_garner_test.rs": "2020-11-27 14:24:44 +0900",
 "test/src/bin/ntt_mint_test.rs": "2020-11-27 14:24:44 +0900",
 "test/src/bin/ntt_test.rs": "2020-11-28 19:21:23 +0900",
-"test/src/bin/segtree_test.rs": "2020-11-27 14:24:44 +0900",
+"test/src/bin/segtree_test.rs": "2020-12-01 00:05:14 +0900",
 "test/src/bin/union_find_test.rs": "2020-11-27 14:24:44 +0900"
 }
