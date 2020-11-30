@@ -17,20 +17,20 @@ impl<A: Monoid> SegmentTree<A> {
 			data1
 		};
 		for i in (1..len).rev() {
-			data[i] = alg.op(&data[i << 1], &data[i << 1 | 1]);
+			data[i] = alg.op(data[i << 1].clone(), data[i << 1 | 1].clone());
 		}
 		Self { len, data, alg }
 	}
 	fn build(&mut self, mut p: usize) {
 		p >>= 1;
 		while p != 0 {
-			self.data[p] = self.alg.op(&self.data[p << 1], &self.data[p << 1 | 1]);
+			self.data[p] = self.alg.op(self.data[p << 1].clone(), self.data[p << 1 | 1].clone());
 			p >>= 1;
 		}
 	}
-	pub fn add(&mut self, pos: usize, v: &A::Item) {
+	pub fn add(&mut self, pos: usize, v: A::Item) {
 		let p = pos + self.len;
-		self.data[p] = self.alg.op(&self.data[p], v);
+		self.data[p] = self.alg.op(self.data[p].clone(), v);
 		self.build(p);
 	}
 	pub fn exec<F: FnOnce(&mut A::Item)>(&mut self, pos: usize, f: F) {
@@ -44,16 +44,16 @@ impl<A: Monoid> SegmentTree<A> {
 		r += self.len;
 		while l < r {
 			if l & 1 != 0 {
-				resl = self.alg.op(&resl, &self.data[l]);
+				resl = self.alg.op(resl, self.data[l].clone());
 				l += 1;
 			}
 			if r & 1 != 0 {
-				resr = self.alg.op(&self.data[r - 1], &resr);
+				resr = self.alg.op(self.data[r - 1].clone(), resr);
 				r -= 1;
 			}
 			l >>= 1;
 			r >>= 1;
 		}
-		self.alg.op(&resl, &resr)
+		self.alg.op(resl, resr)
 	}
 }
