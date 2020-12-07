@@ -107,9 +107,9 @@ data:
   timestamp: '2020-11-28 19:21:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_garner_test.rs
   - test/src/bin/ntt_test.rs
+  - test/src/bin/cargo_test.rs
 documentation_of: src/fp.rs
 layout: document
 redirect_from:

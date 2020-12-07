@@ -86,9 +86,9 @@ data:
   timestamp: '2020-11-27 14:24:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_mint_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_mint_garner_test.rs
 documentation_of: src/mint.rs
 layout: document
