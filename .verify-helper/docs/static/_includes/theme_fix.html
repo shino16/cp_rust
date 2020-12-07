@@ -1,5 +1,8 @@
 {% if site.theme == "jekyll-theme-minimal" %}
 <style type="text/css">
+figure.highlight > div > pre {
+    tab-size: 4;
+}
 @media screen and (min-width: 961px) {
     div.wrapper {
         width: 100%;
@@ -9,6 +12,15 @@
     }
     div.wrapper > section {
         width: calc(100% - 300px);
+    }
+}
+@media screen and (max-width: 960px) {
+    figure.highlight {
+        margin-inline-start: 10px;
+        margin-inline-end: 10px;
+    }
+    figure.highlight > div > pre {
+        tab-size: 2;
     }
 }
 </style>
