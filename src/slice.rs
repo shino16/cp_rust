@@ -31,7 +31,8 @@ impl<T> Slice for [T] {
 		let (mut lb, mut ub) = (0, self.len()); // pred(self[ub]) == false
 		while lb != ub {
 			let mid = (lb + ub) / 2;
-			if pred(&self[mid]) {
+			let val = unsafe { self.get_unchecked(mid) };
+			if pred(val) {
 				lb = mid + 1;
 			} else {
 				ub = mid;
