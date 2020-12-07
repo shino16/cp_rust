@@ -20,14 +20,14 @@ data:
     \twhere\n\t\tSelf::Item: Clone,\n\t{\n\t\tself.iter_mut().for_each(|e| e.clone_from(&value));\n\
     \t}\n\tfn partition_point<F: FnMut(&Self::Item) -> bool>(&self, mut pred: F) ->\
     \ usize {\n\t\tlet (mut lb, mut ub) = (0, self.len()); // pred(self[ub]) == false\n\
-    \t\twhile lb != ub {\n\t\t\tlet mid = (lb + ub) / 2;\n\t\t\tif pred(&self[mid])\
-    \ {\n\t\t\t\tlb = mid + 1;\n\t\t\t} else {\n\t\t\t\tub = mid;\n\t\t\t}\n\t\t}\n\
-    \t\tub\n\t}\n}\n"
+    \t\twhile lb != ub {\n\t\t\tlet mid = (lb + ub) / 2;\n\t\t\tlet val = unsafe {\
+    \ self.get_unchecked(mid) };\n\t\t\tif pred(val) {\n\t\t\t\tlb = mid + 1;\n\t\t\
+    \t} else {\n\t\t\t\tub = mid;\n\t\t\t}\n\t\t}\n\t\tub\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/slice.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-07 12:44:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice.rs
