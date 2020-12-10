@@ -37,8 +37,12 @@ impl IO {
 		}
 		&self.input[i..self.pos]
 	}
-	pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }
-	pub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> { Iter { io: self, _m: PhantomData } }
+	pub fn scan<T: Scan>(&mut self) -> T {
+		T::scan(self)
+	}
+	pub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> {
+		Iter { io: self, _m: PhantomData }
+	}
 	pub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
 		self.scan_iter().take(n)
 	}
@@ -46,8 +50,13 @@ impl IO {
 		(0..n).map(|_| self.scan()).collect()
 	}
 
-	pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
-	pub fn println<T: Print>(&mut self, x: T) { self.print(x); self.print("\n"); }
+	pub fn print<T: Print>(&mut self, x: T) {
+		T::print(self, x);
+	}
+	pub fn println<T: Print>(&mut self, x: T) {
+		self.print(x);
+		self.print("\n");
+	}
 	pub fn iterln<T: Print, I: Iterator<Item = T>>(&mut self, mut iter: I, delim: &str) {
 		if let Some(v) = iter.next() {
 			self.print(v);
@@ -58,7 +67,9 @@ impl IO {
 		}
 		self.print("\n");
 	}
-	pub fn flush(&mut self) { self.out_buf.flush().unwrap(); }
+	pub fn flush(&mut self) {
+		self.out_buf.flush().unwrap();
+	}
 }
 
 pub struct Iter<'a, T> {
@@ -68,24 +79,26 @@ pub struct Iter<'a, T> {
 
 impl<T: Scan> Iterator for Iter<'_, T> {
 	type Item = T;
-	fn next(&mut self) -> Option<Self::Item> { Some(self.io.scan()) }
+	fn next(&mut self) -> Option<Self::Item> {
+		Some(self.io.scan())
+	}
 }
 
 pub trait Scan {
-    fn scan(io: &mut IO) -> Self;
+	fn scan(io: &mut IO) -> Self;
 }
 
 pub trait Print {
-    fn print(w: &mut IO, x: Self);
+	fn print(w: &mut IO, x: Self);
 }
 
 macro_rules! impl_parse_iint {
 	($($t:ty),*) => { $(
 		impl Scan for $t {
 			fn scan(s: &mut IO) -> Self {
-                let scan = |t: &[u8]| t.iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as $t);
-                let s = s.scan_raw();
-                if let Some((&b'-', t)) = s.split_first() { -scan(t) } else { scan(s) }
+				let scan = |t: &[u8]| t.iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as $t);
+				let s = s.scan_raw();
+				if let Some((&b'-', t)) = s.split_first() { -scan(t) } else { scan(s) }
 			}
 		}
 	)* };
@@ -95,7 +108,7 @@ macro_rules! impl_parse_uint {
 	($($t:ty),*) => { $(
 		impl Scan for $t {
 			fn scan(s: &mut IO) -> Self {
-                s.scan_raw().iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as $t)
+				s.scan_raw().iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as $t)
 			}
 		}
 	)* };
@@ -106,46 +119,48 @@ impl_parse_uint!(u32, u64, u128, usize);
 
 impl Scan for u8 {
 	fn scan(s: &mut IO) -> Self {
-        let bytes = s.scan_raw();
+		let bytes = s.scan_raw();
 		debug_assert_eq!(bytes.len(), 1);
 		bytes[0]
 	}
 }
 
 impl Scan for Vec<u8> {
-	fn scan(s: &mut IO) -> Self { s.scan_raw().to_owned() }
+	fn scan(s: &mut IO) -> Self {
+		s.scan_raw().to_owned()
+	}
 }
 
 macro_rules! impl_tuple {
-    () => {};
-    ($t:ident $($ts:ident)*) => {
-        impl<$t: Scan, $($ts: Scan),*> Scan for ($t, $($ts),*) {
-            fn scan(s: &mut IO) -> Self { ($t::scan(s), $($ts::scan(s)),*) }
-        }
-        impl<$t: Print, $($ts: Print),*> Print for ($t, $($ts),*) {
-            #[allow(non_snake_case)]
-            fn print(w: &mut IO, ($t, $($ts),*): Self) {
-                w.print($t);
-                $( w.print(" "); w.print($ts); )*
-            }
-        }
-        impl_tuple!($($ts)*);
-    };
+	() => {};
+	($t:ident $($ts:ident)*) => {
+		impl<$t: Scan, $($ts: Scan),*> Scan for ($t, $($ts),*) {
+			fn scan(s: &mut IO) -> Self { ($t::scan(s), $($ts::scan(s)),*) }
+		}
+		impl<$t: Print, $($ts: Print),*> Print for ($t, $($ts),*) {
+			#[allow(non_snake_case)]
+			fn print(w: &mut IO, ($t, $($ts),*): Self) {
+				w.print($t);
+				$( w.print(" "); w.print($ts); )*
+			}
+		}
+		impl_tuple!($($ts)*);
+	};
 }
 
 impl_tuple!(A B C D E F G);
 
 macro_rules! impl_scan_array {
-    () => {};
-    ($n:literal $($ns:literal)*) => {
-        impl<T: Scan> Scan for [T; $n] {
-            fn scan(s: &mut IO) -> Self {
-                let mut scan = |_| T::scan(s);
-                [scan($n), $(scan($ns)),*]
-            }
-        }
-        impl_scan_array!($($ns)*);
-    };
+	() => {};
+	($n:literal $($ns:literal)*) => {
+		impl<T: Scan> Scan for [T; $n] {
+			fn scan(s: &mut IO) -> Self {
+				let mut scan = |_| T::scan(s);
+				[scan($n), $(scan($ns)),*]
+			}
+		}
+		impl_scan_array!($($ns)*);
+	};
 }
 
 impl_scan_array!(7 6 5 4 3 2 1);
@@ -168,13 +183,19 @@ macro_rules! impl_print_int {
 impl_print_int!(i32, i64, i128, isize, u32, u64, u128, usize);
 
 impl Print for u8 {
-	fn print(w: &mut IO, x: Self) { w.out_buf.write_all(&[x]).unwrap(); }
+	fn print(w: &mut IO, x: Self) {
+		w.out_buf.write_all(&[x]).unwrap();
+	}
 }
 
 impl Print for &[u8] {
-	fn print(w: &mut IO, x: Self) { w.out_buf.write_all(x).unwrap(); }
+	fn print(w: &mut IO, x: Self) {
+		w.out_buf.write_all(x).unwrap();
+	}
 }
 
 impl Print for &str {
-	fn print(w: &mut IO, x: Self) { w.print(x.as_bytes()); }
+	fn print(w: &mut IO, x: Self) {
+		w.print(x.as_bytes());
+	}
 }

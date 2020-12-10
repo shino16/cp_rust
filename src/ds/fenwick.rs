@@ -44,7 +44,8 @@ impl<A: Monoid> FenwickTree<A> {
 		let mut w = (self.data.len() - 1).msb();
 		let mut l = self.alg.unit();
 		while w != 0 {
-			if x + w < self.data.len() && pred(self.alg.op(l.clone(), self.data[x + w].clone())) {
+			if x + w < self.data.len() && pred(self.alg.op(l.clone(), self.data[x + w].clone()))
+			{
 				x += w;
 				l = self.alg.op(l, self.data[x + w].clone());
 			}

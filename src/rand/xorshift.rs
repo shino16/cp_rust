@@ -1,10 +1,10 @@
-pub struct Rng32(u32);
+pub struct Xorshift32(u32);
 
-impl Rng32 {
+impl Xorshift32 {
 	pub fn new() -> Self {
-		Rng32(2_463_534_242)
+		Self(2_463_534_242)
 	}
-	pub fn gen(&mut self) -> u32 {
+	pub fn next(&mut self) -> u32 {
 		let mut x = self.0;
 		x ^= x << 13;
 		x ^= x >> 17;
@@ -14,13 +14,13 @@ impl Rng32 {
 	}
 }
 
-pub struct Rng64(u64);
+pub struct Xorshift64(u64);
 
-impl Rng64 {
+impl Xorshift64 {
 	pub fn new() -> Self {
-		Rng64(88_172_645_463_325_252)
+		Self(88_172_645_463_325_252)
 	}
-	pub fn gen(&mut self) -> u64 {
+	pub fn next(&mut self) -> u64 {
 		let mut x = self.0;
 		x ^= x << 13;
 		x ^= x >> 7;

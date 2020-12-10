@@ -1,5 +1,5 @@
 use crate::fxhash::FxHashMap as HashMap;
-use crate::num::*;
+use crate::int::*;
 use std::cmp::Ordering;
 use std::hash::Hash;
 

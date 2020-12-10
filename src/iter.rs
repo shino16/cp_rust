@@ -1,3 +1,5 @@
+pub mod either;
+pub mod pow;
 pub mod prod;
 
 pub trait Itertools: Iterator {

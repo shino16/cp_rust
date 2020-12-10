@@ -4,22 +4,22 @@ mod tests {
 		use crate::fp::*;
 		#[test]
 		fn test_pow() {
-			use crate::rng::*;
-			let mut rng = Rng32::new();
+			use crate::rand::xoshiro256plus::*;
+			let mut rng = Xoshiro256plus::new();
 			assert_eq!(F17::from(2).pow(3), F17::from(8));
 			for _ in 0..100 {
-				let base: F17 = rng.gen().into();
-				let k = rng.gen() % 100;
+				let base: F17 = rng.next().into();
+				let k = rng.next() % 100;
 				let p = (0..k).map(|_| base).product::<F17>();
 				assert_eq!(p, base.pow(k));
 			}
 		}
 		#[test]
 		fn test_inv() {
-			use crate::rng::*;
-			let mut rng = Rng32::new();
+			use crate::rand::xoshiro256plus::*;
+			let mut rng = Xoshiro256plus::new();
 			for _ in 0..100 {
-				let a: F17 = rng.gen().into();
+				let a: F17 = rng.next().into();
 				let b = a.inv();
 				assert!(a * b == F17::ONE, "{} {}", a, b);
 			}
@@ -30,31 +30,31 @@ mod tests {
 		use crate::mint::*;
 		#[test]
 		fn test_mul() {
-			use crate::rng::*;
-			let mut rng = Rng32::new();
+			use crate::rand::xoshiro256plus::*;
+			let mut rng = Xoshiro256plus::new();
 			for _ in 0..100 {
-				let a = rng.gen() as u64;
-				let b = rng.gen() as u64;
+				let a = rng.next() as u32 as u64;
+				let b = rng.next() as u32 as u64;
 				assert_eq!(Mint17::from(a) * b, Mint17::from(a * b));
 			}
 		}
 		#[test]
 		fn test_pow() {
-			use crate::rng::*;
-			let mut rng = Rng32::new();
+			use crate::rand::xoshiro256plus::*;
+			let mut rng = Xoshiro256plus::new();
 			for _ in 0..100 {
-				let base: Mint17 = rng.gen().into();
-				let k = rng.gen() % 100;
+				let base: Mint17 = rng.next().into();
+				let k = rng.next() % 100;
 				let p = (0..k).map(|_| base).product::<Mint17>();
-				assert_eq!(p, base.pow(k.into()));
+				assert_eq!(p, base.pow(k as u32));
 			}
 		}
 		#[test]
 		fn test_inv() {
-			use crate::rng::*;
-			let mut rng = Rng32::new();
+			use crate::rand::xoshiro256plus::*;
+			let mut rng = Xoshiro256plus::new();
 			for _ in 0..100 {
-				let a: Mint17 = rng.gen().into();
+				let a: Mint17 = rng.next().into();
 				let b = a.inv();
 				assert!(a * b == Mint17::ONE, "{} * {} = {}", a, b, a * b);
 			}
@@ -67,20 +67,13 @@ mod tests {
 		#[test]
 		fn test() {
 			let lhs = (0..3).prod(b"ab".to_vec()).collect_vec();
-			let rhs = vec![
-				(0, b'a'),
-				(0, b'b'),
-				(1, b'a'),
-				(1, b'b'),
-				(2, b'a'),
-				(2, b'b'),
-			];
+			let rhs = vec![(0, b'a'), (0, b'b'), (1, b'a'), (1, b'b'), (2, b'a'), (2, b'b')];
 			assert_eq!(lhs, rhs);
 		}
 	}
 
 	mod num {
-		use crate::num::*;
+		use crate::int::*;
 		#[test]
 		fn types() {
 			assert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);

@@ -1,5 +1,6 @@
 pub mod disjointst;
 pub mod fenwick;
+pub mod list;
 pub mod segtree;
 pub mod sparsetable;
 pub mod uf;

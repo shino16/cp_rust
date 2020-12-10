@@ -28,16 +28,16 @@ impl<T> Slice for [T] {
 		self.iter_mut().for_each(|e| e.clone_from(&value));
 	}
 	fn partition_point<F: FnMut(&Self::Item) -> bool>(&self, mut pred: F) -> usize {
-		let (mut lb, mut ub) = (0, self.len()); // pred(self[ub]) == false
-		while lb != ub {
-			let mid = (lb + ub) / 2;
+		let (mut l, mut r) = (0, self.len()); // pred(self[r]) == false
+		while l != r {
+			let mid = (l + r) / 2;
 			let val = unsafe { self.get_unchecked(mid) };
 			if pred(val) {
-				lb = mid + 1;
+				l = mid + 1;
 			} else {
-				ub = mid;
+				r = mid;
 			}
 		}
-		ub
+		r
 	}
 }

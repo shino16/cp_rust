@@ -1,6 +1,6 @@
+pub use crate::int::ZeroOne;
+use crate::int::*;
 use crate::io::*;
-pub use crate::num::ZeroOne as _;
-use crate::num::*;
 use std::marker::PhantomData;
 use std::{fmt, iter, ops};
 
@@ -46,9 +46,15 @@ pub type Mint99 = MintB;
 
 impl<P: Mod> Mint<P> {
 	const P: u32 = P::P;
-	pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(P::P as i64) as u32) }
-	pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData } }
-	pub fn value(self) -> u32 { self.val }
+	pub fn new(val: i64) -> Self {
+		Self::from_val(val.rem_euclid(P::P as i64) as u32)
+	}
+	pub fn from_val(val: u32) -> Self {
+		Mint { val, _m: PhantomData }
+	}
+	pub fn value(self) -> u32 {
+		self.val
+	}
 	pub fn pow(self, mut exp: u32) -> Self {
 		if self.val == 0 && exp == 0 {
 			return Self::from_val(1);
@@ -64,8 +70,12 @@ impl<P: Mod> Mint<P> {
 		}
 		res
 	}
-	pub fn inv(self) -> Self { self.pow(P::PHI - 1) }
-	pub fn modulus() -> u32 { P::P }
+	pub fn inv(self) -> Self {
+		self.pow(P::PHI - 1)
+	}
+	pub fn modulus() -> u32 {
+		P::P
+	}
 }
 
 macro_rules! impl_from_int {
@@ -85,7 +95,10 @@ impl_from_int! {
 
 impl<P: Mod, T: Into<Mint<P>>> ops::Add<T> for Mint<P> {
 	type Output = Self;
-	fn add(mut self, rhs: T) -> Self { self += rhs; self }
+	fn add(mut self, rhs: T) -> Self {
+		self += rhs;
+		self
+	}
 }
 
 impl<P: Mod, T: Into<Mint<P>>> ops::AddAssign<T> for Mint<P> {
@@ -109,7 +122,10 @@ impl<P: Mod> ops::Neg for Mint<P> {
 
 impl<P: Mod, T: Into<Mint<P>>> ops::Sub<T> for Mint<P> {
 	type Output = Self;
-	fn sub(mut self, rhs: T) -> Self { self -= rhs; self }
+	fn sub(mut self, rhs: T) -> Self {
+		self -= rhs;
+		self
+	}
 }
 
 impl<P: Mod, T: Into<Mint<P>>> ops::SubAssign<T> for Mint<P> {
@@ -131,16 +147,23 @@ impl<P: Mod, T: Into<Mint<P>>> ops::Mul<T> for Mint<P> {
 }
 
 impl<P: Mod, T: Into<Mint<P>>> ops::MulAssign<T> for Mint<P> {
-	fn mul_assign(&mut self, rhs: T) { *self = *self * rhs; }
+	fn mul_assign(&mut self, rhs: T) {
+		*self = *self * rhs;
+	}
 }
 
 impl<P: Mod, T: Into<Mint<P>>> ops::Div<T> for Mint<P> {
 	type Output = Self;
-	fn div(mut self, rhs: T) -> Self { self /= rhs; self }
+	fn div(mut self, rhs: T) -> Self {
+		self /= rhs;
+		self
+	}
 }
 
 impl<P: Mod, T: Into<Mint<P>>> ops::DivAssign<T> for Mint<P> {
-	fn div_assign(&mut self, rhs: T) { *self *= rhs.into().pow(P::PHI - 1); }
+	fn div_assign(&mut self, rhs: T) {
+		*self *= rhs.into().pow(P::PHI - 1);
+	}
 }
 
 impl<P: Mod> iter::Sum for Mint<P> {
@@ -156,11 +179,15 @@ impl<P: Mod> iter::Product for Mint<P> {
 }
 
 impl<P: Mod> fmt::Debug for Mint<P> {
-	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
+	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+		self.val.fmt(f)
+	}
 }
 
 impl<P: Mod> fmt::Display for Mint<P> {
-	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
+	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+		self.val.fmt(f)
+	}
 }
 
 impl<P: Mod> ZeroOne for Mint<P> {
@@ -171,9 +198,13 @@ impl<P: Mod> ZeroOne for Mint<P> {
 impl<P: Mod> Num for Mint<P> {}
 
 impl<M: Mod> Print for Mint<M> {
-	fn print(w: &mut IO, x: Self) { w.print(x.value()); }
+	fn print(w: &mut IO, x: Self) {
+		w.print(x.value());
+	}
 }
 
 impl<M: Mod> Scan for Mint<M> {
-	fn scan(io: &mut IO) -> Self { io.scan::<u32>().into() }
+	fn scan(io: &mut IO) -> Self {
+		io.scan::<u32>().into()
+	}
 }

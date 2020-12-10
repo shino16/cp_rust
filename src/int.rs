@@ -1,6 +1,9 @@
 use crate::as_int::*;
 use crate::bit::*;
+use std::fmt::*;
 use std::ops::*;
+
+pub mod bisect;
 
 pub trait ZeroOne: Copy + Eq {
 	const ZERO: Self;
@@ -12,10 +15,16 @@ pub trait ZeroOne: Copy + Eq {
 
 pub trait Num:
 	ZeroOne
-	+ Add<Output = Self> + AddAssign
-	+ Sub<Output = Self> + SubAssign
-	+ Mul<Output = Self> + MulAssign
-	+ Div<Output = Self> + DivAssign
+	+ Add<Output = Self>
+	+ AddAssign
+	+ Sub<Output = Self>
+	+ SubAssign
+	+ Mul<Output = Self>
+	+ MulAssign
+	+ Div<Output = Self>
+	+ DivAssign
+	+ Debug
+	+ Display
 {
 }
 
