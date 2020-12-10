@@ -21,6 +21,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/dfa.rs
       title: src/dfa.rs
+    - icon: ':warning:'
+      path: src/float.rs
+      title: src/float.rs
     - icon: ':heavy_check_mark:'
       path: src/fp.rs
       title: src/fp.rs
@@ -30,6 +33,9 @@ data:
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
+    - icon: ':heavy_check_mark:'
+      path: src/int.rs
+      title: src/int.rs
     - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
@@ -48,12 +54,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
-    - icon: ':heavy_check_mark:'
-      path: src/num.rs
-      title: src/num.rs
-    - icon: ':heavy_check_mark:'
-      path: src/rng.rs
-      title: src/rng.rs
+    - icon: ':warning:'
+      path: src/rand.rs
+      title: src/rand.rs
     - icon: ':warning:'
       path: src/slice.rs
       title: src/slice.rs
@@ -92,6 +95,9 @@ data:
     - icon: ':warning:'
       path: src/ds/fenwick.rs
       title: src/ds/fenwick.rs
+    - icon: ':warning:'
+      path: src/ds/list.rs
+      title: src/ds/list.rs
     - icon: ':heavy_check_mark:'
       path: src/ds/segtree.rs
       title: src/ds/segtree.rs
@@ -113,13 +119,32 @@ data:
     - icon: ':warning:'
       path: src/ds/vec2d.rs
       title: src/ds/vec2d.rs
+  - name: src/float
+    pages:
+    - icon: ':warning:'
+      path: src/float/bisect.rs
+      title: src/float/bisect.rs
+    - icon: ':warning:'
+      path: src/float/convex.rs
+      title: src/float/convex.rs
   - name: src/fp
     pages:
     - icon: ':heavy_check_mark:'
       path: src/fp/conv.rs
       title: src/fp/conv.rs
+  - name: src/int
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/int/bisect.rs
+      title: src/int/bisect.rs
   - name: src/iter
     pages:
+    - icon: ':heavy_check_mark:'
+      path: src/iter/either.rs
+      title: src/iter/either.rs
+    - icon: ':heavy_check_mark:'
+      path: src/iter/pow.rs
+      title: src/iter/pow.rs
     - icon: ':heavy_check_mark:'
       path: src/iter/prod.rs
       title: src/iter/prod.rs
@@ -136,6 +161,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/mint/conv.rs
       title: src/mint/conv.rs
+  - name: src/rand
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/rand/seed.rs
+      title: src/rand/seed.rs
+    - icon: ':warning:'
+      path: src/rand/xorshift.rs
+      title: src/rand/xorshift.rs
+    - icon: ':heavy_check_mark:'
+      path: src/rand/xoshiro256plus.rs
+      title: src/rand/xoshiro256plus.rs
   verificationCategories:
   - name: test/src/bin
     pages:

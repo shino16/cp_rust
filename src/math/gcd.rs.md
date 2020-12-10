@@ -13,7 +13,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use crate::num::*;\n\n// binary gcd\npub fn gcd<I: Int>(mut a: I, mut b:\
+  code: "use crate::int::*;\n\n// binary gcd\npub fn gcd<I: Int>(mut a: I, mut b:\
     \ I) -> I {\n\tif a.is_zero() {\n\t\treturn b;\n\t} else if b.is_zero() {\n\t\t\
     return a;\n\t}\n\tlet a_shift = a.trailing_zeros();\n\ta >>= a_shift;\n\tlet b_shift\
     \ = b.trailing_zeros();\n\tb >>= b_shift;\n\tlet shift = a_shift.min(b_shift);\n\
@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: src/math/gcd.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

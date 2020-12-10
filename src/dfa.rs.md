@@ -13,7 +13,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use crate::fxhash::FxHashMap as HashMap;\nuse crate::num::*;\nuse std::cmp::Ordering;\n\
+  code: "use crate::fxhash::FxHashMap as HashMap;\nuse crate::int::*;\nuse std::cmp::Ordering;\n\
     use std::hash::Hash;\n\npub trait Dfa {\n\ttype Alphabet;\n\ttype State;\n\tfn\
     \ init(&self) -> Self::State;\n\tfn next(&self, s: Self::State, a: Self::Alphabet,\
     \ i: usize) -> Self::State;\n\tfn accept(&self, s: Self::State) -> bool;\n\tfn\
@@ -77,7 +77,7 @@ data:
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

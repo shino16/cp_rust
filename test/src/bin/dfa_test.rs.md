@@ -20,6 +20,12 @@ data:
     path: src/fxhash.rs
     title: src/fxhash.rs
   - icon: ':heavy_check_mark:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -29,8 +35,8 @@ data:
     path: src/mint/conv.rs
     title: src/mint/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/num.rs
-    title: src/num.rs
+    path: src/rand/seed.rs
+    title: src/rand/seed.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -69,14 +75,16 @@ data:
   - src/dfa.rs
   - src/ds/uvec.rs
   - src/fxhash.rs
+  - src/int.rs
+  - src/int/bisect.rs
   - src/io.rs
   - src/mint.rs
   - src/mint/conv.rs
-  - src/num.rs
+  - src/rand/seed.rs
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs

@@ -27,19 +27,19 @@ data:
     \ bool>(&self, mut pred: F) -> usize {\n\t\tlet mut x = 0; // pred(&self.ask_prefix(x))\
     \ == true\n\t\tlet mut w = (self.data.len() - 1).msb();\n\t\tlet mut l = self.alg.unit();\n\
     \t\twhile w != 0 {\n\t\t\tif x + w < self.data.len() && pred(self.alg.op(l.clone(),\
-    \ self.data[x + w].clone())) {\n\t\t\t\tx += w;\n\t\t\t\tl = self.alg.op(l, self.data[x\
-    \ + w].clone());\n\t\t\t}\n\t\t\tw >>= 1;\n\t\t}\n\t\tx + 1\n\t}\n\tpub fn lower_bound(&self,\
-    \ v: A::Item) -> usize\n\twhere\n\t\tA::Item: Ord,\n\t{\n\t\tself.partition_point(|x|\
-    \ x < v)\n\t}\n\tpub fn upper_bound(&self, v: A::Item) -> usize\n\twhere\n\t\t\
-    A::Item: Ord,\n\t{\n\t\tself.partition_point(|x| x <= v)\n\t}\n}\n\n// A: Commutative\n\
-    impl<A: Group> FenwickTree<A> {\n\tpub fn ask(&self, l: usize, r: usize) -> A::Item\
-    \ {\n\t\tself.alg.op(self.alg.inv(self.ask_prefix(l)), self.ask_prefix(r))\n\t\
-    }\n}\n"
+    \ self.data[x + w].clone()))\n\t\t\t{\n\t\t\t\tx += w;\n\t\t\t\tl = self.alg.op(l,\
+    \ self.data[x + w].clone());\n\t\t\t}\n\t\t\tw >>= 1;\n\t\t}\n\t\tx + 1\n\t}\n\
+    \tpub fn lower_bound(&self, v: A::Item) -> usize\n\twhere\n\t\tA::Item: Ord,\n\
+    \t{\n\t\tself.partition_point(|x| x < v)\n\t}\n\tpub fn upper_bound(&self, v:\
+    \ A::Item) -> usize\n\twhere\n\t\tA::Item: Ord,\n\t{\n\t\tself.partition_point(|x|\
+    \ x <= v)\n\t}\n}\n\n// A: Commutative\nimpl<A: Group> FenwickTree<A> {\n\tpub\
+    \ fn ask(&self, l: usize, r: usize) -> A::Item {\n\t\tself.alg.op(self.alg.inv(self.ask_prefix(l)),\
+    \ self.ask_prefix(r))\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2020-12-01 00:05:14+09:00'
+  timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/fenwick.rs

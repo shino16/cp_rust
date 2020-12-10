@@ -13,24 +13,23 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub struct Rng32(u32);\n\nimpl Rng32 {\n\tpub fn new() -> Self {\n\t\tRng32(2_463_534_242)\n\
-    \t}\n\tpub fn gen(&mut self) -> u32 {\n\t\tlet mut x = self.0;\n\t\tx ^= x <<\
-    \ 13;\n\t\tx ^= x >> 17;\n\t\tx ^= x << 5;\n\t\tself.0 = x;\n\t\tx\n\t}\n}\n\n\
-    pub struct Rng64(u64);\n\nimpl Rng64 {\n\tpub fn new() -> Self {\n\t\tRng64(88_172_645_463_325_252)\n\
-    \t}\n\tpub fn gen(&mut self) -> u64 {\n\t\tlet mut x = self.0;\n\t\tx ^= x <<\
-    \ 13;\n\t\tx ^= x >> 7;\n\t\tx ^= x << 17;\n\t\tself.0 = x;\n\t\tx\n\t}\n}\n"
+  code: "pub enum Either<L, R> {\n\tLeft(L),\n\tRight(R),\n}\n\nimpl<A, L, R> Iterator\
+    \ for Either<L, R>\nwhere\n\tL: Iterator<Item = A>,\n\tR: Iterator<Item = A>,\n\
+    {\n\ttype Item = A;\n\tfn next(&mut self) -> Option<Self::Item> {\n\t\tmatch self\
+    \ {\n\t\t\tSelf::Left(l) => l.next(),\n\t\t\tSelf::Right(r) => r.next(),\n\t\t\
+    }\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/rng.rs
+  path: src/iter/either.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
-documentation_of: src/rng.rs
+documentation_of: src/iter/either.rs
 layout: document
 redirect_from:
-- /library/src/rng.rs
-- /library/src/rng.rs.html
-title: src/rng.rs
+- /library/src/iter/either.rs
+- /library/src/iter/either.rs.html
+title: src/iter/either.rs
 ---

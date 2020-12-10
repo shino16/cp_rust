@@ -20,11 +20,14 @@ data:
     path: src/fp/conv.rs
     title: src/fp/conv.rs
   - icon: ':heavy_check_mark:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
-    path: src/num.rs
-    title: src/num.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -47,12 +50,13 @@ data:
   - src/ds/uvec.rs
   - src/fp.rs
   - src/fp/conv.rs
+  - src/int.rs
+  - src/int/bisect.rs
   - src/io.rs
-  - src/num.rs
   isVerificationFile: true
   path: test/src/bin/ntt_test.rs
   requiredBy: []
-  timestamp: '2020-11-28 19:21:23+09:00'
+  timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_test.rs
