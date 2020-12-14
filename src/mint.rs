@@ -195,7 +195,11 @@ impl<P: Mod> ZeroOne for Mint<P> {
 	const ONE: Self = Self { val: 1, _m: PhantomData };
 }
 
-impl<P: Mod> Num for Mint<P> {}
+impl<P: Mod> Num for Mint<P> {
+    fn wrapping_neg(self) -> Self {
+        -self
+    }
+}
 
 impl<M: Mod> Print for Mint<M> {
 	fn print(w: &mut IO, x: Self) {

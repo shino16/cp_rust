@@ -7,6 +7,7 @@ pub trait Bits:
 	+ BitXor<Output = Self> + BitXorAssign
 	+ Shl<u32, Output = Self> + ShlAssign<u32>
 	+ Shr<u32, Output = Self> + ShrAssign<u32>
+	+ Not<Output = Self>
 {
 	fn trailing_zeros(self) -> u32;
 	fn lsb(self) -> Self;

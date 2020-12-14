@@ -253,7 +253,11 @@ impl<M: Mod> ZeroOne for Fp<M> {
 	};
 }
 
-impl<M: Mod> Num for Fp<M> {}
+impl<M: Mod> Num for Fp<M> {
+    fn wrapping_neg(self) -> Self {
+        -self
+    }
+}
 
 impl<M: Mod> Print for Fp<M> {
 	fn print(w: &mut IO, x: Self) {

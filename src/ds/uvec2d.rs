@@ -18,15 +18,15 @@ impl<T: Clone> UVec2D<T> {
 	}
 }
 
-impl<T> Index<(usize, usize)> for UVec2D<T> {
+impl<T> Index<[usize; 2]> for UVec2D<T> {
 	type Output = T;
-	fn index(&self, (r, c): (usize, usize)) -> &Self::Output {
+	fn index(&self, [r, c]: [usize; 2]) -> &Self::Output {
 		&self.inner[r * self.w + c]
 	}
 }
 
-impl<T> IndexMut<(usize, usize)> for UVec2D<T> {
-	fn index_mut(&mut self, (r, c): (usize, usize)) -> &mut Self::Output {
+impl<T> IndexMut<[usize; 2]> for UVec2D<T> {
+	fn index_mut(&mut self, [r, c]: [usize; 2]) -> &mut Self::Output {
 		&mut self.inner[r * self.w + c]
 	}
 }

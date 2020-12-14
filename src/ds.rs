@@ -1,3 +1,4 @@
+pub mod bitset;
 pub mod disjointst;
 pub mod fenwick;
 pub mod list;

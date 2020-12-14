@@ -17,15 +17,15 @@ impl<T: Clone> Vec2D<T> {
 	}
 }
 
-impl<T> Index<(usize, usize)> for Vec2D<T> {
+impl<T> Index<[usize; 2]> for Vec2D<T> {
 	type Output = T;
-	fn index(&self, (r, c): (usize, usize)) -> &Self::Output {
+	fn index(&self, [r, c]: [usize; 2]) -> &Self::Output {
 		&self.inner[r * self.w + c]
 	}
 }
 
-impl<T> IndexMut<(usize, usize)> for Vec2D<T> {
-	fn index_mut(&mut self, (r, c): (usize, usize)) -> &mut Self::Output {
+impl<T> IndexMut<[usize; 2]> for Vec2D<T> {
+	fn index_mut(&mut self, [r, c]: [usize; 2]) -> &mut Self::Output {
 		&mut self.inner[r * self.w + c]
 	}
 }

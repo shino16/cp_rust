@@ -1,5 +1,6 @@
 use std::ops::{Deref, DerefMut};
 
+#[repr(transparent)]
 #[derive(PartialEq, PartialOrd)]
 pub struct Total<T>(pub T);
 
