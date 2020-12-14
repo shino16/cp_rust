@@ -1,3 +1,5 @@
+pub mod action;
+
 pub trait Alg {
 	type Item: Clone;
 }
@@ -38,11 +40,7 @@ macro_rules! impl_group {
 	};
 }
 
-pub struct MonoidImpl<T: Clone, Unit, Op>(pub Unit, pub Op)
-where
-	T: Clone,
-	Unit: Fn() -> T,
-	Op: Fn(T, T) -> T;
+pub struct MonoidImpl<T: Clone, Unit: Fn() -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);
 pub struct GroupImpl<T, Unit, Op, Inv>(pub Unit, pub Op, pub Inv)
 where
 	T: Clone,
