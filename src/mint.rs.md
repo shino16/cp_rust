@@ -77,15 +77,15 @@ data:
     \ Mint<P> {\n\tfn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {\n\t\tself.val.fmt(f)\n\
     \t}\n}\n\nimpl<P: Mod> ZeroOne for Mint<P> {\n\tconst ZERO: Self = Self { val:\
     \ 0, _m: PhantomData };\n\tconst ONE: Self = Self { val: 1, _m: PhantomData };\n\
-    }\n\nimpl<P: Mod> Num for Mint<P> {}\n\nimpl<M: Mod> Print for Mint<M> {\n\tfn\
-    \ print(w: &mut IO, x: Self) {\n\t\tw.print(x.value());\n\t}\n}\n\nimpl<M: Mod>\
-    \ Scan for Mint<M> {\n\tfn scan(io: &mut IO) -> Self {\n\t\tio.scan::<u32>().into()\n\
-    \t}\n}\n"
+    }\n\nimpl<P: Mod> Num for Mint<P> {\n    fn wrapping_neg(self) -> Self {\n   \
+    \     -self\n    }\n}\n\nimpl<M: Mod> Print for Mint<M> {\n\tfn print(w: &mut\
+    \ IO, x: Self) {\n\t\tw.print(x.value());\n\t}\n}\n\nimpl<M: Mod> Scan for Mint<M>\
+    \ {\n\tfn scan(io: &mut IO) -> Self {\n\t\tio.scan::<u32>().into()\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/mint.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

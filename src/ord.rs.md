@@ -10,24 +10,22 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use std::ops::{Deref, DerefMut};\n\n#[repr(transparent)]\n#[derive(PartialEq,\
-    \ PartialOrd)]\npub struct Total<T>(pub T);\n\nimpl<T: PartialEq> Eq for Total<T>\
-    \ {}\n\nimpl<T: PartialOrd> Ord for Total<T> {\n\tfn cmp(&self, rhs: &Self) ->\
-    \ std::cmp::Ordering {\n\t\tself.0.partial_cmp(&rhs.0).unwrap()\n\t}\n}\n\nimpl<T>\
-    \ Deref for Total<T> {\n\ttype Target = T;\n\tfn deref(&self) -> &Self::Target\
-    \ {\n\t\t&self.0\n\t}\n}\n\nimpl<T> DerefMut for Total<T> {\n\tfn deref_mut(&mut\
-    \ self) -> &mut Self::Target {\n\t\t&mut self.0\n\t}\n}\n"
+  code: "pub trait ChMaxMin: Ord + Sized {\n\tfn chmax(&mut self, v: Self) -> bool\
+    \ {\n\t\tif *self < v {\n\t\t\t*self = v;\n\t\t\ttrue\n\t\t} else {\n\t\t\tfalse\n\
+    \t\t}\n\t}\n\tfn chmin(&mut self, v: Self) -> bool {\n\t\tif *self > v {\n\t\t\
+    \t*self = v;\n\t\t\ttrue\n\t\t} else {\n\t\t\tfalse\n\t\t}\n\t}\n}\n\nimpl<T:\
+    \ Ord + Sized> ChMaxMin for T {}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/cmp/total.rs
+  path: src/ord.rs
   requiredBy: []
   timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/cmp/total.rs
+documentation_of: src/ord.rs
 layout: document
 redirect_from:
-- /library/src/cmp/total.rs
-- /library/src/cmp/total.rs.html
-title: src/cmp/total.rs
+- /library/src/ord.rs
+- /library/src/ord.rs.html
+title: src/ord.rs
 ---

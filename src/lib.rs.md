@@ -23,8 +23,6 @@ data:
 
     pub mod bit;
 
-    pub mod bitset;
-
     pub mod cmp;
 
     pub mod conv;
@@ -38,6 +36,8 @@ data:
     pub mod fp;
 
     pub mod fxhash;
+
+    pub mod graph;
 
     pub mod hash;
 
@@ -55,6 +55,8 @@ data:
 
     pub mod mint;
 
+    pub mod ord;
+
     pub mod rand;
 
     pub mod slice;
@@ -69,7 +71,7 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

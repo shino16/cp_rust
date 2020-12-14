@@ -5,6 +5,9 @@ data:
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
+    path: src/alg/action.rs
+    title: src/alg/action.rs
+  - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
   - icon: ':heavy_check_mark:'
@@ -29,12 +32,13 @@ data:
     \ {\n\t\t\tio.println(st.ask(x, y + 1));\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/alg.rs
+  - src/alg/action.rs
   - src/ds/segtree.rs
   - src/io.rs
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

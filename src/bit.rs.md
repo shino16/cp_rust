@@ -31,20 +31,20 @@ data:
   code: "use std::ops::*;\n\npub trait Bits:\n\tSized\n\t+ BitAnd<Output = Self> +\
     \ BitAndAssign\n\t+ BitOr<Output = Self> + BitOrAssign\n\t+ BitXor<Output = Self>\
     \ + BitXorAssign\n\t+ Shl<u32, Output = Self> + ShlAssign<u32>\n\t+ Shr<u32, Output\
-    \ = Self> + ShrAssign<u32>\n{\n\tfn trailing_zeros(self) -> u32;\n\tfn lsb(self)\
-    \ -> Self;\n\tfn ilog2(self) -> u32;\n\tfn msb(self) -> Self;\n}\n\nmacro_rules!\
-    \ impl_bit {\n\t($($t:ty), *) => { $(\n\t\timpl Bits for $t {\n\t\t\tfn trailing_zeros(self)\
-    \ -> u32 {\n\t\t\t\t<$t>::trailing_zeros(self)\n\t\t\t}\n\t\t\tfn lsb(self) ->\
-    \ Self {\n\t\t\t\tself & self.wrapping_neg()\n\t\t\t}\n\t\t\tfn ilog2(self) ->\
-    \ u32 {\n\t\t\t\tstd::mem::size_of::<$t>() as u32 * 8 - self.leading_zeros() -\
-    \ 1\n\t\t\t}\n\t\t\tfn msb(self) -> Self {\n\t\t\t\t(1 as $t) << self.ilog2()\n\
-    \t\t\t}\n\t\t}\n\t)* };\n}\n\nimpl_bit!(i32, i64, i128, isize, u32, u64, u128,\
-    \ usize);\n"
+    \ = Self> + ShrAssign<u32>\n\t+ Not<Output = Self>\n{\n\tfn trailing_zeros(self)\
+    \ -> u32;\n\tfn lsb(self) -> Self;\n\tfn ilog2(self) -> u32;\n\tfn msb(self) ->\
+    \ Self;\n}\n\nmacro_rules! impl_bit {\n\t($($t:ty), *) => { $(\n\t\timpl Bits\
+    \ for $t {\n\t\t\tfn trailing_zeros(self) -> u32 {\n\t\t\t\t<$t>::trailing_zeros(self)\n\
+    \t\t\t}\n\t\t\tfn lsb(self) -> Self {\n\t\t\t\tself & self.wrapping_neg()\n\t\t\
+    \t}\n\t\t\tfn ilog2(self) -> u32 {\n\t\t\t\tstd::mem::size_of::<$t>() as u32 *\
+    \ 8 - self.leading_zeros() - 1\n\t\t\t}\n\t\t\tfn msb(self) -> Self {\n\t\t\t\t\
+    (1 as $t) << self.ilog2()\n\t\t\t}\n\t\t}\n\t)* };\n}\n\nimpl_bit!(i32, i64, i128,\
+    \ isize, u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/bit.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs

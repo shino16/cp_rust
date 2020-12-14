@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: src/alg
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/alg/action.rs
+      title: src/alg/action.rs
   - name: src
     pages:
     - icon: ':heavy_check_mark:'
@@ -12,9 +17,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/bit.rs
       title: src/bit.rs
-    - icon: ':warning:'
-      path: src/bitset.rs
-      title: src/bitset.rs
     - icon: ':heavy_check_mark:'
       path: src/conv.rs
       title: src/conv.rs
@@ -30,6 +32,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fxhash.rs
       title: src/fxhash.rs
+    - icon: ':warning:'
+      path: src/graph.rs
+      title: src/graph.rs
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
@@ -54,6 +59,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
+    - icon: ':warning:'
+      path: src/ord.rs
+      title: src/ord.rs
     - icon: ':warning:'
       path: src/rand.rs
       title: src/rand.rs
@@ -87,8 +95,28 @@ data:
     - icon: ':warning:'
       path: src/draft/minimize_dfa.rs
       title: src/draft/minimize_dfa.rs
+  - name: src/draft/graph
+    pages:
+    - icon: ':warning:'
+      path: src/draft/graph/ds.rs
+      title: src/draft/graph/ds.rs
+    - icon: ':warning:'
+      path: src/draft/graph/edge.rs
+      title: src/draft/graph/edge.rs
+    - icon: ':warning:'
+      path: src/draft/graph/graph.rs
+      title: src/draft/graph/graph.rs
+    - icon: ':warning:'
+      path: src/draft/graph/grid.rs
+      title: src/draft/graph/grid.rs
+    - icon: ':warning:'
+      path: src/draft/graph/path.rs
+      title: src/draft/graph/path.rs
   - name: src/ds
     pages:
+    - icon: ':warning:'
+      path: src/ds/bitset.rs
+      title: src/ds/bitset.rs
     - icon: ':warning:'
       path: src/ds/disjointst.rs
       title: src/ds/disjointst.rs
@@ -132,6 +160,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fp/conv.rs
       title: src/fp/conv.rs
+  - name: src/graph
+    pages:
+    - icon: ':warning:'
+      path: src/graph/dfs.rs
+      title: src/graph/dfs.rs
+    - icon: ':warning:'
+      path: src/graph/dfs_io.rs
+      title: src/graph/dfs_io.rs
+    - icon: ':warning:'
+      path: src/graph/dijkstra.rs
+      title: src/graph/dijkstra.rs
+    - icon: ':warning:'
+      path: src/graph/euler_tour.rs
+      title: src/graph/euler_tour.rs
   - name: src/int
     pages:
     - icon: ':heavy_check_mark:'

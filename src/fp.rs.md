@@ -93,15 +93,15 @@ data:
     \ f: &mut fmt::Formatter) -> fmt::Result {\n\t\tself.value().fmt(f)\n\t}\n}\n\n\
     impl<M: Mod> ZeroOne for Fp<M> {\n\tconst ZERO: Self = Self { val: 0, _m: PhantomData\
     \ };\n\tconst ONE: Self = Self {\n\t\tval: M::P.wrapping_neg() % M::P,\n\t\t_m:\
-    \ PhantomData,\n\t};\n}\n\nimpl<M: Mod> Num for Fp<M> {}\n\nimpl<M: Mod> Print\
-    \ for Fp<M> {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.print(x.value());\n\t\
-    }\n}\n\nimpl<M: Mod> Scan for Fp<M> {\n\tfn scan(io: &mut IO) -> Self {\n\t\t\
-    Self::new(io.scan())\n\t}\n}\n"
+    \ PhantomData,\n\t};\n}\n\nimpl<M: Mod> Num for Fp<M> {\n    fn wrapping_neg(self)\
+    \ -> Self {\n        -self\n    }\n}\n\nimpl<M: Mod> Print for Fp<M> {\n\tfn print(w:\
+    \ &mut IO, x: Self) {\n\t\tw.print(x.value());\n\t}\n}\n\nimpl<M: Mod> Scan for\
+    \ Fp<M> {\n\tfn scan(io: &mut IO) -> Self {\n\t\tSelf::new(io.scan())\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/fp.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs
