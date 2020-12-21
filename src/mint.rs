@@ -196,9 +196,9 @@ impl<P: Mod> ZeroOne for Mint<P> {
 }
 
 impl<P: Mod> Num for Mint<P> {
-    fn wrapping_neg(self) -> Self {
-        -self
-    }
+	fn wrapping_neg(self) -> Self {
+		-self
+	}
 }
 
 impl<M: Mod> Print for Mint<M> {

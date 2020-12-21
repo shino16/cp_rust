@@ -109,10 +109,10 @@ impl_parse_uint!(u32, u64, u128, usize);
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Usize1(pub usize);
 impl Scan for Usize1 {
-    fn scan(io: &mut IO) -> Self {
+	fn scan(io: &mut IO) -> Self {
 		let n: usize = io.scan();
 		Self(n - 1)
-    }
+	}
 }
 
 impl Scan for u8 {

@@ -19,8 +19,8 @@ pub trait Cum {
 }
 
 impl<T: Clone> Cum for [T] {
-    type Item = T;
-    fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
+	type Item = T;
+	fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
 		let mut res = Vec::with_capacity(self.len() + 1);
 		let mut tl = m.unit();
 		res.push(tl.clone());
@@ -29,9 +29,9 @@ impl<T: Clone> Cum for [T] {
 			res.push(tl.clone());
 		}
 		res
-    }
+	}
 
-    fn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
+	fn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
 		let mut res = Vec::with_capacity(self.len() + 1);
 		let mut tl = m.unit();
 		res.push(tl.clone());
@@ -41,5 +41,5 @@ impl<T: Clone> Cum for [T] {
 		}
 		res.reverse();
 		res
-    }
+	}
 }

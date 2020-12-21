@@ -13,20 +13,20 @@ impl<N> Addition<N> {
 }
 
 impl<N: Num> Alg for Addition<N> {
-    type Item = N;
+	type Item = N;
 }
 
 impl<N: Num> Monoid for Addition<N> {
-    fn unit(&self) -> Self::Item {
-        N::ZERO
-    }
-    fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
+	fn unit(&self) -> Self::Item {
+		N::ZERO
+	}
+	fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
 		x + y
-    }
+	}
 }
 
 impl<N: Num> Group for Addition<N> {
-    fn inv(&self, x: Self::Item) -> Self::Item {
-        x.wrapping_neg()
-    }
+	fn inv(&self, x: Self::Item) -> Self::Item {
+		x.wrapping_neg()
+	}
 }

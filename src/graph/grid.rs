@@ -27,10 +27,10 @@ impl<F: Fn(usize, usize) -> bool> Grid<F> {
 }
 
 impl<F: Fn(usize, usize) -> bool> Graph for Grid<F> {
-    fn len(&self) -> usize {
+	fn len(&self) -> usize {
 		self.h << self.shift
-    }
-    fn adj<G: FnMut(usize)>(&self, v: usize, mut f: G) {
+	}
+	fn adj<G: FnMut(usize)>(&self, v: usize, mut f: G) {
 		let (r, c) = self.pos(v);
 		const DR: [usize; 4] = [1, !0, 0, 0];
 		const DC: [usize; 4] = [0, 0, 1, !0];
@@ -40,5 +40,5 @@ impl<F: Fn(usize, usize) -> bool> Graph for Grid<F> {
 				f(self.at(r, c));
 			}
 		}
-    }
+	}
 }
