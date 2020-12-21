@@ -31,4 +31,4 @@ macro_rules! impl_index {
 	)* }
 }
 
-impl_index!(i32, i64, isize, u32, u64, usize);
+impl_index!(i32, i64, i128, isize, u32, u64, u128, usize);
