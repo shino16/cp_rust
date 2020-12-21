@@ -5,12 +5,9 @@ data:
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
-    path: src/alg/action.rs
-    title: src/alg/action.rs
-  - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -19,9 +16,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A\n\
     \nuse lib::ds::segtree::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
@@ -32,13 +29,12 @@ data:
     \ {\n\t\t\tio.println(st.ask(x, y + 1));\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/alg.rs
-  - src/alg/action.rs
   - src/ds/segtree.rs
   - src/io.rs
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '2020-12-21 16:32:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

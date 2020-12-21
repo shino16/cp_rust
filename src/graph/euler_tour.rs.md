@@ -6,11 +6,11 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub use crate::alg::*;\nuse crate::ds::bitset::*;\npub use crate::graph::*;\n\
+  code: "pub use super::*;\nuse crate::ds::bitset::*;\npub use crate::int::alg::*;\n\
     \npub fn euler_tour<A: Group, G: WTree<A::Item>>(g: &G, s: usize, a: A) -> Vec<A::Item>\n\
     where\n\tA::Item: Clone,\n{\n\tlet mut edges = Vec::new();\n\tlet mut togo = vec![(s,\
     \ !0, a.unit())];\n\twhile let Some((v, par, e)) = togo.pop() {\n\t\tif v.get_bit(31)\
@@ -22,7 +22,7 @@ data:
   isVerificationFile: false
   path: src/graph/euler_tour.rs
   requiredBy: []
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '2020-12-21 16:41:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/euler_tour.rs

@@ -6,28 +6,34 @@ data:
   - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/dfa_test.rs
+    title: test/src/bin/dfa_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub mod either;\npub mod pow;\npub mod prod;\n\npub trait Itertools: Iterator\
-    \ {\n\tfn collect_vec(self) -> Vec<Self::Item>\n\twhere\n\t\tSelf: Sized,\n\t\
-    {\n\t\tself.collect()\n\t}\n}\n\nimpl<I: Iterator> Itertools for I {}\n"
+  code: "pub trait ZeroOne: Copy + Eq {\n\tconst ZERO: Self;\n\tfn is_zero(self) ->\
+    \ bool {\n\t\tself == Self::ZERO\n\t}\n\tconst ONE: Self;\n}\n\nmacro_rules! impl_zo\
+    \ {\n\t($($t:ty),*) => { $(\n\t\timpl ZeroOne for $t {\n\t\t\tconst ZERO: Self\
+    \ = 0;\n\t\t\tconst ONE: Self = 1;\n\t\t}\n\t)* };\n}\n\nimpl_zo!(i32, i64, i128,\
+    \ isize, u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/iter.rs
+  path: src/int/zo.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-12-21 16:33:52+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/src/bin/dfa_test.rs
   - test/src/bin/cargo_test.rs
-documentation_of: src/iter.rs
+documentation_of: src/int/zo.rs
 layout: document
 redirect_from:
-- /library/src/iter.rs
-- /library/src/iter.rs.html
-title: src/iter.rs
+- /library/src/int/zo.rs
+- /library/src/int/zo.rs.html
+title: src/int/zo.rs
 ---

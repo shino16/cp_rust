@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
   - icon: ':heavy_check_mark:'
@@ -15,11 +12,11 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "pub use crate::conv::*;\npub use crate::ds::uvec::*;\npub use crate::fp::*;\n\
+  code: "pub use super::*;\npub use crate::conv::*;\npub use crate::ds::uvec::*;\n\
     \nmacro_rules! impl_ntt {\n\t($module:ident, $modu:ty, $prim:expr) => {\n\t\t\
     pub mod $module {\n\t\t\tuse super::*;\n\n\t\t\ttype FpType = Fp<$modu>;\n\n\t\
     \t\tstatic mut ROOT: UVec<FpType> = UVec(Vec::new());\n\t\t\tstatic mut INV_ROOT:\
@@ -86,12 +83,11 @@ data:
   isVerificationFile: false
   path: src/fp/conv.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2020-12-21 16:41:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_garner_test.rs
   - test/src/bin/ntt_test.rs
-  - test/src/bin/cargo_test.rs
+  - test/src/bin/ntt_garner_test.rs
 documentation_of: src/fp/conv.rs
 layout: document
 redirect_from:

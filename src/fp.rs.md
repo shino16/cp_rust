@@ -3,24 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_garner_test.rs
-    title: test/src/bin/ntt_garner_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_test.rs
-    title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: "use crate::as_int::*;\npub use crate::int::ZeroOne;\nuse crate::int::*;\n\
-    use crate::io::*;\nuse std::marker::PhantomData;\nuse std::{cmp, fmt, iter, ops};\n\
+  code: "use crate::cast::*;\npub use crate::int::ZeroOne;\nuse crate::int::*;\nuse\
+    \ crate::io::*;\nuse std::marker::PhantomData;\nuse std::{cmp, fmt, iter, ops};\n\
     \npub mod conv;\n\npub trait Mod: Default + Clone + Copy + PartialEq + Eq {\n\t\
     const P: u32;\n\tconst K: u32; // -1 / P mod 2^32\n\tconst R2: u32; // 2^64 mod\
     \ P\n}\n\n// montgomery reduction (x -> x / 2^32 mod P)\nfn reduce<M: Mod>(x:\
@@ -93,19 +87,17 @@ data:
     \ f: &mut fmt::Formatter) -> fmt::Result {\n\t\tself.value().fmt(f)\n\t}\n}\n\n\
     impl<M: Mod> ZeroOne for Fp<M> {\n\tconst ZERO: Self = Self { val: 0, _m: PhantomData\
     \ };\n\tconst ONE: Self = Self {\n\t\tval: M::P.wrapping_neg() % M::P,\n\t\t_m:\
-    \ PhantomData,\n\t};\n}\n\nimpl<M: Mod> Num for Fp<M> {\n    fn wrapping_neg(self)\
-    \ -> Self {\n        -self\n    }\n}\n\nimpl<M: Mod> Print for Fp<M> {\n\tfn print(w:\
+    \ PhantomData,\n\t};\n}\n\nimpl<M: Mod> Num for Fp<M> {\n\tfn wrapping_neg(self)\
+    \ -> Self {\n\t\t-self\n\t}\n}\n\nimpl<M: Mod> Print for Fp<M> {\n\tfn print(w:\
     \ &mut IO, x: Self) {\n\t\tw.print(x.value());\n\t}\n}\n\nimpl<M: Mod> Scan for\
     \ Fp<M> {\n\tfn scan(io: &mut IO) -> Self {\n\t\tSelf::new(io.scan())\n\t}\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/fp.rs
   requiredBy: []
-  timestamp: '2020-12-15 00:46:43+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-21 16:32:06+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/src/bin/ntt_garner_test.rs
-  - test/src/bin/ntt_test.rs
   - test/src/bin/cargo_test.rs
 documentation_of: src/fp.rs
 layout: document

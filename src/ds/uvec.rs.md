@@ -4,12 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
-  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
   - icon: ':heavy_check_mark:'
@@ -24,9 +18,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
   code: "use std::ops::{Deref, DerefMut};\n\n#[derive(Clone)]\n#[repr(transparent)]\n\
     pub struct UVec<T>(pub Vec<T>);\n\nimpl<T> UVec<T> {\n\tpub fn new() -> Self {\n\
@@ -53,12 +47,10 @@ data:
   timestamp: '2020-11-27 14:24:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_garner_test.rs
-  - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_test.rs
-  - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_mint_garner_test.rs
+  - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/ntt_garner_test.rs
 documentation_of: src/ds/uvec.rs
 layout: document
 redirect_from:

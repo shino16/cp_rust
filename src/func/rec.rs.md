@@ -10,18 +10,21 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
-  code: ''
+  code: "pub struct Recurse<F>(F);\n\nimpl<F> Recurse<F> {\n\tpub fn call<Arg, Ret>(&self,\
+    \ arg: Arg) -> Ret\n\twhere\n\t\tF: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret,\n\t{\n\
+    \t\tself.0(&|arg| self.call(arg), arg)\n\t}\n}\n\npub fn recurse<Arg, Ret, F:\
+    \ Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret>(f: F) -> Recurse<F> {\n\tRecurse(f)\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/draft/graph/edge.rs
+  path: src/func/rec.rs
   requiredBy: []
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '2020-12-21 16:30:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/draft/graph/edge.rs
+documentation_of: src/func/rec.rs
 layout: document
 redirect_from:
-- /library/src/draft/graph/edge.rs
-- /library/src/draft/graph/edge.rs.html
-title: src/draft/graph/edge.rs
+- /library/src/func/rec.rs
+- /library/src/func/rec.rs.html
+title: src/func/rec.rs
 ---
