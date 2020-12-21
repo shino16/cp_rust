@@ -1,13 +1,13 @@
 use crate::bit::*;
 use crate::cast::*;
-pub use crate::int::zo::*;
+pub use crate::zo::*;
 use std::fmt::*;
 use std::ops::*;
 
 pub mod alg;
 pub mod arith;
 pub mod bisect;
-pub mod zo;
+pub mod gcd;
 
 pub trait Num:
 	ZeroOne

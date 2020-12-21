@@ -94,7 +94,7 @@ mod tests {
 
 	mod math {
 		mod gcd {
-			use crate::math::gcd::*;
+			use crate::int::gcd::*;
 			#[test]
 			fn test_gcd() {
 				assert_eq!(gcd(0, 0), 0);

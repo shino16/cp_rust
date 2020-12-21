@@ -5,7 +5,7 @@ pub mod euler_tour;
 pub mod grid;
 pub mod io;
 
-use crate::int::zo::ZeroOne;
+use crate::zo::ZeroOne;
 
 pub trait Graph {
 	fn len(&self) -> usize;

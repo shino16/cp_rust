@@ -26,5 +26,6 @@ pub mod mint;
 pub mod rand;
 pub mod slice;
 pub mod vec;
+pub mod zo;
 
 pub mod tests;
