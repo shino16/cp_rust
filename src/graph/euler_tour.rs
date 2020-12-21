@@ -1,6 +1,6 @@
-pub use crate::alg::*;
+pub use super::*;
 use crate::ds::bitset::*;
-pub use crate::graph::*;
+pub use crate::int::alg::*;
 
 pub fn euler_tour<A: Group, G: WTree<A::Item>>(g: &G, s: usize, a: A) -> Vec<A::Item>
 where

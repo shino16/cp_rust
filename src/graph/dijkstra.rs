@@ -1,5 +1,5 @@
+pub use super::*;
 use crate::assign::*;
-pub use crate::graph::*;
 use crate::int::*;
 
 pub fn dijkstra<I: UInt, G: WGraph<I>>(g: &G, s: usize) -> Vec<I> {

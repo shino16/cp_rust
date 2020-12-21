@@ -1,4 +1,4 @@
-use crate::int::*;
+use super::*;
 
 pub fn floor_sqrt<I: UInt>(n: I) -> I {
 	if n == I::ZERO {

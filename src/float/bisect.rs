@@ -1,4 +1,4 @@
-use crate::float::*;
+use super::*;
 
 pub fn bisect<F: FnMut(Float) -> bool>(
 	mut l: Float,

@@ -1,4 +1,4 @@
-pub use crate::alg::*;
+pub use super::*;
 
 pub trait Action {
 	type Actor: Monoid;

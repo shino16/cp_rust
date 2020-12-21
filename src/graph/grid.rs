@@ -1,4 +1,4 @@
-pub use crate::graph::*;
+pub use super::*;
 
 pub struct Grid<F: Fn(usize, usize) -> bool> {
 	pub h: usize,

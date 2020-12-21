@@ -1,4 +1,4 @@
-use crate::int::*;
+use super::*;
 
 pub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut r: I, mut pred: F) -> I {
 	while l != r {

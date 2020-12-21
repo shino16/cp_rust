@@ -1,5 +1,5 @@
+use super::*;
 pub use crate::ds::bitset::*;
-use crate::graph::*;
 
 pub fn dfs_io<G: Graph, FI: FnMut(usize, usize), FO: FnMut(usize, usize)>(
 	g: &G,

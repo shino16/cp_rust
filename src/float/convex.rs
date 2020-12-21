@@ -1,4 +1,4 @@
-use crate::float::*;
+use super::*;
 
 /// return (argmin f, min f)
 pub fn convex_min<F: FnMut(Float) -> Float>(

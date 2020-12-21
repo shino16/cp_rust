@@ -1,5 +1,5 @@
+pub use super::*;
 use crate::ds::bitset::*;
-pub use crate::graph::*;
 
 // f: (v, par)
 pub fn dfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize, mut f: F) {

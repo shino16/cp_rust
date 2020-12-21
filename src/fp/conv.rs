@@ -1,6 +1,6 @@
+pub use super::*;
 pub use crate::conv::*;
 pub use crate::ds::uvec::*;
-pub use crate::fp::*;
 
 macro_rules! impl_ntt {
 	($module:ident, $modu:ty, $prim:expr) => {
