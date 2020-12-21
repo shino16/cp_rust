@@ -1,5 +1,5 @@
 pub use super::*;
-pub use crate::alg::*;
+pub use crate::int::*;
 use std::marker::PhantomData;
 
 #[derive(Default)]
@@ -20,7 +20,7 @@ impl<N: Num> Monoid for Addition<N> {
 		N::ZERO
 	}
 	fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
-		x + y
+		x.wrapping_add(y)
 	}
 }
 

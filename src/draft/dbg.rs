@@ -5,5 +5,5 @@ macro_rules! dbg {
 
 #[cfg(not(debug_assertions))]
 macro_rules! dbg {
-	($($x:expr),*) => { ($($x),*) }
+	($($x:expr),*) => { std::convert::identity(($($x),*)) }
 }

@@ -4,10 +4,10 @@ pub use crate::zo::*;
 use std::fmt::*;
 use std::ops::*;
 
-pub mod alg;
 pub mod arith;
 pub mod bisect;
 pub mod gcd;
+pub mod inv;
 
 pub trait Num:
 	ZeroOne
@@ -17,6 +17,9 @@ pub trait Num:
 	+ Div<Output = Self> + DivAssign
 	+ Debug + Display
 {
+	fn wrapping_add(self, rhs: Self) -> Self {
+		self + rhs
+	}
 	fn wrapping_neg(self) -> Self;
 }
 
@@ -27,6 +30,7 @@ pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + PrimCast {
 	type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
 	const MIN: Self;
 	const MAX: Self;
+	fn abs(self) -> Self::Unsigned;
 	fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned;
 }
 
@@ -36,6 +40,9 @@ pub trait UInt: Int {}
 macro_rules! impl_int {
 	(@num $t:ident) => {
 		impl Num for $t {
+			fn wrapping_add(self, rhs: Self) -> Self {
+				self.wrapping_add(rhs)
+			}
 			fn wrapping_neg(self) -> Self {
 				self.wrapping_neg()
 			}
@@ -47,6 +54,10 @@ macro_rules! impl_int {
 			type Unsigned = $u;
 			const MIN: Self = std::$t::MIN;
 			const MAX: Self = std::$t::MAX;
+			#[allow(unconditional_recursion)] // it's not
+			fn abs(self) -> Self::Unsigned {
+				self.abs() as $u
+			}
 			fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned {
 				<$t>::rem_euclid(self, rhs as $t) as $u
 			}

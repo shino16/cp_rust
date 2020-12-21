@@ -21,6 +21,9 @@ impl<A: Monoid> SegmentTree<A> {
 		}
 		Self { len, data, alg }
 	}
+	pub fn len(&self) -> usize {
+		self.len
+	}
 	fn build(&mut self, mut p: usize) {
 		p >>= 1;
 		while p != 0 {

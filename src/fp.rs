@@ -99,7 +99,8 @@ impl<M: Mod> Fp<M> {
 		}
 		debug_assert_eq!(a, 1);
 		if u < 0 {
-			u += M::P as i32;
+			debug_assert_eq!(v, M::P as i32);
+			u += v;
 		}
 		Self::new(u as u32)
 	}

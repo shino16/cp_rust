@@ -1,4 +1,5 @@
 pub mod action;
+pub mod arith;
 
 pub trait Alg {
 	type Item: Clone;

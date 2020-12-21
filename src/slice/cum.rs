@@ -1,4 +1,4 @@
-pub use crate::int::alg::*;
+pub use crate::alg::arith::*;
 
 pub trait Cum {
 	type Item: Clone;

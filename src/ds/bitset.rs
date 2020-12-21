@@ -9,6 +9,7 @@ pub trait BitSet {
 			true
 		}
 	}
+	fn negate(&mut self);
 }
 
 macro_rules! impl_bitset {
@@ -19,6 +20,9 @@ macro_rules! impl_bitset {
 			}
 			fn set_bit(&mut self, i: usize, b: bool) {
 				*self |= (b as $type) << i;
+			}
+			fn negate(&mut self) {
+				*self = !*self;
 			}
 		}
 	)* };
@@ -32,6 +36,11 @@ impl BitSet for [u32] {
 	}
 	fn set_bit(&mut self, i: usize, b: bool) {
 		self[i / 32].set_bit(i % 32, b);
+	}
+	fn negate(&mut self) {
+		for x in self {
+			x.negate()
+		}
 	}
 }
 

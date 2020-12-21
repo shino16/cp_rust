@@ -1,4 +1,4 @@
-pub use crate::alg::*;
+pub use crate::alg::arith::*;
 use crate::bit::*;
 
 #[derive(Clone)]
@@ -18,6 +18,9 @@ impl<A: Monoid> FenwickTree<A> {
 			}
 		}
 		Self { data, alg }
+	}
+	pub fn len(&self) -> usize {
+		self.data.len() - 1
 	}
 	pub fn add(&mut self, pos: usize, v: A::Item) {
 		let mut pos = pos + 1;
