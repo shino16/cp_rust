@@ -2,9 +2,12 @@ pub trait BitSet {
 	fn get_bit(&self, i: usize) -> bool;
 	fn set_bit(&mut self, i: usize, b: bool);
 	fn modify_bit(&mut self, i: usize, b: bool) -> bool {
-		let ret = self.get_bit(i);
-		self.set_bit(i, b);
-		ret
+		if self.get_bit(i) == b {
+			false
+		} else {
+			self.set_bit(i, b);
+			true
+		}
 	}
 }
 
@@ -21,7 +24,7 @@ macro_rules! impl_bitset {
 	)* };
 }
 
-impl_bitset!(i32, i64, i128, isize, u32, u64, u128, usize);
+impl_bitset!(i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize);
 
 impl BitSet for [u32] {
 	fn get_bit(&self, i: usize) -> bool {
@@ -33,5 +36,5 @@ impl BitSet for [u32] {
 }
 
 pub fn new_bitset(n: usize) -> Vec<u32> {
-	vec![0; n / 32]
+	vec![0; (n + 31) / 32]
 }

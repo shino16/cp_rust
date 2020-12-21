@@ -2,8 +2,10 @@ pub mod dfs;
 pub mod dfs_io;
 pub mod dijkstra;
 pub mod euler_tour;
+pub mod grid;
+pub mod io;
 
-use crate::int::ZeroOne;
+use crate::int::zo::ZeroOne;
 
 pub trait Graph {
 	fn len(&self) -> usize;
@@ -44,7 +46,7 @@ impl<W> Graph for Vec<Vec<(usize, W)>> {
 
 impl<W> WGraph<W> for Vec<Vec<(usize, W)>> {
 	fn adj_w<F: FnMut(usize, &W)>(&self, v: usize, mut f: F) {
-		self[v].iter().for_each(|&(v, ref e)| f(v, e))
+		self[v].iter().for_each(|&(v, ref e)| f(v, e));
 	}
 }
 

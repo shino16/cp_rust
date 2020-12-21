@@ -35,7 +35,9 @@ impl IO {
 	pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
 		(0..n).map(|_| self.scan()).collect()
 	}
-
+	pub fn scan_vv<T: Scan>(&mut self, h: usize, w: usize) -> Vec<Vec<T>> {
+		(0..h).map(|_| self.scan_vec(w)).collect()
+	}
 	pub fn print<T: Print>(&mut self, x: T) {
 		T::print(self, x);
 	}
@@ -103,6 +105,15 @@ macro_rules! impl_parse_uint {
 
 impl_parse_iint!(i32, i64, i128, isize);
 impl_parse_uint!(u32, u64, u128, usize);
+
+#[derive(Debug, Clone, Copy, Default)]
+pub struct Usize1(pub usize);
+impl Scan for Usize1 {
+    fn scan(io: &mut IO) -> Self {
+		let n: usize = io.scan();
+		Self(n - 1)
+    }
+}
 
 impl Scan for u8 {
 	fn scan(s: &mut IO) -> Self {

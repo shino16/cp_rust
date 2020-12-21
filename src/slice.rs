@@ -1,3 +1,5 @@
+pub mod cum;
+
 pub trait Slice {
 	type Item;
 	fn fill(&mut self, value: Self::Item)

@@ -3,14 +3,16 @@
 #![allow(clippy::suspicious_op_assign_impl)]
 
 pub mod alg;
-pub mod as_int;
+pub mod assign;
 pub mod bit;
+pub mod cast;
 pub mod cmp;
 pub mod conv;
 pub mod dfa;
 pub mod ds;
 pub mod float;
 pub mod fp;
+pub mod func;
 pub mod fxhash;
 pub mod graph;
 pub mod hash;
@@ -21,7 +23,6 @@ pub mod iter;
 pub mod make_vec;
 pub mod math;
 pub mod mint;
-pub mod ord;
 pub mod rand;
 pub mod slice;
 pub mod vec;

@@ -1,6 +1,6 @@
+use crate::assign::*;
 pub use crate::graph::*;
 use crate::int::*;
-use crate::ord::*;
 
 pub fn dijkstra<I: UInt, G: WGraph<I>>(g: &G, s: usize) -> Vec<I> {
 	let mut dist = vec![I::MAX; g.len()];
@@ -8,8 +8,7 @@ pub fn dijkstra<I: UInt, G: WGraph<I>>(g: &G, s: usize) -> Vec<I> {
 	let mut togo = vec![s];
 	while let Some(v) = togo.pop() {
 		g.adj_w(v, |w, &e| {
-			let d = dist[v] + e;
-			if dist[w].chmin(d) {
+			if assign_if(dist[v] + e, &mut dist[w], |x, y| x < y) {
 				togo.push(w);
 			}
 		});

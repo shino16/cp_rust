@@ -1,4 +1,4 @@
-use crate::as_int::*;
+use crate::cast::*;
 pub use crate::int::ZeroOne;
 use crate::int::*;
 use crate::io::*;

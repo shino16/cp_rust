@@ -1,17 +1,13 @@
-use crate::as_int::*;
+use crate::cast::*;
 use crate::bit::*;
+pub use crate::int::zo::*;
 use std::fmt::*;
 use std::ops::*;
 
+pub mod alg;
+pub mod arith;
 pub mod bisect;
-
-pub trait ZeroOne: Copy + Eq {
-	const ZERO: Self;
-	fn is_zero(self) -> bool {
-		self == Self::ZERO
-	}
-	const ONE: Self;
-}
+pub mod zo;
 
 pub trait Num:
 	ZeroOne
@@ -26,7 +22,7 @@ pub trait Num:
 
 pub trait INum: Num + Neg<Output = Self> {}
 
-pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + CastInt {
+pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + PrimCast {
 	type Signed: IInt + CastFrom<Self> + CastTo<Self>;
 	type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
 	const MIN: Self;
@@ -39,10 +35,6 @@ pub trait UInt: Int {}
 
 macro_rules! impl_int {
 	(@num $t:ident) => {
-		impl ZeroOne for $t {
-			const ZERO: Self = 0;
-			const ONE: Self = 1;
-		}
 		impl Num for $t {
 			fn wrapping_neg(self) -> Self {
 				self.wrapping_neg()
