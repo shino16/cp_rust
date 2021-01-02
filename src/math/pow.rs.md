@@ -119,6 +119,9 @@ data:
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':heavy_check_mark:'
@@ -151,9 +154,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
-  - icon: ':heavy_check_mark:'
-    path: src/math/pow.rs
-    title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -306,6 +306,9 @@ data:
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':heavy_check_mark:'
@@ -338,9 +341,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
-  - icon: ':heavy_check_mark:'
-    path: src/math/pow.rs
-    title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -407,10 +407,10 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use super::*;\n\npub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut\
-    \ r: I, mut pred: F) -> I {\n\twhile l != r {\n\t\tlet mid = (l + r) >> 1;\n\t\
-    \tif pred(mid) {\n\t\t\tl = mid + I::ONE;\n\t\t} else {\n\t\t\tr = mid;\n\t\t\
-    }\n\t}\n\tr\n}\n"
+  code: "use crate::int::*;\n\n#[inline(always)]\npub fn pow<T: Num, K: UInt>(mut\
+    \ e: T, mut k: K) -> T {\n\tlet mut res = T::ONE;\n\twhile k != K::ZERO {\n\t\t\
+    if k & K::ONE != K::ZERO {\n\t\t\tres = res * e;\n\t\t}\n\t\te = e * e;\n\t\t\
+    k >>= 1;\n\t}\n\tres\n}\n"
   dependsOn:
   - src/alg/action.rs
   - src/alg/arith.rs
@@ -450,6 +450,7 @@ data:
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
+  - src/int/bisect.rs
   - src/int/gcd.rs
   - src/int/inv.rs
   - src/int.rs
@@ -462,7 +463,6 @@ data:
   - src/lib.rs
   - src/make_vec.rs
   - src/math/modpow.rs
-  - src/math/pow.rs
   - src/mint/conv.rs
   - src/mint.rs
   - src/rand/seed.rs
@@ -475,7 +475,7 @@ data:
   - src/vec.rs
   - src/zo.rs
   isVerificationFile: false
-  path: src/int/bisect.rs
+  path: src/math/pow.rs
   requiredBy:
   - src/fp.rs
   - src/func.rs
@@ -522,6 +522,7 @@ data:
   - src/assign.rs
   - src/io_interactive.rs
   - src/hash.rs
+  - src/int/bisect.rs
   - src/int/inv.rs
   - src/int/gcd.rs
   - src/int/arith.rs
@@ -531,7 +532,6 @@ data:
   - src/bit.rs
   - src/dfa.rs
   - src/mint.rs
-  - src/math/pow.rs
   - src/math/modpow.rs
   - src/fxhash.rs
   - src/rand/xoshiro256plus.rs
@@ -550,10 +550,10 @@ data:
   - test/src/bin/cargo_test.rs
   - test/src/bin/union_find_test.rs
   - test/src/bin/ntt_garner_test.rs
-documentation_of: src/int/bisect.rs
+documentation_of: src/math/pow.rs
 layout: document
 redirect_from:
-- /library/src/int/bisect.rs
-- /library/src/int/bisect.rs.html
-title: src/int/bisect.rs
+- /library/src/math/pow.rs
+- /library/src/math/pow.rs.html
+title: src/math/pow.rs
 ---

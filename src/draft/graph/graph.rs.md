@@ -5,11 +5,12 @@ data:
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
-  attributes: {}
+  attributes:
+    links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
-    , line 67, in bundle\n    assert 'bundle' in self.config\nAssertionError\n"
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
+    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "pub use crate::graph::*;\n#[derive(Debug, Default)]\npub struct DiGraph(Vec<Vec<usize>>);\n\
     \nimpl<'g> Graph<'g> for DiGraph {\n\ttype V = usize;\n\ttype E = ();\n\ttype\
     \ VIter = std::iter::Copied<std::slice::Iter<'g, Self::V>>;\n\ttype EIter = std::iter::Take<std::iter::Repeat<()>>;\n\

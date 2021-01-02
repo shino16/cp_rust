@@ -8,9 +8,6 @@ data:
     path: src/alg/action.rs
     title: src/alg/action.rs
   - icon: ':heavy_check_mark:'
-    path: src/alg/arith.rs
-    title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
     path: src/assign.rs
     title: src/assign.rs
   - icon: ':heavy_check_mark:'
@@ -118,6 +115,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/arith.rs
     title: src/int/arith.rs
+  - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -195,9 +195,6 @@ data:
     path: src/alg/action.rs
     title: src/alg/action.rs
   - icon: ':heavy_check_mark:'
-    path: src/alg/arith.rs
-    title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
     path: src/assign.rs
     title: src/assign.rs
   - icon: ':heavy_check_mark:'
@@ -305,6 +302,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/arith.rs
     title: src/int/arith.rs
+  - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -407,13 +407,16 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use super::*;\n\npub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut\
-    \ r: I, mut pred: F) -> I {\n\twhile l != r {\n\t\tlet mid = (l + r) >> 1;\n\t\
-    \tif pred(mid) {\n\t\t\tl = mid + I::ONE;\n\t\t} else {\n\t\t\tr = mid;\n\t\t\
-    }\n\t}\n\tr\n}\n"
+  code: "pub use super::*;\npub use crate::int::*;\nuse std::marker::PhantomData;\n\
+    \n#[derive(Default)]\npub struct Addition<N>(PhantomData<N>);\n\nimpl<N> Addition<N>\
+    \ {\n\tpub fn new() -> Self {\n\t\tSelf(PhantomData)\n\t}\n}\n\nimpl<N: Num> Alg\
+    \ for Addition<N> {\n\ttype Item = N;\n}\n\nimpl<N: Num> Monoid for Addition<N>\
+    \ {\n\tfn unit(&self) -> Self::Item {\n\t\tN::ZERO\n\t}\n\tfn op(&self, x: Self::Item,\
+    \ y: Self::Item) -> Self::Item {\n\t\tx.wrapping_add(y)\n\t}\n}\n\nimpl<N: Num>\
+    \ Group for Addition<N> {\n\tfn inv(&self, x: Self::Item) -> Self::Item {\n\t\t\
+    x.wrapping_neg()\n\t}\n}\n"
   dependsOn:
   - src/alg/action.rs
-  - src/alg/arith.rs
   - src/alg.rs
   - src/assign.rs
   - src/bit.rs
@@ -450,6 +453,7 @@ data:
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
+  - src/int/bisect.rs
   - src/int/gcd.rs
   - src/int/inv.rs
   - src/int.rs
@@ -475,7 +479,7 @@ data:
   - src/vec.rs
   - src/zo.rs
   isVerificationFile: false
-  path: src/int/bisect.rs
+  path: src/alg/arith.rs
   requiredBy:
   - src/fp.rs
   - src/func.rs
@@ -512,7 +516,6 @@ data:
   - src/func/rec.rs
   - src/lib.rs
   - src/alg/action.rs
-  - src/alg/arith.rs
   - src/make_vec.rs
   - src/zo.rs
   - src/slice.rs
@@ -522,6 +525,7 @@ data:
   - src/assign.rs
   - src/io_interactive.rs
   - src/hash.rs
+  - src/int/bisect.rs
   - src/int/inv.rs
   - src/int/gcd.rs
   - src/int/arith.rs
@@ -550,10 +554,10 @@ data:
   - test/src/bin/cargo_test.rs
   - test/src/bin/union_find_test.rs
   - test/src/bin/ntt_garner_test.rs
-documentation_of: src/int/bisect.rs
+documentation_of: src/alg/arith.rs
 layout: document
 redirect_from:
-- /library/src/int/bisect.rs
-- /library/src/int/bisect.rs.html
-title: src/int/bisect.rs
+- /library/src/alg/arith.rs
+- /library/src/alg/arith.rs.html
+title: src/alg/arith.rs
 ---

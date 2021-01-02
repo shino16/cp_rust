@@ -119,6 +119,9 @@ data:
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':heavy_check_mark:'
@@ -184,9 +187,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/vec.rs
     title: src/vec.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: src/alg.rs
@@ -306,6 +306,9 @@ data:
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':heavy_check_mark:'
@@ -371,9 +374,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/vec.rs
     title: src/vec.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
@@ -407,10 +407,11 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use super::*;\n\npub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut\
-    \ r: I, mut pred: F) -> I {\n\twhile l != r {\n\t\tlet mid = (l + r) >> 1;\n\t\
-    \tif pred(mid) {\n\t\t\tl = mid + I::ONE;\n\t\t} else {\n\t\t\tr = mid;\n\t\t\
-    }\n\t}\n\tr\n}\n"
+  code: "pub trait ZeroOne: Copy + Eq {\n\tconst ZERO: Self;\n\tfn is_zero(self) ->\
+    \ bool {\n\t\tself == Self::ZERO\n\t}\n\tconst ONE: Self;\n}\n\nmacro_rules! impl_zo\
+    \ {\n\t($($t:ty),*) => { $(\n\t\timpl ZeroOne for $t {\n\t\t\tconst ZERO: Self\
+    \ = 0;\n\t\t\tconst ONE: Self = 1;\n\t\t}\n\t)* };\n}\n\nimpl_zo!(i32, i64, i128,\
+    \ isize, u32, u64, u128, usize);\n"
   dependsOn:
   - src/alg/action.rs
   - src/alg/arith.rs
@@ -450,6 +451,7 @@ data:
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
+  - src/int/bisect.rs
   - src/int/gcd.rs
   - src/int/inv.rs
   - src/int.rs
@@ -473,9 +475,8 @@ data:
   - src/slice.rs
   - src/tests.rs
   - src/vec.rs
-  - src/zo.rs
   isVerificationFile: false
-  path: src/int/bisect.rs
+  path: src/zo.rs
   requiredBy:
   - src/fp.rs
   - src/func.rs
@@ -514,7 +515,6 @@ data:
   - src/alg/action.rs
   - src/alg/arith.rs
   - src/make_vec.rs
-  - src/zo.rs
   - src/slice.rs
   - src/conv.rs
   - src/alg.rs
@@ -522,6 +522,7 @@ data:
   - src/assign.rs
   - src/io_interactive.rs
   - src/hash.rs
+  - src/int/bisect.rs
   - src/int/inv.rs
   - src/int/gcd.rs
   - src/int/arith.rs
@@ -550,10 +551,10 @@ data:
   - test/src/bin/cargo_test.rs
   - test/src/bin/union_find_test.rs
   - test/src/bin/ntt_garner_test.rs
-documentation_of: src/int/bisect.rs
+documentation_of: src/zo.rs
 layout: document
 redirect_from:
-- /library/src/int/bisect.rs
-- /library/src/int/bisect.rs.html
-title: src/int/bisect.rs
+- /library/src/zo.rs
+- /library/src/zo.rs.html
+title: src/zo.rs
 ---

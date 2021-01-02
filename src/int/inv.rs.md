@@ -119,11 +119,11 @@ data:
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int/inv.rs
-    title: src/int/inv.rs
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
@@ -306,11 +306,11 @@ data:
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':heavy_check_mark:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int/inv.rs
-    title: src/int/inv.rs
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
@@ -407,10 +407,13 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use super::*;\n\npub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut\
-    \ r: I, mut pred: F) -> I {\n\twhile l != r {\n\t\tlet mid = (l + r) >> 1;\n\t\
-    \tif pred(mid) {\n\t\t\tl = mid + I::ONE;\n\t\t} else {\n\t\t\tr = mid;\n\t\t\
-    }\n\t}\n\tr\n}\n"
+  code: "pub use super::*;\n\npub fn inv<I: Int>(a: I, modu: I) -> I {\n\tlet [zero,\
+    \ one]: [I::Signed; 2] = [I::Signed::ZERO, I::Signed::ONE];\n\tlet [mut a, mut\
+    \ b, mut u, mut v]: [I::Signed; 4] = [a.as_(), modu.as_(), one, zero];\n\twhile\
+    \ b != zero {\n\t\tlet t = a / b;\n\t\ta -= t * b;\n\t\tu -= t * v;\n\t\tstd::mem::swap(&mut\
+    \ a, &mut b);\n\t\tstd::mem::swap(&mut u, &mut v);\n\t}\n\tdebug_assert_eq!(a,\
+    \ one);\n\tif u < zero {\n\t\tdebug_assert_eq!(v, modu.as_());\n\t\tdebug_assert!(u\
+    \ > zero);\n\t\tu += v;\n\t}\n\ta.as_()\n}\n"
   dependsOn:
   - src/alg/action.rs
   - src/alg/arith.rs
@@ -450,8 +453,8 @@ data:
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
+  - src/int/bisect.rs
   - src/int/gcd.rs
-  - src/int/inv.rs
   - src/int.rs
   - src/io.rs
   - src/io_interactive.rs
@@ -475,7 +478,7 @@ data:
   - src/vec.rs
   - src/zo.rs
   isVerificationFile: false
-  path: src/int/bisect.rs
+  path: src/int/inv.rs
   requiredBy:
   - src/fp.rs
   - src/func.rs
@@ -522,7 +525,7 @@ data:
   - src/assign.rs
   - src/io_interactive.rs
   - src/hash.rs
-  - src/int/inv.rs
+  - src/int/bisect.rs
   - src/int/gcd.rs
   - src/int/arith.rs
   - src/float/bisect.rs
@@ -550,10 +553,10 @@ data:
   - test/src/bin/cargo_test.rs
   - test/src/bin/union_find_test.rs
   - test/src/bin/ntt_garner_test.rs
-documentation_of: src/int/bisect.rs
+documentation_of: src/int/inv.rs
 layout: document
 redirect_from:
-- /library/src/int/bisect.rs
-- /library/src/int/bisect.rs.html
-title: src/int/bisect.rs
+- /library/src/int/inv.rs
+- /library/src/int/inv.rs.html
+title: src/int/inv.rs
 ---
