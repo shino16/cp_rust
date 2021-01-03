@@ -110,6 +110,18 @@ data:
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
+  - icon: ':heavy_check_mark:'
     path: src/hash.rs
     title: src/hash.rs
   - icon: ':heavy_check_mark:'
@@ -131,6 +143,9 @@ data:
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/io/graph.rs
+    title: src/io/graph.rs
+  - icon: ':heavy_check_mark:'
     path: src/io_interactive.rs
     title: src/io_interactive.rs
   - icon: ':heavy_check_mark:'
@@ -149,11 +164,20 @@ data:
     path: src/lib.rs
     title: src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/factorize.rs
+    title: src/math/factorize.rs
+  - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
   - icon: ':heavy_check_mark:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/primes.rs
+    title: src/math/primes.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -297,6 +321,18 @@ data:
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
+  - icon: ':heavy_check_mark:'
     path: src/hash.rs
     title: src/hash.rs
   - icon: ':heavy_check_mark:'
@@ -318,6 +354,9 @@ data:
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/io/graph.rs
+    title: src/io/graph.rs
+  - icon: ':heavy_check_mark:'
     path: src/io_interactive.rs
     title: src/io_interactive.rs
   - icon: ':heavy_check_mark:'
@@ -336,11 +375,20 @@ data:
     path: src/lib.rs
     title: src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/factorize.rs
+    title: src/math/factorize.rs
+  - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
   - icon: ':heavy_check_mark:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/primes.rs
+    title: src/math/primes.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -451,6 +499,10 @@ data:
   - src/graph/euler_tour.rs
   - src/graph/grid.rs
   - src/graph/io.rs
+  - src/graph/tree/dfs.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree.rs
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
@@ -458,6 +510,7 @@ data:
   - src/int/gcd.rs
   - src/int/inv.rs
   - src/int.rs
+  - src/io/graph.rs
   - src/io.rs
   - src/io_interactive.rs
   - src/iter/either.rs
@@ -465,8 +518,11 @@ data:
   - src/iter/prod.rs
   - src/iter.rs
   - src/lib.rs
+  - src/math/binom.rs
+  - src/math/factorize.rs
   - src/math/modpow.rs
   - src/math/pow.rs
+  - src/math/primes.rs
   - src/mint/conv.rs
   - src/mint.rs
   - src/rand/seed.rs
@@ -484,6 +540,7 @@ data:
   - src/fp.rs
   - src/func.rs
   - src/rand.rs
+  - src/io/graph.rs
   - src/slice/cum.rs
   - src/cmp/total.rs
   - src/iter/pow.rs
@@ -506,7 +563,11 @@ data:
   - src/tests.rs
   - src/int.rs
   - src/graph/dfs_io.rs
+  - src/graph/tree.rs
   - src/graph/dfs.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
   - src/graph/dijkstra.rs
   - src/graph/io.rs
   - src/graph/grid.rs
@@ -536,14 +597,17 @@ data:
   - src/dfa.rs
   - src/mint.rs
   - src/math/pow.rs
+  - src/math/factorize.rs
+  - src/math/primes.rs
   - src/math/modpow.rs
+  - src/math/binom.rs
   - src/fxhash.rs
   - src/rand/xoshiro256plus.rs
   - src/rand/seed.rs
   - src/rand/xorshift.rs
   - src/io.rs
   - src/float.rs
-  timestamp: '2020-12-21 20:11:53+09:00'
+  timestamp: '2021-01-03 22:19:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

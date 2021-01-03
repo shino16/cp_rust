@@ -107,6 +107,18 @@ data:
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
+  - icon: ':heavy_check_mark:'
     path: src/hash.rs
     title: src/hash.rs
   - icon: ':heavy_check_mark:'
@@ -127,6 +139,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/io/graph.rs
+    title: src/io/graph.rs
   - icon: ':heavy_check_mark:'
     path: src/io_interactive.rs
     title: src/io_interactive.rs
@@ -149,11 +164,20 @@ data:
     path: src/make_vec.rs
     title: src/make_vec.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/factorize.rs
+    title: src/math/factorize.rs
+  - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
   - icon: ':heavy_check_mark:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/primes.rs
+    title: src/math/primes.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -294,6 +318,18 @@ data:
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
+  - icon: ':heavy_check_mark:'
     path: src/hash.rs
     title: src/hash.rs
   - icon: ':heavy_check_mark:'
@@ -314,6 +350,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/io/graph.rs
+    title: src/io/graph.rs
   - icon: ':heavy_check_mark:'
     path: src/io_interactive.rs
     title: src/io_interactive.rs
@@ -336,11 +375,20 @@ data:
     path: src/make_vec.rs
     title: src/make_vec.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/factorize.rs
+    title: src/math/factorize.rs
+  - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
   - icon: ':heavy_check_mark:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/primes.rs
+    title: src/math/primes.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -408,49 +456,48 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use crate::fxhash::FxHashMap as HashMap;\nuse crate::int::*;\nuse std::cmp::Ordering;\n\
-    use std::hash::Hash;\n\npub trait Dfa {\n\ttype Alphabet;\n\ttype State;\n\tfn\
-    \ init(&self) -> Self::State;\n\tfn next(&self, s: Self::State, a: Self::Alphabet,\
-    \ i: usize) -> Self::State;\n\tfn accept(&self, s: Self::State) -> bool;\n\tfn\
-    \ successful(&self, _: Self::State) -> bool {\n\t\tfalse\n\t}\n\tfn unsuccessful(&self,\
-    \ _: Self::State) -> bool {\n\t\tfalse\n\t}\n\n\tfn count<I: Num>(&self, n: usize,\
-    \ alphabet: &[Self::Alphabet]) -> I\n\twhere\n\t\tSelf::Alphabet: Copy,\n\t\t\
-    Self::State: Eq + Hash + Copy,\n\t{\n\t\tcount(self, n, alphabet)\n\t}\n}\n\n\
-    pub struct And<X, Y>(pub X, pub Y);\n\nimpl<X: Dfa<Alphabet = A>, Y: Dfa<Alphabet\
-    \ = A>, A: Copy> Dfa for And<X, Y> {\n\ttype Alphabet = A;\n\ttype State = (X::State,\
-    \ Y::State);\n\tfn init(&self) -> Self::State {\n\t\t(self.0.init(), self.1.init())\n\
-    \t}\n\tfn next(&self, (s0, s1): Self::State, a: Self::Alphabet, i: usize) -> Self::State\
-    \ {\n\t\t(self.0.next(s0, a, i), self.1.next(s1, a, i))\n\t}\n\tfn accept(&self,\
-    \ (s0, s1): Self::State) -> bool {\n\t\tself.0.accept(s0) && self.1.accept(s1)\n\
-    \t}\n\tfn successful(&self, (s0, s1): Self::State) -> bool {\n\t\tself.0.successful(s0)\
-    \ && self.1.successful(s1)\n\t}\n\tfn unsuccessful(&self, (s0, s1): Self::State)\
-    \ -> bool {\n\t\tself.0.unsuccessful(s0) || self.1.unsuccessful(s1)\n\t}\n}\n\n\
-    pub struct Prod<X, Y>(pub X, pub Y);\n\nimpl<X: Dfa, Y: Dfa> Dfa for Prod<X, Y>\
-    \ {\n\ttype Alphabet = (X::Alphabet, Y::Alphabet);\n\ttype State = (X::State,\
-    \ Y::State);\n\tfn init(&self) -> Self::State {\n\t\t(self.0.init(), self.1.init())\n\
-    \t}\n\tfn next(&self, (s0, s1): Self::State, (a0, a1): Self::Alphabet, i: usize)\
-    \ -> Self::State {\n\t\t(self.0.next(s0, a0, i), self.1.next(s1, a1, i))\n\t}\n\
-    \tfn accept(&self, (s0, s1): Self::State) -> bool {\n\t\tself.0.accept(s0) &&\
-    \ self.1.accept(s1)\n\t}\n\tfn successful(&self, (s0, s1): Self::State) -> bool\
-    \ {\n\t\tself.0.successful(s0) && self.1.successful(s1)\n\t}\n\tfn unsuccessful(&self,\
-    \ (s0, s1): Self::State) -> bool {\n\t\tself.0.unsuccessful(s0) || self.1.unsuccessful(s1)\n\
-    \t}\n}\n\npub struct Not<X>(pub X);\n\nimpl<X: Dfa> Dfa for Not<X> {\n\ttype Alphabet\
-    \ = X::Alphabet;\n\ttype State = X::State;\n\tfn init(&self) -> Self::State {\n\
-    \t\tself.0.init()\n\t}\n\tfn next(&self, s: Self::State, a: Self::Alphabet, i:\
-    \ usize) -> Self::State {\n\t\tself.0.next(s, a, i)\n\t}\n\tfn accept(&self, s:\
-    \ Self::State) -> bool {\n\t\t!self.0.accept(s)\n\t}\n\tfn successful(&self, s:\
-    \ Self::State) -> bool {\n\t\tself.0.unsuccessful(s)\n\t}\n\tfn unsuccessful(&self,\
-    \ s: Self::State) -> bool {\n\t\tself.0.successful(s)\n\t}\n}\n\npub struct Lt<'a>(pub\
-    \ &'a [u8]);\n\nimpl Dfa for Lt<'_> {\n\ttype Alphabet = u8;\n\ttype State = Ordering;\n\
-    \tfn init(&self) -> Self::State {\n\t\tOrdering::Equal\n\t}\n\t// assumes i moves\
-    \ from 0 to self.0.len() - 1\n\tfn next(&self, s: Self::State, a: Self::Alphabet,\
-    \ i: usize) -> Self::State {\n\t\ts.then(a.cmp(&self.0[i]))\n\t}\n\tfn accept(&self,\
-    \ s: Self::State) -> bool {\n\t\ts == Ordering::Less\n\t}\n\tfn successful(&self,\
-    \ s: Self::State) -> bool {\n\t\ts == Ordering::Less\n\t}\n\tfn unsuccessful(&self,\
-    \ s: Self::State) -> bool {\n\t\ts == Ordering::Greater\n\t}\n}\n\npub struct\
-    \ Leq<'a>(pub &'a [u8]);\n\nimpl Dfa for Leq<'_> {\n\ttype Alphabet = u8;\n\t\
-    type State = Ordering;\n\tfn init(&self) -> Self::State {\n\t\tOrdering::Equal\n\
-    \t}\n\t// assumes i moves from 0 to self.0.len() - 1\n\tfn next(&self, s: Self::State,\
-    \ a: Self::Alphabet, i: usize) -> Self::State {\n\t\ts.then(a.cmp(&self.0[i]))\n\
+    use std::hash::Hash;\n\npub const DIGITS: &[u8] = b\"0123456789\";\n\npub trait\
+    \ Dfa {\n\ttype Alphabet;\n\ttype State;\n\tfn init(&self) -> Self::State;\n\t\
+    fn next(&self, s: Self::State, a: Self::Alphabet, i: usize) -> Self::State;\n\t\
+    fn accept(&self, s: Self::State) -> bool;\n\tfn successful(&self, _: Self::State)\
+    \ -> bool {\n\t\tfalse\n\t}\n\tfn unsuccessful(&self, _: Self::State) -> bool\
+    \ {\n\t\tfalse\n\t}\n\n\tfn count<I: Num>(&self, n: usize, alphabet: &[Self::Alphabet])\
+    \ -> I\n\twhere\n\t\tSelf::Alphabet: Copy,\n\t\tSelf::State: Eq + Hash + Copy,\n\
+    \t{\n\t\tcount(self, n, alphabet)\n\t}\n}\n\npub struct And<X, Y>(pub X, pub Y);\n\
+    \nimpl<X: Dfa<Alphabet = A>, Y: Dfa<Alphabet = A>, A: Copy> Dfa for And<X, Y>\
+    \ {\n\ttype Alphabet = A;\n\ttype State = (X::State, Y::State);\n\tfn init(&self)\
+    \ -> Self::State {\n\t\t(self.0.init(), self.1.init())\n\t}\n\tfn next(&self,\
+    \ (s0, s1): Self::State, a: Self::Alphabet, i: usize) -> Self::State {\n\t\t(self.0.next(s0,\
+    \ a, i), self.1.next(s1, a, i))\n\t}\n\tfn accept(&self, (s0, s1): Self::State)\
+    \ -> bool {\n\t\tself.0.accept(s0) && self.1.accept(s1)\n\t}\n\tfn successful(&self,\
+    \ (s0, s1): Self::State) -> bool {\n\t\tself.0.successful(s0) && self.1.successful(s1)\n\
+    \t}\n\tfn unsuccessful(&self, (s0, s1): Self::State) -> bool {\n\t\tself.0.unsuccessful(s0)\
+    \ || self.1.unsuccessful(s1)\n\t}\n}\n\npub struct Prod<X, Y>(pub X, pub Y);\n\
+    \nimpl<X: Dfa, Y: Dfa> Dfa for Prod<X, Y> {\n\ttype Alphabet = (X::Alphabet, Y::Alphabet);\n\
+    \ttype State = (X::State, Y::State);\n\tfn init(&self) -> Self::State {\n\t\t\
+    (self.0.init(), self.1.init())\n\t}\n\tfn next(&self, (s0, s1): Self::State, (a0,\
+    \ a1): Self::Alphabet, i: usize) -> Self::State {\n\t\t(self.0.next(s0, a0, i),\
+    \ self.1.next(s1, a1, i))\n\t}\n\tfn accept(&self, (s0, s1): Self::State) -> bool\
+    \ {\n\t\tself.0.accept(s0) && self.1.accept(s1)\n\t}\n\tfn successful(&self, (s0,\
+    \ s1): Self::State) -> bool {\n\t\tself.0.successful(s0) && self.1.successful(s1)\n\
+    \t}\n\tfn unsuccessful(&self, (s0, s1): Self::State) -> bool {\n\t\tself.0.unsuccessful(s0)\
+    \ || self.1.unsuccessful(s1)\n\t}\n}\n\npub struct Not<X>(pub X);\n\nimpl<X: Dfa>\
+    \ Dfa for Not<X> {\n\ttype Alphabet = X::Alphabet;\n\ttype State = X::State;\n\
+    \tfn init(&self) -> Self::State {\n\t\tself.0.init()\n\t}\n\tfn next(&self, s:\
+    \ Self::State, a: Self::Alphabet, i: usize) -> Self::State {\n\t\tself.0.next(s,\
+    \ a, i)\n\t}\n\tfn accept(&self, s: Self::State) -> bool {\n\t\t!self.0.accept(s)\n\
+    \t}\n\tfn successful(&self, s: Self::State) -> bool {\n\t\tself.0.unsuccessful(s)\n\
+    \t}\n\tfn unsuccessful(&self, s: Self::State) -> bool {\n\t\tself.0.successful(s)\n\
+    \t}\n}\n\npub struct Lt<'a>(pub &'a [u8]);\n\nimpl Dfa for Lt<'_> {\n\ttype Alphabet\
+    \ = u8;\n\ttype State = Ordering;\n\tfn init(&self) -> Self::State {\n\t\tOrdering::Equal\n\
+    \t}\n\tfn next(&self, s: Self::State, a: Self::Alphabet, i: usize) -> Self::State\
+    \ {\n\t\ts.then(a.cmp(&self.0[i]))\n\t}\n\tfn accept(&self, s: Self::State) ->\
+    \ bool {\n\t\ts == Ordering::Less\n\t}\n\tfn successful(&self, s: Self::State)\
+    \ -> bool {\n\t\ts == Ordering::Less\n\t}\n\tfn unsuccessful(&self, s: Self::State)\
+    \ -> bool {\n\t\ts == Ordering::Greater\n\t}\n}\n\npub struct Leq<'a>(pub &'a\
+    \ [u8]);\n\nimpl Dfa for Leq<'_> {\n\ttype Alphabet = u8;\n\ttype State = Ordering;\n\
+    \tfn init(&self) -> Self::State {\n\t\tOrdering::Equal\n\t}\n\tfn next(&self,\
+    \ s: Self::State, a: Self::Alphabet, i: usize) -> Self::State {\n\t\ts.then(a.cmp(&self.0[i]))\n\
     \t}\n\tfn accept(&self, s: Self::State) -> bool {\n\t\ts != Ordering::Greater\n\
     \t}\n\tfn successful(&self, s: Self::State) -> bool {\n\t\ts == Ordering::Less\n\
     \t}\n\tfn unsuccessful(&self, s: Self::State) -> bool {\n\t\ts == Ordering::Greater\n\
@@ -502,6 +549,10 @@ data:
   - src/graph/euler_tour.rs
   - src/graph/grid.rs
   - src/graph/io.rs
+  - src/graph/tree/dfs.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree.rs
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
@@ -509,6 +560,7 @@ data:
   - src/int/gcd.rs
   - src/int/inv.rs
   - src/int.rs
+  - src/io/graph.rs
   - src/io.rs
   - src/io_interactive.rs
   - src/iter/either.rs
@@ -517,8 +569,11 @@ data:
   - src/iter.rs
   - src/lib.rs
   - src/make_vec.rs
+  - src/math/binom.rs
+  - src/math/factorize.rs
   - src/math/modpow.rs
   - src/math/pow.rs
+  - src/math/primes.rs
   - src/mint/conv.rs
   - src/mint.rs
   - src/rand/seed.rs
@@ -536,6 +591,7 @@ data:
   - src/fp.rs
   - src/func.rs
   - src/rand.rs
+  - src/io/graph.rs
   - src/slice/cum.rs
   - src/cmp/total.rs
   - src/iter/pow.rs
@@ -558,7 +614,11 @@ data:
   - src/tests.rs
   - src/int.rs
   - src/graph/dfs_io.rs
+  - src/graph/tree.rs
   - src/graph/dfs.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
   - src/graph/dijkstra.rs
   - src/graph/io.rs
   - src/graph/grid.rs
@@ -588,14 +648,17 @@ data:
   - src/bit.rs
   - src/mint.rs
   - src/math/pow.rs
+  - src/math/factorize.rs
+  - src/math/primes.rs
   - src/math/modpow.rs
+  - src/math/binom.rs
   - src/fxhash.rs
   - src/rand/xoshiro256plus.rs
   - src/rand/seed.rs
   - src/rand/xorshift.rs
   - src/io.rs
   - src/float.rs
-  timestamp: '2020-12-21 20:11:53+09:00'
+  timestamp: '2021-01-03 22:19:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

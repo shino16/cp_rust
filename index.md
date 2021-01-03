@@ -194,6 +194,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/io.rs
       title: src/graph/io.rs
+    - icon: ':heavy_check_mark:'
+      path: src/graph/tree.rs
+      title: src/graph/tree.rs
+  - name: src/graph/tree
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/graph/tree/dfs.rs
+      title: src/graph/tree/dfs.rs
+    - icon: ':heavy_check_mark:'
+      path: src/graph/tree/dfs_io.rs
+      title: src/graph/tree/dfs_io.rs
+    - icon: ':heavy_check_mark:'
+      path: src/graph/tree/reroot.rs
+      title: src/graph/tree/reroot.rs
   - name: src/int
     pages:
     - icon: ':heavy_check_mark:'
@@ -208,6 +222,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int/inv.rs
       title: src/int/inv.rs
+  - name: src/io
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/io/graph.rs
+      title: src/io/graph.rs
   - name: src/iter
     pages:
     - icon: ':heavy_check_mark:'
@@ -222,11 +241,20 @@ data:
   - name: src/math
     pages:
     - icon: ':heavy_check_mark:'
+      path: src/math/binom.rs
+      title: src/math/binom.rs
+    - icon: ':heavy_check_mark:'
+      path: src/math/factorize.rs
+      title: src/math/factorize.rs
+    - icon: ':heavy_check_mark:'
       path: src/math/modpow.rs
       title: src/math/modpow.rs
     - icon: ':heavy_check_mark:'
       path: src/math/pow.rs
       title: src/math/pow.rs
+    - icon: ':heavy_check_mark:'
+      path: src/math/primes.rs
+      title: src/math/primes.rs
   - name: src/mint
     pages:
     - icon: ':heavy_check_mark:'

@@ -107,6 +107,18 @@ data:
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
+  - icon: ':heavy_check_mark:'
     path: src/hash.rs
     title: src/hash.rs
   - icon: ':heavy_check_mark:'
@@ -127,6 +139,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/io/graph.rs
+    title: src/io/graph.rs
   - icon: ':heavy_check_mark:'
     path: src/io_interactive.rs
     title: src/io_interactive.rs
@@ -149,11 +164,20 @@ data:
     path: src/make_vec.rs
     title: src/make_vec.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/factorize.rs
+    title: src/math/factorize.rs
+  - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
   - icon: ':heavy_check_mark:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/primes.rs
+    title: src/math/primes.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -294,6 +318,18 @@ data:
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
+  - icon: ':heavy_check_mark:'
     path: src/hash.rs
     title: src/hash.rs
   - icon: ':heavy_check_mark:'
@@ -314,6 +350,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
+  - icon: ':heavy_check_mark:'
+    path: src/io/graph.rs
+    title: src/io/graph.rs
   - icon: ':heavy_check_mark:'
     path: src/io_interactive.rs
     title: src/io_interactive.rs
@@ -336,11 +375,20 @@ data:
     path: src/make_vec.rs
     title: src/make_vec.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/factorize.rs
+    title: src/math/factorize.rs
+  - icon: ':heavy_check_mark:'
     path: src/math/modpow.rs
     title: src/math/modpow.rs
   - icon: ':heavy_check_mark:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':heavy_check_mark:'
+    path: src/math/primes.rs
+    title: src/math/primes.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
@@ -428,40 +476,39 @@ data:
     \ = SEED64 as u32;\n\t\tSEED = SEED64 as usize;\n\t}\n\tinit\n};\n\ntrait HashWord\
     \ {\n\tfn hash_word(&mut self, word: Self);\n}\n\nmacro_rules! impl_hash_word\
     \ {\n\t($($ty:ty = $key:ident),* $(,)*) => { $(\n\t\timpl HashWord for $ty {\n\
-    \t\t\t#[inline]\n\t\t\tfn hash_word(&mut self, word: Self) {\n\t\t\t\t*self =\
-    \ self.rotate_left(ROTATE).bitxor(word).wrapping_mul(unsafe { $key });\n\t\t\t\
-    }\n\t\t}\n\t)* }\n}\n\nimpl_hash_word!(usize = SEED, u32 = SEED32, u64 = SEED64);\n\
-    \nfn read_u32(bytes: &[u8]) -> u32 {\n\tlet mut data = 0;\n\tunsafe {\n\t\tstd::ptr::copy_nonoverlapping(bytes.as_ptr(),\
-    \ &mut data as *mut _ as *mut u8, 4);\n\t}\n\tdata\n}\n\nfn read_u64(bytes: &[u8])\
-    \ -> u64 {\n\tlet mut data = 0;\n\tunsafe {\n\t\tstd::ptr::copy_nonoverlapping(bytes.as_ptr(),\
+    \t\t\tfn hash_word(&mut self, word: Self) {\n\t\t\t\t*self = self.rotate_left(ROTATE).bitxor(word).wrapping_mul(unsafe\
+    \ { $key });\n\t\t\t}\n\t\t}\n\t)* }\n}\n\nimpl_hash_word!(usize = SEED, u32 =\
+    \ SEED32, u64 = SEED64);\n\nfn read_u32(bytes: &[u8]) -> u32 {\n\tlet mut data\
+    \ = 0;\n\tunsafe {\n\t\tstd::ptr::copy_nonoverlapping(bytes.as_ptr(), &mut data\
+    \ as *mut _ as *mut u8, 4);\n\t}\n\tdata\n}\n\nfn read_u64(bytes: &[u8]) -> u64\
+    \ {\n\tlet mut data = 0;\n\tunsafe {\n\t\tstd::ptr::copy_nonoverlapping(bytes.as_ptr(),\
     \ &mut data as *mut _ as *mut u8, 8);\n\t}\n\tdata\n}\n\n#[allow(dead_code)]\n\
-    #[inline]\nfn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {\n\twhile bytes.len()\
-    \ >= 4 {\n\t\tlet n = read_u32(bytes);\n\t\thash.hash_word(n);\n\t\tbytes = bytes.split_at(4).1;\n\
+    fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {\n\twhile bytes.len() >= 4\
+    \ {\n\t\tlet n = read_u32(bytes);\n\t\thash.hash_word(n);\n\t\tbytes = bytes.split_at(4).1;\n\
     \t}\n\n\tfor byte in bytes {\n\t\thash.hash_word(*byte as u32);\n\t}\n\thash\n\
-    }\n\n#[allow(dead_code)]\n#[inline]\nfn write64(mut hash: u64, mut bytes: &[u8])\
-    \ -> u64 {\n\twhile bytes.len() >= 8 {\n\t\tlet n = read_u64(bytes);\n\t\thash.hash_word(n);\n\
+    }\n\n#[allow(dead_code)]\nfn write64(mut hash: u64, mut bytes: &[u8]) -> u64 {\n\
+    \twhile bytes.len() >= 8 {\n\t\tlet n = read_u64(bytes);\n\t\thash.hash_word(n);\n\
     \t\tbytes = bytes.split_at(8).1;\n\t}\n\n\tif bytes.len() >= 4 {\n\t\tlet n =\
     \ read_u32(bytes);\n\t\thash.hash_word(n as u64);\n\t\tbytes = bytes.split_at(4).1;\n\
     \t}\n\n\tfor byte in bytes {\n\t\thash.hash_word(*byte as u64);\n\t}\n\thash\n\
-    }\n\n#[inline]\n#[cfg(target_pointer_width = \"32\")]\nfn write(hash: usize, bytes:\
-    \ &[u8]) -> usize {\n\twrite32(hash as u32, bytes) as usize\n}\n\n#[inline]\n\
-    #[cfg(target_pointer_width = \"64\")]\nfn write(hash: usize, bytes: &[u8]) ->\
-    \ usize {\n\twrite64(hash as u64, bytes) as usize\n}\n\n#[derive(Debug, Clone)]\n\
-    pub struct FxHasher {\n\thash: usize,\n}\n\nimpl Default for FxHasher {\n\t#[inline]\n\
-    \tfn default() -> FxHasher {\n\t\tFxHasher { hash: 0 }\n\t}\n}\n\nimpl Hasher\
-    \ for FxHasher {\n\t#[inline]\n\tfn write(&mut self, bytes: &[u8]) {\n\t\tself.hash\
-    \ = write(self.hash, bytes);\n\t}\n\n\t#[inline]\n\tfn write_u8(&mut self, i:\
-    \ u8) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\n\t#[inline]\n\tfn write_u16(&mut\
-    \ self, i: u16) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\n\t#[inline]\n\t\
-    fn write_u32(&mut self, i: u32) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\
-    \n\t#[inline]\n\t#[cfg(target_pointer_width = \"32\")]\n\tfn write_u64(&mut self,\
-    \ i: u64) {\n\t\tself.hash.hash_word(i as usize);\n\t\tself.hash.hash_word((i\
-    \ >> 32) as usize);\n\t}\n\n\t#[inline]\n\t#[cfg(target_pointer_width = \"64\"\
-    )]\n\tfn write_u64(&mut self, i: u64) {\n\t\tself.hash.hash_word(i as usize);\n\
-    \t}\n\n\t#[inline]\n\tfn write_usize(&mut self, i: usize) {\n\t\tself.hash.hash_word(i);\n\
-    \t}\n\n\t#[inline]\n\tfn finish(&self) -> u64 {\n\t\tself.hash as u64\n\t}\n}\n\
-    \n#[inline]\npub fn hash<T: Hash + ?Sized>(v: &T) -> usize {\n\tlet mut state\
-    \ = FxHasher::default();\n\tv.hash(&mut state);\n\tstate.finish() as usize\n}\n"
+    }\n\n#[cfg(target_pointer_width = \"32\")]\nfn write(hash: usize, bytes: &[u8])\
+    \ -> usize {\n\twrite32(hash as u32, bytes) as usize\n}\n\n#[cfg(target_pointer_width\
+    \ = \"64\")]\nfn write(hash: usize, bytes: &[u8]) -> usize {\n\twrite64(hash as\
+    \ u64, bytes) as usize\n}\n\n#[derive(Debug, Clone)]\npub struct FxHasher {\n\t\
+    hash: usize,\n}\n\nimpl Default for FxHasher {\n\tfn default() -> FxHasher {\n\
+    \t\tFxHasher { hash: 0 }\n\t}\n}\n\nimpl Hasher for FxHasher {\n\tfn write(&mut\
+    \ self, bytes: &[u8]) {\n\t\tself.hash = write(self.hash, bytes);\n\t}\n\n\tfn\
+    \ write_u8(&mut self, i: u8) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\n\t\
+    fn write_u16(&mut self, i: u16) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\
+    \n\tfn write_u32(&mut self, i: u32) {\n\t\tself.hash.hash_word(i as usize);\n\t\
+    }\n\n\t#[cfg(target_pointer_width = \"32\")]\n\tfn write_u64(&mut self, i: u64)\
+    \ {\n\t\tself.hash.hash_word(i as usize);\n\t\tself.hash.hash_word((i >> 32) as\
+    \ usize);\n\t}\n\n\t#[cfg(target_pointer_width = \"64\")]\n\tfn write_u64(&mut\
+    \ self, i: u64) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\n\tfn write_usize(&mut\
+    \ self, i: usize) {\n\t\tself.hash.hash_word(i);\n\t}\n\n\tfn finish(&self) ->\
+    \ u64 {\n\t\tself.hash as u64\n\t}\n}\n\npub fn hash<T: Hash + ?Sized>(v: &T)\
+    \ -> usize {\n\tlet mut state = FxHasher::default();\n\tv.hash(&mut state);\n\t\
+    state.finish() as usize\n}\n"
   dependsOn:
   - src/alg/action.rs
   - src/alg/arith.rs
@@ -497,6 +544,10 @@ data:
   - src/graph/euler_tour.rs
   - src/graph/grid.rs
   - src/graph/io.rs
+  - src/graph/tree/dfs.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree.rs
   - src/graph.rs
   - src/hash.rs
   - src/int/arith.rs
@@ -504,6 +555,7 @@ data:
   - src/int/gcd.rs
   - src/int/inv.rs
   - src/int.rs
+  - src/io/graph.rs
   - src/io.rs
   - src/io_interactive.rs
   - src/iter/either.rs
@@ -512,8 +564,11 @@ data:
   - src/iter.rs
   - src/lib.rs
   - src/make_vec.rs
+  - src/math/binom.rs
+  - src/math/factorize.rs
   - src/math/modpow.rs
   - src/math/pow.rs
+  - src/math/primes.rs
   - src/mint/conv.rs
   - src/mint.rs
   - src/rand/seed.rs
@@ -531,6 +586,7 @@ data:
   - src/fp.rs
   - src/func.rs
   - src/rand.rs
+  - src/io/graph.rs
   - src/slice/cum.rs
   - src/cmp/total.rs
   - src/iter/pow.rs
@@ -553,7 +609,11 @@ data:
   - src/tests.rs
   - src/int.rs
   - src/graph/dfs_io.rs
+  - src/graph/tree.rs
   - src/graph/dfs.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
   - src/graph/dijkstra.rs
   - src/graph/io.rs
   - src/graph/grid.rs
@@ -584,13 +644,16 @@ data:
   - src/dfa.rs
   - src/mint.rs
   - src/math/pow.rs
+  - src/math/factorize.rs
+  - src/math/primes.rs
   - src/math/modpow.rs
+  - src/math/binom.rs
   - src/rand/xoshiro256plus.rs
   - src/rand/seed.rs
   - src/rand/xorshift.rs
   - src/io.rs
   - src/float.rs
-  timestamp: '2020-12-21 20:11:53+09:00'
+  timestamp: '2021-01-03 22:19:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs
