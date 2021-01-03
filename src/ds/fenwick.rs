@@ -14,7 +14,7 @@ impl<A: Monoid> FenwickTree<A> {
 		data.insert(0, alg.unit());
 		for i in 1..=len {
 			if i + i.lsb() <= len {
-				data[i + i.lsb()] = alg.op(data[i + i.lsb()].clone(), data[i].clone());
+				data[i + i.lsb()] = alg.op(data[i + i.lsb()], data[i]);
 			}
 		}
 		Self { data, alg }
@@ -25,7 +25,7 @@ impl<A: Monoid> FenwickTree<A> {
 	pub fn add(&mut self, pos: usize, v: A::Item) {
 		let mut pos = pos + 1;
 		while pos < self.data.len() {
-			self.data[pos] = self.alg.op(self.data[pos].clone(), v.clone());
+			self.data[pos] = self.alg.op(self.data[pos], v);
 			pos += pos.lsb();
 		}
 	}
@@ -36,7 +36,7 @@ impl<A: Monoid> FenwickTree<A> {
 	pub fn ask_prefix(&self, mut r: usize) -> A::Item {
 		let mut res = self.alg.unit();
 		while r != 0 {
-			res = self.alg.op(self.data[r].clone(), res);
+			res = self.alg.op(self.data[r], res);
 			r -= r.lsb();
 		}
 		res
@@ -47,10 +47,10 @@ impl<A: Monoid> FenwickTree<A> {
 		let mut w = (self.data.len() - 1).msb();
 		let mut l = self.alg.unit();
 		while w != 0 {
-			if x + w < self.data.len() && pred(self.alg.op(l.clone(), self.data[x + w].clone()))
+			if x + w < self.data.len() && pred(self.alg.op(l, self.data[x + w]))
 			{
 				x += w;
-				l = self.alg.op(l, self.data[x + w].clone());
+				l = self.alg.op(l, self.data[x + w]);
 			}
 			w >>= 1;
 		}

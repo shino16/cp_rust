@@ -18,13 +18,13 @@ impl<A: Monoid> DisjointSparseTable<A> {
 				if m >= len {
 					break;
 				}
-				data[s][m - 1] = data[0][m - 1].clone();
-				data[s][m] = data[0][m].clone();
+				data[s][m - 1] = data[0][m - 1];
+				data[s][m] = data[0][m];
 				for i in (z..m - 1).rev() {
-					data[s][i] = alg.op(data[0][i].clone(), data[s][i + 1].clone());
+					data[s][i] = alg.op(data[0][i], data[s][i + 1]);
 				}
 				for i in m + 1..(m + (1 << s)).min(len) {
-					data[s][i] = alg.op(data[s][i - 1].clone(), data[0][i].clone());
+					data[s][i] = alg.op(data[s][i - 1], data[0][i]);
 				}
 			}
 		}
@@ -34,10 +34,10 @@ impl<A: Monoid> DisjointSparseTable<A> {
 		if l == r {
 			self.alg.unit()
 		} else if l + 1 == r {
-			self.data[0][l].clone()
+			self.data[0][l]
 		} else {
 			let s = (l ^ r).ilog2() as usize;
-			self.alg.op(self.data[s][l].clone(), self.data[s][r].clone())
+			self.alg.op(self.data[s][l], self.data[s][r])
 		}
 	}
 }

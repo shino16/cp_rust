@@ -17,7 +17,7 @@ impl<A: Monoid> SegmentTree<A> {
 			data1
 		};
 		for i in (1..len).rev() {
-			data[i] = alg.op(data[i << 1].clone(), data[i << 1 | 1].clone());
+			data[i] = alg.op(data[i << 1], data[i << 1 | 1]);
 		}
 		Self { len, data, alg }
 	}
@@ -27,7 +27,7 @@ impl<A: Monoid> SegmentTree<A> {
 	fn build(&mut self, mut p: usize) {
 		p >>= 1;
 		while p != 0 {
-			self.data[p] = self.alg.op(self.data[p << 1].clone(), self.data[p << 1 | 1].clone());
+			self.data[p] = self.alg.op(self.data[p << 1], self.data[p << 1 | 1]);
 			p >>= 1;
 		}
 	}
@@ -47,11 +47,11 @@ impl<A: Monoid> SegmentTree<A> {
 		r += self.len;
 		while l < r {
 			if l & 1 != 0 {
-				resl = self.alg.op(resl, self.data[l].clone());
+				resl = self.alg.op(resl, self.data[l]);
 				l += 1;
 			}
 			if r & 1 != 0 {
-				resr = self.alg.op(self.data[r - 1].clone(), resr);
+				resr = self.alg.op(self.data[r - 1], resr);
 				r -= 1;
 			}
 			l >>= 1;

@@ -2,16 +2,22 @@ pub mod action;
 pub mod arith;
 
 pub trait Alg {
-	type Item: Clone;
+	type Item: Copy;
 }
 
 pub trait Monoid: Alg {
 	fn unit(&self) -> Self::Item;
 	fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item;
+	fn op_to(&self, y: Self::Item, x: &mut Self::Item) {
+		*x = self.op(*x, y);
+	}
 }
 
 pub trait Group: Monoid {
 	fn inv(&self, x: Self::Item) -> Self::Item;
+	fn op_inv_to(&self, y: Self::Item, x: &mut Self::Item) {
+		*x = self.op(*x, self.inv(y))
+	}
 }
 
 macro_rules! impl_monoid {
@@ -41,15 +47,15 @@ macro_rules! impl_group {
 	};
 }
 
-pub struct MonoidImpl<T: Clone, Unit: Fn() -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);
+pub struct MonoidImpl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);
 pub struct GroupImpl<T, Unit, Op, Inv>(pub Unit, pub Op, pub Inv)
 where
-	T: Clone,
+	T: Copy,
 	Unit: Fn() -> T,
 	Op: Fn(T, T) -> T,
 	Inv: Fn(T) -> T;
 
 // help!
-impl_monoid!(MonoidImpl<T, Unit, Op>, T: Clone, Unit: (Fn() -> T), Op: (Fn(T, T) -> T));
+impl_monoid!(MonoidImpl<T, Unit, Op>, T: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T));
 impl_group!(GroupImpl<T, Unit, Op, Inv>,
-			T: Clone, Unit: (Fn() -> T), Op: (Fn(T, T) -> T), Inv: (Fn(T) -> T));
+			T: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T), Inv: (Fn(T) -> T));

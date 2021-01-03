@@ -1,7 +1,7 @@
 pub use crate::alg::arith::*;
 
 pub trait Cum {
-	type Item: Clone;
+	type Item: Copy;
 	fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>;
 	fn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>;
 	fn cuml_sum(&self) -> Vec<Self::Item>
@@ -18,7 +18,7 @@ pub trait Cum {
 	}
 }
 
-impl<T: Clone> Cum for [T] {
+impl<T: Copy> Cum for [T] {
 	type Item = T;
 	fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
 		let mut res = Vec::with_capacity(self.len() + 1);
