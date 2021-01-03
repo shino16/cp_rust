@@ -5,7 +5,7 @@ impl IO {
 		let n = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..n - 1 {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			graph[u].push(v);
 			graph[v].push(u);
 		}
@@ -15,7 +15,7 @@ impl IO {
 		let (n, m) = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..m {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			graph[u].push(v);
 			graph[v].push(u);
 		}
@@ -25,7 +25,7 @@ impl IO {
 		let n = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..n - 1 {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			graph[u].push(v);
 		}
 		(n, graph)
@@ -34,7 +34,7 @@ impl IO {
 		let (n, m) = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..m {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			graph[u].push(v);
 		}
 		(n, m, graph)
@@ -43,7 +43,7 @@ impl IO {
 		let n = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..n - 1 {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			let w: W = self.scan();
 			graph[u].push((v, w));
 			graph[v].push((u, w));
@@ -54,7 +54,7 @@ impl IO {
 		let (n, m) = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..m {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			let w: W = self.scan();
 			graph[u].push((v, w));
 			graph[v].push((u, w));
@@ -65,7 +65,7 @@ impl IO {
 		let n = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..n - 1 {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			let w: W = self.scan();
 			graph[u].push((v, w));
 		}
@@ -75,7 +75,7 @@ impl IO {
 		let (n, m) = self.scan();
 		let mut graph = vec![Vec::new(); n];
 		for _ in 0..m {
-			let [u, v]: [usize; 2] = self.scan();
+			let [Usize1(u), Usize1(v)]: [Usize1; 2] = self.scan();
 			let w: W = self.scan();
 			graph[u].push((v, w));
 		}

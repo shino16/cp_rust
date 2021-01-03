@@ -45,7 +45,6 @@ trait HashWord {
 macro_rules! impl_hash_word {
 	($($ty:ty = $key:ident),* $(,)*) => { $(
 		impl HashWord for $ty {
-			#[inline]
 			fn hash_word(&mut self, word: Self) {
 				*self = self.rotate_left(ROTATE).bitxor(word).wrapping_mul(unsafe { $key });
 			}
@@ -72,7 +71,6 @@ fn read_u64(bytes: &[u8]) -> u64 {
 }
 
 #[allow(dead_code)]
-#[inline]
 fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {
 	while bytes.len() >= 4 {
 		let n = read_u32(bytes);
@@ -87,7 +85,6 @@ fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {
 }
 
 #[allow(dead_code)]
-#[inline]
 fn write64(mut hash: u64, mut bytes: &[u8]) -> u64 {
 	while bytes.len() >= 8 {
 		let n = read_u64(bytes);
@@ -107,13 +104,11 @@ fn write64(mut hash: u64, mut bytes: &[u8]) -> u64 {
 	hash
 }
 
-#[inline]
 #[cfg(target_pointer_width = "32")]
 fn write(hash: usize, bytes: &[u8]) -> usize {
 	write32(hash as u32, bytes) as usize
 }
 
-#[inline]
 #[cfg(target_pointer_width = "64")]
 fn write(hash: usize, bytes: &[u8]) -> usize {
 	write64(hash as u64, bytes) as usize
@@ -125,58 +120,48 @@ pub struct FxHasher {
 }
 
 impl Default for FxHasher {
-	#[inline]
 	fn default() -> FxHasher {
 		FxHasher { hash: 0 }
 	}
 }
 
 impl Hasher for FxHasher {
-	#[inline]
 	fn write(&mut self, bytes: &[u8]) {
 		self.hash = write(self.hash, bytes);
 	}
 
-	#[inline]
 	fn write_u8(&mut self, i: u8) {
 		self.hash.hash_word(i as usize);
 	}
 
-	#[inline]
 	fn write_u16(&mut self, i: u16) {
 		self.hash.hash_word(i as usize);
 	}
 
-	#[inline]
 	fn write_u32(&mut self, i: u32) {
 		self.hash.hash_word(i as usize);
 	}
 
-	#[inline]
 	#[cfg(target_pointer_width = "32")]
 	fn write_u64(&mut self, i: u64) {
 		self.hash.hash_word(i as usize);
 		self.hash.hash_word((i >> 32) as usize);
 	}
 
-	#[inline]
 	#[cfg(target_pointer_width = "64")]
 	fn write_u64(&mut self, i: u64) {
 		self.hash.hash_word(i as usize);
 	}
 
-	#[inline]
 	fn write_usize(&mut self, i: usize) {
 		self.hash.hash_word(i);
 	}
 
-	#[inline]
 	fn finish(&self) -> u64 {
 		self.hash as u64
 	}
 }
 
-#[inline]
 pub fn hash<T: Hash + ?Sized>(v: &T) -> usize {
 	let mut state = FxHasher::default();
 	v.hash(&mut state);

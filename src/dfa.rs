@@ -3,6 +3,8 @@ use crate::int::*;
 use std::cmp::Ordering;
 use std::hash::Hash;
 
+pub const DIGITS: &[u8] = b"0123456789";
+
 pub trait Dfa {
 	type Alphabet;
 	type State;
@@ -99,7 +101,6 @@ impl Dfa for Lt<'_> {
 	fn init(&self) -> Self::State {
 		Ordering::Equal
 	}
-	// assumes i moves from 0 to self.0.len() - 1
 	fn next(&self, s: Self::State, a: Self::Alphabet, i: usize) -> Self::State {
 		s.then(a.cmp(&self.0[i]))
 	}
@@ -122,7 +123,6 @@ impl Dfa for Leq<'_> {
 	fn init(&self) -> Self::State {
 		Ordering::Equal
 	}
-	// assumes i moves from 0 to self.0.len() - 1
 	fn next(&self, s: Self::State, a: Self::Alphabet, i: usize) -> Self::State {
 		s.then(a.cmp(&self.0[i]))
 	}

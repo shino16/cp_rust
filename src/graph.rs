@@ -4,6 +4,7 @@ pub mod dijkstra;
 pub mod euler_tour;
 pub mod grid;
 pub mod io;
+pub mod tree;
 
 use crate::zo::ZeroOne;
 

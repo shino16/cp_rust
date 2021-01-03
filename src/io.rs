@@ -1,3 +1,4 @@
+pub mod graph;
 use std::io::{stdout, BufWriter, Read, StdoutLock, Write};
 use std::marker::PhantomData;
 
@@ -163,11 +164,11 @@ macro_rules! impl_scan_array {
 
 impl_scan_array!(7 6 5 4 3 2 1);
 
-macro_rules! impl_print_int {
+macro_rules! impl_print_prim {
 	($($t:ty),*) => { $(
 		impl Print for $t {
 			fn print(w: &mut IO, x: Self) {
-				w.buf.write_all(x.to_string().as_bytes()).unwrap();
+				w.buf.write_all(format!("{:.10}", x).as_bytes()).unwrap();
 			}
 		}
 		impl Print for &$t {
@@ -176,7 +177,7 @@ macro_rules! impl_print_int {
 	)* };
 }
 
-impl_print_int!(i32, i64, i128, isize, u32, u64, u128, usize);
+impl_print_prim!(i32, i64, i128, isize, u32, u64, u128, usize, f32, f64);
 
 impl Print for u8 {
 	fn print(w: &mut IO, x: Self) {
