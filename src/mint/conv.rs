@@ -12,7 +12,7 @@ macro_rules! impl_ntt {
 			static mut ROOT: UVec<FpType> = UVec(Vec::new());
 			static mut INV_ROOT: UVec<FpType> = UVec(Vec::new());
 
-			// reserve for n up to 2^k
+			/// reserve for n up to 2^k
 			pub fn reserve(k: usize) {
 				unsafe {
 					if k <= ROOT.len() {
@@ -129,32 +129,3 @@ impl Conv for Mint17 {
 		}
 	}
 }
-
-// impl Conv for u64 {
-// 	fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {
-// 		let r12 = MintC::from(MintB::P).inv();
-// 		let r13 = MintD::from(MintB::P).inv();
-// 		let r23 = MintD::from(MintC::P).inv();
-// 		fn run<M: Mod>(lhs: &mut Vec<u64>, rhs: &mut Vec<u64>) -> Vec<Mint<M>>
-// 		where
-// 			Mint<M>: Conv,
-// 		{
-// 			let lhs = lhs.iter().map(|&e| Mint::from(e)).collect();
-// 			let rhs = rhs.iter().map(|&e| Mint::from(e)).collect();
-// 			Conv::conv(lhs, rhs)
-// 		}
-// 		let v1: Vec<MintB> = run(lhs, rhs);
-// 		let v2: Vec<MintC> = run(lhs, rhs);
-// 		let v3: Vec<MintD> = run(lhs, rhs);
-// 		lhs.resize(v1.len(), Default::default());
-// 		for (((e0, e1), e2), e3) in lhs.iter_mut().zip(v1).zip(v2).zip(v3) {
-// 			let x1 = e1;
-// 			let x2 = (e2 - x1.value()) * r12;
-// 			let x3 = ((e3 - x1.value()) * r13 - x2.value()) * r23;
-// 			let mut x = x1.value() as u64;
-// 			x += x2.value() as u64 * MintB::P as u64;
-// 			x += x3.value() as u64 * MintB::P as u64 * MintC::P as u64;
-// 			*e0 = x;
-// 		}
-// 	}
-// }

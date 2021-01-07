@@ -7,7 +7,7 @@ pub struct SparseTable<A: Alg> {
 	alg: A,
 }
 
-// A: Band (x * x == x)
+/// A: Band (x * x == x)
 impl<A: Monoid> SparseTable<A> {
 	pub fn new(data: Vec<A::Item>, alg: A) -> Self {
 		let len = data.len();

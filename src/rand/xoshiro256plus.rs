@@ -17,7 +17,7 @@ impl Xoshiro256plus {
 		s[3] = s[3].rotate_left(45);
 		s[0].wrapping_add(s[3])
 	}
-	// forward by 2^128
+	/// skip 2^128 steps
 	pub fn split(&mut self) -> Self {
 		static JUMP: [u64; 4] =
 			[0x180ec6d33cfd0aba, 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc4529b1661c];

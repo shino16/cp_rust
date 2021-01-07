@@ -28,7 +28,7 @@ pub fn ugcd<I: UInt>(mut a: I, mut b: I) -> I {
 	}
 }
 
-// (x, y, g) where ax + by = g, x >= 0
+/// (x, y, g) where ax + by = g, x >= 0
 pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I, I) {
 	// A = [a, x, y; b, u, v], k = [-1; a0; b0]
 	// A'= [a, x, y; 0, u, v] \therefore a0*u + b0*v = 0

@@ -25,6 +25,7 @@ pub mod math;
 pub mod mint;
 pub mod rand;
 pub mod slice;
+pub mod u64;
 pub mod vec;
 pub mod zo;
 
