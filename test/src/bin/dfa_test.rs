@@ -8,8 +8,8 @@ use lib::mint::*;
 enum ZigZagState {
 	Initial,
 	First(u8),
-	Increasing(u8),
-	Decreasing(u8),
+	Up(u8),
+	Down(u8),
 }
 
 struct ZigZag;
@@ -26,10 +26,10 @@ impl Dfa for ZigZag {
 			match s {
 				Initial if a == b'0' => Some(Initial),
 				Initial => Some(First(a)),
-				First(d) if d < a => Some(Increasing(a)),
-				First(d) if d > a => Some(Decreasing(a)),
-				Increasing(d) if d > a => Some(Decreasing(a)),
-				Decreasing(d) if d < a => Some(Increasing(a)),
+				First(d) if d < a => Some(Up(a)),
+				First(d) if d > a => Some(Down(a)),
+				Up(d) if d > a => Some(Down(a)),
+				Down(d) if d < a => Some(Up(a)),
 				_ => None,
 			}
 		} else {
