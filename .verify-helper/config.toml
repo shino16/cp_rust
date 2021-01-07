@@ -1,4 +1,4 @@
-[languages.rs]
+[languages.rust]
 verification_file_suffix = '_test.rs'
 compile = 'cargo build --release --workspace'
 execute = 'bash ".verify-helper/execute.sh" {path}'
