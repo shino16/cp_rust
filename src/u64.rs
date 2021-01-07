@@ -13,7 +13,7 @@ pub fn modmul64(a: u64, b: u64, modu: u64) -> u64 {
 	res as u64
 }
 
-pub fn modpow64(e: u64, mut k: u64, modu: u64) -> u64 {
+pub fn modpow64(mut e: u64, mut k: u64, modu: u64) -> u64 {
 	let mut res = 1;
 	while k != 0 {
 		if k % 2 != 0 {
