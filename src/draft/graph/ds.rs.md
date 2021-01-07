@@ -30,7 +30,7 @@ data:
   isVerificationFile: false
   path: src/draft/graph/ds.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/graph/ds.rs
