@@ -11,25 +11,25 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "pub use super::*;\npub use crate::ds::bitset::*;\n\npub fn dfs_io<G: Graph,\
-    \ FI: FnMut(usize, usize), FO: FnMut(usize, usize)>(\n\tg: &G,\n\ts: usize,\n\t\
-    mut fi: FI,\n\tmut fo: FO,\n) {\n\tlet mut visited = new_bitset(g.len());\n\t\
-    visited.set_bit(s, true);\n\tlet mut togo = vec![(s, !0)];\n\twhile let Some((v,\
-    \ par)) = togo.pop() {\n\t\tif v.get_bit(31) {\n\t\t\tfo(!v, par);\n\t\t} else\
-    \ {\n\t\t\tfi(v, par);\n\t\t\ttogo.push((!v, par));\n\t\t\tg.adj(v, |w| {\n\t\t\
-    \t\tif visited.modify_bit(w, true) {\n\t\t\t\t\ttogo.push((w, v));\n\t\t\t\t}\n\
-    \t\t\t});\n\t\t}\n\t}\n}\n"
+  code: "use crate::u64::*;\n\n/// n < 7e18\npub fn is_prime(n: u64) -> bool {\n\t\
+    if n < 2 {\n\t\tfalse\n\t} else if n % 6 % 4 != 1 {\n\t\tn == 2 || n == 3\n\t\
+    } else {\n\t\tlet s = (n - 1).trailing_zeros();\n\t\tfor &a in &[2, 325, 9375,\
+    \ 28178, 450775, 9780504, 1795265022] {\n\t\t\tlet mut p = modpow64(a % n, n >>\
+    \ s, n);\n\t\t\tlet mut i = s;\n\t\t\twhile p != 1 && p != n - 1 && a % n != 0\
+    \ && i != 0 {\n\t\t\t\tp = modmul64(p, p, n);\n\t\t\t\ti -= 1;\n\t\t\t}\n\t\t\t\
+    if p != n - 1 && i != s {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t}\n\t\ttrue\n\t\
+    }\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/graph/dfs_io.rs
+  path: src/math/is_prime.rs
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/graph/dfs_io.rs
+documentation_of: src/math/is_prime.rs
 layout: document
 redirect_from:
-- /library/src/graph/dfs_io.rs
-- /library/src/graph/dfs_io.rs.html
-title: src/graph/dfs_io.rs
+- /library/src/math/is_prime.rs
+- /library/src/math/is_prime.rs.html
+title: src/math/is_prime.rs
 ---

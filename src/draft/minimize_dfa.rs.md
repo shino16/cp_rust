@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: src/draft/minimize_dfa.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/minimize_dfa.rs

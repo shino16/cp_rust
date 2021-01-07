@@ -18,7 +18,7 @@ data:
   isVerificationFile: false
   path: src/draft/dbg.rs
   requiredBy: []
-  timestamp: '2020-12-21 20:11:53+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/dbg.rs
