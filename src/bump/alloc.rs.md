@@ -5,15 +5,12 @@ data:
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
-  attributes:
-    links:
-    - http://opensource.org/licenses/MIT>,
-    - http://rust-lang.org/COPYRIGHT.
-    - http://www.apache.org/licenses/LICENSE-2.0>
+  attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
-    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
+    RuntimeError: bundler is not specified: src/bump/alloc.rs\n"
   code: "// Copyright 2015 The Rust Project Developers. See the COPYRIGHT\n// file\
     \ at the top-level directory of this distribution and at\n// http://rust-lang.org/COPYRIGHT.\n\
     //\n// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or\n// http://www.apache.org/licenses/LICENSE-2.0>\

@@ -5,12 +5,12 @@ data:
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
-  attributes:
-    links: []
+  attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
-    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
+    RuntimeError: bundler is not specified: src/draft/graph/path.rs\n"
   code: "pub use crate::graph::ds::*;\nuse crate::int::*;\n\npub fn dijkstra<'g, G:\
     \ Graph<'g>>(g: &'g G, s: G::V) -> Dict<'g, G::V, G::E> where G::E: UInt {\n\t\
     let mut dist = g.make_dict(!G::E::ZERO);\n\tdist[s] = G::E::ZERO;\n\tlet mut togo\
@@ -21,7 +21,7 @@ data:
   isVerificationFile: false
   path: src/draft/graph/path.rs
   requiredBy: []
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/graph/path.rs

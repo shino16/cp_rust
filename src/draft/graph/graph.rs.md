@@ -1,16 +1,22 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':heavy_check_mark:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
-  attributes:
-    links: []
+  attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/rust.py\"\
-    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
+    RuntimeError: bundler is not specified: src/draft/graph/graph.rs\n"
   code: "pub use crate::graph::*;\n#[derive(Debug, Default)]\npub struct DiGraph(Vec<Vec<usize>>);\n\
     \nimpl<'g> Graph<'g> for DiGraph {\n\ttype V = usize;\n\ttype E = ();\n\ttype\
     \ VIter = std::iter::Copied<std::slice::Iter<'g, Self::V>>;\n\ttype EIter = std::iter::Take<std::iter::Repeat<()>>;\n\
@@ -28,11 +34,13 @@ data:
     \ -> Self::V {\n\t\tself.0.dim()\n\t}\n}\n\npub type UGraph = BiDir<DiGraph>;\n\
     \nimpl UGraph {\n\tpub fn new(n: usize) -> Self {\n\t\tSelf(DiGraph::new(n))\n\
     \t}\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/graph.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/draft/graph/graph.rs
   requiredBy: []
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '2021-01-03 22:19:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/graph/graph.rs
