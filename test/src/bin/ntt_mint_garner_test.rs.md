@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -13,19 +13,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []

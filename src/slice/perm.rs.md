@@ -16,28 +16,25 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/make_vec.rs\n"
-  code: "pub trait VecDim<Elem> {\n\ttype Item;\n\tfn make_vec(self, elem: Elem) ->\
-    \ Vec<Self::Item>;\n}\n\nimpl<Elem: Clone> VecDim<Elem> for usize {\n\ttype Item\
-    \ = Elem;\n\tfn make_vec(self, elem: Elem) -> Vec<Self::Item> {\n\t\tvec![elem;\
-    \ self]\n\t}\n}\n\nimpl<Elem, Dim> VecDim<Elem> for (usize, Dim)\nwhere\n\tDim:\
-    \ VecDim<Elem>,\n\tDim::Item: Clone,\n{\n\ttype Item = Vec<Dim::Item>;\n\tfn make_vec(self,\
-    \ elem: Elem) -> Vec<Self::Item> {\n\t\tvec![self.1.make_vec(elem); self.0]\n\t\
-    }\n}\n\npub fn make_vec<Elem, Dim: VecDim<Elem>>(dim: Dim, elem: Elem) -> Vec<Dim::Item>\
-    \ {\n\tdim.make_vec(elem)\n}\n"
+    RuntimeError: bundler is not specified: src/slice/perm.rs\n"
+  code: "pub fn next_permutation<T: Ord>(a: &mut [T]) -> bool {\n\tif a.len() <= 1\
+    \ {\n\t\treturn false;\n\t}\n\tlet mut k = a.len() - 1;\n\twhile k != 0 && a[k\
+    \ - 1] >= a[k] {\n\t\tk -= 1;\n\t}\n\tif k == 0 {\n\t\ta.reverse();\n\t\treturn\
+    \ false;\n\t}\n\tk -= 1;\n\tlet mut l = a.len() - 1;\n\twhile a[k] >= a[l] {\n\
+    \t\tl -= 1;\n\t}\n\ta.swap(k, l);\n\ta[k + 1..].reverse();\n\ttrue\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/make_vec.rs
+  path: src/slice/perm.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2021-01-12 01:50:14+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
-documentation_of: src/make_vec.rs
+documentation_of: src/slice/perm.rs
 layout: document
 redirect_from:
-- /library/src/make_vec.rs
-- /library/src/make_vec.rs.html
-title: src/make_vec.rs
+- /library/src/slice/perm.rs
+- /library/src/slice/perm.rs.html
+title: src/slice/perm.rs
 ---

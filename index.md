@@ -17,10 +17,10 @@ data:
     - icon: ':warning:'
       path: src/assign.rs
       title: src/assign.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/bit.rs
       title: src/bit.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/cast.rs
       title: src/cast.rs
     - icon: ':heavy_check_mark:'
@@ -32,7 +32,7 @@ data:
     - icon: ':warning:'
       path: src/float.rs
       title: src/float.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/fp.rs
       title: src/fp.rs
     - icon: ':warning:'
@@ -47,25 +47,25 @@ data:
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
       path: src/io_interactive.rs
       title: src/io_interactive.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/iter.rs
       title: src/iter.rs
     - icon: ':warning:'
       path: src/lib.rs
       title: src/lib.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/make_vec.rs
       title: src/make_vec.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/mint.rs
       title: src/mint.rs
     - icon: ':warning:'
@@ -74,7 +74,7 @@ data:
     - icon: ':warning:'
       path: src/slice.rs
       title: src/slice.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/tests.rs
       title: src/tests.rs
     - icon: ':warning:'
@@ -83,7 +83,7 @@ data:
     - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/zo.rs
       title: src/zo.rs
   - name: src/bump
@@ -219,7 +219,7 @@ data:
     - icon: ':warning:'
       path: src/int/bisect.rs
       title: src/int/bisect.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/int/gcd.rs
       title: src/int/gcd.rs
     - icon: ':warning:'
@@ -238,7 +238,7 @@ data:
     - icon: ':warning:'
       path: src/iter/pow.rs
       title: src/iter/pow.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/iter/prod.rs
       title: src/iter/prod.rs
   - name: src/math
@@ -268,13 +268,13 @@ data:
       title: src/mint/conv.rs
   - name: src/rand
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/rand/seed.rs
       title: src/rand/seed.rs
     - icon: ':warning:'
       path: src/rand/xorshift.rs
       title: src/rand/xorshift.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/rand/xoshiro256plus.rs
       title: src/rand/xoshiro256plus.rs
   - name: src/slice
@@ -282,6 +282,9 @@ data:
     - icon: ':warning:'
       path: src/slice/cum.rs
       title: src/slice/cum.rs
+    - icon: ':x:'
+      path: src/slice/perm.rs
+      title: src/slice/perm.rs
   - name: src/u64
     pages:
     - icon: ':warning:'
@@ -290,7 +293,7 @@ data:
   verificationCategories:
   - name: test/src/bin
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/src/bin/cargo_test.rs
       title: test/src/bin/cargo_test.rs
     - icon: ':heavy_check_mark:'

@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []

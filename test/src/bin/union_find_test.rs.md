@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uf.rs
     title: src/ds/uf.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []

@@ -1,52 +1,55 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/iter/prod.rs
     title: src/iter/prod.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: src/slice/perm.rs
+    title: src/slice/perm.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -89,7 +92,12 @@ data:
     \ {\n\t\t\t\t\t\tlet g = gcd(a, b);\n\t\t\t\t\t\tfor c in g + 1..g {\n\t\t\t\t\
     \t\t\tassert!(a % c != 0 || b % c != 0);\n\t\t\t\t\t\t}\n\t\t\t\t\t\tassert_eq!(a\
     \ % g, 0);\n\t\t\t\t\t\tassert_eq!(b % g, 0);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\
-    }\n\t\t}\n\t}\n}\n"
+    }\n\t\t}\n\t}\n\n\tmod slice {\n\t\tmod perm {\n\t\t\tuse crate::slice::perm::*;\n\
+    \t\t\t#[test]\n\t\t\tfn test_next_permutation() {\n\t\t\t\tlet n = 5;\n\t\t\t\t\
+    let mut a: Vec<_> = (0..n).collect();\n\t\t\t\tlet mut b = a.clone();\n\t\t\t\t\
+    let mut cnt = 0;\n\t\t\t\twhile next_permutation(&mut b) {\n\t\t\t\t\tassert!(a\
+    \ < b);\n\t\t\t\t\tnext_permutation(&mut a);\n\t\t\t\t\tcnt += 1;\n\t\t\t\t}\n\
+    \t\t\t\tassert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);\n\t\t\t}\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/bit.rs
   - src/cast.rs
@@ -103,12 +111,13 @@ data:
   - src/mint.rs
   - src/rand/seed.rs
   - src/rand/xoshiro256plus.rs
+  - src/slice/perm.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-07 16:16:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-12 01:50:14+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
 documentation_of: src/tests.rs

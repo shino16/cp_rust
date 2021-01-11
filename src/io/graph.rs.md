@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/graph/io.rs
     title: src/graph/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []

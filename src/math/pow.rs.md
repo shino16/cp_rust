@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
