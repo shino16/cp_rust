@@ -111,4 +111,23 @@ mod tests {
 			}
 		}
 	}
+
+	mod slice {
+		mod perm {
+			use crate::slice::perm::*;
+			#[test]
+			fn test_next_permutation() {
+				let n = 5;
+				let mut a: Vec<_> = (0..n).collect();
+				let mut b = a.clone();
+				let mut cnt = 0;
+				while next_permutation(&mut b) {
+					assert!(a < b);
+					next_permutation(&mut a);
+					cnt += 1;
+				}
+				assert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);
+			}
+		}
+	}
 }

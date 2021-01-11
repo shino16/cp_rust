@@ -1,4 +1,5 @@
 pub mod cum;
+pub mod perm;
 
 pub trait Slice {
 	type Item;
