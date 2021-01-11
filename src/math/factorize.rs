@@ -1,6 +1,12 @@
 pub fn factorize(mut n: u64) -> Vec<(u64, u32)> {
+	if n == 1 {
+		return Vec::new();
+	}
+	if n < 4 {
+		return vec![(n, 1)];
+	}
 	let mut res = Vec::new();
-	if n % 2 != 0 {
+	if n % 2 == 0 {
 		let t = n.trailing_zeros();
 		res.push((2, t));
 		n >>= t;
@@ -18,6 +24,9 @@ pub fn factorize(mut n: u64) -> Vec<(u64, u32)> {
 			}
 			res.push((d, cnt));
 		}
+	}
+	if n != 1 {
+		res.push((n, 1));
 	}
 	res
 }

@@ -1,7 +1,7 @@
 use std::ops::{Deref, DerefMut};
 
 #[repr(transparent)]
-#[derive(PartialEq, PartialOrd)]
+#[derive(PartialEq, PartialOrd, Clone, Copy)]
 pub struct Total<T>(pub T);
 
 impl<T: PartialEq> Eq for Total<T> {}
