@@ -60,11 +60,11 @@ data:
   code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\n\
     \n#[allow(unused_imports)]\nuse lib::tests::*;\n\nuse std::io::{self, Write, Result};\n\
     use std::process::Command;\n\nfn main() -> Result<()> {\n\tlet output = Command::new(\"\
-    cargo\")\n\t\t.arg(\"test\")\n\t\t.output()?;\n\n\tif !output.status.success()\
-    \ {\n\t\tprintln!(\"`cargo test` failed\");\n\t\tprintln!(\"--- captured stdout\
-    \ ---\");\n\t\tio::stdout().write_all(&output.stdout)?;\n\t\tprintln!(\"--- captured\
-    \ stderr ---\");\n\t\tio::stdout().write_all(&output.stderr)?;\n\t}\n\n\tprintln!(\"\
-    Hello World\");\n\n\tOk(())\n}\n"
+    cargo\")\n\t\t.arg(\"test\")\n\t\t.arg(\"--\")\n\t\t.arg(\"--test-threads=1\"\
+    )\n\t\t.output()?;\n\n\tif !output.status.success() {\n\t\tprintln!(\"`cargo test`\
+    \ failed\");\n\t\tprintln!(\"--- captured stdout ---\");\n\t\tio::stdout().write_all(&output.stdout)?;\n\
+    \t\tprintln!(\"--- captured stderr ---\");\n\t\tio::stdout().write_all(&output.stderr)?;\n\
+    \t}\n\n\tprintln!(\"Hello World\");\n\n\tOk(())\n}\n"
   dependsOn:
   - src/bit.rs
   - src/cast.rs
@@ -84,7 +84,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-01-12 16:34:13+09:00'
+  timestamp: '2021-01-12 16:49:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
