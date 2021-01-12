@@ -2,12 +2,18 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':question:'
+    path: src/fp.rs
+    title: src/fp.rs
   - icon: ':warning:'
     path: src/graph/io.rs
     title: src/graph/io.rs
   - icon: ':warning:'
     path: src/io/graph.rs
     title: src/io/graph.rs
+  - icon: ':question:'
+    path: src/mint.rs
+    title: src/mint.rs
   - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
@@ -111,10 +117,12 @@ data:
   isVerificationFile: false
   path: src/io.rs
   requiredBy:
+  - src/fp.rs
   - src/io/graph.rs
   - src/u64/conv.rs
   - src/tests.rs
   - src/graph/io.rs
+  - src/mint.rs
   timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

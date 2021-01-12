@@ -11,15 +11,27 @@ data:
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: src/dfa.rs
+    title: src/dfa.rs
+  - icon: ':warning:'
+    path: src/draft/graph/path.rs
+    title: src/draft/graph/path.rs
   - icon: ':warning:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
+  - icon: ':question:'
+    path: src/fp.rs
+    title: src/fp.rs
   - icon: ':warning:'
     path: src/math/binom.rs
     title: src/math/binom.rs
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
+  - icon: ':question:'
+    path: src/mint.rs
+    title: src/mint.rs
   - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
@@ -90,12 +102,16 @@ data:
   isVerificationFile: false
   path: src/int.rs
   requiredBy:
+  - src/fp.rs
   - src/slice/cum.rs
   - src/ds/fenwick.rs
   - src/u64/conv.rs
   - src/tests.rs
+  - src/dfa.rs
+  - src/mint.rs
   - src/math/pow.rs
   - src/math/binom.rs
+  - src/draft/graph/path.rs
   timestamp: '2020-12-21 20:11:53+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

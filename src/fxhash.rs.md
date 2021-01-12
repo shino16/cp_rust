@@ -4,7 +4,10 @@ data:
   - icon: ':question:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: src/dfa.rs
+    title: src/dfa.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
@@ -72,7 +75,8 @@ data:
   - src/rand/seed.rs
   isVerificationFile: false
   path: src/fxhash.rs
-  requiredBy: []
+  requiredBy:
+  - src/dfa.rs
   timestamp: '2021-01-03 22:19:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: src/draft/graph/ds.rs
@@ -8,6 +11,9 @@ data:
   - icon: ':warning:'
     path: src/draft/graph/graph.rs
     title: src/draft/graph/graph.rs
+  - icon: ':warning:'
+    path: src/draft/graph/path.rs
+    title: src/draft/graph/path.rs
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -32,13 +38,15 @@ data:
     \ W)>> {\n\tfn adj_w<F: FnMut(usize, &W)>(&self, v: usize, mut f: F) {\n\t\tself[v].iter().for_each(|&(v,\
     \ ref e)| f(v, e));\n\t}\n}\n\nimpl<G: Graph> Tree for G {}\nimpl<W, G: WGraph<W>>\
     \ WTree<W> for G {}\n"
-  dependsOn: []
+  dependsOn:
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph.rs
   requiredBy:
   - src/draft/graph/ds.rs
   - src/draft/graph/graph.rs
-  timestamp: '1970-01-01 00:00:00+00:00'
+  - src/draft/graph/path.rs
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph.rs

@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: src/dfa.rs
+    title: src/dfa.rs
+  - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
   - icon: ':x:'
@@ -44,6 +47,7 @@ data:
   path: src/rand/seed.rs
   requiredBy:
   - src/tests.rs
+  - src/dfa.rs
   - src/fxhash.rs
   - src/rand/xoshiro256plus.rs
   timestamp: '1970-01-01 00:00:00+00:00'
