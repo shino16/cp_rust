@@ -116,7 +116,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-12 01:50:14+09:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs

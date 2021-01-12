@@ -17,8 +17,8 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph.rs\n"
-  code: "pub mod dfs;\npub mod dfs_io;\npub mod dijkstra;\npub mod euler_tour;\npub\
-    \ mod grid;\npub mod io;\npub mod tree;\n\nuse crate::zo::ZeroOne;\n\npub trait\
+  code: "pub mod bfs;\npub mod dfs;\npub mod dfs_io;\npub mod dijkstra;\npub mod euler_tour;\n\
+    pub mod grid;\npub mod io;\npub mod tree;\n\nuse crate::zo::ZeroOne;\n\npub trait\
     \ Graph {\n\tfn len(&self) -> usize;\n\tfn adj<F: FnMut(usize)>(&self, v: usize,\
     \ f: F);\n}\n\npub trait WGraph<W>: Graph {\n\tfn adj_w<F: FnMut(usize, &W)>(&self,\
     \ v: usize, f: F);\n}\n\npub trait Tree: Graph {}\n\npub trait WTree<W>: WGraph<W>\

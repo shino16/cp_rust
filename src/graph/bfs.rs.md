@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: src/graph/io.rs
-    title: src/graph/io.rs
-  - icon: ':question:'
-    path: src/io.rs
-    title: src/io.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -16,21 +10,24 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/io/graph.rs\n"
-  code: pub use crate::graph::io::*;
-  dependsOn:
-  - src/graph/io.rs
-  - src/io.rs
+    RuntimeError: bundler is not specified: src/graph/bfs.rs\n"
+  code: "use std::collections::VecDeque;\n\npub use super::*;\nuse crate::ds::bitset::*;\n\
+    \n/// f: (v, par)\npub fn bfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize,\
+    \ mut f: F) {\n\tlet mut visited = new_bitset(g.len());\n\tlet mut togo: VecDeque<_>\
+    \ = vec![(s, !0)].into();\n\tvisited.set_bit(s, true);\n\twhile let Some((v, par))\
+    \ = togo.pop_front() {\n\t\tf(v, par);\n\t\tg.adj(v, |w| {\n\t\t\tif visited.modify_bit(w,\
+    \ true) {\n\t\t\t\ttogo.push_back((w, v));\n\t\t\t}\n\t\t})\n\t}\n}"
+  dependsOn: []
   isVerificationFile: false
-  path: src/io/graph.rs
+  path: src/graph/bfs.rs
   requiredBy: []
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/io/graph.rs
+documentation_of: src/graph/bfs.rs
 layout: document
 redirect_from:
-- /library/src/io/graph.rs
-- /library/src/io/graph.rs.html
-title: src/io/graph.rs
+- /library/src/graph/bfs.rs
+- /library/src/graph/bfs.rs.html
+title: src/graph/bfs.rs
 ---

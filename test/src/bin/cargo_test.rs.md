@@ -84,7 +84,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-01-12 01:50:14+09:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

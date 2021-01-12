@@ -81,32 +81,32 @@ data:
     \ {\n\t($($t:ty),*) => { $(\n\t\timpl Scan for $t {\n\t\t\tfn scan(s: &mut IO)\
     \ -> Self {\n\t\t\t\ts.scan_raw().iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as\
     \ $t)\n\t\t\t}\n\t\t}\n\t)* };\n}\n\nimpl_parse_iint!(i32, i64, i128, isize);\n\
-    impl_parse_uint!(u32, u64, u128, usize);\n\n#[derive(Debug, Clone, Copy, Default)]\n\
-    pub struct Usize1(pub usize);\nimpl Scan for Usize1 {\n\tfn scan(io: &mut IO)\
-    \ -> Self {\n\t\tlet n: usize = io.scan();\n\t\tSelf(n - 1)\n\t}\n}\n\nimpl Scan\
-    \ for u8 {\n\tfn scan(s: &mut IO) -> Self {\n\t\tlet bytes = s.scan_raw();\n\t\
-    \tdebug_assert_eq!(bytes.len(), 1);\n\t\tbytes[0]\n\t}\n}\n\nimpl Scan for &[u8]\
-    \ {\n\tfn scan(s: &mut IO) -> Self {\n\t\ts.scan_raw()\n\t}\n}\n\nmacro_rules!\
-    \ impl_tuple {\n\t() => {};\n\t($t:ident $($ts:ident)*) => {\n\t\timpl<$t: Scan,\
-    \ $($ts: Scan),*> Scan for ($t, $($ts),*) {\n\t\t\tfn scan(s: &mut IO) -> Self\
-    \ { ($t::scan(s), $($ts::scan(s)),*) }\n\t\t}\n\t\timpl<$t: Print, $($ts: Print),*>\
-    \ Print for ($t, $($ts),*) {\n\t\t\t#[allow(non_snake_case)]\n\t\t\tfn print(w:\
-    \ &mut IO, ($t, $($ts),*): Self) {\n\t\t\t\tw.print($t);\n\t\t\t\t$( w.print(\"\
-    \ \"); w.print($ts); )*\n\t\t\t}\n\t\t}\n\t\timpl_tuple!($($ts)*);\n\t};\n}\n\n\
-    impl_tuple!(A B C D E F G);\n\nmacro_rules! impl_scan_array {\n\t() => {};\n\t\
-    ($n:literal $($ns:literal)*) => {\n\t\timpl<T: Scan> Scan for [T; $n] {\n\t\t\t\
-    fn scan(s: &mut IO) -> Self {\n\t\t\t\tlet mut scan = |_| T::scan(s);\n\t\t\t\t\
-    [scan($n), $(scan($ns)),*]\n\t\t\t}\n\t\t}\n\t\timpl_scan_array!($($ns)*);\n\t\
-    };\n}\n\nimpl_scan_array!(7 6 5 4 3 2 1);\n\nmacro_rules! impl_print_prim {\n\t\
-    ($($t:ty),*) => { $(\n\t\timpl Print for $t {\n\t\t\tfn print(w: &mut IO, x: Self)\
-    \ {\n\t\t\t\tw.buf.write_all(format!(\"{:.10}\", x).as_bytes()).unwrap();\n\t\t\
-    \t}\n\t\t}\n\t\timpl Print for &$t {\n\t\t\tfn print(w: &mut IO, x: Self) { w.print(*x);\
-    \ }\n\t\t}\n\t)* };\n}\n\nimpl_print_prim!(i32, i64, i128, isize, u32, u64, u128,\
-    \ usize, f32, f64);\n\nimpl Print for u8 {\n\tfn print(w: &mut IO, x: Self) {\n\
-    \t\tw.buf.write_all(&[x]).unwrap();\n\t}\n}\n\nimpl Print for &[u8] {\n\tfn print(w:\
-    \ &mut IO, x: Self) {\n\t\tw.buf.write_all(x).unwrap();\n\t}\n}\n\nimpl Print\
-    \ for &str {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.print(x.as_bytes());\n\t\
-    }\n}\n"
+    impl_parse_uint!(u32, u64, u128, usize);\n\nimpl Scan for u8 {\n\tfn scan(s: &mut\
+    \ IO) -> Self {\n\t\tlet bytes = s.scan_raw();\n\t\tdebug_assert_eq!(bytes.len(),\
+    \ 1);\n\t\tbytes[0]\n\t}\n}\n\nimpl Scan for &[u8] {\n\tfn scan(s: &mut IO) ->\
+    \ Self {\n\t\ts.scan_raw()\n\t}\n}\n\nmacro_rules! impl_tuple {\n\t() => {};\n\
+    \t($t:ident $($ts:ident)*) => {\n\t\timpl<$t: Scan, $($ts: Scan),*> Scan for ($t,\
+    \ $($ts),*) {\n\t\t\tfn scan(s: &mut IO) -> Self { ($t::scan(s), $($ts::scan(s)),*)\
+    \ }\n\t\t}\n\t\timpl<$t: Print, $($ts: Print),*> Print for ($t, $($ts),*) {\n\t\
+    \t\t#[allow(non_snake_case)]\n\t\t\tfn print(w: &mut IO, ($t, $($ts),*): Self)\
+    \ {\n\t\t\t\tw.print($t);\n\t\t\t\t$( w.print(\" \"); w.print($ts); )*\n\t\t\t\
+    }\n\t\t}\n\t\timpl_tuple!($($ts)*);\n\t};\n}\n\nimpl_tuple!(A B C D E F G);\n\n\
+    macro_rules! impl_scan_array {\n\t() => {};\n\t($n:literal $($ns:literal)*) =>\
+    \ {\n\t\timpl<T: Scan> Scan for [T; $n] {\n\t\t\tfn scan(s: &mut IO) -> Self {\n\
+    \t\t\t\tlet mut scan = |_| T::scan(s);\n\t\t\t\t[scan($n), $(scan($ns)),*]\n\t\
+    \t\t}\n\t\t}\n\t\timpl_scan_array!($($ns)*);\n\t};\n}\n\nimpl_scan_array!(7 6\
+    \ 5 4 3 2 1);\n\nmacro_rules! impl_print_prim {\n\t($($t:ty),*) => { $(\n\t\t\
+    impl Print for $t {\n\t\t\tfn print(w: &mut IO, x: Self) {\n\t\t\t\tw.buf.write_all(format!(\"\
+    {:.10}\", x).as_bytes()).unwrap();\n\t\t\t}\n\t\t}\n\t\timpl Print for &$t {\n\
+    \t\t\tfn print(w: &mut IO, x: Self) { w.print(*x); }\n\t\t}\n\t)* };\n}\n\nimpl_print_prim!(i32,\
+    \ i64, i128, isize, u32, u64, u128, usize, f32, f64);\n\nimpl Print for u8 {\n\
+    \tfn print(w: &mut IO, x: Self) {\n\t\tw.buf.write_all(&[x]).unwrap();\n\t}\n\
+    }\n\nimpl Print for &[u8] {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.buf.write_all(x).unwrap();\n\
+    \t}\n}\n\nimpl Print for &str {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.print(x.as_bytes());\n\
+    \t}\n}\n\n#[derive(Debug, Clone, Copy, Default)]\npub struct Usize1(pub usize);\n\
+    impl Scan for Usize1 {\n\tfn scan(io: &mut IO) -> Self {\n\t\tlet n: usize = io.scan();\n\
+    \t\tSelf(n - 1)\n\t}\n}\nimpl Print for Usize1 {\n    fn print(w: &mut IO, x:\
+    \ Self) {\n\t\tw.print(x.0 + 1)\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/io.rs
@@ -115,7 +115,7 @@ data:
   - src/u64/conv.rs
   - src/tests.rs
   - src/graph/io.rs
-  timestamp: '2021-01-03 22:19:51+09:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/dfa_test.rs

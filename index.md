@@ -20,6 +20,9 @@ data:
     - icon: ':question:'
       path: src/bit.rs
       title: src/bit.rs
+    - icon: ':warning:'
+      path: src/bool.rs
+      title: src/bool.rs
     - icon: ':question:'
       path: src/cast.rs
       title: src/cast.rs
@@ -179,6 +182,9 @@ data:
       title: src/func/rec.rs
   - name: src/graph
     pages:
+    - icon: ':warning:'
+      path: src/graph/bfs.rs
+      title: src/graph/bfs.rs
     - icon: ':warning:'
       path: src/graph/dfs.rs
       title: src/graph/dfs.rs
