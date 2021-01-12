@@ -7,7 +7,7 @@ data:
   - icon: ':warning:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
