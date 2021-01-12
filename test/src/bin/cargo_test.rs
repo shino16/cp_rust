@@ -9,8 +9,6 @@ use std::process::Command;
 fn main() -> Result<()> {
 	let output = Command::new("cargo")
 		.arg("test")
-		.arg("--")
-		.arg("--test-threads=1")
 		.output()?;
 
 	if !output.status.success() {
