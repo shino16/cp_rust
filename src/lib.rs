@@ -5,6 +5,7 @@
 pub mod alg;
 pub mod assign;
 pub mod bit;
+pub mod bool;
 pub mod cast;
 pub mod cmp;
 pub mod conv;
