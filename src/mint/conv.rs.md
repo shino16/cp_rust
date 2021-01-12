@@ -1,6 +1,30 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':heavy_check_mark:'
+    path: src/conv.rs
+    title: src/conv.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/uvec.rs
+    title: src/ds/uvec.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/io.rs
+    title: src/io.rs
+  - icon: ':question:'
+    path: src/mint.rs
+    title: src/mint.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -67,11 +91,19 @@ data:
     \ = ((e3 - x1.value()) * r13 - x2.value()) * r23;\n\t\t\tlet mut x = MintA::from(x1.value());\n\
     \t\t\tx += MintA::from(x2.value()) * MintB::P;\n\t\t\tx += MintA::from(x3.value())\
     \ * MintB::P * MintC::P;\n\t\t\t*e0 = x.value().into();\n\t\t}\n\t}\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/bit.rs
+  - src/cast.rs
+  - src/conv.rs
+  - src/ds/uvec.rs
+  - src/int.rs
+  - src/io.rs
+  - src/mint.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

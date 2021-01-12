@@ -14,6 +14,36 @@ data:
   - icon: ':warning:'
     path: src/draft/graph/path.rs
     title: src/draft/graph/path.rs
+  - icon: ':warning:'
+    path: src/graph/bfs.rs
+    title: src/graph/bfs.rs
+  - icon: ':warning:'
+    path: src/graph/dfs.rs
+    title: src/graph/dfs.rs
+  - icon: ':warning:'
+    path: src/graph/dfs_io.rs
+    title: src/graph/dfs_io.rs
+  - icon: ':warning:'
+    path: src/graph/dijkstra.rs
+    title: src/graph/dijkstra.rs
+  - icon: ':warning:'
+    path: src/graph/euler_tour.rs
+    title: src/graph/euler_tour.rs
+  - icon: ':warning:'
+    path: src/graph/grid.rs
+    title: src/graph/grid.rs
+  - icon: ':warning:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':warning:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':warning:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':warning:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -43,6 +73,16 @@ data:
   isVerificationFile: false
   path: src/graph.rs
   requiredBy:
+  - src/graph/dfs_io.rs
+  - src/graph/tree.rs
+  - src/graph/dfs.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
+  - src/graph/dijkstra.rs
+  - src/graph/bfs.rs
+  - src/graph/grid.rs
+  - src/graph/euler_tour.rs
   - src/draft/graph/ds.rs
   - src/draft/graph/graph.rs
   - src/draft/graph/path.rs

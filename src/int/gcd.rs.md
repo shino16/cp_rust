@@ -1,6 +1,18 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':x:'
     path: src/tests.rs
@@ -32,12 +44,16 @@ data:
     \ a, &mut b);\n\t\tstd::mem::swap(&mut x, &mut u);\n\t\tstd::mem::swap(&mut y,\
     \ &mut v);\n\t}\n\tif x < I::ZERO {\n\t\tx += u;\n\t\ty -= v;\n\t\tdebug_assert_eq!(gcd(u,\
     \ v), I::ONE);\n\t\tdebug_assert!(x + u >= I::ZERO);\n\t}\n\t(x, y, a)\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/bit.rs
+  - src/cast.rs
+  - src/int.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/int/gcd.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-07 16:16:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs

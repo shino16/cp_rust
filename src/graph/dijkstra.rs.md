@@ -1,6 +1,24 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/assign.rs
+    title: src/assign.rs
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -17,11 +35,17 @@ data:
     \ = togo.pop() {\n\t\tg.adj_w(v, |w, &e| {\n\t\t\tif assign_if(dist[v] + e, &mut\
     \ dist[w], |x, y| x < y) {\n\t\t\t\ttogo.push(w);\n\t\t\t}\n\t\t});\n\t}\n\tdist\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - src/assign.rs
+  - src/bit.rs
+  - src/cast.rs
+  - src/graph.rs
+  - src/int.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/dijkstra.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dijkstra.rs

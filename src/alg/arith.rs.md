@@ -1,10 +1,28 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/alg.rs
+    title: src/alg.rs
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
+  - icon: ':warning:'
+    path: src/graph/euler_tour.rs
+    title: src/graph/euler_tour.rs
   - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
@@ -25,13 +43,19 @@ data:
     \ y: Self::Item) -> Self::Item {\n\t\tx.wrapping_add(y)\n\t}\n}\n\nimpl<N: Num>\
     \ Group for Addition<N> {\n\tfn inv(&self, x: Self::Item) -> Self::Item {\n\t\t\
     x.wrapping_neg()\n\t}\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/alg.rs
+  - src/bit.rs
+  - src/cast.rs
+  - src/int.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/alg/arith.rs
   requiredBy:
   - src/slice/cum.rs
   - src/ds/fenwick.rs
-  timestamp: '1970-01-01 00:00:00+00:00'
+  - src/graph/euler_tour.rs
+  timestamp: '2021-01-03 22:19:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/alg/arith.rs

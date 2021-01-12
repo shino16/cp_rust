@@ -5,6 +5,12 @@ data:
   - icon: ':warning:'
     path: src/ds/uvec2d.rs
     title: src/ds/uvec2d.rs
+  - icon: ':heavy_check_mark:'
+    path: src/fp/conv.rs
+    title: src/fp/conv.rs
+  - icon: ':heavy_check_mark:'
+    path: src/mint/conv.rs
+    title: src/mint/conv.rs
   - icon: ':warning:'
     path: src/u64/conv.rs
     title: src/u64/conv.rs
@@ -51,8 +57,10 @@ data:
   isVerificationFile: false
   path: src/ds/uvec.rs
   requiredBy:
+  - src/fp/conv.rs
   - src/ds/uvec2d.rs
   - src/u64/conv.rs
+  - src/mint/conv.rs
   timestamp: '2020-11-27 14:24:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

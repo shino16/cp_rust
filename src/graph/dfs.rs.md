@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/ds/bitset.rs
+    title: src/ds/bitset.rs
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -21,11 +30,14 @@ data:
     \ Graph>(g: &G, s: usize) -> (Vec<(usize, usize)>, Vec<usize>) {\n\tlet mut ord\
     \ = Vec::with_capacity(g.len());\n\tlet mut par = vec![!0; g.len()];\n\tdfs(g,\
     \ s, |v, p| {\n\t\tord.push((v, p));\n\t\tpar[v] = p;\n\t});\n\t(ord, par)\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/ds/bitset.rs
+  - src/graph.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/dfs.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs.rs

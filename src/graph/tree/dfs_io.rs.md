@@ -1,7 +1,22 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/ds/bitset.rs
+    title: src/ds/bitset.rs
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':warning:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -18,11 +33,16 @@ data:
     \ {\n\t\t\tfi(v, par);\n\t\t\ttogo.push((!v, par));\n\t\t\tg.adj(v, |w| {\n\t\t\
     \t\tif w != par {\n\t\t\t\t\ttogo.push((w, v));\n\t\t\t\t}\n\t\t\t});\n\t\t}\n\
     \t}\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/ds/bitset.rs
+  - src/graph.rs
+  - src/graph/tree.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree/dfs_io.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - src/graph/tree/reroot.rs
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dfs_io.rs

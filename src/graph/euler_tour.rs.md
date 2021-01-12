@@ -1,6 +1,30 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/alg.rs
+    title: src/alg.rs
+  - icon: ':warning:'
+    path: src/alg/arith.rs
+    title: src/alg/arith.rs
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':warning:'
+    path: src/ds/bitset.rs
+    title: src/ds/bitset.rs
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -19,11 +43,19 @@ data:
     \t\t\ttogo.push((!v, 0, e.clone()));\n\t\t\tg.adj_w(v, |w, e| {\n\t\t\t\tif w\
     \ != par {\n\t\t\t\t\ttogo.push((w, v, e.clone()));\n\t\t\t\t}\n\t\t\t})\n\t\t\
     }\n\t}\n\tedges\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/alg.rs
+  - src/alg/arith.rs
+  - src/bit.rs
+  - src/cast.rs
+  - src/ds/bitset.rs
+  - src/graph.rs
+  - src/int.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/euler_tour.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/euler_tour.rs

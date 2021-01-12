@@ -1,7 +1,22 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':warning:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':warning:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -20,11 +35,16 @@ data:
     pub use super::*;
 
     '
-  dependsOn: []
+  dependsOn:
+  - src/graph.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - src/graph/tree/reroot.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree.rs

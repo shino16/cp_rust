@@ -17,6 +17,9 @@ data:
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: src/mint/conv.rs
+    title: src/mint/conv.rs
   - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
@@ -110,6 +113,7 @@ data:
   path: src/mint.rs
   requiredBy:
   - src/tests.rs
+  - src/mint/conv.rs
   timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

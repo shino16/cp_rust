@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':warning:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -18,11 +27,14 @@ data:
     \ topological<G: Graph>(g: &G, s: usize) -> Vec<(usize, usize)> {\n\tlet mut res\
     \ = Vec::with_capacity(g.len());\n\tdfs(g, s, |v, par| res.push((v, par)));\n\t\
     res\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/graph.rs
+  - src/graph/tree.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree/dfs.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dfs.rs

@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/float/bisect.rs
+    title: src/float/bisect.rs
+  - icon: ':warning:'
+    path: src/float/convex.rs
+    title: src/float/convex.rs
   _extendedVerifiedWith: []
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
@@ -22,7 +28,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/float.rs
-  requiredBy: []
+  requiredBy:
+  - src/float/bisect.rs
+  - src/float/convex.rs
   timestamp: '2020-12-10 17:35:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

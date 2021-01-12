@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/alg/arith.rs
+    title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
     path: src/dfa.rs
     title: src/dfa.rs
@@ -20,12 +23,57 @@ data:
   - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
+  - icon: ':heavy_check_mark:'
+    path: src/fp/conv.rs
+    title: src/fp/conv.rs
   - icon: ':warning:'
     path: src/graph.rs
     title: src/graph.rs
+  - icon: ':warning:'
+    path: src/graph/bfs.rs
+    title: src/graph/bfs.rs
+  - icon: ':warning:'
+    path: src/graph/dfs.rs
+    title: src/graph/dfs.rs
+  - icon: ':warning:'
+    path: src/graph/dfs_io.rs
+    title: src/graph/dfs_io.rs
+  - icon: ':warning:'
+    path: src/graph/dijkstra.rs
+    title: src/graph/dijkstra.rs
+  - icon: ':warning:'
+    path: src/graph/euler_tour.rs
+    title: src/graph/euler_tour.rs
+  - icon: ':warning:'
+    path: src/graph/grid.rs
+    title: src/graph/grid.rs
+  - icon: ':warning:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':warning:'
+    path: src/graph/tree/dfs.rs
+    title: src/graph/tree/dfs.rs
+  - icon: ':warning:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':warning:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
   - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
+  - icon: ':warning:'
+    path: src/int/arith.rs
+    title: src/int/arith.rs
+  - icon: ':warning:'
+    path: src/int/bisect.rs
+    title: src/int/bisect.rs
+  - icon: ':x:'
+    path: src/int/gcd.rs
+    title: src/int/gcd.rs
+  - icon: ':warning:'
+    path: src/int/inv.rs
+    title: src/int/inv.rs
   - icon: ':warning:'
     path: src/math/binom.rs
     title: src/math/binom.rs
@@ -35,6 +83,9 @@ data:
   - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
+  - icon: ':heavy_check_mark:'
+    path: src/mint/conv.rs
+    title: src/mint/conv.rs
   - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
@@ -82,11 +133,28 @@ data:
   requiredBy:
   - src/fp.rs
   - src/slice/cum.rs
+  - src/fp/conv.rs
   - src/ds/fenwick.rs
   - src/u64/conv.rs
   - src/tests.rs
   - src/int.rs
+  - src/graph/dfs_io.rs
+  - src/graph/tree.rs
+  - src/graph/dfs.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
+  - src/graph/dijkstra.rs
+  - src/graph/bfs.rs
+  - src/graph/grid.rs
+  - src/graph/euler_tour.rs
   - src/graph.rs
+  - src/alg/arith.rs
+  - src/int/bisect.rs
+  - src/int/inv.rs
+  - src/int/gcd.rs
+  - src/int/arith.rs
+  - src/mint/conv.rs
   - src/dfa.rs
   - src/mint.rs
   - src/math/pow.rs

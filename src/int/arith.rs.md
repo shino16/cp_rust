@@ -1,6 +1,18 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -16,11 +28,15 @@ data:
     \t\t(x + n / x) >> 1\n\t}\n}\n\npub fn ceil_sqrt<I: UInt>(n: I) -> I {\n\tif n\
     \ == I::ZERO {\n\t\tI::ZERO\n\t} else {\n\t\tfloor_sqrt(n - I::ONE) + I::ONE\n\
     \t}\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/bit.rs
+  - src/cast.rs
+  - src/int.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/int/arith.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-12-21 20:11:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/arith.rs

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/float.rs
+    title: src/float.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -21,11 +24,12 @@ data:
     \ = f(mr);\n\t\t} else {\n\t\t\tr = mr;\n\t\t\tmr = ml;\n\t\t\tymr = yml;\n\t\t\
     \tmr = (PHI * l + mr) / (1.0 + PHI);\n\t\t\tyml = f(ml);\n\t\t}\n\t}\n\t(ml, yml)\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - src/float.rs
   isVerificationFile: false
   path: src/float/convex.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-12-21 16:41:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/convex.rs

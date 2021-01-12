@@ -50,7 +50,7 @@ data:
   - src/dfa.rs
   - src/fxhash.rs
   - src/rand/xoshiro256plus.rs
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/dfa_test.rs

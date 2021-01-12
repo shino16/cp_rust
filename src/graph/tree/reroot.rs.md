@@ -1,6 +1,24 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/alg.rs
+    title: src/alg.rs
+  - icon: ':warning:'
+    path: src/ds/bitset.rs
+    title: src/ds/bitset.rs
+  - icon: ':warning:'
+    path: src/graph.rs
+    title: src/graph.rs
+  - icon: ':warning:'
+    path: src/graph/tree.rs
+    title: src/graph/tree.rs
+  - icon: ':warning:'
+    path: src/graph/tree/dfs_io.rs
+    title: src/graph/tree/dfs_io.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -23,11 +41,17 @@ data:
     \ par: usize| {\n\t\tlet mut state = state.borrow_mut();\n\t\tif par != !0 {\n\
     \t\t\talg.op_inv_to(state[par], &mut state[v]);\n\t\t\talg.op_to(state[v], &mut\
     \ state[par]);\n\t\t}\n\t};\n\tdfs_io(g, s, f_in, f_out);\n\tres\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/alg.rs
+  - src/ds/bitset.rs
+  - src/graph.rs
+  - src/graph/tree.rs
+  - src/graph/tree/dfs_io.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-12 14:31:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs

@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: src/alg/action.rs
+    title: src/alg/action.rs
+  - icon: ':warning:'
+    path: src/alg/arith.rs
+    title: src/alg/arith.rs
+  - icon: ':warning:'
     path: src/ds/disjointst.rs
     title: src/ds/disjointst.rs
   - icon: ':warning:'
@@ -14,6 +20,12 @@ data:
   - icon: ':warning:'
     path: src/ds/sparsetable.rs
     title: src/ds/sparsetable.rs
+  - icon: ':warning:'
+    path: src/graph/euler_tour.rs
+    title: src/graph/euler_tour.rs
+  - icon: ':warning:'
+    path: src/graph/tree/reroot.rs
+    title: src/graph/tree/reroot.rs
   - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
@@ -59,6 +71,10 @@ data:
   - src/ds/sparsetable.rs
   - src/ds/fenwick.rs
   - src/ds/segtree.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/euler_tour.rs
+  - src/alg/action.rs
+  - src/alg/arith.rs
   timestamp: '2021-01-03 22:19:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/alg.rs
+    title: src/alg.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -19,11 +22,12 @@ data:
     \ A::Item) -> On::Item> Action\n\tfor ActionImpl<On, A, F>\n{\n\ttype Actor =\
     \ A;\n\ttype On = On;\n\tfn act(&self, on: On::Item, actor: A::Item) -> On::Item\
     \ {\n\t\tself.2(on, actor)\n\t}\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/alg.rs
   isVerificationFile: false
   path: src/alg/action.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2021-01-03 22:19:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/alg/action.rs

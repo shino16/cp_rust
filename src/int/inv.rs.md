@@ -1,6 +1,18 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/bit.rs
+    title: src/bit.rs
+  - icon: ':question:'
+    path: src/cast.rs
+    title: src/cast.rs
+  - icon: ':question:'
+    path: src/int.rs
+    title: src/int.rs
+  - icon: ':question:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -18,11 +30,15 @@ data:
     \ a, &mut b);\n\t\tstd::mem::swap(&mut u, &mut v);\n\t}\n\tdebug_assert_eq!(a,\
     \ one);\n\tif u < zero {\n\t\tdebug_assert_eq!(v, modu.as_());\n\t\tdebug_assert!(u\
     \ > zero);\n\t\tu += v;\n\t}\n\ta.as_()\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/bit.rs
+  - src/cast.rs
+  - src/int.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/int/inv.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-12-21 20:11:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/inv.rs

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/float.rs
+    title: src/float.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
@@ -16,11 +19,12 @@ data:
     \ / e).log2() as u32 + 2;\n\tfor _ in 0..k {\n\t\tlet mid = (l + r) / 2.0;\n\t\
     \tif pred(mid) {\n\t\t\tl = mid;\n\t\t} else {\n\t\t\tr = mid;\n\t\t}\n\t}\n\t\
     r\n}\n"
-  dependsOn: []
+  dependsOn:
+  - src/float.rs
   isVerificationFile: false
   path: src/float/bisect.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2020-12-21 16:41:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/bisect.rs
