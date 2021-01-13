@@ -25,7 +25,7 @@ jobs:
           profile: minimal
 
       - name: Build
-        run: cargo build --all-targets
+        run: cargo build --release --all-targets
 
       - name: Setup cargo-auto-bundle
         run: cargo install --git https://github.com/shino16/cargo-auto-bundle.git
