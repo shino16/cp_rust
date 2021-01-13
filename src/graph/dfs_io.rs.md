@@ -24,7 +24,7 @@ data:
     \ FI: FnMut(usize, usize), FO: FnMut(usize, usize)>(\n\tg: &G,\n\ts: usize,\n\t\
     mut fi: FI,\n\tmut fo: FO,\n) {\n\tlet mut visited = new_bitset(g.len());\n\t\
     visited.set_bit(s, true);\n\tlet mut togo = vec![(s, !0)];\n\twhile let Some((v,\
-    \ par)) = togo.pop() {\n\t\tif v.get_bit(31) {\n\t\t\tfo(!v, par);\n\t\t} else\
+    \ par)) = togo.pop() {\n\t\tif v >> 31 != 0 {\n\t\t\tfo(!v, par);\n\t\t} else\
     \ {\n\t\t\tfi(v, par);\n\t\t\ttogo.push((!v, par));\n\t\t\tg.adj(v, |w| {\n\t\t\
     \t\tif visited.modify_bit(w, true) {\n\t\t\t\t\ttogo.push((w, v));\n\t\t\t\t}\n\
     \t\t\t});\n\t\t}\n\t}\n}\n"
@@ -35,7 +35,7 @@ data:
   isVerificationFile: false
   path: src/graph/dfs_io.rs
   requiredBy: []
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '2021-01-13 14:07:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs_io.rs

@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: benches
+    pages:
+    - icon: ':warning:'
+      path: benches/bench.rs
+      title: benches/bench.rs
   - name: src/alg
     pages:
     - icon: ':warning:'
@@ -53,7 +58,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -110,6 +115,9 @@ data:
     - icon: ':warning:'
       path: src/draft/minimize_dfa.rs
       title: src/draft/minimize_dfa.rs
+    - icon: ':warning:'
+      path: src/draft/uf_fast.rs
+      title: src/draft/uf_fast.rs
   - name: src/draft/graph
     pages:
     - icon: ':warning:'
@@ -147,7 +155,7 @@ data:
     - icon: ':warning:'
       path: src/ds/sparsetable.rs
       title: src/ds/sparsetable.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/ds/uf.rs
       title: src/ds/uf.rs
     - icon: ':warning:'
@@ -320,7 +328,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/segtree_test.rs
       title: test/src/bin/segtree_test.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/src/bin/union_find_test.rs
       title: test/src/bin/union_find_test.rs
 layout: toppage
