@@ -1,6 +1,7 @@
 pub mod conv;
 use std::u64;
 
+// 70x faster than naive multiplication in u128 on 64bit cpu
 /// a,b <= modu <= 7.2e18
 pub fn modmul64(a: u64, b: u64, modu: u64) -> u64 {
 	let (a, b, modu) = (a as i64, b as i64, modu as i64);

@@ -11,6 +11,9 @@ impl UnionFind {
 		let size = vec![1; len];
 		Self { par, size, count: len }
 	}
+	pub fn len(&self) -> usize {
+		self.par.len()
+	}
 	pub fn find(&mut self, x: usize) -> usize {
 		if self.par[x] == x {
 			x
@@ -26,7 +29,7 @@ impl UnionFind {
 		let root = self.find(x);
 		self.size[root]
 	}
-	pub fn unite(&mut self, x: usize, y: usize) {
+	pub fn unite(&mut self, x: usize, y: usize) -> usize {
 		let (mut x, mut y) = (self.find(x), self.find(y));
 		if x != y {
 			if self.size[x] < self.size[y] {
@@ -36,8 +39,23 @@ impl UnionFind {
 			self.size[x] += self.size[y];
 			self.count -= 1;
 		}
+		x
 	}
 	pub fn count(&self) -> usize {
 		self.count
+	}
+	pub fn push(&mut self) -> usize {
+		let new = self.len();
+		self.par.push(new);
+		self.size.push(1);
+		new
+	}
+	pub fn group(&self) -> Vec<Vec<usize>> {
+		let mut groups = vec![Vec::new(); self.len()];
+		for (i, &x) in (0..).zip(&self.par) {
+			groups[x].push(i);
+		}
+		groups.retain(|v| !v.is_empty());
+		groups
 	}
 }

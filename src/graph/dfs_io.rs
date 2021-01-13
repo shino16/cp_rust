@@ -11,7 +11,7 @@ pub fn dfs_io<G: Graph, FI: FnMut(usize, usize), FO: FnMut(usize, usize)>(
 	visited.set_bit(s, true);
 	let mut togo = vec![(s, !0)];
 	while let Some((v, par)) = togo.pop() {
-		if v.get_bit(31) {
+		if v >> 31 != 0 {
 			fo(!v, par);
 		} else {
 			fi(v, par);

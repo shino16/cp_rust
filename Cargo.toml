@@ -10,6 +10,9 @@ default-run = "main"
 [dependencies]
 proconio = { version = "=0.3.6", features = ["derive"] }
 
+[dev-dependencies]
+criterion = "0.3"
+
 [lib]
 name = "lib"
 path = "src/lib.rs"
@@ -18,3 +21,7 @@ path = "src/lib.rs"
 name = "main"
 path = "src/main.rs"
 doc = false
+
+[[bench]]
+name = "bench"
+harness = false
