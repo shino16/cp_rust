@@ -48,11 +48,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_test.rs
     title: test/src/bin/segtree_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/union_find_test.rs
     title: test/src/bin/union_find_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -132,7 +132,7 @@ data:
   - src/mint/conv.rs
   - src/mint.rs
   timestamp: '2021-01-12 14:31:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_test.rs

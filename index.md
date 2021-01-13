@@ -58,7 +58,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -155,7 +155,7 @@ data:
     - icon: ':warning:'
       path: src/ds/sparsetable.rs
       title: src/ds/sparsetable.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/uf.rs
       title: src/ds/uf.rs
     - icon: ':warning:'
@@ -328,7 +328,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/segtree_test.rs
       title: test/src/bin/segtree_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/union_find_test.rs
       title: test/src/bin/union_find_test.rs
 layout: toppage
