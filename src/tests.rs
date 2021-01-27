@@ -6,7 +6,7 @@ mod tests {
 		fn test_pow() {
 			use crate::rand::xoshiro256plus::*;
 			let mut rng = Xoshiro256plus::new();
-			assert_eq!(F17::from(2).pow(3), F17::from(8));
+			assert_eq!(F17::new(2).pow(3), F17::new(8));
 			for _ in 0..100 {
 				let base: F17 = rng.next().into();
 				let k = rng.next() % 100;

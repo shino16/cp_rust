@@ -1,7 +1,7 @@
 use crate::io::*;
 pub use crate::zo::ZeroOne;
 use std::marker::PhantomData;
-use std::{cmp, fmt, iter, ops};
+use std::{cmp, fmt, iter, ops, u64, usize};
 
 pub mod conv;
 pub mod num;
@@ -58,7 +58,7 @@ pub type F99 = FpB;
 impl<M: Mod> Fp<M> {
 	pub const P: u32 = M::P;
 	pub fn new(val: u32) -> Self {
-		Fp::from_raw(reduce::<M>(val as u64 * M::R2 as u64))
+		val.into()
 	}
 	fn from_raw(val: u32) -> Self {
 		Fp { val, _m: PhantomData }
@@ -67,17 +67,17 @@ impl<M: Mod> Fp<M> {
 		let v = reduce::<M>(self.val as u64);
 		if v >= M::P { v - M::P } else { v }
 	}
-	pub fn pow(self, k: u64) -> Self {
+	pub fn pow(mut self, mut k: u64) -> Self {
 		if self.val == 0 && k == 0 {
 			return Self::new(1);
 		}
-		let (mut e, mut k) = (self, k % (M::P - 1) as u64);
+		k %= (M::P - 1) as u64;
 		let mut res = Self::ONE;
 		while !k.is_zero() {
 			if k % 2 != 0 {
-				res *= e;
+				res *= self;
 			}
-			e *= e;
+			self *= self;
 			k >>= 1;
 		}
 		res
@@ -100,20 +100,29 @@ impl<M: Mod> Fp<M> {
 	}
 }
 
+impl<M: Mod> From<u32> for Fp<M> {
+	fn from(x: u32) -> Self {
+		Fp::from_raw(reduce::<M>(x as u64 * M::R2 as u64))
+	}
+}
+
+impl<M: Mod> From<usize> for Fp<M> {
+	fn from(x: usize) -> Self {
+		Fp::from_raw(reduce::<M>(x as u64 * M::R2 as u64))
+	}
+}
+
 macro_rules! impl_from_int {
-	($(($t:ty: $via:ty)),*) => { $(
+	($($t:ty),*) => { $(
 		impl<M: Mod> From<$t> for Fp<M> {
 			fn from(x: $t) -> Self {
-				Self::from_raw((x as $via).rem_euclid(M::P as $via) as u32)
+				Fp::from_raw(reduce::<M>(x.rem_euclid(M::P as _) as u64 * M::R2 as u64))
 			}
 		}
 	)* };
 }
 
-impl_from_int! {
-	(i8: i32), (i16: i32), (i32: i32), (i64: i64), (isize: isize),
-	(u8: u32), (u16: u32), (u32: u32), (u64: u64), (usize: usize)
-}
+impl_from_int!(u64, i32, i64, isize);
 
 impl<M: Mod> cmp::PartialEq for Fp<M> {
 	fn eq(&self, other: &Self) -> bool {

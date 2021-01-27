@@ -21,7 +21,7 @@ macro_rules! impl_ntt {
 					ROOT.resize(k, Default::default());
 					INV_ROOT.resize(k, Default::default());
 					let m = FpType::P - 1;
-					let proot = FpType::from($prim);
+					let proot = FpType::new($prim);
 					for i in 0..k {
 						ROOT[i] = -proot.pow((m >> (i + 2)) as u64);
 						INV_ROOT[i] = ROOT[i].inv();
