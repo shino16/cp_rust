@@ -48,7 +48,7 @@ impl Dfa for ZigZag {
 struct Modx;
 
 impl Mod for Modx {
-	const P: u32 = 10000;
+	const M: u32 = 10000;
 	const PHI: u32 = 4000;
 }
 
