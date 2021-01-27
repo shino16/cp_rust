@@ -1,28 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
-  - icon: ':heavy_check_mark:'
-    path: src/cast.rs
-    title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int.rs
-    title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -30,14 +21,14 @@ data:
     path: src/u64/conv.rs
     title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -53,21 +44,21 @@ data:
     \t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\tROOT.resize(k, Default::default());\n\
     \t\t\t\t\tINV_ROOT.resize(k, Default::default());\n\t\t\t\t\tlet m = FpType::P\
     \ - 1;\n\t\t\t\t\tlet proot = FpType::from($prim);\n\t\t\t\t\tfor i in 0..k {\n\
-    \t\t\t\t\t\tROOT[i] = -proot.pow(m >> (i + 2));\n\t\t\t\t\t\tINV_ROOT[i] = ROOT[i].inv();\n\
-    \t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tpub fn ntt(a: &mut UVec<FpType>) {\n\t\
-    \t\t\tlet n = a.len();\n\t\t\t\tlet mut m = n >> 1;\n\t\t\t\twhile m != 0 {\n\t\
-    \t\t\t\tlet mut w = FpType::ONE;\n\t\t\t\t\tfor (k, t) in (0..n).step_by(m * 2).zip(1_u32..)\
+    \t\t\t\t\t\tROOT[i] = -proot.pow((m >> (i + 2)) as u64);\n\t\t\t\t\t\tINV_ROOT[i]\
+    \ = ROOT[i].inv();\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tpub fn ntt(a: &mut\
+    \ UVec<FpType>) {\n\t\t\t\tlet n = a.len();\n\t\t\t\tlet mut m = n >> 1;\n\t\t\
+    \t\twhile m != 0 {\n\t\t\t\t\tlet mut w = FpType::ONE;\n\t\t\t\t\tfor (k, t) in\
+    \ (0..n).step_by(m * 2).zip(1_u32..) {\n\t\t\t\t\t\tfor i in 0..m {\n\t\t\t\t\t\
+    \t\tlet u = a[k + i];\n\t\t\t\t\t\t\tlet v = a[k + i + m] * w;\n\t\t\t\t\t\t\t\
+    a[k + i] = u + v;\n\t\t\t\t\t\t\ta[k + i + m] = u - v;\n\t\t\t\t\t\t}\n\t\t\t\t\
+    \t\tw *= unsafe { ROOT[t.trailing_zeros() as usize] };\n\t\t\t\t\t}\n\t\t\t\t\t\
+    m >>= 1;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tpub fn inv_ntt(a: &mut UVec<FpType>) {\n\
+    \t\t\t\tlet n = a.len();\n\t\t\t\tlet mut m = 1;\n\t\t\t\twhile m < n {\n\t\t\t\
+    \t\tlet mut w = FpType::ONE;\n\t\t\t\t\tfor (k, t) in (0..n).step_by(m * 2).zip(1_u32..)\
     \ {\n\t\t\t\t\t\tfor i in 0..m {\n\t\t\t\t\t\t\tlet u = a[k + i];\n\t\t\t\t\t\t\
-    \tlet v = a[k + i + m] * w;\n\t\t\t\t\t\t\ta[k + i] = u + v;\n\t\t\t\t\t\t\ta[k\
-    \ + i + m] = u - v;\n\t\t\t\t\t\t}\n\t\t\t\t\t\tw *= unsafe { ROOT[t.trailing_zeros()\
-    \ as usize] };\n\t\t\t\t\t}\n\t\t\t\t\tm >>= 1;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t\
-    pub fn inv_ntt(a: &mut UVec<FpType>) {\n\t\t\t\tlet n = a.len();\n\t\t\t\tlet\
-    \ mut m = 1;\n\t\t\t\twhile m < n {\n\t\t\t\t\tlet mut w = FpType::ONE;\n\t\t\t\
-    \t\tfor (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n\t\t\t\t\t\tfor i in 0..m\
-    \ {\n\t\t\t\t\t\t\tlet u = a[k + i];\n\t\t\t\t\t\t\tlet v = a[k + i + m];\n\t\t\
-    \t\t\t\t\ta[k + i] = u + v;\n\t\t\t\t\t\t\ta[k + i + m] = (u - v) * w;\n\t\t\t\
-    \t\t\t}\n\t\t\t\t\t\tw *= unsafe { INV_ROOT[t.trailing_zeros() as usize] };\n\t\
-    \t\t\t\t}\n\t\t\t\t\tm <<= 1;\n\t\t\t\t}\n\t\t\t\tlet d = FpType::from(n).inv();\n\
+    \tlet v = a[k + i + m];\n\t\t\t\t\t\t\ta[k + i] = u + v;\n\t\t\t\t\t\t\ta[k +\
+    \ i + m] = (u - v) * w;\n\t\t\t\t\t\t}\n\t\t\t\t\t\tw *= unsafe { INV_ROOT[t.trailing_zeros()\
+    \ as usize] };\n\t\t\t\t\t}\n\t\t\t\t\tm <<= 1;\n\t\t\t\t}\n\t\t\t\tlet d = FpType::from(n).inv();\n\
     \t\t\t\ta.iter_mut().for_each(|e| *e *= d);\n\t\t\t}\n\n\t\t\tpub fn conv<'a,\
     \ 'b>(a: &'a mut UVec<FpType>, b: &'b mut UVec<FpType>) {\n\t\t\t\tlet len = a.len()\
     \ + b.len() - 1;\n\t\t\t\tfn ilog2(n: usize) -> u32 {\n\t\t\t\t\tstd::mem::size_of::<usize>()\
@@ -95,20 +86,17 @@ data:
     \t\t\tx += FpA::from(x2.value()) * FpB::P;\n\t\t\tx += FpA::from(x3.value()) *\
     \ FpB::P * FpC::P;\n\t\t\t*e0 = x.value().into();\n\t\t}\n\t}\n}\n"
   dependsOn:
-  - src/bit.rs
-  - src/cast.rs
   - src/conv.rs
   - src/ds/uvec.rs
   - src/fp.rs
-  - src/int.rs
   - src/io.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/fp/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-01-12 14:31:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-27 17:46:37+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/ntt_test.rs
   - test/src/bin/ntt_garner_test.rs

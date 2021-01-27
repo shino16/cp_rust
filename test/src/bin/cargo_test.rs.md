@@ -1,55 +1,58 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/iter/prod.rs
     title: src/iter/prod.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':x:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -60,11 +63,12 @@ data:
   code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\n\
     \n#[allow(unused_imports)]\nuse lib::tests::*;\n\nuse std::io::{self, Write, Result};\n\
     use std::process::Command;\n\nfn main() -> Result<()> {\n\tlet output = Command::new(\"\
-    cargo\")\n\t\t.arg(\"test\")\n\t\t.arg(\"--\")\n\t\t.arg(\"--test-threads=1\"\
-    )\n\t\t.output()?;\n\n\tif !output.status.success() {\n\t\tprintln!(\"`cargo test`\
-    \ failed\");\n\t\tprintln!(\"--- captured stdout ---\");\n\t\tio::stdout().write_all(&output.stdout)?;\n\
-    \t\tprintln!(\"--- captured stderr ---\");\n\t\tio::stdout().write_all(&output.stderr)?;\n\
-    \t}\n\n\tprintln!(\"Hello World\");\n\n\tOk(())\n}\n"
+    cargo\")\n\t\t.arg(\"test\")\n\t\t.arg(\"--release\")\n\t\t.arg(\"--\")\n\t\t\
+    .arg(\"--test-threads=1\")\n\t\t.output()?;\n\n\tif !output.status.success() {\n\
+    \t\tprintln!(\"`cargo test` failed\");\n\t\tprintln!(\"--- captured stdout ---\"\
+    );\n\t\tio::stdout().write_all(&output.stdout)?;\n\t\tprintln!(\"--- captured\
+    \ stderr ---\");\n\t\tio::stdout().write_all(&output.stderr)?;\n\t}\n\n\tprintln!(\"\
+    Hello World\");\n\n\tOk(())\n}\n"
   dependsOn:
   - src/bit.rs
   - src/cast.rs
@@ -76,6 +80,7 @@ data:
   - src/iter/prod.rs
   - src/make_vec.rs
   - src/mint.rs
+  - src/num.rs
   - src/rand/seed.rs
   - src/rand/xoshiro256plus.rs
   - src/slice/perm.rs
@@ -84,8 +89,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-01-12 16:49:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-01-27 17:46:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
 layout: document

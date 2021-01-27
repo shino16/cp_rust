@@ -1,28 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
-  - icon: ':heavy_check_mark:'
-    path: src/cast.rs
-    title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int.rs
-    title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -48,7 +39,7 @@ data:
     \ UVec<FpType> = UVec(Vec::new());\n\n\t\t\t/// reserve for n up to 2^k\n\t\t\t\
     pub fn reserve(k: usize) {\n\t\t\t\tunsafe {\n\t\t\t\t\tif k <= ROOT.len() {\n\
     \t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\tROOT.resize(k, Default::default());\n\
-    \t\t\t\t\tINV_ROOT.resize(k, Default::default());\n\t\t\t\t\tlet m = FpType::P\
+    \t\t\t\t\tINV_ROOT.resize(k, Default::default());\n\t\t\t\t\tlet m = FpType::M\
     \ - 1;\n\t\t\t\t\tlet proot = FpType::from($prim);\n\t\t\t\t\tfor i in 0..k {\n\
     \t\t\t\t\t\tROOT[i] = -proot.pow(m >> (i + 2));\n\t\t\t\t\t\tINV_ROOT[i] = ROOT[i].inv();\n\
     \t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tpub fn ntt(a: &mut UVec<FpType>) {\n\t\
@@ -79,8 +70,8 @@ data:
     \ {\n\t\t\t\t\tconv(lhs.as_mut(), rhs.as_mut());\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\
     };\n}\n\nimpl_ntt!(impl_b, ModB, 3);\nimpl_ntt!(impl_c, ModC, 5);\nimpl_ntt!(impl_d,\
     \ ModD, 5);\n\nimpl Conv for Mint17 {\n\tfn conv_in_place(lhs: &mut Vec<Self>,\
-    \ rhs: &mut Vec<Self>) {\n\t\tlet r12 = MintC::from(MintB::P).inv();\n\t\tlet\
-    \ r13 = MintD::from(MintB::P).inv();\n\t\tlet r23 = MintD::from(MintC::P).inv();\n\
+    \ rhs: &mut Vec<Self>) {\n\t\tlet r12 = MintC::from(MintB::M).inv();\n\t\tlet\
+    \ r13 = MintD::from(MintB::M).inv();\n\t\tlet r23 = MintD::from(MintC::M).inv();\n\
     \t\tfn run<M: Mod>(lhs: &mut Vec<Mint17>, rhs: &mut Vec<Mint17>) -> Vec<Mint<M>>\n\
     \t\twhere\n\t\t\tMint<M>: Conv,\n\t\t{\n\t\t\tlet lhs = lhs.iter().map(|&e| Mint::from(e.value())).collect();\n\
     \t\t\tlet rhs = rhs.iter().map(|&e| Mint::from(e.value())).collect();\n\t\t\t\
@@ -89,21 +80,18 @@ data:
     \tlhs.resize(v1.len(), Default::default());\n\t\tfor (((e0, e1), e2), e3) in lhs.iter_mut().zip(v1).zip(v2).zip(v3)\
     \ {\n\t\t\tlet x1 = e1;\n\t\t\tlet x2 = (e2 - x1.value()) * r12;\n\t\t\tlet x3\
     \ = ((e3 - x1.value()) * r13 - x2.value()) * r23;\n\t\t\tlet mut x = MintA::from(x1.value());\n\
-    \t\t\tx += MintA::from(x2.value()) * MintB::P;\n\t\t\tx += MintA::from(x3.value())\
-    \ * MintB::P * MintC::P;\n\t\t\t*e0 = x.value().into();\n\t\t}\n\t}\n}\n"
+    \t\t\tx += MintA::from(x2.value()) * MintB::M;\n\t\t\tx += MintA::from(x3.value())\
+    \ * MintB::M * MintC::M;\n\t\t\t*e0 = x.value().into();\n\t\t}\n\t}\n}\n"
   dependsOn:
-  - src/bit.rs
-  - src/cast.rs
   - src/conv.rs
   - src/ds/uvec.rs
-  - src/int.rs
   - src/io.rs
   - src/mint.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

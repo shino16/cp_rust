@@ -1,31 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
-  - icon: ':heavy_check_mark:'
-    path: src/cast.rs
-    title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int.rs
-    title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -53,19 +44,16 @@ data:
     \ as u64 * FpB::P as u64;\n\t\t\tx += x3.value() as u64 * FpB::P as u64 * FpC::P\
     \ as u64;\n\t\t\t*e0 = x;\n\t\t}\n\t}\n}\n"
   dependsOn:
-  - src/bit.rs
-  - src/cast.rs
   - src/conv.rs
   - src/ds/uvec.rs
   - src/fp.rs
   - src/fp/conv.rs
-  - src/int.rs
   - src/io.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/u64/conv.rs
   requiredBy: []
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/u64/conv.rs

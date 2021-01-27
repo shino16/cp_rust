@@ -2,12 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/dfa.rs
     title: src/dfa.rs
+  - icon: ':warning:'
+    path: src/draft/fpacc64.rs
+    title: src/draft/fpacc64.rs
   - icon: ':warning:'
     path: src/draft/graph/ds.rs
     title: src/draft/graph/ds.rs
@@ -20,12 +23,15 @@ data:
   - icon: ':warning:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
+  - icon: ':warning:'
+    path: src/fp/num.rs
+    title: src/fp/num.rs
   - icon: ':warning:'
     path: src/graph.rs
     title: src/graph.rs
@@ -59,7 +65,7 @@ data:
   - icon: ':warning:'
     path: src/graph/tree/reroot.rs
     title: src/graph/tree/reroot.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':warning:'
@@ -68,7 +74,7 @@ data:
   - icon: ':warning:'
     path: src/int/bisect.rs
     title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':warning:'
@@ -80,29 +86,38 @@ data:
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
   - icon: ':warning:'
+    path: src/mint/num.rs
+    title: src/mint/num.rs
+  - icon: ':question:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   - icon: ':warning:'
     path: src/u64/conv.rs
     title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/lazy_segtree_test.rs
+    title: test/src/bin/lazy_segtree_test.rs
+  - icon: ':x:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
   - icon: ':heavy_check_mark:'
@@ -111,11 +126,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_mint_test.rs
     title: test/src/bin/ntt_mint_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -134,6 +149,7 @@ data:
   - src/fp.rs
   - src/slice/cum.rs
   - src/fp/conv.rs
+  - src/fp/num.rs
   - src/ds/fenwick.rs
   - src/u64/conv.rs
   - src/tests.rs
@@ -150,20 +166,23 @@ data:
   - src/graph/euler_tour.rs
   - src/graph.rs
   - src/alg/arith.rs
+  - src/num.rs
   - src/int/bisect.rs
   - src/int/inv.rs
   - src/int/gcd.rs
   - src/int/arith.rs
   - src/mint/conv.rs
+  - src/mint/num.rs
   - src/dfa.rs
   - src/mint.rs
   - src/math/pow.rs
   - src/math/binom.rs
+  - src/draft/fpacc64.rs
   - src/draft/graph/ds.rs
   - src/draft/graph/graph.rs
   - src/draft/graph/path.rs
   timestamp: '2020-12-21 16:49:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_test.rs
@@ -171,6 +190,7 @@ data:
   - test/src/bin/ntt_mint_test.rs
   - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_garner_test.rs
+  - test/src/bin/lazy_segtree_test.rs
 documentation_of: src/zo.rs
 layout: document
 redirect_from:

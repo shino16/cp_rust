@@ -4,19 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
-  - icon: ':heavy_check_mark:'
-    path: src/cast.rs
-    title: src/cast.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int.rs
-    title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -46,14 +40,12 @@ data:
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
-  - src/bit.rs
-  - src/cast.rs
-  - src/int.rs
+  - src/num.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-01-03 22:19:36+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

@@ -1,16 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -34,11 +37,12 @@ data:
   - src/bit.rs
   - src/cast.rs
   - src/int.rs
+  - src/num.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/int/inv.rs
   requiredBy: []
-  timestamp: '2020-12-21 20:11:53+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/inv.rs

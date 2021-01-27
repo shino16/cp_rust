@@ -11,76 +11,22 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/lib.rs\n"
-  code: '#![allow(clippy::many_single_char_names)]
-
-    #![allow(clippy::new_without_default)]
-
-    #![allow(clippy::suspicious_op_assign_impl)]
-
-
-    pub mod alg;
-
-    pub mod assign;
-
-    pub mod bit;
-
-    pub mod bool;
-
-    pub mod cast;
-
-    pub mod cmp;
-
-    pub mod conv;
-
-    pub mod dfa;
-
-    pub mod ds;
-
-    pub mod float;
-
-    pub mod fp;
-
-    pub mod func;
-
-    pub mod fxhash;
-
-    pub mod graph;
-
-    pub mod hash;
-
-    pub mod int;
-
-    pub mod io;
-
-    pub mod io_interactive;
-
-    pub mod iter;
-
-    pub mod make_vec;
-
-    pub mod math;
-
-    pub mod mint;
-
-    pub mod rand;
-
-    pub mod slice;
-
-    pub mod u64;
-
-    pub mod vec;
-
-    pub mod zo;
-
-
-    pub mod tests;
-
-    '
+  code: "#![allow(clippy::many_single_char_names)]\n#![allow(clippy::new_without_default)]\n\
+    #![allow(clippy::suspicious_op_assign_impl)]\n\npub mod alg;\npub mod assign;\n\
+    pub mod bit;\npub mod bool;\npub mod cast;\npub mod cmp;\npub mod conv;\npub mod\
+    \ dfa;\npub mod ds;\npub mod float;\npub mod fp;\npub mod func;\npub mod fxhash;\n\
+    pub mod graph;\npub mod hash;\npub mod int;\npub mod io;\npub mod io_interactive;\n\
+    pub mod iter;\npub mod make_vec;\npub mod math;\npub mod mint;\npub mod num;\n\
+    pub mod rand;\npub mod slice;\npub mod u64;\npub mod vec;\npub mod zo;\n\npub\
+    \ mod tests;\n\n#[macro_export]\n#[cfg(debug_assertions)]\nmacro_rules! dbg {\n\
+    \t($($x:expr),*) => { std::dbg!($($x),*) }\n}\n\n#[macro_export]\n#[cfg(not(debug_assertions))]\n\
+    macro_rules! dbg {\n\t($($x:expr),*) => { std::convert::identity(($($x),*)) }\n\
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

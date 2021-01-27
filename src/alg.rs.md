@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/action.rs
     title: src/alg/action.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':warning:'
@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/segtree/lazy.rs
+    title: src/ds/segtree/lazy.rs
   - icon: ':warning:'
     path: src/ds/sparsetable.rs
     title: src/ds/sparsetable.rs
@@ -30,6 +33,9 @@ data:
     path: src/slice/cum.rs
     title: src/slice/cum.rs
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/lazy_segtree_test.rs
+    title: test/src/bin/lazy_segtree_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_test.rs
     title: test/src/bin/segtree_test.rs
@@ -67,6 +73,7 @@ data:
   path: src/alg.rs
   requiredBy:
   - src/slice/cum.rs
+  - src/ds/segtree/lazy.rs
   - src/ds/disjointst.rs
   - src/ds/sparsetable.rs
   - src/ds/fenwick.rs
@@ -79,6 +86,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs
+  - test/src/bin/lazy_segtree_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

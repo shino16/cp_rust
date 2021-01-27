@@ -24,25 +24,24 @@ data:
     \tlet i = self.pos;\n\t\twhile self.pos != self.input.len() && !self.input[self.pos].is_ascii_whitespace()\
     \ {\n\t\t\tself.pos += 1;\n\t\t}\n\t\t&self.input[i..self.pos]\n\t}\n\tpub fn\
     \ scan<T: Scan>(&mut self) -> T {\n\t\tT::scan(self)\n\t}\n\tpub fn scan_iter<T:\
-    \ Scan>(&mut self) -> Iter<'_, T> {\n\t\tIter { io: self, _m: PhantomData }\n\t\
-    }\n\tpub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>>\
-    \ {\n\t\tself.scan_iter().take(n)\n\t}\n\tpub fn scan_vec<T: Scan>(&mut self,\
-    \ n: usize) -> Vec<T> {\n\t\t(0..n).map(|_| self.scan()).collect()\n\t}\n\n\t\
-    pub fn print<T: Print>(&mut self, x: T) {\n\t\tT::print(self, x);\n\t}\n\tpub\
-    \ fn println<T: Print>(&mut self, x: T) {\n\t\tself.print(x);\n\t\tself.print(\"\
-    \\n\");\n\t}\n\tpub fn iterln<T: Print, I: Iterator<Item = T>>(&mut self, mut\
-    \ iter: I, delim: &str) {\n\t\tif let Some(v) = iter.next() {\n\t\t\tself.print(v);\n\
-    \t\t\tfor v in iter {\n\t\t\t\tself.print(delim);\n\t\t\t\tself.println(v);\n\t\
-    \t\t}\n\t\t}\n\t\tself.print(\"\\n\");\n\t}\n\tpub fn flush(&mut self) {\n\t\t\
-    self.out_buf.flush().unwrap();\n\t}\n}\n\npub struct Iter<'a, T> {\n\tio: &'a\
-    \ mut IO,\n\t_m: PhantomData<T>,\n}\n\nimpl<T: Scan> Iterator for Iter<'_, T>\
-    \ {\n\ttype Item = T;\n\tfn next(&mut self) -> Option<Self::Item> {\n\t\tSome(self.io.scan())\n\
-    \t}\n}\n\npub trait Scan {\n\tfn scan(io: &mut IO) -> Self;\n}\n\npub trait Print\
-    \ {\n\tfn print(w: &mut IO, x: Self);\n}\n\nmacro_rules! impl_parse_iint {\n\t\
-    ($($t:ty),*) => { $(\n\t\timpl Scan for $t {\n\t\t\tfn scan(s: &mut IO) -> Self\
-    \ {\n\t\t\t\tlet scan = |t: &[u8]| t.iter().fold(0, |s, &b| s * 10 + (b & 0x0F)\
-    \ as $t);\n\t\t\t\tlet s = s.scan_raw();\n\t\t\t\tif let Some((&b'-', t)) = s.split_first()\
-    \ { -scan(t) } else { scan(s) }\n\t\t\t}\n\t\t}\n\t)* };\n}\n\nmacro_rules! impl_parse_uint\
+    \ Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {\n\t\tIter { io:\
+    \ self, _m: PhantomData }.take(n)\n\t}\n\tpub fn scan_vec<T: Scan>(&mut self,\
+    \ n: usize) -> Vec<T> {\n\t\t(0..n).map(|_| self.scan()).collect()\n\t}\n\tpub\
+    \ fn print<T: Print>(&mut self, x: T) {\n\t\tT::print(self, x);\n\t}\n\tpub fn\
+    \ println<T: Print>(&mut self, x: T) {\n\t\tself.print(x);\n\t\tself.print(\"\\\
+    n\");\n\t}\n\tpub fn iterln<T: Print, I: Iterator<Item = T>>(&mut self, mut iter:\
+    \ I, delim: &str) {\n\t\tif let Some(v) = iter.next() {\n\t\t\tself.print(v);\n\
+    \t\t\tfor v in iter {\n\t\t\t\tself.print(delim);\n\t\t\t\tself.print(v);\n\t\t\
+    \t}\n\t\t}\n\t\tself.print(\"\\n\");\n\t}\n\tpub fn flush(&mut self) {\n\t\tself.out_buf.flush().unwrap();\n\
+    \t}\n}\n\npub struct Iter<'a, T> {\n\tio: &'a mut IO,\n\t_m: PhantomData<T>,\n\
+    }\n\nimpl<T: Scan> Iterator for Iter<'_, T> {\n\ttype Item = T;\n\tfn next(&mut\
+    \ self) -> Option<Self::Item> {\n\t\tSome(self.io.scan())\n\t}\n}\n\npub trait\
+    \ Scan {\n\tfn scan(io: &mut IO) -> Self;\n}\n\npub trait Print {\n\tfn print(w:\
+    \ &mut IO, x: Self);\n}\n\nmacro_rules! impl_parse_iint {\n\t($($t:ty),*) => {\
+    \ $(\n\t\timpl Scan for $t {\n\t\t\tfn scan(s: &mut IO) -> Self {\n\t\t\t\tlet\
+    \ scan = |t: &[u8]| t.iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as $t);\n\t\t\
+    \t\tlet s = s.scan_raw();\n\t\t\t\tif let Some((&b'-', t)) = s.split_first() {\
+    \ -scan(t) } else { scan(s) }\n\t\t\t}\n\t\t}\n\t)* };\n}\n\nmacro_rules! impl_parse_uint\
     \ {\n\t($($t:ty),*) => { $(\n\t\timpl Scan for $t {\n\t\t\tfn scan(s: &mut IO)\
     \ -> Self {\n\t\t\t\ts.scan_raw().iter().fold(0, |s, &b| s * 10 + (b & 0x0F) as\
     \ $t)\n\t\t\t}\n\t\t}\n\t)* };\n}\n\nimpl_parse_iint!(i32, i64, i128, isize);\n\
@@ -73,7 +72,7 @@ data:
   isVerificationFile: false
   path: src/io_interactive.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/io_interactive.rs

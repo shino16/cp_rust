@@ -2,12 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/alg/arith.rs
-    title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/dfa.rs
     title: src/dfa.rs
+  - icon: ':warning:'
+    path: src/draft/fpacc64.rs
+    title: src/draft/fpacc64.rs
   - icon: ':warning:'
     path: src/draft/graph/path.rs
     title: src/draft/graph/path.rs
@@ -20,19 +20,10 @@ data:
   - icon: ':warning:'
     path: src/ds/sparsetable.rs
     title: src/ds/sparsetable.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fp.rs
-    title: src/fp.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fp/conv.rs
-    title: src/fp/conv.rs
   - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
-  - icon: ':warning:'
-    path: src/graph/euler_tour.rs
-    title: src/graph/euler_tour.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':warning:'
@@ -41,7 +32,7 @@ data:
   - icon: ':warning:'
     path: src/int/bisect.rs
     title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':warning:'
@@ -53,42 +44,18 @@ data:
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
-  - icon: ':heavy_check_mark:'
-    path: src/mint.rs
-    title: src/mint.rs
-  - icon: ':heavy_check_mark:'
-    path: src/mint/conv.rs
-    title: src/mint/conv.rs
-  - icon: ':warning:'
-    path: src/slice/cum.rs
-    title: src/slice/cum.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':warning:'
-    path: src/u64/conv.rs
-    title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_garner_test.rs
-    title: test/src/bin/ntt_garner_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_mint_garner_test.rs
-    title: test/src/bin/ntt_mint_garner_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_mint_test.rs
-    title: test/src/bin/ntt_mint_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/ntt_test.rs
-    title: test/src/bin/ntt_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -111,37 +78,26 @@ data:
   isVerificationFile: false
   path: src/bit.rs
   requiredBy:
-  - src/fp.rs
-  - src/slice/cum.rs
-  - src/fp/conv.rs
   - src/ds/disjointst.rs
   - src/ds/sparsetable.rs
   - src/ds/fenwick.rs
-  - src/u64/conv.rs
   - src/tests.rs
   - src/int.rs
   - src/graph/dijkstra.rs
-  - src/graph/euler_tour.rs
-  - src/alg/arith.rs
   - src/int/bisect.rs
   - src/int/inv.rs
   - src/int/gcd.rs
   - src/int/arith.rs
-  - src/mint/conv.rs
   - src/dfa.rs
-  - src/mint.rs
   - src/math/pow.rs
   - src/math/binom.rs
+  - src/draft/fpacc64.rs
   - src/draft/graph/path.rs
   timestamp: '2020-12-15 00:46:43+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/dfa_test.rs
-  - test/src/bin/ntt_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/ntt_mint_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/ntt_garner_test.rs
 documentation_of: src/bit.rs
 layout: document
 redirect_from:

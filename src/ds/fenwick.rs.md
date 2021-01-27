@@ -4,19 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
-    path: src/cast.rs
-    title: src/cast.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int.rs
-    title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -42,7 +39,7 @@ data:
     \ {\n\t\tself.data.push(self.alg.unit());\n\t\tself.add(self.data.len() - 1, v);\n\
     \t}\n\tpub fn ask_prefix(&self, mut r: usize) -> A::Item {\n\t\tlet mut res =\
     \ self.alg.unit();\n\t\twhile r != 0 {\n\t\t\tres = self.alg.op(self.data[r],\
-    \ res);\n\t\t\tr -= r.lsb();\n\t\t}\n\t\tres\n\t}\n\t// TODO: test\n\tpub fn partition_point<F:\
+    \ res);\n\t\t\tr -= r.lsb();\n\t\t}\n\t\tres\n\t}\n\tpub fn partition_point<F:\
     \ FnMut(A::Item) -> bool>(&self, mut pred: F) -> usize {\n\t\tlet mut x = 0; //\
     \ pred(&self.ask_prefix(x)) == true\n\t\tlet mut w = (self.data.len() - 1).msb();\n\
     \t\tlet mut l = self.alg.unit();\n\t\twhile w != 0 {\n\t\t\tif x + w < self.data.len()\
@@ -58,13 +55,12 @@ data:
   - src/alg.rs
   - src/alg/arith.rs
   - src/bit.rs
-  - src/cast.rs
-  - src/int.rs
+  - src/num.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-01-07 16:16:30+09:00'
+  timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/fenwick.rs
