@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':question:'
@@ -24,11 +24,11 @@ data:
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -106,7 +106,7 @@ data:
   path: src/dfa.rs
   requiredBy: []
   timestamp: '2021-01-27 17:46:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs
 documentation_of: src/dfa.rs

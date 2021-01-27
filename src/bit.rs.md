@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/dfa.rs
     title: src/dfa.rs
   - icon: ':warning:'
@@ -23,7 +23,7 @@ data:
   - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':warning:'
@@ -51,11 +51,11 @@ data:
   - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -94,7 +94,7 @@ data:
   - src/draft/fpacc64.rs
   - src/draft/graph/path.rs
   timestamp: '2020-12-15 00:46:43+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/dfa_test.rs
   - test/src/bin/cargo_test.rs

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':x:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':x:'
@@ -34,7 +34,7 @@ data:
   - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':x:'

@@ -22,19 +22,19 @@ data:
     - icon: ':warning:'
       path: src/assign.rs
       title: src/assign.rs
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/bit.rs
       title: src/bit.rs
     - icon: ':warning:'
       path: src/bool.rs
       title: src/bool.rs
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/cast.rs
       title: src/cast.rs
     - icon: ':question:'
       path: src/conv.rs
       title: src/conv.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/dfa.rs
       title: src/dfa.rs
     - icon: ':warning:'
@@ -46,7 +46,7 @@ data:
     - icon: ':warning:'
       path: src/func.rs
       title: src/func.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/fxhash.rs
       title: src/fxhash.rs
     - icon: ':warning:'
@@ -55,7 +55,7 @@ data:
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/int.rs
       title: src/int.rs
     - icon: ':question:'
@@ -294,7 +294,7 @@ data:
       title: src/mint/num.rs
   - name: src/rand
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/rand/seed.rs
       title: src/rand/seed.rs
     - icon: ':warning:'
@@ -322,7 +322,7 @@ data:
     - icon: ':x:'
       path: test/src/bin/cargo_test.rs
       title: test/src/bin/cargo_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/dfa_test.rs
       title: test/src/bin/dfa_test.rs
     - icon: ':heavy_check_mark:'

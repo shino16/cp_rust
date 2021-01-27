@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':question:'

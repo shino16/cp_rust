@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   _extendedRequiredBy:

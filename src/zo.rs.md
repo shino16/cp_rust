@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/dfa.rs
     title: src/dfa.rs
   - icon: ':warning:'
@@ -65,7 +65,7 @@ data:
   - icon: ':warning:'
     path: src/graph/tree/reroot.rs
     title: src/graph/tree/reroot.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':warning:'
@@ -111,7 +111,7 @@ data:
   - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
   - icon: ':heavy_check_mark:'

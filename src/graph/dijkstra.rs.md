@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: src/assign.rs
     title: src/assign.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':warning:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':question:'

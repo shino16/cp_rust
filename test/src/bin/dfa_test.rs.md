@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/dfa.rs
     title: src/dfa.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':question:'
@@ -34,7 +34,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -56,7 +56,7 @@ data:
     \ {\n\t\t\tNone\n\t\t}\n\t}\n\tfn accept(&self, s: Self::State) -> bool {\n\t\t\
     s.is_some()\n\t}\n\tfn unsuccessful(&self, s: Self::State) -> bool {\n\t\ts.is_none()\n\
     \t}\n}\n\n#[derive(Default, Clone, Copy, PartialEq, Eq)]\nstruct Modx;\n\nimpl\
-    \ Mod for Modx {\n\tconst P: u32 = 10000;\n\tconst PHI: u32 = 4000;\n}\n\nfn main()\
+    \ Mod for Modx {\n\tconst M: u32 = 10000;\n\tconst PHI: u32 = 4000;\n}\n\nfn main()\
     \ {\n\tlet mut io = IO::new();\n\tlet [a0, b]: [&[u8]; 2] = io.scan();\n\tlet\
     \ m = io.scan();\n\tlet mut a = vec![b'0'; b.len()];\n\ta[b.len() - a0.len()..].copy_from_slice(&a0);\n\
     \n\tlet dfa = And(ZigZag, And(MultipleOf(m), And(Leq(&b), Not(Lt(&a)))));\n\t\
@@ -76,8 +76,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-01-27 17:46:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-01-27 21:36:52+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs
 layout: document
