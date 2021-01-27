@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy:
@@ -9,6 +9,7 @@ data:
     path: src/io/graph.rs
     title: src/io/graph.rs
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}

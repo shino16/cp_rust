@@ -6,6 +6,7 @@ data:
     title: src/u64.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}

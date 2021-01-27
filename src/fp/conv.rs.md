@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -21,14 +21,15 @@ data:
     path: src/u64/conv.rs
     title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_test.rs
     title: test/src/bin/ntt_test.rs
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -43,7 +44,7 @@ data:
     pub fn reserve(k: usize) {\n\t\t\t\tunsafe {\n\t\t\t\t\tif k <= ROOT.len() {\n\
     \t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\tROOT.resize(k, Default::default());\n\
     \t\t\t\t\tINV_ROOT.resize(k, Default::default());\n\t\t\t\t\tlet m = FpType::P\
-    \ - 1;\n\t\t\t\t\tlet proot = FpType::from($prim);\n\t\t\t\t\tfor i in 0..k {\n\
+    \ - 1;\n\t\t\t\t\tlet proot = FpType::new($prim);\n\t\t\t\t\tfor i in 0..k {\n\
     \t\t\t\t\t\tROOT[i] = -proot.pow((m >> (i + 2)) as u64);\n\t\t\t\t\t\tINV_ROOT[i]\
     \ = ROOT[i].inv();\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tpub fn ntt(a: &mut\
     \ UVec<FpType>) {\n\t\t\t\tlet n = a.len();\n\t\t\t\tlet mut m = n >> 1;\n\t\t\
@@ -95,8 +96,8 @@ data:
   path: src/fp/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-01-27 17:46:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-01-27 22:59:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_test.rs
   - test/src/bin/ntt_garner_test.rs

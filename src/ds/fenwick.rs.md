@@ -7,17 +7,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}

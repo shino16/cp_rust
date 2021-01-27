@@ -6,6 +6,7 @@ data:
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}

@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -24,6 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}

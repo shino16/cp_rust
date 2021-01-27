@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/union_find_test.rs
     title: test/src/bin/union_find_test.rs
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}

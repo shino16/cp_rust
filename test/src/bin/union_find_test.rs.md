@@ -4,11 +4,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uf.rs
     title: src/ds/uf.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

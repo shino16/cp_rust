@@ -6,6 +6,7 @@ data:
     path: src/hash.rs
     title: src/hash.rs
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}

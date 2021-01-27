@@ -1,58 +1,59 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/iter/prod.rs
     title: src/iter/prod.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -61,7 +62,7 @@ data:
     RuntimeError: bundler is not specified: src/tests.rs\n"
   code: "#[cfg(test)]\nmod tests {\n\tmod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\
     \t\tfn test_pow() {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\tlet mut\
-    \ rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::from(2).pow(3), F17::from(8));\n\
+    \ rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::new(2).pow(3), F17::new(8));\n\
     \t\t\tfor _ in 0..100 {\n\t\t\t\tlet base: F17 = rng.next().into();\n\t\t\t\t\
     let k = rng.next() % 100;\n\t\t\t\tlet p = (0..k).map(|_| base).product::<F17>();\n\
     \t\t\t\tassert_eq!(p, base.pow(k));\n\t\t\t}\n\t\t}\n\t\t#[test]\n\t\tfn test_inv()\
@@ -120,8 +121,8 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-27 17:46:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-01-27 22:59:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
 documentation_of: src/tests.rs
