@@ -1,5 +1,5 @@
 pub use super::*;
-pub use crate::int::*;
+pub use crate::num::*;
 use std::marker::PhantomData;
 
 #[derive(Default)]

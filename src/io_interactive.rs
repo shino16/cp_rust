@@ -40,16 +40,12 @@ impl IO {
 	pub fn scan<T: Scan>(&mut self) -> T {
 		T::scan(self)
 	}
-	pub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> {
-		Iter { io: self, _m: PhantomData }
-	}
-	pub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
-		self.scan_iter().take(n)
+	pub fn scan_iter<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
+		Iter { io: self, _m: PhantomData }.take(n)
 	}
 	pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
 		(0..n).map(|_| self.scan()).collect()
 	}
-
 	pub fn print<T: Print>(&mut self, x: T) {
 		T::print(self, x);
 	}
@@ -62,7 +58,7 @@ impl IO {
 			self.print(v);
 			for v in iter {
 				self.print(delim);
-				self.println(v);
+				self.print(v);
 			}
 		}
 		self.print("\n");

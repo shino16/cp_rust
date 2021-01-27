@@ -9,8 +9,7 @@ fn main() {
 
 	let inf = (1_u32 << 31) - 1;
 
-	let data = vec![inf; n];
-	let mut st = SegmentTree::new(&data, MonoidImpl(|| inf, |a, b| a.min(b)));
+	let mut st = SegmentTree::new(n, MonoidImpl(|| inf, |a, b| a.min(b)));
 
 	for _ in 0..q {
 		let [c, x, y]: [usize; 3] = io.scan();

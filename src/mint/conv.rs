@@ -20,7 +20,7 @@ macro_rules! impl_ntt {
 					}
 					ROOT.resize(k, Default::default());
 					INV_ROOT.resize(k, Default::default());
-					let m = FpType::P - 1;
+					let m = FpType::M - 1;
 					let proot = FpType::from($prim);
 					for i in 0..k {
 						ROOT[i] = -proot.pow(m >> (i + 2));
@@ -103,9 +103,9 @@ impl_ntt!(impl_d, ModD, 5);
 
 impl Conv for Mint17 {
 	fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {
-		let r12 = MintC::from(MintB::P).inv();
-		let r13 = MintD::from(MintB::P).inv();
-		let r23 = MintD::from(MintC::P).inv();
+		let r12 = MintC::from(MintB::M).inv();
+		let r13 = MintD::from(MintB::M).inv();
+		let r23 = MintD::from(MintC::M).inv();
 		fn run<M: Mod>(lhs: &mut Vec<Mint17>, rhs: &mut Vec<Mint17>) -> Vec<Mint<M>>
 		where
 			Mint<M>: Conv,
@@ -123,8 +123,8 @@ impl Conv for Mint17 {
 			let x2 = (e2 - x1.value()) * r12;
 			let x3 = ((e3 - x1.value()) * r13 - x2.value()) * r23;
 			let mut x = MintA::from(x1.value());
-			x += MintA::from(x2.value()) * MintB::P;
-			x += MintA::from(x3.value()) * MintB::P * MintC::P;
+			x += MintA::from(x2.value()) * MintB::M;
+			x += MintA::from(x3.value()) * MintB::M * MintC::M;
 			*e0 = x.value().into();
 		}
 	}

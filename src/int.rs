@@ -1,29 +1,13 @@
 use crate::bit::*;
 use crate::cast::*;
+pub use crate::num::*;
 pub use crate::zo::*;
-use std::fmt::*;
 use std::ops::*;
 
 pub mod arith;
 pub mod bisect;
 pub mod gcd;
 pub mod inv;
-
-pub trait Num:
-	ZeroOne
-	+ Add<Output = Self> + AddAssign
-	+ Sub<Output = Self> + SubAssign
-	+ Mul<Output = Self> + MulAssign
-	+ Div<Output = Self> + DivAssign
-	+ Debug + Display
-{
-	fn wrapping_add(self, rhs: Self) -> Self {
-		self + rhs
-	}
-	fn wrapping_neg(self) -> Self;
-}
-
-pub trait INum: Num + Neg<Output = Self> {}
 
 pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + PrimCast {
 	type Signed: IInt + CastFrom<Self> + CastTo<Self>;

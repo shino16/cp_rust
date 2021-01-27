@@ -27,17 +27,11 @@ impl IO {
 	pub fn scan<T: Scan>(&mut self) -> T {
 		T::scan(self)
 	}
-	pub fn scan_iter<T: Scan>(&mut self) -> Iter<'_, T> {
-		Iter { io: self, _m: PhantomData }
-	}
-	pub fn scan_n<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
-		self.scan_iter().take(n)
+	pub fn scan_iter<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
+		Iter { io: self, _m: PhantomData }.take(n)
 	}
 	pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
 		(0..n).map(|_| self.scan()).collect()
-	}
-	pub fn scan_vv<T: Scan>(&mut self, h: usize, w: usize) -> Vec<Vec<T>> {
-		(0..h).map(|_| self.scan_vec(w)).collect()
 	}
 	pub fn print<T: Print>(&mut self, x: T) {
 		T::print(self, x);
@@ -197,7 +191,7 @@ impl Scan for Usize1 {
 	}
 }
 impl Print for Usize1 {
-    fn print(w: &mut IO, x: Self) {
+	fn print(w: &mut IO, x: Self) {
 		w.print(x.0 + 1)
-    }
+	}
 }

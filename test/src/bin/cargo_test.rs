@@ -9,6 +9,7 @@ use std::process::Command;
 fn main() -> Result<()> {
 	let output = Command::new("cargo")
 		.arg("test")
+		.arg("--release")
 		.arg("--")
 		.arg("--test-threads=1")
 		.output()?;

@@ -24,6 +24,7 @@ pub mod iter;
 pub mod make_vec;
 pub mod math;
 pub mod mint;
+pub mod num;
 pub mod rand;
 pub mod slice;
 pub mod u64;
@@ -31,3 +32,15 @@ pub mod vec;
 pub mod zo;
 
 pub mod tests;
+
+#[macro_export]
+#[cfg(debug_assertions)]
+macro_rules! dbg {
+	($($x:expr),*) => { std::dbg!($($x),*) }
+}
+
+#[macro_export]
+#[cfg(not(debug_assertions))]
+macro_rules! dbg {
+	($($x:expr),*) => { std::convert::identity(($($x),*)) }
+}
