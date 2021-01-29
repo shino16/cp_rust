@@ -74,25 +74,23 @@ data:
     \ {\n\t\t\t\t\t\tDROP_CNT.fetch_add(1, Ordering::SeqCst);\n\t\t\t\t\t}\n\t\t\t\
     \t}\n\n\t\t\t\tlet mut v = Vec::new();\n\t\t\t\tlet mut l = LinkedList::new();\n\
     \t\t\t\tlet mut l2 = l.clone();\n\t\t\t\tlet mut cur = l2.begin_mut();\n\t\t\t\
-    \tfor n in 0..10 {\n\t\t\t\t\tv.push(S(n));\n\t\t\t\t\tl.push_back(S(n));\n\t\t\
-    \t\t\tcur.insert(S(n));\n\t\t\t\t\tcur.next().unwrap();\n\t\t\t\t}\n\n\t\t\t\t\
-    assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\t\t\t\tassert_eq!(v,\
-    \ l2.into_iter().collect::<Vec<_>>());\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
-    \ 20);\n\n\t\t\t\tlet l = RefCell::new(l);\n\t\t\t\tlet mut cur = LinkedList::begin_inner_mut(&l);\n\
-    \t\t\t\tcur.advance(7).unwrap().remove();\n\t\t\t\tv.remove(7);\n\t\t\t\tassert_eq!(v,\
-    \ l.borrow().clone().into_iter().collect::<Vec<_>>());\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
-    \ 31);\n\t\t\t\tcur.advance(-2).unwrap().insert(S(100));\n\t\t\t\tv.insert(5,\
-    \ S(100));\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
-    \t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 41);\n\t\t\t\tlet mut cur\
-    \ = LinkedList::end_inner_mut(&l);\n\t\t\t\tcur.advance(-8).unwrap().remove();\n\
+    \tfor n in 0..10 {\n\t\t\t\t\tv.push(Box::new(S(n)));\n\t\t\t\t\tl.push_back(Box::new(S(n)));\n\
+    \t\t\t\t\tcur.insert(Box::new(S(n)));\n\t\t\t\t\tcur.next().unwrap();\n\t\t\t\t\
+    }\n\t\t\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\t\t\t\t\
+    assert_eq!(v, l2.into_iter().collect::<Vec<_>>());\n\n\t\t\t\tlet l = RefCell::new(l);\n\
+    \t\t\t\tlet mut cur = LinkedList::begin_inner_mut(&l);\n\t\t\t\tcur.advance(7).unwrap().remove();\n\
+    \t\t\t\tv.remove(7);\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t\tcur.advance(-2).unwrap().insert(Box::new(S(100)));\n\t\t\t\tv.insert(5,\
+    \ Box::new(S(100)));\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t\tlet mut cur = LinkedList::end_inner_mut(&l);\n\t\t\t\tcur.advance(-8).unwrap().remove();\n\
     \t\t\t\tv.remove(2);\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
-    \t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 52);\n\t\t\t\tcur.advance(-2).unwrap();\n\
-    \t\t\t\tassert!(cur.prev().is_none());\n\t\t\t\tstd::mem::drop((v, l));\n\t\t\t\
-    \tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);\n\t\t\t}\n\t\t}\n\t}\n\n\t\
-    mod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\t\tfn test_pow() {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\
-    \t\t\tlet mut rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::new(2).pow(3),\
-    \ F17::new(8));\n\t\t\tfor _ in 0..100 {\n\t\t\t\tlet base: F17 = rng.next().into();\n\
-    \t\t\t\tlet k = rng.next() % 100;\n\t\t\t\tlet p = (0..k).map(|_| base).product::<F17>();\n\
+    \t\t\t\tcur.advance(-2).unwrap();\n\t\t\t\tassert!(cur.prev().is_none());\n\t\t\
+    \t\tstd::mem::drop((v, l));\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
+    \ 70);\n\t\t\t}\n\t\t}\n\t}\n\n\tmod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\
+    \t\tfn test_pow() {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\tlet mut\
+    \ rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::new(2).pow(3), F17::new(8));\n\
+    \t\t\tfor _ in 0..100 {\n\t\t\t\tlet base: F17 = rng.next().into();\n\t\t\t\t\
+    let k = rng.next() % 100;\n\t\t\t\tlet p = (0..k).map(|_| base).product::<F17>();\n\
     \t\t\t\tassert_eq!(p, base.pow(k));\n\t\t\t}\n\t\t}\n\t\t#[test]\n\t\tfn test_inv()\
     \ {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\tlet mut rng = Xoshiro256plus::new();\n\
     \t\t\tfor _ in 0..100 {\n\t\t\t\tlet a: F17 = rng.next().into();\n\t\t\t\tlet\
@@ -151,7 +149,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-01-29 13:28:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

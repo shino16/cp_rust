@@ -27,42 +27,52 @@ data:
   code: "use std::iter::FromIterator;\nuse std::marker::PhantomData;\nuse std::ops::{Deref,\
     \ DerefMut};\nuse std::ptr::NonNull;\n\npub mod inner_mut;\n\n#[derive(Debug,\
     \ PartialEq, PartialOrd, Hash)]\npub struct LinkedList<T> {\n\thead: NonNull<Node<T>>,\n\
-    \ttail: NonNull<Node<T>>,\n\tlen: usize,\n}\n\n#[derive(Debug, PartialEq, PartialOrd,\
-    \ Clone, Copy, Hash, Default)]\npub struct Node<T> {\n\tprev: Option<NonNull<Node<T>>>,\n\
-    \tnext_val: Option<(NonNull<Node<T>>, T)>,\n}\n\nimpl<T> Node<T> {\n\tfn new()\
-    \ -> Self {\n\t\tSelf { prev: None, next_val: None }\n\t}\n}\n\npub struct Iter<'a,\
-    \ T: 'a> {\n\thead: NonNull<Node<T>>,\n\tlen: usize,\n\t_marker: PhantomData<&'a\
-    \ Node<T>>,\n}\n\npub struct IntoIter<T> {\n\tlist: LinkedList<T>,\n}\n\n#[derive(Debug)]\n\
-    pub struct CursorMut<'a, T: 'a> {\n\tpub at: NonNull<Node<T>>,\n\tlist: &'a mut\
-    \ LinkedList<T>,\n}\n\nimpl<T> LinkedList<T> {\n\tpub fn new() -> Self {\n\t\t\
-    let head = Box::leak(Box::new(Node::new())).into();\n\t\tSelf { head, tail: head,\
-    \ len: 0 }\n\t}\n\tpub fn len(&self) -> usize {\n\t\tself.len\n\t}\n\tpub fn is_empty(&self)\
+    \ttail: NonNull<Node<T>>,\n\tarena: Vec<Vec<Node<T>>>,\n\tlen: usize,\n}\n\n#[derive(Debug,\
+    \ PartialEq, PartialOrd, Clone, Copy, Hash, Default)]\npub struct Node<T> {\n\t\
+    prev: Option<NonNull<Node<T>>>,\n\tnext_val: Option<(NonNull<Node<T>>, T)>,\n\
+    }\n\nimpl<T> Node<T> {\n\tfn new() -> Self {\n\t\tSelf { prev: None, next_val:\
+    \ None }\n\t}\n}\n\npub struct Iter<'a, T: 'a> {\n\thead: NonNull<Node<T>>,\n\t\
+    len: usize,\n\t_marker: PhantomData<&'a Node<T>>,\n}\n\npub struct IntoIter<T>\
+    \ {\n\tlist: LinkedList<T>,\n}\n\n#[derive(Debug)]\npub struct CursorMut<'a, T:\
+    \ 'a> {\n\tpub at: NonNull<Node<T>>,\n\tlist: &'a mut LinkedList<T>,\n}\n\nimpl<T>\
+    \ LinkedList<T> {\n\tpub fn new() -> Self {\n\t\tlet mut arena = vec![vec![Node::new()]];\n\
+    \t\tlet head = (&mut arena[0][0]).into();\n\t\tSelf { head, tail: head, arena,\
+    \ len: 0 }\n\t}\n\tpub fn with_capacity(cap: usize) -> Self {\n\t\tlet mut arena\
+    \ = vec![Vec::with_capacity(cap)];\n\t\tarena[0].push(Node::new());\n\t\tlet head\
+    \ = (&mut arena[0][0]).into();\n\t\tSelf { head, tail: head, arena, len: 0 }\n\
+    \t}\n\tpub fn len(&self) -> usize {\n\t\tself.len\n\t}\n\tpub fn is_empty(&self)\
     \ -> bool {\n\t\tself.head == self.tail\n\t}\n\tpub fn clear(&mut self) {\n\t\t\
-    *self = Self::new();\n\t}\n\tpub fn begin_mut(&mut self) -> CursorMut<'_, T> {\n\
-    \t\tCursorMut { at: self.head, list: self }\n\t}\n\tpub fn end_mut(&mut self)\
-    \ -> CursorMut<'_, T> {\n\t\tCursorMut { at: self.tail, list: self }\n\t}\n\t\
-    pub fn push_front(&mut self, val: T) {\n\t\tself.begin_mut().insert(val)\n\t}\n\
-    \tpub fn push_back(&mut self, val: T) {\n\t\tself.end_mut().insert(val)\n\t}\n\
-    \tpub fn pop_front(&mut self) -> Option<T> {\n\t\tself.begin_mut().remove()\n\t\
-    }\n\tpub fn pop_back(&mut self) -> Option<T> {\n\t\tself.end_mut().prev()?.remove()\n\
-    \t}\n\tpub fn iter(&self) -> Iter<'_, T> {\n\t\tIter { head: self.head, len: self.len,\
-    \ _marker: PhantomData }\n\t}\n}\n\nimpl<T> FromIterator<T> for LinkedList<T>\
-    \ {\n\tfn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {\n\t\tlet mut\
-    \ res = Self::new();\n\t\tfor val in iter.into_iter() {\n\t\t\tres.end_mut().insert(val);\n\
+    *self = Self::new();\n\t}\n\tpub fn new_node(&mut self, node: Node<T>) -> NonNull<Node<T>>\
+    \ {\n\t\tlet mut last = self.arena.last_mut().unwrap();\n\t\tif last.len() ==\
+    \ last.capacity() {\n\t\t\tlet new_arena = Vec::with_capacity(last.capacity()\
+    \ * 2);\n\t\t\tself.arena.push(new_arena);\n\t\t\tlast = self.arena.last_mut().unwrap();\n\
+    \t\t}\n\t\tlast.push(node);\n\t\tlast.last_mut().unwrap().into()\n\t}\n\tpub fn\
+    \ begin_mut(&mut self) -> CursorMut<'_, T> {\n\t\tCursorMut { at: self.head, list:\
+    \ self }\n\t}\n\tpub fn end_mut(&mut self) -> CursorMut<'_, T> {\n\t\tCursorMut\
+    \ { at: self.tail, list: self }\n\t}\n\tpub fn push_front(&mut self, val: T) {\n\
+    \t\tself.begin_mut().insert(val)\n\t}\n\tpub fn push_back(&mut self, val: T) {\n\
+    \t\tself.end_mut().insert(val)\n\t}\n\tpub fn pop_front(&mut self) -> Option<T>\
+    \ {\n\t\tself.begin_mut().remove()\n\t}\n\tpub fn pop_back(&mut self) -> Option<T>\
+    \ {\n\t\tself.end_mut().prev()?.remove()\n\t}\n\tpub fn iter(&self) -> Iter<'_,\
+    \ T> {\n\t\tIter { head: self.head, len: self.len, _marker: PhantomData }\n\t\
+    }\n}\n\nimpl<T> FromIterator<T> for LinkedList<T> {\n\tfn from_iter<I: IntoIterator<Item\
+    \ = T>>(iter: I) -> Self {\n\t\tlet iter = iter.into_iter();\n\t\tlet mut res\
+    \ = Self::with_capacity(iter.size_hint().0);\n\t\tfor val in iter {\n\t\t\tres.end_mut().insert(val);\n\
     \t\t}\n\t\tres\n\t}\n}\n\nimpl<T> IntoIterator for LinkedList<T> {\n\ttype Item\
     \ = T;\n\ttype IntoIter = IntoIter<T>;\n\tfn into_iter(self) -> Self::IntoIter\
     \ {\n\t\tIntoIter { list: self }\n\t}\n}\n\nimpl<T: Clone> Clone for LinkedList<T>\
     \ {\n\tfn clone(&self) -> Self {\n\t\tself.iter().cloned().collect()\n\t}\n}\n\
-    \nimpl<T> Drop for LinkedList<T> {\n\tfn drop(&mut self) {\n\t\tlet mut cursor\
-    \ = self.begin_mut();\n\t\twhile cursor.remove().is_some() {}\n\t}\n}\n\nimpl<'a,\
-    \ T: 'a> Iterator for Iter<'a, T> {\n\ttype Item = &'a T;\n\tfn next(&mut self)\
-    \ -> Option<Self::Item> {\n\t\tlet next_val = unsafe { &*self.head.as_ptr() }.next_val.as_ref()?;\n\
-    \t\tlet res = &next_val.1;\n\t\tself.head = next_val.0;\n\t\tSome(res)\n\t}\n\t\
-    fn size_hint(&self) -> (usize, Option<usize>) {\n\t\t(self.len, Some(self.len))\n\
-    \t}\n}\n\nimpl<T> Iterator for IntoIter<T> {\n\ttype Item = T;\n\tfn next(&mut\
-    \ self) -> Option<Self::Item> {\n\t\tself.list.pop_front()\n\t}\n}\n\nimpl<'a,\
-    \ T: 'a> Deref for CursorMut<'a, T> {\n\ttype Target = T;\n\tfn deref(&self) ->\
-    \ &Self::Target {\n\t\tunsafe { &self.at.as_ref().next_val.as_ref().unwrap().1\
+    \nimpl<T> Drop for LinkedList<T> {\n\tfn drop(&mut self) {\n\t\tfor v in &mut\
+    \ self.arena {\n\t\t\tunsafe {\n\t\t\t\tv.set_len(0);\n\t\t\t}\n\t\t}\n\t\tlet\
+    \ mut cursor = self.begin_mut();\n\t\twhile cursor.remove().is_some() {}\n\t}\n\
+    }\n\nimpl<'a, T: 'a> Iterator for Iter<'a, T> {\n\ttype Item = &'a T;\n\tfn next(&mut\
+    \ self) -> Option<Self::Item> {\n\t\tlet next_val = unsafe { &*self.head.as_ptr()\
+    \ }.next_val.as_ref()?;\n\t\tlet res = &next_val.1;\n\t\tself.head = next_val.0;\n\
+    \t\tSome(res)\n\t}\n\tfn size_hint(&self) -> (usize, Option<usize>) {\n\t\t(self.len,\
+    \ Some(self.len))\n\t}\n}\n\nimpl<T> Iterator for IntoIter<T> {\n\ttype Item =\
+    \ T;\n\tfn next(&mut self) -> Option<Self::Item> {\n\t\tself.list.pop_front()\n\
+    \t}\n}\n\nimpl<'a, T: 'a> Deref for CursorMut<'a, T> {\n\ttype Target = T;\n\t\
+    fn deref(&self) -> &Self::Target {\n\t\tunsafe { &self.at.as_ref().next_val.as_ref().unwrap().1\
     \ }\n\t}\n}\n\nimpl<'a, T: 'a> DerefMut for CursorMut<'a, T> {\n\tfn deref_mut(&mut\
     \ self) -> &mut Self::Target {\n\t\tunsafe { &mut self.at.as_mut().next_val.as_mut().unwrap().1\
     \ }\n\t}\n}\n\nimpl<'a, T: 'a> CursorMut<'a, T> {\n\tpub fn next(&mut self) ->\
@@ -73,13 +83,13 @@ data:
     \ {\n\t\t\t\tself.next()?;\n\t\t\t}\n\t\t} else {\n\t\t\tfor _ in by..0 {\n\t\t\
     \t\tself.prev()?;\n\t\t\t}\n\t\t}\n\t\tSome(self)\n\t}\n\tpub fn insert(&mut self,\
     \ val: T) {\n\t\tlet prev = unsafe { self.at.as_ref() }.prev;\n\t\tlet new_node\
-    \ = Box::leak(Box::new(Node { prev, next_val: Some((self.at, val)) })).into();\n\
-    \t\tunsafe { self.at.as_mut() }.prev = Some(new_node);\n\t\tif let Some(mut prev)\
-    \ = prev {\n\t\t\tunsafe { prev.as_mut() }.next_val.as_mut().unwrap().0 = new_node;\n\
+    \ = self.list.new_node(Node { prev, next_val: Some((self.at, val)) });\n\t\tunsafe\
+    \ { self.at.as_mut() }.prev = Some(new_node);\n\t\tif let Some(mut prev) = prev\
+    \ {\n\t\t\tunsafe { prev.as_mut() }.next_val.as_mut().unwrap().0 = new_node;\n\
     \t\t} else {\n\t\t\tself.list.head = new_node;\n\t\t}\n\t\tself.at = new_node;\n\
     \t\tself.list.len += 1;\n\t}\n\tpub fn remove(&mut self) -> Option<T> {\n\t\t\
     if self.at == self.list.tail {\n\t\t\treturn None;\n\t\t}\n\t\tunsafe {\n\t\t\t\
-    let node = *Box::from_raw(self.at.as_ptr());\n\t\t\tlet (mut next, val) = node.next_val?;\n\
+    let node = std::ptr::read(self.at.as_ptr());\n\t\t\tlet (mut next, val) = node.next_val?;\n\
     \t\t\tif let Some(mut prev) = node.prev {\n\t\t\t\t*next.as_mut().prev.as_mut().unwrap()\
     \ = prev;\n\t\t\t\tprev.as_mut().next_val.as_mut().unwrap().0 = next;\n\t\t\t\
     } else {\n\t\t\t\tnext.as_mut().prev = None;\n\t\t\t\tself.list.head = next;\n\
@@ -91,7 +101,7 @@ data:
   - src/ds/linked_list/iter.rs
   - src/ds/linked_list/inner_mut.rs
   - src/tests.rs
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-01-29 13:28:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
