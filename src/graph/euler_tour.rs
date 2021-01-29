@@ -12,11 +12,11 @@ where
 		if v.get_bit(31) {
 			edges.push(a.inv(e));
 		} else {
-			edges.push(e.clone());
-			togo.push((!v, 0, e.clone()));
-			g.adj_w(v, |w, e| {
+			edges.push(e);
+			togo.push((!v, 0, e));
+			g.adj_w(v, |w, &e| {
 				if w != par {
-					togo.push((w, v, e.clone()));
+					togo.push((w, v, e));
 				}
 			})
 		}

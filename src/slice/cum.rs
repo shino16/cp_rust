@@ -35,7 +35,7 @@ impl<T: Copy> Cum for [T] {
 		let mut res = Vec::with_capacity(self.len() + 1);
 		let mut tl = m.unit();
 		res.push(tl.clone());
-		for e in self.into_iter().rev() {
+		for e in self.iter().rev() {
 			tl = m.op(e.clone(), tl);
 			res.push(tl.clone());
 		}

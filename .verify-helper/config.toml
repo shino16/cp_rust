@@ -1,5 +1,5 @@
 [languages.rs]
 verification_file_suffix = '_test.rs'
-compile = 'cargo build --release --workspace'
+compile = 'bash ".verify-helper/compile.sh" {path}'
 execute = 'bash ".verify-helper/execute.sh" {path}'
 list_dependencies = 'cargo auto-bundle --entry-point {path} --list-deps'

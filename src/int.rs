@@ -22,17 +22,7 @@ pub trait IInt: Int + INum {}
 pub trait UInt: Int {}
 
 macro_rules! impl_int {
-	(@num $t:ident) => {
-		impl Num for $t {
-			fn wrapping_add(self, rhs: Self) -> Self {
-				self.wrapping_add(rhs)
-			}
-			fn wrapping_neg(self) -> Self {
-				self.wrapping_neg()
-			}
-		}
-	};
-	(@int $t:ident, $i:ident, $u:ident) => {
+	(@ $t:ident, $i:ident, $u:ident) => {
 		impl Int for $t {
 			type Signed = $i;
 			type Unsigned = $u;
@@ -48,10 +38,8 @@ macro_rules! impl_int {
 		}
 	};
 	({ $i:ident }, { $u:ident }) => {
-		impl_int!(@num $i);
-		impl_int!(@num $u);
-		impl_int!(@int $i, $i, $u);
-		impl_int!(@int $u, $i, $u);
+		impl_int!(@ $i, $i, $u);
+		impl_int!(@ $u, $i, $u);
 		impl INum for $i {}
 		impl IInt for $i {}
 		impl UInt for $u {}

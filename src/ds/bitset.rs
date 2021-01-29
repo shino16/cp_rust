@@ -10,6 +10,7 @@ pub trait BitSet {
 		}
 	}
 	fn negate(&mut self);
+	fn reset(&mut self);
 }
 
 macro_rules! impl_bitset {
@@ -23,6 +24,9 @@ macro_rules! impl_bitset {
 			}
 			fn negate(&mut self) {
 				*self = !*self;
+			}
+			fn reset(&mut self) {
+				*self = 0;
 			}
 		}
 	)* };
@@ -40,6 +44,11 @@ impl BitSet for [u32] {
 	fn negate(&mut self) {
 		for x in self {
 			x.negate()
+		}
+	}
+	fn reset(&mut self) {
+		for x in self {
+			x.reset();
 		}
 	}
 }

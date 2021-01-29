@@ -7,6 +7,8 @@ pub mod grid;
 pub mod io;
 pub mod tree;
 
+pub mod max_flow;
+
 use crate::zo::ZeroOne;
 
 pub trait Graph {

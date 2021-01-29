@@ -18,7 +18,7 @@ where
 	I::Item: Clone,
 {
 	pub fn next(&mut self) -> Option<&Vec<I::Item>> {
-		if self.state.len() == 0 {
+		if self.state.is_empty() {
 			for iter in self.iters.iter_mut() {
 				self.state.push(iter.next()?);
 			}

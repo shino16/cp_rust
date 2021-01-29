@@ -24,8 +24,8 @@ jobs:
           toolchain: 1.42.0
           profile: minimal
 
-      - name: Build
-        run: cargo build --release --all-targets
+      - name: Build tests
+        run: cargo build --release --tests
 
       - name: Setup cargo-auto-bundle
         run: cargo install --git https://github.com/shino16/cargo-auto-bundle.git
