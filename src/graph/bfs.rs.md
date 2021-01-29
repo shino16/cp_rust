@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
   - icon: ':warning:'
@@ -34,7 +34,7 @@ data:
   isVerificationFile: false
   path: src/graph/bfs.rs
   requiredBy: []
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/bfs.rs

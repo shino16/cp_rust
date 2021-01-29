@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
   - icon: ':warning:'
@@ -34,10 +34,9 @@ data:
     \npub fn euler_tour<A: Group, G: WTree<A::Item>>(g: &G, s: usize, a: A) -> Vec<A::Item>\n\
     where\n\tA::Item: Clone,\n{\n\tlet mut edges = Vec::new();\n\tlet mut togo = vec![(s,\
     \ !0, a.unit())];\n\twhile let Some((v, par, e)) = togo.pop() {\n\t\tif v.get_bit(31)\
-    \ {\n\t\t\tedges.push(a.inv(e));\n\t\t} else {\n\t\t\tedges.push(e.clone());\n\
-    \t\t\ttogo.push((!v, 0, e.clone()));\n\t\t\tg.adj_w(v, |w, e| {\n\t\t\t\tif w\
-    \ != par {\n\t\t\t\t\ttogo.push((w, v, e.clone()));\n\t\t\t\t}\n\t\t\t})\n\t\t\
-    }\n\t}\n\tedges\n}\n"
+    \ {\n\t\t\tedges.push(a.inv(e));\n\t\t} else {\n\t\t\tedges.push(e);\n\t\t\ttogo.push((!v,\
+    \ 0, e));\n\t\t\tg.adj_w(v, |w, &e| {\n\t\t\t\tif w != par {\n\t\t\t\t\ttogo.push((w,\
+    \ v, e));\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\tedges\n}\n"
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
@@ -48,7 +47,7 @@ data:
   isVerificationFile: false
   path: src/graph/euler_tour.rs
   requiredBy: []
-  timestamp: '2021-01-27 17:46:37+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/euler_tour.rs

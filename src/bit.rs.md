@@ -79,26 +79,26 @@ data:
   isVerificationFile: false
   path: src/bit.rs
   requiredBy:
+  - src/draft/fpacc64.rs
+  - src/draft/graph/path.rs
+  - src/int/inv.rs
+  - src/int/bisect.rs
+  - src/int/gcd.rs
+  - src/int/arith.rs
+  - src/graph/dijkstra.rs
+  - src/math/binom.rs
+  - src/math/pow.rs
   - src/ds/disjointst.rs
   - src/ds/sparsetable.rs
   - src/ds/fenwick.rs
-  - src/tests.rs
   - src/int.rs
-  - src/graph/dijkstra.rs
-  - src/int/bisect.rs
-  - src/int/inv.rs
-  - src/int/gcd.rs
-  - src/int/arith.rs
   - src/dfa.rs
-  - src/math/pow.rs
-  - src/math/binom.rs
-  - src/draft/fpacc64.rs
-  - src/draft/graph/path.rs
+  - src/tests.rs
   timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/dfa_test.rs
   - test/src/bin/cargo_test.rs
+  - test/src/bin/dfa_test.rs
 documentation_of: src/bit.rs
 layout: document
 redirect_from:

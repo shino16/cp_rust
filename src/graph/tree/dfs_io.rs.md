@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
   - icon: ':warning:'
@@ -43,7 +43,7 @@ data:
   path: src/graph/tree/dfs_io.rs
   requiredBy:
   - src/graph/tree/reroot.rs
-  timestamp: '2021-01-12 14:31:17+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dfs_io.rs

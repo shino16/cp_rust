@@ -18,7 +18,7 @@ data:
     \npub struct IterPow<I: Iterator + Clone> {\n\titers: Vec<I>,\n\titers0: Vec<I>,\n\
     \tstate: Vec<I::Item>,\n}\n\nimpl<'a, I: Iterator + Clone> IterPow<I>\nwhere\n\
     \tI::Item: Clone,\n{\n\tpub fn next(&mut self) -> Option<&Vec<I::Item>> {\n\t\t\
-    if self.state.len() == 0 {\n\t\t\tfor iter in self.iters.iter_mut() {\n\t\t\t\t\
+    if self.state.is_empty() {\n\t\t\tfor iter in self.iters.iter_mut() {\n\t\t\t\t\
     self.state.push(iter.next()?);\n\t\t\t}\n\t\t\treturn Some(&self.state);\n\t\t\
     }\n\t\tfor ((iter, iter0), state) in\n\t\t\tself.iters.iter_mut().zip(self.iters0.iter()).zip(self.state.iter_mut())\n\
     \t\t{\n\t\t\tif let Some(e) = iter.next() {\n\t\t\t\t*state = e;\n\t\t\t\treturn\
@@ -28,7 +28,7 @@ data:
   isVerificationFile: false
   path: src/iter/pow.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/iter/pow.rs

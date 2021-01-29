@@ -8,6 +8,12 @@ data:
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
+    path: src/ds/linked_list.rs
+    title: src/ds/linked_list.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/linked_list/inner_mut.rs
+    title: src/ds/linked_list/inner_mut.rs
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
@@ -60,11 +66,33 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/tests.rs\n"
-  code: "#[cfg(test)]\nmod tests {\n\tmod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\
-    \t\tfn test_pow() {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\tlet mut\
-    \ rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::new(2).pow(3), F17::new(8));\n\
-    \t\t\tfor _ in 0..100 {\n\t\t\t\tlet base: F17 = rng.next().into();\n\t\t\t\t\
-    let k = rng.next() % 100;\n\t\t\t\tlet p = (0..k).map(|_| base).product::<F17>();\n\
+  code: "#[cfg(test)]\nmod tests {\n\tmod ds {\n\t\tmod linked_list {\n\t\t\tuse crate::ds::linked_list::inner_mut::*;\n\
+    \n\t\t\t#[test]\n\t\t\tfn test_linked_list() {\n\t\t\t\tuse std::cell::RefCell;\n\
+    \t\t\t\tuse std::sync::atomic::{AtomicU32, Ordering};\n\n\t\t\t\tstatic DROP_CNT:\
+    \ AtomicU32 = AtomicU32::new(0);\n\t\t\t\t#[derive(PartialEq, Eq, Clone, Debug)]\n\
+    \t\t\t\tstruct S(u32);\n\t\t\t\timpl Drop for S {\n\t\t\t\t\tfn drop(&mut self)\
+    \ {\n\t\t\t\t\t\tDROP_CNT.fetch_add(1, Ordering::SeqCst);\n\t\t\t\t\t}\n\t\t\t\
+    \t}\n\n\t\t\t\tlet mut v = Vec::new();\n\t\t\t\tlet mut l = LinkedList::new();\n\
+    \t\t\t\tlet mut l2 = l.clone();\n\t\t\t\tlet mut cur = l2.begin_mut();\n\t\t\t\
+    \tfor n in 0..10 {\n\t\t\t\t\tv.push(S(n));\n\t\t\t\t\tl.push_back(S(n));\n\t\t\
+    \t\t\tcur.insert(S(n));\n\t\t\t\t\tcur.next().unwrap();\n\t\t\t\t}\n\n\t\t\t\t\
+    assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\t\t\t\tassert_eq!(v,\
+    \ l2.into_iter().collect::<Vec<_>>());\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
+    \ 20);\n\n\t\t\t\tlet l = RefCell::new(l);\n\t\t\t\tlet mut cur = LinkedList::begin_inner_mut(&l);\n\
+    \t\t\t\tcur.advance(7).unwrap().remove();\n\t\t\t\tv.remove(7);\n\t\t\t\tassert_eq!(v,\
+    \ l.borrow().clone().into_iter().collect::<Vec<_>>());\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
+    \ 31);\n\t\t\t\tcur.advance(-2).unwrap().insert(S(100));\n\t\t\t\tv.insert(5,\
+    \ S(100));\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 41);\n\t\t\t\tlet mut cur\
+    \ = LinkedList::end_inner_mut(&l);\n\t\t\t\tcur.advance(-8).unwrap().remove();\n\
+    \t\t\t\tv.remove(2);\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 52);\n\t\t\t\tcur.advance(-2).unwrap();\n\
+    \t\t\t\tassert!(cur.prev().is_none());\n\t\t\t\tstd::mem::drop((v, l));\n\t\t\t\
+    \tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);\n\t\t\t}\n\t\t}\n\t}\n\n\t\
+    mod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\t\tfn test_pow() {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\
+    \t\t\tlet mut rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::new(2).pow(3),\
+    \ F17::new(8));\n\t\t\tfor _ in 0..100 {\n\t\t\t\tlet base: F17 = rng.next().into();\n\
+    \t\t\t\tlet k = rng.next() % 100;\n\t\t\t\tlet p = (0..k).map(|_| base).product::<F17>();\n\
     \t\t\t\tassert_eq!(p, base.pow(k));\n\t\t\t}\n\t\t}\n\t\t#[test]\n\t\tfn test_inv()\
     \ {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\tlet mut rng = Xoshiro256plus::new();\n\
     \t\t\tfor _ in 0..100 {\n\t\t\t\tlet a: F17 = rng.next().into();\n\t\t\t\tlet\
@@ -105,6 +133,8 @@ data:
   dependsOn:
   - src/bit.rs
   - src/cast.rs
+  - src/ds/linked_list.rs
+  - src/ds/linked_list/inner_mut.rs
   - src/fp.rs
   - src/int.rs
   - src/int/gcd.rs
@@ -121,7 +151,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-27 22:59:31+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

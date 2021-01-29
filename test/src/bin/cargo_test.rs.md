@@ -8,6 +8,12 @@ data:
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
+    path: src/ds/linked_list.rs
+    title: src/ds/linked_list.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/linked_list/inner_mut.rs
+    title: src/ds/linked_list/inner_mut.rs
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
@@ -73,6 +79,8 @@ data:
   dependsOn:
   - src/bit.rs
   - src/cast.rs
+  - src/ds/linked_list.rs
+  - src/ds/linked_list/inner_mut.rs
   - src/fp.rs
   - src/int.rs
   - src/int/gcd.rs
@@ -90,7 +98,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-01-27 22:59:31+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

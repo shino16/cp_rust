@@ -106,17 +106,17 @@ data:
   isVerificationFile: false
   path: src/mint.rs
   requiredBy:
-  - src/tests.rs
-  - src/mint/conv.rs
   - src/mint/num.rs
+  - src/mint/conv.rs
+  - src/tests.rs
   timestamp: '2021-01-27 17:46:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/cargo_test.rs
+  - test/src/bin/ntt_mint_test.rs
   - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/cargo_test.rs
-  - test/src/bin/lazy_segtree_test.rs
 documentation_of: src/mint.rs
 layout: document
 redirect_from:

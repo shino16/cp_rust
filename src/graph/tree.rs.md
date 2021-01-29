@@ -42,10 +42,10 @@ data:
   isVerificationFile: false
   path: src/graph/tree.rs
   requiredBy:
-  - src/graph/tree/reroot.rs
-  - src/graph/tree/dfs_io.rs
   - src/graph/tree/dfs.rs
-  timestamp: '2021-01-12 14:31:17+09:00'
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/reroot.rs
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree.rs

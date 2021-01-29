@@ -35,7 +35,7 @@ data:
   isVerificationFile: false
   path: src/fp/num.rs
   requiredBy: []
-  timestamp: '2021-01-27 22:59:31+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/fp/num.rs

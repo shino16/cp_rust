@@ -1,18 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/io.rs
-    title: src/io.rs
-  - icon: ':heavy_check_mark:'
-    path: src/mint.rs
-    title: src/mint.rs
-  - icon: ':heavy_check_mark:'
-    path: src/num.rs
-    title: src/num.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,25 +11,23 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/mint/num.rs\n"
-  code: "pub use super::*;\nuse crate::num::*;\n\nimpl<M: Mod> Num for Mint<M> {\n\
-    \tfn wrapping_add(self, rhs: Self) -> Self {\n\t\tself + rhs\n\t}\n\tfn wrapping_neg(self)\
-    \ -> Self {\n\t\t-self\n\t}\n}\n\nimpl<M: Mod> INum for Mint<M> {}\n"
-  dependsOn:
-  - src/io.rs
-  - src/mint.rs
-  - src/num.rs
-  - src/zo.rs
+    RuntimeError: bundler is not specified: src/graph/max_flow.rs\n"
+  code: 'pub mod edmonds_karp;
+
+    pub mod ford_fulkerson;
+
+    pub mod push_relabel;'
+  dependsOn: []
   isVerificationFile: false
-  path: src/mint/num.rs
+  path: src/graph/max_flow.rs
   requiredBy: []
   timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/mint/num.rs
+documentation_of: src/graph/max_flow.rs
 layout: document
 redirect_from:
-- /library/src/mint/num.rs
-- /library/src/mint/num.rs.html
-title: src/mint/num.rs
+- /library/src/graph/max_flow.rs
+- /library/src/graph/max_flow.rs.html
+title: src/graph/max_flow.rs
 ---

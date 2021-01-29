@@ -49,9 +49,9 @@ data:
   path: src/alg/arith.rs
   requiredBy:
   - src/slice/cum.rs
-  - src/ds/fenwick.rs
   - src/graph/euler_tour.rs
-  timestamp: '2021-01-27 17:46:37+09:00'
+  - src/ds/fenwick.rs
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

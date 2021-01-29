@@ -29,6 +29,9 @@ data:
       path: src/bool.rs
       title: src/bool.rs
     - icon: ':heavy_check_mark:'
+      path: src/bound.rs
+      title: src/bound.rs
+    - icon: ':heavy_check_mark:'
       path: src/cast.rs
       title: src/cast.rs
     - icon: ':heavy_check_mark:'
@@ -135,7 +138,7 @@ data:
       title: src/draft/graph/path.rs
   - name: src/ds
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/bitset.rs
       title: src/ds/bitset.rs
     - icon: ':warning:'
@@ -147,6 +150,9 @@ data:
     - icon: ':warning:'
       path: src/ds/idx.rs
       title: src/ds/idx.rs
+    - icon: ':heavy_check_mark:'
+      path: src/ds/linked_list.rs
+      title: src/ds/linked_list.rs
     - icon: ':warning:'
       path: src/ds/list.rs
       title: src/ds/list.rs
@@ -171,6 +177,14 @@ data:
     - icon: ':warning:'
       path: src/ds/vec2d.rs
       title: src/ds/vec2d.rs
+  - name: src/ds/linked_list
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/ds/linked_list/inner_mut.rs
+      title: src/ds/linked_list/inner_mut.rs
+    - icon: ':warning:'
+      path: src/ds/linked_list/iter.rs
+      title: src/ds/linked_list/iter.rs
   - name: src/ds/segtree
     pages:
     - icon: ':heavy_check_mark:'
@@ -221,8 +235,22 @@ data:
       path: src/graph/io.rs
       title: src/graph/io.rs
     - icon: ':warning:'
+      path: src/graph/max_flow.rs
+      title: src/graph/max_flow.rs
+    - icon: ':warning:'
       path: src/graph/tree.rs
       title: src/graph/tree.rs
+  - name: src/graph/max_flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/graph/max_flow/edmonds_karp.rs
+      title: src/graph/max_flow/edmonds_karp.rs
+    - icon: ':heavy_check_mark:'
+      path: src/graph/max_flow/ford_fulkerson.rs
+      title: src/graph/max_flow/ford_fulkerson.rs
+    - icon: ':warning:'
+      path: src/graph/max_flow/push_relabel.rs
+      title: src/graph/max_flow/push_relabel.rs
   - name: src/graph/tree
     pages:
     - icon: ':warning:'
@@ -325,6 +353,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/dfa_test.rs
       title: test/src/bin/dfa_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/edmonds_karp_test.rs
+      title: test/src/bin/edmonds_karp_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/ford_fulkerson_test.rs
+      title: test/src/bin/ford_fulkerson_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/lazy_segtree_test.rs
       title: test/src/bin/lazy_segtree_test.rs

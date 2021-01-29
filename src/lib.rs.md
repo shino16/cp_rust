@@ -14,20 +14,20 @@ data:
     RuntimeError: bundler is not specified: src/lib.rs\n"
   code: "#![allow(clippy::many_single_char_names)]\n#![allow(clippy::new_without_default)]\n\
     #![allow(clippy::suspicious_op_assign_impl)]\n\npub mod alg;\npub mod assign;\n\
-    pub mod bit;\npub mod bool;\npub mod cast;\npub mod cmp;\npub mod conv;\npub mod\
-    \ dfa;\npub mod ds;\npub mod float;\npub mod fp;\npub mod func;\npub mod fxhash;\n\
-    pub mod graph;\npub mod hash;\npub mod int;\npub mod io;\npub mod io_interactive;\n\
-    pub mod iter;\npub mod make_vec;\npub mod math;\npub mod mint;\npub mod num;\n\
-    pub mod rand;\npub mod slice;\npub mod u64;\npub mod vec;\npub mod zo;\n\npub\
-    \ mod tests;\n\n#[macro_export]\n#[cfg(debug_assertions)]\nmacro_rules! dbg {\n\
-    \t($($x:expr),*) => { std::dbg!($($x),*) }\n}\n\n#[macro_export]\n#[cfg(not(debug_assertions))]\n\
+    pub mod bit;\npub mod bool;\npub mod bound;\npub mod cast;\npub mod cmp;\npub\
+    \ mod conv;\npub mod dfa;\npub mod ds;\npub mod float;\npub mod fp;\npub mod func;\n\
+    pub mod fxhash;\npub mod graph;\npub mod hash;\npub mod int;\npub mod io;\npub\
+    \ mod io_interactive;\npub mod iter;\npub mod make_vec;\npub mod math;\npub mod\
+    \ mint;\npub mod num;\npub mod rand;\npub mod slice;\npub mod u64;\npub mod vec;\n\
+    pub mod zo;\n\npub mod tests;\n\n#[macro_export]\n#[cfg(debug_assertions)]\nmacro_rules!\
+    \ dbg {\n\t($($x:expr),*) => { std::dbg!($($x),*) }\n}\n\n#[macro_export]\n#[cfg(not(debug_assertions))]\n\
     macro_rules! dbg {\n\t($($x:expr),*) => { std::convert::identity(($($x),*)) }\n\
     }\n"
   dependsOn: []
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2021-01-27 17:46:37+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

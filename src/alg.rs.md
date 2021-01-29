@@ -73,21 +73,21 @@ data:
   isVerificationFile: false
   path: src/alg.rs
   requiredBy:
-  - src/slice/cum.rs
-  - src/ds/segtree/lazy.rs
-  - src/ds/disjointst.rs
-  - src/ds/sparsetable.rs
-  - src/ds/fenwick.rs
-  - src/ds/segtree.rs
-  - src/graph/tree/reroot.rs
-  - src/graph/euler_tour.rs
   - src/alg/action.rs
   - src/alg/arith.rs
+  - src/slice/cum.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/euler_tour.rs
+  - src/ds/disjointst.rs
+  - src/ds/sparsetable.rs
+  - src/ds/segtree/lazy.rs
+  - src/ds/segtree.rs
+  - src/ds/fenwick.rs
   timestamp: '2021-01-03 22:19:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/segtree_test.rs
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/segtree_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

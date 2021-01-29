@@ -35,7 +35,7 @@ data:
     \t\tres.push(tl.clone());\n\t\tfor e in self {\n\t\t\ttl = m.op(tl, e.clone());\n\
     \t\t\tres.push(tl.clone());\n\t\t}\n\t\tres\n\t}\n\n\tfn cumr<M: Monoid<Item =\
     \ Self::Item>>(&self, m: M) -> Vec<Self::Item> {\n\t\tlet mut res = Vec::with_capacity(self.len()\
-    \ + 1);\n\t\tlet mut tl = m.unit();\n\t\tres.push(tl.clone());\n\t\tfor e in self.into_iter().rev()\
+    \ + 1);\n\t\tlet mut tl = m.unit();\n\t\tres.push(tl.clone());\n\t\tfor e in self.iter().rev()\
     \ {\n\t\t\ttl = m.op(e.clone(), tl);\n\t\t\tres.push(tl.clone());\n\t\t}\n\t\t\
     res.reverse();\n\t\tres\n\t}\n}\n"
   dependsOn:
@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-01-27 17:46:37+09:00'
+  timestamp: '2021-01-29 12:22:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

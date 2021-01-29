@@ -53,6 +53,12 @@ data:
   - icon: ':warning:'
     path: src/graph/grid.rs
     title: src/graph/grid.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/max_flow/edmonds_karp.rs
+    title: src/graph/max_flow/edmonds_karp.rs
+  - icon: ':heavy_check_mark:'
+    path: src/graph/max_flow/ford_fulkerson.rs
+    title: src/graph/max_flow/ford_fulkerson.rs
   - icon: ':warning:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
@@ -115,6 +121,12 @@ data:
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/edmonds_karp_test.rs
+    title: test/src/bin/edmonds_karp_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/ford_fulkerson_test.rs
+    title: test/src/bin/ford_fulkerson_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
   - icon: ':heavy_check_mark:'
@@ -147,51 +159,55 @@ data:
   isVerificationFile: false
   path: src/zo.rs
   requiredBy:
-  - src/fp.rs
-  - src/slice/cum.rs
-  - src/fp/conv.rs
-  - src/fp/num.rs
-  - src/ds/fenwick.rs
-  - src/u64/conv.rs
-  - src/tests.rs
-  - src/int.rs
-  - src/graph/dfs_io.rs
-  - src/graph/tree.rs
-  - src/graph/dfs.rs
-  - src/graph/tree/reroot.rs
-  - src/graph/tree/dfs_io.rs
-  - src/graph/tree/dfs.rs
-  - src/graph/dijkstra.rs
-  - src/graph/bfs.rs
-  - src/graph/grid.rs
-  - src/graph/euler_tour.rs
-  - src/graph.rs
+  - src/draft/fpacc64.rs
+  - src/draft/graph/graph.rs
+  - src/draft/graph/ds.rs
+  - src/draft/graph/path.rs
   - src/alg/arith.rs
-  - src/num.rs
-  - src/int/bisect.rs
   - src/int/inv.rs
+  - src/int/bisect.rs
   - src/int/gcd.rs
   - src/int/arith.rs
-  - src/mint/conv.rs
+  - src/graph.rs
   - src/mint/num.rs
-  - src/dfa.rs
+  - src/mint/conv.rs
+  - src/fp/num.rs
+  - src/fp/conv.rs
+  - src/fp.rs
+  - src/slice/cum.rs
+  - src/graph/dfs.rs
+  - src/graph/grid.rs
+  - src/graph/tree/dfs.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/reroot.rs
+  - src/graph/dijkstra.rs
+  - src/graph/dfs_io.rs
+  - src/graph/bfs.rs
+  - src/graph/max_flow/ford_fulkerson.rs
+  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/euler_tour.rs
+  - src/graph/tree.rs
   - src/mint.rs
-  - src/math/pow.rs
+  - src/num.rs
   - src/math/binom.rs
-  - src/draft/fpacc64.rs
-  - src/draft/graph/ds.rs
-  - src/draft/graph/graph.rs
-  - src/draft/graph/path.rs
+  - src/math/pow.rs
+  - src/ds/fenwick.rs
+  - src/u64/conv.rs
+  - src/int.rs
+  - src/dfa.rs
+  - src/tests.rs
   timestamp: '2020-12-21 16:49:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/dfa_test.rs
-  - test/src/bin/ntt_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/cargo_test.rs
-  - test/src/bin/ntt_garner_test.rs
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/cargo_test.rs
+  - test/src/bin/ntt_test.rs
+  - test/src/bin/ntt_garner_test.rs
+  - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/dfa_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
 documentation_of: src/zo.rs
 layout: document
 redirect_from:

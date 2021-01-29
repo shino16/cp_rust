@@ -47,15 +47,15 @@ data:
   isVerificationFile: false
   path: src/rand/seed.rs
   requiredBy:
-  - src/tests.rs
-  - src/dfa.rs
   - src/fxhash.rs
   - src/rand/xoshiro256plus.rs
+  - src/dfa.rs
+  - src/tests.rs
   timestamp: '2020-12-15 00:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/dfa_test.rs
   - test/src/bin/cargo_test.rs
+  - test/src/bin/dfa_test.rs
 documentation_of: src/rand/seed.rs
 layout: document
 redirect_from:
