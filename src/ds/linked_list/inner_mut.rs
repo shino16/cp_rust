@@ -51,7 +51,8 @@ impl<'a, T: 'a> CursorInnerMut<'a, T> {
 	}
 	pub fn insert(&mut self, val: T) {
 		let prev = unsafe { self.at.as_ref() }.prev;
-		let new_node = Box::leak(Box::new(Node { prev, next_val: Some((self.at, val)) })).into();
+		let new_node =
+			self.list.borrow_mut().new_node(Node { prev, next_val: Some((self.at, val)) });
 		unsafe { self.at.as_mut() }.prev = Some(new_node);
 		if let Some(mut prev) = prev {
 			unsafe { prev.as_mut() }.next_val.as_mut().unwrap().0 = new_node;
@@ -66,7 +67,7 @@ impl<'a, T: 'a> CursorInnerMut<'a, T> {
 			return None;
 		}
 		unsafe {
-			let node = *Box::from_raw(self.at.as_ptr());
+			let node = std::ptr::read(self.at.as_ptr());
 			let (mut next, val) = node.next_val?;
 			if let Some(mut prev) = node.prev {
 				*next.as_mut().prev.as_mut().unwrap() = prev;
@@ -80,4 +81,3 @@ impl<'a, T: 'a> CursorInnerMut<'a, T> {
 		}
 	}
 }
-

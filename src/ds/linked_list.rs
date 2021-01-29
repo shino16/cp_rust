@@ -9,6 +9,7 @@ pub mod inner_mut;
 pub struct LinkedList<T> {
 	head: NonNull<Node<T>>,
 	tail: NonNull<Node<T>>,
+	arena: Vec<Vec<Node<T>>>,
 	len: usize,
 }
 
@@ -42,8 +43,15 @@ pub struct CursorMut<'a, T: 'a> {
 
 impl<T> LinkedList<T> {
 	pub fn new() -> Self {
-		let head = Box::leak(Box::new(Node::new())).into();
-		Self { head, tail: head, len: 0 }
+		let mut arena = vec![vec![Node::new()]];
+		let head = (&mut arena[0][0]).into();
+		Self { head, tail: head, arena, len: 0 }
+	}
+	pub fn with_capacity(cap: usize) -> Self {
+		let mut arena = vec![Vec::with_capacity(cap)];
+		arena[0].push(Node::new());
+		let head = (&mut arena[0][0]).into();
+		Self { head, tail: head, arena, len: 0 }
 	}
 	pub fn len(&self) -> usize {
 		self.len
@@ -53,6 +61,16 @@ impl<T> LinkedList<T> {
 	}
 	pub fn clear(&mut self) {
 		*self = Self::new();
+	}
+	pub fn new_node(&mut self, node: Node<T>) -> NonNull<Node<T>> {
+		let mut last = self.arena.last_mut().unwrap();
+		if last.len() == last.capacity() {
+			let new_arena = Vec::with_capacity(last.capacity() * 2);
+			self.arena.push(new_arena);
+			last = self.arena.last_mut().unwrap();
+		}
+		last.push(node);
+		last.last_mut().unwrap().into()
 	}
 	pub fn begin_mut(&mut self) -> CursorMut<'_, T> {
 		CursorMut { at: self.head, list: self }
@@ -79,8 +97,9 @@ impl<T> LinkedList<T> {
 
 impl<T> FromIterator<T> for LinkedList<T> {
 	fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
-		let mut res = Self::new();
-		for val in iter.into_iter() {
+		let iter = iter.into_iter();
+		let mut res = Self::with_capacity(iter.size_hint().0);
+		for val in iter {
 			res.end_mut().insert(val);
 		}
 		res
@@ -103,6 +122,11 @@ impl<T: Clone> Clone for LinkedList<T> {
 
 impl<T> Drop for LinkedList<T> {
 	fn drop(&mut self) {
+		for v in &mut self.arena {
+			unsafe {
+				v.set_len(0);
+			}
+		}
 		let mut cursor = self.begin_mut();
 		while cursor.remove().is_some() {}
 	}
@@ -164,7 +188,7 @@ impl<'a, T: 'a> CursorMut<'a, T> {
 	}
 	pub fn insert(&mut self, val: T) {
 		let prev = unsafe { self.at.as_ref() }.prev;
-		let new_node = Box::leak(Box::new(Node { prev, next_val: Some((self.at, val)) })).into();
+		let new_node = self.list.new_node(Node { prev, next_val: Some((self.at, val)) });
 		unsafe { self.at.as_mut() }.prev = Some(new_node);
 		if let Some(mut prev) = prev {
 			unsafe { prev.as_mut() }.next_val.as_mut().unwrap().0 = new_node;
@@ -179,7 +203,7 @@ impl<'a, T: 'a> CursorMut<'a, T> {
 			return None;
 		}
 		unsafe {
-			let node = *Box::from_raw(self.at.as_ptr());
+			let node = std::ptr::read(self.at.as_ptr());
 			let (mut next, val) = node.next_val?;
 			if let Some(mut prev) = node.prev {
 				*next.as_mut().prev.as_mut().unwrap() = prev;
