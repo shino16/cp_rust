@@ -115,6 +115,12 @@ impl Scan for &[u8] {
 	}
 }
 
+impl Scan for Vec<u8> {
+	fn scan(s: &mut IO) -> Self {
+		s.scan_raw().to_vec()
+	}
+}
+
 macro_rules! impl_tuple {
 	() => {};
 	($t:ident $($ts:ident)*) => {
@@ -173,6 +179,12 @@ impl Print for u8 {
 impl Print for &[u8] {
 	fn print(w: &mut IO, x: Self) {
 		w.buf.write_all(x).unwrap();
+	}
+}
+
+impl Print for Vec<u8> {
+	fn print(w: &mut IO, x: Self) {
+		w.buf.write_all(&x).unwrap();
 	}
 }
 

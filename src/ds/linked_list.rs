@@ -4,12 +4,14 @@ use std::ops::{Deref, DerefMut};
 use std::ptr::NonNull;
 
 pub mod inner_mut;
+pub mod ptr;
 
-#[derive(Debug, PartialEq, PartialOrd, Hash)]
+#[derive(PartialEq, PartialOrd, Hash)]
 pub struct LinkedList<T> {
-	head: NonNull<Node<T>>,
-	tail: NonNull<Node<T>>,
-	arena: Vec<Vec<Node<T>>>,
+	pub head: NonNull<Node<T>>,
+	pub tail: NonNull<Node<T>>,
+	arenas: Vec<Vec<Node<T>>>,
+	arena_idx: usize,
 	len: usize,
 }
 
@@ -35,23 +37,22 @@ pub struct IntoIter<T> {
 	list: LinkedList<T>,
 }
 
-#[derive(Debug)]
 pub struct CursorMut<'a, T: 'a> {
-	pub at: NonNull<Node<T>>,
+	at: NonNull<Node<T>>,
 	list: &'a mut LinkedList<T>,
 }
 
 impl<T> LinkedList<T> {
 	pub fn new() -> Self {
-		let mut arena = vec![vec![Node::new()]];
-		let head = (&mut arena[0][0]).into();
-		Self { head, tail: head, arena, len: 0 }
+		let mut arenas = vec![vec![Node::new()]];
+		let head = (&mut arenas[0][0]).into();
+		Self { head, tail: head, arenas, arena_idx: 0, len: 0 }
 	}
 	pub fn with_capacity(cap: usize) -> Self {
-		let mut arena = vec![Vec::with_capacity(cap)];
-		arena[0].push(Node::new());
-		let head = (&mut arena[0][0]).into();
-		Self { head, tail: head, arena, len: 0 }
+		let mut arenas = vec![Vec::with_capacity(cap)];
+		arenas[0].push(Node::new());
+		let head = (&mut arenas[0][0]).into();
+		Self { head, tail: head, arenas, arena_idx: 0, len: 0 }
 	}
 	pub fn len(&self) -> usize {
 		self.len
@@ -60,17 +61,21 @@ impl<T> LinkedList<T> {
 		self.head == self.tail
 	}
 	pub fn clear(&mut self) {
-		*self = Self::new();
+		self.drop_impl();
+		self.arena_idx = 0;
 	}
-	pub fn new_node(&mut self, node: Node<T>) -> NonNull<Node<T>> {
-		let mut last = self.arena.last_mut().unwrap();
-		if last.len() == last.capacity() {
-			let new_arena = Vec::with_capacity(last.capacity() * 2);
-			self.arena.push(new_arena);
-			last = self.arena.last_mut().unwrap();
+	fn new_node(&mut self, node: Node<T>) -> NonNull<Node<T>> {
+		let arena = &self.arenas[self.arena_idx];
+		if arena.len() == arena.capacity() {
+			self.arena_idx += 1;
+			if self.arena_idx == self.arenas.len() {
+				let new_arena = Vec::with_capacity(arena.capacity() * 2);
+				self.arenas.push(new_arena);
+			}
 		}
-		last.push(node);
-		last.last_mut().unwrap().into()
+		let arena = &mut self.arenas[self.arena_idx];
+		arena.push(node);
+		arena.last_mut().unwrap().into()
 	}
 	pub fn begin_mut(&mut self) -> CursorMut<'_, T> {
 		CursorMut { at: self.head, list: self }
@@ -93,6 +98,15 @@ impl<T> LinkedList<T> {
 	pub fn iter(&self) -> Iter<'_, T> {
 		Iter { head: self.head, len: self.len, _marker: PhantomData }
 	}
+	fn drop_impl(&mut self) {
+		for v in &mut self.arenas[1..] {
+			unsafe {
+				v.set_len(0);
+			}
+		}
+		let mut cursor = self.begin_mut();
+		while cursor.remove().is_some() {}
+	}
 }
 
 impl<T> FromIterator<T> for LinkedList<T> {
@@ -114,7 +128,7 @@ impl<T> IntoIterator for LinkedList<T> {
 	}
 }
 
-impl<T: Clone> Clone for LinkedList<T> {
+impl<T: Clone + std::fmt::Debug> Clone for LinkedList<T> {
 	fn clone(&self) -> Self {
 		self.iter().cloned().collect()
 	}
@@ -122,21 +136,16 @@ impl<T: Clone> Clone for LinkedList<T> {
 
 impl<T> Drop for LinkedList<T> {
 	fn drop(&mut self) {
-		for v in &mut self.arena {
-			unsafe {
-				v.set_len(0);
-			}
-		}
-		let mut cursor = self.begin_mut();
-		while cursor.remove().is_some() {}
+		self.drop_impl();
 	}
 }
 
-impl<'a, T: 'a> Iterator for Iter<'a, T> {
+impl<'a, T: 'a + std::fmt::Debug> Iterator for Iter<'a, T> {
 	type Item = &'a T;
 	fn next(&mut self) -> Option<Self::Item> {
 		let next_val = unsafe { &*self.head.as_ptr() }.next_val.as_ref()?;
 		let res = &next_val.1;
+		assert!(next_val.0 != self.head);
 		self.head = next_val.0;
 		Some(res)
 	}
@@ -197,6 +206,15 @@ impl<'a, T: 'a> CursorMut<'a, T> {
 		}
 		self.at = new_node;
 		self.list.len += 1;
+		unsafe {
+			if let Some(prev) = self.at.as_ref().prev {
+				assert!(Some(prev) != prev.as_ref().next_val.as_ref().map(|t| t.0));
+			}
+			assert!(Some(self.at) != self.at.as_ref().next_val.as_ref().map(|t| t.0));
+			if let Some((next, _)) = self.at.as_ref().next_val {
+				assert!(Some(next) != next.as_ref().next_val.as_ref().map(|t| t.0));
+			}
+		}
 	}
 	pub fn remove(&mut self) -> Option<T> {
 		if self.at == self.list.tail {
@@ -213,7 +231,21 @@ impl<'a, T: 'a> CursorMut<'a, T> {
 				self.list.head = next;
 			}
 			self.at = next;
+
+			if let Some(prev) = self.at.as_ref().prev {
+				assert!(Some(prev) != prev.as_ref().next_val.as_ref().map(|t| t.0));
+			}
+			assert!(Some(self.at) != self.at.as_ref().next_val.as_ref().map(|t| t.0));
+			if let Some((next, _)) = self.at.as_ref().next_val {
+				assert!(Some(next) != next.as_ref().next_val.as_ref().map(|t| t.0));
+			}
 			Some(val)
 		}
+	}
+}
+
+impl<T: std::fmt::Debug> std::fmt::Debug for LinkedList<T> {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		f.debug_list().entries(self.iter()).finish()
 	}
 }

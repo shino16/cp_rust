@@ -9,5 +9,3 @@ impl<M: Mod> Num for Fp<M> {
 		-self
 	}
 }
-
-impl<M: Mod> INum for Fp<M> {}

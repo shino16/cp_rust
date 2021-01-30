@@ -9,5 +9,3 @@ impl<M: Mod> Num for Mint<M> {
 		-self
 	}
 }
-
-impl<M: Mod> INum for Mint<M> {}

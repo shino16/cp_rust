@@ -2,6 +2,8 @@ use crate::bound::Bound;
 pub use crate::num::*;
 use std::collections::VecDeque;
 
+pub mod edge;
+
 #[derive(Clone, Copy, Debug)]
 pub struct Edge<C: Num + Bound> {
 	pub to: usize,
@@ -45,7 +47,9 @@ impl<C: Num + Bound> EdmondsKarp<C> {
 		let mut track = vec![!0; self.len()];
 		let mut togo = VecDeque::new();
 		loop {
-			for e in &mut track { *e = !0; }
+			for e in &mut track {
+				*e = !0;
+			}
 			togo.clear();
 			togo.push_back((s, C::MAX));
 			let mut df = C::ZERO;

@@ -1,5 +1,6 @@
 pub mod cum;
 pub mod perm;
+pub mod fill;
 
 pub trait Slice {
 	type Item;

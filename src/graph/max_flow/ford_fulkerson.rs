@@ -2,6 +2,8 @@ use crate::bound::Bound;
 use crate::ds::bitset::*;
 pub use crate::num::*;
 
+pub mod edge;
+
 #[derive(Clone, Copy, Debug)]
 pub struct Edge<C: Num + Bound> {
 	pub to: usize,

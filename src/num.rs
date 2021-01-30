@@ -35,3 +35,5 @@ macro_rules! impl_num {
 }
 
 impl_num!(i32, i64, i128, isize, u32, u64, u128, usize);
+
+impl<T: Num + Neg<Output = Self>> INum for T {}

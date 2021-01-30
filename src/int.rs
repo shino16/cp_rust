@@ -40,7 +40,6 @@ macro_rules! impl_int {
 	({ $i:ident }, { $u:ident }) => {
 		impl_int!(@ $i, $i, $u);
 		impl_int!(@ $u, $i, $u);
-		impl INum for $i {}
 		impl IInt for $i {}
 		impl UInt for $u {}
 	};
