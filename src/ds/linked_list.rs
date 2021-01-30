@@ -6,6 +6,8 @@ use std::ptr::NonNull;
 pub mod inner_mut;
 pub mod ptr;
 
+/// FIXME: double free
+/// https://github.com/shino16/cpr/runs/1796088138?check_suite_focus=true#step:8:64
 #[derive(PartialEq, PartialOrd, Hash)]
 pub struct LinkedList<T> {
 	pub head: NonNull<Node<T>>,
