@@ -1,5 +1,7 @@
 pub use super::*;
 
+/// FIXME: double free
+/// https://github.com/shino16/cpr/runs/1796042987?check_suite_focus=true#step:8:65
 #[derive(Clone)]
 pub struct CursorPtr<T> {
 	at: NonNull<Node<T>>,

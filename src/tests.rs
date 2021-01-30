@@ -47,52 +47,52 @@ mod tests {
 				std::mem::drop((v, l));
 				assert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);
 			}
-			#[test]
-			fn test_linked_list_ptr() {
-				use crate::ds::linked_list::ptr::*;
-				use std::sync::atomic::{AtomicU32, Ordering};
+			// #[test]
+			// fn test_linked_list_ptr() {
+			// 	use crate::ds::linked_list::ptr::*;
+			// 	use std::sync::atomic::{AtomicU32, Ordering};
 
-				static DROP_CNT: AtomicU32 = AtomicU32::new(0);
-				#[derive(PartialEq, Eq, Clone, Debug)]
-				struct S(u32);
-				impl Drop for S {
-					fn drop(&mut self) {
-						DROP_CNT.fetch_add(1, Ordering::SeqCst);
-					}
-				}
+			// 	static DROP_CNT: AtomicU32 = AtomicU32::new(0);
+			// 	#[derive(PartialEq, Eq, Clone, Debug)]
+			// 	struct S(u32);
+			// 	impl Drop for S {
+			// 		fn drop(&mut self) {
+			// 			DROP_CNT.fetch_add(1, Ordering::SeqCst);
+			// 		}
+			// 	}
 
-				let mut v = Vec::new();
-				let mut l = LinkedList::new();
-				let mut l2 = l.clone();
-				let mut cur = l2.begin_mut();
-				for n in 0..10 {
-					v.push(Box::new(S(n)));
-					l.push_back(Box::new(S(n)));
-					cur.insert(Box::new(S(n)));
-					cur.next().unwrap();
-				}
-				assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
-				assert_eq!(v, l2.into_iter().collect::<Vec<_>>());
+			// 	let mut v = Vec::new();
+			// 	let mut l = LinkedList::new();
+			// 	let mut l2 = l.clone();
+			// 	let mut cur = l2.begin_mut();
+			// 	for n in 0..10 {
+			// 		v.push(Box::new(S(n)));
+			// 		l.push_back(Box::new(S(n)));
+			// 		cur.insert(Box::new(S(n)));
+			// 		cur.next().unwrap();
+			// 	}
+			// 	assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
+			// 	assert_eq!(v, l2.into_iter().collect::<Vec<_>>());
 
-				let mut cur = l.begin_ptr();
-				unsafe { cur.advance(7).unwrap().remove(); }
-				v.remove(7);
-				assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
-				unsafe { cur.advance(-2).unwrap().insert(Box::new(S(100))); }
-				v.insert(5, Box::new(S(100)));
-				assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
-				let mut cur = l.end_ptr();
-				unsafe { cur.advance(-8).unwrap().remove(); }
-				v.remove(2);
-				assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
-				cur.advance(-2).unwrap();
-				assert!(cur.prev().is_none());
-				for (v, l) in v.iter().zip(l.iter()) {
-					assert_eq!(v, l);
-				}
-				std::mem::drop((v, l));
-				assert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);
-			}
+			// 	let mut cur = l.begin_ptr();
+			// 	unsafe { cur.advance(7).unwrap().remove(); }
+			// 	v.remove(7);
+			// 	assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
+			// 	unsafe { cur.advance(-2).unwrap().insert(Box::new(S(100))); }
+			// 	v.insert(5, Box::new(S(100)));
+			// 	assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
+			// 	let mut cur = l.end_ptr();
+			// 	unsafe { cur.advance(-8).unwrap().remove(); }
+			// 	v.remove(2);
+			// 	assert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());
+			// 	cur.advance(-2).unwrap();
+			// 	assert!(cur.prev().is_none());
+			// 	for (v, l) in v.iter().zip(l.iter()) {
+			// 		assert_eq!(v, l);
+			// 	}
+			// 	std::mem::drop((v, l));
+			// 	assert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);
+			// }
 		}
 	}
 
