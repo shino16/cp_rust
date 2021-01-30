@@ -8,24 +8,19 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/push_relabel.rs
     title: src/graph/max_flow/push_relabel.rs
-  - icon: ':x:'
-    path: src/tests.rs
-    title: src/tests.rs
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/linked_list/ptr.rs\n"
-  code: "pub use super::*;\n\n#[derive(Clone)]\npub struct CursorPtr<T> {\n\tat: NonNull<Node<T>>,\n\
-    \tlist: NonNull<LinkedList<T>>,\n}\n\nimpl<T> LinkedList<T> {\n\tpub fn begin_ptr<'a>(&mut\
+  code: "pub use super::*;\n\n/// FIXME: double free\n/// https://github.com/shino16/cpr/runs/1796042987?check_suite_focus=true#step:8:65\n\
+    #[derive(Clone)]\npub struct CursorPtr<T> {\n\tat: NonNull<Node<T>>,\n\tlist:\
+    \ NonNull<LinkedList<T>>,\n}\n\nimpl<T> LinkedList<T> {\n\tpub fn begin_ptr<'a>(&mut\
     \ self) -> CursorPtr<T> {\n\t\tCursorPtr { at: self.head, list: self.into() }\n\
     \t}\n\tpub fn end_ptr<'a>(&mut self) -> CursorPtr<T> {\n\t\tCursorPtr { at: self.tail,\
     \ list: self.into() }\n\t}\n}\n\nimpl<T> Deref for CursorPtr<T> {\n\ttype Target\
@@ -61,11 +56,9 @@ data:
   path: src/ds/linked_list/ptr.rs
   requiredBy:
   - src/graph/max_flow/push_relabel.rs
-  - src/tests.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/src/bin/cargo_test.rs
+  timestamp: '2021-01-30 13:10:47+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/ds/linked_list/ptr.rs
 layout: document
 redirect_from:

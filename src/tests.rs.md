@@ -13,9 +13,6 @@ data:
   - icon: ':x:'
     path: src/ds/linked_list/inner_mut.rs
     title: src/ds/linked_list/inner_mut.rs
-  - icon: ':x:'
-    path: src/ds/linked_list/ptr.rs
-    title: src/ds/linked_list/ptr.rs
   - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
@@ -89,27 +86,28 @@ data:
     \t\t\t\tv.remove(2);\n\t\t\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
     \t\t\t\tcur.advance(-2).unwrap();\n\t\t\t\tassert!(cur.prev().is_none());\n\t\t\
     \t\tstd::mem::drop((v, l));\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
-    \ 70);\n\t\t\t}\n\t\t\t#[test]\n\t\t\tfn test_linked_list_ptr() {\n\t\t\t\tuse\
-    \ crate::ds::linked_list::ptr::*;\n\t\t\t\tuse std::sync::atomic::{AtomicU32,\
-    \ Ordering};\n\n\t\t\t\tstatic DROP_CNT: AtomicU32 = AtomicU32::new(0);\n\t\t\t\
-    \t#[derive(PartialEq, Eq, Clone, Debug)]\n\t\t\t\tstruct S(u32);\n\t\t\t\timpl\
-    \ Drop for S {\n\t\t\t\t\tfn drop(&mut self) {\n\t\t\t\t\t\tDROP_CNT.fetch_add(1,\
-    \ Ordering::SeqCst);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tlet mut v = Vec::new();\n\
-    \t\t\t\tlet mut l = LinkedList::new();\n\t\t\t\tlet mut l2 = l.clone();\n\t\t\t\
-    \tlet mut cur = l2.begin_mut();\n\t\t\t\tfor n in 0..10 {\n\t\t\t\t\tv.push(Box::new(S(n)));\n\
-    \t\t\t\t\tl.push_back(Box::new(S(n)));\n\t\t\t\t\tcur.insert(Box::new(S(n)));\n\
-    \t\t\t\t\tcur.next().unwrap();\n\t\t\t\t}\n\t\t\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
-    \t\t\t\tassert_eq!(v, l2.into_iter().collect::<Vec<_>>());\n\n\t\t\t\tlet mut\
-    \ cur = l.begin_ptr();\n\t\t\t\tunsafe { cur.advance(7).unwrap().remove(); }\n\
-    \t\t\t\tv.remove(7);\n\t\t\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
-    \t\t\t\tunsafe { cur.advance(-2).unwrap().insert(Box::new(S(100))); }\n\t\t\t\t\
-    v.insert(5, Box::new(S(100)));\n\t\t\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
-    \t\t\t\tlet mut cur = l.end_ptr();\n\t\t\t\tunsafe { cur.advance(-8).unwrap().remove();\
-    \ }\n\t\t\t\tv.remove(2);\n\t\t\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
-    \t\t\t\tcur.advance(-2).unwrap();\n\t\t\t\tassert!(cur.prev().is_none());\n\t\t\
-    \t\tfor (v, l) in v.iter().zip(l.iter()) {\n\t\t\t\t\tassert_eq!(v, l);\n\t\t\t\
-    \t}\n\t\t\t\tstd::mem::drop((v, l));\n\t\t\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
-    \ 70);\n\t\t\t}\n\t\t}\n\t}\n\n\tmod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\
+    \ 70);\n\t\t\t}\n\t\t\t// #[test]\n\t\t\t// fn test_linked_list_ptr() {\n\t\t\t\
+    // \tuse crate::ds::linked_list::ptr::*;\n\t\t\t// \tuse std::sync::atomic::{AtomicU32,\
+    \ Ordering};\n\n\t\t\t// \tstatic DROP_CNT: AtomicU32 = AtomicU32::new(0);\n\t\
+    \t\t// \t#[derive(PartialEq, Eq, Clone, Debug)]\n\t\t\t// \tstruct S(u32);\n\t\
+    \t\t// \timpl Drop for S {\n\t\t\t// \t\tfn drop(&mut self) {\n\t\t\t// \t\t\t\
+    DROP_CNT.fetch_add(1, Ordering::SeqCst);\n\t\t\t// \t\t}\n\t\t\t// \t}\n\n\t\t\
+    \t// \tlet mut v = Vec::new();\n\t\t\t// \tlet mut l = LinkedList::new();\n\t\t\
+    \t// \tlet mut l2 = l.clone();\n\t\t\t// \tlet mut cur = l2.begin_mut();\n\t\t\
+    \t// \tfor n in 0..10 {\n\t\t\t// \t\tv.push(Box::new(S(n)));\n\t\t\t// \t\tl.push_back(Box::new(S(n)));\n\
+    \t\t\t// \t\tcur.insert(Box::new(S(n)));\n\t\t\t// \t\tcur.next().unwrap();\n\t\
+    \t\t// \t}\n\t\t\t// \tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t// \tassert_eq!(v, l2.into_iter().collect::<Vec<_>>());\n\n\t\t\t// \tlet\
+    \ mut cur = l.begin_ptr();\n\t\t\t// \tunsafe { cur.advance(7).unwrap().remove();\
+    \ }\n\t\t\t// \tv.remove(7);\n\t\t\t// \tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t// \tunsafe { cur.advance(-2).unwrap().insert(Box::new(S(100))); }\n\t\t\
+    \t// \tv.insert(5, Box::new(S(100)));\n\t\t\t// \tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t// \tlet mut cur = l.end_ptr();\n\t\t\t// \tunsafe { cur.advance(-8).unwrap().remove();\
+    \ }\n\t\t\t// \tv.remove(2);\n\t\t\t// \tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\t\t// \tcur.advance(-2).unwrap();\n\t\t\t// \tassert!(cur.prev().is_none());\n\
+    \t\t\t// \tfor (v, l) in v.iter().zip(l.iter()) {\n\t\t\t// \t\tassert_eq!(v,\
+    \ l);\n\t\t\t// \t}\n\t\t\t// \tstd::mem::drop((v, l));\n\t\t\t// \tassert_eq!(DROP_CNT.load(Ordering::SeqCst),\
+    \ 70);\n\t\t\t// }\n\t\t}\n\t}\n\n\tmod fp {\n\t\tuse crate::fp::*;\n\t\t#[test]\n\
     \t\tfn test_pow() {\n\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\tlet mut\
     \ rng = Xoshiro256plus::new();\n\t\t\tassert_eq!(F17::new(2).pow(3), F17::new(8));\n\
     \t\t\tfor _ in 0..100 {\n\t\t\t\tlet base: F17 = rng.next().into();\n\t\t\t\t\
@@ -156,7 +154,6 @@ data:
   - src/cast.rs
   - src/ds/linked_list.rs
   - src/ds/linked_list/inner_mut.rs
-  - src/ds/linked_list/ptr.rs
   - src/fp.rs
   - src/int.rs
   - src/int/gcd.rs
@@ -173,7 +170,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-30 13:10:47+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs

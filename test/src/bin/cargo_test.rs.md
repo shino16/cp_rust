@@ -13,9 +13,6 @@ data:
   - icon: ':x:'
     path: src/ds/linked_list/inner_mut.rs
     title: src/ds/linked_list/inner_mut.rs
-  - icon: ':x:'
-    path: src/ds/linked_list/ptr.rs
-    title: src/ds/linked_list/ptr.rs
   - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
@@ -84,7 +81,6 @@ data:
   - src/cast.rs
   - src/ds/linked_list.rs
   - src/ds/linked_list/inner_mut.rs
-  - src/ds/linked_list/ptr.rs
   - src/fp.rs
   - src/int.rs
   - src/int/gcd.rs
@@ -102,7 +98,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-30 13:10:47+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

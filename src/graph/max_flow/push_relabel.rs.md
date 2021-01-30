@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: src/ds/linked_list.rs
     title: src/ds/linked_list.rs
-  - icon: ':x:'
+  - icon: ':warning:'
     path: src/ds/linked_list/ptr.rs
     title: src/ds/linked_list/ptr.rs
   - icon: ':question:'
@@ -98,7 +98,7 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow/push_relabel.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-30 13:10:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/max_flow/push_relabel.rs

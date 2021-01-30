@@ -171,7 +171,7 @@ data:
     - icon: ':warning:'
       path: src/ds/linked_list/iter.rs
       title: src/ds/linked_list/iter.rs
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/ds/linked_list/ptr.rs
       title: src/ds/linked_list/ptr.rs
   - name: src/ds/segtree
