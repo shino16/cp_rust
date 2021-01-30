@@ -2,6 +2,8 @@ use crate::bound::*;
 use crate::num::*;
 use std::collections::VecDeque;
 
+pub mod edge;
+
 #[derive(Clone, Copy, Debug)]
 pub struct InnerEdge<C: Num + Bound> {
 	pub to: usize,
@@ -9,8 +11,7 @@ pub struct InnerEdge<C: Num + Bound> {
 	rev: usize,
 }
 
-/// highest-label preflow-push algorithm with global labeling and gap-relabeling
-/// FIXME: flow may be invalid except around sink
+/// highest-label preflow-push algorithm with global labeling and gap relabeling
 /// O(V^2 \sqrt(E))
 #[derive(Clone)]
 pub struct Hlpp<C: Num + Bound> {
@@ -32,8 +33,8 @@ impl<C: Num + Bound> Hlpp<C> {
 			height: vec![len; len],
 			excess: vec![C::ZERO; len],
 			count: vec![0; len * 2],
-			todo: vec![Vec::new(); len + 1],
-			height_inv: vec![Vec::new(); len + 1],
+			todo: vec![Vec::new(); len * 2],
+			height_inv: vec![Vec::new(); len * 2],
 			idx: vec![!0; len],
 			highest_active: 0,
 			highest: 0,
@@ -70,56 +71,67 @@ impl<C: Num + Bound> Hlpp<C> {
 		self.graph[to][rev].cap += df;
 		self.excess[v] -= df;
 		self.excess[to] += df;
-		if !init && self.excess[to] > C::ZERO && self.excess[to] <= df {
+		if !init && self.excess[to] == df {
 			self.todo[self.height[to]].push(to);
+			self.highest_active = self.highest_active.max(self.height[to]);
 		}
 	}
+	fn change_height(&mut self, v: usize, h0: usize, h1: usize) {
+		self.count[h0] -= 1;
+		self.height[v] = h1;
+		self.idx[v] = self.height_inv[h1].len();
+		self.height_inv[h1].push(v);
+		self.count[h1] += 1;
+		debug_assert!(self.highest_active <= h1);
+		self.highest_active = h1;
+		if h1 < self.len() {
+			self.highest = self.highest.max(h1);
+		}
+		self.todo[h1].push(v);
+	}
 	fn relabel(&mut self, v: usize, h1: usize) {
-		debug_assert!(h1 != 0);
 		let h0 = self.height[v];
-		if self.count[h0] == 1 {
+		if self.count[h0] == 1 && h0 < self.len() {
 			let len = self.len();
+			debug_assert!(self.highest < len);
 			for h in h0..=self.highest {
-				for v in self.height_inv[h].drain(..) {
-					self.count[h] -= 1;
-					self.height[v] = len;
+				let mut drain = std::mem::take(&mut self.height_inv[h]);
+				for v in drain.drain(..) {
+					self.change_height(v, h, len);
 				}
+				self.height_inv[h] = drain;
 			}
 			self.highest = h0 - 1;
 		} else {
-			self.count[h0] -= 1;
+			if self.idx[v] >= self.height_inv[h0].len() {
+			}
 			self.height_inv[h0].swap_remove(self.idx[v]);
 			if let Some(&w) = self.height_inv[h0].get(self.idx[v]) {
 				self.idx[w] = self.idx[v];
 			}
-			self.height[v] = h1;
-			if h1 != self.len() {
-				self.idx[v] = self.height_inv[h1].len();
-				self.height_inv[h1].push(v);
-				self.count[h1] += 1;
-				debug_assert!(self.highest_active <= h1);
-				self.highest_active = h1;
-				self.highest = self.highest.max(h1);
-				self.todo[h1].push(v);
-			}
+			self.change_height(v, h0, h1);
 		}
 	}
 	fn discharge(&mut self, v: usize) {
-		debug_assert!(self.excess[v] > C::ZERO);
-		let mut min = !0;
-		for i in 0..self.graph[v].len() {
-			if self.graph[v][i].cap > C::ZERO {
-				if self.height[v] > self.height[self.graph[v][i].to] {
-					self.push(v, i, false);
-					if self.excess[v] == C::ZERO {
-						return;
+		loop {
+			let mut min = !0;
+			for i in 0..self.graph[v].len() {
+				if self.graph[v][i].cap > C::ZERO {
+					if self.height[v] > self.height[self.graph[v][i].to] {
+						self.push(v, i, false);
+						if self.excess[v] == C::ZERO {
+							return;
+						}
+					} else {
+						min = min.min(self.height[self.graph[v][i].to]);
 					}
-				} else {
-					min = min.min(self.height[v]);
 				}
 			}
+			self.relabel(v, min + 1);
+			if self.excess[v] == C::ZERO {
+				return;
+			}
 		}
-		self.relabel(v, min + 1);
 	}
 	fn init(&mut self, s: usize, t: usize) {
 		self.excess[s] = C::MAX;
@@ -140,13 +152,12 @@ impl<C: Num + Bound> Hlpp<C> {
 			}
 		}
 		self.highest = h;
-		self.highest_active = h;
 		for v in 0..self.len() {
 			let h = self.height[v];
 			self.count[h] += 1;
 			self.idx[v] = self.height_inv[h].len();
 			self.height_inv[h].push(v);
-			if h < self.len() && self.excess[v] > C::ZERO {
+			if self.excess[v] > C::ZERO {
 				self.todo[h].push(v);
 			}
 		}
@@ -156,12 +167,14 @@ impl<C: Num + Bound> Hlpp<C> {
 			return C::ZERO;
 		}
 		self.init(s, t);
-		self.highest_active += 1;
+		self.highest_active = self.todo.len();
 		while self.highest_active > 0 {
 			self.highest_active -= 1;
 			while let Some(v) = self.todo[self.highest_active].pop() {
 				if v != s && v != t {
-					self.discharge(v);
+					if self.excess[v] > C::ZERO {
+						self.discharge(v);
+					}
 				}
 			}
 		}
