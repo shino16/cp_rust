@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: src/ds/linked_list.rs
     title: src/ds/linked_list.rs
   _extendedRequiredBy: []
@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: src/ds/linked_list/iter.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-30 14:00:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/linked_list/iter.rs

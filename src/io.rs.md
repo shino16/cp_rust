@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: src/io/graph.rs
     title: src/io/graph.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':heavy_check_mark:'
@@ -29,14 +29,14 @@ data:
   - icon: ':warning:'
     path: src/mint/num.rs
     title: src/mint/num.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
   - icon: ':warning:'
     path: src/u64/conv.rs
     title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
@@ -72,9 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/union_find_test.rs
     title: test/src/bin/union_find_test.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -156,7 +156,7 @@ data:
   - src/io/graph.rs
   - src/tests.rs
   timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/hlpp_test.rs

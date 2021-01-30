@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: src/ds/linked_list.rs
     title: src/ds/linked_list.rs
   _extendedRequiredBy:
@@ -56,7 +56,7 @@ data:
   path: src/ds/linked_list/ptr.rs
   requiredBy:
   - src/graph/max_flow/push_relabel.rs
-  timestamp: '2021-01-30 13:10:47+09:00'
+  timestamp: '2021-01-30 14:00:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/linked_list/ptr.rs

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: src/ds/linked_list/inner_mut.rs
     title: src/ds/linked_list/inner_mut.rs
   - icon: ':warning:'
@@ -14,16 +14,10 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/push_relabel.rs
     title: src/graph/max_flow/push_relabel.rs
-  - icon: ':x:'
-    path: src/tests.rs
-    title: src/tests.rs
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -31,17 +25,18 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/linked_list.rs\n"
   code: "use std::iter::FromIterator;\nuse std::marker::PhantomData;\nuse std::ops::{Deref,\
-    \ DerefMut};\nuse std::ptr::NonNull;\n\npub mod inner_mut;\npub mod ptr;\n\n#[derive(PartialEq,\
-    \ PartialOrd, Hash)]\npub struct LinkedList<T> {\n\tpub head: NonNull<Node<T>>,\n\
-    \tpub tail: NonNull<Node<T>>,\n\tarenas: Vec<Vec<Node<T>>>,\n\tarena_idx: usize,\n\
-    \tlen: usize,\n}\n\n#[derive(Debug, PartialEq, PartialOrd, Clone, Copy, Hash,\
-    \ Default)]\npub struct Node<T> {\n\tprev: Option<NonNull<Node<T>>>,\n\tnext_val:\
-    \ Option<(NonNull<Node<T>>, T)>,\n}\n\nimpl<T> Node<T> {\n\tfn new() -> Self {\n\
-    \t\tSelf { prev: None, next_val: None }\n\t}\n}\n\npub struct Iter<'a, T: 'a>\
-    \ {\n\thead: NonNull<Node<T>>,\n\tlen: usize,\n\t_marker: PhantomData<&'a Node<T>>,\n\
-    }\n\npub struct IntoIter<T> {\n\tlist: LinkedList<T>,\n}\n\npub struct CursorMut<'a,\
-    \ T: 'a> {\n\tat: NonNull<Node<T>>,\n\tlist: &'a mut LinkedList<T>,\n}\n\nimpl<T>\
-    \ LinkedList<T> {\n\tpub fn new() -> Self {\n\t\tlet mut arenas = vec![vec![Node::new()]];\n\
+    \ DerefMut};\nuse std::ptr::NonNull;\n\npub mod inner_mut;\npub mod ptr;\n\n///\
+    \ FIXME: double free\n/// https://github.com/shino16/cpr/runs/1796088138?check_suite_focus=true#step:8:64\n\
+    #[derive(PartialEq, PartialOrd, Hash)]\npub struct LinkedList<T> {\n\tpub head:\
+    \ NonNull<Node<T>>,\n\tpub tail: NonNull<Node<T>>,\n\tarenas: Vec<Vec<Node<T>>>,\n\
+    \tarena_idx: usize,\n\tlen: usize,\n}\n\n#[derive(Debug, PartialEq, PartialOrd,\
+    \ Clone, Copy, Hash, Default)]\npub struct Node<T> {\n\tprev: Option<NonNull<Node<T>>>,\n\
+    \tnext_val: Option<(NonNull<Node<T>>, T)>,\n}\n\nimpl<T> Node<T> {\n\tfn new()\
+    \ -> Self {\n\t\tSelf { prev: None, next_val: None }\n\t}\n}\n\npub struct Iter<'a,\
+    \ T: 'a> {\n\thead: NonNull<Node<T>>,\n\tlen: usize,\n\t_marker: PhantomData<&'a\
+    \ Node<T>>,\n}\n\npub struct IntoIter<T> {\n\tlist: LinkedList<T>,\n}\n\npub struct\
+    \ CursorMut<'a, T: 'a> {\n\tat: NonNull<Node<T>>,\n\tlist: &'a mut LinkedList<T>,\n\
+    }\n\nimpl<T> LinkedList<T> {\n\tpub fn new() -> Self {\n\t\tlet mut arenas = vec![vec![Node::new()]];\n\
     \t\tlet head = (&mut arenas[0][0]).into();\n\t\tSelf { head, tail: head, arenas,\
     \ arena_idx: 0, len: 0 }\n\t}\n\tpub fn with_capacity(cap: usize) -> Self {\n\t\
     \tlet mut arenas = vec![Vec::with_capacity(cap)];\n\t\tarenas[0].push(Node::new());\n\
@@ -122,11 +117,9 @@ data:
   - src/ds/linked_list/ptr.rs
   - src/ds/linked_list/iter.rs
   - src/ds/linked_list/inner_mut.rs
-  - src/tests.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/src/bin/cargo_test.rs
+  timestamp: '2021-01-30 14:00:47+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/ds/linked_list.rs
 layout: document
 redirect_from:

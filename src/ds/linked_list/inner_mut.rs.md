@@ -1,20 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: src/ds/linked_list.rs
     title: src/ds/linked_list.rs
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: src/tests.rs
-    title: src/tests.rs
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
-  _isVerificationFailed: true
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -54,12 +48,10 @@ data:
   - src/ds/linked_list.rs
   isVerificationFile: false
   path: src/ds/linked_list/inner_mut.rs
-  requiredBy:
-  - src/tests.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/src/bin/cargo_test.rs
+  requiredBy: []
+  timestamp: '2021-01-30 14:00:47+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/ds/linked_list/inner_mut.rs
 layout: document
 redirect_from:

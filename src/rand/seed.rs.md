@@ -8,22 +8,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -52,7 +52,7 @@ data:
   - src/dfa.rs
   - src/tests.rs
   timestamp: '2020-12-15 00:46:43+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
   - test/src/bin/dfa_test.rs

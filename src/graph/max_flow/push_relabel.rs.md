@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/bound.rs
     title: src/bound.rs
-  - icon: ':x:'
+  - icon: ':warning:'
     path: src/ds/linked_list.rs
     title: src/ds/linked_list.rs
   - icon: ':warning:'
     path: src/ds/linked_list/ptr.rs
     title: src/ds/linked_list/ptr.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -98,7 +98,7 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow/push_relabel.rs
   requiredBy: []
-  timestamp: '2021-01-30 13:10:47+09:00'
+  timestamp: '2021-01-30 14:00:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/max_flow/push_relabel.rs
