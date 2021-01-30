@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -14,9 +14,6 @@ data:
   - icon: ':warning:'
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
-  - icon: ':warning:'
-    path: src/draft/graph/path.rs
-    title: src/draft/graph/path.rs
   - icon: ':warning:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
@@ -32,10 +29,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/edmonds_karp.rs
     title: src/graph/max_flow/edmonds_karp.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/edmonds_karp/edge.rs
+    title: src/graph/max_flow/edmonds_karp/edge.rs
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/ford_fulkerson/edge.rs
+    title: src/graph/max_flow/ford_fulkerson/edge.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/ford_fulkerson/edges.rs
+    title: src/graph/max_flow/ford_fulkerson/edges.rs
   - icon: ':heavy_check_mark:'
+    path: src/graph/max_flow/hlpp.rs
+    title: src/graph/max_flow/hlpp.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/hlpp/edge.rs
+    title: src/graph/max_flow/hlpp/edge.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/push_relabel.rs
+    title: src/graph/max_flow/push_relabel.rs
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':warning:'
@@ -44,7 +59,7 @@ data:
   - icon: ':warning:'
     path: src/int/bisect.rs
     title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':warning:'
@@ -62,11 +77,11 @@ data:
   - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
@@ -79,11 +94,14 @@ data:
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/hlpp_test.rs
+    title: test/src/bin/hlpp_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -98,14 +116,14 @@ data:
     \ = Self> {}\n\nmacro_rules! impl_num {\n\t($($t:ty),*) => { $(\n\t\timpl Num\
     \ for $t {\n\t\t\tfn wrapping_add(self, rhs: Self) -> Self {\n\t\t\t\tself.wrapping_add(rhs)\n\
     \t\t\t}\n\t\t\tfn wrapping_neg(self) -> Self {\n\t\t\t\tself.wrapping_neg()\n\t\
-    \t\t}\n\t\t}\n\t)* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32, u64, u128, usize);\n"
+    \t\t}\n\t\t}\n\t)* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32, u64, u128, usize);\n\
+    \nimpl<T: Num + Neg<Output = Self>> INum for T {}\n"
   dependsOn:
   - src/zo.rs
   isVerificationFile: false
   path: src/num.rs
   requiredBy:
   - src/draft/fpacc64.rs
-  - src/draft/graph/path.rs
   - src/alg/arith.rs
   - src/int/inv.rs
   - src/int/bisect.rs
@@ -115,8 +133,14 @@ data:
   - src/fp/num.rs
   - src/slice/cum.rs
   - src/graph/dijkstra.rs
+  - src/graph/max_flow/push_relabel.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/max_flow/hlpp/edge.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
   - src/graph/euler_tour.rs
   - src/math/binom.rs
   - src/math/pow.rs
@@ -124,10 +148,11 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-01-29 12:22:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-30 12:54:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/hlpp_test.rs
   - test/src/bin/cargo_test.rs
   - test/src/bin/ford_fulkerson_test.rs
   - test/src/bin/edmonds_karp_test.rs

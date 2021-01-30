@@ -18,6 +18,12 @@ data:
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
   - icon: ':warning:'
+    path: src/graph/max_flow/ford_fulkerson/edge.rs
+    title: src/graph/max_flow/ford_fulkerson/edge.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/ford_fulkerson/edges.rs
+    title: src/graph/max_flow/ford_fulkerson/edges.rs
+  - icon: ':warning:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
   - icon: ':warning:'
@@ -65,6 +71,8 @@ data:
   - src/graph/dfs_io.rs
   - src/graph/bfs.rs
   - src/graph/max_flow/ford_fulkerson.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
   - src/graph/euler_tour.rs
   - src/math/primes.rs
   timestamp: '2021-01-29 12:22:27+09:00'

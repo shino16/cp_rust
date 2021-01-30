@@ -7,13 +7,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -96,7 +96,7 @@ data:
   path: src/fp/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-01-27 22:59:31+09:00'
+  timestamp: '2021-01-30 12:54:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_test.rs

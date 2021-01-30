@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -26,7 +26,7 @@ data:
     RuntimeError: bundler is not specified: src/fp/num.rs\n"
   code: "pub use super::*;\nuse crate::num::*;\n\nimpl<M: Mod> Num for Fp<M> {\n\t\
     fn wrapping_add(self, rhs: Self) -> Self {\n\t\tself + rhs\n\t}\n\tfn wrapping_neg(self)\
-    \ -> Self {\n\t\t-self\n\t}\n}\n\nimpl<M: Mod> INum for Fp<M> {}\n"
+    \ -> Self {\n\t\t-self\n\t}\n}\n"
   dependsOn:
   - src/fp.rs
   - src/io.rs
@@ -35,7 +35,7 @@ data:
   isVerificationFile: false
   path: src/fp/num.rs
   requiredBy: []
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-01-30 12:54:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/fp/num.rs

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -21,9 +21,6 @@ data:
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
   - icon: ':warning:'
-    path: src/draft/graph/path.rs
-    title: src/draft/graph/path.rs
-  - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
   - icon: ':warning:'
@@ -32,7 +29,7 @@ data:
   - icon: ':warning:'
     path: src/int/bisect.rs
     title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':warning:'
@@ -44,19 +41,19 @@ data:
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -77,11 +74,10 @@ data:
     \ {\n\t\t\t\tself.abs() as $u\n\t\t\t}\n\t\t\tfn rem_euclid(self, rhs: Self::Unsigned)\
     \ -> Self::Unsigned {\n\t\t\t\t<$t>::rem_euclid(self, rhs as $t) as $u\n\t\t\t\
     }\n\t\t}\n\t};\n\t({ $i:ident }, { $u:ident }) => {\n\t\timpl_int!(@ $i, $i, $u);\n\
-    \t\timpl_int!(@ $u, $i, $u);\n\t\timpl INum for $i {}\n\t\timpl IInt for $i {}\n\
-    \t\timpl UInt for $u {}\n\t};\n\t({ $i:ident, $($is:ident),* }, { $u:ident, $($us:ident),*\
-    \ }) => {\n\t\timpl_int!({ $i }, { $u });\n\t\timpl_int!({ $($is),* }, { $($us),*\
-    \ });\n\t}\n}\n\nimpl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize\
-    \ });\n"
+    \t\timpl_int!(@ $u, $i, $u);\n\t\timpl IInt for $i {}\n\t\timpl UInt for $u {}\n\
+    \t};\n\t({ $i:ident, $($is:ident),* }, { $u:ident, $($us:ident),* }) => {\n\t\t\
+    impl_int!({ $i }, { $u });\n\t\timpl_int!({ $($is),* }, { $($us),* });\n\t}\n\
+    }\n\nimpl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize });\n"
   dependsOn:
   - src/bit.rs
   - src/cast.rs
@@ -91,7 +87,6 @@ data:
   path: src/int.rs
   requiredBy:
   - src/draft/fpacc64.rs
-  - src/draft/graph/path.rs
   - src/int/inv.rs
   - src/int/bisect.rs
   - src/int/gcd.rs
@@ -101,8 +96,8 @@ data:
   - src/math/pow.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-01-29 12:22:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-30 12:54:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
   - test/src/bin/dfa_test.rs

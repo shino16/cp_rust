@@ -1,19 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/draft/graph/ds.rs
-    title: src/draft/graph/ds.rs
-  - icon: ':warning:'
-    path: src/draft/graph/graph.rs
-    title: src/draft/graph/graph.rs
-  - icon: ':warning:'
-    path: src/draft/graph/path.rs
-    title: src/draft/graph/path.rs
   - icon: ':warning:'
     path: src/graph/bfs.rs
     title: src/graph/bfs.rs
@@ -75,9 +66,6 @@ data:
   isVerificationFile: false
   path: src/graph.rs
   requiredBy:
-  - src/draft/graph/graph.rs
-  - src/draft/graph/ds.rs
-  - src/draft/graph/path.rs
   - src/graph/dfs.rs
   - src/graph/grid.rs
   - src/graph/tree/dfs.rs

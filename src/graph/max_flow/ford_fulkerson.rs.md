@@ -7,13 +7,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/graph/max_flow/ford_fulkerson/edge.rs
+    title: src/graph/max_flow/ford_fulkerson/edge.rs
+  - icon: ':warning:'
+    path: src/graph/max_flow/ford_fulkerson/edges.rs
+    title: src/graph/max_flow/ford_fulkerson/edges.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ford_fulkerson_test.rs
@@ -28,13 +34,13 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/max_flow/ford_fulkerson.rs\n"
   code: "use crate::bound::Bound;\nuse crate::ds::bitset::*;\npub use crate::num::*;\n\
-    \n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bound> {\n\tpub to:\
-    \ usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// O(FE)\n#[derive(Clone)]\npub\
-    \ struct FordFulkerson<C: Num + Bound> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n}\n\
-    \nimpl<C: Num + Bound> FordFulkerson<C> {\n\tpub fn new(len: usize) -> Self {\n\
-    \t\tSelf { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize {\n\
-    \t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>]) ->\
-    \ Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
+    \npub mod edge;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bound>\
+    \ {\n\tpub to: usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// O(FE)\n#[derive(Clone)]\n\
+    pub struct FordFulkerson<C: Num + Bound> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n\
+    }\n\nimpl<C: Num + Bound> FordFulkerson<C> {\n\tpub fn new(len: usize) -> Self\
+    \ {\n\t\tSelf { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize\
+    \ {\n\t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>])\
+    \ -> Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
     \ {\n\t\t\tfor &(w, cap) in adj {\n\t\t\t\tret.add_edge(v, w, cap);\n\t\t\t}\n\
     \t\t}\n\t\tret\n\t}\n\tpub fn add_vertex(&mut self) -> usize {\n\t\tself.graph.push(Vec::new());\n\
     \t\tself.graph.len() - 1\n\t}\n\tpub fn add_edge(&mut self, v: usize, w: usize,\
@@ -59,8 +65,10 @@ data:
   - src/zo.rs
   isVerificationFile: false
   path: src/graph/max_flow/ford_fulkerson.rs
-  requiredBy: []
-  timestamp: '2021-01-29 12:22:27+09:00'
+  requiredBy:
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  timestamp: '2021-01-30 12:54:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs

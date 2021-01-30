@@ -4,13 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/bound.rs
     title: src/bound.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/graph/max_flow/edmonds_karp/edge.rs
+    title: src/graph/max_flow/edmonds_karp/edge.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/edmonds_karp_test.rs
@@ -25,13 +28,13 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/max_flow/edmonds_karp.rs\n"
   code: "use crate::bound::Bound;\npub use crate::num::*;\nuse std::collections::VecDeque;\n\
-    \n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bound> {\n\tpub to:\
-    \ usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// O(VE^2)\n#[derive(Clone)]\npub\
-    \ struct EdmondsKarp<C: Num + Bound> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n}\n\n\
-    impl<C: Num + Bound> EdmondsKarp<C> {\n\tpub fn new(len: usize) -> Self {\n\t\t\
-    Self { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize {\n\t\
-    \tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>]) -> Self\
-    \ {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
+    \npub mod edge;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bound>\
+    \ {\n\tpub to: usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// O(VE^2)\n#[derive(Clone)]\n\
+    pub struct EdmondsKarp<C: Num + Bound> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n}\n\
+    \nimpl<C: Num + Bound> EdmondsKarp<C> {\n\tpub fn new(len: usize) -> Self {\n\t\
+    \tSelf { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize {\n\
+    \t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>]) ->\
+    \ Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
     \ {\n\t\t\tfor &(w, cap) in adj {\n\t\t\t\tret.add_edge(v, w, cap);\n\t\t\t}\n\
     \t\t}\n\t\tret\n\t}\n\tpub fn add_vertex(&mut self) -> usize {\n\t\tself.graph.push(Vec::new());\n\
     \t\tself.graph.len() - 1\n\t}\n\tpub fn add_edge(&mut self, v: usize, w: usize,\
@@ -39,16 +42,16 @@ data:
     \t\tself.graph[v].push(Edge { to: w, cap, rev: widx });\n\t\tself.graph[w].push(Edge\
     \ { to: v, cap: C::ZERO, rev: vidx });\n\t}\n\tpub fn solve(&mut self, s: usize,\
     \ t: usize) -> C {\n\t\tlet mut res = C::ZERO;\n\t\tlet mut track = vec![!0; self.len()];\n\
-    \t\tlet mut togo = VecDeque::new();\n\t\tloop {\n\t\t\tfor e in &mut track { *e\
-    \ = !0; }\n\t\t\ttogo.clear();\n\t\t\ttogo.push_back((s, C::MAX));\n\t\t\tlet\
-    \ mut df = C::ZERO;\n\t\t\twhile let Some((v, ub)) = togo.pop_front() {\n\t\t\t\
-    \tfor &Edge { to, cap, rev } in &self.graph[v] {\n\t\t\t\t\tif cap != C::ZERO\
-    \ && track[to] == !0 {\n\t\t\t\t\t\ttrack[to] = rev;\n\t\t\t\t\t\tif to == t {\n\
-    \t\t\t\t\t\t\tdf = ub.min(cap);\n\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t}\n\t\t\t\t\
-    \t\ttogo.push_back((to, ub.min(cap)));\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\t\
-    if df == C::ZERO {\n\t\t\t\treturn res;\n\t\t\t}\n\t\t\tres += df;\n\t\t\tlet\
-    \ mut v = t;\n\t\t\twhile v != s {\n\t\t\t\tlet &mut Edge { to, ref mut cap, rev\
-    \ } = &mut self.graph[v][track[v]];\n\t\t\t\t*cap += df;\n\t\t\t\tself.graph[to][rev].cap\
+    \t\tlet mut togo = VecDeque::new();\n\t\tloop {\n\t\t\tfor e in &mut track {\n\
+    \t\t\t\t*e = !0;\n\t\t\t}\n\t\t\ttogo.clear();\n\t\t\ttogo.push_back((s, C::MAX));\n\
+    \t\t\tlet mut df = C::ZERO;\n\t\t\twhile let Some((v, ub)) = togo.pop_front()\
+    \ {\n\t\t\t\tfor &Edge { to, cap, rev } in &self.graph[v] {\n\t\t\t\t\tif cap\
+    \ != C::ZERO && track[to] == !0 {\n\t\t\t\t\t\ttrack[to] = rev;\n\t\t\t\t\t\t\
+    if to == t {\n\t\t\t\t\t\t\tdf = ub.min(cap);\n\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\
+    \t}\n\t\t\t\t\t\ttogo.push_back((to, ub.min(cap)));\n\t\t\t\t\t}\n\t\t\t\t}\n\t\
+    \t\t}\n\t\t\tif df == C::ZERO {\n\t\t\t\treturn res;\n\t\t\t}\n\t\t\tres += df;\n\
+    \t\t\tlet mut v = t;\n\t\t\twhile v != s {\n\t\t\t\tlet &mut Edge { to, ref mut\
+    \ cap, rev } = &mut self.graph[v][track[v]];\n\t\t\t\t*cap += df;\n\t\t\t\tself.graph[to][rev].cap\
     \ -= df;\n\t\t\t\tv = to;\n\t\t\t}\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/bound.rs
@@ -56,8 +59,9 @@ data:
   - src/zo.rs
   isVerificationFile: false
   path: src/graph/max_flow/edmonds_karp.rs
-  requiredBy: []
-  timestamp: '2021-01-29 12:22:27+09:00'
+  requiredBy:
+  - src/graph/max_flow/edmonds_karp/edge.rs
+  timestamp: '2021-01-30 12:54:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs

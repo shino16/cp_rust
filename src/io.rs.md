@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: src/io/graph.rs
     title: src/io/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':heavy_check_mark:'
@@ -29,14 +29,14 @@ data:
   - icon: ':warning:'
     path: src/mint/num.rs
     title: src/mint/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   - icon: ':warning:'
     path: src/u64/conv.rs
     title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
@@ -48,6 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/hlpp_test.rs
+    title: test/src/bin/hlpp_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
@@ -69,9 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/union_find_test.rs
     title: test/src/bin/union_find_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -112,24 +115,26 @@ data:
     impl_parse_uint!(u32, u64, u128, usize);\n\nimpl Scan for u8 {\n\tfn scan(s: &mut\
     \ IO) -> Self {\n\t\tlet bytes = s.scan_raw();\n\t\tdebug_assert_eq!(bytes.len(),\
     \ 1);\n\t\tbytes[0]\n\t}\n}\n\nimpl Scan for &[u8] {\n\tfn scan(s: &mut IO) ->\
-    \ Self {\n\t\ts.scan_raw()\n\t}\n}\n\nmacro_rules! impl_tuple {\n\t() => {};\n\
-    \t($t:ident $($ts:ident)*) => {\n\t\timpl<$t: Scan, $($ts: Scan),*> Scan for ($t,\
-    \ $($ts),*) {\n\t\t\tfn scan(s: &mut IO) -> Self { ($t::scan(s), $($ts::scan(s)),*)\
-    \ }\n\t\t}\n\t\timpl<$t: Print, $($ts: Print),*> Print for ($t, $($ts),*) {\n\t\
-    \t\t#[allow(non_snake_case)]\n\t\t\tfn print(w: &mut IO, ($t, $($ts),*): Self)\
-    \ {\n\t\t\t\tw.print($t);\n\t\t\t\t$( w.print(\" \"); w.print($ts); )*\n\t\t\t\
-    }\n\t\t}\n\t\timpl_tuple!($($ts)*);\n\t};\n}\n\nimpl_tuple!(A B C D E F G);\n\n\
-    macro_rules! impl_scan_array {\n\t() => {};\n\t($n:literal $($ns:literal)*) =>\
-    \ {\n\t\timpl<T: Scan> Scan for [T; $n] {\n\t\t\tfn scan(s: &mut IO) -> Self {\n\
-    \t\t\t\tlet mut scan = |_| T::scan(s);\n\t\t\t\t[scan($n), $(scan($ns)),*]\n\t\
-    \t\t}\n\t\t}\n\t\timpl_scan_array!($($ns)*);\n\t};\n}\n\nimpl_scan_array!(7 6\
-    \ 5 4 3 2 1);\n\nmacro_rules! impl_print_prim {\n\t($($t:ty),*) => { $(\n\t\t\
+    \ Self {\n\t\ts.scan_raw()\n\t}\n}\n\nimpl Scan for Vec<u8> {\n\tfn scan(s: &mut\
+    \ IO) -> Self {\n\t\ts.scan_raw().to_vec()\n\t}\n}\n\nmacro_rules! impl_tuple\
+    \ {\n\t() => {};\n\t($t:ident $($ts:ident)*) => {\n\t\timpl<$t: Scan, $($ts: Scan),*>\
+    \ Scan for ($t, $($ts),*) {\n\t\t\tfn scan(s: &mut IO) -> Self { ($t::scan(s),\
+    \ $($ts::scan(s)),*) }\n\t\t}\n\t\timpl<$t: Print, $($ts: Print),*> Print for\
+    \ ($t, $($ts),*) {\n\t\t\t#[allow(non_snake_case)]\n\t\t\tfn print(w: &mut IO,\
+    \ ($t, $($ts),*): Self) {\n\t\t\t\tw.print($t);\n\t\t\t\t$( w.print(\" \"); w.print($ts);\
+    \ )*\n\t\t\t}\n\t\t}\n\t\timpl_tuple!($($ts)*);\n\t};\n}\n\nimpl_tuple!(A B C\
+    \ D E F G);\n\nmacro_rules! impl_scan_array {\n\t() => {};\n\t($n:literal $($ns:literal)*)\
+    \ => {\n\t\timpl<T: Scan> Scan for [T; $n] {\n\t\t\tfn scan(s: &mut IO) -> Self\
+    \ {\n\t\t\t\tlet mut scan = |_| T::scan(s);\n\t\t\t\t[scan($n), $(scan($ns)),*]\n\
+    \t\t\t}\n\t\t}\n\t\timpl_scan_array!($($ns)*);\n\t};\n}\n\nimpl_scan_array!(7\
+    \ 6 5 4 3 2 1);\n\nmacro_rules! impl_print_prim {\n\t($($t:ty),*) => { $(\n\t\t\
     impl Print for $t {\n\t\t\tfn print(w: &mut IO, x: Self) {\n\t\t\t\tw.buf.write_all(format!(\"\
     {:.10}\", x).as_bytes()).unwrap();\n\t\t\t}\n\t\t}\n\t\timpl Print for &$t {\n\
     \t\t\tfn print(w: &mut IO, x: Self) { w.print(*x); }\n\t\t}\n\t)* };\n}\n\nimpl_print_prim!(i32,\
     \ i64, i128, isize, u32, u64, u128, usize, f32, f64);\n\nimpl Print for u8 {\n\
     \tfn print(w: &mut IO, x: Self) {\n\t\tw.buf.write_all(&[x]).unwrap();\n\t}\n\
     }\n\nimpl Print for &[u8] {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.buf.write_all(x).unwrap();\n\
+    \t}\n}\n\nimpl Print for Vec<u8> {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.buf.write_all(&x).unwrap();\n\
     \t}\n}\n\nimpl Print for &str {\n\tfn print(w: &mut IO, x: Self) {\n\t\tw.print(x.as_bytes());\n\
     \t}\n}\n\n#[derive(Debug, Clone, Copy, Default)]\npub struct Usize1(pub usize);\n\
     impl Scan for Usize1 {\n\tfn scan(io: &mut IO) -> Self {\n\t\tlet n: usize = io.scan();\n\
@@ -150,10 +155,11 @@ data:
   - src/u64/conv.rs
   - src/io/graph.rs
   - src/tests.rs
-  timestamp: '2021-01-27 17:46:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-30 12:54:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/hlpp_test.rs
   - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_test.rs
   - test/src/bin/ntt_garner_test.rs
