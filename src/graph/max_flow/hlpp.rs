@@ -103,8 +103,7 @@ impl<C: Num + Bound> Hlpp<C> {
 			}
 			self.highest = h0 - 1;
 		} else {
-			if self.idx[v] >= self.height_inv[h0].len() {
-			}
+			if self.idx[v] >= self.height_inv[h0].len() {}
 			self.height_inv[h0].swap_remove(self.idx[v]);
 			if let Some(&w) = self.height_inv[h0].get(self.idx[v]) {
 				self.idx[w] = self.idx[v];
@@ -113,7 +112,7 @@ impl<C: Num + Bound> Hlpp<C> {
 		}
 	}
 	fn discharge(&mut self, v: usize) {
-		loop {
+		while self.excess[v] > C::ZERO {
 			let mut min = !0;
 			for i in 0..self.graph[v].len() {
 				if self.graph[v][i].cap > C::ZERO {
@@ -128,9 +127,6 @@ impl<C: Num + Bound> Hlpp<C> {
 				}
 			}
 			self.relabel(v, min + 1);
-			if self.excess[v] == C::ZERO {
-				return;
-			}
 		}
 	}
 	fn init(&mut self, s: usize, t: usize) {
@@ -172,9 +168,7 @@ impl<C: Num + Bound> Hlpp<C> {
 			self.highest_active -= 1;
 			while let Some(v) = self.todo[self.highest_active].pop() {
 				if v != s && v != t {
-					if self.excess[v] > C::ZERO {
-						self.discharge(v);
-					}
+					self.discharge(v);
 				}
 			}
 		}

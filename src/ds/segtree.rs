@@ -39,7 +39,7 @@ impl<A: Monoid> SegmentTree<A> {
 	}
 	pub fn add(&mut self, pos: usize, v: A::Item) {
 		let p = pos + self.len();
-		self.data[p] = self.alg.op(self.data[p].clone(), v);
+		self.data[p] = self.alg.op(self.data[p], v);
 		self.build(p);
 	}
 	pub fn exec<F: FnOnce(&mut A::Item)>(&mut self, pos: usize, f: F) {

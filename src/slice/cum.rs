@@ -23,10 +23,10 @@ impl<T: Copy> Cum for [T] {
 	fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
 		let mut res = Vec::with_capacity(self.len() + 1);
 		let mut tl = m.unit();
-		res.push(tl.clone());
+		res.push(tl);
 		for e in self {
-			tl = m.op(tl, e.clone());
-			res.push(tl.clone());
+			tl = m.op(tl, *e);
+			res.push(tl);
 		}
 		res
 	}
@@ -34,10 +34,10 @@ impl<T: Copy> Cum for [T] {
 	fn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item> {
 		let mut res = Vec::with_capacity(self.len() + 1);
 		let mut tl = m.unit();
-		res.push(tl.clone());
+		res.push(tl);
 		for e in self.iter().rev() {
-			tl = m.op(e.clone(), tl);
-			res.push(tl.clone());
+			tl = m.op(*e, tl);
+			res.push(tl);
 		}
 		res.reverse();
 		res

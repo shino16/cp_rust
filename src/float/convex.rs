@@ -7,7 +7,7 @@ pub fn convex_min<F: FnMut(Float) -> Float>(
 	e: Float,
 	mut f: F,
 ) -> (Float, Float) {
-	const PHI: Float = 1.6180339887498948482;
+	const PHI: Float = 1.618_033_988_749_895;
 	let k = ((r - l) / e).log(PHI) as u32 + 2;
 
 	let mut ml = (PHI * l + r) / (1.0 + PHI);

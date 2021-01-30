@@ -6,17 +6,18 @@ pub struct List<T>(Option<Rc<(T, List<T>)>>);
 
 impl<T> Default for List<T> {
 	fn default() -> Self {
-		Self::nil()
+		Self::new()
 	}
 }
 
 impl<T> List<T> {
-	pub fn nil() -> Self {
+	pub fn new() -> Self {
 		Self(None)
 	}
 	pub fn push(&mut self, val: T) {
-		let me = std::mem::take(self);
-		*self = Self(Some(Rc::new((val, me))));
+		unsafe {
+			std::ptr::write(self, Self(Some(Rc::new((val, std::ptr::read(self))))));
+		}
 	}
 	pub fn cons(self, val: T) -> Self {
 		Self(Some(Rc::new((val, self))))
@@ -28,7 +29,7 @@ impl<T> List<T> {
 		self.0.as_deref().map(|(_, tl)| tl)
 	}
 	pub fn from_rev_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
-		iter.into_iter().fold(Self::nil(), |es, e| es.cons(e))
+		iter.into_iter().fold(Self::new(), |es, e| es.cons(e))
 	}
 }
 
@@ -51,6 +52,6 @@ impl<T> FromIterator<T> for List<T> {
 	fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
 		let mut iter = iter.into_iter();
 		let val = iter.next();
-		Self(val.map(|val| Rc::new((val, Self::from_iter(iter)))))
+		Self(val.map(|val| Rc::new((val, iter.collect()))))
 	}
 }
