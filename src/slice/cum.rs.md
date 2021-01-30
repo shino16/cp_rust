@@ -32,12 +32,12 @@ data:
     {\n\t\tself.cumr(Addition::new())\n\t}\n}\n\nimpl<T: Copy> Cum for [T] {\n\ttype\
     \ Item = T;\n\tfn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>\
     \ {\n\t\tlet mut res = Vec::with_capacity(self.len() + 1);\n\t\tlet mut tl = m.unit();\n\
-    \t\tres.push(tl.clone());\n\t\tfor e in self {\n\t\t\ttl = m.op(tl, e.clone());\n\
-    \t\t\tres.push(tl.clone());\n\t\t}\n\t\tres\n\t}\n\n\tfn cumr<M: Monoid<Item =\
-    \ Self::Item>>(&self, m: M) -> Vec<Self::Item> {\n\t\tlet mut res = Vec::with_capacity(self.len()\
-    \ + 1);\n\t\tlet mut tl = m.unit();\n\t\tres.push(tl.clone());\n\t\tfor e in self.iter().rev()\
-    \ {\n\t\t\ttl = m.op(e.clone(), tl);\n\t\t\tres.push(tl.clone());\n\t\t}\n\t\t\
-    res.reverse();\n\t\tres\n\t}\n}\n"
+    \t\tres.push(tl);\n\t\tfor e in self {\n\t\t\ttl = m.op(tl, *e);\n\t\t\tres.push(tl);\n\
+    \t\t}\n\t\tres\n\t}\n\n\tfn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) ->\
+    \ Vec<Self::Item> {\n\t\tlet mut res = Vec::with_capacity(self.len() + 1);\n\t\
+    \tlet mut tl = m.unit();\n\t\tres.push(tl);\n\t\tfor e in self.iter().rev() {\n\
+    \t\t\ttl = m.op(*e, tl);\n\t\t\tres.push(tl);\n\t\t}\n\t\tres.reverse();\n\t\t\
+    res\n\t}\n}\n"
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

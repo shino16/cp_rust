@@ -63,34 +63,32 @@ data:
     \ < len);\n\t\t\tfor h in h0..=self.highest {\n\t\t\t\tlet mut drain = std::mem::take(&mut\
     \ self.height_inv[h]);\n\t\t\t\tfor v in drain.drain(..) {\n\t\t\t\t\tself.change_height(v,\
     \ h, len);\n\t\t\t\t}\n\t\t\t\tself.height_inv[h] = drain;\n\t\t\t}\n\t\t\tself.highest\
-    \ = h0 - 1;\n\t\t} else {\n\t\t\tif self.idx[v] >= self.height_inv[h0].len() {\n\
-    \t\t\t}\n\t\t\tself.height_inv[h0].swap_remove(self.idx[v]);\n\t\t\tif let Some(&w)\
-    \ = self.height_inv[h0].get(self.idx[v]) {\n\t\t\t\tself.idx[w] = self.idx[v];\n\
-    \t\t\t}\n\t\t\tself.change_height(v, h0, h1);\n\t\t}\n\t}\n\tfn discharge(&mut\
-    \ self, v: usize) {\n\t\tloop {\n\t\t\tlet mut min = !0;\n\t\t\tfor i in 0..self.graph[v].len()\
+    \ = h0 - 1;\n\t\t} else {\n\t\t\tif self.idx[v] >= self.height_inv[h0].len() {}\n\
+    \t\t\tself.height_inv[h0].swap_remove(self.idx[v]);\n\t\t\tif let Some(&w) = self.height_inv[h0].get(self.idx[v])\
+    \ {\n\t\t\t\tself.idx[w] = self.idx[v];\n\t\t\t}\n\t\t\tself.change_height(v,\
+    \ h0, h1);\n\t\t}\n\t}\n\tfn discharge(&mut self, v: usize) {\n\t\twhile self.excess[v]\
+    \ > C::ZERO {\n\t\t\tlet mut min = !0;\n\t\t\tfor i in 0..self.graph[v].len()\
     \ {\n\t\t\t\tif self.graph[v][i].cap > C::ZERO {\n\t\t\t\t\tif self.height[v]\
     \ > self.height[self.graph[v][i].to] {\n\t\t\t\t\t\tself.push(v, i, false);\n\t\
     \t\t\t\t\tif self.excess[v] == C::ZERO {\n\t\t\t\t\t\t\treturn;\n\t\t\t\t\t\t\
     }\n\t\t\t\t\t} else {\n\t\t\t\t\t\tmin = min.min(self.height[self.graph[v][i].to]);\n\
-    \t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\tself.relabel(v, min + 1);\n\t\t\tif self.excess[v]\
-    \ == C::ZERO {\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\t}\n\tfn init(&mut self, s:\
-    \ usize, t: usize) {\n\t\tself.excess[s] = C::MAX;\n\t\tfor i in 0..self.graph[s].len()\
-    \ {\n\t\t\tself.push(s, i, true);\n\t\t}\n\t\tself.height[t] = 0;\n\t\tlet mut\
-    \ bfs = VecDeque::new();\n\t\tbfs.push_back(t);\n\t\tlet mut h = 0;\n\t\twhile\
-    \ let Some(v) = bfs.pop_front() {\n\t\t\th = self.height[v];\n\t\t\tfor &InnerEdge\
-    \ { to, cap: _, rev } in &self.graph[v] {\n\t\t\t\tif self.height[to] == self.len()\
-    \ && self.graph[to][rev].cap > C::ZERO {\n\t\t\t\t\tself.height[to] = h + 1;\n\
-    \t\t\t\t\tbfs.push_back(to);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tself.highest = h;\n\
-    \t\tfor v in 0..self.len() {\n\t\t\tlet h = self.height[v];\n\t\t\tself.count[h]\
+    \t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\tself.relabel(v, min + 1);\n\t\t}\n\t}\n\
+    \tfn init(&mut self, s: usize, t: usize) {\n\t\tself.excess[s] = C::MAX;\n\t\t\
+    for i in 0..self.graph[s].len() {\n\t\t\tself.push(s, i, true);\n\t\t}\n\t\tself.height[t]\
+    \ = 0;\n\t\tlet mut bfs = VecDeque::new();\n\t\tbfs.push_back(t);\n\t\tlet mut\
+    \ h = 0;\n\t\twhile let Some(v) = bfs.pop_front() {\n\t\t\th = self.height[v];\n\
+    \t\t\tfor &InnerEdge { to, cap: _, rev } in &self.graph[v] {\n\t\t\t\tif self.height[to]\
+    \ == self.len() && self.graph[to][rev].cap > C::ZERO {\n\t\t\t\t\tself.height[to]\
+    \ = h + 1;\n\t\t\t\t\tbfs.push_back(to);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tself.highest\
+    \ = h;\n\t\tfor v in 0..self.len() {\n\t\t\tlet h = self.height[v];\n\t\t\tself.count[h]\
     \ += 1;\n\t\t\tself.idx[v] = self.height_inv[h].len();\n\t\t\tself.height_inv[h].push(v);\n\
     \t\t\tif self.excess[v] > C::ZERO {\n\t\t\t\tself.todo[h].push(v);\n\t\t\t}\n\t\
     \t}\n\t}\n\tpub fn solve(&mut self, s: usize, t: usize) -> C {\n\t\tif s == t\
     \ {\n\t\t\treturn C::ZERO;\n\t\t}\n\t\tself.init(s, t);\n\t\tself.highest_active\
     \ = self.todo.len();\n\t\twhile self.highest_active > 0 {\n\t\t\tself.highest_active\
     \ -= 1;\n\t\t\twhile let Some(v) = self.todo[self.highest_active].pop() {\n\t\t\
-    \t\tif v != s && v != t {\n\t\t\t\t\tif self.excess[v] > C::ZERO {\n\t\t\t\t\t\
-    \tself.discharge(v);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tself.excess[t]\n\
-    \t}\n}\n"
+    \t\tif v != s && v != t {\n\t\t\t\t\tself.discharge(v);\n\t\t\t\t}\n\t\t\t}\n\t\
+    \t}\n\t\tself.excess[t]\n\t}\n}\n"
   dependsOn:
   - src/bound.rs
   - src/num.rs
@@ -99,7 +97,7 @@ data:
   path: src/graph/max_flow/hlpp.rs
   requiredBy:
   - src/graph/max_flow/hlpp/edge.rs
-  timestamp: '2021-01-30 16:54:54+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/hlpp_test.rs

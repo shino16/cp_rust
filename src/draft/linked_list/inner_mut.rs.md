@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: src/ds/linked_list.rs
-    title: src/ds/linked_list.rs
+    path: src/draft/linked_list.rs
+    title: src/draft/linked_list.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,7 +14,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/ds/linked_list/inner_mut.rs\n"
+    RuntimeError: bundler is not specified: src/draft/linked_list/inner_mut.rs\n"
   code: "pub use super::*;\nuse std::cell::RefCell;\n\npub struct CursorInnerMut<'a,\
     \ T: 'a> {\n\tat: NonNull<Node<T>>,\n\tlist: &'a RefCell<LinkedList<T>>,\n}\n\n\
     impl<T> LinkedList<T> {\n\tpub fn begin_inner_mut<'a>(list: &'a RefCell<Self>)\
@@ -45,17 +45,17 @@ data:
     \ = next;\n\t\t\t} else {\n\t\t\t\tnext.as_mut().prev = None;\n\t\t\t\tself.list.borrow_mut().head\
     \ = next;\n\t\t\t}\n\t\t\tself.at = next;\n\t\t\tSome(val)\n\t\t}\n\t}\n}\n"
   dependsOn:
-  - src/ds/linked_list.rs
+  - src/draft/linked_list.rs
   isVerificationFile: false
-  path: src/ds/linked_list/inner_mut.rs
+  path: src/draft/linked_list/inner_mut.rs
   requiredBy: []
-  timestamp: '2021-01-30 14:00:47+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/ds/linked_list/inner_mut.rs
+documentation_of: src/draft/linked_list/inner_mut.rs
 layout: document
 redirect_from:
-- /library/src/ds/linked_list/inner_mut.rs
-- /library/src/ds/linked_list/inner_mut.rs.html
-title: src/ds/linked_list/inner_mut.rs
+- /library/src/draft/linked_list/inner_mut.rs
+- /library/src/draft/linked_list/inner_mut.rs.html
+title: src/draft/linked_list/inner_mut.rs
 ---

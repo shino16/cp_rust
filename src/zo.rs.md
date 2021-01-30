@@ -66,9 +66,6 @@ data:
     path: src/graph/max_flow/hlpp/edge.rs
     title: src/graph/max_flow/hlpp/edge.rs
   - icon: ':warning:'
-    path: src/graph/max_flow/push_relabel.rs
-    title: src/graph/max_flow/push_relabel.rs
-  - icon: ':warning:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
   - icon: ':warning:'
@@ -192,7 +189,6 @@ data:
   - src/graph/dijkstra.rs
   - src/graph/dfs_io.rs
   - src/graph/bfs.rs
-  - src/graph/max_flow/push_relabel.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/edmonds_karp.rs
   - src/graph/max_flow/hlpp/edge.rs

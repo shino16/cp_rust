@@ -23,9 +23,6 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/hlpp/edge.rs
     title: src/graph/max_flow/hlpp/edge.rs
-  - icon: ':warning:'
-    path: src/graph/max_flow/push_relabel.rs
-    title: src/graph/max_flow/push_relabel.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/edmonds_karp_test.rs
@@ -53,7 +50,6 @@ data:
   isVerificationFile: false
   path: src/bound.rs
   requiredBy:
-  - src/graph/max_flow/push_relabel.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/edmonds_karp.rs
   - src/graph/max_flow/hlpp/edge.rs

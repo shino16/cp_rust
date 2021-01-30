@@ -3,17 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: src/ds/linked_list/inner_mut.rs
-    title: src/ds/linked_list/inner_mut.rs
+    path: src/draft/linked_list/inner_mut.rs
+    title: src/draft/linked_list/inner_mut.rs
   - icon: ':warning:'
-    path: src/ds/linked_list/iter.rs
-    title: src/ds/linked_list/iter.rs
+    path: src/draft/linked_list/iter.rs
+    title: src/draft/linked_list/iter.rs
   - icon: ':warning:'
-    path: src/ds/linked_list/ptr.rs
-    title: src/ds/linked_list/ptr.rs
-  - icon: ':warning:'
-    path: src/graph/max_flow/push_relabel.rs
-    title: src/graph/max_flow/push_relabel.rs
+    path: src/draft/linked_list/ptr.rs
+    title: src/draft/linked_list/ptr.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -23,7 +20,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/ds/linked_list.rs\n"
+    RuntimeError: bundler is not specified: src/draft/linked_list.rs\n"
   code: "use std::iter::FromIterator;\nuse std::marker::PhantomData;\nuse std::ops::{Deref,\
     \ DerefMut};\nuse std::ptr::NonNull;\n\npub mod inner_mut;\npub mod ptr;\n\n///\
     \ FIXME: double free\n/// https://github.com/shino16/cpr/runs/1796088138?check_suite_focus=true#step:8:64\n\
@@ -108,22 +105,57 @@ data:
     assert!(Some(next) != next.as_ref().next_val.as_ref().map(|t| t.0));\n\t\t\t}\n\
     \t\t\tSome(val)\n\t\t}\n\t}\n}\n\nimpl<T: std::fmt::Debug> std::fmt::Debug for\
     \ LinkedList<T> {\n\tfn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result\
-    \ {\n\t\tf.debug_list().entries(self.iter()).finish()\n\t}\n}\n"
+    \ {\n\t\tf.debug_list().entries(self.iter()).finish()\n\t}\n}\n\n#[cfg(test)]\n\
+    mod test {\n\t#[test]\n\tfn test_linked_list() {\n\t\tuse crate::ds::linked_list::inner_mut::*;\n\
+    \t\tuse std::cell::RefCell;\n\t\tuse std::sync::atomic::{AtomicU32, Ordering};\n\
+    \n\t\tstatic DROP_CNT: AtomicU32 = AtomicU32::new(0);\n\t\t#[derive(PartialEq,\
+    \ Eq, Clone, Debug)]\n\t\tstruct S(u32);\n\t\timpl Drop for S {\n\t\t\tfn drop(&mut\
+    \ self) {\n\t\t\t\tDROP_CNT.fetch_add(1, Ordering::SeqCst);\n\t\t\t}\n\t\t}\n\n\
+    \t\tlet mut v = Vec::new();\n\t\tlet mut l = LinkedList::new();\n\t\tlet mut l2\
+    \ = l.clone();\n\t\tlet mut cur = l2.begin_mut();\n\t\tfor n in 0..10 {\n\t\t\t\
+    v.push(Box::new(S(n)));\n\t\t\tl.push_back(Box::new(S(n)));\n\t\t\tcur.insert(Box::new(S(n)));\n\
+    \t\t\tcur.next().unwrap();\n\t\t}\n\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\tassert_eq!(v, l2.into_iter().collect::<Vec<_>>());\n\n\t\tlet l = RefCell::new(l);\n\
+    \t\tlet mut cur = LinkedList::begin_inner_mut(&l);\n\t\tcur.advance(7).unwrap().remove();\n\
+    \t\tv.remove(7);\n\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
+    \t\tcur.advance(-2).unwrap().insert(Box::new(S(100)));\n\t\tv.insert(5, Box::new(S(100)));\n\
+    \t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\t\tlet\
+    \ mut cur = LinkedList::end_inner_mut(&l);\n\t\tcur.advance(-8).unwrap().remove();\n\
+    \t\tv.remove(2);\n\t\tassert_eq!(v, l.borrow().clone().into_iter().collect::<Vec<_>>());\n\
+    \t\tcur.advance(-2).unwrap();\n\t\tassert!(cur.prev().is_none());\n\t\tstd::mem::drop((v,\
+    \ l));\n\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);\n\t}\n\t#[test]\n\
+    \tfn test_linked_list_ptr() {\n\t\tuse crate::ds::linked_list::ptr::*;\n\t\tuse\
+    \ std::sync::atomic::{AtomicU32, Ordering};\n\n\t\tstatic DROP_CNT: AtomicU32\
+    \ = AtomicU32::new(0);\n\t\t#[derive(PartialEq, Eq, Clone, Debug)]\n\t\tstruct\
+    \ S(u32);\n\t\timpl Drop for S {\n\t\t\tfn drop(&mut self) {\n\t\t\t\tDROP_CNT.fetch_add(1,\
+    \ Ordering::SeqCst);\n\t\t\t}\n\t\t}\n\n\t\tlet mut v = Vec::new();\n\t\tlet mut\
+    \ l = LinkedList::new();\n\t\tlet mut l2 = l.clone();\n\t\tlet mut cur = l2.begin_mut();\n\
+    \t\tfor n in 0..10 {\n\t\t\tv.push(Box::new(S(n)));\n\t\t\tl.push_back(Box::new(S(n)));\n\
+    \t\t\tcur.insert(Box::new(S(n)));\n\t\t\tcur.next().unwrap();\n\t\t}\n\t\tassert_eq!(v,\
+    \ l.clone().into_iter().collect::<Vec<_>>());\n\t\tassert_eq!(v, l2.into_iter().collect::<Vec<_>>());\n\
+    \n\t\tlet mut cur = l.begin_ptr();\n\t\tunsafe { cur.advance(7).unwrap().remove();\
+    \ }\n\t\tv.remove(7);\n\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\tunsafe { cur.advance(-2).unwrap().insert(Box::new(S(100))); }\n\t\tv.insert(5,\
+    \ Box::new(S(100)));\n\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\tlet mut cur = l.end_ptr();\n\t\tunsafe { cur.advance(-8).unwrap().remove();\
+    \ }\n\t\tv.remove(2);\n\t\tassert_eq!(v, l.clone().into_iter().collect::<Vec<_>>());\n\
+    \t\tcur.advance(-2).unwrap();\n\t\tassert!(cur.prev().is_none());\n\t\tfor (v,\
+    \ l) in v.iter().zip(l.iter()) {\n\t\t\tassert_eq!(v, l);\n\t\t}\n\t\tstd::mem::drop((v,\
+    \ l));\n\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);\n\t}\n}"
   dependsOn: []
   isVerificationFile: false
-  path: src/ds/linked_list.rs
+  path: src/draft/linked_list.rs
   requiredBy:
-  - src/graph/max_flow/push_relabel.rs
-  - src/ds/linked_list/ptr.rs
-  - src/ds/linked_list/iter.rs
-  - src/ds/linked_list/inner_mut.rs
-  timestamp: '2021-01-30 14:00:47+09:00'
+  - src/draft/linked_list/ptr.rs
+  - src/draft/linked_list/iter.rs
+  - src/draft/linked_list/inner_mut.rs
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/ds/linked_list.rs
+documentation_of: src/draft/linked_list.rs
 layout: document
 redirect_from:
-- /library/src/ds/linked_list.rs
-- /library/src/ds/linked_list.rs.html
-title: src/ds/linked_list.rs
+- /library/src/draft/linked_list.rs
+- /library/src/draft/linked_list.rs.html
+title: src/draft/linked_list.rs
 ---

@@ -30,10 +30,10 @@ data:
     \ mut p: usize) {\n\t\tp >>= 1;\n\t\twhile p != 0 {\n\t\t\tself.data[p] = self.alg.op(self.data[p\
     \ << 1], self.data[p << 1 | 1]);\n\t\t\tp >>= 1;\n\t\t}\n\t}\n\tpub fn add(&mut\
     \ self, pos: usize, v: A::Item) {\n\t\tlet p = pos + self.len();\n\t\tself.data[p]\
-    \ = self.alg.op(self.data[p].clone(), v);\n\t\tself.build(p);\n\t}\n\tpub fn exec<F:\
-    \ FnOnce(&mut A::Item)>(&mut self, pos: usize, f: F) {\n\t\tlet p = pos + self.len();\n\
-    \t\tf(&mut self.data[p]);\n\t\tself.build(p);\n\t}\n\tpub fn ask(&self, mut l:\
-    \ usize, mut r: usize) -> A::Item {\n\t\tlet (mut resl, mut resr) = (self.alg.unit(),\
+    \ = self.alg.op(self.data[p], v);\n\t\tself.build(p);\n\t}\n\tpub fn exec<F: FnOnce(&mut\
+    \ A::Item)>(&mut self, pos: usize, f: F) {\n\t\tlet p = pos + self.len();\n\t\t\
+    f(&mut self.data[p]);\n\t\tself.build(p);\n\t}\n\tpub fn ask(&self, mut l: usize,\
+    \ mut r: usize) -> A::Item {\n\t\tlet (mut resl, mut resr) = (self.alg.unit(),\
     \ self.alg.unit());\n\t\tl += self.len();\n\t\tr += self.len();\n\t\twhile l <\
     \ r {\n\t\t\tif l & 1 != 0 {\n\t\t\t\tresl = self.alg.op(resl, self.data[l]);\n\
     \t\t\t\tl += 1;\n\t\t\t}\n\t\t\tif r & 1 != 0 {\n\t\t\t\tresr = self.alg.op(self.data[r\
@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree.rs
   requiredBy: []
-  timestamp: '2021-01-27 17:46:37+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs

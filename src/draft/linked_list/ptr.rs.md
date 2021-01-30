@@ -2,12 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: src/ds/linked_list.rs
-    title: src/ds/linked_list.rs
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/graph/max_flow/push_relabel.rs
-    title: src/graph/max_flow/push_relabel.rs
+    path: src/draft/linked_list.rs
+    title: src/draft/linked_list.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -17,7 +14,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/ds/linked_list/ptr.rs\n"
+    RuntimeError: bundler is not specified: src/draft/linked_list/ptr.rs\n"
   code: "pub use super::*;\n\n/// FIXME: double free\n/// https://github.com/shino16/cpr/runs/1796042987?check_suite_focus=true#step:8:65\n\
     #[derive(Clone)]\npub struct CursorPtr<T> {\n\tat: NonNull<Node<T>>,\n\tlist:\
     \ NonNull<LinkedList<T>>,\n}\n\nimpl<T> LinkedList<T> {\n\tpub fn begin_ptr<'a>(&mut\
@@ -51,18 +48,17 @@ data:
     \ = next;\n\t\t}\n\t\tself.at = next;\n\t\tself.list.as_mut().len -= 1;\n\t\t\
     Some(val)\n\t}\n}\n"
   dependsOn:
-  - src/ds/linked_list.rs
+  - src/draft/linked_list.rs
   isVerificationFile: false
-  path: src/ds/linked_list/ptr.rs
-  requiredBy:
-  - src/graph/max_flow/push_relabel.rs
-  timestamp: '2021-01-30 14:00:47+09:00'
+  path: src/draft/linked_list/ptr.rs
+  requiredBy: []
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/ds/linked_list/ptr.rs
+documentation_of: src/draft/linked_list/ptr.rs
 layout: document
 redirect_from:
-- /library/src/ds/linked_list/ptr.rs
-- /library/src/ds/linked_list/ptr.rs.html
-title: src/ds/linked_list/ptr.rs
+- /library/src/draft/linked_list/ptr.rs
+- /library/src/draft/linked_list/ptr.rs.html
+title: src/draft/linked_list/ptr.rs
 ---

@@ -42,7 +42,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/hlpp_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 16:54:54+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/hlpp_test.rs

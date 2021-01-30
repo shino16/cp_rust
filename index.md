@@ -117,11 +117,25 @@ data:
       path: src/draft/iprod.rs
       title: src/draft/iprod.rs
     - icon: ':warning:'
+      path: src/draft/linked_list.rs
+      title: src/draft/linked_list.rs
+    - icon: ':warning:'
       path: src/draft/minimize_dfa.rs
       title: src/draft/minimize_dfa.rs
     - icon: ':warning:'
       path: src/draft/uf_fast.rs
       title: src/draft/uf_fast.rs
+  - name: src/draft/linked_list
+    pages:
+    - icon: ':warning:'
+      path: src/draft/linked_list/inner_mut.rs
+      title: src/draft/linked_list/inner_mut.rs
+    - icon: ':warning:'
+      path: src/draft/linked_list/iter.rs
+      title: src/draft/linked_list/iter.rs
+    - icon: ':warning:'
+      path: src/draft/linked_list/ptr.rs
+      title: src/draft/linked_list/ptr.rs
   - name: src/ds
     pages:
     - icon: ':heavy_check_mark:'
@@ -136,9 +150,6 @@ data:
     - icon: ':warning:'
       path: src/ds/idx.rs
       title: src/ds/idx.rs
-    - icon: ':warning:'
-      path: src/ds/linked_list.rs
-      title: src/ds/linked_list.rs
     - icon: ':warning:'
       path: src/ds/list.rs
       title: src/ds/list.rs
@@ -163,17 +174,6 @@ data:
     - icon: ':warning:'
       path: src/ds/vec2d.rs
       title: src/ds/vec2d.rs
-  - name: src/ds/linked_list
-    pages:
-    - icon: ':warning:'
-      path: src/ds/linked_list/inner_mut.rs
-      title: src/ds/linked_list/inner_mut.rs
-    - icon: ':warning:'
-      path: src/ds/linked_list/iter.rs
-      title: src/ds/linked_list/iter.rs
-    - icon: ':warning:'
-      path: src/ds/linked_list/ptr.rs
-      title: src/ds/linked_list/ptr.rs
   - name: src/ds/segtree
     pages:
     - icon: ':heavy_check_mark:'
@@ -245,9 +245,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/max_flow/hlpp.rs
       title: src/graph/max_flow/hlpp.rs
-    - icon: ':warning:'
-      path: src/graph/max_flow/push_relabel.rs
-      title: src/graph/max_flow/push_relabel.rs
   - name: src/graph/max_flow/ford_fulkerson
     pages:
     - icon: ':warning:'

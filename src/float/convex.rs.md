@@ -17,7 +17,7 @@ data:
     RuntimeError: bundler is not specified: src/float/convex.rs\n"
   code: "use super::*;\n\n/// return (argmin f, min f)\npub fn convex_min<F: FnMut(Float)\
     \ -> Float>(\n\tmut l: Float,\n\tmut r: Float,\n\te: Float,\n\tmut f: F,\n) ->\
-    \ (Float, Float) {\n\tconst PHI: Float = 1.6180339887498948482;\n\tlet k = ((r\
+    \ (Float, Float) {\n\tconst PHI: Float = 1.618_033_988_749_895;\n\tlet k = ((r\
     \ - l) / e).log(PHI) as u32 + 2;\n\n\tlet mut ml = (PHI * l + r) / (1.0 + PHI);\n\
     \tlet mut mr = (l + PHI * r) / (1.0 + PHI);\n\tlet mut yml = f(ml);\n\tlet mut\
     \ ymr = f(mr);\n\n\tfor _ in 0..k {\n\t\tif yml < ymr {\n\t\t\tl = ml;\n\t\t\t\
@@ -30,7 +30,7 @@ data:
   isVerificationFile: false
   path: src/float/convex.rs
   requiredBy: []
-  timestamp: '2020-12-21 16:41:24+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/convex.rs

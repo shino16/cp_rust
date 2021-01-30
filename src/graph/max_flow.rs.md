@@ -16,8 +16,6 @@ data:
 
     pub mod ford_fulkerson;
 
-    pub mod push_relabel;
-
     pub mod hlpp;
 
     '
@@ -25,7 +23,7 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow.rs
   requiredBy: []
-  timestamp: '2021-01-30 16:54:54+09:00'
+  timestamp: '2021-01-30 17:33:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/max_flow.rs
