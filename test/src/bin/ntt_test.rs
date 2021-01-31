@@ -1,7 +1,7 @@
 // verify-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod
 
-use lib::io::*;
 use lib::fp::conv::*;
+use lib::io::*;
 
 fn main() {
 	let mut io = IO::new();

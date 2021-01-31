@@ -70,6 +70,9 @@ impl<A: Monoid> FenwickTree<A> {
 
 /// A: Commutative
 impl<A: Group> FenwickTree<A> {
+	pub fn sub(&mut self, pos: usize, v: A::Item) {
+		self.add(pos, self.alg.inv(v));
+	}
 	pub fn ask(&self, l: usize, r: usize) -> A::Item {
 		self.alg.op(self.alg.inv(self.ask_prefix(l)), self.ask_prefix(r))
 	}

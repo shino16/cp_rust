@@ -1,20 +1,23 @@
 pub use super::*;
-pub use crate::ds::bitset::*;
+use crate::ds::bitset::*;
 
-pub fn dfs_io<G: Graph, FI: FnMut(usize, usize), FO: FnMut(usize, usize)>(
-	g: &G,
-	s: usize,
-	mut fi: FI,
-	mut fo: FO,
-) {
+#[derive(Debug)]
+pub enum InOut {
+	In(usize),
+	Out(usize),
+}
+
+pub use InOut::*;
+
+pub fn dfs_io<G: Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {
 	let mut visited = new_bitset(g.len());
 	visited.set_bit(s, true);
 	let mut togo = vec![(s, !0)];
 	while let Some((v, par)) = togo.pop() {
 		if v >> 31 != 0 {
-			fo(!v, par);
+			f(Out(!v), par);
 		} else {
-			fi(v, par);
+			f(In(v), par);
 			togo.push((!v, par));
 			g.adj(v, |w| {
 				if visited.modify_bit(w, true) {

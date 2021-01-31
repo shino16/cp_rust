@@ -15,10 +15,10 @@ fn main() -> Result<()> {
 		.output()?;
 
 	if !output.status.success() {
-		println!("`cargo test` failed");
-		println!("--- captured stdout ---");
+		eprintln!("`cargo test` failed");
+		eprintln!("--- captured stdout ---");
 		io::stdout().write_all(&output.stdout)?;
-		println!("--- captured stderr ---");
+		eprintln!("--- captured stderr ---");
 		io::stdout().write_all(&output.stderr)?;
 	}
 
