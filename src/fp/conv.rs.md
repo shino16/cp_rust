@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:

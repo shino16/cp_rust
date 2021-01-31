@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
   _extendedRequiredBy: []

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bit.rs
     title: src/bit.rs
   _extendedRequiredBy: []
