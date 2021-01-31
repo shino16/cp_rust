@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -32,7 +32,7 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/ntt_test.rs\n"
   code: "// verify-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod\n\
-    \nuse lib::io::*;\nuse lib::fp::conv::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
+    \nuse lib::fp::conv::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
     \tlet (n, m) = io.scan();\n\tlet a = io.scan_vec::<F99>(n);\n\tlet b = io.scan_vec::<F99>(m);\n\
     \tif (n, m) == (1, 1) {\n\t\tio.println(a[0] * b[0]);\n\t} else {\n\t\tio.iterln(Conv::conv(a,\
     \ b).into_iter(), \" \");\n\t}\n}\n"
@@ -46,7 +46,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-31 20:22:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_test.rs

@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
     path: src/alg/action.rs
     title: src/alg/action.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree/lazy.rs
     title: src/ds/segtree/lazy.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -38,8 +38,8 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/lazy_segtree_test.rs\n"
   code: "// verify-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum\n\
-    \nuse lib::alg::arith::*;\nuse lib::ds::segtree::lazy::*;\nuse lib::mint::*;\n\
-    use lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\tlet [n, q]: [usize;\
+    \nuse lib::alg::arith::*;\nuse lib::ds::segtree::lazy::*;\nuse lib::io::*;\nuse\
+    \ lib::mint::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\tlet [n, q]: [usize;\
     \ 2] = io.scan();\n\tlet a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();\n\
     \tlet mut ds = LazySegmentTree::new_from_slice(\n\t\t&a,\n\t\tMonoidImpl(|| (Mint99::ZERO,\
     \ Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),\n\t\tMonoidImpl(|| (Mint99::ONE,\
@@ -60,7 +60,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/lazy_segtree_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-01-31 20:22:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/lazy_segtree_test.rs

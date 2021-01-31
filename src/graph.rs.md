@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: src/graph/dfs.rs
     title: src/graph/dfs.rs
-  - icon: ':warning:'
+  - icon: ':x:'
     path: src/graph/dfs_io.rs
     title: src/graph/dfs_io.rs
   - icon: ':warning:'
@@ -35,10 +35,13 @@ data:
   - icon: ':warning:'
     path: src/graph/tree/reroot.rs
     title: src/graph/tree/reroot.rs
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/src/bin/dfs_io_test.rs
+    title: test/src/bin/dfs_io_test.rs
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -77,8 +80,9 @@ data:
   - src/graph/euler_tour.rs
   - src/graph/tree.rs
   timestamp: '2021-01-29 12:22:27+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/src/bin/dfs_io_test.rs
 documentation_of: src/graph.rs
 layout: document
 redirect_from:

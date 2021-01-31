@@ -11,18 +11,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/alg/action.rs
       title: src/alg/action.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/alg/arith.rs
       title: src/alg/arith.rs
   - name: src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/alg.rs
       title: src/alg.rs
     - icon: ':warning:'
       path: src/assign.rs
       title: src/assign.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/bit.rs
       title: src/bit.rs
     - icon: ':warning:'
@@ -52,7 +52,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fxhash.rs
       title: src/fxhash.rs
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/graph.rs
       title: src/graph.rs
     - icon: ':warning:'
@@ -61,7 +61,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -79,7 +79,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/num.rs
       title: src/num.rs
     - icon: ':warning:'
@@ -97,7 +97,7 @@ data:
     - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/zo.rs
       title: src/zo.rs
   - name: src/cmp
@@ -138,13 +138,13 @@ data:
       title: src/draft/linked_list/ptr.rs
   - name: src/ds
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/ds/bitset.rs
       title: src/ds/bitset.rs
     - icon: ':warning:'
       path: src/ds/disjointst.rs
       title: src/ds/disjointst.rs
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/ds/fenwick.rs
       title: src/ds/fenwick.rs
     - icon: ':warning:'
@@ -208,7 +208,7 @@ data:
     - icon: ':warning:'
       path: src/graph/dfs.rs
       title: src/graph/dfs.rs
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/graph/dfs_io.rs
       title: src/graph/dfs_io.rs
     - icon: ':warning:'
@@ -363,6 +363,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/dfa_test.rs
       title: test/src/bin/dfa_test.rs
+    - icon: ':x:'
+      path: test/src/bin/dfs_io_test.rs
+      title: test/src/bin/dfs_io_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/edmonds_karp_test.rs
       title: test/src/bin/edmonds_karp_test.rs

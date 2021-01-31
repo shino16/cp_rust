@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':warning:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -26,7 +26,7 @@ data:
     \ mut f: F) {\n\tlet mut visited = new_bitset(g.len());\n\tlet mut togo: VecDeque<_>\
     \ = vec![(s, !0)].into();\n\tvisited.set_bit(s, true);\n\twhile let Some((v, par))\
     \ = togo.pop_front() {\n\t\tf(v, par);\n\t\tg.adj(v, |w| {\n\t\t\tif visited.modify_bit(w,\
-    \ true) {\n\t\t\t\ttogo.push_back((w, v));\n\t\t\t}\n\t\t})\n\t}\n}"
+    \ true) {\n\t\t\t\ttogo.push_back((w, v));\n\t\t\t}\n\t\t})\n\t}\n}\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
@@ -34,7 +34,7 @@ data:
   isVerificationFile: false
   path: src/graph/bfs.rs
   requiredBy: []
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-01-31 20:22:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/bfs.rs

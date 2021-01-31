@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':warning:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
   - icon: ':warning:'
@@ -16,7 +16,7 @@ data:
   - icon: ':warning:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []

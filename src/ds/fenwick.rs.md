@@ -1,26 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bit.rs
     title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/src/bin/dfs_io_test.rs
+    title: test/src/bin/dfs_io_test.rs
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -50,7 +53,8 @@ data:
     \tself.partition_point(|x| x < v)\n\t}\n\tpub fn upper_bound(&self, v: A::Item)\
     \ -> usize\n\twhere\n\t\tA::Item: Ord,\n\t{\n\t\tself.partition_point(|x| x <=\
     \ v)\n\t}\n}\n\n/// A: Commutative\nimpl<A: Group> FenwickTree<A> {\n\tpub fn\
-    \ ask(&self, l: usize, r: usize) -> A::Item {\n\t\tself.alg.op(self.alg.inv(self.ask_prefix(l)),\
+    \ sub(&mut self, pos: usize, v: A::Item) {\n\t\tself.add(pos, self.alg.inv(v));\n\
+    \t}\n\tpub fn ask(&self, l: usize, r: usize) -> A::Item {\n\t\tself.alg.op(self.alg.inv(self.ask_prefix(l)),\
     \ self.ask_prefix(r))\n\t}\n}\n"
   dependsOn:
   - src/alg.rs
@@ -61,9 +65,10 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-01-31 20:22:45+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/src/bin/dfs_io_test.rs
 documentation_of: src/ds/fenwick.rs
 layout: document
 redirect_from:

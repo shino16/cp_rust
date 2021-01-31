@@ -8,12 +8,9 @@ data:
   - icon: ':warning:'
     path: src/graph/dfs.rs
     title: src/graph/dfs.rs
-  - icon: ':warning:'
+  - icon: ':x:'
     path: src/graph/dfs_io.rs
     title: src/graph/dfs_io.rs
-  - icon: ':warning:'
-    path: src/graph/euler_tour.rs
-    title: src/graph/euler_tour.rs
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
@@ -33,12 +30,15 @@ data:
     path: src/math/primes.rs
     title: src/math/primes.rs
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/src/bin/dfs_io_test.rs
+    title: test/src/bin/dfs_io_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -73,12 +73,12 @@ data:
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/euler_tour.rs
   - src/math/primes.rs
   timestamp: '2021-01-29 12:22:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/dfs_io_test.rs
 documentation_of: src/ds/bitset.rs
 layout: document
 redirect_from:

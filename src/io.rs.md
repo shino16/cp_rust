@@ -42,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
+  - icon: ':x:'
+    path: test/src/bin/dfs_io_test.rs
+    title: test/src/bin/dfs_io_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/edmonds_karp_test.rs
     title: test/src/bin/edmonds_karp_test.rs
@@ -72,9 +75,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/union_find_test.rs
     title: test/src/bin/union_find_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -156,7 +159,7 @@ data:
   - src/io/graph.rs
   - src/tests.rs
   timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/hlpp_test.rs
@@ -166,6 +169,7 @@ data:
   - test/src/bin/ford_fulkerson_test.rs
   - test/src/bin/edmonds_karp_test.rs
   - test/src/bin/union_find_test.rs
+  - test/src/bin/dfs_io_test.rs
   - test/src/bin/segtree_test.rs
   - test/src/bin/ntt_mint_test.rs
   - test/src/bin/dfa_test.rs
