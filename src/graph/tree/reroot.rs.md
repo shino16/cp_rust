@@ -4,9 +4,6 @@ data:
   - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
-    path: src/ds/bitset.rs
-    title: src/ds/bitset.rs
   - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
@@ -30,21 +27,19 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/reroot.rs\n"
-  code: "use std::cell::RefCell;\npub use super::dfs_io::*;\npub use crate::alg::*;\n\
-    \npub fn rerooting<G: Graph, A: Group>(g: &G, s: usize, alg: A) -> Vec<A::Item>\
-    \ {\n\tlet state = RefCell::new(vec![alg.unit(); g.len()]);\n\tlet mut res = vec![alg.unit();\
-    \ g.len()];\n\tdfs_io(g, s, |_, _| {}, |v, par| {\n\t\tlet mut state = state.borrow_mut();\n\
-    \t\tg.adj(v, |w| {\n\t\t\tif w != par {\n\t\t\t\talg.op_to(state[w], &mut state[v]);\n\
-    \t\t\t}\n\t\t});\n\t});\n\tres[s] = state.borrow()[s];\n\tlet f_in = |v: usize,\
-    \ par: usize| {\n\t\tlet mut state = state.borrow_mut();\n\t\tif par != !0 {\n\
-    \t\t\talg.op_inv_to(state[v], &mut state[par]);\n\t\t\talg.op_to(state[par], &mut\
-    \ state[v]);\n\t\t\tres[v] = state[v];\n\t\t}\n\t};\n\tlet f_out = |v: usize,\
-    \ par: usize| {\n\t\tlet mut state = state.borrow_mut();\n\t\tif par != !0 {\n\
-    \t\t\talg.op_inv_to(state[par], &mut state[v]);\n\t\t\talg.op_to(state[v], &mut\
-    \ state[par]);\n\t\t}\n\t};\n\tdfs_io(g, s, f_in, f_out);\n\tres\n}\n"
+  code: "pub use super::dfs_io::*;\npub use crate::alg::*;\n\npub fn rerooting_dp<G:\
+    \ Graph, A: Group>(g: &G, s: usize, alg: A) -> Vec<A::Item> {\n\tlet mut state\
+    \ = vec![alg.unit(); g.len()];\n\tlet mut res = vec![alg.unit(); g.len()];\n\t\
+    dfs_io(g, s, |v, par| {\n\t\tif let Out(v) = v {\n\t\t\tg.adj(v, |w| {\n\t\t\t\
+    \tif w != par {\n\t\t\t\t\talg.op_to(state[w], &mut state[v]);\n\t\t\t\t}\n\t\t\
+    \t});\n\t\t}\n\t});\n\tres[s] = state[s];\n\tdfs_io(g, s, |v, par| match v {\n\
+    \t\tIn(v) =>\n\t\t\tif par != !0 {\n\t\t\t\talg.op_inv_to(state[v], &mut state[par]);\n\
+    \t\t\t\talg.op_to(state[par], &mut state[v]);\n\t\t\t\tres[v] = state[v];\n\t\t\
+    \t},\n\t\tOut(v) =>\n\t\t\tif par != !0 {\n\t\t\t\talg.op_inv_to(state[par], &mut\
+    \ state[v]);\n\t\t\t\talg.op_to(state[v], &mut state[par]);\n\t\t\t},\n\t});\n\
+    \tres\n}\n"
   dependsOn:
   - src/alg.rs
-  - src/ds/bitset.rs
   - src/graph.rs
   - src/graph/tree.rs
   - src/graph/tree/dfs_io.rs
@@ -52,7 +47,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-01-31 21:43:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs

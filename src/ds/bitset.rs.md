@@ -21,12 +21,6 @@ data:
     path: src/graph/max_flow/ford_fulkerson/edges.rs
     title: src/graph/max_flow/ford_fulkerson/edges.rs
   - icon: ':warning:'
-    path: src/graph/tree/dfs_io.rs
-    title: src/graph/tree/dfs_io.rs
-  - icon: ':warning:'
-    path: src/graph/tree/reroot.rs
-    title: src/graph/tree/reroot.rs
-  - icon: ':warning:'
     path: src/math/primes.rs
     title: src/math/primes.rs
   _extendedVerifiedWith:
@@ -66,8 +60,6 @@ data:
   path: src/ds/bitset.rs
   requiredBy:
   - src/graph/dfs.rs
-  - src/graph/tree/dfs_io.rs
-  - src/graph/tree/reroot.rs
   - src/graph/dfs_io.rs
   - src/graph/bfs.rs
   - src/graph/max_flow/ford_fulkerson.rs
