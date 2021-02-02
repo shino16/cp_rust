@@ -1,32 +1,38 @@
 use super::*;
 
 pub fn gcd<I: Int>(a: I, b: I) -> I {
-	ugcd(a.abs(), b.abs()).as_()
+	if b == I::ZERO {
+		a
+	} else {
+		gcd(b, a % b)
+	}
+	// ugcd(a.abs(), b.abs()).as_()
 }
 
-// binary gcd
-pub fn ugcd<I: UInt>(mut a: I, mut b: I) -> I {
-	if a.is_zero() {
-		return b;
-	} else if b.is_zero() {
-		return a;
-	}
-	let a_shift = a.trailing_zeros();
-	a >>= a_shift;
-	let b_shift = b.trailing_zeros();
-	b >>= b_shift;
-	let shift = a_shift.min(b_shift);
-	loop {
-		if a > b {
-			std::mem::swap(&mut a, &mut b);
-		}
-		b -= a;
-		if b.is_zero() {
-			return a << shift;
-		}
-		b >>= b.trailing_zeros();
-	}
-}
+// FIXME
+// // binary gcd
+// pub fn ugcd<I: UInt>(mut a: I, mut b: I) -> I {
+// 	if a.is_zero() {
+// 		return b;
+// 	} else if b.is_zero() {
+// 		return a;
+// 	}
+// 	let a_shift = a.trailing_zeros();
+// 	a >>= a_shift;
+// 	let b_shift = b.trailing_zeros();
+// 	b >>= b_shift;
+// 	let shift = a_shift.min(b_shift);
+// 	loop {
+// 		if a > b {
+// 			std::mem::swap(&mut a, &mut b);
+// 		}
+// 		b -= a;
+// 		if b.is_zero() {
+// 			return a << shift;
+// 		}
+// 		b >>= b.trailing_zeros();
+// 	}
+// }
 
 /// (x, y, g) where ax + by = g, x >= 0
 pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I, I) {

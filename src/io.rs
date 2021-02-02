@@ -2,11 +2,12 @@ pub mod graph;
 use std::io::{stdout, BufWriter, Read, StdoutLock, Write};
 use std::marker::PhantomData;
 
+pub type Bytes = &'static [u8];
+
 pub struct IO {
 	iter: std::str::SplitAsciiWhitespace<'static>,
 	buf: BufWriter<StdoutLock<'static>>,
 }
-
 impl IO {
 	pub fn new() -> Self {
 		let mut input = String::new();
@@ -18,24 +19,16 @@ impl IO {
 			buf: BufWriter::new(out.lock()),
 		}
 	}
-	fn scan_str(&mut self) -> &'static str {
-		self.iter.next().unwrap()
-	}
-	fn scan_raw(&mut self) -> &'static [u8] {
-		self.scan_str().as_bytes()
-	}
-	pub fn scan<T: Scan>(&mut self) -> T {
-		T::scan(self)
-	}
+	fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }
+	fn scan_raw(&mut self) -> Bytes { self.scan_str().as_bytes() }
+	pub fn scan<T: Scan>(&mut self) -> T { T::scan(self) }
 	pub fn scan_iter<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_, T>> {
 		Iter { io: self, _m: PhantomData }.take(n)
 	}
 	pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {
 		(0..n).map(|_| self.scan()).collect()
 	}
-	pub fn print<T: Print>(&mut self, x: T) {
-		T::print(self, x);
-	}
+	pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }
 	pub fn println<T: Print>(&mut self, x: T) {
 		self.print(x);
 		self.print("\n");
@@ -51,31 +44,22 @@ impl IO {
 		}
 		self.print("\n");
 	}
-	pub fn flush(&mut self) {
-		self.buf.flush().unwrap();
-	}
+	pub fn flush(&mut self) { self.buf.flush().unwrap(); }
 }
-
 pub struct Iter<'a, T> {
 	io: &'a mut IO,
 	_m: PhantomData<T>,
 }
-
 impl<T: Scan> Iterator for Iter<'_, T> {
 	type Item = T;
-	fn next(&mut self) -> Option<Self::Item> {
-		Some(self.io.scan())
-	}
+	fn next(&mut self) -> Option<Self::Item> { Some(self.io.scan()) }
 }
-
 pub trait Scan {
 	fn scan(io: &mut IO) -> Self;
 }
-
 pub trait Print {
 	fn print(w: &mut IO, x: Self);
 }
-
 macro_rules! impl_parse_iint {
 	($($t:ty),*) => { $(
 		impl Scan for $t {
@@ -87,7 +71,6 @@ macro_rules! impl_parse_iint {
 		}
 	)* };
 }
-
 macro_rules! impl_parse_uint {
 	($($t:ty),*) => { $(
 		impl Scan for $t {
@@ -97,10 +80,8 @@ macro_rules! impl_parse_uint {
 		}
 	)* };
 }
-
 impl_parse_iint!(i32, i64, i128, isize);
 impl_parse_uint!(u32, u64, u128, usize);
-
 impl Scan for u8 {
 	fn scan(s: &mut IO) -> Self {
 		let bytes = s.scan_raw();
@@ -108,19 +89,12 @@ impl Scan for u8 {
 		bytes[0]
 	}
 }
-
-impl Scan for &[u8] {
-	fn scan(s: &mut IO) -> Self {
-		s.scan_raw()
-	}
+impl Scan for Bytes {
+	fn scan(s: &mut IO) -> Self { s.scan_raw() }
 }
-
 impl Scan for Vec<u8> {
-	fn scan(s: &mut IO) -> Self {
-		s.scan_raw().to_vec()
-	}
+	fn scan(s: &mut IO) -> Self { s.scan_raw().to_vec() }
 }
-
 macro_rules! impl_tuple {
 	() => {};
 	($t:ident $($ts:ident)*) => {
@@ -137,9 +111,7 @@ macro_rules! impl_tuple {
 		impl_tuple!($($ts)*);
 	};
 }
-
 impl_tuple!(A B C D E F G);
-
 macro_rules! impl_scan_array {
 	() => {};
 	($n:literal $($ns:literal)*) => {
@@ -149,12 +121,11 @@ macro_rules! impl_scan_array {
 				[scan($n), $(scan($ns)),*]
 			}
 		}
+		// use IO::iterln to print [T; N]
 		impl_scan_array!($($ns)*);
 	};
 }
-
 impl_scan_array!(7 6 5 4 3 2 1);
-
 macro_rules! impl_print_prim {
 	($($t:ty),*) => { $(
 		impl Print for $t {
@@ -167,33 +138,19 @@ macro_rules! impl_print_prim {
 		}
 	)* };
 }
-
 impl_print_prim!(i32, i64, i128, isize, u32, u64, u128, usize, f32, f64);
-
 impl Print for u8 {
-	fn print(w: &mut IO, x: Self) {
-		w.buf.write_all(&[x]).unwrap();
-	}
+	fn print(w: &mut IO, x: Self) { w.buf.write_all(&[x]).unwrap(); }
 }
-
 impl Print for &[u8] {
-	fn print(w: &mut IO, x: Self) {
-		w.buf.write_all(x).unwrap();
-	}
+	fn print(w: &mut IO, x: Self) { w.buf.write_all(x).unwrap(); }
 }
-
 impl Print for Vec<u8> {
-	fn print(w: &mut IO, x: Self) {
-		w.buf.write_all(&x).unwrap();
-	}
+	fn print(w: &mut IO, x: Self) { w.buf.write_all(&x).unwrap(); }
 }
-
 impl Print for &str {
-	fn print(w: &mut IO, x: Self) {
-		w.print(x.as_bytes());
-	}
+	fn print(w: &mut IO, x: Self) { w.print(x.as_bytes()); }
 }
-
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Usize1(pub usize);
 impl Scan for Usize1 {
@@ -203,7 +160,5 @@ impl Scan for Usize1 {
 	}
 }
 impl Print for Usize1 {
-	fn print(w: &mut IO, x: Self) {
-		w.print(x.0 + 1)
-	}
+	fn print(w: &mut IO, x: Self) { w.print(x.0 + 1) }
 }

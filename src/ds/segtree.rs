@@ -1,3 +1,4 @@
+pub mod beats;
 pub mod lazy;
 pub use crate::alg::*;
 use std::ops::Index;
@@ -12,13 +13,9 @@ pub struct SegmentTree<A: Alg> {
 
 impl<A: Monoid> SegmentTree<A> {
 	pub fn new(len: usize, alg: A) -> Self {
-		Self {
-			len,
-			data: vec![alg.unit(); len * 2],
-			alg,
-		}
+		Self { len, data: vec![alg.unit(); len * 2], alg }
 	}
-	pub fn new_from_slice(slice: &[A::Item], alg: A) -> Self {
+	pub fn from_slice(slice: &[A::Item], alg: A) -> Self {
 		let len = slice.len();
 		let mut data = slice.to_vec();
 		data.extend_from_slice(slice);
@@ -68,8 +65,8 @@ impl<A: Monoid> SegmentTree<A> {
 }
 
 impl<A: Monoid, I: SliceIndex<[A::Item]>> Index<I> for SegmentTree<A> {
-    type Output = I::Output;
-    fn index(&self, idx: I) -> &Self::Output {
+	type Output = I::Output;
+	fn index(&self, idx: I) -> &Self::Output {
 		&self.data[self.len()..][idx]
-    }
+	}
 }

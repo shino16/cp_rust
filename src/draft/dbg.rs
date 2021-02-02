@@ -1,4 +1,5 @@
 #[cfg(debug_assertions)]
+#[macro_export]
 macro_rules! dbg {
     () => {
         std::eprintln!("[{}:{}]", std::file!(), std::line!());
@@ -8,7 +9,7 @@ macro_rules! dbg {
         // of temporaries - https://stackoverflow.com/a/48732525/1063961
         match $val {
             tmp => {
-                std::eprintln!("[{}:{}] {} = {:#?}",
+                std::eprintln!("[{}:{}] {} = {:?}",
                     std::file!(), std::line!(), std::stringify!($val), &tmp);
                 tmp
             }
@@ -22,6 +23,7 @@ macro_rules! dbg {
 }
 
 #[cfg(not(debug_assertions))]
+#[macro_export]
 macro_rules! dbg {
 	($($x:expr),*) => { std::convert::identity(($($x),*)) }
 }

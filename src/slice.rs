@@ -1,47 +1,25 @@
 pub mod cum;
-pub mod perm;
 pub mod fill;
+pub mod perm;
+pub mod sort;
 
-pub trait Slice {
-	type Item;
-	fn fill(&mut self, value: Self::Item)
-	where
-		Self::Item: Clone;
-	/// min { i | !pred(arr[i]) }
-	fn partition_point<F: FnMut(&Self::Item) -> bool>(&self, pred: F) -> usize;
-	fn lower_bound(&self, v: &Self::Item) -> usize
-	where
-		Self::Item: Ord,
-	{
-		self.partition_point(|x| x < v)
+pub fn partition_point<T, F: FnMut(&T) -> bool>(slice: &[T], mut pred: F) -> usize {
+	let (mut l, mut r) = (0, slice.len()); // pred(slice[r]) == false
+	while l != r {
+		let mid = (l + r) / 2;
+		let val = unsafe { slice.get_unchecked(mid) };
+		if pred(val) {
+			l = mid + 1;
+		} else {
+			r = mid;
+		}
 	}
-	fn upper_bound(&self, v: &Self::Item) -> usize
-	where
-		Self::Item: Ord,
-	{
-		self.partition_point(|x| x <= v)
-	}
+	r
 }
 
-impl<T> Slice for [T] {
-	type Item = T;
-	fn fill(&mut self, value: Self::Item)
-	where
-		Self::Item: Clone,
-	{
-		self.iter_mut().for_each(|e| e.clone_from(&value));
-	}
-	fn partition_point<F: FnMut(&Self::Item) -> bool>(&self, mut pred: F) -> usize {
-		let (mut l, mut r) = (0, self.len()); // pred(self[r]) == false
-		while l != r {
-			let mid = (l + r) / 2;
-			let val = unsafe { self.get_unchecked(mid) };
-			if pred(val) {
-				l = mid + 1;
-			} else {
-				r = mid;
-			}
-		}
-		r
-	}
+pub fn lower_bound<T: Ord>(slice: &[T], v: &T) -> usize {
+	partition_point(slice, |x| x < v)
+}
+pub fn upper_bound<T: Ord>(slice: &[T], v: &T) -> usize {
+	partition_point(slice, |x| x <= v)
 }

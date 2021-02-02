@@ -61,6 +61,25 @@ mod tests {
 		}
 	}
 
+	mod func {
+		mod memo {
+			use crate::func::memo::*;
+			#[test]
+			fn test_memo() {
+				const MOD: u32 = 1_000_000_007;
+				let mut fib = vec![1, 1];
+				for i in 2..=1000 {
+					let a = fib[i - 1] + fib[i - 2];
+					fib.push(a % MOD);
+				}
+				let rhs = memo(|fib, n|
+					if n <= 1 { 1 } else { (fib(n - 1) + fib(n - 2)) % MOD }
+				).call(1000);
+				assert_eq!(fib[1000], rhs);
+			}
+		}
+	}
+
 	mod iter {
 		use crate::iter::prod::*;
 		use crate::iter::*;
@@ -127,6 +146,20 @@ mod tests {
 					cnt += 1;
 				}
 				assert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);
+			}
+		}
+		mod sort {
+			use crate::slice::sort::*;
+			#[test]
+			fn test_count_sort() {
+				use crate::rand::xoshiro256plus::*;
+				let mut rng = Xoshiro256plus::new();
+				let len = 100;
+				let modu = rng.next() % len as u64 + 50;
+				let mut a: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
+				let b = count_sort_by_key(&a, modu as usize, |&x| x as usize);
+				a.sort();
+				assert_eq!(a, b);
 			}
 		}
 	}

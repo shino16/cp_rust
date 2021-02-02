@@ -5,9 +5,9 @@ fn trunc(x: usize) -> usize {
 }
 
 #[derive(Clone)]
-pub struct LazySegmentTree<On: Alg, Act: Alg, Apply>
+pub struct SegmentTreeBeats<On: Alg, Act: Alg, Apply>
 where
-	Apply: Fn(On::Item, Act::Item) -> On::Item,
+	Apply: Fn(On::Item, Act::Item) -> Option<On::Item>,
 {
 	len: usize,
 	log: u32,
@@ -17,8 +17,8 @@ where
 	apply: Apply,
 }
 
-impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> On::Item>
-	LazySegmentTree<On, Act, Apply>
+impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> Option<On::Item>>
+	SegmentTreeBeats<On, Act, Apply>
 {
 	pub fn new(len: usize, on_alg: On, act_alg: Act, apply: Apply) -> Self {
 		Self {
@@ -44,15 +44,22 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> On::Item>
 		self.len
 	}
 	fn apply(&mut self, p: usize, actor: Act::Item) {
-		self.data[p].0 = (self.apply)(self.data[p].0, actor);
 		self.act_alg.op_to(actor, &mut self.data[p].1);
+		self.data[p].0 = if let Some(d) = (self.apply)(self.data[p].0, actor) {
+			d
+		} else {
+			self.push(p);
+			self.on_alg.op(self.data[p << 1].0, self.data[p << 1 | 1].0)
+		};
+	}
+	fn push(&mut self, p: usize) {
+		self.apply(p << 1, self.data[p].1);
+		self.apply(p << 1 | 1, self.data[p].1);
+		self.data[p].1 = self.act_alg.unit();
 	}
 	fn flush(&mut self, p: usize) {
 		for s in (1..=self.log).rev() {
-			let p = p >> s;
-			self.apply(p << 1, self.data[p].1);
-			self.apply(p << 1 | 1, self.data[p].1);
-			self.data[p].1 = self.act_alg.unit();
+			self.push(p >> s);
 		}
 	}
 	fn build(&mut self, mut p: usize) {

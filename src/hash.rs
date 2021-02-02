@@ -10,7 +10,7 @@ impl<T: Ord> Compress<T> {
 	}
 	pub fn compress(&self, v: &T) -> usize {
 		debug_assert!(self.0.binary_search(v).is_ok());
-		self.0.lower_bound(v)
+		lower_bound(&self.0, v)
 	}
 	pub fn restore(&self, i: usize) -> &T {
 		&self.0[i]

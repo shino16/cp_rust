@@ -15,4 +15,5 @@ single_line_if_else_max_width = 50
 struct_lit_width = 60
 use_field_init_shorthand = true
 wrap_comments = true
+# fn_single_line = true
 width_heuristics = "Max"
