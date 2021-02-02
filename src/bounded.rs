@@ -1,11 +1,11 @@
-pub trait Bound: Ord {
+pub trait Bounded: Ord {
 	const MIN: Self;
 	const MAX: Self;
 }
 
 macro_rules! impl_bound {
 	($($t:ident),*) => { $(
-		impl Bound for $t {
+		impl Bounded for $t {
 			const MIN: Self = std::$t::MIN;
 			const MAX: Self = std::$t::MAX;
 		}

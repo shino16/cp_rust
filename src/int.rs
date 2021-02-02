@@ -1,4 +1,5 @@
 use crate::bit::*;
+pub use crate::bounded::*;
 use crate::cast::*;
 pub use crate::num::*;
 pub use crate::zo::*;
@@ -9,11 +10,9 @@ pub mod bisect;
 pub mod gcd;
 pub mod inv;
 
-pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bits + PrimCast {
+pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bounded + Bits + PrimCast {
 	type Signed: IInt + CastFrom<Self> + CastTo<Self>;
 	type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
-	const MIN: Self;
-	const MAX: Self;
 	fn abs(self) -> Self::Unsigned;
 	fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned;
 }
@@ -22,15 +21,12 @@ pub trait IInt: Int + INum {}
 pub trait UInt: Int {}
 
 macro_rules! impl_int {
-	(@ $t:ident, $i:ident, $u:ident) => {
+	(@ $t:ident, $i:ident, $u:ident, $abs:expr) => {
 		impl Int for $t {
 			type Signed = $i;
 			type Unsigned = $u;
-			const MIN: Self = std::$t::MIN;
-			const MAX: Self = std::$t::MAX;
-			#[allow(unconditional_recursion)] // it's not
 			fn abs(self) -> Self::Unsigned {
-				self.abs() as $u
+				$abs(self) as $u
 			}
 			fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned {
 				<$t>::rem_euclid(self, rhs as $t) as $u
@@ -38,8 +34,8 @@ macro_rules! impl_int {
 		}
 	};
 	({ $i:ident }, { $u:ident }) => {
-		impl_int!(@ $i, $i, $u);
-		impl_int!(@ $u, $i, $u);
+		impl_int!(@ $i, $i, $u, |x| <$i>::abs(x));
+		impl_int!(@ $u, $i, $u, |x| x);
 		impl IInt for $i {}
 		impl UInt for $u {}
 	};

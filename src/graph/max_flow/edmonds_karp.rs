@@ -1,11 +1,11 @@
-use crate::bound::Bound;
+use crate::bounded::Bounded;
 pub use crate::num::*;
 use std::collections::VecDeque;
 
 pub mod edge;
 
 #[derive(Clone, Copy, Debug)]
-pub struct Edge<C: Num + Bound> {
+pub struct Edge<C: Num + Bounded> {
 	pub to: usize,
 	pub cap: C,
 	rev: usize,
@@ -13,11 +13,11 @@ pub struct Edge<C: Num + Bound> {
 
 /// O(VE^2)
 #[derive(Clone)]
-pub struct EdmondsKarp<C: Num + Bound> {
+pub struct EdmondsKarp<C: Num + Bounded> {
 	pub graph: Vec<Vec<Edge<C>>>,
 }
 
-impl<C: Num + Bound> EdmondsKarp<C> {
+impl<C: Num + Bounded> EdmondsKarp<C> {
 	pub fn new(len: usize) -> Self {
 		Self { graph: vec![Vec::new(); len] }
 	}

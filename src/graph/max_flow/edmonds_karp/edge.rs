@@ -1,14 +1,14 @@
 pub use super::*;
 
 #[derive(Clone, Copy, Debug)]
-pub struct Edge<C: Num + Bound> {
+pub struct Edge<C: Num + Bounded> {
 	pub from: usize,
 	pub to: usize,
 	pub cap: C,
 	pub flow: C,
 }
 
-impl<C: Num + Bound> EdmondsKarp<C> {
+impl<C: Num + Bounded> EdmondsKarp<C> {
 	pub fn get_edge(&self, v: usize, idx: usize) -> Edge<C> {
 		let e = self.graph[v][idx];
 		let rev = self.graph[e.to][e.rev];

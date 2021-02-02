@@ -1,11 +1,11 @@
-use crate::bound::*;
+use crate::bounded::*;
 use crate::num::*;
 use std::collections::VecDeque;
 
 pub mod edge;
 
 #[derive(Clone, Copy, Debug)]
-pub struct InnerEdge<C: Num + Bound> {
+pub struct InnerEdge<C: Num + Bounded> {
 	pub to: usize,
 	pub cap: C,
 	rev: usize,
@@ -14,7 +14,7 @@ pub struct InnerEdge<C: Num + Bound> {
 /// highest-label preflow-push algorithm with global labeling and gap relabeling
 /// O(V^2 \sqrt(E))
 #[derive(Clone)]
-pub struct Hlpp<C: Num + Bound> {
+pub struct Hlpp<C: Num + Bounded> {
 	pub graph: Vec<Vec<InnerEdge<C>>>,
 	height: Vec<usize>,
 	excess: Vec<C>,
@@ -26,7 +26,7 @@ pub struct Hlpp<C: Num + Bound> {
 	highest: usize,
 }
 
-impl<C: Num + Bound> Hlpp<C> {
+impl<C: Num + Bounded> Hlpp<C> {
 	pub fn new(len: usize) -> Self {
 		Self {
 			graph: vec![Vec::new(); len],

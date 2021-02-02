@@ -1,11 +1,11 @@
-use crate::bound::Bound;
+use crate::bounded::Bounded;
 use crate::ds::bitset::*;
 pub use crate::num::*;
 
 pub mod edge;
 
 #[derive(Clone, Copy, Debug)]
-pub struct Edge<C: Num + Bound> {
+pub struct Edge<C: Num + Bounded> {
 	pub to: usize,
 	pub cap: C,
 	rev: usize,
@@ -13,11 +13,11 @@ pub struct Edge<C: Num + Bound> {
 
 /// O(FE)
 #[derive(Clone)]
-pub struct FordFulkerson<C: Num + Bound> {
+pub struct FordFulkerson<C: Num + Bounded> {
 	pub graph: Vec<Vec<Edge<C>>>,
 }
 
-impl<C: Num + Bound> FordFulkerson<C> {
+impl<C: Num + Bounded> FordFulkerson<C> {
 	pub fn new(len: usize) -> Self {
 		Self { graph: vec![Vec::new(); len] }
 	}
