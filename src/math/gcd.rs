@@ -1,16 +1,17 @@
-use super::*;
+type Int = i32;
+type UInt = u32;
 
-pub fn gcd<I: Int>(a: I, b: I) -> I {
-	ugcd(a.abs(), b.abs()).as_()
+pub fn gcd(a: Int, b: Int) -> Int {
+	ugcd(a.abs() as _, b.abs() as _) as _
 }
 
 // binary gcd
-pub fn ugcd<I: UInt>(a: I, b: I) -> I {
+pub fn ugcd(a: UInt, b: UInt) -> UInt {
 	#[target_feature(enable = "bmi1")]
-	unsafe fn ugcd_impl<I: UInt>(mut a: I, mut b: I) -> I {
-		if a.is_zero() {
+	unsafe fn ugcd_impl(mut a: UInt, mut b: UInt) -> UInt {
+		if a == 0 {
 			return b;
-		} else if b.is_zero() {
+		} else if b == 0 {
 			return a;
 		}
 		let a_shift = a.trailing_zeros();
@@ -32,11 +33,11 @@ pub fn ugcd<I: UInt>(a: I, b: I) -> I {
 }
 
 /// (x, y, g) where ax + by = g, x >= 0
-pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I, I) {
+pub fn extgcd(mut a: Int, mut b: Int) -> (Int, Int, Int) {
 	// A = [a, x, y; b, u, v], k = [-1; a0; b0]
 	// A'= [a, x, y; 0, u, v] \therefore a0*u + b0*v = 0
-	let (mut x, mut y, mut u, mut v) = (I::ONE, I::ZERO, I::ZERO, I::ONE);
-	while !b.is_zero() {
+	let (mut x, mut y, mut u, mut v) = (1, 0, 0, 1);
+	while b != 0 {
 		let t = a / b;
 		a -= t * b;
 		x -= t * u;
@@ -45,11 +46,11 @@ pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I, I) {
 		std::mem::swap(&mut x, &mut u);
 		std::mem::swap(&mut y, &mut v);
 	}
-	if x < I::ZERO {
+	if x < 0 {
 		x += u;
 		y -= v;
-		debug_assert_eq!(gcd(u, v), I::ONE);
-		debug_assert!(x + u >= I::ZERO);
+		debug_assert_eq!(gcd(u, v), 1);
+		debug_assert!(x + u >= 0);
 	}
 	(x, y, a)
 }
