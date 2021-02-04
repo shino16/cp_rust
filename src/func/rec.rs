@@ -1,3 +1,4 @@
+#[must_use]
 pub struct Recurse<F>(F);
 
 impl<F> Recurse<F> {

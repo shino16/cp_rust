@@ -22,10 +22,8 @@ enum F {
 use F::*;
 
 struct M;
-impl Alg for M {
-	type Item = E;
-}
 impl Monoid for M {
+	type Item = E;
 	fn unit(&self) -> Self::Item {
 		E { len: 0, sum: 0, max: 0, lcm: 1 }
 	}
@@ -46,10 +44,8 @@ impl Monoid for M {
 }
 
 struct A;
-impl Alg for A {
-	type Item = F;
-}
 impl Monoid for A {
+	type Item = F;
 	fn unit(&self) -> Self::Item {
 		Unit
 	}

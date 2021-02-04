@@ -5,7 +5,7 @@ fn trunc(x: usize) -> usize {
 }
 
 #[derive(Clone)]
-pub struct SegmentTreeBeats<On: Alg, Act: Alg, Apply>
+pub struct SegmentTreeBeats<On: Monoid, Act: Monoid, Apply>
 where
 	Apply: Fn(On::Item, Act::Item) -> Option<On::Item>,
 {

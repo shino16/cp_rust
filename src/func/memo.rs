@@ -2,6 +2,7 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::hash::Hash;
 
+#[must_use]
 pub struct Memo<F, Arg, Ret>(F, RefCell<HashMap<Arg, Ret>>);
 
 impl<F, Arg, Ret> Memo<F, Arg, Ret>

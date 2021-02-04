@@ -9,7 +9,7 @@ fn main() {
 	let mut io = IO::new();
 	let [n, q]: [usize; 2] = io.scan();
 	let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();
-	let mut ds = LazySegmentTree::new_from_slice(
+	let mut ds = LazySegmentTree::from_slice(
 		&a,
 		MonoidImpl(|| (Mint99::ZERO, Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),
 		MonoidImpl(|| (Mint99::ONE, Mint99::ZERO), |(a, b), (c, d)| (a * c, b * c + d)),

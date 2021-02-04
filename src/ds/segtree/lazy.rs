@@ -5,7 +5,7 @@ fn trunc(x: usize) -> usize {
 }
 
 #[derive(Clone)]
-pub struct LazySegmentTree<On: Alg, Act: Alg, Apply>
+pub struct LazySegmentTree<On: Monoid, Act: Monoid, Apply>
 where
 	Apply: Fn(On::Item, Act::Item) -> On::Item,
 {
@@ -86,7 +86,7 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> On::Item>
 		self.flush(pos + self.len());
 		let p = pos + self.len();
 		f(&mut self.data[p].0);
-		self.build(pos + self.len());
+		self.build(trunc(pos + self.len()));
 	}
 	pub fn act_over(&mut self, l: usize, r: usize, actor: Act::Item) {
 		self.flush(trunc(l + self.len()));

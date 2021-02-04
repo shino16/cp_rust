@@ -2,7 +2,7 @@ pub use crate::alg::*;
 use crate::bit::*;
 
 #[derive(Clone)]
-pub struct SparseTable<A: Alg> {
+pub struct SparseTable<A: Monoid> {
 	data: Vec<Vec<A::Item>>,
 	alg: A,
 }
