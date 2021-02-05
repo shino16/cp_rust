@@ -31,7 +31,7 @@ jobs:
         run: cargo install --git https://github.com/shino16/cargo-auto-bundle.git
 
       - name: oj-verify
-        run: oj-verify all --config-file .verification-helper/config.toml
+        run: oj-verify --config-file .verification-helper/config.toml all
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
