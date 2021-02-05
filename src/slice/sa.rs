@@ -1,26 +1,26 @@
 use super::sort::*;
 
 // reference
-// Kärkkäinen, Juha, Peter Sanders, and Stefan Burkhardt. "Linear work suffix array construction." Journal of the ACM (JACM) 53, no. 6, pp. 918-936, 2006.
+// Kärkkäinen, Sanders and Burkhardt
+/// require exactly 3 sentinels in the last
 pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 	t: &[T],
 	out: &mut Vec<usize>,
 	max_key: usize,
 	mut key: F,
 ) {
-	out.clear();
-	out.reserve(t.len() + 1);
-	out.push(t.len());
+	let n = t.len() - 3;
 
-	if t.len() == 0 {
+	out.clear();
+	out.reserve(n + 1);
+	out.push(n);
+
+	if n == 0 {
 		return;
-	} else if t.len() == 1 {
+	} else if n == 1 {
 		out.push(1);
 		return;
 	}
-
-	let n = t.len();
-	let mut key_at = |i| if i >= n { 0 } else { key(&t[i]) };
 	let (n0, n1, n2) = ((n + 2) / 3, (n + 1) / 3, n / 3);
 	let n02 = n0 + n2;
 	let (mut r, mut sa12) = (Vec::with_capacity(n02 + 3), Vec::with_capacity(n02));
@@ -29,20 +29,20 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 			r.push(i);
 		}
 	}
-	assert_eq!(r.len(), n02);
+	debug_assert_eq!(r.len(), n02);
 
 	// radix sort [(t[i], t[i + 1], t[i + 2]) | i % 3 != 0]
-	count_sort(&r, &mut sa12, max_key, |&v| key_at(v + 2));
-	count_sort(&sa12, &mut r, max_key, |&v| key_at(v + 1));
-	count_sort(&r, &mut sa12, max_key, |&v| key_at(v));
+	count_sort(&r, &mut sa12, max_key, |&v| key(&t[v + 2]));
+	count_sort(&sa12, &mut r, max_key, |&v| key(&t[v + 1]));
+	count_sort(&r, &mut sa12, max_key, |&v| key(&t[v]));
 
 	let (mut name, mut c0, mut c1, mut c2) = (0, !0, !0, !0);
 	for &i in &sa12 {
-		if key_at(i) != c0 || key_at(i + 1) != c1 || key_at(i + 2) != c2 {
+		if key(&t[i]) != c0 || key(&t[i + 1]) != c1 || key(&t[i + 2]) != c2 {
 			name += 1;
-			c0 = key_at(i);
-			c1 = key_at(i + 1);
-			c2 = key_at(i + 2);
+			c0 = key(&t[i]);
+			c1 = key(&t[i + 1]);
+			c2 = key(&t[i + 2]);
 		}
 		if i % 3 == 1 {
 			r[i / 3] = name;
@@ -54,6 +54,7 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 		fn deref(v: &usize) -> usize {
 			*v
 		}
+		r.extend_from_slice(&[0; 3]);
 		suffix_array(&r, &mut sa12, name, deref);
 		for (name, &i) in (1..).zip(&sa12) {
 			r[i] = name;
@@ -70,7 +71,7 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 			r0.push(i * 3);
 		}
 	}
-	count_sort(&r0, &mut sa0, max_key, |&v| key_at(v));
+	count_sort(&r0, &mut sa0, max_key, |&v| key(&t[v]));
 
 	// sentinel
 	r.extend_from_slice(&[0; 3]);
@@ -84,10 +85,10 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 		let i = enc(qi);
 		let j = pi;
 		let cond = if qi < n0 {
-			(key_at(i), r[qi + n0]) <= (key_at(j), r[j / 3])
+			(key(&t[i]), r[qi + n0]) <= (key(&t[j]), r[j / 3])
 		} else {
-			(key_at(i), key_at(i + 1), r[qi - n0 + 1])
-				<= (key_at(j), key_at(j + 1), r[j / 3 + n0])
+			(key(&t[i]), key(&t[i + 1]), r[qi - n0 + 1])
+				<= (key(&t[j]), key(&t[j + 1]), r[j / 3 + n0])
 		};
 		if cond {
 			out.push(i);
@@ -96,6 +97,7 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 			} else {
 				out.push(j);
 				out.extend(p);
+				assert_eq!(out.len(), n + 1);
 				return;
 			}
 		} else {
@@ -105,6 +107,7 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 			} else {
 				out.push(i);
 				out.extend(q.map(enc));
+				assert_eq!(out.len(), n + 1);
 				return;
 			}
 		}

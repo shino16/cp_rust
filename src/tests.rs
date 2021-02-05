@@ -161,10 +161,11 @@ mod tests {
 				let mut rng = Xorshift32::new();
 				let modu = rng.next() % 1000;
 				let len = rng.next() as usize % 1000;
-				let v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
+				let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
+				v.extend_from_slice(&[0; 3]);
 				let mut sa = Vec::new();
 				suffix_array(&v, &mut sa, modu as usize, |&v| v as usize);
-				let mut ans: Vec<_> = (0..len + 1).collect();
+				let mut ans: Vec<_> = (0..=len).collect();
 				ans.sort_unstable_by_key(|&i| &v[i..]);
 				assert_eq!(sa, ans);
 			}

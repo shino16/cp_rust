@@ -39,4 +39,4 @@ mod imp {
 	}
 }
 
-pub use self::imp::*; // Edition 2015 support
+pub use self::imp::*; // support 2015 edition
