@@ -1,6 +1,7 @@
 pub mod cum;
 pub mod fill;
 pub mod perm;
+pub mod sa;
 pub mod sort;
 
 pub fn partition_point<T, F: FnMut(&T) -> bool>(slice: &[T], mut pred: F) -> usize {
@@ -20,6 +21,7 @@ pub fn partition_point<T, F: FnMut(&T) -> bool>(slice: &[T], mut pred: F) -> usi
 pub fn lower_bound<T: Ord>(slice: &[T], v: &T) -> usize {
 	partition_point(slice, |x| x < v)
 }
+
 pub fn upper_bound<T: Ord>(slice: &[T], v: &T) -> usize {
 	partition_point(slice, |x| x <= v)
 }

@@ -1,4 +1,4 @@
-// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
+// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
 
 use lib::graph::max_flow::ford_fulkerson::FordFulkerson;
 use lib::io::*;

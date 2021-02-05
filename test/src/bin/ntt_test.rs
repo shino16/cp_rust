@@ -1,4 +1,4 @@
-// verify-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod
 
 use lib::fp::conv::*;
 use lib::io::*;

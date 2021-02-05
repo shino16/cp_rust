@@ -22,6 +22,7 @@ pub mod int;
 pub mod io;
 pub mod io_interactive;
 pub mod iter;
+pub mod macros;
 pub mod make_vec;
 pub mod math;
 pub mod mint;

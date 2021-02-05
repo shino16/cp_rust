@@ -1,4 +1,4 @@
-// verify-helper: PROBLEM https://yukicoder.me/problems/no/880
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/880
 
 use lib::ds::segtree::beats::*;
 use lib::int::gcd::*;

@@ -1,4 +1,4 @@
-// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570
+// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570
 
 use lib::dfa::*;
 use lib::io::*;

@@ -1,4 +1,4 @@
-// verify-helper: PROBLEM https://yukicoder.me/problems/no/778
+// verification-helper: PROBLEM https://yukicoder.me/problems/no/778
 
 use lib::ds::fenwick::*;
 use lib::graph::tree::dfs_io::*;

@@ -72,9 +72,14 @@ mod tests {
 					let a = fib[i - 1] + fib[i - 2];
 					fib.push(a % MOD);
 				}
-				let rhs = memo(|fib, n|
-					if n <= 1 { 1 } else { (fib(n - 1) + fib(n - 2)) % MOD }
-				).call(1000);
+				let rhs = memo(|fib, n| {
+					if n <= 1 {
+						1
+					} else {
+						(fib(n - 1) + fib(n - 2)) % MOD
+					}
+				})
+				.call(1000);
 				assert_eq!(fib[1000], rhs);
 			}
 		}
@@ -148,17 +153,36 @@ mod tests {
 				assert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);
 			}
 		}
+		mod sa {
+			use crate::slice::sa::*;
+			#[test]
+			fn suffix_array_test() {
+				use crate::rand::xorshift::*;
+				let mut rng = Xorshift32::new();
+				let modu = rng.next() % 1000;
+				let len = rng.next() as usize % 1000;
+				let v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
+				let mut sa = Vec::new();
+				suffix_array(&v, &mut sa, modu as usize, |&v| v as usize);
+				let mut ans: Vec<_> = (0..len + 1).collect();
+				ans.sort_unstable_by_key(|&i| &v[i..]);
+				assert_eq!(sa, ans);
+			}
+		}
 		mod sort {
 			use crate::slice::sort::*;
 			#[test]
 			fn test_count_sort() {
 				use crate::rand::xoshiro256plus::*;
 				let mut rng = Xoshiro256plus::new();
-				let len = 100;
+				let len = rng.next() as usize % 100;
 				let modu = rng.next() % len as u64 + 50;
-				let mut a: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
-				let b = count_sort_by_key(&a, modu as usize, |&x| x as usize);
-				a.sort();
+				let mut a: Vec<_> = std::iter::repeat_with(|| (rng.next() % modu, rng.next()))
+					.take(len)
+					.collect();
+				let mut b = Vec::new();
+				count_sort(&a, &mut b, modu as usize, |&x| x.0 as usize);
+				a.sort_by_key(|&x| x.0);
 				assert_eq!(a, b);
 			}
 		}
