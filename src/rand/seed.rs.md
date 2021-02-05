@@ -41,8 +41,8 @@ data:
     \ -> u64;\n\t}\n}\n\n#[cfg(not(windows))]\nmod imp {\n\tpub fn seed() -> [u64;\
     \ 4] {\n\t\t[\n\t\t\t// arbitrary\n\t\t\t0x35fee63b_fd9f69cf,\n\t\t\t0x9fd0680a_f9e37356,\n\
     \t\t\t0x7454d5e3_d982527e,\n\t\t\t0x35d1849a_77925163,\n\t\t]\n\t}\n\tpub fn seed64()\
-    \ -> u64 {\n\t\t0x17adfb20_0995921c\n\t}\n}\n\npub use self::imp::*; // Edition\
-    \ 2015 support\n"
+    \ -> u64 {\n\t\t0x17adfb20_0995921c\n\t}\n}\n\npub use self::imp::*; // support\
+    \ 2015 edition\n"
   dependsOn: []
   isVerificationFile: false
   path: src/rand/seed.rs
@@ -51,7 +51,7 @@ data:
   - src/rand/xoshiro256plus.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '2021-02-06 03:07:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

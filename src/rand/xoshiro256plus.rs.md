@@ -38,7 +38,7 @@ data:
   path: src/rand/xoshiro256plus.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-01-07 16:16:30+09:00'
+  timestamp: '2021-02-06 03:07:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

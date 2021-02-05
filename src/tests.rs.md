@@ -127,17 +127,17 @@ data:
     \t\t\tuse crate::slice::sa::*;\n\t\t\t#[test]\n\t\t\tfn suffix_array_test() {\n\
     \t\t\t\tuse crate::rand::xorshift::*;\n\t\t\t\tlet mut rng = Xorshift32::new();\n\
     \t\t\t\tlet modu = rng.next() % 1000;\n\t\t\t\tlet len = rng.next() as usize %\
-    \ 1000;\n\t\t\t\tlet v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();\n\
-    \t\t\t\tlet mut sa = Vec::new();\n\t\t\t\tsuffix_array(&v, &mut sa, modu as usize,\
-    \ |&v| v as usize);\n\t\t\t\tlet mut ans: Vec<_> = (0..len + 1).collect();\n\t\
-    \t\t\tans.sort_unstable_by_key(|&i| &v[i..]);\n\t\t\t\tassert_eq!(sa, ans);\n\t\
-    \t\t}\n\t\t}\n\t\tmod sort {\n\t\t\tuse crate::slice::sort::*;\n\t\t\t#[test]\n\
-    \t\t\tfn test_count_sort() {\n\t\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\
-    \t\tlet mut rng = Xoshiro256plus::new();\n\t\t\t\tlet len = rng.next() as usize\
-    \ % 100;\n\t\t\t\tlet modu = rng.next() % len as u64 + 50;\n\t\t\t\tlet mut a:\
-    \ Vec<_> = std::iter::repeat_with(|| (rng.next() % modu, rng.next()))\n\t\t\t\t\
-    \t.take(len)\n\t\t\t\t\t.collect();\n\t\t\t\tlet mut b = Vec::new();\n\t\t\t\t\
-    count_sort(&a, &mut b, modu as usize, |&x| x.0 as usize);\n\t\t\t\ta.sort_by_key(|&x|\
+    \ 1000;\n\t\t\t\tlet mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();\n\
+    \t\t\t\tv.extend_from_slice(&[0; 3]);\n\t\t\t\tlet mut sa = Vec::new();\n\t\t\t\
+    \tsuffix_array(&v, &mut sa, modu as usize, |&v| v as usize);\n\t\t\t\tlet mut\
+    \ ans: Vec<_> = (0..=len).collect();\n\t\t\t\tans.sort_unstable_by_key(|&i| &v[i..]);\n\
+    \t\t\t\tassert_eq!(sa, ans);\n\t\t\t}\n\t\t}\n\t\tmod sort {\n\t\t\tuse crate::slice::sort::*;\n\
+    \t\t\t#[test]\n\t\t\tfn test_count_sort() {\n\t\t\t\tuse crate::rand::xoshiro256plus::*;\n\
+    \t\t\t\tlet mut rng = Xoshiro256plus::new();\n\t\t\t\tlet len = rng.next() as\
+    \ usize % 100;\n\t\t\t\tlet modu = rng.next() % len as u64 + 50;\n\t\t\t\tlet\
+    \ mut a: Vec<_> = std::iter::repeat_with(|| (rng.next() % modu, rng.next()))\n\
+    \t\t\t\t\t.take(len)\n\t\t\t\t\t.collect();\n\t\t\t\tlet mut b = Vec::new();\n\
+    \t\t\t\tcount_sort(&a, &mut b, modu as usize, |&x| x.0 as usize);\n\t\t\t\ta.sort_by_key(|&x|\
     \ x.0);\n\t\t\t\tassert_eq!(a, b);\n\t\t\t}\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/bit.rs
@@ -163,7 +163,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-02-06 01:09:11+09:00'
+  timestamp: '2021-02-06 03:07:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
