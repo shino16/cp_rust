@@ -1,5 +1,6 @@
 pub mod cum;
 pub mod fill;
+pub mod lcp;
 pub mod perm;
 pub mod sa;
 pub mod sort;

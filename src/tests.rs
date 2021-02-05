@@ -155,19 +155,27 @@ mod tests {
 		}
 		mod sa {
 			use crate::slice::sa::*;
+			use crate::slice::lcp::*;
 			#[test]
-			fn suffix_array_test() {
-				use crate::rand::xorshift::*;
-				let mut rng = Xorshift32::new();
+			fn suffix_array_lcp_test() {
+				use crate::rand::xoshiro256plus::*;
+				let mut rng = Xoshiro256plus::new();
 				let modu = rng.next() % 1000;
 				let len = rng.next() as usize % 1000;
 				let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
 				v.extend_from_slice(&[0; 3]);
 				let mut sa = Vec::new();
-				suffix_array(&v, &mut sa, modu as usize, |&v| v as usize);
+				suffix_array_impl(&v, &mut sa, modu as usize, |&v| v as usize);
 				let mut ans: Vec<_> = (0..=len).collect();
 				ans.sort_unstable_by_key(|&i| &v[i..]);
 				assert_eq!(sa, ans);
+				let lcp = lcp_impl(&v, &sa, |&v| v as usize);
+				for ((&i, &j), lcp) in sa.iter().skip(1).zip(&sa).zip(lcp) {
+					assert_eq!(v[i..i + lcp], v[j..j + lcp]);
+					if i.max(j) + lcp < len {
+						assert_ne!(v[i..i + lcp + 1], v[j..j + lcp + 1]);
+					}
+				}
 			}
 		}
 		mod sort {

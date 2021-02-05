@@ -1,9 +1,16 @@
 use super::sort::*;
 
+pub fn suffix_array(v: &mut Vec<u8>) -> Vec<usize> {
+	let mut out = Vec::with_capacity(v.len());
+	v.extend_from_slice(&[0; 3]);
+	suffix_array_impl(&v, &mut out, !0_u8 as usize, |&v| v as usize);
+	out
+}
+
 // reference
 // Kärkkäinen, Sanders and Burkhardt
 /// require exactly 3 sentinels in the last
-pub fn suffix_array<T, F: FnMut(&T) -> usize>(
+pub fn suffix_array_impl<T, F: FnMut(&T) -> usize>(
 	t: &[T],
 	out: &mut Vec<usize>,
 	max_key: usize,
@@ -55,7 +62,7 @@ pub fn suffix_array<T, F: FnMut(&T) -> usize>(
 			*v
 		}
 		r.extend_from_slice(&[0; 3]);
-		suffix_array(&r, &mut sa12, name, deref);
+		suffix_array_impl(&r, &mut sa12, name, deref);
 		for (name, &i) in (1..).zip(&sa12) {
 			r[i] = name;
 		}
