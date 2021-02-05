@@ -21,6 +21,6 @@ where
 	}
 }
 
-pub fn memo<Arg, Ret, F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret>(f: F) -> Memo<F, Arg, Ret> {
+pub fn memo<Arg: Hash, Ret, F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret>(f: F) -> Memo<F, Arg, Ret> {
 	Memo(f, RefCell::new(HashMap::new()))
 }
