@@ -5,6 +5,9 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -40,6 +43,7 @@ data:
     \ * self.inv_fact[r] * self.inv_fact[n - r]\n\t}\n}\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/int.rs
   - src/num.rs
@@ -47,7 +51,7 @@ data:
   isVerificationFile: false
   path: src/math/binom.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/binom.rs

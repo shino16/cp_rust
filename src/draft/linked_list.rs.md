@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: src/ds.rs
+    title: src/ds.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: src/draft/linked_list/inner_mut.rs
@@ -142,7 +145,8 @@ data:
     \t\tcur.advance(-2).unwrap();\n\t\tassert!(cur.prev().is_none());\n\t\tfor (v,\
     \ l) in v.iter().zip(l.iter()) {\n\t\t\tassert_eq!(v, l);\n\t\t}\n\t\tstd::mem::drop((v,\
     \ l));\n\t\tassert_eq!(DROP_CNT.load(Ordering::SeqCst), 70);\n\t}\n}"
-  dependsOn: []
+  dependsOn:
+  - src/ds.rs
   isVerificationFile: false
   path: src/draft/linked_list.rs
   requiredBy:

@@ -5,6 +5,9 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -111,6 +114,7 @@ data:
     \ Fp<M> {\n\tfn scan(io: &mut IO) -> Self {\n\t\tSelf::new(io.scan())\n\t}\n}\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/int.rs
   - src/io.rs
@@ -119,7 +123,7 @@ data:
   isVerificationFile: false
   path: src/draft/fpacc64.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/fpacc64.rs

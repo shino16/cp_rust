@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

@@ -3,9 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/alg/action.rs
-    title: src/alg/action.rs
-  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':warning:'
@@ -17,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/segtree/beats.rs
+    title: src/ds/segtree/beats.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree/lazy.rs
     title: src/ds/segtree/lazy.rs
@@ -37,6 +37,9 @@ data:
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/segtree_beats_test.rs
+    title: test/src/bin/segtree_beats_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_test.rs
     title: test/src/bin/segtree_test.rs
   - icon: ':heavy_check_mark:'
@@ -51,47 +54,46 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/alg.rs\n"
-  code: "pub mod action;\npub mod arith;\n\npub trait Alg {\n\ttype Item: Copy;\n\
-    }\n\npub trait Monoid: Alg {\n\tfn unit(&self) -> Self::Item;\n\tfn op(&self,\
-    \ x: Self::Item, y: Self::Item) -> Self::Item;\n\tfn op_to(&self, y: Self::Item,\
-    \ x: &mut Self::Item) {\n\t\t*x = self.op(*x, y);\n\t}\n}\n\npub trait Group:\
-    \ Monoid {\n\tfn inv(&self, x: Self::Item) -> Self::Item;\n\tfn op_inv_to(&self,\
-    \ y: Self::Item, x: &mut Self::Item) {\n\t\t*x = self.op(*x, self.inv(y))\n\t\
-    }\n}\n\nmacro_rules! impl_monoid {\n\t($target:ty, $($params:tt : $bounds:tt),*)\
-    \ => {\n\t\timpl<$($params : $bounds),*> Alg for $target {\n\t\t\ttype Item =\
-    \ T;\n\t\t}\n\t\timpl<$($params : $bounds),*> Monoid for $target {\n\t\t\tfn unit(&self)\
-    \ -> Self::Item {\n\t\t\t\t(self.0)()\n\t\t\t}\n\t\t\tfn op(&self, x: Self::Item,\
-    \ y: Self::Item) -> Self::Item {\n\t\t\t\t(self.1)(x, y)\n\t\t\t}\n\t\t}\n\t};\n\
+  code: "pub mod arith;\n\npub trait Monoid {\n\ttype Item: Copy;\n\tfn unit(&self)\
+    \ -> Self::Item;\n\tfn op(&self, x: Self::Item, y: Self::Item) -> Self::Item;\n\
+    \tfn op_to(&self, y: Self::Item, x: &mut Self::Item) { *x = self.op(*x, y); }\n\
+    }\n\npub trait Group: Monoid {\n\tfn inv(&self, x: Self::Item) -> Self::Item;\n\
+    \tfn op_inv_to(&self, y: Self::Item, x: &mut Self::Item) { *x = self.op(*x, self.inv(y))\
+    \ }\n}\n\nmacro_rules! impl_monoid {\n\t($target:ty, $($params:tt : $bounds:tt),*)\
+    \ => {\n\t\timpl<$($params : $bounds),*> Monoid for $target {\n\t\t\ttype Item\
+    \ = T;\n\t\t\tfn unit(&self) -> Self::Item { (self.0)() }\n\t\t\tfn op(&self,\
+    \ x: Self::Item, y: Self::Item) -> Self::Item { (self.1)(x, y) }\n\t\t}\n\t};\n\
     }\n\nmacro_rules! impl_group {\n\t($target:ty, $($params:tt : $bounds:tt),*) =>\
     \ {\n\t\timpl_monoid!($target, $($params : $bounds),*);\n\t\timpl<$($params :\
     \ $bounds),*> Group for $target {\n\t\t\tfn inv(&self, x: Self::Item) -> Self::Item\
-    \ {\n\t\t\t\t(self.2)(x)\n\t\t\t}\n\t\t}\n\t};\n}\n\npub struct MonoidImpl<T:\
-    \ Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);\npub struct GroupImpl<T,\
-    \ Unit, Op, Inv>(pub Unit, pub Op, pub Inv)\nwhere\n\tT: Copy,\n\tUnit: Fn() ->\
-    \ T,\n\tOp: Fn(T, T) -> T,\n\tInv: Fn(T) -> T;\n\n// help!\nimpl_monoid!(MonoidImpl<T,\
-    \ Unit, Op>, T: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T));\nimpl_group!(GroupImpl<T,\
+    \ { (self.2)(x) }\n\t\t}\n\t};\n}\n\npub struct MonoidImpl<T: Copy, Unit: Fn()\
+    \ -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);\npub struct GroupImpl<T, Unit, Op,\
+    \ Inv>(pub Unit, pub Op, pub Inv)\nwhere\n\tT: Copy,\n\tUnit: Fn() -> T,\n\tOp:\
+    \ Fn(T, T) -> T,\n\tInv: Fn(T) -> T;\n\n// help!\nimpl_monoid!(MonoidImpl<T, Unit,\
+    \ Op>, T: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T));\nimpl_group!(GroupImpl<T,\
     \ Unit, Op, Inv>,\n\t\t\tT: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T), Inv:\
     \ (Fn(T) -> T));\n"
   dependsOn: []
   isVerificationFile: false
   path: src/alg.rs
   requiredBy:
-  - src/alg/action.rs
   - src/alg/arith.rs
   - src/slice/cum.rs
   - src/graph/tree/reroot.rs
   - src/graph/euler_tour.rs
   - src/ds/disjointst.rs
   - src/ds/sparsetable.rs
+  - src/ds/segtree/beats.rs
   - src/ds/segtree/lazy.rs
   - src/ds/segtree.rs
   - src/ds/fenwick.rs
-  timestamp: '2021-01-03 22:19:36+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/segtree_test.rs
+  - test/src/bin/segtree_beats_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

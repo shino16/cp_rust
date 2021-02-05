@@ -18,14 +18,16 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/io/graph.rs\n"
-  code: pub use crate::graph::io::*;
+  code: 'pub use crate::graph::io::*;
+
+    '
   dependsOn:
   - src/graph/io.rs
   - src/io.rs
   isVerificationFile: false
   path: src/io/graph.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-03 06:11:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/io/graph.rs

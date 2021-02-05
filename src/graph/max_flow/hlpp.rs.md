@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/bound.rs
-    title: src/bound.rs
+    path: src/bounded.rs
+    title: src/bounded.rs
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
@@ -27,33 +27,34 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/max_flow/hlpp.rs\n"
-  code: "use crate::bound::*;\nuse crate::num::*;\nuse std::collections::VecDeque;\n\
+  code: "use crate::bounded::*;\nuse crate::num::*;\nuse std::collections::VecDeque;\n\
     \npub mod edge;\n\n#[derive(Clone, Copy, Debug)]\npub struct InnerEdge<C: Num\
-    \ + Bound> {\n\tpub to: usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// highest-label\
+    \ + Bounded> {\n\tpub to: usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// highest-label\
     \ preflow-push algorithm with global labeling and gap relabeling\n/// O(V^2 \\\
-    sqrt(E))\n#[derive(Clone)]\npub struct Hlpp<C: Num + Bound> {\n\tpub graph: Vec<Vec<InnerEdge<C>>>,\n\
-    \theight: Vec<usize>,\n\texcess: Vec<C>,\n\tcount: Vec<usize>,\n\ttodo: Vec<Vec<usize>>,\n\
-    \theight_inv: Vec<Vec<usize>>,\n\tidx: Vec<usize>,\n\thighest_active: usize,\n\
-    \thighest: usize,\n}\n\nimpl<C: Num + Bound> Hlpp<C> {\n\tpub fn new(len: usize)\
-    \ -> Self {\n\t\tSelf {\n\t\t\tgraph: vec![Vec::new(); len],\n\t\t\theight: vec![len;\
-    \ len],\n\t\t\texcess: vec![C::ZERO; len],\n\t\t\tcount: vec![0; len * 2],\n\t\
-    \t\ttodo: vec![Vec::new(); len * 2],\n\t\t\theight_inv: vec![Vec::new(); len *\
-    \ 2],\n\t\t\tidx: vec![!0; len],\n\t\t\thighest_active: 0,\n\t\t\thighest: 0,\n\
-    \t\t}\n\t}\n\tpub fn len(&self) -> usize {\n\t\tself.graph.len()\n\t}\n\tpub fn\
-    \ from_digraph(graph: &[Vec<(usize, C)>]) -> Self {\n\t\tlet mut ret = Self::new(graph.len());\n\
-    \t\tfor (v, adj) in (0..).zip(graph) {\n\t\t\tfor &(w, cap) in adj {\n\t\t\t\t\
-    ret.add_edge(v, w, cap);\n\t\t\t}\n\t\t}\n\t\tret\n\t}\n\tpub fn add_edge(&mut\
-    \ self, v: usize, w: usize, cap: C) {\n\t\tlet (vidx, widx) = (self.graph[v].len(),\
-    \ self.graph[w].len());\n\t\tself.graph[v].push(InnerEdge { to: w, cap, rev: widx\
-    \ });\n\t\tself.graph[w].push(InnerEdge { to: v, cap: C::ZERO, rev: vidx });\n\
-    \t}\n\tfn push(&mut self, v: usize, idx: usize, init: bool) {\n\t\tlet InnerEdge\
-    \ { to, ref mut cap, rev } = self.graph[v][idx];\n\t\tdebug_assert!(self.excess[v]\
-    \ > C::ZERO);\n\t\tif !init {\n\t\t\tdebug_assert!(self.height[v] == self.height[to]\
-    \ + 1);\n\t\t}\n\t\tif *cap == C::ZERO {\n\t\t\treturn;\n\t\t}\n\t\tlet df = self.excess[v].min(*cap);\n\
-    \t\t*cap -= df;\n\t\tself.graph[to][rev].cap += df;\n\t\tself.excess[v] -= df;\n\
-    \t\tself.excess[to] += df;\n\t\tif !init && self.excess[to] == df {\n\t\t\tself.todo[self.height[to]].push(to);\n\
-    \t\t\tself.highest_active = self.highest_active.max(self.height[to]);\n\t\t}\n\
-    \t}\n\tfn change_height(&mut self, v: usize, h0: usize, h1: usize) {\n\t\tself.count[h0]\
+    sqrt(E))\n#[derive(Clone)]\npub struct Hlpp<C: Num + Bounded> {\n\tpub graph:\
+    \ Vec<Vec<InnerEdge<C>>>,\n\theight: Vec<usize>,\n\texcess: Vec<C>,\n\tcount:\
+    \ Vec<usize>,\n\ttodo: Vec<Vec<usize>>,\n\theight_inv: Vec<Vec<usize>>,\n\tidx:\
+    \ Vec<usize>,\n\thighest_active: usize,\n\thighest: usize,\n}\n\nimpl<C: Num +\
+    \ Bounded> Hlpp<C> {\n\tpub fn new(len: usize) -> Self {\n\t\tSelf {\n\t\t\tgraph:\
+    \ vec![Vec::new(); len],\n\t\t\theight: vec![len; len],\n\t\t\texcess: vec![C::ZERO;\
+    \ len],\n\t\t\tcount: vec![0; len * 2],\n\t\t\ttodo: vec![Vec::new(); len * 2],\n\
+    \t\t\theight_inv: vec![Vec::new(); len * 2],\n\t\t\tidx: vec![!0; len],\n\t\t\t\
+    highest_active: 0,\n\t\t\thighest: 0,\n\t\t}\n\t}\n\tpub fn len(&self) -> usize\
+    \ {\n\t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>])\
+    \ -> Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
+    \ {\n\t\t\tfor &(w, cap) in adj {\n\t\t\t\tret.add_edge(v, w, cap);\n\t\t\t}\n\
+    \t\t}\n\t\tret\n\t}\n\tpub fn add_edge(&mut self, v: usize, w: usize, cap: C)\
+    \ {\n\t\tlet (vidx, widx) = (self.graph[v].len(), self.graph[w].len());\n\t\t\
+    self.graph[v].push(InnerEdge { to: w, cap, rev: widx });\n\t\tself.graph[w].push(InnerEdge\
+    \ { to: v, cap: C::ZERO, rev: vidx });\n\t}\n\tfn push(&mut self, v: usize, idx:\
+    \ usize, init: bool) {\n\t\tlet InnerEdge { to, ref mut cap, rev } = self.graph[v][idx];\n\
+    \t\tdebug_assert!(self.excess[v] > C::ZERO);\n\t\tif !init {\n\t\t\tdebug_assert!(self.height[v]\
+    \ == self.height[to] + 1);\n\t\t}\n\t\tif *cap == C::ZERO {\n\t\t\treturn;\n\t\
+    \t}\n\t\tlet df = self.excess[v].min(*cap);\n\t\t*cap -= df;\n\t\tself.graph[to][rev].cap\
+    \ += df;\n\t\tself.excess[v] -= df;\n\t\tself.excess[to] += df;\n\t\tif !init\
+    \ && self.excess[to] == df {\n\t\t\tself.todo[self.height[to]].push(to);\n\t\t\
+    \tself.highest_active = self.highest_active.max(self.height[to]);\n\t\t}\n\t}\n\
+    \tfn change_height(&mut self, v: usize, h0: usize, h1: usize) {\n\t\tself.count[h0]\
     \ -= 1;\n\t\tself.height[v] = h1;\n\t\tself.idx[v] = self.height_inv[h1].len();\n\
     \t\tself.height_inv[h1].push(v);\n\t\tself.count[h1] += 1;\n\t\tdebug_assert!(self.highest_active\
     \ <= h1);\n\t\tself.highest_active = h1;\n\t\tif h1 < self.len() {\n\t\t\tself.highest\
@@ -90,14 +91,14 @@ data:
     \t\tif v != s && v != t {\n\t\t\t\t\tself.discharge(v);\n\t\t\t\t}\n\t\t\t}\n\t\
     \t}\n\t\tself.excess[t]\n\t}\n}\n"
   dependsOn:
-  - src/bound.rs
+  - src/bounded.rs
   - src/num.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/graph/max_flow/hlpp.rs
   requiredBy:
   - src/graph/max_flow/hlpp/edge.rs
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/hlpp_test.rs

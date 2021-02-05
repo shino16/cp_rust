@@ -47,7 +47,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '2021-01-31 21:43:13+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs

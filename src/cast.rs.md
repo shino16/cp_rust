@@ -42,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/segtree_beats_test.rs
+    title: test/src/bin/segtree_beats_test.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -83,6 +86,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
+  - test/src/bin/segtree_beats_test.rs
   - test/src/bin/dfa_test.rs
 documentation_of: src/cast.rs
 layout: document

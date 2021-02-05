@@ -5,11 +5,17 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
+  - icon: ':heavy_check_mark:'
+    path: src/func/memo.rs
+    title: src/func/memo.rs
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
@@ -38,11 +44,20 @@ data:
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':heavy_check_mark:'
+    path: src/rand/xorshift.rs
+    title: src/rand/xorshift.rs
+  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
   - icon: ':heavy_check_mark:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
+  - icon: ':heavy_check_mark:'
+    path: src/slice/sa.rs
+    title: src/slice/sa.rs
+  - icon: ':heavy_check_mark:'
+    path: src/slice/sort.rs
+    title: src/slice/sort.rs
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
@@ -61,7 +76,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/cargo_test.rs\n"
-  code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\n\
+  code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\n\
     \n#[allow(unused_imports)]\nuse lib::tests::*;\n\nuse std::io::{self, Write, Result};\n\
     use std::process::Command;\n\nfn main() -> Result<()> {\n\tlet output = Command::new(\"\
     cargo\")\n\t\t.arg(\"test\")\n\t\t.arg(\"--release\")\n\t\t.arg(\"--\")\n\t\t\
@@ -72,8 +87,10 @@ data:
     Hello World\");\n\n\tOk(())\n}\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/fp.rs
+  - src/func/memo.rs
   - src/int.rs
   - src/int/gcd.rs
   - src/io.rs
@@ -83,14 +100,17 @@ data:
   - src/mint.rs
   - src/num.rs
   - src/rand/seed.rs
+  - src/rand/xorshift.rs
   - src/rand/xoshiro256plus.rs
   - src/slice/perm.rs
+  - src/slice/sa.rs
+  - src/slice/sort.rs
   - src/tests.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-01-31 20:22:45+09:00'
+  timestamp: '2021-02-06 01:09:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

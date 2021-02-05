@@ -5,6 +5,9 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -97,6 +100,7 @@ data:
     \ dfa.accept(s) {\n\t\t\tsum += k;\n\t\t}\n\t}\n\tsum\n}\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/fxhash.rs
   - src/int.rs
@@ -106,7 +110,7 @@ data:
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

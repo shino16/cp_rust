@@ -37,13 +37,12 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/alg/arith.rs\n"
   code: "pub use super::*;\npub use crate::num::*;\nuse std::marker::PhantomData;\n\
-    \n#[derive(Default)]\npub struct Addition<N>(PhantomData<N>);\n\nimpl<N> Addition<N>\
-    \ {\n\tpub fn new() -> Self {\n\t\tSelf(PhantomData)\n\t}\n}\n\nimpl<N: Num> Alg\
-    \ for Addition<N> {\n\ttype Item = N;\n}\n\nimpl<N: Num> Monoid for Addition<N>\
-    \ {\n\tfn unit(&self) -> Self::Item {\n\t\tN::ZERO\n\t}\n\tfn op(&self, x: Self::Item,\
-    \ y: Self::Item) -> Self::Item {\n\t\tx.wrapping_add(y)\n\t}\n}\n\nimpl<N: Num>\
-    \ Group for Addition<N> {\n\tfn inv(&self, x: Self::Item) -> Self::Item {\n\t\t\
-    x.wrapping_neg()\n\t}\n}\n"
+    \npub struct Addition<N>(PhantomData<N>);\n\nimpl<N> Addition<N> {\n\tpub fn new()\
+    \ -> Self { Self(PhantomData) }\n}\nimpl<N: Num> Monoid for Addition<N> {\n\t\
+    type Item = N;\n\tfn unit(&self) -> Self::Item { N::ZERO }\n\tfn op(&self, x:\
+    \ Self::Item, y: Self::Item) -> Self::Item { x.wrapping_add(y) }\n}\nimpl<N: Num>\
+    \ Group for Addition<N> {\n\tfn inv(&self, x: Self::Item) -> Self::Item { x.wrapping_neg()\
+    \ }\n}\n"
   dependsOn:
   - src/alg.rs
   - src/num.rs
@@ -54,7 +53,7 @@ data:
   - src/slice/cum.rs
   - src/graph/euler_tour.rs
   - src/ds/fenwick.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

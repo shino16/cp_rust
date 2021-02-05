@@ -43,14 +43,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/tree_dfs_io_test.rs\n"
-  code: "// verify-helper: PROBLEM https://yukicoder.me/problems/no/778\n\nuse lib::ds::fenwick::*;\n\
-    use lib::graph::tree::dfs_io::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io\
-    \ = IO::new();\n\tlet n = io.scan();\n\tlet mut graph = vec![Vec::new(); n];\n\
-    \tfor v in 1..n {\n\t\tlet p: usize = io.scan();\n\t\tgraph[p].push(v);\n\t\t\
-    graph[v].push(p);\n\t}\n\tlet mut fwk = FenwickTree::new(vec![0; n], Addition::new());\n\
-    \tlet mut ans = 0;\n\tdfs_io(&graph, 0, |v, _| match v {\n\t\tIn(v) => {\n\t\t\
-    \tans += fwk.ask_prefix(v) as u64;\n\t\t\tfwk.add(v, 1_u32);\n\t\t},\n\t\tOut(v)\
-    \ => fwk.sub(v, 1),\n\t});\n\tio.println(ans);\n}\n"
+  code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/778\n\n\
+    use lib::ds::fenwick::*;\nuse lib::graph::tree::dfs_io::*;\nuse lib::io::*;\n\n\
+    fn main() {\n\tlet mut io = IO::new();\n\tlet n = io.scan();\n\tlet mut graph\
+    \ = vec![Vec::new(); n];\n\tfor v in 1..n {\n\t\tlet p: usize = io.scan();\n\t\
+    \tgraph[p].push(v);\n\t\tgraph[v].push(p);\n\t}\n\tlet mut fwk = FenwickTree::new(vec![0;\
+    \ n], Addition::new());\n\tlet mut ans = 0;\n\tdfs_io(&graph, 0, |v, _| match\
+    \ v {\n\t\tIn(v) => {\n\t\t\tans += fwk.ask_prefix(v) as u64;\n\t\t\tfwk.add(v,\
+    \ 1_u32);\n\t\t},\n\t\tOut(v) => fwk.sub(v, 1),\n\t});\n\tio.println(ans);\n}\n"
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
@@ -65,7 +65,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-01-31 21:57:49+09:00'
+  timestamp: '2021-02-06 00:52:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs

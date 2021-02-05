@@ -31,8 +31,8 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/fenwick.rs\n"
   code: "pub use crate::alg::arith::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub\
-    \ struct FenwickTree<A: Alg> {\n\tdata: Vec<A::Item>,\n\talg: A,\n}\n\n/// A:\
-    \ Commutative\nimpl<A: Monoid> FenwickTree<A> {\n\tpub fn new(mut data: Vec<A::Item>,\
+    \ struct FenwickTree<A: Monoid> {\n\tdata: Vec<A::Item>,\n\talg: A,\n}\n\n///\
+    \ A: Commutative\nimpl<A: Monoid> FenwickTree<A> {\n\tpub fn new(mut data: Vec<A::Item>,\
     \ alg: A) -> Self {\n\t\tlet len = data.len();\n\t\tdata.insert(0, alg.unit());\n\
     \t\tfor i in 1..=len {\n\t\t\tif i + i.lsb() <= len {\n\t\t\t\tdata[i + i.lsb()]\
     \ = alg.op(data[i + i.lsb()], data[i]);\n\t\t\t}\n\t\t}\n\t\tSelf { data, alg\
@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-01-31 20:22:45+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

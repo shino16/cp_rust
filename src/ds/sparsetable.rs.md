@@ -18,25 +18,25 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/sparsetable.rs\n"
-  code: "use crate::alg::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub struct SparseTable<A:\
-    \ Alg> {\n\tdata: Vec<Vec<A::Item>>,\n\talg: A,\n}\n\n/// A: Band (x * x == x)\n\
-    impl<A: Monoid> SparseTable<A> {\n\tpub fn new(data: Vec<A::Item>, alg: A) ->\
-    \ Self {\n\t\tlet len = data.len();\n\t\tlet height = len.ilog2() as usize;\n\t\
-    \tlet mut data = vec![data];\n\t\tfor s in 1..=height {\n\t\t\tlet w = 1 << (s\
-    \ - 1);\n\t\t\tlet mut new_row = Vec::with_capacity(data[s - 1].len() - w);\n\t\
-    \t\tfor i in 0..data[s - 1].len() - w {\n\t\t\t\tnew_row.push(alg.op(data[s -\
-    \ 1][i], data[s - 1][i + w]));\n\t\t\t}\n\t\t\tdata.push(new_row);\n\t\t}\n\t\t\
-    Self { data, alg }\n\t}\n\tpub fn ask(&self, l: usize, r: usize) -> A::Item {\n\
-    \t\tif l == r {\n\t\t\tself.alg.unit()\n\t\t} else {\n\t\t\tlet s = (r - l).ilog2()\
-    \ as usize;\n\t\t\tlet w = 1 << s;\n\t\t\tself.alg.op(self.data[s][l], self.data[s][r\
-    \ - w])\n\t\t}\n\t}\n}\n"
+  code: "pub use crate::alg::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub struct\
+    \ SparseTable<A: Monoid> {\n\tdata: Vec<Vec<A::Item>>,\n\talg: A,\n}\n\n/// A:\
+    \ Band (x * x == x)\nimpl<A: Monoid> SparseTable<A> {\n\tpub fn new(data: Vec<A::Item>,\
+    \ alg: A) -> Self {\n\t\tlet len = data.len();\n\t\tlet height = len.ilog2() as\
+    \ usize;\n\t\tlet mut data = vec![data];\n\t\tfor s in 1..=height {\n\t\t\tlet\
+    \ w = 1 << (s - 1);\n\t\t\tlet mut new_row = Vec::with_capacity(data[s - 1].len()\
+    \ - w);\n\t\t\tfor i in 0..data[s - 1].len() - w {\n\t\t\t\tnew_row.push(alg.op(data[s\
+    \ - 1][i], data[s - 1][i + w]));\n\t\t\t}\n\t\t\tdata.push(new_row);\n\t\t}\n\t\
+    \tSelf { data, alg }\n\t}\n\tpub fn ask(&self, l: usize, r: usize) -> A::Item\
+    \ {\n\t\tif l == r {\n\t\t\tself.alg.unit()\n\t\t} else {\n\t\t\tlet s = (r -\
+    \ l).ilog2() as usize;\n\t\t\tlet w = 1 << s;\n\t\t\tself.alg.op(self.data[s][l],\
+    \ self.data[s][r - w])\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/alg.rs
   - src/bit.rs
   isVerificationFile: false
   path: src/ds/sparsetable.rs
   requiredBy: []
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/sparsetable.rs

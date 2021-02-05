@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/bound.rs
-    title: src/bound.rs
+    path: src/bounded.rs
+    title: src/bounded.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
@@ -31,13 +31,13 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/ford_fulkerson_test.rs\n"
-  code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\n\
+  code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\n\
     \nuse lib::graph::max_flow::ford_fulkerson::FordFulkerson;\nuse lib::io::*;\n\n\
     fn main() {\n\tlet mut io = IO::new();\n\tlet [n, m]: [usize; 2] = io.scan();\n\
     \tlet mut solver = FordFulkerson::<u32>::new(n);\n\tfor _ in 0..m {\n\t\tsolver.add_edge(io.scan(),\
     \ io.scan(), io.scan());\n\t}\n\tio.println(solver.solve(0, n - 1));\n}\n"
   dependsOn:
-  - src/bound.rs
+  - src/bounded.rs
   - src/ds/bitset.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/io.rs
@@ -46,7 +46,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ford_fulkerson_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-06 00:52:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ford_fulkerson_test.rs

@@ -5,6 +5,9 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -43,7 +46,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/dfa_test.rs\n"
-  code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570\n\
+  code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570\n\
     \nuse lib::dfa::*;\nuse lib::io::*;\nuse lib::mint::*;\n\n#[derive(Ord, PartialOrd,\
     \ Eq, PartialEq, Copy, Clone, Hash)]\nenum ZigZagState {\n\tInitial,\n\tFirst(u8),\n\
     \tUp(u8),\n\tDown(u8),\n}\n\nstruct ZigZag;\n\nimpl Dfa for ZigZag {\n\ttype Alphabet\
@@ -65,6 +68,7 @@ data:
     \ alphabet);\n\tprintln!(\"{}\", ans);\n}\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/dfa.rs
   - src/fxhash.rs
@@ -77,7 +81,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-06 00:52:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs

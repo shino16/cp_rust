@@ -5,6 +5,9 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/segtree_beats_test.rs
+    title: test/src/bin/segtree_beats_test.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -60,26 +66,26 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int.rs\n"
-  code: "use crate::bit::*;\nuse crate::cast::*;\npub use crate::num::*;\npub use\
-    \ crate::zo::*;\nuse std::ops::*;\n\npub mod arith;\npub mod bisect;\npub mod\
-    \ gcd;\npub mod inv;\n\npub trait Int: Num + Ord + Rem<Output = Self> + RemAssign\
-    \ + Bits + PrimCast {\n\ttype Signed: IInt + CastFrom<Self> + CastTo<Self>;\n\t\
-    type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;\n\tconst MIN: Self;\n\tconst\
-    \ MAX: Self;\n\tfn abs(self) -> Self::Unsigned;\n\tfn rem_euclid(self, rhs: Self::Unsigned)\
-    \ -> Self::Unsigned;\n}\n\npub trait IInt: Int + INum {}\npub trait UInt: Int\
-    \ {}\n\nmacro_rules! impl_int {\n\t(@ $t:ident, $i:ident, $u:ident) => {\n\t\t\
-    impl Int for $t {\n\t\t\ttype Signed = $i;\n\t\t\ttype Unsigned = $u;\n\t\t\t\
-    const MIN: Self = std::$t::MIN;\n\t\t\tconst MAX: Self = std::$t::MAX;\n\t\t\t\
-    #[allow(unconditional_recursion)] // it's not\n\t\t\tfn abs(self) -> Self::Unsigned\
-    \ {\n\t\t\t\tself.abs() as $u\n\t\t\t}\n\t\t\tfn rem_euclid(self, rhs: Self::Unsigned)\
-    \ -> Self::Unsigned {\n\t\t\t\t<$t>::rem_euclid(self, rhs as $t) as $u\n\t\t\t\
-    }\n\t\t}\n\t};\n\t({ $i:ident }, { $u:ident }) => {\n\t\timpl_int!(@ $i, $i, $u);\n\
-    \t\timpl_int!(@ $u, $i, $u);\n\t\timpl IInt for $i {}\n\t\timpl UInt for $u {}\n\
-    \t};\n\t({ $i:ident, $($is:ident),* }, { $u:ident, $($us:ident),* }) => {\n\t\t\
-    impl_int!({ $i }, { $u });\n\t\timpl_int!({ $($is),* }, { $($us),* });\n\t}\n\
-    }\n\nimpl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize });\n"
+  code: "use crate::bit::*;\npub use crate::bounded::*;\nuse crate::cast::*;\npub\
+    \ use crate::num::*;\npub use crate::zo::*;\nuse std::ops::*;\n\npub mod arith;\n\
+    pub mod bisect;\npub mod gcd;\npub mod inv;\n\npub trait Int: Num + Ord + Rem<Output\
+    \ = Self> + RemAssign + Bounded + Bits + PrimCast {\n\ttype Signed: IInt + CastFrom<Self>\
+    \ + CastTo<Self>;\n\ttype Unsigned: UInt + CastFrom<Self> + CastTo<Self>;\n\t\
+    fn abs(self) -> Self::Unsigned;\n\tfn rem_euclid(self, rhs: Self::Unsigned) ->\
+    \ Self::Unsigned;\n}\n\npub trait IInt: Int + INum {}\npub trait UInt: Int {}\n\
+    \nmacro_rules! impl_int {\n\t(@ $t:ident, $i:ident, $u:ident, $abs:expr) => {\n\
+    \t\timpl Int for $t {\n\t\t\ttype Signed = $i;\n\t\t\ttype Unsigned = $u;\n\t\t\
+    \tfn abs(self) -> Self::Unsigned {\n\t\t\t\t$abs(self) as $u\n\t\t\t}\n\t\t\t\
+    fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned {\n\t\t\t\t<$t>::rem_euclid(self,\
+    \ rhs as $t) as $u\n\t\t\t}\n\t\t}\n\t};\n\t({ $i:ident }, { $u:ident }) => {\n\
+    \t\timpl_int!(@ $i, $i, $u, |x| <$i>::abs(x));\n\t\timpl_int!(@ $u, $i, $u, |x|\
+    \ x);\n\t\timpl IInt for $i {}\n\t\timpl UInt for $u {}\n\t};\n\t({ $i:ident,\
+    \ $($is:ident),* }, { $u:ident, $($us:ident),* }) => {\n\t\timpl_int!({ $i },\
+    \ { $u });\n\t\timpl_int!({ $($is),* }, { $($us),* });\n\t}\n}\n\nimpl_int!({\
+    \ i32, i64, i128, isize }, { u32, u64, u128, usize });\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/num.rs
   - src/zo.rs
@@ -96,10 +102,11 @@ data:
   - src/math/pow.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
+  - test/src/bin/segtree_beats_test.rs
   - test/src/bin/dfa_test.rs
 documentation_of: src/int.rs
 layout: document

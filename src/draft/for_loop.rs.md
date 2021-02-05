@@ -11,23 +11,21 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/func/rec.rs\n"
-  code: "#[must_use]\npub struct Recurse<F>(F);\n\nimpl<F> Recurse<F> {\n\tpub fn\
-    \ call<Arg, Ret>(&self, arg: Arg) -> Ret\n\twhere\n\t\tF: Fn(&dyn Fn(Arg) -> Ret,\
-    \ Arg) -> Ret,\n\t{\n\t\tself.0(&|arg| self.call(arg), arg)\n\t}\n}\n\npub fn\
-    \ recurse<Arg, Ret, F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret>(f: F) -> Recurse<F>\
-    \ {\n\tRecurse(f)\n}\n"
+    RuntimeError: bundler is not specified: src/draft/for_loop.rs\n"
+  code: "macro_rules! for_loop {\n    ($init:stmt; $cond:expr; $upd:stmt; $block:block)\
+    \ => {\n        $init\n        while $cond {\n            $block\n           \
+    \ $upd\n        }\n    };\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/func/rec.rs
+  path: src/draft/for_loop.rs
   requiredBy: []
   timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/func/rec.rs
+documentation_of: src/draft/for_loop.rs
 layout: document
 redirect_from:
-- /library/src/func/rec.rs
-- /library/src/func/rec.rs.html
-title: src/func/rec.rs
+- /library/src/draft/for_loop.rs
+- /library/src/draft/for_loop.rs.html
+title: src/draft/for_loop.rs
 ---

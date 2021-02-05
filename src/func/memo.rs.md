@@ -9,9 +9,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/segtree_beats_test.rs
-    title: test/src/bin/segtree_beats_test.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -20,27 +17,29 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/iter.rs\n"
-  code: "pub mod either;\npub mod pow;\npub mod prod;\n\npub trait Itertools: Iterator\
-    \ {\n\tfn collect_vec(self) -> Vec<Self::Item>\n\twhere\n\t\tSelf: Sized,\n\t\
-    {\n\t\tself.collect()\n\t}\n}\n\nimpl<I: Iterator> Itertools for I {}\n\n#[macro_export]\n\
-    macro_rules! iprod {\n\t($head:expr) => {\n\t\t$head.into_iter()\n\t};\n\t($head:expr,\
-    \ $($tail:expr),*) => (\n\t\t$head.into_iter().flat_map(|e| {\n\t\t\tstd::iter::repeat(e).zip(iprod!($($tail),*))\n\
-    \t\t})\n\t);\n}\n"
+    RuntimeError: bundler is not specified: src/func/memo.rs\n"
+  code: "use std::cell::RefCell;\nuse std::collections::HashMap;\nuse std::hash::Hash;\n\
+    \n#[must_use]\npub struct Memo<F, Arg, Ret>(F, RefCell<HashMap<Arg, Ret>>);\n\n\
+    impl<F, Arg, Ret> Memo<F, Arg, Ret>\nwhere\n\tF: Fn(&dyn Fn(Arg) -> Ret, Arg)\
+    \ -> Ret,\n\tArg: Clone + Eq + Hash,\n\tRet: Clone,\n{\n\tpub fn call(&self, arg:\
+    \ Arg) -> Ret {\n\t\tif let Some(ret) = self.1.borrow().get(&arg) {\n\t\t\treturn\
+    \ ret.clone();\n\t\t}\n\t\tlet ret = self.0(&|arg| self.call(arg), arg.clone());\n\
+    \t\tself.1.borrow_mut().insert(arg, ret.clone());\n\t\tret\n\t}\n}\n\npub fn memo<Arg:\
+    \ Eq + Hash, Ret, F>(f: F) -> Memo<F, Arg, Ret>\nwhere\n\tF: Fn(&dyn Fn(Arg) ->\
+    \ Ret, Arg) -> Ret,\n{\n\tMemo(f, RefCell::new(HashMap::new()))\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/iter.rs
+  path: src/func/memo.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-01-27 17:46:37+09:00'
+  timestamp: '2021-02-06 01:09:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
-  - test/src/bin/segtree_beats_test.rs
-documentation_of: src/iter.rs
+documentation_of: src/func/memo.rs
 layout: document
 redirect_from:
-- /library/src/iter.rs
-- /library/src/iter.rs.html
-title: src/iter.rs
+- /library/src/func/memo.rs
+- /library/src/func/memo.rs.html
+title: src/func/memo.rs
 ---

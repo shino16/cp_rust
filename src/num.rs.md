@@ -97,6 +97,9 @@ data:
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/segtree_beats_test.rs
+    title: test/src/bin/segtree_beats_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
   _isVerificationFailed: false
@@ -156,6 +159,7 @@ data:
   - test/src/bin/ford_fulkerson_test.rs
   - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/segtree_beats_test.rs
   - test/src/bin/dfa_test.rs
 documentation_of: src/num.rs
 layout: document

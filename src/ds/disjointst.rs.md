@@ -19,8 +19,8 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/disjointst.rs\n"
   code: "pub use crate::alg::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub struct\
-    \ DisjointSparseTable<A: Alg> {\n\tdata: Vec<Vec<A::Item>>,\n\talg: A,\n}\n\n\
-    impl<A: Monoid> DisjointSparseTable<A> {\n\tpub fn new(data: Vec<A::Item>, alg:\
+    \ DisjointSparseTable<A: Monoid> {\n\tdata: Vec<Vec<A::Item>>,\n\talg: A,\n}\n\
+    \nimpl<A: Monoid> DisjointSparseTable<A> {\n\tpub fn new(data: Vec<A::Item>, alg:\
     \ A) -> Self {\n\t\tlet len = data.len();\n\t\tlet height = len.ilog2() as usize;\n\
     \t\tlet mut data = vec![data; height + 1];\n\t\tfor s in 1..=height {\n\t\t\t\
     for z in (0..len).step_by(1 << (s + 1)) {\n\t\t\t\tlet m = z + (1 << s);\n\t\t\
@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: src/ds/disjointst.rs
   requiredBy: []
-  timestamp: '2021-01-03 22:19:36+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/disjointst.rs

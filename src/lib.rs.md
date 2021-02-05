@@ -27,7 +27,7 @@ data:
 
     pub mod bool;
 
-    pub mod bound;
+    pub mod bounded;
 
     pub mod cast;
 
@@ -59,6 +59,8 @@ data:
 
     pub mod iter;
 
+    pub mod macros;
+
     pub mod make_vec;
 
     pub mod math;
@@ -85,7 +87,7 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2021-01-31 16:38:46+09:00'
+  timestamp: '2021-02-06 00:52:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

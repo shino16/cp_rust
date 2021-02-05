@@ -5,11 +5,17 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
+  - icon: ':heavy_check_mark:'
+    path: src/func/memo.rs
+    title: src/func/memo.rs
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
@@ -38,11 +44,20 @@ data:
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':heavy_check_mark:'
+    path: src/rand/xorshift.rs
+    title: src/rand/xorshift.rs
+  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
   - icon: ':heavy_check_mark:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
+  - icon: ':heavy_check_mark:'
+    path: src/slice/sa.rs
+    title: src/slice/sa.rs
+  - icon: ':heavy_check_mark:'
+    path: src/slice/sort.rs
+    title: src/slice/sort.rs
   - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
@@ -81,10 +96,17 @@ data:
     \t\t\tlet mut rng = Xoshiro256plus::new();\n\t\t\tfor _ in 0..100 {\n\t\t\t\t\
     let a: Mint17 = rng.next().into();\n\t\t\t\tlet b = a.inv();\n\t\t\t\tassert!(a\
     \ * b == Mint17::ONE, \"{} * {} = {}\", a, b, a * b);\n\t\t\t}\n\t\t}\n\t}\n\n\
-    \tmod iter {\n\t\tuse crate::iter::prod::*;\n\t\tuse crate::iter::*;\n\t\t#[test]\n\
-    \t\tfn test() {\n\t\t\tlet lhs = (0..3).prod(b\"ab\".to_vec()).collect_vec();\n\
-    \t\t\tlet rhs = vec![(0, b'a'), (0, b'b'), (1, b'a'), (1, b'b'), (2, b'a'), (2,\
-    \ b'b')];\n\t\t\tassert_eq!(lhs, rhs);\n\t\t}\n\t}\n\n\tmod num {\n\t\tuse crate::int::*;\n\
+    \tmod func {\n\t\tmod memo {\n\t\t\tuse crate::func::memo::*;\n\t\t\t#[test]\n\
+    \t\t\tfn test_memo() {\n\t\t\t\tconst MOD: u32 = 1_000_000_007;\n\t\t\t\tlet mut\
+    \ fib = vec![1, 1];\n\t\t\t\tfor i in 2..=1000 {\n\t\t\t\t\tlet a = fib[i - 1]\
+    \ + fib[i - 2];\n\t\t\t\t\tfib.push(a % MOD);\n\t\t\t\t}\n\t\t\t\tlet rhs = memo(|fib,\
+    \ n| {\n\t\t\t\t\tif n <= 1 {\n\t\t\t\t\t\t1\n\t\t\t\t\t} else {\n\t\t\t\t\t\t\
+    (fib(n - 1) + fib(n - 2)) % MOD\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t\t.call(1000);\n\
+    \t\t\t\tassert_eq!(fib[1000], rhs);\n\t\t\t}\n\t\t}\n\t}\n\n\tmod iter {\n\t\t\
+    use crate::iter::prod::*;\n\t\tuse crate::iter::*;\n\t\t#[test]\n\t\tfn test()\
+    \ {\n\t\t\tlet lhs = (0..3).prod(b\"ab\".to_vec()).collect_vec();\n\t\t\tlet rhs\
+    \ = vec![(0, b'a'), (0, b'b'), (1, b'a'), (1, b'b'), (2, b'a'), (2, b'b')];\n\t\
+    \t\tassert_eq!(lhs, rhs);\n\t\t}\n\t}\n\n\tmod num {\n\t\tuse crate::int::*;\n\
     \t\t#[test]\n\t\tfn types() {\n\t\t\tassert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);\n\
     \t\t\tassert_eq!(<i32 as Int>::Unsigned::ZERO, 0_u32);\n\t\t\tassert_eq!(<u32\
     \ as Int>::Signed::ZERO, 0_i32);\n\t\t\tassert_eq!(<u32 as Int>::Unsigned::ZERO,\
@@ -101,11 +123,28 @@ data:
     let mut a: Vec<_> = (0..n).collect();\n\t\t\t\tlet mut b = a.clone();\n\t\t\t\t\
     let mut cnt = 0;\n\t\t\t\twhile next_permutation(&mut b) {\n\t\t\t\t\tassert!(a\
     \ < b);\n\t\t\t\t\tnext_permutation(&mut a);\n\t\t\t\t\tcnt += 1;\n\t\t\t\t}\n\
-    \t\t\t\tassert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);\n\t\t\t}\n\t\t}\n\t}\n}\n"
+    \t\t\t\tassert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);\n\t\t\t}\n\t\t}\n\t\tmod sa {\n\
+    \t\t\tuse crate::slice::sa::*;\n\t\t\t#[test]\n\t\t\tfn suffix_array_test() {\n\
+    \t\t\t\tuse crate::rand::xorshift::*;\n\t\t\t\tlet mut rng = Xorshift32::new();\n\
+    \t\t\t\tlet modu = rng.next() % 1000;\n\t\t\t\tlet len = rng.next() as usize %\
+    \ 1000;\n\t\t\t\tlet v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();\n\
+    \t\t\t\tlet mut sa = Vec::new();\n\t\t\t\tsuffix_array(&v, &mut sa, modu as usize,\
+    \ |&v| v as usize);\n\t\t\t\tlet mut ans: Vec<_> = (0..len + 1).collect();\n\t\
+    \t\t\tans.sort_unstable_by_key(|&i| &v[i..]);\n\t\t\t\tassert_eq!(sa, ans);\n\t\
+    \t\t}\n\t\t}\n\t\tmod sort {\n\t\t\tuse crate::slice::sort::*;\n\t\t\t#[test]\n\
+    \t\t\tfn test_count_sort() {\n\t\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\
+    \t\tlet mut rng = Xoshiro256plus::new();\n\t\t\t\tlet len = rng.next() as usize\
+    \ % 100;\n\t\t\t\tlet modu = rng.next() % len as u64 + 50;\n\t\t\t\tlet mut a:\
+    \ Vec<_> = std::iter::repeat_with(|| (rng.next() % modu, rng.next()))\n\t\t\t\t\
+    \t.take(len)\n\t\t\t\t\t.collect();\n\t\t\t\tlet mut b = Vec::new();\n\t\t\t\t\
+    count_sort(&a, &mut b, modu as usize, |&x| x.0 as usize);\n\t\t\t\ta.sort_by_key(|&x|\
+    \ x.0);\n\t\t\t\tassert_eq!(a, b);\n\t\t\t}\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/fp.rs
+  - src/func/memo.rs
   - src/int.rs
   - src/int/gcd.rs
   - src/io.rs
@@ -115,13 +154,16 @@ data:
   - src/mint.rs
   - src/num.rs
   - src/rand/seed.rs
+  - src/rand/xorshift.rs
   - src/rand/xoshiro256plus.rs
   - src/slice/perm.rs
+  - src/slice/sa.rs
+  - src/slice/sort.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-06 01:09:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

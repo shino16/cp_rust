@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/bound.rs
-    title: src/bound.rs
+    path: src/bounded.rs
+    title: src/bounded.rs
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
@@ -27,14 +27,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/max_flow/edmonds_karp.rs\n"
-  code: "use crate::bound::Bound;\npub use crate::num::*;\nuse std::collections::VecDeque;\n\
-    \npub mod edge;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bound>\
+  code: "use crate::bounded::Bounded;\npub use crate::num::*;\nuse std::collections::VecDeque;\n\
+    \npub mod edge;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bounded>\
     \ {\n\tpub to: usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// O(VE^2)\n#[derive(Clone)]\n\
-    pub struct EdmondsKarp<C: Num + Bound> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n}\n\
-    \nimpl<C: Num + Bound> EdmondsKarp<C> {\n\tpub fn new(len: usize) -> Self {\n\t\
-    \tSelf { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize {\n\
-    \t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>]) ->\
-    \ Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
+    pub struct EdmondsKarp<C: Num + Bounded> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n\
+    }\n\nimpl<C: Num + Bounded> EdmondsKarp<C> {\n\tpub fn new(len: usize) -> Self\
+    \ {\n\t\tSelf { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize\
+    \ {\n\t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>])\
+    \ -> Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
     \ {\n\t\t\tfor &(w, cap) in adj {\n\t\t\t\tret.add_edge(v, w, cap);\n\t\t\t}\n\
     \t\t}\n\t\tret\n\t}\n\tpub fn add_vertex(&mut self) -> usize {\n\t\tself.graph.push(Vec::new());\n\
     \t\tself.graph.len() - 1\n\t}\n\tpub fn add_edge(&mut self, v: usize, w: usize,\
@@ -54,14 +54,14 @@ data:
     \ cap, rev } = &mut self.graph[v][track[v]];\n\t\t\t\t*cap += df;\n\t\t\t\tself.graph[to][rev].cap\
     \ -= df;\n\t\t\t\tv = to;\n\t\t\t}\n\t\t}\n\t}\n}\n"
   dependsOn:
-  - src/bound.rs
+  - src/bounded.rs
   - src/num.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/graph/max_flow/edmonds_karp.rs
   requiredBy:
   - src/graph/max_flow/edmonds_karp/edge.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs

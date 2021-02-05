@@ -9,9 +9,6 @@ data:
   - name: src/alg
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/alg/action.rs
-      title: src/alg/action.rs
-    - icon: ':heavy_check_mark:'
       path: src/alg/arith.rs
       title: src/alg/arith.rs
   - name: src
@@ -29,17 +26,23 @@ data:
       path: src/bool.rs
       title: src/bool.rs
     - icon: ':heavy_check_mark:'
-      path: src/bound.rs
-      title: src/bound.rs
+      path: src/bounded.rs
+      title: src/bounded.rs
     - icon: ':heavy_check_mark:'
       path: src/cast.rs
       title: src/cast.rs
+    - icon: ':warning:'
+      path: src/cmp.rs
+      title: src/cmp.rs
     - icon: ':heavy_check_mark:'
       path: src/conv.rs
       title: src/conv.rs
     - icon: ':heavy_check_mark:'
       path: src/dfa.rs
       title: src/dfa.rs
+    - icon: ':warning:'
+      path: src/ds.rs
+      title: src/ds.rs
     - icon: ':warning:'
       path: src/float.rs
       title: src/float.rs
@@ -73,9 +76,18 @@ data:
     - icon: ':warning:'
       path: src/lib.rs
       title: src/lib.rs
+    - icon: ':warning:'
+      path: src/macros.rs
+      title: src/macros.rs
+    - icon: ':warning:'
+      path: src/main.rs
+      title: src/main.rs
     - icon: ':heavy_check_mark:'
       path: src/make_vec.rs
       title: src/make_vec.rs
+    - icon: ':warning:'
+      path: src/math.rs
+      title: src/math.rs
     - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
@@ -91,6 +103,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/tests.rs
       title: src/tests.rs
+    - icon: ':warning:'
+      path: src/tri.rs
+      title: src/tri.rs
     - icon: ':warning:'
       path: src/u64.rs
       title: src/u64.rs
@@ -110,6 +125,9 @@ data:
     - icon: ':warning:'
       path: src/draft/dbg.rs
       title: src/draft/dbg.rs
+    - icon: ':warning:'
+      path: src/draft/for_loop.rs
+      title: src/draft/for_loop.rs
     - icon: ':warning:'
       path: src/draft/fpacc64.rs
       title: src/draft/fpacc64.rs
@@ -177,6 +195,9 @@ data:
   - name: src/ds/segtree
     pages:
     - icon: ':heavy_check_mark:'
+      path: src/ds/segtree/beats.rs
+      title: src/ds/segtree/beats.rs
+    - icon: ':heavy_check_mark:'
       path: src/ds/segtree/lazy.rs
       title: src/ds/segtree/lazy.rs
   - name: src/float
@@ -197,6 +218,9 @@ data:
       title: src/fp/num.rs
   - name: src/func
     pages:
+    - icon: ':heavy_check_mark:'
+      path: src/func/memo.rs
+      title: src/func/memo.rs
     - icon: ':warning:'
       path: src/func/rec.rs
       title: src/func/rec.rs
@@ -308,6 +332,9 @@ data:
       path: src/math/factorize.rs
       title: src/math/factorize.rs
     - icon: ':warning:'
+      path: src/math/gcd.rs
+      title: src/math/gcd.rs
+    - icon: ':warning:'
       path: src/math/is_prime.rs
       title: src/math/is_prime.rs
     - icon: ':warning:'
@@ -332,7 +359,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/rand/seed.rs
       title: src/rand/seed.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/rand/xorshift.rs
       title: src/rand/xorshift.rs
     - icon: ':heavy_check_mark:'
@@ -349,6 +376,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/slice/perm.rs
       title: src/slice/perm.rs
+    - icon: ':heavy_check_mark:'
+      path: src/slice/sa.rs
+      title: src/slice/sa.rs
+    - icon: ':heavy_check_mark:'
+      path: src/slice/sort.rs
+      title: src/slice/sort.rs
   - name: src/u64
     pages:
     - icon: ':warning:'
@@ -387,6 +420,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_test.rs
       title: test/src/bin/ntt_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/segtree_beats_test.rs
+      title: test/src/bin/segtree_beats_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/segtree_test.rs
       title: test/src/bin/segtree_test.rs

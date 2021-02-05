@@ -1,9 +1,6 @@
 {% if site.theme == "jekyll-theme-minimal" %}
 <style type="text/css">
-figure.highlight > div > pre {
-    tab-size: 4;
-}
-@media screen and (min-width: 961px) {
+@media screen and (min-width: 900px) {
     div.wrapper {
         width: 100%;
     }
@@ -14,14 +11,15 @@ figure.highlight > div > pre {
         width: calc(100% - 300px);
     }
 }
-@media screen and (max-width: 720px) {
-    figure.highlight {
-        margin-inline-start: 10px;
-        margin-inline-end: 10px;
-    }
-    figure.highlight > div > pre {
-        tab-size: 2;
-    }
+a:hover, a:focus {
+    font-weight: normal;
+    text-decoration: underline;
+}
+h1 a:hover {
+    font-weight: bold;
+}
+h1 a:focus {
+    font-weight: bold;
 }
 </style>
 {% endif %}

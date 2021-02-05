@@ -4,6 +4,9 @@ data:
   - icon: ':warning:'
     path: src/draft/linked_list.rs
     title: src/draft/linked_list.rs
+  - icon: ':warning:'
+    path: src/ds.rs
+    title: src/ds.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -46,6 +49,7 @@ data:
     \ = next;\n\t\t\t}\n\t\t\tself.at = next;\n\t\t\tSome(val)\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/draft/linked_list.rs
+  - src/ds.rs
   isVerificationFile: false
   path: src/draft/linked_list/inner_mut.rs
   requiredBy: []

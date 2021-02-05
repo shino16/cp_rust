@@ -43,7 +43,7 @@ data:
   isVerificationFile: false
   path: src/graph/euler_tour.rs
   requiredBy: []
-  timestamp: '2021-01-31 20:22:45+09:00'
+  timestamp: '2021-02-05 04:21:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/euler_tour.rs

@@ -8,6 +8,9 @@ data:
     path: src/bit.rs
     title: src/bit.rs
   - icon: ':heavy_check_mark:'
+    path: src/bounded.rs
+    title: src/bounded.rs
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -43,6 +46,7 @@ data:
   dependsOn:
   - src/assign.rs
   - src/bit.rs
+  - src/bounded.rs
   - src/cast.rs
   - src/graph.rs
   - src/int.rs
@@ -51,7 +55,7 @@ data:
   isVerificationFile: false
   path: src/graph/dijkstra.rs
   requiredBy: []
-  timestamp: '2021-01-31 20:22:45+09:00'
+  timestamp: '2021-02-03 06:45:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dijkstra.rs

@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/bound.rs
-    title: src/bound.rs
+    path: src/bounded.rs
+    title: src/bounded.rs
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/hlpp.rs
     title: src/graph/max_flow/hlpp.rs
@@ -28,13 +28,13 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/hlpp_test.rs\n"
-  code: "// verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\n\
+  code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\n\
     \nuse lib::graph::max_flow::hlpp::Hlpp;\nuse lib::io::*;\n\nfn main() {\n\tlet\
     \ mut io = IO::new();\n\tlet [n, m]: [usize; 2] = io.scan();\n\tlet mut solver\
     \ = Hlpp::<u32>::new(n);\n\tfor _ in 0..m {\n\t\tsolver.add_edge(io.scan(), io.scan(),\
     \ io.scan());\n\t}\n\tio.println(solver.solve(0, n - 1));\n}\n"
   dependsOn:
-  - src/bound.rs
+  - src/bounded.rs
   - src/graph/max_flow/hlpp.rs
   - src/io.rs
   - src/num.rs
@@ -42,7 +42,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/hlpp_test.rs
   requiredBy: []
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-06 00:52:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/hlpp_test.rs
