@@ -359,7 +359,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/rand/seed.rs
       title: src/rand/seed.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/rand/xorshift.rs
       title: src/rand/xorshift.rs
     - icon: ':heavy_check_mark:'
@@ -373,6 +373,9 @@ data:
     - icon: ':warning:'
       path: src/slice/fill.rs
       title: src/slice/fill.rs
+    - icon: ':heavy_check_mark:'
+      path: src/slice/lcp.rs
+      title: src/slice/lcp.rs
     - icon: ':heavy_check_mark:'
       path: src/slice/perm.rs
       title: src/slice/perm.rs

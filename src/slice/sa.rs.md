@@ -21,9 +21,12 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice/sa.rs\n"
-  code: "use super::sort::*;\n\n// reference\n// K\xE4rkk\xE4inen, Sanders and Burkhardt\n\
-    /// require exactly 3 sentinels in the last\npub fn suffix_array<T, F: FnMut(&T)\
-    \ -> usize>(\n\tt: &[T],\n\tout: &mut Vec<usize>,\n\tmax_key: usize,\n\tmut key:\
+  code: "use super::sort::*;\n\npub fn suffix_array(v: &mut Vec<u8>) -> Vec<usize>\
+    \ {\n\tlet mut out = Vec::with_capacity(v.len());\n\tv.extend_from_slice(&[0;\
+    \ 3]);\n\tsuffix_array_impl(&v, &mut out, !0_u8 as usize, |&v| v as usize);\n\t\
+    out\n}\n\n// reference\n// K\xE4rkk\xE4inen, Sanders and Burkhardt\n/// require\
+    \ exactly 3 sentinels in the last\npub fn suffix_array_impl<T, F: FnMut(&T) ->\
+    \ usize>(\n\tt: &[T],\n\tout: &mut Vec<usize>,\n\tmax_key: usize,\n\tmut key:\
     \ F,\n) {\n\tlet n = t.len() - 3;\n\n\tout.clear();\n\tout.reserve(n + 1);\n\t\
     out.push(n);\n\n\tif n == 0 {\n\t\treturn;\n\t} else if n == 1 {\n\t\tout.push(1);\n\
     \t\treturn;\n\t}\n\tlet (n0, n1, n2) = ((n + 2) / 3, (n + 1) / 3, n / 3);\n\t\
@@ -38,10 +41,10 @@ data:
     \t\t\tc1 = key(&t[i + 1]);\n\t\t\tc2 = key(&t[i + 2]);\n\t\t}\n\t\tif i % 3 ==\
     \ 1 {\n\t\t\tr[i / 3] = name;\n\t\t} else {\n\t\t\tr[i / 3 + n0] = name;\n\t\t\
     }\n\t}\n\tif name < n02 {\n\t\tfn deref(v: &usize) -> usize {\n\t\t\t*v\n\t\t\
-    }\n\t\tr.extend_from_slice(&[0; 3]);\n\t\tsuffix_array(&r, &mut sa12, name, deref);\n\
-    \t\tfor (name, &i) in (1..).zip(&sa12) {\n\t\t\tr[i] = name;\n\t\t}\n\t} else\
-    \ {\n\t\tfor (i, &name) in (0..).zip(&r) {\n\t\t\tsa12[name - 1] = i;\n\t\t}\n\
-    \t}\n\n\tlet (mut r0, mut sa0) = (Vec::with_capacity(n0), Vec::with_capacity(n0));\n\
+    }\n\t\tr.extend_from_slice(&[0; 3]);\n\t\tsuffix_array_impl(&r, &mut sa12, name,\
+    \ deref);\n\t\tfor (name, &i) in (1..).zip(&sa12) {\n\t\t\tr[i] = name;\n\t\t\
+    }\n\t} else {\n\t\tfor (i, &name) in (0..).zip(&r) {\n\t\t\tsa12[name - 1] = i;\n\
+    \t\t}\n\t}\n\n\tlet (mut r0, mut sa0) = (Vec::with_capacity(n0), Vec::with_capacity(n0));\n\
     \tfor &i in &sa12 {\n\t\tif i < n0 {\n\t\t\tr0.push(i * 3);\n\t\t}\n\t}\n\tcount_sort(&r0,\
     \ &mut sa0, max_key, |&v| key(&t[v]));\n\n\t// sentinel\n\tr.extend_from_slice(&[0;\
     \ 3]);\n\tlet enc = |i| {\n\t\tif i < n0 { i * 3 + 1 } else { (i - n0) * 3 + 2\
@@ -63,7 +66,7 @@ data:
   path: src/slice/sa.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-02-06 03:07:17+09:00'
+  timestamp: '2021-02-06 03:32:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

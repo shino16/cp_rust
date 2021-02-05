@@ -44,11 +44,11 @@ data:
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':heavy_check_mark:'
-    path: src/rand/xorshift.rs
-    title: src/rand/xorshift.rs
-  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
+  - icon: ':heavy_check_mark:'
+    path: src/slice/lcp.rs
+    title: src/slice/lcp.rs
   - icon: ':heavy_check_mark:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
@@ -124,21 +124,26 @@ data:
     let mut cnt = 0;\n\t\t\t\twhile next_permutation(&mut b) {\n\t\t\t\t\tassert!(a\
     \ < b);\n\t\t\t\t\tnext_permutation(&mut a);\n\t\t\t\t\tcnt += 1;\n\t\t\t\t}\n\
     \t\t\t\tassert_eq!(cnt, 5 * 4 * 3 * 2 * 1 - 1);\n\t\t\t}\n\t\t}\n\t\tmod sa {\n\
-    \t\t\tuse crate::slice::sa::*;\n\t\t\t#[test]\n\t\t\tfn suffix_array_test() {\n\
-    \t\t\t\tuse crate::rand::xorshift::*;\n\t\t\t\tlet mut rng = Xorshift32::new();\n\
-    \t\t\t\tlet modu = rng.next() % 1000;\n\t\t\t\tlet len = rng.next() as usize %\
-    \ 1000;\n\t\t\t\tlet mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();\n\
-    \t\t\t\tv.extend_from_slice(&[0; 3]);\n\t\t\t\tlet mut sa = Vec::new();\n\t\t\t\
-    \tsuffix_array(&v, &mut sa, modu as usize, |&v| v as usize);\n\t\t\t\tlet mut\
-    \ ans: Vec<_> = (0..=len).collect();\n\t\t\t\tans.sort_unstable_by_key(|&i| &v[i..]);\n\
-    \t\t\t\tassert_eq!(sa, ans);\n\t\t\t}\n\t\t}\n\t\tmod sort {\n\t\t\tuse crate::slice::sort::*;\n\
-    \t\t\t#[test]\n\t\t\tfn test_count_sort() {\n\t\t\t\tuse crate::rand::xoshiro256plus::*;\n\
-    \t\t\t\tlet mut rng = Xoshiro256plus::new();\n\t\t\t\tlet len = rng.next() as\
-    \ usize % 100;\n\t\t\t\tlet modu = rng.next() % len as u64 + 50;\n\t\t\t\tlet\
-    \ mut a: Vec<_> = std::iter::repeat_with(|| (rng.next() % modu, rng.next()))\n\
-    \t\t\t\t\t.take(len)\n\t\t\t\t\t.collect();\n\t\t\t\tlet mut b = Vec::new();\n\
-    \t\t\t\tcount_sort(&a, &mut b, modu as usize, |&x| x.0 as usize);\n\t\t\t\ta.sort_by_key(|&x|\
-    \ x.0);\n\t\t\t\tassert_eq!(a, b);\n\t\t\t}\n\t\t}\n\t}\n}\n"
+    \t\t\tuse crate::slice::sa::*;\n\t\t\tuse crate::slice::lcp::*;\n\t\t\t#[test]\n\
+    \t\t\tfn suffix_array_lcp_test() {\n\t\t\t\tuse crate::rand::xoshiro256plus::*;\n\
+    \t\t\t\tlet mut rng = Xoshiro256plus::new();\n\t\t\t\tlet modu = rng.next() %\
+    \ 1000;\n\t\t\t\tlet len = rng.next() as usize % 1000;\n\t\t\t\tlet mut v: Vec<_>\
+    \ = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();\n\t\t\t\t\
+    v.extend_from_slice(&[0; 3]);\n\t\t\t\tlet mut sa = Vec::new();\n\t\t\t\tsuffix_array_impl(&v,\
+    \ &mut sa, modu as usize, |&v| v as usize);\n\t\t\t\tlet mut ans: Vec<_> = (0..=len).collect();\n\
+    \t\t\t\tans.sort_unstable_by_key(|&i| &v[i..]);\n\t\t\t\tassert_eq!(sa, ans);\n\
+    \t\t\t\tlet lcp = lcp_impl(&v, &sa, |&v| v as usize);\n\t\t\t\tfor ((&i, &j),\
+    \ lcp) in sa.iter().skip(1).zip(&sa).zip(lcp) {\n\t\t\t\t\tassert_eq!(v[i..i +\
+    \ lcp], v[j..j + lcp]);\n\t\t\t\t\tif i.max(j) + lcp < len {\n\t\t\t\t\t\tassert_ne!(v[i..i\
+    \ + lcp + 1], v[j..j + lcp + 1]);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\
+    mod sort {\n\t\t\tuse crate::slice::sort::*;\n\t\t\t#[test]\n\t\t\tfn test_count_sort()\
+    \ {\n\t\t\t\tuse crate::rand::xoshiro256plus::*;\n\t\t\t\tlet mut rng = Xoshiro256plus::new();\n\
+    \t\t\t\tlet len = rng.next() as usize % 100;\n\t\t\t\tlet modu = rng.next() %\
+    \ len as u64 + 50;\n\t\t\t\tlet mut a: Vec<_> = std::iter::repeat_with(|| (rng.next()\
+    \ % modu, rng.next()))\n\t\t\t\t\t.take(len)\n\t\t\t\t\t.collect();\n\t\t\t\t\
+    let mut b = Vec::new();\n\t\t\t\tcount_sort(&a, &mut b, modu as usize, |&x| x.0\
+    \ as usize);\n\t\t\t\ta.sort_by_key(|&x| x.0);\n\t\t\t\tassert_eq!(a, b);\n\t\t\
+    \t}\n\t\t}\n\t}\n}\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -154,8 +159,8 @@ data:
   - src/mint.rs
   - src/num.rs
   - src/rand/seed.rs
-  - src/rand/xorshift.rs
   - src/rand/xoshiro256plus.rs
+  - src/slice/lcp.rs
   - src/slice/perm.rs
   - src/slice/sa.rs
   - src/slice/sort.rs
@@ -163,7 +168,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-02-06 03:07:17+09:00'
+  timestamp: '2021-02-06 03:32:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

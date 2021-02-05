@@ -27,7 +27,7 @@ data:
   isVerificationFile: false
   path: src/hash.rs
   requiredBy: []
-  timestamp: '2021-02-06 00:52:06+09:00'
+  timestamp: '2021-02-06 03:32:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/hash.rs

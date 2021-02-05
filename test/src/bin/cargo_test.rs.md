@@ -44,11 +44,11 @@ data:
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':heavy_check_mark:'
-    path: src/rand/xorshift.rs
-    title: src/rand/xorshift.rs
-  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
+  - icon: ':heavy_check_mark:'
+    path: src/slice/lcp.rs
+    title: src/slice/lcp.rs
   - icon: ':heavy_check_mark:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
@@ -100,8 +100,8 @@ data:
   - src/mint.rs
   - src/num.rs
   - src/rand/seed.rs
-  - src/rand/xorshift.rs
   - src/rand/xoshiro256plus.rs
+  - src/slice/lcp.rs
   - src/slice/perm.rs
   - src/slice/sa.rs
   - src/slice/sort.rs
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-02-06 03:07:17+09:00'
+  timestamp: '2021-02-06 03:32:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
