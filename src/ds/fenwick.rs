@@ -7,7 +7,6 @@ pub struct FenwickTree<A: Monoid> {
 	alg: A,
 }
 
-/// A: Commutative
 impl<A: Monoid> FenwickTree<A> {
 	pub fn new(mut data: Vec<A::Item>, alg: A) -> Self {
 		let len = data.len();
@@ -68,7 +67,6 @@ impl<A: Monoid> FenwickTree<A> {
 	}
 }
 
-/// A: Commutative
 impl<A: Group> FenwickTree<A> {
 	pub fn sub(&mut self, pos: usize, v: A::Item) {
 		self.add(pos, self.alg.inv(v));
