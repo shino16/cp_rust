@@ -1,5 +1,5 @@
 type Int = i32;
-type UInt = u32;
+type UInt = u64;
 
 pub fn gcd(a: Int, b: Int) -> Int {
 	ugcd(a.abs() as _, b.abs() as _) as _

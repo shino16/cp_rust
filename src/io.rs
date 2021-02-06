@@ -162,3 +162,9 @@ impl Scan for Usize1 {
 impl Print for Usize1 {
 	fn print(w: &mut IO, x: Self) { w.print(x.0 + 1) }
 }
+
+impl Scan for f64 {
+    fn scan(io: &mut IO) -> Self {
+        io.scan_str().parse().unwrap()
+    }
+}

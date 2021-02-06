@@ -5,6 +5,7 @@ pub mod idx;
 pub mod list;
 pub mod segtree;
 pub mod sparsetable;
+pub mod swag;
 pub mod uf;
 pub mod uslice;
 pub mod uvec;

@@ -1,4 +1,4 @@
-pub fn factorize(mut n: u64) -> Vec<(u64, u32)> {
+pub fn factorize(mut n: u32) -> Vec<(u32, u32)> {
 	if n == 1 {
 		return Vec::new();
 	}
