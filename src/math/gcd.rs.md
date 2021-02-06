@@ -12,7 +12,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math/gcd.rs\n"
-  code: "type Int = i32;\ntype UInt = u32;\n\npub fn gcd(a: Int, b: Int) -> Int {\n\
+  code: "type Int = i32;\ntype UInt = u64;\n\npub fn gcd(a: Int, b: Int) -> Int {\n\
     \tugcd(a.abs() as _, b.abs() as _) as _\n}\n\n// binary gcd\npub fn ugcd(a: UInt,\
     \ b: UInt) -> UInt {\n\t#[target_feature(enable = \"bmi1\")]\n\tunsafe fn ugcd_impl(mut\
     \ a: UInt, mut b: UInt) -> UInt {\n\t\tif a == 0 {\n\t\t\treturn b;\n\t\t} else\
@@ -33,7 +33,7 @@ data:
   isVerificationFile: false
   path: src/math/gcd.rs
   requiredBy: []
-  timestamp: '2021-02-03 21:57:49+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/gcd.rs

@@ -23,6 +23,9 @@ data:
   - icon: ':warning:'
     path: src/ds/sparsetable.rs
     title: src/ds/sparsetable.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/swag.rs
+    title: src/ds/swag.rs
   - icon: ':warning:'
     path: src/graph/euler_tour.rs
     title: src/graph/euler_tour.rs
@@ -42,6 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_test.rs
     title: test/src/bin/segtree_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/swag_test.rs
+    title: test/src/bin/swag_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
@@ -83,6 +89,7 @@ data:
   - src/graph/euler_tour.rs
   - src/ds/disjointst.rs
   - src/ds/sparsetable.rs
+  - src/ds/swag.rs
   - src/ds/segtree/beats.rs
   - src/ds/segtree/lazy.rs
   - src/ds/segtree.rs
@@ -94,6 +101,7 @@ data:
   - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/segtree_test.rs
   - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/swag_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

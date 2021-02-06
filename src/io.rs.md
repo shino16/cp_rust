@@ -73,6 +73,9 @@ data:
     path: test/src/bin/segtree_test.rs
     title: test/src/bin/segtree_test.rs
   - icon: ':heavy_check_mark:'
+    path: test/src/bin/swag_test.rs
+    title: test/src/bin/swag_test.rs
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
   - icon: ':heavy_check_mark:'
@@ -144,7 +147,8 @@ data:
     \ }\n}\n#[derive(Debug, Clone, Copy, Default)]\npub struct Usize1(pub usize);\n\
     impl Scan for Usize1 {\n\tfn scan(io: &mut IO) -> Self {\n\t\tlet n: usize = io.scan();\n\
     \t\tSelf(n - 1)\n\t}\n}\nimpl Print for Usize1 {\n\tfn print(w: &mut IO, x: Self)\
-    \ { w.print(x.0 + 1) }\n}\n"
+    \ { w.print(x.0 + 1) }\n}\n\nimpl Scan for f64 {\n    fn scan(io: &mut IO) ->\
+    \ Self {\n        io.scan_str().parse().unwrap()\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/io.rs
@@ -160,7 +164,7 @@ data:
   - src/u64/conv.rs
   - src/io/graph.rs
   - src/tests.rs
-  timestamp: '2021-02-03 06:11:11+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
@@ -174,6 +178,7 @@ data:
   - test/src/bin/union_find_test.rs
   - test/src/bin/segtree_test.rs
   - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/swag_test.rs
   - test/src/bin/ntt_mint_test.rs
   - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_mint_garner_test.rs

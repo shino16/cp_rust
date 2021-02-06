@@ -96,7 +96,7 @@ data:
   path: src/fp/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-02-03 06:11:11+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_test.rs

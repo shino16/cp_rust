@@ -168,7 +168,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-02-06 03:32:36+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

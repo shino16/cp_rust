@@ -90,7 +90,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_beats_test.rs
   requiredBy: []
-  timestamp: '2021-02-06 00:52:06+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_beats_test.rs

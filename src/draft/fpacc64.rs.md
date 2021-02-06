@@ -123,7 +123,7 @@ data:
   isVerificationFile: false
   path: src/draft/fpacc64.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/fpacc64.rs

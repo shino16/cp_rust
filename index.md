@@ -178,6 +178,9 @@ data:
       path: src/ds/sparsetable.rs
       title: src/ds/sparsetable.rs
     - icon: ':heavy_check_mark:'
+      path: src/ds/swag.rs
+      title: src/ds/swag.rs
+    - icon: ':heavy_check_mark:'
       path: src/ds/uf.rs
       title: src/ds/uf.rs
     - icon: ':warning:'
@@ -429,6 +432,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/segtree_test.rs
       title: test/src/bin/segtree_test.rs
+    - icon: ':heavy_check_mark:'
+      path: test/src/bin/swag_test.rs
+      title: test/src/bin/swag_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/tree_dfs_io_test.rs
       title: test/src/bin/tree_dfs_io_test.rs

@@ -12,7 +12,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math/factorize.rs\n"
-  code: "pub fn factorize(mut n: u64) -> Vec<(u64, u32)> {\n\tif n == 1 {\n\t\treturn\
+  code: "pub fn factorize(mut n: u32) -> Vec<(u32, u32)> {\n\tif n == 1 {\n\t\treturn\
     \ Vec::new();\n\t}\n\tif n < 4 {\n\t\treturn vec![(n, 1)];\n\t}\n\tlet mut res\
     \ = Vec::new();\n\tif n % 2 == 0 {\n\t\tlet t = n.trailing_zeros();\n\t\tres.push((2,\
     \ t));\n\t\tn >>= t;\n\t}\n\tfor d in (3..).step_by(2) {\n\t\tif d * d > n {\n\
@@ -24,7 +24,7 @@ data:
   isVerificationFile: false
   path: src/math/factorize.rs
   requiredBy: []
-  timestamp: '2021-01-12 01:50:33+09:00'
+  timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/factorize.rs

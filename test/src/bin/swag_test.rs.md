@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/ds/uf.rs
-    title: src/ds/uf.rs
+    path: src/alg.rs
+    title: src/alg.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/swag.rs
+    title: src/ds/swag.rs
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
@@ -13,31 +16,32 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D&lang=ja
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: test/src/bin/union_find_test.rs\n"
-  code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A\n\
-    \nuse lib::ds::uf::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
-    \tlet (n, q) = io.scan();\n\tlet mut uf = UnionFind::new(n);\n\tfor _ in 0_usize..q\
-    \ {\n\t\tlet (com, x, y): (u8, _, _) = io.scan();\n\t\tif com == b'0' {\n\t\t\t\
-    uf.unite(x, y);\n\t\t} else {\n\t\t\tio.println(uf.is_same(x, y) as u32);\n\t\t\
-    }\n\t}\n}\n"
+    RuntimeError: bundler is not specified: test/src/bin/swag_test.rs\n"
+  code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D&lang=ja\n\
+    \nuse lib::ds::swag::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
+    \tlet (n, Usize1(l)) = io.scan();\n\tlet a = io.scan_vec::<u32>(n);\n\tlet mut\
+    \ swag = Swag::new(MonoidImpl(|| !0, u32::min));\n\tswag.extend_from_slice(&a[..l]);\n\
+    \tio.iterln(\n\t\ta[l..].iter().map(|&a| {\n\t\t\tswag.push(a);\n\t\t\tlet ans\
+    \ = swag.ask();\n\t\t\tswag.pop();\n\t\t\tans\n\t\t}),\n\t\t\" \",\n\t);\n}\n"
   dependsOn:
-  - src/ds/uf.rs
+  - src/alg.rs
+  - src/ds/swag.rs
   - src/io.rs
   isVerificationFile: true
-  path: test/src/bin/union_find_test.rs
+  path: test/src/bin/swag_test.rs
   requiredBy: []
   timestamp: '2021-02-07 05:27:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/src/bin/union_find_test.rs
+documentation_of: test/src/bin/swag_test.rs
 layout: document
 redirect_from:
-- /verify/test/src/bin/union_find_test.rs
-- /verify/test/src/bin/union_find_test.rs.html
-title: test/src/bin/union_find_test.rs
+- /verify/test/src/bin/swag_test.rs
+- /verify/test/src/bin/swag_test.rs.html
+title: test/src/bin/swag_test.rs
 ---
