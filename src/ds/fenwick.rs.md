@@ -31,29 +31,28 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/fenwick.rs\n"
   code: "pub use crate::alg::arith::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub\
-    \ struct FenwickTree<A: Monoid> {\n\tdata: Vec<A::Item>,\n\talg: A,\n}\n\n///\
-    \ A: Commutative\nimpl<A: Monoid> FenwickTree<A> {\n\tpub fn new(mut data: Vec<A::Item>,\
-    \ alg: A) -> Self {\n\t\tlet len = data.len();\n\t\tdata.insert(0, alg.unit());\n\
-    \t\tfor i in 1..=len {\n\t\t\tif i + i.lsb() <= len {\n\t\t\t\tdata[i + i.lsb()]\
-    \ = alg.op(data[i + i.lsb()], data[i]);\n\t\t\t}\n\t\t}\n\t\tSelf { data, alg\
-    \ }\n\t}\n\tpub fn len(&self) -> usize {\n\t\tself.data.len() - 1\n\t}\n\tpub\
-    \ fn add(&mut self, pos: usize, v: A::Item) {\n\t\tlet mut pos = pos + 1;\n\t\t\
-    while pos < self.data.len() {\n\t\t\tself.data[pos] = self.alg.op(self.data[pos],\
-    \ v);\n\t\t\tpos += pos.lsb();\n\t\t}\n\t}\n\tpub fn push(&mut self, v: A::Item)\
-    \ {\n\t\tself.data.push(self.alg.unit());\n\t\tself.add(self.data.len() - 1, v);\n\
-    \t}\n\tpub fn ask_prefix(&self, mut r: usize) -> A::Item {\n\t\tlet mut res =\
-    \ self.alg.unit();\n\t\twhile r != 0 {\n\t\t\tres = self.alg.op(self.data[r],\
-    \ res);\n\t\t\tr -= r.lsb();\n\t\t}\n\t\tres\n\t}\n\tpub fn partition_point<F:\
-    \ FnMut(A::Item) -> bool>(&self, mut pred: F) -> usize {\n\t\tlet mut x = 0; //\
-    \ pred(&self.ask_prefix(x)) == true\n\t\tlet mut w = (self.data.len() - 1).msb();\n\
-    \t\tlet mut l = self.alg.unit();\n\t\twhile w != 0 {\n\t\t\tif x + w < self.data.len()\
-    \ && pred(self.alg.op(l, self.data[x + w])) {\n\t\t\t\tx += w;\n\t\t\t\tl = self.alg.op(l,\
-    \ self.data[x + w]);\n\t\t\t}\n\t\t\tw >>= 1;\n\t\t}\n\t\tx + 1\n\t}\n\tpub fn\
-    \ lower_bound(&self, v: A::Item) -> usize\n\twhere\n\t\tA::Item: Ord,\n\t{\n\t\
-    \tself.partition_point(|x| x < v)\n\t}\n\tpub fn upper_bound(&self, v: A::Item)\
-    \ -> usize\n\twhere\n\t\tA::Item: Ord,\n\t{\n\t\tself.partition_point(|x| x <=\
-    \ v)\n\t}\n}\n\n/// A: Commutative\nimpl<A: Group> FenwickTree<A> {\n\tpub fn\
-    \ sub(&mut self, pos: usize, v: A::Item) {\n\t\tself.add(pos, self.alg.inv(v));\n\
+    \ struct FenwickTree<A: Monoid> {\n\tdata: Vec<A::Item>,\n\talg: A,\n}\n\nimpl<A:\
+    \ Monoid> FenwickTree<A> {\n\tpub fn new(mut data: Vec<A::Item>, alg: A) -> Self\
+    \ {\n\t\tlet len = data.len();\n\t\tdata.insert(0, alg.unit());\n\t\tfor i in\
+    \ 1..=len {\n\t\t\tif i + i.lsb() <= len {\n\t\t\t\tdata[i + i.lsb()] = alg.op(data[i\
+    \ + i.lsb()], data[i]);\n\t\t\t}\n\t\t}\n\t\tSelf { data, alg }\n\t}\n\tpub fn\
+    \ len(&self) -> usize {\n\t\tself.data.len() - 1\n\t}\n\tpub fn add(&mut self,\
+    \ pos: usize, v: A::Item) {\n\t\tlet mut pos = pos + 1;\n\t\twhile pos < self.data.len()\
+    \ {\n\t\t\tself.data[pos] = self.alg.op(self.data[pos], v);\n\t\t\tpos += pos.lsb();\n\
+    \t\t}\n\t}\n\tpub fn push(&mut self, v: A::Item) {\n\t\tself.data.push(self.alg.unit());\n\
+    \t\tself.add(self.data.len() - 1, v);\n\t}\n\tpub fn ask_prefix(&self, mut r:\
+    \ usize) -> A::Item {\n\t\tlet mut res = self.alg.unit();\n\t\twhile r != 0 {\n\
+    \t\t\tres = self.alg.op(self.data[r], res);\n\t\t\tr -= r.lsb();\n\t\t}\n\t\t\
+    res\n\t}\n\tpub fn partition_point<F: FnMut(A::Item) -> bool>(&self, mut pred:\
+    \ F) -> usize {\n\t\tlet mut x = 0; // pred(&self.ask_prefix(x)) == true\n\t\t\
+    let mut w = (self.data.len() - 1).msb();\n\t\tlet mut l = self.alg.unit();\n\t\
+    \twhile w != 0 {\n\t\t\tif x + w < self.data.len() && pred(self.alg.op(l, self.data[x\
+    \ + w])) {\n\t\t\t\tx += w;\n\t\t\t\tl = self.alg.op(l, self.data[x + w]);\n\t\
+    \t\t}\n\t\t\tw >>= 1;\n\t\t}\n\t\tx + 1\n\t}\n\tpub fn lower_bound(&self, v: A::Item)\
+    \ -> usize\n\twhere\n\t\tA::Item: Ord,\n\t{\n\t\tself.partition_point(|x| x <\
+    \ v)\n\t}\n\tpub fn upper_bound(&self, v: A::Item) -> usize\n\twhere\n\t\tA::Item:\
+    \ Ord,\n\t{\n\t\tself.partition_point(|x| x <= v)\n\t}\n}\n\nimpl<A: Group> FenwickTree<A>\
+    \ {\n\tpub fn sub(&mut self, pos: usize, v: A::Item) {\n\t\tself.add(pos, self.alg.inv(v));\n\
     \t}\n\tpub fn ask(&self, l: usize, r: usize) -> A::Item {\n\t\tself.alg.op(self.alg.inv(self.ask_prefix(l)),\
     \ self.ask_prefix(r))\n\t}\n}\n"
   dependsOn:
@@ -65,7 +64,7 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-02-05 04:21:11+09:00'
+  timestamp: '2021-02-06 20:30:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs
