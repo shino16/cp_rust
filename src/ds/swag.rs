@@ -1,23 +1,23 @@
 pub use crate::alg::*;
 
 pub struct Swag<A: Monoid> {
-	front: Vec<(A::Item, A::Item)>,
+    front: Vec<(A::Item, A::Item)>,
     front_prod: A::Item,
-	back: Vec<A::Item>,
-	back_prod: A::Item,
-	alg: A,
+    back: Vec<A::Item>,
+    back_prod: A::Item,
+    alg: A,
 }
 
 impl<A: Monoid> Swag<A> {
-	pub fn new(alg: A) -> Self {
-		Self {
-			front: Vec::new(),
+    pub fn new(alg: A) -> Self {
+        Self {
+            front: Vec::new(),
             front_prod: alg.unit(),
-			back: Vec::new(),
-			back_prod: alg.unit(),
-			alg,
-		}
-	}
+            back: Vec::new(),
+            back_prod: alg.unit(),
+            alg,
+        }
+    }
     pub fn ask(&mut self) -> A::Item {
         self.ensure_front();
         self.alg.op(self.front_prod, self.back_prod)
@@ -45,10 +45,10 @@ impl<A: Monoid> Swag<A> {
         self.front_prod = prod;
         elt
     }
-	fn ensure_front(&mut self) {
-		if !self.front.is_empty() {
-			return;
-		}
+    fn ensure_front(&mut self) {
+        if !self.front.is_empty() {
+            return;
+        }
         self.front.reserve(self.back.len());
         let mut prod = self.alg.unit();
         while let Some(elt) = self.back.pop() {
@@ -57,5 +57,5 @@ impl<A: Monoid> Swag<A> {
         }
         self.front_prod = prod;
         self.back_prod = self.alg.unit();
-	}
+    }
 }
