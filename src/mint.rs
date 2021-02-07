@@ -195,14 +195,14 @@ impl<M: Mod> ZeroOne for Mint<M> {
     const ONE: Self = Self { val: 1, _m: PhantomData };
 }
 
-impl<M: Mod> Print for Mint<M> {
-    fn print(w: &mut IO, x: Self) {
-        w.print(x.value());
-    }
-}
+// impl<M: Mod> Print for Mint<M> {
+//     fn print(w: &mut IO, x: Self) {
+//         w.print(x.value());
+//     }
+// }
 
-impl<M: Mod> Scan for Mint<M> {
-    fn scan(io: &mut IO) -> Self {
-        io.scan::<u32>().into()
-    }
-}
+// impl<M: Mod> Scan for Mint<M> {
+//     fn scan(io: &mut IO) -> Self {
+//         io.scan::<u32>().into()
+//     }
+// }
