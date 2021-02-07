@@ -1,7 +1,3 @@
-#![allow(clippy::many_single_char_names)]
-#![allow(clippy::new_without_default)]
-#![allow(clippy::suspicious_op_assign_impl)]
-
 pub mod alg;
 pub mod assign;
 pub mod bit;

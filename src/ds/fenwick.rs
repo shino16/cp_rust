@@ -21,6 +21,11 @@ impl<A: Monoid> FenwickTree<A> {
 	pub fn len(&self) -> usize {
 		self.data.len() - 1
 	}
+	pub fn clear(&mut self) {
+		for e in &mut self.data {
+			*e = self.alg.unit();
+		}
+	}
 	pub fn add(&mut self, pos: usize, v: A::Item) {
 		let mut pos = pos + 1;
 		while pos < self.data.len() {
