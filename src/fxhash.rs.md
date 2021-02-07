@@ -34,51 +34,52 @@ data:
     \ = 0;\nstatic mut SEED32: u32 = 0;\nstatic mut SEED: usize = 0;\n\n#[used]\n\
     #[cfg_attr(target_os = \"linux\", link_section = \".init_array\")]\n#[cfg_attr(target_os\
     \ = \"windows\", link_section = \".CRT$XCU\")]\nstatic INIT: unsafe extern \"\
-    C\" fn() = {\n\t#[cfg_attr(target_os = \"linux\", link_section = \".text.startup\"\
-    )]\n\tunsafe extern \"C\" fn init() {\n\t\tSEED64 = seed::seed64();\n\t\tSEED32\
-    \ = SEED64 as u32;\n\t\tSEED = SEED64 as usize;\n\t}\n\tinit\n};\n\ntrait HashWord\
-    \ {\n\tfn hash_word(&mut self, word: Self);\n}\n\nmacro_rules! impl_hash_word\
-    \ {\n\t($($ty:ty = $key:ident),* $(,)*) => { $(\n\t\timpl HashWord for $ty {\n\
-    \t\t\tfn hash_word(&mut self, word: Self) {\n\t\t\t\t*self = self.rotate_left(ROTATE).bitxor(word).wrapping_mul(unsafe\
-    \ { $key });\n\t\t\t}\n\t\t}\n\t)* }\n}\n\nimpl_hash_word!(usize = SEED, u32 =\
-    \ SEED32, u64 = SEED64);\n\nfn read_u32(bytes: &[u8]) -> u32 {\n\tlet mut data\
-    \ = 0;\n\tunsafe {\n\t\tstd::ptr::copy_nonoverlapping(bytes.as_ptr(), &mut data\
-    \ as *mut _ as *mut u8, 4);\n\t}\n\tdata\n}\n\nfn read_u64(bytes: &[u8]) -> u64\
-    \ {\n\tlet mut data = 0;\n\tunsafe {\n\t\tstd::ptr::copy_nonoverlapping(bytes.as_ptr(),\
-    \ &mut data as *mut _ as *mut u8, 8);\n\t}\n\tdata\n}\n\n#[allow(dead_code)]\n\
-    fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {\n\twhile bytes.len() >= 4\
-    \ {\n\t\tlet n = read_u32(bytes);\n\t\thash.hash_word(n);\n\t\tbytes = bytes.split_at(4).1;\n\
-    \t}\n\n\tfor byte in bytes {\n\t\thash.hash_word(*byte as u32);\n\t}\n\thash\n\
-    }\n\n#[allow(dead_code)]\nfn write64(mut hash: u64, mut bytes: &[u8]) -> u64 {\n\
-    \twhile bytes.len() >= 8 {\n\t\tlet n = read_u64(bytes);\n\t\thash.hash_word(n);\n\
-    \t\tbytes = bytes.split_at(8).1;\n\t}\n\n\tif bytes.len() >= 4 {\n\t\tlet n =\
-    \ read_u32(bytes);\n\t\thash.hash_word(n as u64);\n\t\tbytes = bytes.split_at(4).1;\n\
-    \t}\n\n\tfor byte in bytes {\n\t\thash.hash_word(*byte as u64);\n\t}\n\thash\n\
-    }\n\n#[cfg(target_pointer_width = \"32\")]\nfn write(hash: usize, bytes: &[u8])\
-    \ -> usize {\n\twrite32(hash as u32, bytes) as usize\n}\n\n#[cfg(target_pointer_width\
-    \ = \"64\")]\nfn write(hash: usize, bytes: &[u8]) -> usize {\n\twrite64(hash as\
-    \ u64, bytes) as usize\n}\n\n#[derive(Debug, Clone)]\npub struct FxHasher {\n\t\
-    hash: usize,\n}\n\nimpl Default for FxHasher {\n\tfn default() -> FxHasher {\n\
-    \t\tFxHasher { hash: 0 }\n\t}\n}\n\nimpl Hasher for FxHasher {\n\tfn write(&mut\
-    \ self, bytes: &[u8]) {\n\t\tself.hash = write(self.hash, bytes);\n\t}\n\n\tfn\
-    \ write_u8(&mut self, i: u8) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\n\t\
-    fn write_u16(&mut self, i: u16) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\
-    \n\tfn write_u32(&mut self, i: u32) {\n\t\tself.hash.hash_word(i as usize);\n\t\
-    }\n\n\t#[cfg(target_pointer_width = \"32\")]\n\tfn write_u64(&mut self, i: u64)\
-    \ {\n\t\tself.hash.hash_word(i as usize);\n\t\tself.hash.hash_word((i >> 32) as\
-    \ usize);\n\t}\n\n\t#[cfg(target_pointer_width = \"64\")]\n\tfn write_u64(&mut\
-    \ self, i: u64) {\n\t\tself.hash.hash_word(i as usize);\n\t}\n\n\tfn write_usize(&mut\
-    \ self, i: usize) {\n\t\tself.hash.hash_word(i);\n\t}\n\n\tfn finish(&self) ->\
-    \ u64 {\n\t\tself.hash as u64\n\t}\n}\n\npub fn hash<T: Hash + ?Sized>(v: &T)\
-    \ -> usize {\n\tlet mut state = FxHasher::default();\n\tv.hash(&mut state);\n\t\
-    state.finish() as usize\n}\n"
+    C\" fn() = {\n    #[cfg_attr(target_os = \"linux\", link_section = \".text.startup\"\
+    )]\n    unsafe extern \"C\" fn init() {\n        SEED64 = seed::seed64();\n  \
+    \      SEED32 = SEED64 as u32;\n        SEED = SEED64 as usize;\n    }\n    init\n\
+    };\n\ntrait HashWord {\n    fn hash_word(&mut self, word: Self);\n}\n\nmacro_rules!\
+    \ impl_hash_word {\n    ($($ty:ty = $key:ident),* $(,)*) => { $(\n        impl\
+    \ HashWord for $ty {\n            fn hash_word(&mut self, word: Self) {\n    \
+    \            *self = self.rotate_left(ROTATE).bitxor(word).wrapping_mul(unsafe\
+    \ { $key });\n            }\n        }\n    )* }\n}\n\nimpl_hash_word!(usize =\
+    \ SEED, u32 = SEED32, u64 = SEED64);\n\nfn read_u32(bytes: &[u8]) -> u32 {\n \
+    \   let mut data = 0;\n    unsafe {\n        std::ptr::copy_nonoverlapping(bytes.as_ptr(),\
+    \ &mut data as *mut _ as *mut u8, 4);\n    }\n    data\n}\n\nfn read_u64(bytes:\
+    \ &[u8]) -> u64 {\n    let mut data = 0;\n    unsafe {\n        std::ptr::copy_nonoverlapping(bytes.as_ptr(),\
+    \ &mut data as *mut _ as *mut u8, 8);\n    }\n    data\n}\n\n#[allow(dead_code)]\n\
+    fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {\n    while bytes.len() >=\
+    \ 4 {\n        let n = read_u32(bytes);\n        hash.hash_word(n);\n        bytes\
+    \ = bytes.split_at(4).1;\n    }\n\n    for byte in bytes {\n        hash.hash_word(*byte\
+    \ as u32);\n    }\n    hash\n}\n\n#[allow(dead_code)]\nfn write64(mut hash: u64,\
+    \ mut bytes: &[u8]) -> u64 {\n    while bytes.len() >= 8 {\n        let n = read_u64(bytes);\n\
+    \        hash.hash_word(n);\n        bytes = bytes.split_at(8).1;\n    }\n\n \
+    \   if bytes.len() >= 4 {\n        let n = read_u32(bytes);\n        hash.hash_word(n\
+    \ as u64);\n        bytes = bytes.split_at(4).1;\n    }\n\n    for byte in bytes\
+    \ {\n        hash.hash_word(*byte as u64);\n    }\n    hash\n}\n\n#[cfg(target_pointer_width\
+    \ = \"32\")]\nfn write(hash: usize, bytes: &[u8]) -> usize {\n    write32(hash\
+    \ as u32, bytes) as usize\n}\n\n#[cfg(target_pointer_width = \"64\")]\nfn write(hash:\
+    \ usize, bytes: &[u8]) -> usize {\n    write64(hash as u64, bytes) as usize\n\
+    }\n\n#[derive(Debug, Clone)]\npub struct FxHasher {\n    hash: usize,\n}\n\nimpl\
+    \ Default for FxHasher {\n    fn default() -> FxHasher {\n        FxHasher { hash:\
+    \ 0 }\n    }\n}\n\nimpl Hasher for FxHasher {\n    fn write(&mut self, bytes:\
+    \ &[u8]) {\n        self.hash = write(self.hash, bytes);\n    }\n\n    fn write_u8(&mut\
+    \ self, i: u8) {\n        self.hash.hash_word(i as usize);\n    }\n\n    fn write_u16(&mut\
+    \ self, i: u16) {\n        self.hash.hash_word(i as usize);\n    }\n\n    fn write_u32(&mut\
+    \ self, i: u32) {\n        self.hash.hash_word(i as usize);\n    }\n\n    #[cfg(target_pointer_width\
+    \ = \"32\")]\n    fn write_u64(&mut self, i: u64) {\n        self.hash.hash_word(i\
+    \ as usize);\n        self.hash.hash_word((i >> 32) as usize);\n    }\n\n    #[cfg(target_pointer_width\
+    \ = \"64\")]\n    fn write_u64(&mut self, i: u64) {\n        self.hash.hash_word(i\
+    \ as usize);\n    }\n\n    fn write_usize(&mut self, i: usize) {\n        self.hash.hash_word(i);\n\
+    \    }\n\n    fn finish(&self) -> u64 {\n        self.hash as u64\n    }\n}\n\n\
+    pub fn hash<T: Hash + ?Sized>(v: &T) -> usize {\n    let mut state = FxHasher::default();\n\
+    \    v.hash(&mut state);\n    state.finish() as usize\n}\n"
   dependsOn:
   - src/rand/seed.rs
   isVerificationFile: false
   path: src/fxhash.rs
   requiredBy:
   - src/dfa.rs
-  timestamp: '2021-02-06 03:07:17+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

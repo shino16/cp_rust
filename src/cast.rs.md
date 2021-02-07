@@ -54,19 +54,21 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/cast.rs\n"
-  code: "pub trait CastTo<T> {\n\tfn cast_to(self) -> T;\n}\npub trait CastFrom<T>\
-    \ {\n\tfn cast_from(src: T) -> Self;\n}\n\nimpl<T, U: CastTo<T>> CastFrom<U> for\
-    \ T {\n\tfn cast_from(src: U) -> Self {\n\t\tU::cast_to(src)\n\t}\n}\n\nmacro_rules!\
-    \ impl_prim {\n\t($($ts:ty),*) => {\n\t\timpl_asint!({ $($ts),* } => { $($ts),*\
-    \ });\n\t\tpub trait PrimCast where $(Self: CastTo<$ts>),*, $(Self: CastFrom<$ts>),*\
-    \ {}\n\t\t$( impl PrimCast for $ts {} )*\n\t}\n}\n\nmacro_rules! impl_asint {\n\
-    \t({ $t:ty } => { $($us:ty),* }) => { $(\n\t\timpl CastTo<$us> for $t {\n\t\t\t\
-    fn cast_to(self) -> $us {\n\t\t\t\tself as $us\n\t\t\t}\n\t\t}\n\t)* };\n\t({\
-    \ $t:ty, $($ts:ty),* } => { $($us:ty),* }) => {\n\t\timpl_asint!({ $t } => { $($us),*\
-    \ });\n\t\timpl_asint!({ $($ts),* } => { $($us),* });\n\t};\n}\n\nimpl_prim!(i32,\
+  code: "pub trait CastTo<T> {\n    fn cast_to(self) -> T;\n}\npub trait CastFrom<T>\
+    \ {\n    fn cast_from(src: T) -> Self;\n}\n\nimpl<T, U: CastTo<T>> CastFrom<U>\
+    \ for T {\n    fn cast_from(src: U) -> Self {\n        U::cast_to(src)\n    }\n\
+    }\n\nmacro_rules! impl_prim {\n    ($($ts:ty),*) => {\n        impl_asint!({ $($ts),*\
+    \ } => { $($ts),* });\n        pub trait PrimCast where $(Self: CastTo<$ts>),*,\
+    \ $(Self: CastFrom<$ts>),* {}\n        $( impl PrimCast for $ts {} )*\n    }\n\
+    }\n\nmacro_rules! impl_asint {\n    ({ $t:ty } => { $($us:ty),* }) => { $(\n \
+    \       impl CastTo<$us> for $t {\n            fn cast_to(self) -> $us {\n   \
+    \             self as $us\n            }\n        }\n    )* };\n    ({ $t:ty,\
+    \ $($ts:ty),* } => { $($us:ty),* }) => {\n        impl_asint!({ $t } => { $($us),*\
+    \ });\n        impl_asint!({ $($ts),* } => { $($us),* });\n    };\n}\n\nimpl_prim!(i32,\
     \ i64, i128, isize, u32, u64, u128, usize, f32, f64);\n\npub trait As: Sized {\n\
-    \tfn as_<T: CastFrom<Self>>(self) -> T {\n\t\tT::cast_from(self)\n\t}\n\tfn into_<T:\
-    \ From<Self>>(self) -> T {\n\t\tT::from(self)\n\t}\n}\n\nimpl<T> As for T {}\n"
+    \    fn as_<T: CastFrom<Self>>(self) -> T {\n        T::cast_from(self)\n    }\n\
+    \    fn into_<T: From<Self>>(self) -> T {\n        T::from(self)\n    }\n}\n\n\
+    impl<T> As for T {}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/cast.rs
@@ -82,7 +84,7 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2020-12-21 16:30:24+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

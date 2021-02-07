@@ -18,25 +18,28 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/iter/prod.rs\n"
-  code: "pub trait ProdIterator: Iterator {\n\tfn prod<J: IntoIterator>(mut self,\
-    \ other: J) -> Product<Self, J::IntoIter>\n\twhere\n\t\tSelf: Sized,\n\t\tSelf::Item:\
-    \ Clone,\n\t\tJ::IntoIter: Clone,\n\t{\n\t\tlet other = other.into_iter();\n\t\
-    \tProduct {\n\t\t\tae: self.next(),\n\t\t\ta: self,\n\t\t\tb: other.clone(),\n\
-    \t\t\tb0: other,\n\t\t}\n\t}\n}\n\nimpl<I: Iterator> ProdIterator for I {}\n\n\
-    pub struct Product<I: Iterator, J> {\n\ta: I,\n\tae: Option<I::Item>,\n\tb: J,\n\
-    \tb0: J,\n}\n\nimpl<I: Iterator, J: Iterator + Clone> Iterator for Product<I,\
-    \ J>\nwhere\n\tI::Item: Clone,\n{\n\ttype Item = (I::Item, J::Item);\n\tfn next(&mut\
-    \ self) -> Option<Self::Item> {\n\t\tlet be = match self.b.next() {\n\t\t\tNone\
-    \ => {\n\t\t\t\tself.b = self.b0.clone();\n\t\t\t\tmatch self.b.next() {\n\t\t\
-    \t\t\tNone => return None,\n\t\t\t\t\tSome(e) => {\n\t\t\t\t\t\tself.ae = self.a.next();\n\
-    \t\t\t\t\t\te\n\t\t\t\t\t},\n\t\t\t\t}\n\t\t\t},\n\t\t\tSome(e) => e,\n\t\t};\n\
-    \t\tself.ae.as_ref().map(|ae| (ae.clone(), be))\n\t}\n}\n"
+  code: "pub trait ProdIterator: Iterator {\n    fn prod<J: IntoIterator>(mut self,\
+    \ other: J) -> Product<Self, J::IntoIter>\n    where\n        Self: Sized,\n \
+    \       Self::Item: Clone,\n        J::IntoIter: Clone,\n    {\n        let other\
+    \ = other.into_iter();\n        Product {\n            ae: self.next(),\n    \
+    \        a: self,\n            b: other.clone(),\n            b0: other,\n   \
+    \     }\n    }\n}\n\nimpl<I: Iterator> ProdIterator for I {}\n\npub struct Product<I:\
+    \ Iterator, J> {\n    a: I,\n    ae: Option<I::Item>,\n    b: J,\n    b0: J,\n\
+    }\n\nimpl<I: Iterator, J: Iterator + Clone> Iterator for Product<I, J>\nwhere\n\
+    \    I::Item: Clone,\n{\n    type Item = (I::Item, J::Item);\n    fn next(&mut\
+    \ self) -> Option<Self::Item> {\n        let be = match self.b.next() {\n    \
+    \        None => {\n                self.b = self.b0.clone();\n              \
+    \  match self.b.next() {\n                    None => return None,\n         \
+    \           Some(e) => {\n                        self.ae = self.a.next();\n \
+    \                       e\n                    },\n                }\n       \
+    \     },\n            Some(e) => e,\n        };\n        self.ae.as_ref().map(|ae|\
+    \ (ae.clone(), be))\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/iter/prod.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

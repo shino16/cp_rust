@@ -84,10 +84,11 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/bounded.rs\n"
-  code: "pub trait Bounded: Ord {\n\tconst MIN: Self;\n\tconst MAX: Self;\n}\n\nmacro_rules!\
-    \ impl_bound {\n\t($($t:ident),*) => { $(\n\t\timpl Bounded for $t {\n\t\t\tconst\
-    \ MIN: Self = std::$t::MIN;\n\t\t\tconst MAX: Self = std::$t::MAX;\n\t\t}\n\t\
-    )* };\n}\n\nimpl_bound!(i32, i64, i128, isize, u32, u64, u128, usize);\n"
+  code: "pub trait Bounded: Ord {\n    const MIN: Self;\n    const MAX: Self;\n}\n\
+    \nmacro_rules! impl_bound {\n    ($($t:ident),*) => { $(\n        impl Bounded\
+    \ for $t {\n            const MIN: Self = std::$t::MIN;\n            const MAX:\
+    \ Self = std::$t::MAX;\n        }\n    )* };\n}\n\nimpl_bound!(i32, i64, i128,\
+    \ isize, u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/bounded.rs
@@ -110,7 +111,7 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/hlpp_test.rs

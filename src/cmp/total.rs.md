@@ -15,15 +15,16 @@ data:
   code: "use std::ops::{Deref, DerefMut};\n\n#[repr(transparent)]\n#[derive(Debug,\
     \ PartialEq, PartialOrd, Clone, Copy, Hash, Default)]\npub struct Total<T>(pub\
     \ T);\n\nimpl<T: PartialEq> Eq for Total<T> {}\n\nimpl<T: PartialOrd> Ord for\
-    \ Total<T> {\n\tfn cmp(&self, rhs: &Self) -> std::cmp::Ordering {\n\t\tself.0.partial_cmp(&rhs.0).unwrap()\n\
-    \t}\n}\n\nimpl<T> Deref for Total<T> {\n\ttype Target = T;\n\tfn deref(&self)\
-    \ -> &Self::Target {\n\t\t&self.0\n\t}\n}\n\nimpl<T> DerefMut for Total<T> {\n\
-    \tfn deref_mut(&mut self) -> &mut Self::Target {\n\t\t&mut self.0\n\t}\n}\n"
+    \ Total<T> {\n    fn cmp(&self, rhs: &Self) -> std::cmp::Ordering {\n        self.0.partial_cmp(&rhs.0).unwrap()\n\
+    \    }\n}\n\nimpl<T> Deref for Total<T> {\n    type Target = T;\n    fn deref(&self)\
+    \ -> &Self::Target {\n        &self.0\n    }\n}\n\nimpl<T> DerefMut for Total<T>\
+    \ {\n    fn deref_mut(&mut self) -> &mut Self::Target {\n        &mut self.0\n\
+    \    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/cmp/total.rs
   requiredBy: []
-  timestamp: '2021-01-13 14:07:03+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/cmp/total.rs

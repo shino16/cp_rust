@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -28,13 +28,13 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/max_flow/ford_fulkerson/edge.rs\n"
   code: "pub use super::*;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num\
-    \ + Bounded> {\n\tpub from: usize,\n\tpub to: usize,\n\tpub cap: C,\n\tpub flow:\
-    \ C,\n}\n\nimpl<C: Num + Bounded> FordFulkerson<C> {\n\tpub fn get_edge(&self,\
-    \ v: usize, idx: usize) -> Edge<C> {\n\t\tlet e = self.graph[v][idx];\n\t\tlet\
-    \ rev = self.graph[e.to][e.rev];\n\t\tEdge { from: v, to: e.to, cap: e.cap + rev.cap,\
-    \ flow: rev.cap }\n\t}\n\tpub fn get_edges_from(&self, v: usize) -> Vec<Edge<C>>\
-    \ {\n\t\t(0..self.graph[v].len()).map(|idx| self.get_edge(v, idx)).collect()\n\
-    \t}\n}\n"
+    \ + Bounded> {\n    pub from: usize,\n    pub to: usize,\n    pub cap: C,\n  \
+    \  pub flow: C,\n}\n\nimpl<C: Num + Bounded> FordFulkerson<C> {\n    pub fn get_edge(&self,\
+    \ v: usize, idx: usize) -> Edge<C> {\n        let e = self.graph[v][idx];\n  \
+    \      let rev = self.graph[e.to][e.rev];\n        Edge { from: v, to: e.to, cap:\
+    \ e.cap + rev.cap, flow: rev.cap }\n    }\n    pub fn get_edges_from(&self, v:\
+    \ usize) -> Vec<Edge<C>> {\n        (0..self.graph[v].len()).map(|idx| self.get_edge(v,\
+    \ idx)).collect()\n    }\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/ds/bitset.rs
@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow/ford_fulkerson/edge.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/max_flow/ford_fulkerson/edge.rs

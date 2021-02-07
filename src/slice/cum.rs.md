@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -24,20 +24,21 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice/cum.rs\n"
-  code: "pub use crate::alg::arith::*;\n\npub trait Cum {\n\ttype Item: Copy;\n\t\
-    fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>;\n\tfn cumr<M:\
-    \ Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>;\n\tfn cuml_sum(&self)\
-    \ -> Vec<Self::Item>\n\twhere\n\t\tSelf::Item: Num,\n\t{\n\t\tself.cuml(Addition::new())\n\
-    \t}\n\tfn cumr_sum(&self) -> Vec<Self::Item>\n\twhere\n\t\tSelf::Item: Num,\n\t\
-    {\n\t\tself.cumr(Addition::new())\n\t}\n}\n\nimpl<T: Copy> Cum for [T] {\n\ttype\
-    \ Item = T;\n\tfn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>\
-    \ {\n\t\tlet mut res = Vec::with_capacity(self.len() + 1);\n\t\tlet mut tl = m.unit();\n\
-    \t\tres.push(tl);\n\t\tfor e in self {\n\t\t\ttl = m.op(tl, *e);\n\t\t\tres.push(tl);\n\
-    \t\t}\n\t\tres\n\t}\n\n\tfn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) ->\
-    \ Vec<Self::Item> {\n\t\tlet mut res = Vec::with_capacity(self.len() + 1);\n\t\
-    \tlet mut tl = m.unit();\n\t\tres.push(tl);\n\t\tfor e in self.iter().rev() {\n\
-    \t\t\ttl = m.op(*e, tl);\n\t\t\tres.push(tl);\n\t\t}\n\t\tres.reverse();\n\t\t\
-    res\n\t}\n}\n"
+  code: "pub use crate::alg::arith::*;\n\npub trait Cum {\n    type Item: Copy;\n\
+    \    fn cuml<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>;\n\
+    \    fn cumr<M: Monoid<Item = Self::Item>>(&self, m: M) -> Vec<Self::Item>;\n\
+    \    fn cuml_sum(&self) -> Vec<Self::Item>\n    where\n        Self::Item: Num,\n\
+    \    {\n        self.cuml(Addition::new())\n    }\n    fn cumr_sum(&self) -> Vec<Self::Item>\n\
+    \    where\n        Self::Item: Num,\n    {\n        self.cumr(Addition::new())\n\
+    \    }\n}\n\nimpl<T: Copy> Cum for [T] {\n    type Item = T;\n    fn cuml<M: Monoid<Item\
+    \ = Self::Item>>(&self, m: M) -> Vec<Self::Item> {\n        let mut res = Vec::with_capacity(self.len()\
+    \ + 1);\n        let mut tl = m.unit();\n        res.push(tl);\n        for e\
+    \ in self {\n            tl = m.op(tl, *e);\n            res.push(tl);\n     \
+    \   }\n        res\n    }\n\n    fn cumr<M: Monoid<Item = Self::Item>>(&self,\
+    \ m: M) -> Vec<Self::Item> {\n        let mut res = Vec::with_capacity(self.len()\
+    \ + 1);\n        let mut tl = m.unit();\n        res.push(tl);\n        for e\
+    \ in self.iter().rev() {\n            tl = m.op(*e, tl);\n            res.push(tl);\n\
+    \        }\n        res.reverse();\n        res\n    }\n}\n"
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
@@ -46,7 +47,7 @@ data:
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-02-05 04:21:11+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

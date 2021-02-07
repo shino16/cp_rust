@@ -12,14 +12,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/lib.rs\n"
-  code: '#![allow(clippy::many_single_char_names)]
-
-    #![allow(clippy::new_without_default)]
-
-    #![allow(clippy::suspicious_op_assign_impl)]
-
-
-    pub mod alg;
+  code: 'pub mod alg;
 
     pub mod assign;
 
@@ -87,7 +80,7 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy: []
-  timestamp: '2021-02-06 00:52:06+09:00'
+  timestamp: '2021-02-08 00:51:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

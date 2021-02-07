@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -28,16 +28,17 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/reroot.rs\n"
   code: "pub use super::dfs_io::*;\npub use crate::alg::*;\n\npub fn rerooting_dp<G:\
-    \ Graph, A: Group>(g: &G, s: usize, alg: A) -> Vec<A::Item> {\n\tlet mut state\
-    \ = vec![alg.unit(); g.len()];\n\tlet mut res = vec![alg.unit(); g.len()];\n\t\
-    dfs_io(g, s, |v, par| {\n\t\tif let Out(v) = v {\n\t\t\tg.adj(v, |w| {\n\t\t\t\
-    \tif w != par {\n\t\t\t\t\talg.op_to(state[w], &mut state[v]);\n\t\t\t\t}\n\t\t\
-    \t});\n\t\t}\n\t});\n\tres[s] = state[s];\n\tdfs_io(g, s, |v, par| match v {\n\
-    \t\tIn(v) =>\n\t\t\tif par != !0 {\n\t\t\t\talg.op_inv_to(state[v], &mut state[par]);\n\
-    \t\t\t\talg.op_to(state[par], &mut state[v]);\n\t\t\t\tres[v] = state[v];\n\t\t\
-    \t},\n\t\tOut(v) =>\n\t\t\tif par != !0 {\n\t\t\t\talg.op_inv_to(state[par], &mut\
-    \ state[v]);\n\t\t\t\talg.op_to(state[v], &mut state[par]);\n\t\t\t},\n\t});\n\
-    \tres\n}\n"
+    \ Graph, A: Group>(g: &G, s: usize, alg: A) -> Vec<A::Item> {\n    let mut state\
+    \ = vec![alg.unit(); g.len()];\n    let mut res = vec![alg.unit(); g.len()];\n\
+    \    dfs_io(g, s, |v, par| {\n        if let Out(v) = v {\n            g.adj(v,\
+    \ |w| {\n                if w != par {\n                    alg.op_to(state[w],\
+    \ &mut state[v]);\n                }\n            });\n        }\n    });\n  \
+    \  res[s] = state[s];\n    dfs_io(g, s, |v, par| match v {\n        In(v) =>\n\
+    \            if par != !0 {\n                alg.op_inv_to(state[v], &mut state[par]);\n\
+    \                alg.op_to(state[par], &mut state[v]);\n                res[v]\
+    \ = state[v];\n            },\n        Out(v) =>\n            if par != !0 {\n\
+    \                alg.op_inv_to(state[par], &mut state[v]);\n                alg.op_to(state[v],\
+    \ &mut state[par]);\n            },\n    });\n    res\n}\n"
   dependsOn:
   - src/alg.rs
   - src/graph.rs
@@ -47,7 +48,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '2021-02-05 04:21:11+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs

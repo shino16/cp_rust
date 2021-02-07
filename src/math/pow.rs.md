@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -31,9 +31,9 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math/pow.rs\n"
   code: "use crate::int::*;\n\n#[inline(always)]\npub fn pow<T: Num, K: UInt>(mut\
-    \ e: T, mut k: K) -> T {\n\tlet mut res = T::ONE;\n\twhile k != K::ZERO {\n\t\t\
-    if k & K::ONE != K::ZERO {\n\t\t\tres *= e;\n\t\t}\n\t\te *= e;\n\t\tk >>= 1;\n\
-    \t}\n\tres\n}\n"
+    \ e: T, mut k: K) -> T {\n    let mut res = T::ONE;\n    while k != K::ZERO {\n\
+    \        if k & K::ONE != K::ZERO {\n            res *= e;\n        }\n      \
+    \  e *= e;\n        k >>= 1;\n    }\n    res\n}\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: src/math/pow.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/pow.rs

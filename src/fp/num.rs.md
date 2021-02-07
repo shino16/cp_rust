@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -24,9 +24,9 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/fp/num.rs\n"
-  code: "pub use super::*;\nuse crate::num::*;\n\nimpl<M: Mod> Num for Fp<M> {\n\t\
-    fn wrapping_add(self, rhs: Self) -> Self {\n\t\tself + rhs\n\t}\n\tfn wrapping_neg(self)\
-    \ -> Self {\n\t\t-self\n\t}\n}\n"
+  code: "pub use super::*;\nuse crate::num::*;\n\nimpl<M: Mod> Num for Fp<M> {\n \
+    \   fn wrapping_add(self, rhs: Self) -> Self {\n        self + rhs\n    }\n  \
+    \  fn wrapping_neg(self) -> Self {\n        -self\n    }\n}\n"
   dependsOn:
   - src/fp.rs
   - src/io.rs
@@ -35,7 +35,7 @@ data:
   isVerificationFile: false
   path: src/fp/num.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/fp/num.rs

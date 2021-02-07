@@ -16,15 +16,15 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/assign.rs\n"
   code: "pub fn assign_if<T, F: Fn(&T, &T) -> bool>(v: T, var: &mut T, f: F) -> bool\
-    \ {\n\tif f(&v, var) {\n\t\t*var = v;\n\t\ttrue\n\t} else {\n\t\tfalse\n\t}\n\
-    }\n\npub fn chmin<T: Ord>(v: T, var: &mut T) -> bool {\n\tassign_if(v, var, |x,\
-    \ y| x < y)\n}\n"
+    \ {\n    if f(&v, var) {\n        *var = v;\n        true\n    } else {\n    \
+    \    false\n    }\n}\n\npub fn chmin<T: Ord>(v: T, var: &mut T) -> bool {\n  \
+    \  assign_if(v, var, |x, y| x < y)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/assign.rs
   requiredBy:
   - src/graph/dijkstra.rs
-  timestamp: '2021-01-03 22:19:51+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/assign.rs

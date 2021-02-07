@@ -13,20 +13,22 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/idx.rs\n"
   code: "use std::ops::{Deref, DerefMut, Index, IndexMut};\n\npub struct Idxable<T>(pub\
-    \ Vec<T>);\n\nimpl<T> Deref for Idxable<T> {\n\ttype Target = Vec<T>;\n\tfn deref(&self)\
-    \ -> &Self::Target {\n\t\t&self.0\n\t}\n}\n\nimpl<T> DerefMut for Idxable<T> {\n\
-    \tfn deref_mut(&mut self) -> &mut Self::Target {\n\t\t&mut self.0\n\t}\n}\n\n\
-    macro_rules! impl_index {\n\t($($idx:ty),*) => { $(\n\t\timpl<T> Index<$idx> for\
-    \ Idxable<T> {\n\t\t\ttype Output = T;\n\t\t\tfn index(&self, index: $idx) ->\
-    \ &Self::Output {\n\t\t\t\tself.0.index(index as usize)\n\t\t\t}\n\t\t}\n\t\t\
-    impl<T> IndexMut<$idx> for Idxable<T> {\n\t\t\tfn index_mut(&mut self, index:\
-    \ $idx) -> &mut Self::Output {\n\t\t\t\tself.0.index_mut(index as usize)\n\t\t\
-    \t}\n\t\t}\n\t)* }\n}\n\nimpl_index!(i32, i64, i128, isize, u32, u64, u128, usize);\n"
+    \ Vec<T>);\n\nimpl<T> Deref for Idxable<T> {\n    type Target = Vec<T>;\n    fn\
+    \ deref(&self) -> &Self::Target {\n        &self.0\n    }\n}\n\nimpl<T> DerefMut\
+    \ for Idxable<T> {\n    fn deref_mut(&mut self) -> &mut Self::Target {\n     \
+    \   &mut self.0\n    }\n}\n\nmacro_rules! impl_index {\n    ($($idx:ty),*) =>\
+    \ { $(\n        impl<T> Index<$idx> for Idxable<T> {\n            type Output\
+    \ = T;\n            fn index(&self, index: $idx) -> &Self::Output {\n        \
+    \        self.0.index(index as usize)\n            }\n        }\n        impl<T>\
+    \ IndexMut<$idx> for Idxable<T> {\n            fn index_mut(&mut self, index:\
+    \ $idx) -> &mut Self::Output {\n                self.0.index_mut(index as usize)\n\
+    \            }\n        }\n    )* }\n}\n\nimpl_index!(i32, i64, i128, isize, u32,\
+    \ u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/idx.rs
   requiredBy: []
-  timestamp: '2020-12-21 16:33:52+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/idx.rs

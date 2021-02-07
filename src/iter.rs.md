@@ -22,17 +22,18 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/iter.rs\n"
   code: "pub mod either;\npub mod pow;\npub mod prod;\n\npub trait Itertools: Iterator\
-    \ {\n\tfn collect_vec(self) -> Vec<Self::Item>\n\twhere\n\t\tSelf: Sized,\n\t\
-    {\n\t\tself.collect()\n\t}\n}\n\nimpl<I: Iterator> Itertools for I {}\n\n#[macro_export]\n\
-    macro_rules! iprod {\n\t($head:expr) => {\n\t\t$head.into_iter()\n\t};\n\t($head:expr,\
-    \ $($tail:expr),*) => (\n\t\t$head.into_iter().flat_map(|e| {\n\t\t\tstd::iter::repeat(e).zip(iprod!($($tail),*))\n\
-    \t\t})\n\t);\n}\n"
+    \ {\n    fn collect_vec(self) -> Vec<Self::Item>\n    where\n        Self: Sized,\n\
+    \    {\n        self.collect()\n    }\n}\n\nimpl<I: Iterator> Itertools for I\
+    \ {}\n\n#[macro_export]\nmacro_rules! iprod {\n    ($head:expr) => {\n       \
+    \ $head.into_iter()\n    };\n    ($head:expr, $($tail:expr),*) => (\n        $head.into_iter().flat_map(|e|\
+    \ {\n            std::iter::repeat(e).zip(iprod!($($tail),*))\n        })\n  \
+    \  );\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/iter.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-01-27 17:46:37+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

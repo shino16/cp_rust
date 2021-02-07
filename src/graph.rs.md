@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -50,20 +50,21 @@ data:
     RuntimeError: bundler is not specified: src/graph.rs\n"
   code: "pub mod bfs;\npub mod dfs;\npub mod dfs_io;\npub mod dijkstra;\npub mod euler_tour;\n\
     pub mod grid;\npub mod io;\npub mod tree;\n\npub mod max_flow;\n\nuse crate::zo::ZeroOne;\n\
-    \npub trait Graph {\n\tfn len(&self) -> usize;\n\tfn adj<F: FnMut(usize)>(&self,\
-    \ v: usize, f: F);\n}\n\npub trait WGraph<W>: Graph {\n\tfn adj_w<F: FnMut(usize,\
+    \npub trait Graph {\n    fn len(&self) -> usize;\n    fn adj<F: FnMut(usize)>(&self,\
+    \ v: usize, f: F);\n}\n\npub trait WGraph<W>: Graph {\n    fn adj_w<F: FnMut(usize,\
     \ &W)>(&self, v: usize, f: F);\n}\n\npub trait Tree: Graph {}\n\npub trait WTree<W>:\
-    \ WGraph<W> {}\n\nimpl Graph for Vec<Vec<usize>> {\n\tfn len(&self) -> usize {\n\
-    \t\tself.len()\n\t}\n\tfn adj<F: FnMut(usize)>(&self, v: usize, f: F) {\n\t\t\
-    self[v].iter().copied().for_each(f);\n\t}\n}\n\nimpl<N: ZeroOne> WGraph<N> for\
-    \ Vec<Vec<usize>> {\n\tfn adj_w<F: FnMut(usize, &N)>(&self, v: usize, mut f: F)\
-    \ {\n\t\tself[v].iter().for_each(|&v| f(v, &N::ONE))\n\t}\n}\n\nimpl<W> Graph\
-    \ for Vec<Vec<(usize, W)>> {\n\tfn len(&self) -> usize {\n\t\tself.len()\n\t}\n\
-    \tfn adj<F: FnMut(usize)>(&self, v: usize, mut f: F) {\n\t\tself[v].iter().for_each(|&(v,\
-    \ _)| f(v))\n\t}\n}\n\nimpl<W> WGraph<W> for Vec<Vec<(usize, W)>> {\n\tfn adj_w<F:\
-    \ FnMut(usize, &W)>(&self, v: usize, mut f: F) {\n\t\tself[v].iter().for_each(|&(v,\
-    \ ref e)| f(v, e));\n\t}\n}\n\nimpl<G: Graph> Tree for G {}\nimpl<W, G: WGraph<W>>\
-    \ WTree<W> for G {}\n"
+    \ WGraph<W> {}\n\nimpl Graph for Vec<Vec<usize>> {\n    fn len(&self) -> usize\
+    \ {\n        self.len()\n    }\n    fn adj<F: FnMut(usize)>(&self, v: usize, f:\
+    \ F) {\n        self[v].iter().copied().for_each(f);\n    }\n}\n\nimpl<N: ZeroOne>\
+    \ WGraph<N> for Vec<Vec<usize>> {\n    fn adj_w<F: FnMut(usize, &N)>(&self, v:\
+    \ usize, mut f: F) {\n        self[v].iter().for_each(|&v| f(v, &N::ONE))\n  \
+    \  }\n}\n\nimpl<W> Graph for Vec<Vec<(usize, W)>> {\n    fn len(&self) -> usize\
+    \ {\n        self.len()\n    }\n    fn adj<F: FnMut(usize)>(&self, v: usize, mut\
+    \ f: F) {\n        self[v].iter().for_each(|&(v, _)| f(v))\n    }\n}\n\nimpl<W>\
+    \ WGraph<W> for Vec<Vec<(usize, W)>> {\n    fn adj_w<F: FnMut(usize, &W)>(&self,\
+    \ v: usize, mut f: F) {\n        self[v].iter().for_each(|&(v, ref e)| f(v, e));\n\
+    \    }\n}\n\nimpl<G: Graph> Tree for G {}\nimpl<W, G: WGraph<W>> WTree<W> for\
+    \ G {}\n"
   dependsOn:
   - src/zo.rs
   isVerificationFile: false
@@ -79,7 +80,7 @@ data:
   - src/graph/bfs.rs
   - src/graph/euler_tour.rs
   - src/graph/tree.rs
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

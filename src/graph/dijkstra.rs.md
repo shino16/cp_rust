@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -38,11 +38,12 @@ data:
     RuntimeError: bundler is not specified: src/graph/dijkstra.rs\n"
   code: "pub use super::*;\nuse crate::assign::*;\nuse crate::int::*;\nuse std::cmp::Reverse;\n\
     use std::collections::BinaryHeap;\n\npub fn dijkstra<I: UInt, G: WGraph<I>>(g:\
-    \ &G, s: usize) -> Vec<I> {\n\tlet mut dist = vec![I::MAX; g.len()];\n\tdist[s]\
-    \ = I::ZERO;\n\tlet mut togo: BinaryHeap<_> = vec![Reverse((I::ZERO, s))].into();\n\
-    \twhile let Some(Reverse((d, v))) = togo.pop() {\n\t\tg.adj_w(v, |w, &e| {\n\t\
-    \t\tif assign_if(d + e, &mut dist[w], |x, y| x < y) {\n\t\t\t\ttogo.push(Reverse((d\
-    \ + e, w)));\n\t\t\t}\n\t\t});\n\t}\n\tdist\n}\n"
+    \ &G, s: usize) -> Vec<I> {\n    let mut dist = vec![I::MAX; g.len()];\n    dist[s]\
+    \ = I::ZERO;\n    let mut togo: BinaryHeap<_> = vec![Reverse((I::ZERO, s))].into();\n\
+    \    while let Some(Reverse((d, v))) = togo.pop() {\n        g.adj_w(v, |w, &e|\
+    \ {\n            if assign_if(d + e, &mut dist[w], |x, y| x < y) {\n         \
+    \       togo.push(Reverse((d + e, w)));\n            }\n        });\n    }\n \
+    \   dist\n}\n"
   dependsOn:
   - src/assign.rs
   - src/bit.rs
@@ -55,7 +56,7 @@ data:
   isVerificationFile: false
   path: src/graph/dijkstra.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dijkstra.rs

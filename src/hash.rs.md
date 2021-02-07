@@ -16,18 +16,20 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/hash.rs\n"
   code: "use crate::slice::*;\nuse std::collections::HashMap;\nuse std::hash::Hash;\n\
-    \npub struct Compress<T: Ord>(Vec<T>);\n\nimpl<T: Ord> Compress<T> {\n\tpub fn\
-    \ from(mut data: Vec<T>) -> Self {\n\t\tdata.sort_unstable();\n\t\tdata.dedup();\n\
-    \t\tSelf(data)\n\t}\n\tpub fn compress(&self, v: &T) -> usize {\n\t\tdebug_assert!(self.0.binary_search(v).is_ok());\n\
-    \t\tlower_bound(&self.0, v)\n\t}\n\tpub fn restore(&self, i: usize) -> &T {\n\t\
-    \t&self.0[i]\n\t}\n\tpub fn cache_al(&self) -> HashMap<T, usize>\n\twhere\n\t\t\
-    T: Clone + Hash,\n\t{\n\t\tself.0.iter().cloned().zip(0..).collect()\n\t}\n}\n"
+    \npub struct Compress<T: Ord>(Vec<T>);\n\nimpl<T: Ord> Compress<T> {\n    pub\
+    \ fn from(mut data: Vec<T>) -> Self {\n        data.sort_unstable();\n       \
+    \ data.dedup();\n        Self(data)\n    }\n    pub fn compress(&self, v: &T)\
+    \ -> usize {\n        debug_assert!(self.0.binary_search(v).is_ok());\n      \
+    \  lower_bound(&self.0, v)\n    }\n    pub fn restore(&self, i: usize) -> &T {\n\
+    \        &self.0[i]\n    }\n    pub fn cache_al(&self) -> HashMap<T, usize>\n\
+    \    where\n        T: Clone + Hash,\n    {\n        self.0.iter().cloned().zip(0..).collect()\n\
+    \    }\n}\n"
   dependsOn:
   - src/slice.rs
   isVerificationFile: false
   path: src/hash.rs
   requiredBy: []
-  timestamp: '2021-02-06 03:32:36+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/hash.rs

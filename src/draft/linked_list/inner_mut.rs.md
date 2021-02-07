@@ -19,41 +19,45 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/draft/linked_list/inner_mut.rs\n"
   code: "pub use super::*;\nuse std::cell::RefCell;\n\npub struct CursorInnerMut<'a,\
-    \ T: 'a> {\n\tat: NonNull<Node<T>>,\n\tlist: &'a RefCell<LinkedList<T>>,\n}\n\n\
-    impl<T> LinkedList<T> {\n\tpub fn begin_inner_mut<'a>(list: &'a RefCell<Self>)\
-    \ -> CursorInnerMut<'a, T> {\n\t\tCursorInnerMut { at: list.borrow().head, list\
-    \ }\n\t}\n\tpub fn end_inner_mut<'a>(list: &'a RefCell<Self>) -> CursorInnerMut<'a,\
-    \ T> {\n\t\tCursorInnerMut { at: list.borrow().tail, list }\n\t}\n}\n\nimpl<'a,\
-    \ T: 'a> Deref for CursorInnerMut<'a, T> {\n\ttype Target = T;\n\tfn deref(&self)\
-    \ -> &Self::Target {\n\t\tunsafe { &self.at.as_ref().next_val.as_ref().unwrap().1\
-    \ }\n\t}\n}\n\nimpl<'a, T: 'a> DerefMut for CursorInnerMut<'a, T> {\n\tfn deref_mut(&mut\
-    \ self) -> &mut Self::Target {\n\t\tunsafe { &mut self.at.as_mut().next_val.as_mut().unwrap().1\
-    \ }\n\t}\n}\n\nimpl<'a, T: 'a> CursorInnerMut<'a, T> {\n\tpub fn next(&mut self)\
-    \ -> Option<&mut Self> {\n\t\tself.at = unsafe { self.at.as_ref() }.next_val.as_ref()?.0;\n\
-    \t\tSome(self)\n\t}\n\tpub fn prev(&mut self) -> Option<&mut Self> {\n\t\tself.at\
-    \ = unsafe { self.at.as_ref() }.prev?;\n\t\tSome(self)\n\t}\n\tpub fn advance(&mut\
-    \ self, by: isize) -> Option<&mut Self> {\n\t\tif by >= 0 {\n\t\t\tfor _ in 0..by\
-    \ {\n\t\t\t\tself.next()?;\n\t\t\t}\n\t\t} else {\n\t\t\tfor _ in by..0 {\n\t\t\
-    \t\tself.prev()?;\n\t\t\t}\n\t\t}\n\t\tSome(self)\n\t}\n\tpub fn insert(&mut self,\
-    \ val: T) {\n\t\tlet prev = unsafe { self.at.as_ref() }.prev;\n\t\tlet new_node\
-    \ =\n\t\t\tself.list.borrow_mut().new_node(Node { prev, next_val: Some((self.at,\
-    \ val)) });\n\t\tunsafe { self.at.as_mut() }.prev = Some(new_node);\n\t\tif let\
-    \ Some(mut prev) = prev {\n\t\t\tunsafe { prev.as_mut() }.next_val.as_mut().unwrap().0\
-    \ = new_node;\n\t\t} else {\n\t\t\tself.list.borrow_mut().head = new_node;\n\t\
-    \t}\n\t\tself.at = new_node;\n\t\tself.list.borrow_mut().len += 1;\n\t}\n\tpub\
-    \ fn remove(&mut self) -> Option<T> {\n\t\tif self.at == self.list.borrow_mut().tail\
-    \ {\n\t\t\treturn None;\n\t\t}\n\t\tunsafe {\n\t\t\tlet node = std::ptr::read(self.at.as_ptr());\n\
-    \t\t\tlet (mut next, val) = node.next_val?;\n\t\t\tif let Some(mut prev) = node.prev\
-    \ {\n\t\t\t\t*next.as_mut().prev.as_mut().unwrap() = prev;\n\t\t\t\tprev.as_mut().next_val.as_mut().unwrap().0\
-    \ = next;\n\t\t\t} else {\n\t\t\t\tnext.as_mut().prev = None;\n\t\t\t\tself.list.borrow_mut().head\
-    \ = next;\n\t\t\t}\n\t\t\tself.at = next;\n\t\t\tSome(val)\n\t\t}\n\t}\n}\n"
+    \ T: 'a> {\n    at: NonNull<Node<T>>,\n    list: &'a RefCell<LinkedList<T>>,\n\
+    }\n\nimpl<T> LinkedList<T> {\n    pub fn begin_inner_mut<'a>(list: &'a RefCell<Self>)\
+    \ -> CursorInnerMut<'a, T> {\n        CursorInnerMut { at: list.borrow().head,\
+    \ list }\n    }\n    pub fn end_inner_mut<'a>(list: &'a RefCell<Self>) -> CursorInnerMut<'a,\
+    \ T> {\n        CursorInnerMut { at: list.borrow().tail, list }\n    }\n}\n\n\
+    impl<'a, T: 'a> Deref for CursorInnerMut<'a, T> {\n    type Target = T;\n    fn\
+    \ deref(&self) -> &Self::Target {\n        unsafe { &self.at.as_ref().next_val.as_ref().unwrap().1\
+    \ }\n    }\n}\n\nimpl<'a, T: 'a> DerefMut for CursorInnerMut<'a, T> {\n    fn\
+    \ deref_mut(&mut self) -> &mut Self::Target {\n        unsafe { &mut self.at.as_mut().next_val.as_mut().unwrap().1\
+    \ }\n    }\n}\n\nimpl<'a, T: 'a> CursorInnerMut<'a, T> {\n    pub fn next(&mut\
+    \ self) -> Option<&mut Self> {\n        self.at = unsafe { self.at.as_ref() }.next_val.as_ref()?.0;\n\
+    \        Some(self)\n    }\n    pub fn prev(&mut self) -> Option<&mut Self> {\n\
+    \        self.at = unsafe { self.at.as_ref() }.prev?;\n        Some(self)\n  \
+    \  }\n    pub fn advance(&mut self, by: isize) -> Option<&mut Self> {\n      \
+    \  if by >= 0 {\n            for _ in 0..by {\n                self.next()?;\n\
+    \            }\n        } else {\n            for _ in by..0 {\n             \
+    \   self.prev()?;\n            }\n        }\n        Some(self)\n    }\n    pub\
+    \ fn insert(&mut self, val: T) {\n        let prev = unsafe { self.at.as_ref()\
+    \ }.prev;\n        let new_node =\n            self.list.borrow_mut().new_node(Node\
+    \ { prev, next_val: Some((self.at, val)) });\n        unsafe { self.at.as_mut()\
+    \ }.prev = Some(new_node);\n        if let Some(mut prev) = prev {\n         \
+    \   unsafe { prev.as_mut() }.next_val.as_mut().unwrap().0 = new_node;\n      \
+    \  } else {\n            self.list.borrow_mut().head = new_node;\n        }\n\
+    \        self.at = new_node;\n        self.list.borrow_mut().len += 1;\n    }\n\
+    \    pub fn remove(&mut self) -> Option<T> {\n        if self.at == self.list.borrow_mut().tail\
+    \ {\n            return None;\n        }\n        unsafe {\n            let node\
+    \ = std::ptr::read(self.at.as_ptr());\n            let (mut next, val) = node.next_val?;\n\
+    \            if let Some(mut prev) = node.prev {\n                *next.as_mut().prev.as_mut().unwrap()\
+    \ = prev;\n                prev.as_mut().next_val.as_mut().unwrap().0 = next;\n\
+    \            } else {\n                next.as_mut().prev = None;\n          \
+    \      self.list.borrow_mut().head = next;\n            }\n            self.at\
+    \ = next;\n            Some(val)\n        }\n    }\n}\n"
   dependsOn:
   - src/draft/linked_list.rs
   - src/ds.rs
   isVerificationFile: false
   path: src/draft/linked_list/inner_mut.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/linked_list/inner_mut.rs

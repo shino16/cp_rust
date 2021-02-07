@@ -18,20 +18,20 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/make_vec.rs\n"
-  code: "pub trait VecDim<Elem> {\n\ttype Item;\n\tfn make_vec(self, elem: Elem) ->\
-    \ Vec<Self::Item>;\n}\n\nimpl<Elem: Clone> VecDim<Elem> for usize {\n\ttype Item\
-    \ = Elem;\n\tfn make_vec(self, elem: Elem) -> Vec<Self::Item> {\n\t\tvec![elem;\
-    \ self]\n\t}\n}\n\nimpl<Elem, Dim> VecDim<Elem> for (usize, Dim)\nwhere\n\tDim:\
-    \ VecDim<Elem>,\n\tDim::Item: Clone,\n{\n\ttype Item = Vec<Dim::Item>;\n\tfn make_vec(self,\
-    \ elem: Elem) -> Vec<Self::Item> {\n\t\tvec![self.1.make_vec(elem); self.0]\n\t\
-    }\n}\n\npub fn make_vec<Elem, Dim: VecDim<Elem>>(dim: Dim, elem: Elem) -> Vec<Dim::Item>\
-    \ {\n\tdim.make_vec(elem)\n}\n"
+  code: "pub trait VecDim<Elem> {\n    type Item;\n    fn make_vec(self, elem: Elem)\
+    \ -> Vec<Self::Item>;\n}\n\nimpl<Elem: Clone> VecDim<Elem> for usize {\n    type\
+    \ Item = Elem;\n    fn make_vec(self, elem: Elem) -> Vec<Self::Item> {\n     \
+    \   vec![elem; self]\n    }\n}\n\nimpl<Elem, Dim> VecDim<Elem> for (usize, Dim)\n\
+    where\n    Dim: VecDim<Elem>,\n    Dim::Item: Clone,\n{\n    type Item = Vec<Dim::Item>;\n\
+    \    fn make_vec(self, elem: Elem) -> Vec<Self::Item> {\n        vec![self.1.make_vec(elem);\
+    \ self.0]\n    }\n}\n\npub fn make_vec<Elem, Dim: VecDim<Elem>>(dim: Dim, elem:\
+    \ Elem) -> Vec<Dim::Item> {\n    dim.make_vec(elem)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/make_vec.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

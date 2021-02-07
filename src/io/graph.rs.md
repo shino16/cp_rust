@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/graph/io.rs
     title: src/graph/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -27,7 +27,7 @@ data:
   isVerificationFile: false
   path: src/io/graph.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/io/graph.rs

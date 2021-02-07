@@ -36,22 +36,24 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/bitset.rs\n"
-  code: "pub trait BitSet {\n\tfn get_bit(&self, i: usize) -> bool;\n\tfn set_bit(&mut\
-    \ self, i: usize, b: bool);\n\tfn modify_bit(&mut self, i: usize, b: bool) ->\
-    \ bool {\n\t\tif self.get_bit(i) == b {\n\t\t\tfalse\n\t\t} else {\n\t\t\tself.set_bit(i,\
-    \ b);\n\t\t\ttrue\n\t\t}\n\t}\n\tfn negate(&mut self);\n\tfn reset(&mut self);\n\
-    }\n\nmacro_rules! impl_bitset {\n\t($($type:ty),*) => { $(\n\t\timpl BitSet for\
-    \ $type {\n\t\t\tfn get_bit(&self, i: usize) -> bool {\n\t\t\t\t((*self >> i)\
-    \ & 1) != 0\n\t\t\t}\n\t\t\tfn set_bit(&mut self, i: usize, b: bool) {\n\t\t\t\
-    \t*self |= (b as $type) << i;\n\t\t\t}\n\t\t\tfn negate(&mut self) {\n\t\t\t\t\
-    *self = !*self;\n\t\t\t}\n\t\t\tfn reset(&mut self) {\n\t\t\t\t*self = 0;\n\t\t\
-    \t}\n\t\t}\n\t)* };\n}\n\nimpl_bitset!(i32, i64, i128, isize, u32, u64, u128,\
-    \ usize);\n\nimpl BitSet for [u32] {\n\tfn get_bit(&self, i: usize) -> bool {\n\
-    \t\tself[i / 32].get_bit(i % 32)\n\t}\n\tfn set_bit(&mut self, i: usize, b: bool)\
-    \ {\n\t\tself[i / 32].set_bit(i % 32, b);\n\t}\n\tfn negate(&mut self) {\n\t\t\
-    for x in self {\n\t\t\tx.negate()\n\t\t}\n\t}\n\tfn reset(&mut self) {\n\t\tfor\
-    \ x in self {\n\t\t\tx.reset();\n\t\t}\n\t}\n}\n\npub fn new_bitset(n: usize)\
-    \ -> Vec<u32> {\n\tvec![0; (n + 31) / 32]\n}\n"
+  code: "pub trait BitSet {\n    fn get_bit(&self, i: usize) -> bool;\n    fn set_bit(&mut\
+    \ self, i: usize, b: bool);\n    fn modify_bit(&mut self, i: usize, b: bool) ->\
+    \ bool {\n        if self.get_bit(i) == b {\n            false\n        } else\
+    \ {\n            self.set_bit(i, b);\n            true\n        }\n    }\n   \
+    \ fn negate(&mut self);\n    fn reset(&mut self);\n}\n\nmacro_rules! impl_bitset\
+    \ {\n    ($($type:ty),*) => { $(\n        impl BitSet for $type {\n          \
+    \  fn get_bit(&self, i: usize) -> bool {\n                ((*self >> i) & 1) !=\
+    \ 0\n            }\n            fn set_bit(&mut self, i: usize, b: bool) {\n \
+    \               *self |= (b as $type) << i;\n            }\n            fn negate(&mut\
+    \ self) {\n                *self = !*self;\n            }\n            fn reset(&mut\
+    \ self) {\n                *self = 0;\n            }\n        }\n    )* };\n}\n\
+    \nimpl_bitset!(i32, i64, i128, isize, u32, u64, u128, usize);\n\nimpl BitSet for\
+    \ [u32] {\n    fn get_bit(&self, i: usize) -> bool {\n        self[i / 32].get_bit(i\
+    \ % 32)\n    }\n    fn set_bit(&mut self, i: usize, b: bool) {\n        self[i\
+    \ / 32].set_bit(i % 32, b);\n    }\n    fn negate(&mut self) {\n        for x\
+    \ in self {\n            x.negate()\n        }\n    }\n    fn reset(&mut self)\
+    \ {\n        for x in self {\n            x.reset();\n        }\n    }\n}\n\n\
+    pub fn new_bitset(n: usize) -> Vec<u32> {\n    vec![0; (n + 31) / 32]\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/bitset.rs
@@ -63,7 +65,7 @@ data:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
   - src/math/primes.rs
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs

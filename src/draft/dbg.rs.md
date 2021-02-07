@@ -21,13 +21,13 @@ data:
     \ &tmp);\n                tmp\n            }\n        }\n    };\n    // Trailing\
     \ comma with single argument is ignored\n    ($val:expr,) => { dbg!($val) };\n\
     \    ($($val:expr),+ $(,)?) => {\n        ($(dbg!($val)),+,)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
-    #[macro_export]\nmacro_rules! dbg {\n\t($($x:expr),*) => { std::convert::identity(($($x),*))\
+    #[macro_export]\nmacro_rules! dbg {\n    ($($x:expr),*) => { std::convert::identity(($($x),*))\
     \ }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/draft/dbg.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:11:11+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/dbg.rs

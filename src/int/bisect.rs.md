@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -31,9 +31,9 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int/bisect.rs\n"
   code: "use super::*;\n\npub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut\
-    \ r: I, mut pred: F) -> I {\n\twhile l != r {\n\t\tlet mid = (l + r) >> 1;\n\t\
-    \tif pred(mid) {\n\t\t\tl = mid + I::ONE;\n\t\t} else {\n\t\t\tr = mid;\n\t\t\
-    }\n\t}\n\tr\n}\n"
+    \ r: I, mut pred: F) -> I {\n    while l != r {\n        let mid = (l + r) >>\
+    \ 1;\n        if pred(mid) {\n            l = mid + I::ONE;\n        } else {\n\
+    \            r = mid;\n        }\n    }\n    r\n}\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: src/int/bisect.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/bisect.rs

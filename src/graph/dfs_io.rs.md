@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -22,13 +22,14 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/dfs_io.rs\n"
   code: "pub use super::*;\nuse crate::ds::bitset::*;\n\n#[derive(Debug)]\npub enum\
-    \ InOut {\n\tIn(usize),\n\tOut(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G:\
-    \ Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {\n\tlet mut visited\
-    \ = new_bitset(g.len());\n\tvisited.set_bit(s, true);\n\tlet mut togo = vec![(s,\
-    \ !0)];\n\twhile let Some((v, par)) = togo.pop() {\n\t\tif v >> 31 != 0 {\n\t\t\
-    \tf(Out(!v), par);\n\t\t} else {\n\t\t\tf(In(v), par);\n\t\t\ttogo.push((!v, par));\n\
-    \t\t\tg.adj(v, |w| {\n\t\t\t\tif visited.modify_bit(w, true) {\n\t\t\t\t\ttogo.push((w,\
-    \ v));\n\t\t\t\t}\n\t\t\t});\n\t\t}\n\t}\n}\n"
+    \ InOut {\n    In(usize),\n    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G:\
+    \ Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {\n    let mut visited\
+    \ = new_bitset(g.len());\n    visited.set_bit(s, true);\n    let mut togo = vec![(s,\
+    \ !0)];\n    while let Some((v, par)) = togo.pop() {\n        if v >> 31 != 0\
+    \ {\n            f(Out(!v), par);\n        } else {\n            f(In(v), par);\n\
+    \            togo.push((!v, par));\n            g.adj(v, |w| {\n             \
+    \   if visited.modify_bit(w, true) {\n                    togo.push((w, v));\n\
+    \                }\n            });\n        }\n    }\n}\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
@@ -36,7 +37,7 @@ data:
   isVerificationFile: false
   path: src/graph/dfs_io.rs
   requiredBy: []
-  timestamp: '2021-01-31 20:22:45+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs_io.rs

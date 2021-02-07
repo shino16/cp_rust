@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uf.rs
     title: src/ds/uf.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -20,18 +20,18 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/union_find_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A\n\
-    \nuse lib::ds::uf::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
-    \tlet (n, q) = io.scan();\n\tlet mut uf = UnionFind::new(n);\n\tfor _ in 0_usize..q\
-    \ {\n\t\tlet (com, x, y): (u8, _, _) = io.scan();\n\t\tif com == b'0' {\n\t\t\t\
-    uf.unite(x, y);\n\t\t} else {\n\t\t\tio.println(uf.is_same(x, y) as u32);\n\t\t\
-    }\n\t}\n}\n"
+    \nuse lib::ds::uf::*;\nuse lib::io::*;\n\nfn main() {\n    let mut io = IO::new();\n\
+    \    let (n, q) = io.scan();\n    let mut uf = UnionFind::new(n);\n    for _ in\
+    \ 0_usize..q {\n        let (com, x, y): (u8, _, _) = io.scan();\n        if com\
+    \ == b'0' {\n            uf.unite(x, y);\n        } else {\n            io.println(uf.is_same(x,\
+    \ y) as u32);\n        }\n    }\n}\n"
   dependsOn:
   - src/ds/uf.rs
   - src/io.rs
   isVerificationFile: true
   path: test/src/bin/union_find_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/union_find_test.rs

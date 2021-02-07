@@ -13,13 +13,13 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/vec.rs\n"
   code: "use std::mem::ManuallyDrop;\n\npub fn transmute_vec<T, U>(v: Vec<T>) -> Vec<U>\
-    \ {\n\tlet mut v = ManuallyDrop::new(v);\n\tunsafe { Vec::from_raw_parts(v.as_mut_ptr()\
+    \ {\n    let mut v = ManuallyDrop::new(v);\n    unsafe { Vec::from_raw_parts(v.as_mut_ptr()\
     \ as *mut _, v.len(), v.capacity()) }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/vec.rs
   requiredBy: []
-  timestamp: '2020-11-27 14:24:44+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/vec.rs

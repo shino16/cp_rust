@@ -15,17 +15,17 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/float/bisect.rs\n"
-  code: "use super::*;\n\npub fn bisect<F: FnMut(Float) -> bool>(\n\tmut l: Float,\n\
-    \tmut r: Float,\n\te: Float,\n\tmut pred: F,\n) -> Float {\n\tlet k = ((r - l)\
-    \ / e).log2() as u32 + 2;\n\tfor _ in 0..k {\n\t\tlet mid = (l + r) / 2.0;\n\t\
-    \tif pred(mid) {\n\t\t\tl = mid;\n\t\t} else {\n\t\t\tr = mid;\n\t\t}\n\t}\n\t\
-    r\n}\n"
+  code: "use super::*;\n\npub fn bisect<F: FnMut(Float) -> bool>(\n    mut l: Float,\n\
+    \    mut r: Float,\n    e: Float,\n    mut pred: F,\n) -> Float {\n    let k =\
+    \ ((r - l) / e).log2() as u32 + 2;\n    for _ in 0..k {\n        let mid = (l\
+    \ + r) / 2.0;\n        if pred(mid) {\n            l = mid;\n        } else {\n\
+    \            r = mid;\n        }\n    }\n    r\n}\n"
   dependsOn:
   - src/float.rs
   isVerificationFile: false
   path: src/float/bisect.rs
   requiredBy: []
-  timestamp: '2020-12-21 16:41:24+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/bisect.rs

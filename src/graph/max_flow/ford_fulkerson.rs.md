@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -35,29 +35,33 @@ data:
     RuntimeError: bundler is not specified: src/graph/max_flow/ford_fulkerson.rs\n"
   code: "use crate::bounded::Bounded;\nuse crate::ds::bitset::*;\npub use crate::num::*;\n\
     \npub mod edge;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num + Bounded>\
-    \ {\n\tpub to: usize,\n\tpub cap: C,\n\trev: usize,\n}\n\n/// O(FE)\n#[derive(Clone)]\n\
-    pub struct FordFulkerson<C: Num + Bounded> {\n\tpub graph: Vec<Vec<Edge<C>>>,\n\
-    }\n\nimpl<C: Num + Bounded> FordFulkerson<C> {\n\tpub fn new(len: usize) -> Self\
-    \ {\n\t\tSelf { graph: vec![Vec::new(); len] }\n\t}\n\tpub fn len(&self) -> usize\
-    \ {\n\t\tself.graph.len()\n\t}\n\tpub fn from_digraph(graph: &[Vec<(usize, C)>])\
-    \ -> Self {\n\t\tlet mut ret = Self::new(graph.len());\n\t\tfor (v, adj) in (0..).zip(graph)\
-    \ {\n\t\t\tfor &(w, cap) in adj {\n\t\t\t\tret.add_edge(v, w, cap);\n\t\t\t}\n\
-    \t\t}\n\t\tret\n\t}\n\tpub fn add_vertex(&mut self) -> usize {\n\t\tself.graph.push(Vec::new());\n\
-    \t\tself.graph.len() - 1\n\t}\n\tpub fn add_edge(&mut self, v: usize, w: usize,\
-    \ cap: C) {\n\t\tlet (vidx, widx) = (self.graph[v].len(), self.graph[w].len());\n\
-    \t\tself.graph[v].push(Edge { to: w, cap, rev: widx });\n\t\tself.graph[w].push(Edge\
-    \ { to: v, cap: C::ZERO, rev: vidx });\n\t}\n\tpub fn solve(&mut self, s: usize,\
-    \ t: usize) -> C {\n\t\tlet mut res = C::ZERO;\n\t\tlet mut used = new_bitset(self.graph.len());\n\
-    \t\tloop {\n\t\t\tused.reset();\n\t\t\tlet f = Self::dfs(&mut self.graph, s, t,\
-    \ &mut used, C::MAX);\n\t\t\tif f == C::ZERO {\n\t\t\t\treturn res;\n\t\t\t}\n\
-    \t\t\tres += f;\n\t\t}\n\t}\n\tfn dfs(graph: &mut Vec<Vec<Edge<C>>>, v: usize,\
-    \ t: usize, used: &mut [u32], ub: C) -> C {\n\t\tif v == t {\n\t\t\treturn ub;\n\
-    \t\t}\n\t\tlet mut adj = std::mem::take(&mut graph[v]);\n\t\tfor &mut Edge { to,\
-    \ ref mut cap, rev } in &mut adj {\n\t\t\tif *cap != C::ZERO && used.modify_bit(to,\
-    \ true) {\n\t\t\t\tlet df = Self::dfs(graph, to, t, used, ub.min(*cap));\n\t\t\
-    \t\tif df != C::ZERO {\n\t\t\t\t\t*cap -= df;\n\t\t\t\t\tgraph[to][rev].cap +=\
-    \ df;\n\t\t\t\t\tgraph[v] = adj;\n\t\t\t\t\treturn df;\n\t\t\t\t}\n\t\t\t}\n\t\
-    \t}\n\t\tgraph[v] = adj;\n\t\tC::ZERO\n\t}\n}\n"
+    \ {\n    pub to: usize,\n    pub cap: C,\n    rev: usize,\n}\n\n/// O(FE)\n#[derive(Clone)]\n\
+    pub struct FordFulkerson<C: Num + Bounded> {\n    pub graph: Vec<Vec<Edge<C>>>,\n\
+    }\n\nimpl<C: Num + Bounded> FordFulkerson<C> {\n    pub fn new(len: usize) ->\
+    \ Self {\n        Self { graph: vec![Vec::new(); len] }\n    }\n    pub fn len(&self)\
+    \ -> usize {\n        self.graph.len()\n    }\n    pub fn from_digraph(graph:\
+    \ &[Vec<(usize, C)>]) -> Self {\n        let mut ret = Self::new(graph.len());\n\
+    \        for (v, adj) in (0..).zip(graph) {\n            for &(w, cap) in adj\
+    \ {\n                ret.add_edge(v, w, cap);\n            }\n        }\n    \
+    \    ret\n    }\n    pub fn add_vertex(&mut self) -> usize {\n        self.graph.push(Vec::new());\n\
+    \        self.graph.len() - 1\n    }\n    pub fn add_edge(&mut self, v: usize,\
+    \ w: usize, cap: C) {\n        let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());\n\
+    \        self.graph[v].push(Edge { to: w, cap, rev: widx });\n        self.graph[w].push(Edge\
+    \ { to: v, cap: C::ZERO, rev: vidx });\n    }\n    pub fn solve(&mut self, s:\
+    \ usize, t: usize) -> C {\n        let mut res = C::ZERO;\n        let mut used\
+    \ = new_bitset(self.graph.len());\n        loop {\n            used.reset();\n\
+    \            let f = Self::dfs(&mut self.graph, s, t, &mut used, C::MAX);\n  \
+    \          if f == C::ZERO {\n                return res;\n            }\n   \
+    \         res += f;\n        }\n    }\n    fn dfs(graph: &mut Vec<Vec<Edge<C>>>,\
+    \ v: usize, t: usize, used: &mut [u32], ub: C) -> C {\n        if v == t {\n \
+    \           return ub;\n        }\n        let mut adj = std::mem::take(&mut graph[v]);\n\
+    \        for &mut Edge { to, ref mut cap, rev } in &mut adj {\n            if\
+    \ *cap != C::ZERO && used.modify_bit(to, true) {\n                let df = Self::dfs(graph,\
+    \ to, t, used, ub.min(*cap));\n                if df != C::ZERO {\n          \
+    \          *cap -= df;\n                    graph[to][rev].cap += df;\n      \
+    \              graph[v] = adj;\n                    return df;\n             \
+    \   }\n            }\n        }\n        graph[v] = adj;\n        C::ZERO\n  \
+    \  }\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/ds/bitset.rs
@@ -68,7 +72,7 @@ data:
   requiredBy:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs

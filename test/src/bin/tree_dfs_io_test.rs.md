@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
@@ -22,13 +22,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -45,12 +45,13 @@ data:
     RuntimeError: bundler is not specified: test/src/bin/tree_dfs_io_test.rs\n"
   code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/778\n\n\
     use lib::ds::fenwick::*;\nuse lib::graph::tree::dfs_io::*;\nuse lib::io::*;\n\n\
-    fn main() {\n\tlet mut io = IO::new();\n\tlet n = io.scan();\n\tlet mut graph\
-    \ = vec![Vec::new(); n];\n\tfor v in 1..n {\n\t\tlet p: usize = io.scan();\n\t\
-    \tgraph[p].push(v);\n\t\tgraph[v].push(p);\n\t}\n\tlet mut fwk = FenwickTree::new(vec![0;\
-    \ n], Addition::new());\n\tlet mut ans = 0;\n\tdfs_io(&graph, 0, |v, _| match\
-    \ v {\n\t\tIn(v) => {\n\t\t\tans += fwk.ask_prefix(v) as u64;\n\t\t\tfwk.add(v,\
-    \ 1_u32);\n\t\t},\n\t\tOut(v) => fwk.sub(v, 1),\n\t});\n\tio.println(ans);\n}\n"
+    fn main() {\n    let mut io = IO::new();\n    let n = io.scan();\n    let mut\
+    \ graph = vec![Vec::new(); n];\n    for v in 1..n {\n        let p: usize = io.scan();\n\
+    \        graph[p].push(v);\n        graph[v].push(p);\n    }\n    let mut fwk\
+    \ = FenwickTree::new(vec![0; n], Addition::new());\n    let mut ans = 0;\n   \
+    \ dfs_io(&graph, 0, |v, _| match v {\n        In(v) => {\n            ans += fwk.ask_prefix(v)\
+    \ as u64;\n            fwk.add(v, 1_u32);\n        },\n        Out(v) => fwk.sub(v,\
+    \ 1),\n    });\n    io.println(ans);\n}\n"
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
@@ -65,7 +66,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs

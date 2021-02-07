@@ -22,23 +22,24 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice/sort.rs\n"
   code: "use std::mem::MaybeUninit;\n\npub fn count_sort_bytes(slice: &[u8], out:\
-    \ &mut Vec<u8>, max_key: usize) {\n\tcount_sort(slice, out, max_key, |&x| x as\
-    \ usize);\n}\n\npub fn count_sort<T: Clone, F: FnMut(&T) -> usize>(\n\tslice:\
-    \ &[T],\n\tout: &mut Vec<T>,\n\tmax_key: usize,\n\tmut key: F,\n) {\n\tlet mut\
-    \ count = vec![0; max_key + 1];\n\tfor e in slice {\n\t\tcount[key(e)] += 1;\n\
-    \t}\n\tfor i in 0..max_key {\n\t\tcount[i + 1] += count[i];\n\t}\n\tout.clear();\n\
-    \tout.reserve(slice.len());\n\t{\n\t\t// this is safe\n\t\t// refer to https://docs.rs/uninit/0.4.0/uninit/extension_traits/trait.VecCapacity.html#method.get_backing_buffer_with_leaking_writes\n\
-    \t\tlet out: &mut [MaybeUninit<T>] =\n\t\t\tunsafe { std::slice::from_raw_parts_mut(out.as_mut_ptr()\
-    \ as _, slice.len()) };\n\t\tfor e in slice.iter().rev() {\n\t\t\tcount[key(e)]\
-    \ -= 1;\n\t\t\tout[count[key(e)]] = MaybeUninit::new(e.clone());\n\t\t}\n\t}\n\
-    \tunsafe {\n\t\tout.set_len(slice.len());\n\t}\n}\n"
+    \ &mut Vec<u8>, max_key: usize) {\n    count_sort(slice, out, max_key, |&x| x\
+    \ as usize);\n}\n\npub fn count_sort<T: Clone, F: FnMut(&T) -> usize>(\n    slice:\
+    \ &[T],\n    out: &mut Vec<T>,\n    max_key: usize,\n    mut key: F,\n) {\n  \
+    \  let mut count = vec![0; max_key + 1];\n    for e in slice {\n        count[key(e)]\
+    \ += 1;\n    }\n    for i in 0..max_key {\n        count[i + 1] += count[i];\n\
+    \    }\n    out.clear();\n    out.reserve(slice.len());\n    {\n        // this\
+    \ is safe\n        // refer to https://docs.rs/uninit/0.4.0/uninit/extension_traits/trait.VecCapacity.html#method.get_backing_buffer_with_leaking_writes\n\
+    \        let out: &mut [MaybeUninit<T>] =\n            unsafe { std::slice::from_raw_parts_mut(out.as_mut_ptr()\
+    \ as _, slice.len()) };\n        for e in slice.iter().rev() {\n            count[key(e)]\
+    \ -= 1;\n            out[count[key(e)]] = MaybeUninit::new(e.clone());\n     \
+    \   }\n    }\n    unsafe {\n        out.set_len(slice.len());\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/slice/sort.rs
   requiredBy:
   - src/slice/sa.rs
   - src/tests.rs
-  timestamp: '2021-02-06 00:52:06+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

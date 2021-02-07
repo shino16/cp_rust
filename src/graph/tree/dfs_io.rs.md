@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -27,13 +27,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/dfs_io.rs\n"
-  code: "pub use super::*;\n\n#[derive(Debug)]\npub enum InOut {\n\tIn(usize),\n\t\
-    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G: Graph, F: FnMut(InOut,\
-    \ usize)>(g: &G, s: usize, mut f: F) {\n\tlet mut togo = vec![(s, !0)];\n\twhile\
-    \ let Some((v, par)) = togo.pop() {\n\t\tif  v > !v {\n\t\t\tf(Out(!v), par);\n\
-    \t\t} else {\n\t\t\tf(In(v), par);\n\t\t\ttogo.push((!v, par));\n\t\t\tg.adj(v,\
-    \ |w| {\n\t\t\t\tif w != par {\n\t\t\t\t\ttogo.push((w, v));\n\t\t\t\t}\n\t\t\t\
-    });\n\t\t}\n\t}\n}\n"
+  code: "pub use super::*;\n\n#[derive(Debug)]\npub enum InOut {\n    In(usize),\n\
+    \    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G: Graph, F: FnMut(InOut,\
+    \ usize)>(g: &G, s: usize, mut f: F) {\n    let mut togo = vec![(s, !0)];\n  \
+    \  while let Some((v, par)) = togo.pop() {\n        if  v > !v {\n           \
+    \ f(Out(!v), par);\n        } else {\n            f(In(v), par);\n           \
+    \ togo.push((!v, par));\n            g.adj(v, |w| {\n                if w != par\
+    \ {\n                    togo.push((w, v));\n                }\n            });\n\
+    \        }\n    }\n}\n"
   dependsOn:
   - src/graph.rs
   - src/graph/tree.rs
@@ -42,7 +43,7 @@ data:
   path: src/graph/tree/dfs_io.rs
   requiredBy:
   - src/graph/tree/reroot.rs
-  timestamp: '2021-01-31 21:43:13+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

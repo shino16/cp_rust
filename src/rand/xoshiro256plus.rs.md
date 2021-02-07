@@ -22,23 +22,25 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/rand/xoshiro256plus.rs\n"
   code: "use crate::rand::seed::*;\n\npub struct Xoshiro256plus([u64; 4]);\n\nimpl\
-    \ Xoshiro256plus {\n\tpub fn new() -> Self {\n\t\tSelf(seed())\n\t}\n\tpub fn\
-    \ next(&mut self) -> u64 {\n\t\tlet s = &mut self.0;\n\t\tlet t = s[1] << 17;\n\
-    \t\ts[2] ^= s[0];\n\t\ts[3] ^= s[1];\n\t\ts[1] ^= s[2];\n\t\ts[0] ^= s[3];\n\t\
-    \ts[2] ^= t;\n\t\ts[3] = s[3].rotate_left(45);\n\t\ts[0].wrapping_add(s[3])\n\t\
-    }\n\t/// skip 2^128 steps\n\tpub fn split(&mut self) -> Self {\n\t\tstatic JUMP:\
-    \ [u64; 4] =\n\t\t\t[0x180ec6d33cfd0aba, 0xd5a61266f0c9392c, 0xa9582618e03fc9aa,\
-    \ 0x39abdc4529b1661c];\n\t\tlet mut s2 = [0; 4];\n\t\tfor &jump in &JUMP {\n\t\
-    \t\tfor b in 0..64 {\n\t\t\t\tif (jump >> b) & 1 != 0 {\n\t\t\t\t\tfor (s2, s)\
-    \ in s2.iter_mut().zip(&self.0) {\n\t\t\t\t\t\t*s2 ^= s;\n\t\t\t\t\t}\n\t\t\t\t\
-    }\n\t\t\t\tself.next();\n\t\t\t}\n\t\t}\n\t\tSelf(s2)\n\t}\n}\n"
+    \ Xoshiro256plus {\n    pub fn new() -> Self {\n        Self(seed())\n    }\n\
+    \    pub fn next(&mut self) -> u64 {\n        let s = &mut self.0;\n        let\
+    \ t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1]\
+    \ ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = s[3].rotate_left(45);\n\
+    \        s[0].wrapping_add(s[3])\n    }\n    /// skip 2^128 steps\n    pub fn\
+    \ split(&mut self) -> Self {\n        static JUMP: [u64; 4] =\n            [0x180ec6d33cfd0aba,\
+    \ 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc4529b1661c];\n        let mut\
+    \ s2 = [0; 4];\n        for &jump in &JUMP {\n            for b in 0..64 {\n \
+    \               if (jump >> b) & 1 != 0 {\n                    for (s2, s) in\
+    \ s2.iter_mut().zip(&self.0) {\n                        *s2 ^= s;\n          \
+    \          }\n                }\n                self.next();\n            }\n\
+    \        }\n        Self(s2)\n    }\n}\n"
   dependsOn:
   - src/rand/seed.rs
   isVerificationFile: false
   path: src/rand/xoshiro256plus.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-02-06 03:07:17+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

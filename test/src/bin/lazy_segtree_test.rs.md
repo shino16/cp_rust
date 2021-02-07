@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/ds/segtree/lazy.rs
     title: src/ds/segtree/lazy.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -36,15 +36,16 @@ data:
     RuntimeError: bundler is not specified: test/src/bin/lazy_segtree_test.rs\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum\n\
     \nuse lib::alg::arith::*;\nuse lib::ds::segtree::lazy::*;\nuse lib::io::*;\nuse\
-    \ lib::mint::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\tlet [n, q]: [usize;\
-    \ 2] = io.scan();\n\tlet a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();\n\
-    \tlet mut ds = LazySegmentTree::from_slice(\n\t\t&a,\n\t\tMonoidImpl(|| (Mint99::ZERO,\
-    \ Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),\n\t\tMonoidImpl(|| (Mint99::ONE,\
-    \ Mint99::ZERO), |(a, b), (c, d)| (a * c, b * c + d)),\n\t\t|(x, w), (a, b)| (a\
-    \ * x + b * w, w),\n\t);\n\tfor _ in 0..q {\n\t\tlet t: u32 = io.scan();\n\t\t\
-    if t == 0 {\n\t\t\tds.act_over(io.scan(), io.scan(), io.scan());\n\t\t} else {\n\
-    \t\t\tlet ans = ds.ask(io.scan(), io.scan()).0;\n\t\t\tio.println(ans);\n\t\t\
-    }\n\t}\n}\n\n// f(x) = ax + b\n// g(x) = cx + d\n// g(f(x)) = acx + bc + d\n"
+    \ lib::mint::*;\n\nfn main() {\n    let mut io = IO::new();\n    let [n, q]: [usize;\
+    \ 2] = io.scan();\n    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();\n\
+    \    let mut ds = LazySegmentTree::from_slice(\n        &a,\n        MonoidImpl(||\
+    \ (Mint99::ZERO, Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),\n        MonoidImpl(||\
+    \ (Mint99::ONE, Mint99::ZERO), |(a, b), (c, d)| (a * c, b * c + d)),\n       \
+    \ |(x, w), (a, b)| (a * x + b * w, w),\n    );\n    for _ in 0..q {\n        let\
+    \ t: u32 = io.scan();\n        if t == 0 {\n            ds.act_over(io.scan(),\
+    \ io.scan(), io.scan());\n        } else {\n            let ans = ds.ask(io.scan(),\
+    \ io.scan()).0;\n            io.println(ans);\n        }\n    }\n}\n\n// f(x)\
+    \ = ax + b\n// g(x) = cx + d\n// g(f(x)) = acx + bc + d\n"
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
@@ -56,8 +57,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/lazy_segtree_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-08 00:55:36+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/lazy_segtree_test.rs
 layout: document

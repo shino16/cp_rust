@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -23,10 +23,11 @@ data:
     RuntimeError: bundler is not specified: src/graph/bfs.rs\n"
   code: "use std::collections::VecDeque;\n\npub use super::*;\nuse crate::ds::bitset::*;\n\
     \n/// f: (v, par)\npub fn bfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize,\
-    \ mut f: F) {\n\tlet mut visited = new_bitset(g.len());\n\tlet mut togo: VecDeque<_>\
-    \ = vec![(s, !0)].into();\n\tvisited.set_bit(s, true);\n\twhile let Some((v, par))\
-    \ = togo.pop_front() {\n\t\tf(v, par);\n\t\tg.adj(v, |w| {\n\t\t\tif visited.modify_bit(w,\
-    \ true) {\n\t\t\t\ttogo.push_back((w, v));\n\t\t\t}\n\t\t})\n\t}\n}\n"
+    \ mut f: F) {\n    let mut visited = new_bitset(g.len());\n    let mut togo: VecDeque<_>\
+    \ = vec![(s, !0)].into();\n    visited.set_bit(s, true);\n    while let Some((v,\
+    \ par)) = togo.pop_front() {\n        f(v, par);\n        g.adj(v, |w| {\n   \
+    \         if visited.modify_bit(w, true) {\n                togo.push_back((w,\
+    \ v));\n            }\n        })\n    }\n}\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
@@ -34,7 +35,7 @@ data:
   isVerificationFile: false
   path: src/graph/bfs.rs
   requiredBy: []
-  timestamp: '2021-01-31 20:22:45+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/bfs.rs

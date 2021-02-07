@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
@@ -98,16 +98,16 @@ data:
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
   - icon: ':warning:'
     path: src/mint/num.rs
     title: src/mint/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':warning:'
@@ -135,16 +135,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/hlpp_test.rs
     title: test/src/bin/hlpp_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_garner_test.rs
     title: test/src/bin/ntt_garner_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ntt_mint_garner_test.rs
     title: test/src/bin/ntt_mint_garner_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ntt_mint_test.rs
     title: test/src/bin/ntt_mint_test.rs
   - icon: ':heavy_check_mark:'
@@ -156,20 +156,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/zo.rs\n"
-  code: "pub trait ZeroOne: Copy + Eq {\n\tconst ZERO: Self;\n\tfn is_zero(self) ->\
-    \ bool {\n\t\tself == Self::ZERO\n\t}\n\tconst ONE: Self;\n}\n\nmacro_rules! impl_zo\
-    \ {\n\t($($t:ty),*) => { $(\n\t\timpl ZeroOne for $t {\n\t\t\tconst ZERO: Self\
-    \ = 0;\n\t\t\tconst ONE: Self = 1;\n\t\t}\n\t)* };\n}\n\nimpl_zo!(i32, i64, i128,\
-    \ isize, u32, u64, u128, usize);\n"
+  code: "pub trait ZeroOne: Copy + Eq {\n    const ZERO: Self;\n    fn is_zero(self)\
+    \ -> bool {\n        self == Self::ZERO\n    }\n    const ONE: Self;\n}\n\nmacro_rules!\
+    \ impl_zo {\n    ($($t:ty),*) => { $(\n        impl ZeroOne for $t {\n       \
+    \     const ZERO: Self = 0;\n            const ONE: Self = 1;\n        }\n   \
+    \ )* };\n}\n\nimpl_zo!(i32, i64, i128, isize, u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/zo.rs
@@ -213,8 +213,8 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2020-12-21 16:49:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-08 00:55:24+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/hlpp_test.rs

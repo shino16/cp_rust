@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -48,7 +48,7 @@ data:
   - src/graph/tree/dfs.rs
   - src/graph/tree/dfs_io.rs
   - src/graph/tree/reroot.rs
-  timestamp: '2021-01-29 12:22:27+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

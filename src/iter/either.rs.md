@@ -12,16 +12,16 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/iter/either.rs\n"
-  code: "pub enum Either<L, R> {\n\tLeft(L),\n\tRight(R),\n}\n\nimpl<A, L, R> Iterator\
-    \ for Either<L, R>\nwhere\n\tL: Iterator<Item = A>,\n\tR: Iterator<Item = A>,\n\
-    {\n\ttype Item = A;\n\tfn next(&mut self) -> Option<Self::Item> {\n\t\tmatch self\
-    \ {\n\t\t\tSelf::Left(l) => l.next(),\n\t\t\tSelf::Right(r) => r.next(),\n\t\t\
-    }\n\t}\n}\n"
+  code: "pub enum Either<L, R> {\n    Left(L),\n    Right(R),\n}\n\nimpl<A, L, R>\
+    \ Iterator for Either<L, R>\nwhere\n    L: Iterator<Item = A>,\n    R: Iterator<Item\
+    \ = A>,\n{\n    type Item = A;\n    fn next(&mut self) -> Option<Self::Item> {\n\
+    \        match self {\n            Self::Left(l) => l.next(),\n            Self::Right(r)\
+    \ => r.next(),\n        }\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/iter/either.rs
   requiredBy: []
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/iter/either.rs

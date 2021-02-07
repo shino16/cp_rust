@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -34,10 +34,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -61,7 +61,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -78,13 +78,13 @@ data:
     RuntimeError: bundler is not specified: test/src/bin/cargo_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\n\
     \n#[allow(unused_imports)]\nuse lib::tests::*;\n\nuse std::io::{self, Write, Result};\n\
-    use std::process::Command;\n\nfn main() -> Result<()> {\n\tlet output = Command::new(\"\
-    cargo\")\n\t\t.arg(\"test\")\n\t\t.arg(\"--release\")\n\t\t.arg(\"--\")\n\t\t\
-    .arg(\"--test-threads=1\")\n\t\t.output()?;\n\n\tif !output.status.success() {\n\
-    \t\teprintln!(\"`cargo test` failed\");\n\t\teprintln!(\"--- captured stdout ---\"\
-    );\n\t\tio::stdout().write_all(&output.stdout)?;\n\t\teprintln!(\"--- captured\
-    \ stderr ---\");\n\t\tio::stdout().write_all(&output.stderr)?;\n\t}\n\n\tprintln!(\"\
-    Hello World\");\n\n\tOk(())\n}\n"
+    use std::process::Command;\n\nfn main() -> Result<()> {\n    let output = Command::new(\"\
+    cargo\")\n        .arg(\"test\")\n        .arg(\"--release\")\n        .arg(\"\
+    --\")\n        .arg(\"--test-threads=1\")\n        .output()?;\n\n    if !output.status.success()\
+    \ {\n        eprintln!(\"`cargo test` failed\");\n        eprintln!(\"--- captured\
+    \ stdout ---\");\n        io::stdout().write_all(&output.stdout)?;\n        eprintln!(\"\
+    --- captured stderr ---\");\n        io::stdout().write_all(&output.stderr)?;\n\
+    \    }\n\n    println!(\"Hello World\");\n\n    Ok(())\n}\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

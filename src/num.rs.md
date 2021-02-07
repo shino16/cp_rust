@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
@@ -93,7 +93,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/hlpp_test.rs
     title: test/src/bin/hlpp_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
   - icon: ':heavy_check_mark:'
@@ -102,9 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -112,15 +112,16 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/num.rs\n"
   code: "pub use crate::zo::ZeroOne;\nuse std::fmt::*;\nuse std::ops::*;\n\npub trait\
-    \ Num:\n\tZeroOne\n\t+ Add<Output = Self>\n\t+ AddAssign\n\t+ Sub<Output = Self>\n\
-    \t+ SubAssign\n\t+ Mul<Output = Self>\n\t+ MulAssign\n\t+ Div<Output = Self>\n\
-    \t+ DivAssign\n\t+ Debug\n\t+ Display\n{\n\tfn wrapping_add(self, rhs: Self) ->\
-    \ Self;\n\tfn wrapping_neg(self) -> Self;\n}\n\npub trait INum: Num + Neg<Output\
-    \ = Self> {}\n\nmacro_rules! impl_num {\n\t($($t:ty),*) => { $(\n\t\timpl Num\
-    \ for $t {\n\t\t\tfn wrapping_add(self, rhs: Self) -> Self {\n\t\t\t\tself.wrapping_add(rhs)\n\
-    \t\t\t}\n\t\t\tfn wrapping_neg(self) -> Self {\n\t\t\t\tself.wrapping_neg()\n\t\
-    \t\t}\n\t\t}\n\t)* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32, u64, u128, usize);\n\
-    \nimpl<T: Num + Neg<Output = Self>> INum for T {}\n"
+    \ Num:\n    ZeroOne\n    + Add<Output = Self>\n    + AddAssign\n    + Sub<Output\
+    \ = Self>\n    + SubAssign\n    + Mul<Output = Self>\n    + MulAssign\n    + Div<Output\
+    \ = Self>\n    + DivAssign\n    + Debug\n    + Display\n{\n    fn wrapping_add(self,\
+    \ rhs: Self) -> Self;\n    fn wrapping_neg(self) -> Self;\n}\n\npub trait INum:\
+    \ Num + Neg<Output = Self> {}\n\nmacro_rules! impl_num {\n    ($($t:ty),*) =>\
+    \ { $(\n        impl Num for $t {\n            fn wrapping_add(self, rhs: Self)\
+    \ -> Self {\n                self.wrapping_add(rhs)\n            }\n         \
+    \   fn wrapping_neg(self) -> Self {\n                self.wrapping_neg()\n   \
+    \         }\n        }\n    )* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32,\
+    \ u64, u128, usize);\n\nimpl<T: Num + Neg<Output = Self>> INum for T {}\n"
   dependsOn:
   - src/zo.rs
   isVerificationFile: false
@@ -150,8 +151,8 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-01-30 12:54:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-08 00:55:24+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/hlpp_test.rs

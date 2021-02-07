@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -30,13 +30,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int/inv.rs\n"
-  code: "pub use super::*;\n\npub fn inv<I: Int>(a: I, modu: I) -> I {\n\tlet [zero,\
-    \ one]: [I::Signed; 2] = [I::Signed::ZERO, I::Signed::ONE];\n\tlet [mut a, mut\
-    \ b, mut u, mut v]: [I::Signed; 4] = [a.as_(), modu.as_(), one, zero];\n\twhile\
-    \ b != zero {\n\t\tlet t = a / b;\n\t\ta -= t * b;\n\t\tu -= t * v;\n\t\tstd::mem::swap(&mut\
-    \ a, &mut b);\n\t\tstd::mem::swap(&mut u, &mut v);\n\t}\n\tdebug_assert_eq!(a,\
-    \ one);\n\tif u < zero {\n\t\tdebug_assert_eq!(v, modu.as_());\n\t\tdebug_assert!(u\
-    \ > zero);\n\t\tu += v;\n\t}\n\ta.as_()\n}\n"
+  code: "pub use super::*;\n\npub fn inv<I: Int>(a: I, modu: I) -> I {\n    let [zero,\
+    \ one]: [I::Signed; 2] = [I::Signed::ZERO, I::Signed::ONE];\n    let [mut a, mut\
+    \ b, mut u, mut v]: [I::Signed; 4] = [a.as_(), modu.as_(), one, zero];\n    while\
+    \ b != zero {\n        let t = a / b;\n        a -= t * b;\n        u -= t * v;\n\
+    \        std::mem::swap(&mut a, &mut b);\n        std::mem::swap(&mut u, &mut\
+    \ v);\n    }\n    debug_assert_eq!(a, one);\n    if u < zero {\n        debug_assert_eq!(v,\
+    \ modu.as_());\n        debug_assert!(u > zero);\n        u += v;\n    }\n   \
+    \ a.as_()\n}\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -47,7 +48,7 @@ data:
   isVerificationFile: false
   path: src/int/inv.rs
   requiredBy: []
-  timestamp: '2021-02-03 06:45:01+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/inv.rs

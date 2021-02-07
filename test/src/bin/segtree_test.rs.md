@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -23,12 +23,12 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/segtree_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A\n\
-    \nuse lib::ds::segtree::*;\nuse lib::io::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
-    \tlet (n, q): (usize, usize) = io.scan();\n\n\tlet inf = (1_u32 << 31) - 1;\n\n\
-    \tlet mut st = SegmentTree::new(n, MonoidImpl(|| inf, |a, b| a.min(b)));\n\n\t\
-    for _ in 0..q {\n\t\tlet [c, x, y]: [usize; 3] = io.scan();\n\t\tif c == 0 {\n\
-    \t\t\tst.exec(x, |v| *v = y as u32);\n\t\t} else {\n\t\t\tio.println(st.ask(x,\
-    \ y + 1));\n\t\t}\n\t}\n}\n"
+    \nuse lib::ds::segtree::*;\nuse lib::io::*;\n\nfn main() {\n    let mut io = IO::new();\n\
+    \    let (n, q): (usize, usize) = io.scan();\n\n    let inf = (1_u32 << 31) -\
+    \ 1;\n\n    let mut st = SegmentTree::new(n, MonoidImpl(|| inf, |a, b| a.min(b)));\n\
+    \n    for _ in 0..q {\n        let [c, x, y]: [usize; 3] = io.scan();\n      \
+    \  if c == 0 {\n            st.exec(x, |v| *v = y as u32);\n        } else {\n\
+    \            io.println(st.ask(x, y + 1));\n        }\n    }\n}\n"
   dependsOn:
   - src/alg.rs
   - src/ds/segtree.rs
@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

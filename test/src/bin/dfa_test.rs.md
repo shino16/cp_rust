@@ -19,19 +19,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -48,24 +48,26 @@ data:
     RuntimeError: bundler is not specified: test/src/bin/dfa_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570\n\
     \nuse lib::dfa::*;\nuse lib::io::*;\nuse lib::mint::*;\n\n#[derive(Ord, PartialOrd,\
-    \ Eq, PartialEq, Copy, Clone, Hash)]\nenum ZigZagState {\n\tInitial,\n\tFirst(u8),\n\
-    \tUp(u8),\n\tDown(u8),\n}\n\nstruct ZigZag;\n\nimpl Dfa for ZigZag {\n\ttype Alphabet\
-    \ = u8;\n\ttype State = Option<ZigZagState>;\n\tfn init(&self) -> Self::State\
-    \ {\n\t\tSome(ZigZagState::Initial)\n\t}\n\tfn next(&self, s: Self::State, a:\
-    \ Self::Alphabet, _: usize) -> Self::State {\n\t\tuse ZigZagState::*;\n\t\tif\
-    \ let Some(s) = s {\n\t\t\tmatch s {\n\t\t\t\tInitial if a == b'0' => Some(Initial),\n\
-    \t\t\t\tInitial => Some(First(a)),\n\t\t\t\tFirst(d) if d < a => Some(Up(a)),\n\
-    \t\t\t\tFirst(d) if d > a => Some(Down(a)),\n\t\t\t\tUp(d) if d > a => Some(Down(a)),\n\
-    \t\t\t\tDown(d) if d < a => Some(Up(a)),\n\t\t\t\t_ => None,\n\t\t\t}\n\t\t} else\
-    \ {\n\t\t\tNone\n\t\t}\n\t}\n\tfn accept(&self, s: Self::State) -> bool {\n\t\t\
-    s.is_some()\n\t}\n\tfn unsuccessful(&self, s: Self::State) -> bool {\n\t\ts.is_none()\n\
-    \t}\n}\n\n#[derive(Default, Clone, Copy, PartialEq, Eq)]\nstruct Modx;\n\nimpl\
-    \ Mod for Modx {\n\tconst M: u32 = 10000;\n\tconst PHI: u32 = 4000;\n}\n\nfn main()\
-    \ {\n\tlet mut io = IO::new();\n\tlet [a0, b]: [&[u8]; 2] = io.scan();\n\tlet\
-    \ m = io.scan();\n\tlet mut a = vec![b'0'; b.len()];\n\ta[b.len() - a0.len()..].copy_from_slice(&a0);\n\
-    \n\tlet dfa = And(ZigZag, And(MultipleOf(m), And(Leq(&b), Not(Lt(&a)))));\n\t\
-    let alphabet = \"0123456789\".as_bytes();\n\tlet ans: Mint<Modx> = dfa.count(a.len(),\
-    \ alphabet);\n\tprintln!(\"{}\", ans);\n}\n"
+    \ Eq, PartialEq, Copy, Clone, Hash)]\nenum ZigZagState {\n    Initial,\n    First(u8),\n\
+    \    Up(u8),\n    Down(u8),\n}\n\nstruct ZigZag;\n\nimpl Dfa for ZigZag {\n  \
+    \  type Alphabet = u8;\n    type State = Option<ZigZagState>;\n    fn init(&self)\
+    \ -> Self::State {\n        Some(ZigZagState::Initial)\n    }\n    fn next(&self,\
+    \ s: Self::State, a: Self::Alphabet, _: usize) -> Self::State {\n        use ZigZagState::*;\n\
+    \        if let Some(s) = s {\n            match s {\n                Initial\
+    \ if a == b'0' => Some(Initial),\n                Initial => Some(First(a)),\n\
+    \                First(d) if d < a => Some(Up(a)),\n                First(d) if\
+    \ d > a => Some(Down(a)),\n                Up(d) if d > a => Some(Down(a)),\n\
+    \                Down(d) if d < a => Some(Up(a)),\n                _ => None,\n\
+    \            }\n        } else {\n            None\n        }\n    }\n    fn accept(&self,\
+    \ s: Self::State) -> bool {\n        s.is_some()\n    }\n    fn unsuccessful(&self,\
+    \ s: Self::State) -> bool {\n        s.is_none()\n    }\n}\n\n#[derive(Default,\
+    \ Clone, Copy, PartialEq, Eq)]\nstruct Modx;\n\nimpl Mod for Modx {\n    const\
+    \ M: u32 = 10000;\n    const PHI: u32 = 4000;\n}\n\nfn main() {\n    let mut io\
+    \ = IO::new();\n    let [a0, b]: [&[u8]; 2] = io.scan();\n    let m = io.scan();\n\
+    \    let mut a = vec![b'0'; b.len()];\n    a[b.len() - a0.len()..].copy_from_slice(&a0);\n\
+    \n    let dfa = And(ZigZag, And(MultipleOf(m), And(Leq(&b), Not(Lt(&a)))));\n\
+    \    let alphabet = \"0123456789\".as_bytes();\n    let ans: Mint<Modx> = dfa.count(a.len(),\
+    \ alphabet);\n    println!(\"{}\", ans);\n}\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -81,7 +83,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs

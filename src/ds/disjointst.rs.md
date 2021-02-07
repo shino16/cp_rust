@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
@@ -19,27 +19,29 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/disjointst.rs\n"
   code: "pub use crate::alg::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub struct\
-    \ DisjointSparseTable<A: Monoid> {\n\tdata: Vec<Vec<A::Item>>,\n\talg: A,\n}\n\
-    \nimpl<A: Monoid> DisjointSparseTable<A> {\n\tpub fn new(data: Vec<A::Item>, alg:\
-    \ A) -> Self {\n\t\tlet len = data.len();\n\t\tlet height = len.ilog2() as usize;\n\
-    \t\tlet mut data = vec![data; height + 1];\n\t\tfor s in 1..=height {\n\t\t\t\
-    for z in (0..len).step_by(1 << (s + 1)) {\n\t\t\t\tlet m = z + (1 << s);\n\t\t\
-    \t\tif m >= len {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tdata[s][m - 1] = data[0][m\
-    \ - 1];\n\t\t\t\tdata[s][m] = data[0][m];\n\t\t\t\tfor i in (z..m - 1).rev() {\n\
-    \t\t\t\t\tdata[s][i] = alg.op(data[0][i], data[s][i + 1]);\n\t\t\t\t}\n\t\t\t\t\
-    for i in m + 1..(m + (1 << s)).min(len) {\n\t\t\t\t\tdata[s][i] = alg.op(data[s][i\
-    \ - 1], data[0][i]);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tSelf { data, alg }\n\t}\n\
-    \tpub fn ask(&self, l: usize, r: usize) -> A::Item {\n\t\tif l == r {\n\t\t\t\
-    self.alg.unit()\n\t\t} else if l + 1 == r {\n\t\t\tself.data[0][l]\n\t\t} else\
-    \ {\n\t\t\tlet s = (l ^ r).ilog2() as usize;\n\t\t\tself.alg.op(self.data[s][l],\
-    \ self.data[s][r])\n\t\t}\n\t}\n}\n"
+    \ DisjointSparseTable<A: Monoid> {\n    data: Vec<Vec<A::Item>>,\n    alg: A,\n\
+    }\n\nimpl<A: Monoid> DisjointSparseTable<A> {\n    pub fn new(data: Vec<A::Item>,\
+    \ alg: A) -> Self {\n        let len = data.len();\n        let height = len.ilog2()\
+    \ as usize;\n        let mut data = vec![data; height + 1];\n        for s in\
+    \ 1..=height {\n            for z in (0..len).step_by(1 << (s + 1)) {\n      \
+    \          let m = z + (1 << s);\n                if m >= len {\n            \
+    \        break;\n                }\n                data[s][m - 1] = data[0][m\
+    \ - 1];\n                data[s][m] = data[0][m];\n                for i in (z..m\
+    \ - 1).rev() {\n                    data[s][i] = alg.op(data[0][i], data[s][i\
+    \ + 1]);\n                }\n                for i in m + 1..(m + (1 << s)).min(len)\
+    \ {\n                    data[s][i] = alg.op(data[s][i - 1], data[0][i]);\n  \
+    \              }\n            }\n        }\n        Self { data, alg }\n    }\n\
+    \    pub fn ask(&self, l: usize, r: usize) -> A::Item {\n        if l == r {\n\
+    \            self.alg.unit()\n        } else if l + 1 == r {\n            self.data[0][l]\n\
+    \        } else {\n            let s = (l ^ r).ilog2() as usize;\n           \
+    \ self.alg.op(self.data[s][l], self.data[s][r])\n        }\n    }\n}\n"
   dependsOn:
   - src/alg.rs
   - src/bit.rs
   isVerificationFile: false
   path: src/ds/disjointst.rs
   requiredBy: []
-  timestamp: '2021-02-05 04:21:11+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/disjointst.rs

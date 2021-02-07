@@ -18,17 +18,18 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice/perm.rs\n"
-  code: "pub fn next_permutation<T: Ord>(a: &mut [T]) -> bool {\n\tif a.len() <= 1\
-    \ {\n\t\treturn false;\n\t}\n\tlet mut k = a.len() - 1;\n\twhile k != 0 && a[k\
-    \ - 1] >= a[k] {\n\t\tk -= 1;\n\t}\n\tif k == 0 {\n\t\ta.reverse();\n\t\treturn\
-    \ false;\n\t}\n\tk -= 1;\n\tlet mut l = a.len() - 1;\n\twhile a[k] >= a[l] {\n\
-    \t\tl -= 1;\n\t}\n\ta.swap(k, l);\n\ta[k + 1..].reverse();\n\ttrue\n}\n"
+  code: "pub fn next_permutation<T: Ord>(a: &mut [T]) -> bool {\n    if a.len() <=\
+    \ 1 {\n        return false;\n    }\n    let mut k = a.len() - 1;\n    while k\
+    \ != 0 && a[k - 1] >= a[k] {\n        k -= 1;\n    }\n    if k == 0 {\n      \
+    \  a.reverse();\n        return false;\n    }\n    k -= 1;\n    let mut l = a.len()\
+    \ - 1;\n    while a[k] >= a[l] {\n        l -= 1;\n    }\n    a.swap(k, l);\n\
+    \    a[k + 1..].reverse();\n    true\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/slice/perm.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-01-12 01:50:14+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

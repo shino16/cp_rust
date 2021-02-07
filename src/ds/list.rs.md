@@ -14,27 +14,28 @@ data:
     RuntimeError: bundler is not specified: src/ds/list.rs\n"
   code: "use std::iter::FromIterator;\nuse std::rc::Rc;\n\n#[derive(Clone, Ord, PartialOrd,\
     \ Eq, PartialEq, Debug)]\npub struct List<T>(Option<Rc<(T, List<T>)>>);\n\nimpl<T>\
-    \ Default for List<T> {\n\tfn default() -> Self {\n\t\tSelf::new()\n\t}\n}\n\n\
-    impl<T> List<T> {\n\tpub fn new() -> Self {\n\t\tSelf(None)\n\t}\n\tpub fn push(&mut\
-    \ self, val: T) {\n\t\tunsafe {\n\t\t\tstd::ptr::write(self, Self(Some(Rc::new((val,\
-    \ std::ptr::read(self))))));\n\t\t}\n\t}\n\tpub fn cons(self, val: T) -> Self\
-    \ {\n\t\tSelf(Some(Rc::new((val, self))))\n\t}\n\tpub fn head(&self) -> Option<&T>\
-    \ {\n\t\tself.0.as_deref().map(|(hd, _)| hd)\n\t}\n\tpub fn tail(&self) -> Option<&Self>\
-    \ {\n\t\tself.0.as_deref().map(|(_, tl)| tl)\n\t}\n\tpub fn from_rev_iter<I: IntoIterator<Item\
-    \ = T>>(iter: I) -> Self {\n\t\titer.into_iter().fold(Self::new(), |es, e| es.cons(e))\n\
-    \t}\n}\n\npub struct Iter<'a, T>(&'a List<T>);\n\nimpl<'a, T> Iterator for Iter<'a,\
-    \ T> {\n\ttype Item = &'a T;\n\tfn next(&mut self) -> Option<Self::Item> {\n\t\
-    \tmatch (self.0).0.as_deref() {\n\t\t\tNone => None,\n\t\t\tSome(&(ref hd, ref\
-    \ tl)) => {\n\t\t\t\t*self = Self(tl);\n\t\t\t\tSome(hd)\n\t\t\t},\n\t\t}\n\t\
-    }\n}\n\nimpl<T> FromIterator<T> for List<T> {\n\tfn from_iter<I: IntoIterator<Item\
-    \ = T>>(iter: I) -> Self {\n\t\tlet mut iter = iter.into_iter();\n\t\tlet val\
-    \ = iter.next();\n\t\tSelf(val.map(|val| Rc::new((val, iter.collect()))))\n\t\
-    }\n}\n"
+    \ Default for List<T> {\n    fn default() -> Self {\n        Self::new()\n   \
+    \ }\n}\n\nimpl<T> List<T> {\n    pub fn new() -> Self {\n        Self(None)\n\
+    \    }\n    pub fn push(&mut self, val: T) {\n        unsafe {\n            std::ptr::write(self,\
+    \ Self(Some(Rc::new((val, std::ptr::read(self))))));\n        }\n    }\n    pub\
+    \ fn cons(self, val: T) -> Self {\n        Self(Some(Rc::new((val, self))))\n\
+    \    }\n    pub fn head(&self) -> Option<&T> {\n        self.0.as_deref().map(|(hd,\
+    \ _)| hd)\n    }\n    pub fn tail(&self) -> Option<&Self> {\n        self.0.as_deref().map(|(_,\
+    \ tl)| tl)\n    }\n    pub fn from_rev_iter<I: IntoIterator<Item = T>>(iter: I)\
+    \ -> Self {\n        iter.into_iter().fold(Self::new(), |es, e| es.cons(e))\n\
+    \    }\n}\n\npub struct Iter<'a, T>(&'a List<T>);\n\nimpl<'a, T> Iterator for\
+    \ Iter<'a, T> {\n    type Item = &'a T;\n    fn next(&mut self) -> Option<Self::Item>\
+    \ {\n        match (self.0).0.as_deref() {\n            None => None,\n      \
+    \      Some(&(ref hd, ref tl)) => {\n                *self = Self(tl);\n     \
+    \           Some(hd)\n            },\n        }\n    }\n}\n\nimpl<T> FromIterator<T>\
+    \ for List<T> {\n    fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self\
+    \ {\n        let mut iter = iter.into_iter();\n        let val = iter.next();\n\
+    \        Self(val.map(|val| Rc::new((val, iter.collect()))))\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/list.rs
   requiredBy: []
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/list.rs

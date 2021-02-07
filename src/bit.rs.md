@@ -66,18 +66,19 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/bit.rs\n"
-  code: "use std::ops::*;\n\npub trait Bits:\n\tSized\n\t+ BitAnd<Output = Self> +\
-    \ BitAndAssign\n\t+ BitOr<Output = Self> + BitOrAssign\n\t+ BitXor<Output = Self>\
-    \ + BitXorAssign\n\t+ Shl<u32, Output = Self> + ShlAssign<u32>\n\t+ Shr<u32, Output\
-    \ = Self> + ShrAssign<u32>\n\t+ Not<Output = Self>\n{\n\tfn trailing_zeros(self)\
-    \ -> u32;\n\tfn lsb(self) -> Self;\n\tfn ilog2(self) -> u32;\n\tfn msb(self) ->\
-    \ Self;\n}\n\nmacro_rules! impl_bit {\n\t($($t:ty), *) => { $(\n\t\timpl Bits\
-    \ for $t {\n\t\t\tfn trailing_zeros(self) -> u32 {\n\t\t\t\t<$t>::trailing_zeros(self)\n\
-    \t\t\t}\n\t\t\tfn lsb(self) -> Self {\n\t\t\t\tself & self.wrapping_neg()\n\t\t\
-    \t}\n\t\t\tfn ilog2(self) -> u32 {\n\t\t\t\tstd::mem::size_of::<$t>() as u32 *\
-    \ 8 - self.leading_zeros() - 1\n\t\t\t}\n\t\t\tfn msb(self) -> Self {\n\t\t\t\t\
-    (1 as $t) << self.ilog2()\n\t\t\t}\n\t\t}\n\t)* };\n}\n\nimpl_bit!(i32, i64, i128,\
-    \ isize, u32, u64, u128, usize);\n"
+  code: "use std::ops::*;\n\npub trait Bits:\n    Sized\n    + BitAnd<Output = Self>\
+    \ + BitAndAssign\n    + BitOr<Output = Self> + BitOrAssign\n    + BitXor<Output\
+    \ = Self> + BitXorAssign\n    + Shl<u32, Output = Self> + ShlAssign<u32>\n   \
+    \ + Shr<u32, Output = Self> + ShrAssign<u32>\n    + Not<Output = Self>\n{\n  \
+    \  fn trailing_zeros(self) -> u32;\n    fn lsb(self) -> Self;\n    fn ilog2(self)\
+    \ -> u32;\n    fn msb(self) -> Self;\n}\n\nmacro_rules! impl_bit {\n    ($($t:ty),\
+    \ *) => { $(\n        impl Bits for $t {\n            fn trailing_zeros(self)\
+    \ -> u32 {\n                <$t>::trailing_zeros(self)\n            }\n      \
+    \      fn lsb(self) -> Self {\n                self & self.wrapping_neg()\n  \
+    \          }\n            fn ilog2(self) -> u32 {\n                std::mem::size_of::<$t>()\
+    \ as u32 * 8 - self.leading_zeros() - 1\n            }\n            fn msb(self)\
+    \ -> Self {\n                (1 as $t) << self.ilog2()\n            }\n      \
+    \  }\n    )* };\n}\n\nimpl_bit!(i32, i64, i128, isize, u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/bit.rs
@@ -96,7 +97,7 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2020-12-15 00:46:43+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

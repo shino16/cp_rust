@@ -16,21 +16,22 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/float/convex.rs\n"
   code: "use super::*;\n\n/// return (argmin f, min f)\npub fn convex_min<F: FnMut(Float)\
-    \ -> Float>(\n\tmut l: Float,\n\tmut r: Float,\n\te: Float,\n\tmut f: F,\n) ->\
-    \ (Float, Float) {\n\tconst PHI: Float = 1.618_033_988_749_895;\n\tlet k = ((r\
-    \ - l) / e).log(PHI) as u32 + 2;\n\n\tlet mut ml = (PHI * l + r) / (1.0 + PHI);\n\
-    \tlet mut mr = (l + PHI * r) / (1.0 + PHI);\n\tlet mut yml = f(ml);\n\tlet mut\
-    \ ymr = f(mr);\n\n\tfor _ in 0..k {\n\t\tif yml < ymr {\n\t\t\tl = ml;\n\t\t\t\
-    ml = mr;\n\t\t\tyml = ymr;\n\t\t\tmr = (ml + PHI * r) / (1.0 + PHI);\n\t\t\tymr\
-    \ = f(mr);\n\t\t} else {\n\t\t\tr = mr;\n\t\t\tmr = ml;\n\t\t\tymr = yml;\n\t\t\
-    \tmr = (PHI * l + mr) / (1.0 + PHI);\n\t\t\tyml = f(ml);\n\t\t}\n\t}\n\t(ml, yml)\n\
-    }\n"
+    \ -> Float>(\n    mut l: Float,\n    mut r: Float,\n    e: Float,\n    mut f:\
+    \ F,\n) -> (Float, Float) {\n    const PHI: Float = 1.618_033_988_749_895;\n \
+    \   let k = ((r - l) / e).log(PHI) as u32 + 2;\n\n    let mut ml = (PHI * l +\
+    \ r) / (1.0 + PHI);\n    let mut mr = (l + PHI * r) / (1.0 + PHI);\n    let mut\
+    \ yml = f(ml);\n    let mut ymr = f(mr);\n\n    for _ in 0..k {\n        if yml\
+    \ < ymr {\n            l = ml;\n            ml = mr;\n            yml = ymr;\n\
+    \            mr = (ml + PHI * r) / (1.0 + PHI);\n            ymr = f(mr);\n  \
+    \      } else {\n            r = mr;\n            mr = ml;\n            ymr =\
+    \ yml;\n            mr = (PHI * l + mr) / (1.0 + PHI);\n            yml = f(ml);\n\
+    \        }\n    }\n    (ml, yml)\n}\n"
   dependsOn:
   - src/float.rs
   isVerificationFile: false
   path: src/float/convex.rs
   requiredBy: []
-  timestamp: '2021-01-30 17:33:56+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/convex.rs

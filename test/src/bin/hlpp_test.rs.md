@@ -7,13 +7,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/hlpp.rs
     title: src/graph/max_flow/hlpp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -29,10 +29,10 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/hlpp_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\n\
-    \nuse lib::graph::max_flow::hlpp::Hlpp;\nuse lib::io::*;\n\nfn main() {\n\tlet\
-    \ mut io = IO::new();\n\tlet [n, m]: [usize; 2] = io.scan();\n\tlet mut solver\
-    \ = Hlpp::<u32>::new(n);\n\tfor _ in 0..m {\n\t\tsolver.add_edge(io.scan(), io.scan(),\
-    \ io.scan());\n\t}\n\tio.println(solver.solve(0, n - 1));\n}\n"
+    \nuse lib::graph::max_flow::hlpp::Hlpp;\nuse lib::io::*;\n\nfn main() {\n    let\
+    \ mut io = IO::new();\n    let [n, m]: [usize; 2] = io.scan();\n    let mut solver\
+    \ = Hlpp::<u32>::new(n);\n    for _ in 0..m {\n        solver.add_edge(io.scan(),\
+    \ io.scan(), io.scan());\n    }\n    io.println(solver.solve(0, n - 1));\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/graph/max_flow/hlpp.rs
@@ -42,7 +42,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/hlpp_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/hlpp_test.rs

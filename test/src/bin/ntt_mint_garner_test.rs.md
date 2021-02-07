@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -32,10 +32,11 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/ntt_mint_garner_test.rs\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod_1000000007\n\
-    \nuse lib::io::*;\nuse lib::mint::conv::*;\n\nfn main() {\n\tlet mut io = IO::new();\n\
-    \tlet (n, m) = io.scan();\n\tlet a = io.scan_vec::<Mint17>(n);\n\tlet b = io.scan_vec::<Mint17>(m);\n\
-    \tif (n, m) == (1, 1) {\n\t\tio.println(a[0] * b[0]);\n\t} else {\n\t\tio.iterln(Conv::conv(a,\
-    \ b).into_iter(), \" \");\n\t}\n}\n"
+    \nuse lib::io::*;\nuse lib::mint::conv::*;\n\nfn main() {\n    let mut io = IO::new();\n\
+    \    let (n, m) = io.scan();\n    let a = io.scan_vec::<Mint17>(n);\n    let b\
+    \ = io.scan_vec::<Mint17>(m);\n    if (n, m) == (1, 1) {\n        io.println(a[0]\
+    \ * b[0]);\n    } else {\n        io.iterln(Conv::conv(a, b).into_iter(), \" \"\
+    );\n    }\n}\n"
   dependsOn:
   - src/conv.rs
   - src/ds/uvec.rs
@@ -46,8 +47,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_mint_garner_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-08 00:55:36+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/ntt_mint_garner_test.rs
 layout: document

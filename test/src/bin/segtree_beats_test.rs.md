@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
@@ -22,16 +22,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -48,33 +48,38 @@ data:
     RuntimeError: bundler is not specified: test/src/bin/segtree_beats_test.rs\n"
   code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/880\n\n\
     use lib::ds::segtree::beats::*;\nuse lib::int::gcd::*;\nuse lib::io::*;\nuse lib::iter::Itertools;\n\
-    \n#[derive(Debug, Clone, Copy)]\nstruct E {\n\tlen: usize,\n\tsum: u64,\n\tmax:\
-    \ u32,\n\tlcm: u32,\n}\n\n#[derive(Debug, Clone, Copy)]\nenum F {\n\tAsgn(u32),\n\
-    \tGcd(u32),\n\tUnit,\n}\nuse F::*;\n\nstruct M;\nimpl Monoid for M {\n\ttype Item\
-    \ = E;\n\tfn unit(&self) -> Self::Item {\n\t\tE { len: 0, sum: 0, max: 0, lcm:\
-    \ 1 }\n\t}\n\tfn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {\n\t\t\
-    if x.len == 0 {\n\t\t\ty\n\t\t} else if y.len == 0 {\n\t\t\tx\n\t\t} else {\n\t\
-    \t\tE {\n\t\t\t\tlen: x.len + y.len,\n\t\t\t\tsum: x.sum + y.sum,\n\t\t\t\tmax:\
-    \ x.max.max(y.max),\n\t\t\t\tlcm: lcm(x.lcm, y.lcm),\n\t\t\t}\n\t\t}\n\t}\n}\n\
-    \nstruct A;\nimpl Monoid for A {\n\ttype Item = F;\n\tfn unit(&self) -> Self::Item\
-    \ {\n\t\tUnit\n\t}\n\tfn op(&self, x: Self::Item, y: Self::Item) -> Self::Item\
-    \ {\n\t\tmatch y {\n\t\t\tAsgn(_) => y,\n\t\t\tGcd(y) => match x {\n\t\t\t\tAsgn(a)\
-    \ => Asgn(gcd(a, y)),\n\t\t\t\tGcd(x) => Gcd(gcd(x, y)),\n\t\t\t\t_ => Gcd(y),\n\
-    \t\t\t},\n\t\t\t_ => x,\n\t\t}\n\t}\n}\n\nfn lcm(x: u32, y: u32) -> u32 {\n\t\
-    let lcm = x as u64 * y as u64 / gcd(x, y) as u64;\n\t(1 << 30).min(lcm) as u32\n\
-    }\n\nfn fill(a: u32, len: usize) -> E {\n\tE { len, sum: a as u64 * len as u64,\
-    \ max: a, lcm: a }\n}\n\nfn act(e: E, a: F) -> Option<E> {\n\tmatch a {\n\t\t\
-    Asgn(a) => Some(fill(a, e.len)),\n\t\tGcd(a) =>\n\t\t\tif e.len == 1 {\n\t\t\t\
-    \tSome(fill(gcd(e.max, a), 1))\n\t\t\t} else if e.lcm != 1 << 30 && a % e.lcm\
-    \ == 0 {\n\t\t\t\tSome(e)\n\t\t\t} else {\n\t\t\t\tNone\n\t\t\t},\n\t\t_ => Some(e),\n\
-    \t}\n}\n\nfn main() {\n\tlet mut io = IO::new();\n\tlet [n, q]: [usize; 2] = io.scan();\n\
-    \tlet a = io\n\t\t.scan_iter::<u32>(n)\n\t\t.map(|a| E { len: 1, sum: a as u64,\
-    \ max: a, lcm: a })\n\t\t.collect_vec();\n\tlet mut st = SegmentTreeBeats::from_slice(&a,\
-    \ M, A, act);\n\tfor _ in 0..q {\n\t\tlet (c, Usize1(l), r) = io.scan();\n\t\t\
-    match c {\n\t\t\t1 => {\n\t\t\t\tst.act_over(l, r, Asgn(io.scan()));\n\t\t\t},\n\
-    \t\t\t2 => {\n\t\t\t\tst.act_over(l, r, Gcd(io.scan()));\n\t\t\t},\n\t\t\t3 =>\
-    \ {\n\t\t\t\tio.println(st.ask(l, r).max);\n\t\t\t},\n\t\t\t_ => {\n\t\t\t\tio.println(st.ask(l,\
-    \ r).sum);\n\t\t\t},\n\t\t}\n\t}\n}\n"
+    \n#[derive(Debug, Clone, Copy)]\nstruct E {\n    len: usize,\n    sum: u64,\n\
+    \    max: u32,\n    lcm: u32,\n}\n\n#[derive(Debug, Clone, Copy)]\nenum F {\n\
+    \    Asgn(u32),\n    Gcd(u32),\n    Unit,\n}\nuse F::*;\n\nstruct M;\nimpl Monoid\
+    \ for M {\n    type Item = E;\n    fn unit(&self) -> Self::Item {\n        E {\
+    \ len: 0, sum: 0, max: 0, lcm: 1 }\n    }\n    fn op(&self, x: Self::Item, y:\
+    \ Self::Item) -> Self::Item {\n        if x.len == 0 {\n            y\n      \
+    \  } else if y.len == 0 {\n            x\n        } else {\n            E {\n\
+    \                len: x.len + y.len,\n                sum: x.sum + y.sum,\n  \
+    \              max: x.max.max(y.max),\n                lcm: lcm(x.lcm, y.lcm),\n\
+    \            }\n        }\n    }\n}\n\nstruct A;\nimpl Monoid for A {\n    type\
+    \ Item = F;\n    fn unit(&self) -> Self::Item {\n        Unit\n    }\n    fn op(&self,\
+    \ x: Self::Item, y: Self::Item) -> Self::Item {\n        match y {\n         \
+    \   Asgn(_) => y,\n            Gcd(y) => match x {\n                Asgn(a) =>\
+    \ Asgn(gcd(a, y)),\n                Gcd(x) => Gcd(gcd(x, y)),\n              \
+    \  _ => Gcd(y),\n            },\n            _ => x,\n        }\n    }\n}\n\n\
+    fn lcm(x: u32, y: u32) -> u32 {\n    let lcm = x as u64 * y as u64 / gcd(x, y)\
+    \ as u64;\n    (1 << 30).min(lcm) as u32\n}\n\nfn fill(a: u32, len: usize) ->\
+    \ E {\n    E { len, sum: a as u64 * len as u64, max: a, lcm: a }\n}\n\nfn act(e:\
+    \ E, a: F) -> Option<E> {\n    match a {\n        Asgn(a) => Some(fill(a, e.len)),\n\
+    \        Gcd(a) =>\n            if e.len == 1 {\n                Some(fill(gcd(e.max,\
+    \ a), 1))\n            } else if e.lcm != 1 << 30 && a % e.lcm == 0 {\n      \
+    \          Some(e)\n            } else {\n                None\n            },\n\
+    \        _ => Some(e),\n    }\n}\n\nfn main() {\n    let mut io = IO::new();\n\
+    \    let [n, q]: [usize; 2] = io.scan();\n    let a = io\n        .scan_iter::<u32>(n)\n\
+    \        .map(|a| E { len: 1, sum: a as u64, max: a, lcm: a })\n        .collect_vec();\n\
+    \    let mut st = SegmentTreeBeats::from_slice(&a, M, A, act);\n    for _ in 0..q\
+    \ {\n        let (c, Usize1(l), r) = io.scan();\n        match c {\n         \
+    \   1 => {\n                st.act_over(l, r, Asgn(io.scan()));\n            },\n\
+    \            2 => {\n                st.act_over(l, r, Gcd(io.scan()));\n    \
+    \        },\n            3 => {\n                io.println(st.ask(l, r).max);\n\
+    \            },\n            _ => {\n                io.println(st.ask(l, r).sum);\n\
+    \            },\n        }\n    }\n}\n"
   dependsOn:
   - src/alg.rs
   - src/bit.rs
@@ -90,7 +95,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_beats_test.rs
   requiredBy: []
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_beats_test.rs
