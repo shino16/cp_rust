@@ -77,7 +77,6 @@ fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {
         hash.hash_word(n);
         bytes = bytes.split_at(4).1;
     }
-
     for byte in bytes {
         hash.hash_word(*byte as u32);
     }
@@ -91,13 +90,11 @@ fn write64(mut hash: u64, mut bytes: &[u8]) -> u64 {
         hash.hash_word(n);
         bytes = bytes.split_at(8).1;
     }
-
     if bytes.len() >= 4 {
         let n = read_u32(bytes);
         hash.hash_word(n as u64);
         bytes = bytes.split_at(4).1;
     }
-
     for byte in bytes {
         hash.hash_word(*byte as u64);
     }
@@ -105,14 +102,10 @@ fn write64(mut hash: u64, mut bytes: &[u8]) -> u64 {
 }
 
 #[cfg(target_pointer_width = "32")]
-fn write(hash: usize, bytes: &[u8]) -> usize {
-    write32(hash as u32, bytes) as usize
-}
+fn write(hash: usize, bytes: &[u8]) -> usize { write32(hash as u32, bytes) as usize }
 
 #[cfg(target_pointer_width = "64")]
-fn write(hash: usize, bytes: &[u8]) -> usize {
-    write64(hash as u64, bytes) as usize
-}
+fn write(hash: usize, bytes: &[u8]) -> usize { write64(hash as u64, bytes) as usize }
 
 #[derive(Debug, Clone)]
 pub struct FxHasher {
@@ -120,46 +113,23 @@ pub struct FxHasher {
 }
 
 impl Default for FxHasher {
-    fn default() -> FxHasher {
-        FxHasher { hash: 0 }
-    }
+    fn default() -> FxHasher { FxHasher { hash: 0 } }
 }
 
 impl Hasher for FxHasher {
-    fn write(&mut self, bytes: &[u8]) {
-        self.hash = write(self.hash, bytes);
-    }
-
-    fn write_u8(&mut self, i: u8) {
-        self.hash.hash_word(i as usize);
-    }
-
-    fn write_u16(&mut self, i: u16) {
-        self.hash.hash_word(i as usize);
-    }
-
-    fn write_u32(&mut self, i: u32) {
-        self.hash.hash_word(i as usize);
-    }
-
+    fn write(&mut self, bytes: &[u8]) { self.hash = write(self.hash, bytes); }
+    fn write_u8(&mut self, i: u8) { self.hash.hash_word(i as usize); }
+    fn write_u16(&mut self, i: u16) { self.hash.hash_word(i as usize); }
+    fn write_u32(&mut self, i: u32) { self.hash.hash_word(i as usize); }
     #[cfg(target_pointer_width = "32")]
     fn write_u64(&mut self, i: u64) {
         self.hash.hash_word(i as usize);
         self.hash.hash_word((i >> 32) as usize);
     }
-
     #[cfg(target_pointer_width = "64")]
-    fn write_u64(&mut self, i: u64) {
-        self.hash.hash_word(i as usize);
-    }
-
-    fn write_usize(&mut self, i: usize) {
-        self.hash.hash_word(i);
-    }
-
-    fn finish(&self) -> u64 {
-        self.hash as u64
-    }
+    fn write_u64(&mut self, i: u64) { self.hash.hash_word(i as usize); }
+    fn write_usize(&mut self, i: usize) { self.hash.hash_word(i); }
+    fn finish(&self) -> u64 { self.hash as u64 }
 }
 
 pub fn hash<T: Hash + ?Sized>(v: &T) -> usize {
