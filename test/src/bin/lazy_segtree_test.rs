@@ -3,7 +3,7 @@
 use lib::alg::arith::*;
 use lib::ds::segtree::lazy::*;
 use lib::io::*;
-use lib::mint::*;
+use lib::mint::io::*;
 
 fn main() {
     let mut io = IO::new();

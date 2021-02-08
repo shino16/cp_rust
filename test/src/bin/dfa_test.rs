@@ -2,7 +2,7 @@
 
 use lib::dfa::*;
 use lib::io::*;
-use lib::mint::*;
+use lib::mint::io::*;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Copy, Clone, Hash)]
 enum ZigZagState {

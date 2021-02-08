@@ -9,6 +9,7 @@ pub mod arith;
 pub mod bisect;
 pub mod gcd;
 pub mod inv;
+pub mod saturate;
 
 pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bounded + Bits + PrimCast {
     type Signed: IInt + CastFrom<Self> + CastTo<Self>;

@@ -29,7 +29,7 @@ impl UnionFind {
         let root = self.find(x);
         self.size[root]
     }
-    pub fn unite(&mut self, x: usize, y: usize) -> usize {
+    pub fn unite(&mut self, x: usize, y: usize) -> bool {
         let (mut x, mut y) = (self.find(x), self.find(y));
         if x != y {
             if self.size[x] < self.size[y] {
@@ -38,8 +38,10 @@ impl UnionFind {
             self.par[y] = x;
             self.size[x] += self.size[y];
             self.count -= 1;
+            true
+        } else {
+            false
         }
-        x
     }
     pub fn count(&self) -> usize {
         self.count
@@ -50,10 +52,10 @@ impl UnionFind {
         self.size.push(1);
         new
     }
-    pub fn group(&self) -> Vec<Vec<usize>> {
+    pub fn groups(&mut self) -> Vec<Vec<usize>> {
         let mut groups = vec![Vec::new(); self.len()];
-        for (i, &x) in (0..).zip(&self.par) {
-            groups[x].push(i);
+        for i in 0..self.len() {
+            groups[self.find(i)].push(i);
         }
         groups.retain(|v| !v.is_empty());
         groups

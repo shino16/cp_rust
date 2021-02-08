@@ -3,6 +3,7 @@ use std::marker::PhantomData;
 use std::{fmt, iter, ops};
 
 pub mod conv;
+pub mod io;
 pub mod num;
 
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
@@ -46,15 +47,9 @@ pub type Mint99 = MintB;
 
 impl<M: Mod> Mint<M> {
     pub const M: u32 = M::M;
-    pub fn new(val: i64) -> Self {
-        Self::from_val(val.rem_euclid(M::M as i64) as u32)
-    }
-    pub fn from_val(val: u32) -> Self {
-        Mint { val, _m: PhantomData }
-    }
-    pub fn value(self) -> u32 {
-        self.val
-    }
+    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M as i64) as u32) }
+    pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData } }
+    pub fn value(self) -> u32 { self.val }
     pub fn pow(self, mut exp: u32) -> Self {
         if self.val == 0 && exp == 0 {
             return Self::from_val(1);
@@ -70,12 +65,8 @@ impl<M: Mod> Mint<M> {
         }
         res
     }
-    pub fn inv(self) -> Self {
-        self.pow(M::PHI - 1)
-    }
-    pub fn modulus() -> u32 {
-        M::M
-    }
+    pub fn inv(self) -> Self { self.pow(M::PHI - 1) }
+    pub fn modulus() -> u32 { M::M }
 }
 
 macro_rules! impl_from_int {
@@ -147,9 +138,7 @@ impl<M: Mod, T: Into<Mint<M>>> ops::Mul<T> for Mint<M> {
 }
 
 impl<M: Mod, T: Into<Mint<M>>> ops::MulAssign<T> for Mint<M> {
-    fn mul_assign(&mut self, rhs: T) {
-        *self = *self * rhs;
-    }
+    fn mul_assign(&mut self, rhs: T) { *self = *self * rhs; }
 }
 
 impl<M: Mod, T: Into<Mint<M>>> ops::Div<T> for Mint<M> {
@@ -161,15 +150,11 @@ impl<M: Mod, T: Into<Mint<M>>> ops::Div<T> for Mint<M> {
 }
 
 impl<M: Mod, T: Into<Mint<M>>> ops::DivAssign<T> for Mint<M> {
-    fn div_assign(&mut self, rhs: T) {
-        *self *= rhs.into().pow(M::PHI - 1);
-    }
+    fn div_assign(&mut self, rhs: T) { *self *= rhs.into().pow(M::PHI - 1); }
 }
 
 impl<M: Mod> iter::Sum for Mint<M> {
-    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::from_val(0), |b, x| b + x)
-    }
+    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::from_val(0), |b, x| b + x) }
 }
 
 impl<M: Mod> iter::Product for Mint<M> {
@@ -179,30 +164,14 @@ impl<M: Mod> iter::Product for Mint<M> {
 }
 
 impl<M: Mod> fmt::Debug for Mint<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        self.val.fmt(f)
-    }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
 }
 
 impl<M: Mod> fmt::Display for Mint<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        self.val.fmt(f)
-    }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
 }
 
 impl<M: Mod> ZeroOne for Mint<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
     const ONE: Self = Self { val: 1, _m: PhantomData };
 }
-
-// impl<M: Mod> Print for Mint<M> {
-//     fn print(w: &mut IO, x: Self) {
-//         w.print(x.value());
-//     }
-// }
-
-// impl<M: Mod> Scan for Mint<M> {
-//     fn scan(io: &mut IO) -> Self {
-//         io.scan::<u32>().into()
-//     }
-// }
