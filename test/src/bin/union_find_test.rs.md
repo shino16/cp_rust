@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uf.rs
     title: src/ds/uf.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -31,7 +31,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/union_find_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/union_find_test.rs

@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_mint_garner_test.rs
     title: test/src/bin/ntt_mint_garner_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_mint_test.rs
     title: test/src/bin/ntt_mint_test.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -100,8 +100,8 @@ data:
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:36+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-02-08 23:15:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_test.rs
   - test/src/bin/ntt_mint_garner_test.rs

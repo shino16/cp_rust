@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:

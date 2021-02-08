@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -47,8 +47,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_mint_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:36+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-08 23:15:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_mint_test.rs
 layout: document

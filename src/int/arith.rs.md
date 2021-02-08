@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -45,7 +45,7 @@ data:
   isVerificationFile: false
   path: src/int/arith.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/arith.rs

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []

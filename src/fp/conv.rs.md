@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/conv.rs
     title: src/conv.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
   - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:

@@ -19,19 +19,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: src/mint/io.rs
+    title: src/mint/io.rs
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -47,7 +50,7 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/dfa_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0570\n\
-    \nuse lib::dfa::*;\nuse lib::io::*;\nuse lib::mint::*;\n\n#[derive(Ord, PartialOrd,\
+    \nuse lib::dfa::*;\nuse lib::io::*;\nuse lib::mint::io::*;\n\n#[derive(Ord, PartialOrd,\
     \ Eq, PartialEq, Copy, Clone, Hash)]\nenum ZigZagState {\n    Initial,\n    First(u8),\n\
     \    Up(u8),\n    Down(u8),\n}\n\nstruct ZigZag;\n\nimpl Dfa for ZigZag {\n  \
     \  type Alphabet = u8;\n    type State = Option<ZigZagState>;\n    fn init(&self)\
@@ -77,13 +80,14 @@ data:
   - src/int.rs
   - src/io.rs
   - src/mint.rs
+  - src/mint/io.rs
   - src/num.rs
   - src/rand/seed.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:36+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs

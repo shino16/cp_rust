@@ -1,32 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/segtree/lazy.rs
     title: src/ds/segtree/lazy.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: src/mint/io.rs
+    title: src/mint/io.rs
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -36,8 +39,8 @@ data:
     RuntimeError: bundler is not specified: test/src/bin/lazy_segtree_test.rs\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum\n\
     \nuse lib::alg::arith::*;\nuse lib::ds::segtree::lazy::*;\nuse lib::io::*;\nuse\
-    \ lib::mint::*;\n\nfn main() {\n    let mut io = IO::new();\n    let [n, q]: [usize;\
-    \ 2] = io.scan();\n    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();\n\
+    \ lib::mint::io::*;\n\nfn main() {\n    let mut io = IO::new();\n    let [n, q]:\
+    \ [usize; 2] = io.scan();\n    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();\n\
     \    let mut ds = LazySegmentTree::from_slice(\n        &a,\n        MonoidImpl(||\
     \ (Mint99::ZERO, Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),\n        MonoidImpl(||\
     \ (Mint99::ONE, Mint99::ZERO), |(a, b), (c, d)| (a * c, b * c + d)),\n       \
@@ -52,13 +55,14 @@ data:
   - src/ds/segtree/lazy.rs
   - src/io.rs
   - src/mint.rs
+  - src/mint/io.rs
   - src/num.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/lazy_segtree_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:36+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-08 23:15:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/lazy_segtree_test.rs
 layout: document

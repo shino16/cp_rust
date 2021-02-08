@@ -25,22 +25,23 @@ data:
     \        }\n    }\n    pub fn is_same(&mut self, x: usize, y: usize) -> bool {\n\
     \        self.find(x) == self.find(y)\n    }\n    pub fn size(&mut self, x: usize)\
     \ -> usize {\n        let root = self.find(x);\n        self.size[root]\n    }\n\
-    \    pub fn unite(&mut self, x: usize, y: usize) -> usize {\n        let (mut\
-    \ x, mut y) = (self.find(x), self.find(y));\n        if x != y {\n           \
-    \ if self.size[x] < self.size[y] {\n                std::mem::swap(&mut x, &mut\
-    \ y);\n            }\n            self.par[y] = x;\n            self.size[x] +=\
-    \ self.size[y];\n            self.count -= 1;\n        }\n        x\n    }\n \
-    \   pub fn count(&self) -> usize {\n        self.count\n    }\n    pub fn push(&mut\
-    \ self) -> usize {\n        let new = self.len();\n        self.par.push(new);\n\
-    \        self.size.push(1);\n        new\n    }\n    pub fn group(&self) -> Vec<Vec<usize>>\
-    \ {\n        let mut groups = vec![Vec::new(); self.len()];\n        for (i, &x)\
-    \ in (0..).zip(&self.par) {\n            groups[x].push(i);\n        }\n     \
-    \   groups.retain(|v| !v.is_empty());\n        groups\n    }\n}\n"
+    \    pub fn unite(&mut self, x: usize, y: usize) -> bool {\n        let (mut x,\
+    \ mut y) = (self.find(x), self.find(y));\n        if x != y {\n            if\
+    \ self.size[x] < self.size[y] {\n                std::mem::swap(&mut x, &mut y);\n\
+    \            }\n            self.par[y] = x;\n            self.size[x] += self.size[y];\n\
+    \            self.count -= 1;\n            true\n        } else {\n          \
+    \  false\n        }\n    }\n    pub fn count(&self) -> usize {\n        self.count\n\
+    \    }\n    pub fn push(&mut self) -> usize {\n        let new = self.len();\n\
+    \        self.par.push(new);\n        self.size.push(1);\n        new\n    }\n\
+    \    pub fn groups(&mut self) -> Vec<Vec<usize>> {\n        let mut groups = vec![Vec::new();\
+    \ self.len()];\n        for i in 0..self.len() {\n            groups[self.find(i)].push(i);\n\
+    \        }\n        groups.retain(|v| !v.is_empty());\n        groups\n    }\n\
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: src/ds/uf.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/union_find_test.rs

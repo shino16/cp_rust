@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -34,10 +34,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -61,7 +61,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:36+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

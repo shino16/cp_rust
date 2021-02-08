@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -68,23 +68,23 @@ data:
     RuntimeError: bundler is not specified: src/int.rs\n"
   code: "use crate::bit::*;\npub use crate::bounded::*;\nuse crate::cast::*;\npub\
     \ use crate::num::*;\npub use crate::zo::*;\nuse std::ops::*;\n\npub mod arith;\n\
-    pub mod bisect;\npub mod gcd;\npub mod inv;\n\npub trait Int: Num + Ord + Rem<Output\
-    \ = Self> + RemAssign + Bounded + Bits + PrimCast {\n    type Signed: IInt + CastFrom<Self>\
-    \ + CastTo<Self>;\n    type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;\n\
-    \    fn abs(self) -> Self::Unsigned;\n    fn rem_euclid(self, rhs: Self::Unsigned)\
-    \ -> Self::Unsigned;\n}\n\npub trait IInt: Int + INum {}\npub trait UInt: Int\
-    \ {}\n\nmacro_rules! impl_int {\n    (@ $t:ident, $i:ident, $u:ident, $abs:expr)\
-    \ => {\n        impl Int for $t {\n            type Signed = $i;\n           \
-    \ type Unsigned = $u;\n            fn abs(self) -> Self::Unsigned {\n        \
-    \        $abs(self) as $u\n            }\n            fn rem_euclid(self, rhs:\
-    \ Self::Unsigned) -> Self::Unsigned {\n                <$t>::rem_euclid(self,\
-    \ rhs as $t) as $u\n            }\n        }\n    };\n    ({ $i:ident }, { $u:ident\
-    \ }) => {\n        impl_int!(@ $i, $i, $u, |x| <$i>::abs(x));\n        impl_int!(@\
-    \ $u, $i, $u, |x| x);\n        impl IInt for $i {}\n        impl UInt for $u {}\n\
-    \    };\n    ({ $i:ident, $($is:ident),* }, { $u:ident, $($us:ident),* }) => {\n\
-    \        impl_int!({ $i }, { $u });\n        impl_int!({ $($is),* }, { $($us),*\
-    \ });\n    }\n}\n\nimpl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize\
-    \ });\n"
+    pub mod bisect;\npub mod gcd;\npub mod inv;\npub mod saturate;\n\npub trait Int:\
+    \ Num + Ord + Rem<Output = Self> + RemAssign + Bounded + Bits + PrimCast {\n \
+    \   type Signed: IInt + CastFrom<Self> + CastTo<Self>;\n    type Unsigned: UInt\
+    \ + CastFrom<Self> + CastTo<Self>;\n    fn abs(self) -> Self::Unsigned;\n    fn\
+    \ rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned;\n}\n\npub trait IInt:\
+    \ Int + INum {}\npub trait UInt: Int {}\n\nmacro_rules! impl_int {\n    (@ $t:ident,\
+    \ $i:ident, $u:ident, $abs:expr) => {\n        impl Int for $t {\n           \
+    \ type Signed = $i;\n            type Unsigned = $u;\n            fn abs(self)\
+    \ -> Self::Unsigned {\n                $abs(self) as $u\n            }\n     \
+    \       fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned {\n       \
+    \         <$t>::rem_euclid(self, rhs as $t) as $u\n            }\n        }\n\
+    \    };\n    ({ $i:ident }, { $u:ident }) => {\n        impl_int!(@ $i, $i, $u,\
+    \ |x| <$i>::abs(x));\n        impl_int!(@ $u, $i, $u, |x| x);\n        impl IInt\
+    \ for $i {}\n        impl UInt for $u {}\n    };\n    ({ $i:ident, $($is:ident),*\
+    \ }, { $u:ident, $($us:ident),* }) => {\n        impl_int!({ $i }, { $u });\n\
+    \        impl_int!({ $($is),* }, { $($us),* });\n    }\n}\n\nimpl_int!({ i32,\
+    \ i64, i128, isize }, { u32, u64, u128, usize });\n"
   dependsOn:
   - src/bit.rs
   - src/bounded.rs
@@ -104,7 +104,7 @@ data:
   - src/math/pow.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

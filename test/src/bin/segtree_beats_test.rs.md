@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
@@ -22,16 +22,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -95,7 +95,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_beats_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-08 23:15:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_beats_test.rs

@@ -8,12 +8,12 @@ data:
       title: benches/bench.rs
   - name: src/alg
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/alg/arith.rs
       title: src/alg/arith.rs
   - name: src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/alg.rs
       title: src/alg.rs
     - icon: ':warning:'
@@ -34,7 +34,7 @@ data:
     - icon: ':warning:'
       path: src/cmp.rs
       title: src/cmp.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/conv.rs
       title: src/conv.rs
     - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -88,10 +88,10 @@ data:
     - icon: ':warning:'
       path: src/math.rs
       title: src/math.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
     - icon: ':warning:'
@@ -112,7 +112,7 @@ data:
     - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/zo.rs
       title: src/zo.rs
   - name: src/cmp
@@ -186,7 +186,7 @@ data:
     - icon: ':warning:'
       path: src/ds/uslice.rs
       title: src/ds/uslice.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/uvec.rs
       title: src/ds/uvec.rs
     - icon: ':warning:'
@@ -200,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/ds/segtree/beats.rs
       title: src/ds/segtree/beats.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/segtree/lazy.rs
       title: src/ds/segtree/lazy.rs
   - name: src/float
@@ -310,6 +310,9 @@ data:
     - icon: ':warning:'
       path: src/int/inv.rs
       title: src/int/inv.rs
+    - icon: ':warning:'
+      path: src/int/saturate.rs
+      title: src/int/saturate.rs
   - name: src/io
     pages:
     - icon: ':warning:'
@@ -351,9 +354,12 @@ data:
       title: src/math/primes.rs
   - name: src/mint
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/mint/conv.rs
       title: src/mint/conv.rs
+    - icon: ':heavy_check_mark:'
+      path: src/mint/io.rs
+      title: src/mint/io.rs
     - icon: ':warning:'
       path: src/mint/num.rs
       title: src/mint/num.rs
@@ -411,16 +417,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/hlpp_test.rs
       title: test/src/bin/hlpp_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/lazy_segtree_test.rs
       title: test/src/bin/lazy_segtree_test.rs
     - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_garner_test.rs
       title: test/src/bin/ntt_garner_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_mint_garner_test.rs
       title: test/src/bin/ntt_mint_garner_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_mint_test.rs
       title: test/src/bin/ntt_mint_test.rs
     - icon: ':heavy_check_mark:'

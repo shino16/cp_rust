@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
@@ -22,13 +22,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
