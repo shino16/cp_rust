@@ -49,37 +49,37 @@ data:
     \ &mut data as *mut _ as *mut u8, 8);\n    }\n    data\n}\n\n#[allow(dead_code)]\n\
     fn write32(mut hash: u32, mut bytes: &[u8]) -> u32 {\n    while bytes.len() >=\
     \ 4 {\n        let n = read_u32(bytes);\n        hash.hash_word(n);\n        bytes\
-    \ = bytes.split_at(4).1;\n    }\n\n    for byte in bytes {\n        hash.hash_word(*byte\
+    \ = bytes.split_at(4).1;\n    }\n    for byte in bytes {\n        hash.hash_word(*byte\
     \ as u32);\n    }\n    hash\n}\n\n#[allow(dead_code)]\nfn write64(mut hash: u64,\
     \ mut bytes: &[u8]) -> u64 {\n    while bytes.len() >= 8 {\n        let n = read_u64(bytes);\n\
-    \        hash.hash_word(n);\n        bytes = bytes.split_at(8).1;\n    }\n\n \
-    \   if bytes.len() >= 4 {\n        let n = read_u32(bytes);\n        hash.hash_word(n\
-    \ as u64);\n        bytes = bytes.split_at(4).1;\n    }\n\n    for byte in bytes\
+    \        hash.hash_word(n);\n        bytes = bytes.split_at(8).1;\n    }\n   \
+    \ if bytes.len() >= 4 {\n        let n = read_u32(bytes);\n        hash.hash_word(n\
+    \ as u64);\n        bytes = bytes.split_at(4).1;\n    }\n    for byte in bytes\
     \ {\n        hash.hash_word(*byte as u64);\n    }\n    hash\n}\n\n#[cfg(target_pointer_width\
-    \ = \"32\")]\nfn write(hash: usize, bytes: &[u8]) -> usize {\n    write32(hash\
-    \ as u32, bytes) as usize\n}\n\n#[cfg(target_pointer_width = \"64\")]\nfn write(hash:\
-    \ usize, bytes: &[u8]) -> usize {\n    write64(hash as u64, bytes) as usize\n\
-    }\n\n#[derive(Debug, Clone)]\npub struct FxHasher {\n    hash: usize,\n}\n\nimpl\
-    \ Default for FxHasher {\n    fn default() -> FxHasher {\n        FxHasher { hash:\
-    \ 0 }\n    }\n}\n\nimpl Hasher for FxHasher {\n    fn write(&mut self, bytes:\
-    \ &[u8]) {\n        self.hash = write(self.hash, bytes);\n    }\n\n    fn write_u8(&mut\
-    \ self, i: u8) {\n        self.hash.hash_word(i as usize);\n    }\n\n    fn write_u16(&mut\
-    \ self, i: u16) {\n        self.hash.hash_word(i as usize);\n    }\n\n    fn write_u32(&mut\
-    \ self, i: u32) {\n        self.hash.hash_word(i as usize);\n    }\n\n    #[cfg(target_pointer_width\
-    \ = \"32\")]\n    fn write_u64(&mut self, i: u64) {\n        self.hash.hash_word(i\
-    \ as usize);\n        self.hash.hash_word((i >> 32) as usize);\n    }\n\n    #[cfg(target_pointer_width\
-    \ = \"64\")]\n    fn write_u64(&mut self, i: u64) {\n        self.hash.hash_word(i\
-    \ as usize);\n    }\n\n    fn write_usize(&mut self, i: usize) {\n        self.hash.hash_word(i);\n\
-    \    }\n\n    fn finish(&self) -> u64 {\n        self.hash as u64\n    }\n}\n\n\
-    pub fn hash<T: Hash + ?Sized>(v: &T) -> usize {\n    let mut state = FxHasher::default();\n\
-    \    v.hash(&mut state);\n    state.finish() as usize\n}\n"
+    \ = \"32\")]\nfn write(hash: usize, bytes: &[u8]) -> usize { write32(hash as u32,\
+    \ bytes) as usize }\n\n#[cfg(target_pointer_width = \"64\")]\nfn write(hash: usize,\
+    \ bytes: &[u8]) -> usize { write64(hash as u64, bytes) as usize }\n\n#[derive(Debug,\
+    \ Clone)]\npub struct FxHasher {\n    hash: usize,\n}\n\nimpl Default for FxHasher\
+    \ {\n    fn default() -> FxHasher { FxHasher { hash: 0 } }\n}\n\nimpl Hasher for\
+    \ FxHasher {\n    fn write(&mut self, bytes: &[u8]) { self.hash = write(self.hash,\
+    \ bytes); }\n    fn write_u8(&mut self, i: u8) { self.hash.hash_word(i as usize);\
+    \ }\n    fn write_u16(&mut self, i: u16) { self.hash.hash_word(i as usize); }\n\
+    \    fn write_u32(&mut self, i: u32) { self.hash.hash_word(i as usize); }\n  \
+    \  #[cfg(target_pointer_width = \"32\")]\n    fn write_u64(&mut self, i: u64)\
+    \ {\n        self.hash.hash_word(i as usize);\n        self.hash.hash_word((i\
+    \ >> 32) as usize);\n    }\n    #[cfg(target_pointer_width = \"64\")]\n    fn\
+    \ write_u64(&mut self, i: u64) { self.hash.hash_word(i as usize); }\n    fn write_usize(&mut\
+    \ self, i: usize) { self.hash.hash_word(i); }\n    fn finish(&self) -> u64 { self.hash\
+    \ as u64 }\n}\n\npub fn hash<T: Hash + ?Sized>(v: &T) -> usize {\n    let mut\
+    \ state = FxHasher::default();\n    v.hash(&mut state);\n    state.finish() as\
+    \ usize\n}\n"
   dependsOn:
   - src/rand/seed.rs
   isVerificationFile: false
   path: src/fxhash.rs
   requiredBy:
   - src/dfa.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-09 02:37:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

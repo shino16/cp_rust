@@ -115,7 +115,7 @@ data:
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-09 02:37:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

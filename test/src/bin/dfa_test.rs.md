@@ -87,7 +87,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-09 02:37:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs
