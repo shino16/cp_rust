@@ -1,5 +1,5 @@
 #[cfg(windows)]
-mod imp {
+mod detail {
     extern "system" {
         #[link_name = "SystemFunction036"]
         fn RtlGenRandom(buf: *mut u8, len: u32) -> u8;
@@ -24,7 +24,7 @@ mod imp {
 }
 
 #[cfg(not(windows))]
-mod imp {
+mod detail {
     pub fn seed() -> [u64; 4] {
         [
             // arbitrary
@@ -39,4 +39,4 @@ mod imp {
     }
 }
 
-pub use self::imp::*; // support 2015 edition
+pub use self::detail::*;
