@@ -1,4 +1,4 @@
-use crate::bit::*;
+use crate::bits::*;
 pub use crate::bounded::*;
 use crate::cast::*;
 pub use crate::num::*;

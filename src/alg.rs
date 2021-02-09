@@ -1,3 +1,5 @@
+// basic algebraic structures
+
 pub mod arith;
 
 pub trait Monoid {
@@ -39,7 +41,6 @@ where
     Op: Fn(T, T) -> T,
     Inv: Fn(T) -> T;
 
-// help!
 impl_monoid!(MonoidImpl<T, Unit, Op>, T: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T));
 impl_group!(GroupImpl<T, Unit, Op, Inv>,
             T: Copy, Unit: (Fn() -> T), Op: (Fn(T, T) -> T), Inv: (Fn(T) -> T));

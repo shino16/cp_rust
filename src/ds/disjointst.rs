@@ -1,5 +1,5 @@
 pub use crate::alg::*;
-use crate::bit::*;
+use crate::bits::*;
 
 #[derive(Clone)]
 pub struct DisjointSparseTable<A: Monoid> {

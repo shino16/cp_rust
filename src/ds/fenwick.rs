@@ -1,5 +1,5 @@
-pub use crate::alg::arith::*;
-use crate::bit::*;
+pub use crate::alg::*;
+use crate::bits::*;
 
 #[derive(Clone)]
 pub struct FenwickTree<A: Monoid> {

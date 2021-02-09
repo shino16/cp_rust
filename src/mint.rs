@@ -1,6 +1,7 @@
 pub use crate::zo::ZeroOne;
 use std::marker::PhantomData;
 use std::{fmt, iter, ops};
+pub use crate::def_mod;
 
 pub mod conv;
 pub mod io;
