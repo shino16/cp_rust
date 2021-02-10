@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -58,7 +58,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/slice/sort.rs
     title: src/slice/sort.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -161,7 +161,7 @@ data:
     \    a.sort_by_key(|&x| x.0);\n                assert_eq!(a, b);\n           \
     \ }\n        }\n    }\n}\n"
   dependsOn:
-  - src/bit.rs
+  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/fp.rs
@@ -184,7 +184,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-02-09 02:35:12+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

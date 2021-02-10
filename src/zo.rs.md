@@ -12,9 +12,6 @@ data:
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
   - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
-  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
@@ -23,7 +20,7 @@ data:
   - icon: ':warning:'
     path: src/fp/num.rs
     title: src/fp/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
   - icon: ':warning:'
@@ -65,13 +62,13 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/hlpp/edge.rs
     title: src/graph/max_flow/hlpp/edge.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
   - icon: ':warning:'
     path: src/graph/tree/dfs.rs
     title: src/graph/tree/dfs.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
   - icon: ':warning:'
@@ -156,12 +153,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_beats_test.rs
     title: test/src/bin/segtree_beats_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -212,13 +209,12 @@ data:
   - src/num.rs
   - src/math/binom.rs
   - src/math/pow.rs
-  - src/ds/fenwick.rs
   - src/u64/conv.rs
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
   timestamp: '2021-02-08 00:55:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/hlpp_test.rs

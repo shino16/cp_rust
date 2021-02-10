@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -36,7 +36,7 @@ data:
     \    if n == I::ZERO {\n        I::ZERO\n    } else {\n        floor_sqrt(n -\
     \ I::ONE) + I::ONE\n    }\n}\n"
   dependsOn:
-  - src/bit.rs
+  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/int.rs
@@ -45,7 +45,7 @@ data:
   isVerificationFile: false
   path: src/int/arith.rs
   requiredBy: []
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/arith.rs

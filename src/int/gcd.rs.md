@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -59,7 +59,7 @@ data:
     \ {\n        x += u;\n        y -= v;\n        debug_assert_eq!(gcd(u, v), I::ONE);\n\
     \        debug_assert!(x + u >= I::ZERO);\n    }\n    (x, y, a)\n}\n"
   dependsOn:
-  - src/bit.rs
+  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/int.rs
@@ -69,7 +69,7 @@ data:
   path: src/int/gcd.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

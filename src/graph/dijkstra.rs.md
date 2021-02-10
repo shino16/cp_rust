@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: src/assign.rs
     title: src/assign.rs
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
   - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
   - icon: ':heavy_check_mark:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -46,7 +46,7 @@ data:
     \   dist\n}\n"
   dependsOn:
   - src/assign.rs
-  - src/bit.rs
+  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/graph.rs
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: src/graph/dijkstra.rs
   requiredBy: []
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dijkstra.rs

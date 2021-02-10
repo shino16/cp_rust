@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -47,7 +47,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_garner_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-11 01:05:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_garner_test.rs

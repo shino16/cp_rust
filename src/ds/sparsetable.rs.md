@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -18,7 +18,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/sparsetable.rs\n"
-  code: "pub use crate::alg::*;\nuse crate::bit::*;\n\n#[derive(Clone)]\npub struct\
+  code: "pub use crate::alg::*;\nuse crate::bits::*;\n\n#[derive(Clone)]\npub struct\
     \ SparseTable<A: Monoid> {\n    data: Vec<Vec<A::Item>>,\n    alg: A,\n}\n\n///\
     \ A: Band (x * x == x)\nimpl<A: Monoid> SparseTable<A> {\n    pub fn new(data:\
     \ Vec<A::Item>, alg: A) -> Self {\n        let len = data.len();\n        let\
@@ -34,11 +34,11 @@ data:
     \  }\n}\n"
   dependsOn:
   - src/alg.rs
-  - src/bit.rs
+  - src/bits.rs
   isVerificationFile: false
   path: src/ds/sparsetable.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/sparsetable.rs

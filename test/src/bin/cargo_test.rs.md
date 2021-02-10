@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -61,7 +61,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -86,7 +86,7 @@ data:
     --- captured stderr ---\");\n        io::stdout().write_all(&output.stderr)?;\n\
     \    }\n\n    println!(\"Hello World\");\n\n    Ok(())\n}\n"
   dependsOn:
-  - src/bit.rs
+  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/fp.rs
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-02-09 02:35:12+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

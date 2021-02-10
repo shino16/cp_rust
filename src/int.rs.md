@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
   - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -66,7 +66,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int.rs\n"
-  code: "use crate::bit::*;\npub use crate::bounded::*;\nuse crate::cast::*;\npub\
+  code: "use crate::bits::*;\npub use crate::bounded::*;\nuse crate::cast::*;\npub\
     \ use crate::num::*;\npub use crate::zo::*;\nuse std::ops::*;\n\npub mod arith;\n\
     pub mod bisect;\npub mod gcd;\npub mod inv;\npub mod saturate;\n\npub trait Int:\
     \ Num + Ord + Rem<Output = Self> + RemAssign + Bounded + Bits + PrimCast {\n \
@@ -86,7 +86,7 @@ data:
     \        impl_int!({ $($is),* }, { $($us),* });\n    }\n}\n\nimpl_int!({ i32,\
     \ i64, i128, isize }, { u32, u64, u128, usize });\n"
   dependsOn:
-  - src/bit.rs
+  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/num.rs
@@ -104,7 +104,7 @@ data:
   - src/math/pow.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

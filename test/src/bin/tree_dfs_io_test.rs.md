@@ -1,41 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
-    path: src/alg/arith.rs
-    title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
-    path: src/bit.rs
-    title: src/bit.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/bits.rs
+    title: src/bits.rs
+  - icon: ':x:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
-    path: src/num.rs
-    title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/778
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -54,20 +48,18 @@ data:
     \ 1),\n    });\n    io.println(ans);\n}\n"
   dependsOn:
   - src/alg.rs
-  - src/alg/arith.rs
-  - src/bit.rs
+  - src/bits.rs
   - src/ds/fenwick.rs
   - src/graph.rs
   - src/graph/tree.rs
   - src/graph/tree/dfs_io.rs
   - src/io.rs
-  - src/num.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-10 04:47:06+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs
 layout: document

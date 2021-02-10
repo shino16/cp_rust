@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: src/ds/disjointst.rs
     title: src/ds/disjointst.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
   - icon: ':warning:'
@@ -54,18 +54,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_beats_test.rs
     title: test/src/bin/segtree_beats_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/bit.rs\n"
+    RuntimeError: bundler is not specified: src/bits.rs\n"
   code: "use std::ops::*;\n\npub trait Bits:\n    Sized\n    + BitAnd<Output = Self>\
     \ + BitAndAssign\n    + BitOr<Output = Self> + BitOrAssign\n    + BitXor<Output\
     \ = Self> + BitXorAssign\n    + Shl<u32, Output = Self> + ShlAssign<u32>\n   \
@@ -81,7 +81,7 @@ data:
     \  }\n    )* };\n}\n\nimpl_bit!(i32, i64, i128, isize, u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/bit.rs
+  path: src/bits.rs
   requiredBy:
   - src/draft/fpacc64.rs
   - src/int/inv.rs
@@ -97,17 +97,17 @@ data:
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-10 04:47:06+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
   - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/dfa_test.rs
-documentation_of: src/bit.rs
+documentation_of: src/bits.rs
 layout: document
 redirect_from:
-- /library/src/bit.rs
-- /library/src/bit.rs.html
-title: src/bit.rs
+- /library/src/bits.rs
+- /library/src/bits.rs.html
+title: src/bits.rs
 ---

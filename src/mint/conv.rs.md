@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -46,19 +46,19 @@ data:
     \ &mut UVec<FpType>) {\n                let n = a.len();\n                let\
     \ mut m = n >> 1;\n                while m != 0 {\n                    let mut\
     \ w = FpType::ONE;\n                    for (k, t) in (0..n).step_by(m * 2).zip(1_u32..)\
-    \ {\n                        for i in 0..m {\n                            let\
-    \ u = a[k + i];\n                            let v = a[k + i + m] * w;\n     \
-    \                       a[k + i] = u + v;\n                            a[k + i\
-    \ + m] = u - v;\n                        }\n                        w *= unsafe\
-    \ { ROOT[t.trailing_zeros() as usize] };\n                    }\n            \
-    \        m >>= 1;\n                }\n            }\n\n            pub fn inv_ntt(a:\
-    \ &mut UVec<FpType>) {\n                let n = a.len();\n                let\
-    \ mut m = 1;\n                while m < n {\n                    let mut w = FpType::ONE;\n\
-    \                    for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n    \
-    \                    for i in 0..m {\n                            let u = a[k\
-    \ + i];\n                            let v = a[k + i + m];\n                 \
-    \           a[k + i] = u + v;\n                            a[k + i + m] = (u -\
-    \ v) * w;\n                        }\n                        w *= unsafe { INV_ROOT[t.trailing_zeros()\
+    \ {\n                        for i in k..k + m {\n                           \
+    \ let u = a[i];\n                            let v = a[i + m] * w;\n         \
+    \                   a[i] = u + v;\n                            a[i + m] = u -\
+    \ v;\n                        }\n                        w *= unsafe { ROOT[t.trailing_zeros()\
+    \ as usize] };\n                    }\n                    m >>= 1;\n        \
+    \        }\n            }\n\n            pub fn inv_ntt(a: &mut UVec<FpType>)\
+    \ {\n                let n = a.len();\n                let mut m = 1;\n      \
+    \          while m < n {\n                    let mut w = FpType::ONE;\n     \
+    \               for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n         \
+    \               for i in k..k + m {\n                            let u = a[i];\n\
+    \                            let v = a[i + m];\n                            a[i]\
+    \ = u + v;\n                            a[i + m] = (u - v) * w;\n            \
+    \            }\n                        w *= unsafe { INV_ROOT[t.trailing_zeros()\
     \ as usize] };\n                    }\n                    m <<= 1;\n        \
     \        }\n                let d = FpType::from(n).inv();\n                a.iter_mut().for_each(|e|\
     \ *e *= d);\n            }\n\n            pub fn conv<'a, 'b>(a: &'a mut UVec<FpType>,\
@@ -100,7 +100,7 @@ data:
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-11 01:05:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_test.rs

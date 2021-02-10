@@ -34,6 +34,8 @@ data:
 
     pub mod list;
 
+    pub mod pool;
+
     pub mod segtree;
 
     pub mod sparsetable;
@@ -59,7 +61,7 @@ data:
   - src/draft/linked_list/iter.rs
   - src/draft/linked_list/inner_mut.rs
   - src/draft/linked_list.rs
-  timestamp: '2021-02-07 05:27:00+09:00'
+  timestamp: '2021-02-09 16:24:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds.rs

@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: src/lib.rs
+    title: src/lib.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -43,19 +46,19 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/mint.rs\n"
   code: "pub use crate::zo::ZeroOne;\nuse std::marker::PhantomData;\nuse std::{fmt,\
-    \ iter, ops};\n\npub mod conv;\npub mod io;\npub mod num;\n\npub trait Mod: Default\
-    \ + Clone + Copy + PartialEq + Eq {\n    const M: u32;\n    const PHI: u32;\n\
-    }\n\n#[macro_export]\nmacro_rules! def_mod {\n    ($name:ident, $modulus:expr)\
-    \ => {\n        def_mod!($name, $modulus, $modulus - 1);\n    };\n    ($name:ident,\
-    \ $modulus:expr, $phi:expr) => {\n        #[derive(Default, Clone, Copy, PartialEq,\
-    \ Eq, Debug)]\n        pub struct $name;\n        impl Mod for $name {\n     \
-    \       const M: u32 = $modulus;\n            const PHI: u32 = $phi;\n       \
-    \ }\n    };\n}\n\ndef_mod!(ModA, 1_000_000_007);\ndef_mod!(ModB, 998_244_353);\n\
-    def_mod!(ModC, 1_012_924_417);\ndef_mod!(ModD, 924_844_033);\n\n#[derive(Default,\
-    \ Clone, Copy, PartialEq, Eq)]\npub struct Mint<M: Mod> {\n    pub val: u32,\n\
-    \    _m: PhantomData<M>,\n}\n\npub type MintA = Mint<ModA>;\npub type MintB =\
-    \ Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\n\n\
-    pub type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n\
+    \ iter, ops};\npub use crate::def_mod;\n\npub mod conv;\npub mod io;\npub mod\
+    \ num;\n\npub trait Mod: Default + Clone + Copy + PartialEq + Eq {\n    const\
+    \ M: u32;\n    const PHI: u32;\n}\n\n#[macro_export]\nmacro_rules! def_mod {\n\
+    \    ($name:ident, $modulus:expr) => {\n        def_mod!($name, $modulus, $modulus\
+    \ - 1);\n    };\n    ($name:ident, $modulus:expr, $phi:expr) => {\n        #[derive(Default,\
+    \ Clone, Copy, PartialEq, Eq, Debug)]\n        pub struct $name;\n        impl\
+    \ Mod for $name {\n            const M: u32 = $modulus;\n            const PHI:\
+    \ u32 = $phi;\n        }\n    };\n}\n\ndef_mod!(ModA, 1_000_000_007);\ndef_mod!(ModB,\
+    \ 998_244_353);\ndef_mod!(ModC, 1_012_924_417);\ndef_mod!(ModD, 924_844_033);\n\
+    \n#[derive(Default, Clone, Copy, PartialEq, Eq)]\npub struct Mint<M: Mod> {\n\
+    \    pub val: u32,\n    _m: PhantomData<M>,\n}\n\npub type MintA = Mint<ModA>;\n\
+    pub type MintB = Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\n\
+    \npub type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n\
     \    pub const M: u32 = M::M;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
     \ as i64) as u32) }\n    pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData\
     \ } }\n    pub fn value(self) -> u32 { self.val }\n    pub fn pow(self, mut exp:\
@@ -102,6 +105,7 @@ data:
     \ Self = Self { val: 0, _m: PhantomData };\n    const ONE: Self = Self { val:\
     \ 1, _m: PhantomData };\n}\n"
   dependsOn:
+  - src/lib.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/mint.rs
@@ -110,7 +114,7 @@ data:
   - src/mint/conv.rs
   - src/mint/io.rs
   - src/tests.rs
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

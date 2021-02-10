@@ -1,19 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
   - icon: ':warning:'
     path: src/graph/euler_tour.rs
     title: src/graph/euler_tour.rs
@@ -24,9 +21,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
     title: test/src/bin/lazy_segtree_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/tree_dfs_io_test.rs
-    title: test/src/bin/tree_dfs_io_test.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -52,12 +46,10 @@ data:
   requiredBy:
   - src/slice/cum.rs
   - src/graph/euler_tour.rs
-  - src/ds/fenwick.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
-  - test/src/bin/tree_dfs_io_test.rs
 documentation_of: src/alg/arith.rs
 layout: document
 redirect_from:

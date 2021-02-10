@@ -168,7 +168,7 @@ data:
   - src/draft/linked_list/ptr.rs
   - src/draft/linked_list/iter.rs
   - src/draft/linked_list/inner_mut.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-09 16:24:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/linked_list.rs

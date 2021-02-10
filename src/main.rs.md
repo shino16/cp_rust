@@ -12,12 +12,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/main.rs\n"
-  code: fn main() {}
+  code: 'fn main() {}
+
+    '
   dependsOn: []
   isVerificationFile: false
   path: src/main.rs
   requiredBy: []
-  timestamp: '2021-02-03 21:57:11+09:00'
+  timestamp: '2021-02-11 01:05:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/main.rs
