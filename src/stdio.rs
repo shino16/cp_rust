@@ -1,5 +1,4 @@
 pub use crate::{scan, prtln};
-pub use std::io::Write;
 use std::io::{stdout, BufWriter, StdoutLock};
 
 pub fn stdout_buf() -> BufWriter<StdoutLock<'static>> {
@@ -9,28 +8,40 @@ pub fn stdout_buf() -> BufWriter<StdoutLock<'static>> {
 
 #[macro_export]
 macro_rules! prtln {
-    ($dst:expr) => {
-        std::writeln!($dst).unwrap();
+    (new $var:ident) => {
+        let mut $var = stdout_buf();
     };
-    ($dst:expr, $expr:expr) => {
-        std::writeln!($dst, "{}", $expr).unwrap();
-    };
-    ($dst:expr, $expr:expr, $($exprs:expr),*) => { {
-        std::write!($dst, "{} ", $expr).unwrap();
-        $crate::prtln!($dst, $($exprs),*);
+    (new $var:ident, $($t:tt)*) => { {
+        $crate::prtln!(new $var);
+        $crate::prtln!(to $var, $($t)*);
     } };
-    ($dst:expr, iter $expr:expr) => {
-        $crate::prtln!($dst, iter $expr, sep " ");
+    (to $var:ident, $($t:tt)*) => { {
+        use std::io::Write;
+        $crate::prtln_inner!($var, $($t)*);
+    } };
+    ($($t:tt)*) => {
+        $crate::prtln!(new __prtln, $($t)*);
     };
-    ($dst:expr, iter $expr:expr, sep $sep:expr) => { {
+}
+
+#[macro_export]
+macro_rules! prtln_inner {
+    ($dst:expr $(,)?) => {
+        ::std::writeln!($dst).unwrap();
+    };
+    ($dst:expr, $expr:expr $(,$exprs:expr)*) => { {
+        ::std::write!($dst, "{} ", $expr).unwrap();
+        $crate::prtln_inner!($dst, $($exprs),*);
+    } };
+    ($dst:expr, iter=$expr:expr, sep=$sep:expr) => { {
         let mut iter = $expr.into_iter();
         if let Some(expr) = iter.next() {
-            std::write!($dst, "{}", expr).unwrap();
+            ::std::write!($dst, "{}", expr).unwrap();
             for expr in iter {
-                std::write!($dst, "{}{}", $sep, expr).unwrap();
+                ::std::write!($dst, "{}{}", $sep, expr).unwrap();
             }
         }
-        $crate::prtln!($dst);
+        $crate::prtln_inner!($dst);
     } };
 }
 
@@ -39,24 +50,28 @@ macro_rules! scan {
     (from $s:expr, $($r:tt)*) => {
         $crate::scan_inner!($s, $($r)*);
     };
-    (save to $var:ident, $($r:tt)*) => {
+    (new $var:ident, $($r:tt)*) => {
         let s = {
-            use std::io::Read;
+            use ::std::io::Read;
             let mut s = String::new();
-            std::io::stdin().read_to_string(&mut s).unwrap();
+            ::std::io::stdin().read_to_string(&mut s).unwrap();
             s
         };
         let $var = &mut s.split_whitespace();
         $crate::scan_inner!($var, $($r)*);
     };
     ($($r:tt)*) => {
-        $crate::scan!(save to __scan, $($r)*);
+        $crate::scan!(nwq __scan, $($r)*);
     }
 }
 
 #[macro_export]
 macro_rules! scan_inner {
     ($iter:expr $(,)?) => {};
+    ($iter:expr, $var:ident : $t:tt $($r:tt)*) => {
+        let $var = $crate::scan_value!($iter, $t);
+        $crate::scan_inner!($iter $($r)*)
+    };
     ($iter:expr, $pat:pat in $t:tt $($r:tt)*) => {
         let $pat = $crate::scan_value!($iter, $t);
         $crate::scan_inner!($iter $($r)*)

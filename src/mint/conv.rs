@@ -35,11 +35,11 @@ macro_rules! impl_ntt {
                 while m != 0 {
                     let mut w = FpType::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
-                        for i in 0..m {
-                            let u = a[k + i];
-                            let v = a[k + i + m] * w;
-                            a[k + i] = u + v;
-                            a[k + i + m] = u - v;
+                        for i in k..k + m {
+                            let u = a[i];
+                            let v = a[i + m] * w;
+                            a[i] = u + v;
+                            a[i + m] = u - v;
                         }
                         w *= unsafe { ROOT[t.trailing_zeros() as usize] };
                     }
@@ -53,11 +53,11 @@ macro_rules! impl_ntt {
                 while m < n {
                     let mut w = FpType::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
-                        for i in 0..m {
-                            let u = a[k + i];
-                            let v = a[k + i + m];
-                            a[k + i] = u + v;
-                            a[k + i + m] = (u - v) * w;
+                        for i in k..k + m {
+                            let u = a[i];
+                            let v = a[i + m];
+                            a[i] = u + v;
+                            a[i + m] = (u - v) * w;
                         }
                         w *= unsafe { INV_ROOT[t.trailing_zeros() as usize] };
                     }
