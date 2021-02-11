@@ -1,4 +1,4 @@
-pub use crate::alg::*;
+pub use crate::alg::arith::*;
 use crate::bits::*;
 
 #[derive(Clone)]
