@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/assign.rs
     title: src/assign.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
   - icon: ':heavy_check_mark:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []

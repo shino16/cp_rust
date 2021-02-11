@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
+  - icon: ':heavy_check_mark:'
+    path: src/ds/fenwick.rs
+    title: src/ds/fenwick.rs
   - icon: ':warning:'
     path: src/fp/num.rs
     title: src/fp/num.rs
@@ -96,6 +99,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/segtree_beats_test.rs
     title: test/src/bin/segtree_beats_test.rs
+  - icon: ':heavy_check_mark:'
+    path: test/src/bin/tree_dfs_io_test.rs
+    title: test/src/bin/tree_dfs_io_test.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -141,6 +147,7 @@ data:
   - src/graph/euler_tour.rs
   - src/math/binom.rs
   - src/math/pow.rs
+  - src/ds/fenwick.rs
   - src/int.rs
   - src/dfa.rs
   - src/tests.rs
@@ -151,6 +158,7 @@ data:
   - test/src/bin/hlpp_test.rs
   - test/src/bin/cargo_test.rs
   - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/edmonds_karp_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/dfa_test.rs

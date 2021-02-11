@@ -1,30 +1,39 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: src/alg/arith.rs
+    title: src/alg/arith.rs
+  - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
+  - icon: ':heavy_check_mark:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':heavy_check_mark:'
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/fenwick.rs\n"
-  code: "pub use crate::alg::*;\nuse crate::bits::*;\n\n#[derive(Clone)]\npub struct\
-    \ FenwickTree<A: Monoid> {\n    data: Vec<A::Item>,\n    alg: A,\n}\n\nimpl<A:\
-    \ Monoid> FenwickTree<A> {\n    pub fn new(mut data: Vec<A::Item>, alg: A) ->\
-    \ Self {\n        let len = data.len();\n        data.insert(0, alg.unit());\n\
+  code: "pub use crate::alg::arith::*;\nuse crate::bits::*;\n\n#[derive(Clone)]\n\
+    pub struct FenwickTree<A: Monoid> {\n    data: Vec<A::Item>,\n    alg: A,\n}\n\
+    \nimpl<A: Monoid> FenwickTree<A> {\n    pub fn new(mut data: Vec<A::Item>, alg:\
+    \ A) -> Self {\n        let len = data.len();\n        data.insert(0, alg.unit());\n\
     \        for i in 1..=len {\n            if i + i.lsb() <= len {\n           \
     \     data[i + i.lsb()] = alg.op(data[i + i.lsb()], data[i]);\n            }\n\
     \        }\n        Self { data, alg }\n    }\n    pub fn len(&self) -> usize\
@@ -53,12 +62,15 @@ data:
     \ self.ask_prefix(r))\n    }\n}\n"
   dependsOn:
   - src/alg.rs
+  - src/alg/arith.rs
   - src/bits.rs
+  - src/num.rs
+  - src/zo.rs
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-02-10 04:47:06+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-02-11 12:01:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs
 documentation_of: src/ds/fenwick.rs

@@ -13,13 +13,13 @@ data:
       title: src/alg/arith.rs
   - name: src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/alg.rs
       title: src/alg.rs
     - icon: ':warning:'
       path: src/assign.rs
       title: src/assign.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/bits.rs
       title: src/bits.rs
     - icon: ':warning:'
@@ -55,7 +55,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fxhash.rs
       title: src/fxhash.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph.rs
       title: src/graph.rs
     - icon: ':warning:'
@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -112,7 +112,7 @@ data:
     - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/zo.rs
       title: src/zo.rs
   - name: src/cmp
@@ -162,7 +162,7 @@ data:
     - icon: ':warning:'
       path: src/ds/disjointst.rs
       title: src/ds/disjointst.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/fenwick.rs
       title: src/ds/fenwick.rs
     - icon: ':warning:'
@@ -256,7 +256,7 @@ data:
     - icon: ':warning:'
       path: src/graph/max_flow.rs
       title: src/graph/max_flow.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/tree.rs
       title: src/graph/tree.rs
   - name: src/graph/max_flow/edmonds_karp
@@ -293,7 +293,7 @@ data:
     - icon: ':warning:'
       path: src/graph/tree/dfs.rs
       title: src/graph/tree/dfs.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/tree/dfs_io.rs
       title: src/graph/tree/dfs_io.rs
     - icon: ':warning:'
@@ -452,7 +452,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/swag_test.rs
       title: test/src/bin/swag_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/tree_dfs_io_test.rs
       title: test/src/bin/tree_dfs_io_test.rs
     - icon: ':heavy_check_mark:'

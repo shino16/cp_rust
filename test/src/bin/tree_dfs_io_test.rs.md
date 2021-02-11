@@ -1,35 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: src/alg/arith.rs
+    title: src/alg/arith.rs
+  - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: src/num.rs
+    title: src/num.rs
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/778
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -48,18 +54,20 @@ data:
     \ 1),\n    });\n    io.println(ans);\n}\n"
   dependsOn:
   - src/alg.rs
+  - src/alg/arith.rs
   - src/bits.rs
   - src/ds/fenwick.rs
   - src/graph.rs
   - src/graph/tree.rs
   - src/graph/tree/dfs_io.rs
   - src/io.rs
+  - src/num.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-02-10 04:47:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-11 12:01:56+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs
 layout: document
