@@ -10,3 +10,7 @@ pub fn assign_if<T, F: Fn(&T, &T) -> bool>(v: T, var: &mut T, f: F) -> bool {
 pub fn chmin<T: Ord>(v: T, var: &mut T) -> bool {
     assign_if(v, var, |x, y| x < y)
 }
+
+pub fn chmax<T: Ord>(v: T, var: &mut T) -> bool {
+    assign_if(v, var, |x, y| x > y)
+}

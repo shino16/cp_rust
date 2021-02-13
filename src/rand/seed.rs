@@ -1,3 +1,4 @@
+// Codeforces
 #[cfg(windows)]
 mod detail {
     extern "system" {
