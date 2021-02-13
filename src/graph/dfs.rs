@@ -22,11 +22,11 @@ pub fn is_connected<G: Graph>(g: &G) -> bool {
     cnt == g.len()
 }
 
-pub fn dfs_ord_par<G: Graph>(g: &G, s: usize) -> (Vec<(usize, usize)>, Vec<usize>) {
+pub fn dfs_ord_par<G: Graph>(g: &G, s: usize) -> (Vec<usize>, Vec<usize>) {
     let mut ord = Vec::with_capacity(g.len());
     let mut par = vec![!0; g.len()];
     dfs(g, s, |v, p| {
-        ord.push((v, p));
+        ord.push(v);
         par[v] = p;
     });
     (ord, par)

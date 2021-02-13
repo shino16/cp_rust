@@ -1,8 +1,6 @@
 pub use crate::alg::*;
 
-fn trunc(x: usize) -> usize {
-    x >> x.trailing_zeros()
-}
+fn trunc(x: usize) -> usize { x >> x.trailing_zeros() }
 
 #[derive(Clone)]
 pub struct LazySegmentTree<On: Monoid, Act: Monoid, Apply>
@@ -40,9 +38,7 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> On::Item>
         }
         Self { len, log, data, on_alg, act_alg, apply }
     }
-    pub fn len(&self) -> usize {
-        self.len
-    }
+    pub fn len(&self) -> usize { self.len }
     fn apply(&mut self, p: usize, actor: Act::Item) {
         self.data[p].0 = (self.apply)(self.data[p].0, actor);
         self.act_alg.op_to(actor, &mut self.data[p].1);
