@@ -2,6 +2,8 @@ pub use crate::zo::ZeroOne;
 use std::fmt::*;
 use std::ops::*;
 
+pub mod field;
+
 pub trait Num:
     ZeroOne
     + Add<Output = Self>

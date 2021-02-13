@@ -1,7 +1,7 @@
+pub use crate::def_mod;
 pub use crate::zo::ZeroOne;
 use std::marker::PhantomData;
 use std::{fmt, iter, ops};
-pub use crate::def_mod;
 
 pub mod conv;
 pub mod io;
@@ -42,7 +42,6 @@ pub type MintA = Mint<ModA>;
 pub type MintB = Mint<ModB>;
 pub type MintC = Mint<ModC>;
 pub type MintD = Mint<ModD>;
-
 pub type Mint17 = MintA;
 pub type Mint99 = MintB;
 
@@ -55,13 +54,11 @@ impl<M: Mod> Mint<M> {
         if self.val == 0 && exp == 0 {
             return Self::from_val(1);
         }
-        let mut e = self;
+        let mut b = self;
         let mut res = Self::from_val(1);
         while exp != 0 {
-            if exp % 2 == 1 {
-                res *= e;
-            }
-            e *= e;
+            if exp % 2 == 1 { res *= b; }
+            b *= b;
             exp >>= 1;
         }
         res
@@ -71,65 +68,42 @@ impl<M: Mod> Mint<M> {
 }
 
 macro_rules! impl_from_int {
-    ($(($t:ty: $via:ty)),*) => { $(
+    ($(($t:ty: $via:ty)),* $(,)?) => { $(
         impl<M: Mod> From<$t> for Mint<M> {
-            fn from(x: $t) -> Self {
-                Self::from_val((x as $via).rem_euclid(M::M as $via) as u32)
-            }
+            fn from(x: $t) -> Self { Self::from_val((x as $via).rem_euclid(M::M as $via) as u32) }
         }
     )* };
 }
-
 impl_from_int! {
-    (i8: i32), (i16: i32), (i32: i32), (i64: i64), (isize: isize),
-    (u8: u32), (u16: u32), (u32: u32), (u64: u64), (usize: usize)
+    (i8: i32), (i16: i32), (i32: i32), (i64: i64),
+    (u8: u32), (u16: u32), (u32: u32), (u64: u64),
 }
 
 impl<M: Mod, T: Into<Mint<M>>> ops::Add<T> for Mint<M> {
     type Output = Self;
-    fn add(mut self, rhs: T) -> Self {
-        self += rhs;
-        self
-    }
+    fn add(mut self, rhs: T) -> Self { self += rhs; self }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::AddAssign<T> for Mint<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
-        if self.val >= M::M {
-            self.val -= M::M;
-        }
+        if self.val >= M::M { self.val -= M::M; }
     }
 }
-
 impl<M: Mod> ops::Neg for Mint<M> {
     type Output = Self;
-    fn neg(self) -> Self {
-        Mint::from_val(match self.val {
-            0 => 0,
-            s => M::M - s,
-        })
-    }
+    fn neg(self) -> Self { Mint::from_val(if self.val == 0 { 0 } else { M::M - self.val }) }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::Sub<T> for Mint<M> {
     type Output = Self;
-    fn sub(mut self, rhs: T) -> Self {
-        self -= rhs;
-        self
-    }
+    fn sub(mut self, rhs: T) -> Self { self -= rhs; self }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::SubAssign<T> for Mint<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
-        if self.val < rhs.val {
-            self.val += M::M;
-        }
+        if self.val < rhs.val { self.val += M::M; }
         self.val -= rhs.val;
     }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::Mul<T> for Mint<M> {
     type Output = Self;
     fn mul(self, rhs: T) -> Self {
@@ -137,41 +111,30 @@ impl<M: Mod, T: Into<Mint<M>>> ops::Mul<T> for Mint<M> {
         Self::from_val(val as u32)
     }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::MulAssign<T> for Mint<M> {
     fn mul_assign(&mut self, rhs: T) { *self = *self * rhs; }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::Div<T> for Mint<M> {
     type Output = Self;
-    fn div(mut self, rhs: T) -> Self {
-        self /= rhs;
-        self
-    }
+    fn div(mut self, rhs: T) -> Self { self /= rhs; self }
 }
-
 impl<M: Mod, T: Into<Mint<M>>> ops::DivAssign<T> for Mint<M> {
     fn div_assign(&mut self, rhs: T) { *self *= rhs.into().pow(M::PHI - 1); }
 }
-
 impl<M: Mod> iter::Sum for Mint<M> {
     fn sum<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::from_val(0), |b, x| b + x) }
 }
-
 impl<M: Mod> iter::Product for Mint<M> {
     fn product<I: Iterator<Item = Self>>(iter: I) -> Self {
         iter.fold(Self::from_val(1), |b, x| b * x)
     }
 }
-
 impl<M: Mod> fmt::Debug for Mint<M> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
 }
-
 impl<M: Mod> fmt::Display for Mint<M> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
 }
-
 impl<M: Mod> ZeroOne for Mint<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
     const ONE: Self = Self { val: 1, _m: PhantomData };

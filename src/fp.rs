@@ -48,21 +48,13 @@ pub type FpA = Fp<ModA>;
 pub type FpB = Fp<ModB>;
 pub type FpC = Fp<ModC>;
 pub type FpD = Fp<ModD>;
-
-/// mod 1_000_000_007
 pub type F17 = FpA;
-
-/// mod 998_244_353
 pub type F99 = FpB;
 
 impl<M: Mod> Fp<M> {
     pub const P: u32 = M::P;
-    pub fn new(val: u32) -> Self {
-        val.into()
-    }
-    fn from_raw(val: u32) -> Self {
-        Fp { val, _m: PhantomData }
-    }
+    pub fn new(val: u32) -> Self { val.into() }
+    fn from_raw(val: u32) -> Self { Fp { val, _m: PhantomData } }
     pub fn value(self) -> u32 {
         let v = reduce::<M>(self.val as u64);
         if v >= M::P { v - M::P } else { v }
@@ -74,9 +66,7 @@ impl<M: Mod> Fp<M> {
         k %= (M::P - 1) as u64;
         let mut res = Self::ONE;
         while !k.is_zero() {
-            if k % 2 != 0 {
-                res *= self;
-            }
+            if k % 2 != 0 { res *= self; }
             self *= self;
             k >>= 1;
         }
@@ -101,15 +91,7 @@ impl<M: Mod> Fp<M> {
 }
 
 impl<M: Mod> From<u32> for Fp<M> {
-    fn from(x: u32) -> Self {
-        Fp::from_raw(reduce::<M>(x as u64 * M::R2 as u64))
-    }
-}
-
-impl<M: Mod> From<usize> for Fp<M> {
-    fn from(x: usize) -> Self {
-        Fp::from_raw(reduce::<M>(x as u64 * M::R2 as u64))
-    }
+    fn from(x: u32) -> Self { Fp::from_raw(reduce::<M>(x as u64 * M::R2 as u64)) }
 }
 
 macro_rules! impl_from_int {
@@ -122,16 +104,12 @@ macro_rules! impl_from_int {
     )* };
 }
 
-impl_from_int!(u64, i32, i64, isize);
+impl_from_int!(u64, i32, i64);
 
 impl<M: Mod> cmp::PartialEq for Fp<M> {
     fn eq(&self, other: &Self) -> bool {
         let val = |obj: &Fp<M>| {
-            if obj.val >= M::P {
-                obj.val - M::P
-            } else {
-                obj.val
-            }
+            if obj.val >= M::P { obj.val - M::P } else { obj.val }
         };
         val(self) == val(other)
     }
@@ -142,17 +120,13 @@ impl<M: Mod> cmp::Eq for Fp<M> {}
 impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
-        if self.val >= M::P * 2 {
-            self.val -= M::P * 2;
-        }
+        if self.val >= M::P * 2 { self.val -= M::P * 2; }
     }
 }
 impl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
-        if self.val < rhs.val {
-            self.val += M::P * 2;
-        }
+        if self.val < rhs.val { self.val += M::P * 2; }
         self.val -= rhs.val;
     }
 }
@@ -162,18 +136,14 @@ impl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M> {
     }
 }
 impl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {
-    fn div_assign(&mut self, rhs: T) {
-        *self *= rhs.into().inv();
-    }
+    fn div_assign(&mut self, rhs: T) { *self *= rhs.into().inv(); }
 }
 
 macro_rules! impl_binop {
     ($(($Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),*) => { $(
         impl<M: Mod, T: Into<Fp<M>>> ops::$Op<T> for Fp<M> {
             type Output = Self;
-            fn $op(mut self, rhs: T) -> Self {
-                ops::$OpAssign::$op_assign(&mut self, rhs); self
-            }
+            fn $op(mut self, rhs: T) -> Self { ops::$OpAssign::$op_assign(&mut self, rhs); self }
         }
     )* };
 }
@@ -187,48 +157,27 @@ impl_binop!(
 
 impl<M: Mod> ops::Neg for Fp<M> {
     type Output = Self;
-    fn neg(self) -> Self {
-        Fp::from_raw(M::P * 2 - self.val)
-    }
+    fn neg(self) -> Self { Fp::from_raw(M::P * 2 - self.val) }
 }
-
 impl<M: Mod> iter::Sum for Fp<M> {
-    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::ZERO, |b, x| b + x)
-    }
+    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::ZERO, |b, x| b + x) }
 }
-
 impl<M: Mod> iter::Product for Fp<M> {
-    fn product<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::ONE, |b, x| b * x)
-    }
+    fn product<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::ONE, |b, x| b * x) }
 }
-
 impl<M: Mod> fmt::Debug for Fp<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        self.value().fmt(f)
-    }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }
 }
-
 impl<M: Mod> fmt::Display for Fp<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        self.value().fmt(f)
-    }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }
 }
-
 impl<M: Mod> ZeroOne for Fp<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
     const ONE: Self = Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData };
 }
-
 impl<M: Mod> Print for Fp<M> {
-    fn print(w: &mut IO, x: Self) {
-        w.print(x.value());
-    }
+    fn print(w: &mut IO, x: Self) { w.print(x.value()); }
 }
-
 impl<M: Mod> Scan for Fp<M> {
-    fn scan(io: &mut IO) -> Self {
-        Self::new(io.scan())
-    }
+    fn scan(io: &mut IO) -> Self { Self::new(io.scan()) }
 }

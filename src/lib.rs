@@ -22,6 +22,7 @@ pub mod make_vec;
 pub mod math;
 pub mod mint;
 pub mod num;
+pub mod poly;
 pub mod rand;
 pub mod slice;
 pub mod stdio;
