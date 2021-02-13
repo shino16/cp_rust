@@ -13,9 +13,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -44,11 +41,10 @@ data:
   - src/graph.rs
   - src/graph/tree.rs
   - src/graph/tree/dfs_io.rs
-  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '2021-02-10 04:47:06+09:00'
+  timestamp: '2021-02-13 16:52:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs

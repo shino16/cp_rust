@@ -79,7 +79,7 @@ data:
   path: src/fxhash.rs
   requiredBy:
   - src/dfa.rs
-  timestamp: '2021-02-09 02:37:01+09:00'
+  timestamp: '2021-02-13 16:52:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

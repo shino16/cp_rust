@@ -72,8 +72,8 @@ data:
   timestamp: '2021-02-10 04:47:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/cargo_test.rs
   - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/cargo_test.rs
 documentation_of: src/int/gcd.rs
 layout: document
 redirect_from:

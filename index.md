@@ -259,6 +259,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/tree.rs
       title: src/graph/tree.rs
+    - icon: ':warning:'
+      path: src/graph/weighted.rs
+      title: src/graph/weighted.rs
   - name: src/graph/max_flow/edmonds_karp
     pages:
     - icon: ':warning:'

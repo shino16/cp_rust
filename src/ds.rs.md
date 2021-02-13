@@ -57,10 +57,10 @@ data:
   isVerificationFile: false
   path: src/ds.rs
   requiredBy:
-  - src/draft/linked_list/ptr.rs
-  - src/draft/linked_list/iter.rs
-  - src/draft/linked_list/inner_mut.rs
   - src/draft/linked_list.rs
+  - src/draft/linked_list/inner_mut.rs
+  - src/draft/linked_list/iter.rs
+  - src/draft/linked_list/ptr.rs
   timestamp: '2021-02-09 16:24:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

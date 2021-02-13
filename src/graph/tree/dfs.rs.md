@@ -7,9 +7,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -31,11 +28,10 @@ data:
   dependsOn:
   - src/graph.rs
   - src/graph/tree.rs
-  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree/dfs.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 16:52:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dfs.rs

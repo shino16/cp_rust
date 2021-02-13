@@ -7,9 +7,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: src/graph/tree/reroot.rs
@@ -38,12 +35,11 @@ data:
   dependsOn:
   - src/graph.rs
   - src/graph/tree.rs
-  - src/zo.rs
   isVerificationFile: false
   path: src/graph/tree/dfs_io.rs
   requiredBy:
   - src/graph/tree/reroot.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 16:52:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs
