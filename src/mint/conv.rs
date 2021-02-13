@@ -63,7 +63,7 @@ macro_rules! impl_ntt {
                     }
                     m <<= 1;
                 }
-                let d = FpType::from(n).inv();
+                let d = FpType::from(n as u32).inv();
                 a.iter_mut().for_each(|e| *e *= d);
             }
 
