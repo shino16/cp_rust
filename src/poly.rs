@@ -4,7 +4,8 @@ pub use crate::num::field::*;
 pub trait Poly: Field + Conv {}
 impl<T: Field + Conv> Poly for T {}
 
-// requires F(0) != 0
+// TODO
+
 pub fn inv<T: Poly>(f: Vec<T>, need: usize) -> Vec<T> {
     let (mut f2, mut inv2) = (Vec::new(), Vec::new());
     let mut inv = vec![T::ONE / f[0]];
