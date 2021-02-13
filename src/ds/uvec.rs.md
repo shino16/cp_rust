@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/ds.rs
+    title: src/ds.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: src/ds/uvec2d.rs
@@ -38,24 +41,24 @@ data:
     RuntimeError: bundler is not specified: src/ds/uvec.rs\n"
   code: "use std::ops::{Deref, DerefMut};\n\n#[derive(Clone)]\n#[repr(transparent)]\n\
     pub struct UVec<T>(pub Vec<T>);\n\nimpl<T> UVec<T> {\n    pub fn new() -> Self\
-    \ {\n        Self(Vec::new())\n    }\n}\n\nimpl<T> AsRef<UVec<T>> for Vec<T> {\n\
-    \    fn as_ref(&self) -> &UVec<T> {\n        unsafe { &*(self as *const Vec<T>\
-    \ as *const UVec<T>) }\n    }\n}\n\nimpl<T> AsMut<UVec<T>> for Vec<T> {\n    fn\
-    \ as_mut(&mut self) -> &mut UVec<T> {\n        unsafe { &mut *(self as *mut Vec<T>\
-    \ as *mut UVec<T>) }\n    }\n}\n\nimpl<T> AsRef<Vec<T>> for UVec<T> {\n    fn\
-    \ as_ref(&self) -> &Vec<T> {\n        &self.0\n    }\n}\n\nimpl<T> AsMut<Vec<T>>\
-    \ for UVec<T> {\n    fn as_mut(&mut self) -> &mut Vec<T> {\n        &mut self.0\n\
-    \    }\n}\n\nimpl<T> Deref for UVec<T> {\n    type Target = Vec<T>;\n    fn deref(&self)\
-    \ -> &Self::Target {\n        &self.0\n    }\n}\n\nimpl<T> DerefMut for UVec<T>\
-    \ {\n    fn deref_mut(&mut self) -> &mut Self::Target {\n        &mut self.0\n\
-    \    }\n}\n\n#[cfg(not(debug_assertions))]\nuse std::ops::{Index, IndexMut};\n\
-    #[cfg(not(debug_assertions))]\nuse std::slice::SliceIndex;\n\n#[cfg(not(debug_assertions))]\n\
-    impl<T, I: SliceIndex<[T]>> Index<I> for UVec<T> {\n    type Output = I::Output;\n\
-    \    fn index(&self, index: I) -> &Self::Output {\n        unsafe { self.0.get_unchecked(index)\
-    \ }\n    }\n}\n\n#[cfg(not(debug_assertions))]\nimpl<T, I: SliceIndex<[T]>> IndexMut<I>\
-    \ for UVec<T> {\n    fn index_mut(&mut self, index: I) -> &mut Self::Output {\n\
-    \        unsafe { self.0.get_unchecked_mut(index) }\n    }\n}\n"
-  dependsOn: []
+    \ { Self(Vec::new()) }\n}\nimpl<T> AsRef<UVec<T>> for Vec<T> {\n    fn as_ref(&self)\
+    \ -> &UVec<T> { unsafe { &*(self as *const Vec<T> as *const UVec<T>) } }\n}\n\
+    impl<T> AsMut<UVec<T>> for Vec<T> {\n    fn as_mut(&mut self) -> &mut UVec<T>\
+    \ { unsafe { &mut *(self as *mut Vec<T> as *mut UVec<T>) } }\n}\nimpl<T> AsRef<Vec<T>>\
+    \ for UVec<T> {\n    fn as_ref(&self) -> &Vec<T> { &self.0 }\n}\nimpl<T> AsMut<Vec<T>>\
+    \ for UVec<T> {\n    fn as_mut(&mut self) -> &mut Vec<T> { &mut self.0 }\n}\n\
+    impl<T> Deref for UVec<T> {\n    type Target = Vec<T>;\n    fn deref(&self) ->\
+    \ &Self::Target { &self.0 }\n}\nimpl<T> DerefMut for UVec<T> {\n    fn deref_mut(&mut\
+    \ self) -> &mut Self::Target { &mut self.0 }\n}\n\n#[cfg(not(debug_assertions))]\n\
+    mod unchecked {\n    use super::*;\n    use std::ops::{Index, IndexMut};\n   \
+    \ use std::slice::SliceIndex;\n\n    impl<T, I: SliceIndex<[T]>> Index<I> for\
+    \ UVec<T> {\n        type Output = I::Output;\n        fn index(&self, index:\
+    \ I) -> &Self::Output { unsafe { self.0.get_unchecked(index) } }\n    }\n    impl<T,\
+    \ I: SliceIndex<[T]>> IndexMut<I> for UVec<T> {\n        fn index_mut(&mut self,\
+    \ index: I) -> &mut Self::Output {\n            unsafe { self.0.get_unchecked_mut(index)\
+    \ }\n        }\n    }\n}\n"
+  dependsOn:
+  - src/ds.rs
   isVerificationFile: false
   path: src/ds/uvec.rs
   requiredBy:
@@ -63,7 +66,7 @@ data:
   - src/mint/conv.rs
   - src/ds/uvec2d.rs
   - src/fp/conv.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_test.rs

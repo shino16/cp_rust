@@ -9,6 +9,9 @@ data:
     path: src/mint/conv.rs
     title: src/mint/conv.rs
   - icon: ':warning:'
+    path: src/poly.rs
+    title: src/poly.rs
+  - icon: ':warning:'
     path: src/u64/conv.rs
     title: src/u64/conv.rs
   _extendedVerifiedWith:
@@ -40,6 +43,7 @@ data:
   isVerificationFile: false
   path: src/conv.rs
   requiredBy:
+  - src/poly.rs
   - src/u64/conv.rs
   - src/mint/conv.rs
   - src/fp/conv.rs

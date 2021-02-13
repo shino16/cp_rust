@@ -90,6 +90,12 @@ data:
     path: src/num.rs
     title: src/num.rs
   - icon: ':warning:'
+    path: src/num/field.rs
+    title: src/num/field.rs
+  - icon: ':warning:'
+    path: src/poly.rs
+    title: src/poly.rs
+  - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
   - icon: ':heavy_check_mark:'
@@ -153,6 +159,7 @@ data:
   isVerificationFile: false
   path: src/zo.rs
   requiredBy:
+  - src/poly.rs
   - src/slice/cum.rs
   - src/mint.rs
   - src/u64/conv.rs
@@ -160,6 +167,7 @@ data:
   - src/alg/arith.rs
   - src/math/binom.rs
   - src/math/pow.rs
+  - src/num/field.rs
   - src/mint/conv.rs
   - src/mint/io.rs
   - src/mint/num.rs

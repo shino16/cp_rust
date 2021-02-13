@@ -66,7 +66,7 @@ data:
   path: src/graph/max_flow/edmonds_karp.rs
   requiredBy:
   - src/graph/max_flow/edmonds_karp/edge.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs

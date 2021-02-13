@@ -40,7 +40,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/dfa.rs
       title: src/dfa.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/ds.rs
       title: src/ds.rs
     - icon: ':warning:'
@@ -91,6 +91,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
+    - icon: ':warning:'
+      path: src/poly.rs
+      title: src/poly.rs
     - icon: ':warning:'
       path: src/rand.rs
       title: src/rand.rs
@@ -369,6 +372,11 @@ data:
     - icon: ':warning:'
       path: src/mint/num.rs
       title: src/mint/num.rs
+  - name: src/num
+    pages:
+    - icon: ':warning:'
+      path: src/num/field.rs
+      title: src/num/field.rs
   - name: src/rand
     pages:
     - icon: ':heavy_check_mark:'

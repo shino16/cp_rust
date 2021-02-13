@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: src/ds.rs
+    title: src/ds.rs
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
   _extendedRequiredBy: []
@@ -31,11 +34,12 @@ data:
     \ r: usize) -> &mut Self::Output {\n        &mut self.inner[r * self.w..(r + 1)\
     \ * self.w]\n    }\n}\n"
   dependsOn:
+  - src/ds.rs
   - src/ds/uvec.rs
   isVerificationFile: false
   path: src/ds/uvec2d.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/uvec2d.rs

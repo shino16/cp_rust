@@ -40,7 +40,7 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow/edmonds_karp/edge.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/max_flow/edmonds_karp/edge.rs

@@ -72,6 +72,12 @@ data:
     path: src/mint/num.rs
     title: src/mint/num.rs
   - icon: ':warning:'
+    path: src/num/field.rs
+    title: src/num/field.rs
+  - icon: ':warning:'
+    path: src/poly.rs
+    title: src/poly.rs
+  - icon: ':warning:'
     path: src/slice/cum.rs
     title: src/slice/cum.rs
   - icon: ':heavy_check_mark:'
@@ -111,27 +117,29 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/num.rs\n"
-  code: "pub use crate::zo::ZeroOne;\nuse std::fmt::*;\nuse std::ops::*;\n\npub trait\
-    \ Num:\n    ZeroOne\n    + Add<Output = Self>\n    + AddAssign\n    + Sub<Output\
-    \ = Self>\n    + SubAssign\n    + Mul<Output = Self>\n    + MulAssign\n    + Div<Output\
-    \ = Self>\n    + DivAssign\n    + Debug\n    + Display\n{\n    fn wrapping_add(self,\
-    \ rhs: Self) -> Self;\n    fn wrapping_neg(self) -> Self;\n}\n\npub trait INum:\
-    \ Num + Neg<Output = Self> {}\n\nmacro_rules! impl_num {\n    ($($t:ty),*) =>\
-    \ { $(\n        impl Num for $t {\n            fn wrapping_add(self, rhs: Self)\
-    \ -> Self {\n                self.wrapping_add(rhs)\n            }\n         \
-    \   fn wrapping_neg(self) -> Self {\n                self.wrapping_neg()\n   \
-    \         }\n        }\n    )* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32,\
+  code: "pub use crate::zo::ZeroOne;\nuse std::fmt::*;\nuse std::ops::*;\n\npub mod\
+    \ field;\n\npub trait Num:\n    ZeroOne\n    + Add<Output = Self>\n    + AddAssign\n\
+    \    + Sub<Output = Self>\n    + SubAssign\n    + Mul<Output = Self>\n    + MulAssign\n\
+    \    + Div<Output = Self>\n    + DivAssign\n    + Debug\n    + Display\n{\n  \
+    \  fn wrapping_add(self, rhs: Self) -> Self;\n    fn wrapping_neg(self) -> Self;\n\
+    }\n\npub trait INum: Num + Neg<Output = Self> {}\n\nmacro_rules! impl_num {\n\
+    \    ($($t:ty),*) => { $(\n        impl Num for $t {\n            fn wrapping_add(self,\
+    \ rhs: Self) -> Self {\n                self.wrapping_add(rhs)\n            }\n\
+    \            fn wrapping_neg(self) -> Self {\n                self.wrapping_neg()\n\
+    \            }\n        }\n    )* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32,\
     \ u64, u128, usize);\n\nimpl<T: Num + Neg<Output = Self>> INum for T {}\n"
   dependsOn:
   - src/zo.rs
   isVerificationFile: false
   path: src/num.rs
   requiredBy:
+  - src/poly.rs
   - src/slice/cum.rs
   - src/dfa.rs
   - src/alg/arith.rs
   - src/math/binom.rs
   - src/math/pow.rs
+  - src/num/field.rs
   - src/mint/num.rs
   - src/draft/fpacc64.rs
   - src/ds/fenwick.rs
@@ -151,7 +159,7 @@ data:
   - src/graph/max_flow/edmonds_karp/edge.rs
   - src/graph/max_flow/hlpp/edge.rs
   - src/int.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs

@@ -5,6 +5,9 @@ data:
     path: src/conv.rs
     title: src/conv.rs
   - icon: ':heavy_check_mark:'
+    path: src/ds.rs
+    title: src/ds.rs
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
   - icon: ':heavy_check_mark:'
@@ -60,22 +63,22 @@ data:
     \ = u + v;\n                            a[i + m] = (u - v) * w;\n            \
     \            }\n                        w *= unsafe { INV_ROOT[t.trailing_zeros()\
     \ as usize] };\n                    }\n                    m <<= 1;\n        \
-    \        }\n                let d = FpType::from(n).inv();\n                a.iter_mut().for_each(|e|\
-    \ *e *= d);\n            }\n\n            pub fn conv<'a, 'b>(a: &'a mut UVec<FpType>,\
-    \ b: &'b mut UVec<FpType>) {\n                let len = a.len() + b.len() - 1;\n\
-    \                fn ilog2(n: usize) -> u32 {\n                    std::mem::size_of::<usize>()\
-    \ as u32 * 8 - n.leading_zeros() - 1\n                }\n                let n:\
-    \ usize = 1 << ilog2(len * 2 - 1);\n                reserve(n.trailing_zeros()\
-    \ as usize);\n                a.resize(n, Default::default());\n             \
-    \   b.resize(n, Default::default());\n                ntt(a);\n              \
-    \  ntt(b);\n                a.iter_mut().zip(b.iter()).for_each(|(a, b)| *a *=\
-    \ *b);\n                b.clear();\n                inv_ntt(a);\n            \
-    \    a.truncate(len);\n            }\n\n            impl Conv for FpType {\n \
-    \               fn conv(mut lhs: Vec<Self>, mut rhs: Vec<Self>) -> Vec<Self> {\n\
-    \                    conv(lhs.as_mut(), rhs.as_mut());\n                    lhs\n\
-    \                }\n                fn conv_in_place(lhs: &mut Vec<Self>, rhs:\
-    \ &mut Vec<Self>) {\n                    conv(lhs.as_mut(), rhs.as_mut());\n \
-    \               }\n            }\n        }\n    };\n}\n\nimpl_ntt!(impl_b, ModB,\
+    \        }\n                let d = FpType::from(n as u32).inv();\n          \
+    \      a.iter_mut().for_each(|e| *e *= d);\n            }\n\n            pub fn\
+    \ conv<'a, 'b>(a: &'a mut UVec<FpType>, b: &'b mut UVec<FpType>) {\n         \
+    \       let len = a.len() + b.len() - 1;\n                fn ilog2(n: usize) ->\
+    \ u32 {\n                    std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros()\
+    \ - 1\n                }\n                let n: usize = 1 << ilog2(len * 2 -\
+    \ 1);\n                reserve(n.trailing_zeros() as usize);\n               \
+    \ a.resize(n, Default::default());\n                b.resize(n, Default::default());\n\
+    \                ntt(a);\n                ntt(b);\n                a.iter_mut().zip(b.iter()).for_each(|(a,\
+    \ b)| *a *= *b);\n                b.clear();\n                inv_ntt(a);\n  \
+    \              a.truncate(len);\n            }\n\n            impl Conv for FpType\
+    \ {\n                fn conv(mut lhs: Vec<Self>, mut rhs: Vec<Self>) -> Vec<Self>\
+    \ {\n                    conv(lhs.as_mut(), rhs.as_mut());\n                 \
+    \   lhs\n                }\n                fn conv_in_place(lhs: &mut Vec<Self>,\
+    \ rhs: &mut Vec<Self>) {\n                    conv(lhs.as_mut(), rhs.as_mut());\n\
+    \                }\n            }\n        }\n    };\n}\n\nimpl_ntt!(impl_b, ModB,\
     \ 3);\nimpl_ntt!(impl_c, ModC, 5);\nimpl_ntt!(impl_d, ModD, 5);\n\nimpl Conv for\
     \ Mint17 {\n    fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {\n\
     \        let r12 = MintC::from(MintB::M).inv();\n        let r13 = MintD::from(MintB::M).inv();\n\
@@ -94,13 +97,14 @@ data:
     \            *e0 = x.value().into();\n        }\n    }\n}\n"
   dependsOn:
   - src/conv.rs
+  - src/ds.rs
   - src/ds/uvec.rs
   - src/mint.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-02-11 01:05:36+09:00'
+  timestamp: '2021-02-13 20:49:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_test.rs

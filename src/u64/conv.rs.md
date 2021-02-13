@@ -5,6 +5,9 @@ data:
     path: src/conv.rs
     title: src/conv.rs
   - icon: ':heavy_check_mark:'
+    path: src/ds.rs
+    title: src/ds.rs
+  - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
   - icon: ':heavy_check_mark:'
@@ -48,6 +51,7 @@ data:
     \        }\n    }\n}\n"
   dependsOn:
   - src/conv.rs
+  - src/ds.rs
   - src/ds/uvec.rs
   - src/fp.rs
   - src/fp/conv.rs
@@ -56,7 +60,7 @@ data:
   isVerificationFile: false
   path: src/u64/conv.rs
   requiredBy: []
-  timestamp: '2021-02-11 01:05:36+09:00'
+  timestamp: '2021-02-13 20:49:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/u64/conv.rs

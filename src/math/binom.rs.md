@@ -53,7 +53,7 @@ data:
   isVerificationFile: false
   path: src/math/binom.rs
   requiredBy: []
-  timestamp: '2021-02-10 04:47:06+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/binom.rs

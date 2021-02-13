@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/draft/linked_list.rs
     title: src/draft/linked_list.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: src/ds.rs
     title: src/ds.rs
   _extendedRequiredBy: []

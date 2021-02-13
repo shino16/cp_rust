@@ -55,66 +55,60 @@ data:
     \ 924_844_031);\n\n// modular arithmetics\n#[repr(transparent)]\n#[derive(Default,\
     \ Clone, Copy)]\npub struct Fp<M: Mod> {\n    val: u32,\n    _m: PhantomData<M>,\n\
     }\n\npub type FpA = Fp<ModA>;\npub type FpB = Fp<ModB>;\npub type FpC = Fp<ModC>;\n\
-    pub type FpD = Fp<ModD>;\n\n/// mod 1_000_000_007\npub type F17 = FpA;\n\n///\
-    \ mod 998_244_353\npub type F99 = FpB;\n\nimpl<M: Mod> Fp<M> {\n    pub const\
-    \ P: u32 = M::P;\n    pub fn new(val: u32) -> Self {\n        val.into()\n   \
-    \ }\n    fn from_raw(val: u32) -> Self {\n        Fp { val, _m: PhantomData }\n\
-    \    }\n    pub fn value(self) -> u32 {\n        let v = reduce::<M>(self.val\
-    \ as u64);\n        if v >= M::P { v - M::P } else { v }\n    }\n    pub fn pow(mut\
+    pub type FpD = Fp<ModD>;\npub type F17 = FpA;\npub type F99 = FpB;\n\nimpl<M:\
+    \ Mod> Fp<M> {\n    pub const P: u32 = M::P;\n    pub fn new(val: u32) -> Self\
+    \ { val.into() }\n    fn from_raw(val: u32) -> Self { Fp { val, _m: PhantomData\
+    \ } }\n    pub fn value(self) -> u32 {\n        let v = reduce::<M>(self.val as\
+    \ u64);\n        if v >= M::P { v - M::P } else { v }\n    }\n    pub fn pow(mut\
     \ self, mut k: u64) -> Self {\n        if self.val == 0 && k == 0 {\n        \
     \    return Self::new(1);\n        }\n        k %= (M::P - 1) as u64;\n      \
     \  let mut res = Self::ONE;\n        while !k.is_zero() {\n            if k %\
-    \ 2 != 0 {\n                res *= self;\n            }\n            self *= self;\n\
-    \            k >>= 1;\n        }\n        res\n    }\n    pub fn inv(self) ->\
-    \ Self {\n        let (mut a, mut b, mut u, mut v) = (M::P as i32, self.value()\
-    \ as i32, 0, 1);\n        while b != 0 {\n            let t = a / b;\n       \
-    \     a -= t * b;\n            u -= t * v;\n            std::mem::swap(&mut a,\
-    \ &mut b);\n            std::mem::swap(&mut u, &mut v);\n        }\n        debug_assert_eq!(a,\
-    \ 1);\n        if u < 0 {\n            debug_assert_eq!(v, M::P as i32);\n   \
-    \         u += v;\n        }\n        Self::new(u as u32)\n    }\n}\n\nimpl<M:\
-    \ Mod> From<u32> for Fp<M> {\n    fn from(x: u32) -> Self {\n        Fp::from_raw(reduce::<M>(x\
-    \ as u64 * M::R2 as u64))\n    }\n}\n\nimpl<M: Mod> From<usize> for Fp<M> {\n\
-    \    fn from(x: usize) -> Self {\n        Fp::from_raw(reduce::<M>(x as u64 *\
-    \ M::R2 as u64))\n    }\n}\n\nmacro_rules! impl_from_int {\n    ($($t:ty),*) =>\
-    \ { $(\n        impl<M: Mod> From<$t> for Fp<M> {\n            fn from(x: $t)\
+    \ 2 != 0 { res *= self; }\n            self *= self;\n            k >>= 1;\n \
+    \       }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let (mut\
+    \ a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n      \
+    \  while b != 0 {\n            let t = a / b;\n            a -= t * b;\n     \
+    \       u -= t * v;\n            std::mem::swap(&mut a, &mut b);\n           \
+    \ std::mem::swap(&mut u, &mut v);\n        }\n        debug_assert_eq!(a, 1);\n\
+    \        if u < 0 {\n            debug_assert_eq!(v, M::P as i32);\n         \
+    \   u += v;\n        }\n        Self::new(u as u32)\n    }\n}\n\nimpl<M: Mod>\
+    \ From<u32> for Fp<M> {\n    fn from(x: u32) -> Self { Fp::from_raw(reduce::<M>(x\
+    \ as u64 * M::R2 as u64)) }\n}\n\nmacro_rules! impl_from_int {\n    ($($t:ty),*)\
+    \ => { $(\n        impl<M: Mod> From<$t> for Fp<M> {\n            fn from(x: $t)\
     \ -> Self {\n                Fp::from_raw(reduce::<M>(x.rem_euclid(M::P as _)\
     \ as u64 * M::R2 as u64))\n            }\n        }\n    )* };\n}\n\nimpl_from_int!(u64,\
-    \ i32, i64, isize);\n\nimpl<M: Mod> cmp::PartialEq for Fp<M> {\n    fn eq(&self,\
-    \ other: &Self) -> bool {\n        let val = |obj: &Fp<M>| {\n            if obj.val\
-    \ >= M::P {\n                obj.val - M::P\n            } else {\n          \
-    \      obj.val\n            }\n        };\n        val(self) == val(other)\n \
-    \   }\n}\n\nimpl<M: Mod> cmp::Eq for Fp<M> {}\n\nimpl<M: Mod, T: Into<Fp<M>>>\
-    \ ops::AddAssign<T> for Fp<M> {\n    fn add_assign(&mut self, rhs: T) {\n    \
-    \    self.val += rhs.into().val;\n        if self.val >= M::P * 2 {\n        \
-    \    self.val -= M::P * 2;\n        }\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>>\
-    \ ops::SubAssign<T> for Fp<M> {\n    fn sub_assign(&mut self, rhs: T) {\n    \
-    \    let rhs = rhs.into();\n        if self.val < rhs.val {\n            self.val\
-    \ += M::P * 2;\n        }\n        self.val -= rhs.val;\n    }\n}\nimpl<M: Mod,\
-    \ T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M> {\n    fn mul_assign(&mut self,\
-    \ rhs: T) {\n        self.val = reduce::<M>(self.val as u64 * rhs.into().val as\
-    \ u64);\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {\n\
-    \    fn div_assign(&mut self, rhs: T) {\n        *self *= rhs.into().inv();\n\
-    \    }\n}\n\nmacro_rules! impl_binop {\n    ($(($Op:ident, $op:ident, $OpAssign:ident,\
+    \ i32, i64);\n\nimpl<M: Mod> cmp::PartialEq for Fp<M> {\n    fn eq(&self, other:\
+    \ &Self) -> bool {\n        let val = |obj: &Fp<M>| {\n            if obj.val\
+    \ >= M::P { obj.val - M::P } else { obj.val }\n        };\n        val(self) ==\
+    \ val(other)\n    }\n}\n\nimpl<M: Mod> cmp::Eq for Fp<M> {}\n\nimpl<M: Mod, T:\
+    \ Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {\n    fn add_assign(&mut self, rhs:\
+    \ T) {\n        self.val += rhs.into().val;\n        if self.val >= M::P * 2 {\
+    \ self.val -= M::P * 2; }\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T>\
+    \ for Fp<M> {\n    fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n\
+    \        if self.val < rhs.val { self.val += M::P * 2; }\n        self.val -=\
+    \ rhs.val;\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M>\
+    \ {\n    fn mul_assign(&mut self, rhs: T) {\n        self.val = reduce::<M>(self.val\
+    \ as u64 * rhs.into().val as u64);\n    }\n}\nimpl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T>\
+    \ for Fp<M> {\n    fn div_assign(&mut self, rhs: T) { *self *= rhs.into().inv();\
+    \ }\n}\n\nmacro_rules! impl_binop {\n    ($(($Op:ident, $op:ident, $OpAssign:ident,\
     \ $op_assign:ident)),*) => { $(\n        impl<M: Mod, T: Into<Fp<M>>> ops::$Op<T>\
     \ for Fp<M> {\n            type Output = Self;\n            fn $op(mut self, rhs:\
-    \ T) -> Self {\n                ops::$OpAssign::$op_assign(&mut self, rhs); self\n\
-    \            }\n        }\n    )* };\n}\n\nimpl_binop!(\n    (Add, add, AddAssign,\
-    \ add_assign),\n    (Sub, sub, SubAssign, sub_assign),\n    (Mul, mul, MulAssign,\
-    \ mul_assign),\n    (Div, div, DivAssign, div_assign)\n);\n\nimpl<M: Mod> ops::Neg\
-    \ for Fp<M> {\n    type Output = Self;\n    fn neg(self) -> Self {\n        Fp::from_raw(M::P\
-    \ * 2 - self.val)\n    }\n}\n\nimpl<M: Mod> iter::Sum for Fp<M> {\n    fn sum<I:\
-    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::ZERO, |b,\
-    \ x| b + x)\n    }\n}\n\nimpl<M: Mod> iter::Product for Fp<M> {\n    fn product<I:\
-    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::ONE, |b,\
-    \ x| b * x)\n    }\n}\n\nimpl<M: Mod> fmt::Debug for Fp<M> {\n    fn fmt(&self,\
-    \ f: &mut fmt::Formatter) -> fmt::Result {\n        self.value().fmt(f)\n    }\n\
-    }\n\nimpl<M: Mod> fmt::Display for Fp<M> {\n    fn fmt(&self, f: &mut fmt::Formatter)\
-    \ -> fmt::Result {\n        self.value().fmt(f)\n    }\n}\n\nimpl<M: Mod> ZeroOne\
-    \ for Fp<M> {\n    const ZERO: Self = Self { val: 0, _m: PhantomData };\n    const\
-    \ ONE: Self = Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData };\n}\n\n\
-    impl<M: Mod> Print for Fp<M> {\n    fn print(w: &mut IO, x: Self) {\n        w.print(x.value());\n\
-    \    }\n}\n\nimpl<M: Mod> Scan for Fp<M> {\n    fn scan(io: &mut IO) -> Self {\n\
-    \        Self::new(io.scan())\n    }\n}\n"
+    \ T) -> Self { ops::$OpAssign::$op_assign(&mut self, rhs); self }\n        }\n\
+    \    )* };\n}\n\nimpl_binop!(\n    (Add, add, AddAssign, add_assign),\n    (Sub,\
+    \ sub, SubAssign, sub_assign),\n    (Mul, mul, MulAssign, mul_assign),\n    (Div,\
+    \ div, DivAssign, div_assign)\n);\n\nimpl<M: Mod> ops::Neg for Fp<M> {\n    type\
+    \ Output = Self;\n    fn neg(self) -> Self { Fp::from_raw(M::P * 2 - self.val)\
+    \ }\n}\nimpl<M: Mod> iter::Sum for Fp<M> {\n    fn sum<I: Iterator<Item = Self>>(iter:\
+    \ I) -> Self { iter.fold(Self::ZERO, |b, x| b + x) }\n}\nimpl<M: Mod> iter::Product\
+    \ for Fp<M> {\n    fn product<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::ONE,\
+    \ |b, x| b * x) }\n}\nimpl<M: Mod> fmt::Debug for Fp<M> {\n    fn fmt(&self, f:\
+    \ &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }\n}\nimpl<M: Mod>\
+    \ fmt::Display for Fp<M> {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result\
+    \ { self.value().fmt(f) }\n}\nimpl<M: Mod> ZeroOne for Fp<M> {\n    const ZERO:\
+    \ Self = Self { val: 0, _m: PhantomData };\n    const ONE: Self = Self { val:\
+    \ M::P.wrapping_neg() % M::P, _m: PhantomData };\n}\nimpl<M: Mod> Print for Fp<M>\
+    \ {\n    fn print(w: &mut IO, x: Self) { w.print(x.value()); }\n}\nimpl<M: Mod>\
+    \ Scan for Fp<M> {\n    fn scan(io: &mut IO) -> Self { Self::new(io.scan()) }\n\
+    }\n"
   dependsOn:
   - src/io.rs
   - src/zo.rs
@@ -125,7 +119,7 @@ data:
   - src/fp/conv.rs
   - src/fp/num.rs
   - src/tests.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-13 20:22:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs
