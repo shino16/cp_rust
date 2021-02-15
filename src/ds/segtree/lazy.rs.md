@@ -18,8 +18,8 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/segtree/lazy.rs\n"
-  code: "pub use crate::alg::*;\n\nfn trunc(x: usize) -> usize {\n    x >> x.trailing_zeros()\n\
-    }\n\n#[derive(Clone)]\npub struct LazySegmentTree<On: Monoid, Act: Monoid, Apply>\n\
+  code: "pub use crate::alg::*;\n\nfn trunc(x: usize) -> usize { x >> x.trailing_zeros()\
+    \ }\n\n#[derive(Clone)]\npub struct LazySegmentTree<On: Monoid, Act: Monoid, Apply>\n\
     where\n    Apply: Fn(On::Item, Act::Item) -> On::Item,\n{\n    len: usize,\n \
     \   log: u32,\n    data: Vec<(On::Item, Act::Item)>,\n    on_alg: On,\n    act_alg:\
     \ Act,\n    apply: Apply,\n}\n\nimpl<On: Monoid, Act: Monoid, Apply: Fn(On::Item,\
@@ -34,14 +34,14 @@ data:
     \ data: Vec<_> = iter.clone().chain(iter).collect();\n        for i in (1..len).rev()\
     \ {\n            data[i].0 = on_alg.op(data[i << 1].0, data[i << 1 | 1].0);\n\
     \        }\n        Self { len, log, data, on_alg, act_alg, apply }\n    }\n \
-    \   pub fn len(&self) -> usize {\n        self.len\n    }\n    fn apply(&mut self,\
-    \ p: usize, actor: Act::Item) {\n        self.data[p].0 = (self.apply)(self.data[p].0,\
-    \ actor);\n        self.act_alg.op_to(actor, &mut self.data[p].1);\n    }\n  \
-    \  fn flush(&mut self, p: usize) {\n        for s in (1..=self.log).rev() {\n\
-    \            let p = p >> s;\n            self.apply(p << 1, self.data[p].1);\n\
-    \            self.apply(p << 1 | 1, self.data[p].1);\n            self.data[p].1\
-    \ = self.act_alg.unit();\n        }\n    }\n    fn build(&mut self, mut p: usize)\
-    \ {\n        p >>= 1;\n        while p != 0 {\n            self.data[p].0 = self.on_alg.op(self.data[p\
+    \   pub fn len(&self) -> usize { self.len }\n    fn apply(&mut self, p: usize,\
+    \ actor: Act::Item) {\n        self.data[p].0 = (self.apply)(self.data[p].0, actor);\n\
+    \        self.act_alg.op_to(actor, &mut self.data[p].1);\n    }\n    fn flush(&mut\
+    \ self, p: usize) {\n        for s in (1..=self.log).rev() {\n            let\
+    \ p = p >> s;\n            self.apply(p << 1, self.data[p].1);\n            self.apply(p\
+    \ << 1 | 1, self.data[p].1);\n            self.data[p].1 = self.act_alg.unit();\n\
+    \        }\n    }\n    fn build(&mut self, mut p: usize) {\n        p >>= 1;\n\
+    \        while p != 0 {\n            self.data[p].0 = self.on_alg.op(self.data[p\
     \ << 1].0, self.data[p << 1 | 1].0);\n            // debug_assert_eq!(self.data[p].1,\
     \ self.act_alg.unit());\n            p >>= 1;\n        }\n    }\n    pub fn ask(&mut\
     \ self, l: usize, r: usize) -> On::Item {\n        self.flush(trunc(l + self.len()));\n\
@@ -63,13 +63,17 @@ data:
     \               if r & 1 != 0 {\n                    r -= 1;\n               \
     \     self.apply(r, actor);\n                }\n                l >>= 1;\n   \
     \             r >>= 1;\n            }\n        }\n        self.build(trunc(l +\
-    \ self.len()));\n        self.build(trunc(r + self.len()) - 1);\n    }\n}\n"
+    \ self.len()));\n        self.build(trunc(r + self.len()) - 1);\n    }\n    pub\
+    \ fn flush_all(&mut self) -> &[(On::Item, Act::Item)] {\n        for p in 1..self.len()\
+    \ {\n            self.apply(p << 1, self.data[p].1);\n            self.apply(p\
+    \ << 1 | 1, self.data[p].1);\n            self.data[p].1 = self.act_alg.unit();\n\
+    \        }\n        &self.data[self.len()..]\n    }\n}\n"
   dependsOn:
   - src/alg.rs
   isVerificationFile: false
   path: src/ds/segtree/lazy.rs
   requiredBy: []
-  timestamp: '2021-02-10 04:47:06+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

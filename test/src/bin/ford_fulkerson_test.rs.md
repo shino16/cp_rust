@@ -47,7 +47,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ford_fulkerson_test.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ford_fulkerson_test.rs

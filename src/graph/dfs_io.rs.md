@@ -20,20 +20,21 @@ data:
     RuntimeError: bundler is not specified: src/graph/dfs_io.rs\n"
   code: "pub use super::*;\nuse crate::ds::bitset::*;\n\n#[derive(Debug)]\npub enum\
     \ InOut {\n    In(usize),\n    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G:\
-    \ Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {\n    let mut visited\
-    \ = new_bitset(g.len());\n    visited.set_bit(s, true);\n    let mut togo = vec![(s,\
-    \ !0)];\n    while let Some((v, par)) = togo.pop() {\n        if v >> 31 != 0\
-    \ {\n            f(Out(!v), par);\n        } else {\n            f(In(v), par);\n\
-    \            togo.push((!v, par));\n            g.adj(v, |w| {\n             \
-    \   if visited.modify_bit(w, true) {\n                    togo.push((w, v));\n\
-    \                }\n            });\n        }\n    }\n}\n"
+    \ Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {\n    fn dfs_impl<G:\
+    \ Graph, F: FnMut(InOut, usize)>(\n        g: &G,\n        v: usize,\n       \
+    \ par: usize,\n        visited: &mut [u32],\n        f: &mut F,\n    ) {\n   \
+    \     f(In(v), par);\n        g.adj(v, |w| {\n            if visited.modify_bit(w,\
+    \ true) {\n                dfs_impl(g, w, v, visited, f);\n            }\n   \
+    \     });\n        f(Out(v), par);\n    }\n    let mut visited = new_bitset(g.len());\n\
+    \    visited.set_bit(s, true);\n    dfs_impl(g, s, !0, &mut visited, &mut f);\n\
+    }\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
   isVerificationFile: false
   path: src/graph/dfs_io.rs
   requiredBy: []
-  timestamp: '2021-02-13 16:52:06+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs_io.rs

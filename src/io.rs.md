@@ -5,15 +5,9 @@ data:
   - icon: ':warning:'
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fp.rs
-    title: src/fp.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fp/conv.rs
-    title: src/fp/conv.rs
   - icon: ':warning:'
-    path: src/fp/num.rs
-    title: src/fp/num.rs
+    path: src/fp/io.rs
+    title: src/fp/io.rs
   - icon: ':warning:'
     path: src/graph/io.rs
     title: src/graph/io.rs
@@ -23,16 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint/io.rs
     title: src/mint/io.rs
-  - icon: ':heavy_check_mark:'
-    path: src/tests.rs
-    title: src/tests.rs
-  - icon: ':warning:'
-    path: src/u64/conv.rs
-    title: src/u64/conv.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
@@ -91,18 +76,19 @@ data:
     \        std::io::stdin().read_to_string(&mut input).unwrap();\n        let input\
     \ = Box::leak(input.into_boxed_str());\n        let out = Box::leak(Box::new(stdout()));\n\
     \        IO {\n            iter: input.split_ascii_whitespace(),\n           \
-    \ buf: BufWriter::new(out.lock()),\n        }\n    }\n    fn scan_str(&mut self)\
-    \ -> &'static str { self.iter.next().unwrap() }\n    fn scan_raw(&mut self) ->\
-    \ Bytes { self.scan_str().as_bytes() }\n    pub fn scan<T: Scan>(&mut self) ->\
-    \ T { T::scan(self) }\n    pub fn scan_iter<T: Scan>(&mut self, n: usize) -> std::iter::Take<Iter<'_,\
-    \ T>> {\n        Iter { io: self, _m: PhantomData }.take(n)\n    }\n    pub fn\
-    \ scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T> {\n        (0..n).map(|_| self.scan()).collect()\n\
-    \    }\n    pub fn print<T: Print>(&mut self, x: T) { T::print(self, x); }\n \
-    \   pub fn println<T: Print>(&mut self, x: T) {\n        self.print(x);\n    \
-    \    self.print(\"\\n\");\n    }\n    pub fn iterln<T: Print, I: IntoIterator<Item\
-    \ = T>>(&mut self, into_iter: I, delim: &str) {\n        let mut iter = into_iter.into_iter();\n\
-    \        if let Some(v) = iter.next() {\n            self.print(v);\n        \
-    \    for v in iter {\n                self.print(delim);\n                self.print(v);\n\
+    \ buf: BufWriter::with_capacity(1 << 25, out.lock()),\n        }\n    }\n    fn\
+    \ scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }\n    fn scan_raw(&mut\
+    \ self) -> Bytes { self.scan_str().as_bytes() }\n    pub fn scan<T: Scan>(&mut\
+    \ self) -> T { T::scan(self) }\n    pub fn scan_iter<T: Scan>(&mut self, n: usize)\
+    \ -> std::iter::Take<Iter<'_, T>> {\n        Iter { io: self, _m: PhantomData\
+    \ }.take(n)\n    }\n    pub fn scan_vec<T: Scan>(&mut self, n: usize) -> Vec<T>\
+    \ {\n        (0..n).map(|_| self.scan()).collect()\n    }\n    pub fn print<T:\
+    \ Print>(&mut self, x: T) { T::print(self, x); }\n    pub fn println<T: Print>(&mut\
+    \ self, x: T) {\n        self.print(x);\n        self.print(\"\\n\");\n    }\n\
+    \    pub fn iterln<T: Print, I: IntoIterator<Item = T>>(&mut self, into_iter:\
+    \ I, delim: &str) {\n        let mut iter = into_iter.into_iter();\n        if\
+    \ let Some(v) = iter.next() {\n            self.print(v);\n            for v in\
+    \ iter {\n                self.print(delim);\n                self.print(v);\n\
     \            }\n        }\n        self.print(\"\\n\");\n    }\n    pub fn flush(&mut\
     \ self) { self.buf.flush().unwrap(); }\n}\npub struct Iter<'a, T> {\n    io: &'a\
     \ mut IO,\n    _m: PhantomData<T>,\n}\nimpl<T: Scan> Iterator for Iter<'_, T>\
@@ -154,16 +140,12 @@ data:
   isVerificationFile: false
   path: src/io.rs
   requiredBy:
-  - src/u64/conv.rs
   - src/mint/io.rs
   - src/draft/fpacc64.rs
   - src/io/graph.rs
-  - src/fp/conv.rs
-  - src/fp/num.rs
-  - src/tests.rs
+  - src/fp/io.rs
   - src/graph/io.rs
-  - src/fp.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs
@@ -177,7 +159,6 @@ data:
   - test/src/bin/hlpp_test.rs
   - test/src/bin/union_find_test.rs
   - test/src/bin/swag_test.rs
-  - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_test.rs
   - test/src/bin/dfa_test.rs
   - test/src/bin/lazy_segtree_test.rs

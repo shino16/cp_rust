@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/swag_test.rs
   requiredBy: []
-  timestamp: '2021-02-10 04:47:06+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/swag_test.rs

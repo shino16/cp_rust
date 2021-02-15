@@ -5,9 +5,6 @@ data:
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
-    path: src/io.rs
-    title: src/io.rs
-  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -29,13 +26,12 @@ data:
     \  fn wrapping_neg(self) -> Self {\n        -self\n    }\n}\n"
   dependsOn:
   - src/fp.rs
-  - src/io.rs
   - src/num.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/fp/num.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/fp/num.rs

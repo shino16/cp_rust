@@ -14,9 +14,6 @@ data:
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
-    path: src/io.rs
-    title: src/io.rs
-  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -89,9 +86,9 @@ data:
     \ 3);\nimpl_ntt!(impl_c, ModC, 5);\nimpl_ntt!(impl_d, ModD, 5);\n\nimpl Conv for\
     \ F17 {\n    fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {\n  \
     \      let r12 = FpC::from(FpB::P).inv();\n        let r13 = FpD::from(FpB::P).inv();\n\
-    \        let r23 = FpD::from(FpC::P).inv();\n        fn run<M: Mod>(lhs: &mut\
-    \ Vec<F17>, rhs: &mut Vec<F17>) -> Vec<Fp<M>>\n        where\n            Fp<M>:\
-    \ Conv,\n        {\n            let lhs = lhs.iter().map(|&e| Fp::from(e.value())).collect();\n\
+    \        let r23 = FpD::from(FpC::P).inv();\n        fn run<M: Mod>(lhs: &[F17],\
+    \ rhs: &[F17]) -> Vec<Fp<M>>\n        where\n            Fp<M>: Conv,\n      \
+    \  {\n            let lhs = lhs.iter().map(|&e| Fp::from(e.value())).collect();\n\
     \            let rhs = rhs.iter().map(|&e| Fp::from(e.value())).collect();\n \
     \           Conv::conv(lhs, rhs)\n        }\n        let v1: Vec<FpB> = run(lhs,\
     \ rhs);\n        let v2: Vec<FpC> = run(lhs, rhs);\n        let v3: Vec<FpD> =\
@@ -107,13 +104,12 @@ data:
   - src/ds.rs
   - src/ds/uvec.rs
   - src/fp.rs
-  - src/io.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/fp/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-02-13 20:49:39+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs

@@ -23,9 +23,6 @@ data:
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':heavy_check_mark:'
-    path: src/io.rs
-    title: src/io.rs
-  - icon: ':heavy_check_mark:'
     path: src/iter.rs
     title: src/iter.rs
   - icon: ':heavy_check_mark:'
@@ -93,7 +90,6 @@ data:
   - src/func/memo.rs
   - src/int.rs
   - src/int/gcd.rs
-  - src/io.rs
   - src/iter.rs
   - src/iter/prod.rs
   - src/make_vec.rs
@@ -110,7 +106,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-15 17:55:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
