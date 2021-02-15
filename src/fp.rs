@@ -1,9 +1,11 @@
-use crate::io::*;
+// modular arithmetics
+
 pub use crate::zo::ZeroOne;
 use std::marker::PhantomData;
-use std::{cmp, fmt, iter, ops, u64, usize};
+use std::{cmp, fmt, iter, ops};
 
 pub mod conv;
+pub mod io;
 pub mod num;
 
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
@@ -36,7 +38,6 @@ def_prime!(ModB, 998_244_353, 998_244_351);
 def_prime!(ModC, 1_012_924_417, 1_012_924_415);
 def_prime!(ModD, 924_844_033, 924_844_031);
 
-// modular arithmetics
 #[repr(transparent)]
 #[derive(Default, Clone, Copy)]
 pub struct Fp<M: Mod> {
@@ -89,11 +90,9 @@ impl<M: Mod> Fp<M> {
         Self::new(u as u32)
     }
 }
-
 impl<M: Mod> From<u32> for Fp<M> {
     fn from(x: u32) -> Self { Fp::from_raw(reduce::<M>(x as u64 * M::R2 as u64)) }
 }
-
 macro_rules! impl_from_int {
     ($($t:ty),*) => { $(
         impl<M: Mod> From<$t> for Fp<M> {
@@ -103,9 +102,7 @@ macro_rules! impl_from_int {
         }
     )* };
 }
-
 impl_from_int!(u64, i32, i64);
-
 impl<M: Mod> cmp::PartialEq for Fp<M> {
     fn eq(&self, other: &Self) -> bool {
         let val = |obj: &Fp<M>| {
@@ -114,9 +111,7 @@ impl<M: Mod> cmp::PartialEq for Fp<M> {
         val(self) == val(other)
     }
 }
-
 impl<M: Mod> cmp::Eq for Fp<M> {}
-
 impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
@@ -138,7 +133,6 @@ impl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M> {
 impl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {
     fn div_assign(&mut self, rhs: T) { *self *= rhs.into().inv(); }
 }
-
 macro_rules! impl_binop {
     ($(($Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),*) => { $(
         impl<M: Mod, T: Into<Fp<M>>> ops::$Op<T> for Fp<M> {
@@ -147,14 +141,12 @@ macro_rules! impl_binop {
         }
     )* };
 }
-
 impl_binop!(
     (Add, add, AddAssign, add_assign),
     (Sub, sub, SubAssign, sub_assign),
     (Mul, mul, MulAssign, mul_assign),
     (Div, div, DivAssign, div_assign)
 );
-
 impl<M: Mod> ops::Neg for Fp<M> {
     type Output = Self;
     fn neg(self) -> Self { Fp::from_raw(M::P * 2 - self.val) }
@@ -174,10 +166,4 @@ impl<M: Mod> fmt::Display for Fp<M> {
 impl<M: Mod> ZeroOne for Fp<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
     const ONE: Self = Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData };
-}
-impl<M: Mod> Print for Fp<M> {
-    fn print(w: &mut IO, x: Self) { w.print(x.value()); }
-}
-impl<M: Mod> Scan for Fp<M> {
-    fn scan(io: &mut IO) -> Self { Self::new(io.scan()) }
 }

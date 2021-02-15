@@ -10,20 +10,22 @@ pub enum InOut {
 pub use InOut::*;
 
 pub fn dfs_io<G: Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {
+    fn dfs_impl<G: Graph, F: FnMut(InOut, usize)>(
+        g: &G,
+        v: usize,
+        par: usize,
+        visited: &mut [u32],
+        f: &mut F,
+    ) {
+        f(In(v), par);
+        g.adj(v, |w| {
+            if visited.modify_bit(w, true) {
+                dfs_impl(g, w, v, visited, f);
+            }
+        });
+        f(Out(v), par);
+    }
     let mut visited = new_bitset(g.len());
     visited.set_bit(s, true);
-    let mut togo = vec![(s, !0)];
-    while let Some((v, par)) = togo.pop() {
-        if v >> 31 != 0 {
-            f(Out(!v), par);
-        } else {
-            f(In(v), par);
-            togo.push((!v, par));
-            g.adj(v, |w| {
-                if visited.modify_bit(w, true) {
-                    togo.push((w, v));
-                }
-            });
-        }
-    }
+    dfs_impl(g, s, !0, &mut visited, &mut f);
 }

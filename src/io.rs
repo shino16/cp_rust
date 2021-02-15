@@ -16,7 +16,7 @@ impl IO {
         let out = Box::leak(Box::new(stdout()));
         IO {
             iter: input.split_ascii_whitespace(),
-            buf: BufWriter::new(out.lock()),
+            buf: BufWriter::with_capacity(1 << 25, out.lock()),
         }
     }
     fn scan_str(&mut self) -> &'static str { self.iter.next().unwrap() }

@@ -105,4 +105,12 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> On::Item>
         self.build(trunc(l + self.len()));
         self.build(trunc(r + self.len()) - 1);
     }
+    pub fn flush_all(&mut self) -> &[(On::Item, Act::Item)] {
+        for p in 1..self.len() {
+            self.apply(p << 1, self.data[p].1);
+            self.apply(p << 1 | 1, self.data[p].1);
+            self.data[p].1 = self.act_alg.unit();
+        }
+        &self.data[self.len()..]
+    }
 }

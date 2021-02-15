@@ -106,7 +106,7 @@ impl Conv for F17 {
         let r12 = FpC::from(FpB::P).inv();
         let r13 = FpD::from(FpB::P).inv();
         let r23 = FpD::from(FpC::P).inv();
-        fn run<M: Mod>(lhs: &mut Vec<F17>, rhs: &mut Vec<F17>) -> Vec<Fp<M>>
+        fn run<M: Mod>(lhs: &[F17], rhs: &[F17]) -> Vec<Fp<M>>
         where
             Fp<M>: Conv,
         {
