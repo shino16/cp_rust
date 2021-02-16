@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/778
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -45,8 +45,8 @@ data:
     fn main() {\n    let mut io = IO::new();\n    let n = io.scan();\n    let mut\
     \ graph = vec![Vec::new(); n];\n    for v in 1..n {\n        let p: usize = io.scan();\n\
     \        graph[p].push(v);\n        graph[v].push(p);\n    }\n    let mut fwk\
-    \ = FenwickTree::new(vec![0; n], Addition::new());\n    let mut ans = 0;\n   \
-    \ dfs_io(&graph, 0, |v, _| match v {\n        In(v) => {\n            ans += fwk.ask_prefix(v)\
+    \ = FenwickTree::new(vec![0; n], Addition());\n    let mut ans = 0;\n    dfs_io(&graph,\
+    \ 0, |v, _| match v {\n        In(v) => {\n            ans += fwk.ask_prefix(v)\
     \ as u64;\n            fwk.add(v, 1_u32);\n        },\n        Out(v) => fwk.sub(v,\
     \ 1),\n    });\n    io.println(ans);\n}\n"
   dependsOn:
@@ -62,8 +62,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-02-16 22:11:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-17 07:58:47+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs
 layout: document
