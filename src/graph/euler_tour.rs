@@ -1,7 +1,7 @@
 pub use super::weighted::*;
 pub use crate::alg::arith::*;
 
-pub fn euler_tour<A: Group, G: WGraph<A::Item>>(g: &G, s: usize, alg: A) -> Vec<A::Item> {
+pub fn euler_tour<T: Copy, M: Group<T>, G: WGraph<T>>(g: &G, s: usize, alg: M) -> Vec<T> {
     let mut edges = Vec::new();
     let mut togo = vec![(s, !0, alg.unit())];
     while let Some((v, par, e)) = togo.pop() {

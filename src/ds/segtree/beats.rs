@@ -5,22 +5,22 @@ fn trunc(x: usize) -> usize {
 }
 
 #[derive(Clone)]
-pub struct SegmentTreeBeats<On: Monoid, Act: Monoid, Apply>
+pub struct SegmentTreeBeats<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply>
 where
-    Apply: Fn(On::Item, Act::Item) -> Option<On::Item>,
+    Apply: Fn(T, A) -> Option<T>,
 {
     len: usize,
     log: u32,
-    data: Vec<(On::Item, Act::Item)>,
-    on_alg: On,
-    act_alg: Act,
+    data: Vec<(T, A)>,
+    on_alg: MT,
+    act_alg: MA,
     apply: Apply,
 }
 
-impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> Option<On::Item>>
-    SegmentTreeBeats<On, Act, Apply>
+impl<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> Option<T>>
+    SegmentTreeBeats<T, A, MT, MA, Apply>
 {
-    pub fn new(len: usize, on_alg: On, act_alg: Act, apply: Apply) -> Self {
+    pub fn new(len: usize, on_alg: MT, act_alg: MA, apply: Apply) -> Self {
         Self {
             len,
             log: len.next_power_of_two().trailing_zeros(),
@@ -30,7 +30,7 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> Option<On::Item>
             apply,
         }
     }
-    pub fn from_slice(slice: &[On::Item], on_alg: On, act_alg: Act, apply: Apply) -> Self {
+    pub fn from_slice(slice: &[T], on_alg: MT, act_alg: MA, apply: Apply) -> Self {
         let len = slice.len();
         let log = len.next_power_of_two().trailing_zeros();
         let iter = slice.iter().map(|&x| (x, act_alg.unit()));
@@ -43,7 +43,7 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> Option<On::Item>
     pub fn len(&self) -> usize {
         self.len
     }
-    fn apply(&mut self, p: usize, actor: Act::Item) {
+    fn apply(&mut self, p: usize, actor: A) {
         self.act_alg.op_to(actor, &mut self.data[p].1);
         self.data[p].0 = if let Some(d) = (self.apply)(self.data[p].0, actor) {
             d
@@ -70,7 +70,7 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> Option<On::Item>
             p >>= 1;
         }
     }
-    pub fn ask(&mut self, l: usize, r: usize) -> On::Item {
+    pub fn ask(&mut self, l: usize, r: usize) -> T {
         self.flush(trunc(l + self.len()));
         self.flush(trunc(r + self.len()) - 1);
         let [mut resl, mut resr] = [self.on_alg.unit(); 2];
@@ -89,13 +89,13 @@ impl<On: Monoid, Act: Monoid, Apply: Fn(On::Item, Act::Item) -> Option<On::Item>
         }
         self.on_alg.op(resl, resr)
     }
-    pub fn exec<F: FnOnce(&mut On::Item)>(&mut self, pos: usize, f: F) {
+    pub fn exec<F: FnOnce(&mut T)>(&mut self, pos: usize, f: F) {
         self.flush(pos + self.len());
         let p = pos + self.len();
         f(&mut self.data[p].0);
         self.build(pos + self.len());
     }
-    pub fn act_over(&mut self, l: usize, r: usize, actor: Act::Item) {
+    pub fn act_over(&mut self, l: usize, r: usize, actor: A) {
         self.flush(trunc(l + self.len()));
         self.flush(trunc(r + self.len()) - 1);
         {

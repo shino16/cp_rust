@@ -1,7 +1,7 @@
 pub use super::dfs_io::*;
 pub use crate::alg::*;
 
-pub fn rerooting_dp<G: Graph, A: Group>(g: &G, s: usize, alg: A) -> Vec<A::Item> {
+pub fn rerooting_dp<G: Graph, T: Copy, M: Group<T>>(g: &G, s: usize, alg: M) -> Vec<T> {
     let mut state = vec![alg.unit(); g.len()];
     let mut res = vec![alg.unit(); g.len()];
     dfs_io(g, s, |v, par| {

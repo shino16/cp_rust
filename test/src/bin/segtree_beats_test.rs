@@ -22,12 +22,11 @@ enum F {
 use F::*;
 
 struct M;
-impl Monoid for M {
-    type Item = E;
-    fn unit(&self) -> Self::Item {
+impl Monoid<E> for M {
+    fn unit(&self) -> E {
         E { len: 0, sum: 0, max: 0, lcm: 1 }
     }
-    fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
+    fn op(&self, x: E, y: E) -> E {
         if x.len == 0 {
             y
         } else if y.len == 0 {
@@ -44,12 +43,11 @@ impl Monoid for M {
 }
 
 struct A;
-impl Monoid for A {
-    type Item = F;
-    fn unit(&self) -> Self::Item {
+impl Monoid<F> for A {
+    fn unit(&self) -> F {
         Unit
     }
-    fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item {
+    fn op(&self, x: F, y: F) -> F {
         match y {
             Asgn(_) => y,
             Gcd(y) => match x {

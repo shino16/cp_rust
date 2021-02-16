@@ -13,7 +13,7 @@ fn main() {
         graph[p].push(v);
         graph[v].push(p);
     }
-    let mut fwk = FenwickTree::new(vec![0; n], Addition::new());
+    let mut fwk = FenwickTree::new(vec![0; n], Addition());
     let mut ans = 0;
     dfs_io(&graph, 0, |v, _| match v {
         In(v) => {

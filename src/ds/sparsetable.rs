@@ -2,14 +2,14 @@ pub use crate::alg::*;
 use crate::bits::*;
 
 #[derive(Clone)]
-pub struct SparseTable<A: Monoid> {
-    data: Vec<Vec<A::Item>>,
-    alg: A,
+pub struct SparseTable<T: Copy, M: Monoid<T>> {
+    data: Vec<Vec<T>>,
+    alg: M,
 }
 
-/// A: Band (x * x == x)
-impl<A: Monoid> SparseTable<A> {
-    pub fn new(data: Vec<A::Item>, alg: A) -> Self {
+/// M: Band (x * x == x)
+impl<T: Copy, M: Monoid<T>> SparseTable<T, M> {
+    pub fn new(data: Vec<T>, alg: M) -> Self {
         let len = data.len();
         let height = len.ilog2() as usize;
         let mut data = vec![data];
@@ -23,7 +23,7 @@ impl<A: Monoid> SparseTable<A> {
         }
         Self { data, alg }
     }
-    pub fn ask(&self, l: usize, r: usize) -> A::Item {
+    pub fn ask(&self, l: usize, r: usize) -> T {
         if l == r {
             self.alg.unit()
         } else {

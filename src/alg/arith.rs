@@ -1,17 +1,13 @@
 pub use super::*;
 pub use crate::num::*;
-use std::marker::PhantomData;
 
-pub struct Addition<N>(PhantomData<N>);
+#[derive(Default)]
+pub struct Addition();
 
-impl<N> Addition<N> {
-    pub fn new() -> Self { Self(PhantomData) }
+impl<T: Num> Monoid<T> for Addition {
+    fn unit(&self) -> T { T::ZERO }
+    fn op(&self, x: T, y: T) -> T { x.wrapping_add(y) }
 }
-impl<N: Num> Monoid for Addition<N> {
-    type Item = N;
-    fn unit(&self) -> Self::Item { N::ZERO }
-    fn op(&self, x: Self::Item, y: Self::Item) -> Self::Item { x.wrapping_add(y) }
-}
-impl<N: Num> Group for Addition<N> {
-    fn inv(&self, x: Self::Item) -> Self::Item { x.wrapping_neg() }
+impl<T: Num> Group<T> for Addition {
+    fn inv(&self, x: T) -> T { x.wrapping_neg() }
 }

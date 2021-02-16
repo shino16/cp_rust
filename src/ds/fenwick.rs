@@ -1,19 +1,18 @@
 pub use crate::alg::arith::*;
-use crate::bits::*;
 
 #[derive(Clone)]
-pub struct FenwickTree<A: Monoid> {
-    data: Vec<A::Item>,
-    alg: A,
+pub struct FenwickTree<T: Copy, M: Monoid<T>> {
+    data: Vec<T>,
+    alg: M,
 }
 
-impl<A: Monoid> FenwickTree<A> {
-    pub fn new(mut data: Vec<A::Item>, alg: A) -> Self {
+impl<T: Copy, M: Monoid<T>> FenwickTree<T, M> {
+    pub fn new(mut data: Vec<T>, alg: M) -> Self {
         let len = data.len();
         data.insert(0, alg.unit());
         for i in 1..=len {
-            if i + i.lsb() <= len {
-                data[i + i.lsb()] = alg.op(data[i + i.lsb()], data[i]);
+            if i + lsb(i) <= len {
+                data[i + lsb(i)] = alg.op(data[i + lsb(i)], data[i]);
             }
         }
         Self { data, alg }
@@ -26,28 +25,28 @@ impl<A: Monoid> FenwickTree<A> {
             *e = self.alg.unit();
         }
     }
-    pub fn add(&mut self, pos: usize, v: A::Item) {
+    pub fn add(&mut self, pos: usize, v: T) {
         let mut pos = pos + 1;
         while pos < self.data.len() {
             self.data[pos] = self.alg.op(self.data[pos], v);
-            pos += pos.lsb();
+            pos += lsb(pos);
         }
     }
-    pub fn push(&mut self, v: A::Item) {
+    pub fn push(&mut self, v: T) {
         self.data.push(self.alg.unit());
         self.add(self.data.len() - 1, v);
     }
-    pub fn ask_prefix(&self, mut r: usize) -> A::Item {
+    pub fn ask_prefix(&self, mut r: usize) -> T {
         let mut res = self.alg.unit();
         while r != 0 {
             res = self.alg.op(self.data[r], res);
-            r -= r.lsb();
+            r -= lsb(r);
         }
         res
     }
-    pub fn partition_point<F: FnMut(A::Item) -> bool>(&self, mut pred: F) -> usize {
+    pub fn partition_point<F: FnMut(T) -> bool>(&self, mut pred: F) -> usize {
         let mut x = 0; // pred(&self.ask_prefix(x)) == true
-        let mut w = (self.data.len() - 1).msb();
+        let mut w = self.data.len().next_power_of_two() >> 1;
         let mut l = self.alg.unit();
         while w != 0 {
             if x + w < self.data.len() && pred(self.alg.op(l, self.data[x + w])) {
@@ -58,25 +57,29 @@ impl<A: Monoid> FenwickTree<A> {
         }
         x + 1
     }
-    pub fn lower_bound(&self, v: A::Item) -> usize
+    pub fn lower_bound(&self, v: T) -> usize
     where
-        A::Item: Ord,
+        T: Ord,
     {
         self.partition_point(|x| x < v)
     }
-    pub fn upper_bound(&self, v: A::Item) -> usize
+    pub fn upper_bound(&self, v: T) -> usize
     where
-        A::Item: Ord,
+        T: Ord,
     {
         self.partition_point(|x| x <= v)
     }
 }
 
-impl<A: Group> FenwickTree<A> {
-    pub fn sub(&mut self, pos: usize, v: A::Item) {
+impl<T: Copy, M: Group<T>> FenwickTree<T, M> {
+    pub fn sub(&mut self, pos: usize, v: T) {
         self.add(pos, self.alg.inv(v));
     }
-    pub fn ask(&self, l: usize, r: usize) -> A::Item {
+    pub fn ask(&self, l: usize, r: usize) -> T {
         self.alg.op(self.alg.inv(self.ask_prefix(l)), self.ask_prefix(r))
     }
+}
+
+fn lsb(n: usize) -> usize {
+    n & (!n + 1)
 }
