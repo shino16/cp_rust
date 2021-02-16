@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/lib.rs
     title: src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:

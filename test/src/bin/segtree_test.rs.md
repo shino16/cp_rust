@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []
@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-02-16 22:11:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

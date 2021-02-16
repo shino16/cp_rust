@@ -2,45 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: src/dfa.rs
-    title: src/dfa.rs
-  - icon: ':warning:'
-    path: src/draft/fpacc64.rs
-    title: src/draft/fpacc64.rs
   - icon: ':warning:'
     path: src/ds/disjointst.rs
     title: src/ds/disjointst.rs
-  - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
   - icon: ':warning:'
     path: src/ds/sparsetable.rs
     title: src/ds/sparsetable.rs
-  - icon: ':warning:'
-    path: src/graph/dijkstra.rs
-    title: src/graph/dijkstra.rs
-  - icon: ':heavy_check_mark:'
-    path: src/int.rs
-    title: src/int.rs
-  - icon: ':warning:'
-    path: src/int/arith.rs
-    title: src/int/arith.rs
-  - icon: ':warning:'
-    path: src/int/bisect.rs
-    title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':warning:'
-    path: src/int/inv.rs
-    title: src/int/inv.rs
-  - icon: ':warning:'
-    path: src/math/binom.rs
-    title: src/math/binom.rs
-  - icon: ':warning:'
-    path: src/math/pow.rs
-    title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
@@ -48,18 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/segtree_beats_test.rs
     title: test/src/bin/segtree_beats_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/tree_dfs_io_test.rs
-    title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -83,27 +47,15 @@ data:
   isVerificationFile: false
   path: src/bits.rs
   requiredBy:
-  - src/dfa.rs
-  - src/math/binom.rs
-  - src/math/pow.rs
-  - src/draft/fpacc64.rs
-  - src/ds/fenwick.rs
   - src/ds/disjointst.rs
   - src/ds/sparsetable.rs
-  - src/int/inv.rs
-  - src/int/bisect.rs
   - src/int/gcd.rs
-  - src/int/arith.rs
   - src/tests.rs
-  - src/graph/dijkstra.rs
-  - src/int.rs
   timestamp: '2021-02-10 04:47:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs
-  - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/dfa_test.rs
 documentation_of: src/bits.rs
 layout: document
 redirect_from:

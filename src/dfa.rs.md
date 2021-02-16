@@ -1,28 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bits.rs
-    title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -104,7 +101,6 @@ data:
     \   let mut sum = I::ZERO;\n    for (s, k) in dp {\n        if dfa.accept(s) {\n\
     \            sum += k;\n        }\n    }\n    sum\n}\n"
   dependsOn:
-  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/fxhash.rs
@@ -115,7 +111,7 @@ data:
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-16 22:07:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

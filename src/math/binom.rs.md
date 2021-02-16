@@ -1,22 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bits.rs
-    title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -44,7 +41,6 @@ data:
     \ 2] = [n.as_(), r.as_()];\n        self.fact[n] * self.inv_fact[r] * self.inv_fact[n\
     \ - r]\n    }\n}\n"
   dependsOn:
-  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/int.rs
@@ -53,7 +49,7 @@ data:
   isVerificationFile: false
   path: src/math/binom.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-16 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/binom.rs

@@ -1,13 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bits.rs
-    title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
@@ -16,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -28,13 +25,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint/io.rs
     title: src/mint/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -72,7 +69,6 @@ data:
     \    let alphabet = \"0123456789\".as_bytes();\n    let ans: Mint<Modx> = dfa.count(a.len(),\
     \ alphabet);\n    println!(\"{}\", ans);\n}\n"
   dependsOn:
-  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/dfa.rs
@@ -87,7 +83,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-02-16 22:07:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs

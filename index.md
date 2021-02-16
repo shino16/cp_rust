@@ -8,27 +8,27 @@ data:
       title: benches/bench.rs
   - name: src/alg
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/alg/arith.rs
       title: src/alg/arith.rs
   - name: src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/alg.rs
       title: src/alg.rs
     - icon: ':warning:'
       path: src/assign.rs
       title: src/assign.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/bits.rs
       title: src/bits.rs
     - icon: ':warning:'
       path: src/bool.rs
       title: src/bool.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/bounded.rs
       title: src/bounded.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/cast.rs
       title: src/cast.rs
     - icon: ':warning:'
@@ -55,22 +55,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/fxhash.rs
       title: src/fxhash.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/graph.rs
       title: src/graph.rs
     - icon: ':warning:'
       path: src/hash.rs
       title: src/hash.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
       path: src/io_interactive.rs
       title: src/io_interactive.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/iter.rs
       title: src/iter.rs
     - icon: ':warning:'
@@ -88,7 +88,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/num.rs
       title: src/num.rs
     - icon: ':warning:'
@@ -115,7 +115,7 @@ data:
     - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/zo.rs
       title: src/zo.rs
   - name: src/cmp
@@ -165,7 +165,7 @@ data:
     - icon: ':warning:'
       path: src/ds/disjointst.rs
       title: src/ds/disjointst.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/ds/fenwick.rs
       title: src/ds/fenwick.rs
     - icon: ':warning:'
@@ -203,7 +203,7 @@ data:
       title: src/ds/vec2d.rs
   - name: src/ds/segtree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/ds/segtree/beats.rs
       title: src/ds/segtree/beats.rs
     - icon: ':heavy_check_mark:'
@@ -262,7 +262,7 @@ data:
     - icon: ':warning:'
       path: src/graph/max_flow.rs
       title: src/graph/max_flow.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/graph/tree.rs
       title: src/graph/tree.rs
     - icon: ':warning:'
@@ -302,7 +302,7 @@ data:
     - icon: ':warning:'
       path: src/graph/tree/dfs.rs
       title: src/graph/tree/dfs.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/graph/tree/dfs_io.rs
       title: src/graph/tree/dfs_io.rs
     - icon: ':warning:'
@@ -316,7 +316,7 @@ data:
     - icon: ':warning:'
       path: src/int/bisect.rs
       title: src/int/bisect.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/int/gcd.rs
       title: src/int/gcd.rs
     - icon: ':warning:'
@@ -457,7 +457,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/ntt_test.rs
       title: test/src/bin/ntt_test.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/src/bin/segtree_beats_test.rs
       title: test/src/bin/segtree_beats_test.rs
     - icon: ':heavy_check_mark:'
@@ -466,7 +466,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/swag_test.rs
       title: test/src/bin/swag_test.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/src/bin/tree_dfs_io_test.rs
       title: test/src/bin/tree_dfs_io_test.rs
     - icon: ':heavy_check_mark:'

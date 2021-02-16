@@ -1,19 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/bits.rs
-    title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -32,7 +29,7 @@ data:
   - icon: ':warning:'
     path: src/int/bisect.rs
     title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':warning:'
@@ -54,39 +51,38 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/segtree_beats_test.rs
     title: test/src/bin/segtree_beats_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int.rs\n"
-  code: "use crate::bits::*;\npub use crate::bounded::*;\nuse crate::cast::*;\npub\
-    \ use crate::num::*;\npub use crate::zo::*;\nuse std::ops::*;\n\npub mod arith;\n\
-    pub mod bisect;\npub mod gcd;\npub mod inv;\npub mod saturate;\n\npub trait Int:\
-    \ Num + Ord + Rem<Output = Self> + RemAssign + Bounded + Bits + PrimCast {\n \
-    \   type Signed: IInt + CastFrom<Self> + CastTo<Self>;\n    type Unsigned: UInt\
-    \ + CastFrom<Self> + CastTo<Self>;\n    fn abs(self) -> Self::Unsigned;\n    fn\
-    \ rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned;\n}\n\npub trait IInt:\
-    \ Int + INum {}\npub trait UInt: Int {}\n\nmacro_rules! impl_int {\n    (@ $t:ident,\
-    \ $i:ident, $u:ident, $abs:expr) => {\n        impl Int for $t {\n           \
-    \ type Signed = $i;\n            type Unsigned = $u;\n            fn abs(self)\
-    \ -> Self::Unsigned {\n                $abs(self) as $u\n            }\n     \
-    \       fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned {\n       \
-    \         <$t>::rem_euclid(self, rhs as $t) as $u\n            }\n        }\n\
-    \    };\n    ({ $i:ident }, { $u:ident }) => {\n        impl_int!(@ $i, $i, $u,\
-    \ |x| <$i>::abs(x));\n        impl_int!(@ $u, $i, $u, |x| x);\n        impl IInt\
-    \ for $i {}\n        impl UInt for $u {}\n    };\n    ({ $i:ident, $($is:ident),*\
-    \ }, { $u:ident, $($us:ident),* }) => {\n        impl_int!({ $i }, { $u });\n\
-    \        impl_int!({ $($is),* }, { $($us),* });\n    }\n}\n\nimpl_int!({ i32,\
-    \ i64, i128, isize }, { u32, u64, u128, usize });\n"
+  code: "pub use crate::bounded::*;\nuse crate::cast::*;\npub use crate::num::*;\n\
+    pub use crate::zo::*;\nuse std::ops::*;\n\npub mod arith;\npub mod bisect;\npub\
+    \ mod gcd;\npub mod inv;\npub mod saturate;\n\npub trait Int: Num + Ord + Rem<Output\
+    \ = Self> + RemAssign + Bounded + PrimCast {\n    type Signed: IInt + CastFrom<Self>\
+    \ + CastTo<Self>;\n    type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;\n\
+    \    fn abs(self) -> Self::Unsigned;\n    fn rem_euclid(self, rhs: Self::Unsigned)\
+    \ -> Self::Unsigned;\n}\n\npub trait IInt: Int + INum {}\npub trait UInt: Int\
+    \ {}\n\nmacro_rules! impl_int {\n    (@ $t:ident, $i:ident, $u:ident, $abs:expr)\
+    \ => {\n        impl Int for $t {\n            type Signed = $i;\n           \
+    \ type Unsigned = $u;\n            fn abs(self) -> Self::Unsigned {\n        \
+    \        $abs(self) as $u\n            }\n            fn rem_euclid(self, rhs:\
+    \ Self::Unsigned) -> Self::Unsigned {\n                <$t>::rem_euclid(self,\
+    \ rhs as $t) as $u\n            }\n        }\n    };\n    ({ $i:ident }, { $u:ident\
+    \ }) => {\n        impl_int!(@ $i, $i, $u, |x| <$i>::abs(x));\n        impl_int!(@\
+    \ $u, $i, $u, |x| x);\n        impl IInt for $i {}\n        impl UInt for $u {}\n\
+    \    };\n    ({ $i:ident, $($is:ident),* }, { $u:ident, $($us:ident),* }) => {\n\
+    \        impl_int!({ $i }, { $u });\n        impl_int!({ $($is),* }, { $($us),*\
+    \ });\n    }\n}\n\nimpl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize\
+    \ });\n"
   dependsOn:
-  - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
   - src/num.rs
@@ -104,8 +100,8 @@ data:
   - src/int/arith.rs
   - src/tests.rs
   - src/graph/dijkstra.rs
-  timestamp: '2021-02-13 20:22:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-16 22:07:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs

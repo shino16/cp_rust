@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []

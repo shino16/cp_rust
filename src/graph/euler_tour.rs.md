@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg/arith.rs
     title: src/alg/arith.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
   - icon: ':warning:'
     path: src/graph/weighted.rs
     title: src/graph/weighted.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -30,8 +30,8 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/euler_tour.rs\n"
-  code: "pub use super::weighted::*;\npub use crate::alg::arith::*;\n\npub fn euler_tour<A:\
-    \ Group, G: WGraph<A::Item>>(g: &G, s: usize, alg: A) -> Vec<A::Item> {\n    let\
+  code: "pub use super::weighted::*;\npub use crate::alg::arith::*;\n\npub fn euler_tour<T:\
+    \ Copy, M: Group<T>, G: WGraph<T>>(g: &G, s: usize, alg: M) -> Vec<T> {\n    let\
     \ mut edges = Vec::new();\n    let mut togo = vec![(s, !0, alg.unit())];\n   \
     \ while let Some((v, par, e)) = togo.pop() {\n        if v > !v {\n          \
     \  edges.push(alg.inv(e));\n        } else {\n            edges.push(e);\n   \
@@ -48,7 +48,7 @@ data:
   isVerificationFile: false
   path: src/graph/euler_tour.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-16 22:11:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/euler_tour.rs

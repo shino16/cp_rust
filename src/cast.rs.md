@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':warning:'
@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: src/int/bisect.rs
     title: src/int/bisect.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
   - icon: ':warning:'
@@ -42,12 +42,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/segtree_beats_test.rs
     title: test/src/bin/segtree_beats_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -85,7 +85,7 @@ data:
   - src/graph/dijkstra.rs
   - src/int.rs
   timestamp: '2021-02-08 00:55:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs

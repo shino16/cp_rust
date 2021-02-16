@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph.rs
     title: src/graph.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/tree.rs
     title: src/graph/tree.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
   _extendedRequiredBy: []
@@ -25,8 +25,8 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/reroot.rs\n"
   code: "pub use super::dfs_io::*;\npub use crate::alg::*;\n\npub fn rerooting_dp<G:\
-    \ Graph, A: Group>(g: &G, s: usize, alg: A) -> Vec<A::Item> {\n    let mut state\
-    \ = vec![alg.unit(); g.len()];\n    let mut res = vec![alg.unit(); g.len()];\n\
+    \ Graph, T: Copy, M: Group<T>>(g: &G, s: usize, alg: M) -> Vec<T> {\n    let mut\
+    \ state = vec![alg.unit(); g.len()];\n    let mut res = vec![alg.unit(); g.len()];\n\
     \    dfs_io(g, s, |v, par| {\n        if let Out(v) = v {\n            g.adj(v,\
     \ |w| {\n                if w != par {\n                    alg.op_to(state[w],\
     \ &mut state[v]);\n                }\n            });\n        }\n    });\n  \
@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '2021-02-13 16:52:06+09:00'
+  timestamp: '2021-02-16 22:11:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs
