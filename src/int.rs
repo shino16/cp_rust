@@ -1,4 +1,3 @@
-use crate::bits::*;
 pub use crate::bounded::*;
 use crate::cast::*;
 pub use crate::num::*;
@@ -11,7 +10,7 @@ pub mod gcd;
 pub mod inv;
 pub mod saturate;
 
-pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bounded + Bits + PrimCast {
+pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bounded + PrimCast {
     type Signed: IInt + CastFrom<Self> + CastTo<Self>;
     type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
     fn abs(self) -> Self::Unsigned;
