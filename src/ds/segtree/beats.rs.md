@@ -19,23 +19,23 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/segtree/beats.rs\n"
   code: "pub use crate::alg::*;\n\nfn trunc(x: usize) -> usize {\n    x >> x.trailing_zeros()\n\
-    }\n\n#[derive(Clone)]\npub struct SegmentTreeBeats<T: Copy, A: Copy, MT: Monoid<T>,\
-    \ MA: Monoid<A>, Apply>\nwhere\n    Apply: Fn(T, A) -> Option<T>,\n{\n    len:\
-    \ usize,\n    log: u32,\n    data: Vec<(T, A)>,\n    on_alg: MT,\n    act_alg:\
-    \ MA,\n    apply: Apply,\n}\n\nimpl<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>,\
-    \ Apply: Fn(T, A) -> Option<T>>\n    SegmentTreeBeats<T, A, MT, MA, Apply>\n{\n\
-    \    pub fn new(len: usize, on_alg: MT, act_alg: MA, apply: Apply) -> Self {\n\
-    \        Self {\n            len,\n            log: len.next_power_of_two().trailing_zeros(),\n\
-    \            data: vec![(on_alg.unit(), act_alg.unit()); len * 2],\n         \
-    \   on_alg,\n            act_alg,\n            apply,\n        }\n    }\n    pub\
-    \ fn from_slice(slice: &[T], on_alg: MT, act_alg: MA, apply: Apply) -> Self {\n\
-    \        let len = slice.len();\n        let log = len.next_power_of_two().trailing_zeros();\n\
-    \        let iter = slice.iter().map(|&x| (x, act_alg.unit()));\n        let mut\
-    \ data: Vec<_> = iter.clone().chain(iter).collect();\n        for i in (1..len).rev()\
-    \ {\n            data[i].0 = on_alg.op(data[i << 1].0, data[i << 1 | 1].0);\n\
-    \        }\n        Self { len, log, data, on_alg, act_alg, apply }\n    }\n \
-    \   pub fn len(&self) -> usize {\n        self.len\n    }\n    fn apply(&mut self,\
-    \ p: usize, actor: A) {\n        self.act_alg.op_to(actor, &mut self.data[p].1);\n\
+    }\n\n#[derive(Clone)]\npub struct SegmentTreeBeats<T, A, MT, MA, Apply>\nwhere\n\
+    \    Apply: Fn(T, A) -> Option<T>,\n{\n    len: usize,\n    log: u32,\n    data:\
+    \ Vec<(T, A)>,\n    on_alg: MT,\n    act_alg: MA,\n    apply: Apply,\n}\n\nimpl<T:\
+    \ Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> Option<T>>\n\
+    \    SegmentTreeBeats<T, A, MT, MA, Apply>\n{\n    pub fn new(len: usize, on_alg:\
+    \ MT, act_alg: MA, apply: Apply) -> Self {\n        Self {\n            len,\n\
+    \            log: len.next_power_of_two().trailing_zeros(),\n            data:\
+    \ vec![(on_alg.unit(), act_alg.unit()); len * 2],\n            on_alg,\n     \
+    \       act_alg,\n            apply,\n        }\n    }\n    pub fn from_slice(slice:\
+    \ &[T], on_alg: MT, act_alg: MA, apply: Apply) -> Self {\n        let len = slice.len();\n\
+    \        let log = len.next_power_of_two().trailing_zeros();\n        let iter\
+    \ = slice.iter().map(|&x| (x, act_alg.unit()));\n        let mut data: Vec<_>\
+    \ = iter.clone().chain(iter).collect();\n        for i in (1..len).rev() {\n \
+    \           data[i].0 = on_alg.op(data[i << 1].0, data[i << 1 | 1].0);\n     \
+    \   }\n        Self { len, log, data, on_alg, act_alg, apply }\n    }\n    pub\
+    \ fn len(&self) -> usize {\n        self.len\n    }\n    fn apply(&mut self, p:\
+    \ usize, actor: A) {\n        self.act_alg.op_to(actor, &mut self.data[p].1);\n\
     \        self.data[p].0 = if let Some(d) = (self.apply)(self.data[p].0, actor)\
     \ {\n            d\n        } else {\n            self.push(p);\n            self.on_alg.op(self.data[p\
     \ << 1].0, self.data[p << 1 | 1].0)\n        };\n    }\n    fn push(&mut self,\
@@ -71,7 +71,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree/beats.rs
   requiredBy: []
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:37:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs

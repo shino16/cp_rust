@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:49:39+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_test.rs

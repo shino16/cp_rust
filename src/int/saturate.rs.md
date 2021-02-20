@@ -13,19 +13,20 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int/saturate.rs\n"
   code: "use std::ops::*;\n\n#[repr(transparent)]\n#[derive(Debug, Clone, Copy, PartialEq,\
-    \ Eq, PartialOrd, Ord, Default, Hash)]\npub struct Saturate<T>(pub T);\n\nmacro_rules!\
-    \ impl_ops {\n    ($($t:ty),*) => { $(\n        impl Add for Saturate<$t> {\n\
-    \            type Output = Self;\n            fn add(self, rhs: Self) -> Self\
-    \ {\n                Self(self.0.saturating_add(rhs.0))\n            }\n     \
-    \   }\n        impl AddAssign for Saturate<$t> {\n            fn add_assign(&mut\
-    \ self, rhs: Self) {\n                *self = *self + rhs;\n            }\n  \
-    \      }\n    )* };\n}\n\nimpl_ops!(i8, i16, i32, i64, i128, isize, u8, u16, u32,\
-    \ u64, u128, usize);\n"
+    \ Eq, PartialOrd, Ord, Default, Hash)]\npub struct Saturate<T>(pub T);\n\nimpl<T>\
+    \ From<T> for Saturate<T> { fn from(x: T) -> Self { Self(x) } }\n\nmacro_rules!\
+    \ impl_ops {\n    ($($t:ty),*) => { $(\n        impl<T: Into<Saturate<$t>>> Add<T>\
+    \ for Saturate<$t> {\n            type Output = Self;\n            fn add(self,\
+    \ rhs: T) -> Self { Self(self.0.saturating_add(rhs.into().0)) }\n        }\n \
+    \       impl<T: Into<Saturate<$t>>> AddAssign<T> for Saturate<$t> {\n        \
+    \    fn add_assign(&mut self, rhs: T) { *self = *self + rhs; }\n        }\n  \
+    \  )* };\n}\n\nimpl_ops!(i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128,\
+    \ usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/int/saturate.rs
   requiredBy: []
-  timestamp: '2021-02-08 23:15:08+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/saturate.rs

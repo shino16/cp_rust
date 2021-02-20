@@ -19,37 +19,37 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/segtree.rs\n"
   code: "pub mod beats;\npub mod lazy;\npub use crate::alg::*;\nuse std::ops::Index;\n\
-    use std::slice::SliceIndex;\n\n#[derive(Clone)]\npub struct SegmentTree<T: Copy,\
-    \ M: Monoid<T>> {\n    len: usize,\n    data: Vec<T>,\n    alg: M,\n}\n\nimpl<T:\
-    \ Copy, M: Monoid<T>> SegmentTree<T, M> {\n    pub fn new(len: usize, alg: M)\
-    \ -> Self { Self { len, data: vec![alg.unit(); len * 2], alg } }\n    pub fn from_slice(slice:\
-    \ &[T], alg: M) -> Self {\n        let len = slice.len();\n        let mut data\
-    \ = slice.to_vec();\n        data.extend_from_slice(slice);\n        for i in\
-    \ (1..len).rev() {\n            data[i] = alg.op(data[i << 1], data[i << 1 | 1]);\n\
-    \        }\n        Self { len, data, alg }\n    }\n    pub fn len(&self) -> usize\
-    \ { self.len }\n    fn build(&mut self, mut p: usize) {\n        p >>= 1;\n  \
-    \      while p != 0 {\n            self.data[p] = self.alg.op(self.data[p << 1],\
-    \ self.data[p << 1 | 1]);\n            p >>= 1;\n        }\n    }\n    pub fn\
-    \ add(&mut self, pos: usize, v: T) {\n        let p = pos + self.len();\n    \
-    \    self.data[p] = self.alg.op(self.data[p], v);\n        self.build(p);\n  \
-    \  }\n    pub fn exec<F: FnOnce(&mut T)>(&mut self, pos: usize, f: F) {\n    \
-    \    let p = pos + self.len();\n        f(&mut self.data[p]);\n        self.build(p);\n\
-    \    }\n    pub fn ask(&self, mut l: usize, mut r: usize) -> T {\n        let\
-    \ (mut resl, mut resr) = (self.alg.unit(), self.alg.unit());\n        l += self.len();\n\
-    \        r += self.len();\n        while l < r {\n            if l & 1 != 0 {\n\
-    \                resl = self.alg.op(resl, self.data[l]);\n                l +=\
-    \ 1;\n            }\n            if r & 1 != 0 {\n                resr = self.alg.op(self.data[r\
-    \ - 1], resr);\n                r -= 1;\n            }\n            l >>= 1;\n\
-    \            r >>= 1;\n        }\n        self.alg.op(resl, resr)\n    }\n}\n\n\
-    impl<T: Copy, M: Monoid<T>, I: SliceIndex<[T]>> Index<I> for SegmentTree<T, M>\
-    \ {\n    type Output = I::Output;\n    fn index(&self, idx: I) -> &Self::Output\
-    \ { &self.data[self.len()..][idx] }\n}\n"
+    use std::slice::SliceIndex;\n\n#[derive(Clone)]\npub struct SegmentTree<T, M>\
+    \ {\n    len: usize,\n    data: Vec<T>,\n    alg: M,\n}\n\nimpl<T: Copy, M: Monoid<T>>\
+    \ SegmentTree<T, M> {\n    pub fn new(len: usize, alg: M) -> Self { Self { len,\
+    \ data: vec![alg.unit(); len * 2], alg } }\n    pub fn from_slice(slice: &[T],\
+    \ alg: M) -> Self {\n        let len = slice.len();\n        let mut data = slice.to_vec();\n\
+    \        data.extend_from_slice(slice);\n        for i in (1..len).rev() {\n \
+    \           data[i] = alg.op(data[i << 1], data[i << 1 | 1]);\n        }\n   \
+    \     Self { len, data, alg }\n    }\n    pub fn len(&self) -> usize { self.len\
+    \ }\n    fn build(&mut self, mut p: usize) {\n        p >>= 1;\n        while\
+    \ p != 0 {\n            self.data[p] = self.alg.op(self.data[p << 1], self.data[p\
+    \ << 1 | 1]);\n            p >>= 1;\n        }\n    }\n    pub fn add(&mut self,\
+    \ pos: usize, v: T) {\n        let p = pos + self.len();\n        self.data[p]\
+    \ = self.alg.op(self.data[p], v);\n        self.build(p);\n    }\n    pub fn exec<F:\
+    \ FnOnce(&mut T)>(&mut self, pos: usize, f: F) {\n        let p = pos + self.len();\n\
+    \        f(&mut self.data[p]);\n        self.build(p);\n    }\n    pub fn ask(&self,\
+    \ mut l: usize, mut r: usize) -> T {\n        let (mut resl, mut resr) = (self.alg.unit(),\
+    \ self.alg.unit());\n        l += self.len();\n        r += self.len();\n    \
+    \    while l < r {\n            if l & 1 != 0 {\n                resl = self.alg.op(resl,\
+    \ self.data[l]);\n                l += 1;\n            }\n            if r & 1\
+    \ != 0 {\n                resr = self.alg.op(self.data[r - 1], resr);\n      \
+    \          r -= 1;\n            }\n            l >>= 1;\n            r >>= 1;\n\
+    \        }\n        self.alg.op(resl, resr)\n    }\n}\n\nimpl<T: Copy, M: Monoid<T>,\
+    \ I: SliceIndex<[T]>> Index<I> for SegmentTree<T, M> {\n    type Output = I::Output;\n\
+    \    fn index(&self, idx: I) -> &Self::Output { &self.data[self.len()..][idx]\
+    \ }\n}\n"
   dependsOn:
   - src/alg.rs
   isVerificationFile: false
   path: src/ds/segtree.rs
   requiredBy: []
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:37:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs

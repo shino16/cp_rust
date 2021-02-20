@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow/ford_fulkerson/edge.rs
   requiredBy: []
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/max_flow/ford_fulkerson/edge.rs

@@ -40,23 +40,23 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/uvec.rs\n"
   code: "use std::ops::{Deref, DerefMut};\n\n#[derive(Clone)]\n#[repr(transparent)]\n\
-    pub struct UVec<T>(pub Vec<T>);\n\nimpl<T> UVec<T> {\n    pub fn new() -> Self\
-    \ { Self(Vec::new()) }\n}\nimpl<T> AsRef<UVec<T>> for Vec<T> {\n    fn as_ref(&self)\
-    \ -> &UVec<T> { unsafe { &*(self as *const Vec<T> as *const UVec<T>) } }\n}\n\
-    impl<T> AsMut<UVec<T>> for Vec<T> {\n    fn as_mut(&mut self) -> &mut UVec<T>\
-    \ { unsafe { &mut *(self as *mut Vec<T> as *mut UVec<T>) } }\n}\nimpl<T> AsRef<Vec<T>>\
-    \ for UVec<T> {\n    fn as_ref(&self) -> &Vec<T> { &self.0 }\n}\nimpl<T> AsMut<Vec<T>>\
-    \ for UVec<T> {\n    fn as_mut(&mut self) -> &mut Vec<T> { &mut self.0 }\n}\n\
-    impl<T> Deref for UVec<T> {\n    type Target = Vec<T>;\n    fn deref(&self) ->\
-    \ &Self::Target { &self.0 }\n}\nimpl<T> DerefMut for UVec<T> {\n    fn deref_mut(&mut\
+    pub struct UVec<T>(pub Vec<T>);\n\nimpl<T> UVec<T> { pub fn new() -> Self { Self(Vec::new())\
+    \ } }\nimpl<T> AsRef<UVec<T>> for Vec<T> {\n    fn as_ref(&self) -> &UVec<T> {\n\
+    \        unsafe { &*(self as *const Vec<T> as *const UVec<T>) }\n    }\n}\nimpl<T>\
+    \ AsMut<UVec<T>> for Vec<T> {\n    fn as_mut(&mut self) -> &mut UVec<T> {\n  \
+    \      unsafe { &mut *(self as *mut Vec<T> as *mut UVec<T>) }\n    }\n}\nimpl<T>\
+    \ AsRef<Vec<T>> for UVec<T> { fn as_ref(&self) -> &Vec<T> { &self.0 } }\nimpl<T>\
+    \ AsMut<Vec<T>> for UVec<T> { fn as_mut(&mut self) -> &mut Vec<T> { &mut self.0\
+    \ } }\nimpl<T> Deref for UVec<T> {\n    type Target = Vec<T>;\n    fn deref(&self)\
+    \ -> &Self::Target { &self.0 }\n}\nimpl<T> DerefMut for UVec<T> {\n    fn deref_mut(&mut\
     \ self) -> &mut Self::Target { &mut self.0 }\n}\n\n#[cfg(not(debug_assertions))]\n\
     mod unchecked {\n    use super::*;\n    use std::ops::{Index, IndexMut};\n   \
     \ use std::slice::SliceIndex;\n\n    impl<T, I: SliceIndex<[T]>> Index<I> for\
     \ UVec<T> {\n        type Output = I::Output;\n        fn index(&self, index:\
-    \ I) -> &Self::Output { unsafe { self.0.get_unchecked(index) } }\n    }\n    impl<T,\
-    \ I: SliceIndex<[T]>> IndexMut<I> for UVec<T> {\n        fn index_mut(&mut self,\
-    \ index: I) -> &mut Self::Output {\n            unsafe { self.0.get_unchecked_mut(index)\
-    \ }\n        }\n    }\n}\n"
+    \ I) -> &Self::Output {\n            unsafe { self.0.get_unchecked(index) }\n\
+    \        }\n    }\n    impl<T, I: SliceIndex<[T]>> IndexMut<I> for UVec<T> {\n\
+    \        fn index_mut(&mut self, index: I) -> &mut Self::Output {\n          \
+    \  unsafe { self.0.get_unchecked_mut(index) }\n        }\n    }\n}\n"
   dependsOn:
   - src/ds.rs
   isVerificationFile: false
@@ -66,7 +66,7 @@ data:
   - src/mint/conv.rs
   - src/ds/uvec2d.rs
   - src/fp/conv.rs
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_test.rs

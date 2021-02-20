@@ -51,7 +51,7 @@ data:
   - src/slice/cum.rs
   - src/ds/fenwick.rs
   - src/graph/euler_tour.rs
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

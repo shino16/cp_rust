@@ -45,23 +45,27 @@ data:
     \ {\n                ret.add_edge(v, w, cap);\n            }\n        }\n    \
     \    ret\n    }\n    pub fn add_vertex(&mut self) -> usize {\n        self.graph.push(Vec::new());\n\
     \        self.graph.len() - 1\n    }\n    pub fn add_edge(&mut self, v: usize,\
-    \ w: usize, cap: C) {\n        let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());\n\
-    \        self.graph[v].push(Edge { to: w, cap, rev: widx });\n        self.graph[w].push(Edge\
-    \ { to: v, cap: C::ZERO, rev: vidx });\n    }\n    pub fn solve(&mut self, s:\
-    \ usize, t: usize) -> C {\n        let mut res = C::ZERO;\n        let mut used\
-    \ = new_bitset(self.graph.len());\n        loop {\n            used.reset();\n\
-    \            let f = Self::dfs(&mut self.graph, s, t, &mut used, C::MAX);\n  \
-    \          if f == C::ZERO {\n                return res;\n            }\n   \
-    \         res += f;\n        }\n    }\n    fn dfs(graph: &mut Vec<Vec<Edge<C>>>,\
-    \ v: usize, t: usize, used: &mut [u32], ub: C) -> C {\n        if v == t {\n \
-    \           return ub;\n        }\n        let mut adj = std::mem::take(&mut graph[v]);\n\
+    \ w: usize, cap: C) {\n        if cap != C::ZERO {\n            let (vidx, widx)\
+    \ = (self.graph[v].len(), self.graph[w].len());\n            self.graph[v].push(Edge\
+    \ { to: w, cap, rev: widx });\n            self.graph[w].push(Edge { to: v, cap:\
+    \ C::ZERO, rev: vidx });\n        }\n    }\n    pub fn solve(&mut self, s: usize,\
+    \ t: usize) -> C {\n        let mut res = C::ZERO;\n        let mut used = new_bitset(self.graph.len());\n\
+    \        loop {\n            used.reset();\n            let f = self.dfs(s, t,\
+    \ &mut used, C::MAX);\n            if f == C::ZERO {\n                return res;\n\
+    \            }\n            res += f;\n        }\n    }\n    pub fn min_cut(&self)\
+    \ -> Vec<(usize, usize)> {\n        let mut res = Vec::new();\n        for v in\
+    \ 0..self.len() {\n            for e in &self.graph[v] {\n                if e.cap\
+    \ == C::ZERO {\n                    res.push((v, e.to));\n                }\n\
+    \            }\n        }\n        res\n    }\n    fn dfs(&mut self, v: usize,\
+    \ t: usize, used: &mut [u32], ub: C) -> C {\n        if v == t {\n           \
+    \ return ub;\n        }\n        let mut adj = std::mem::take(&mut self.graph[v]);\n\
     \        for &mut Edge { to, ref mut cap, rev } in &mut adj {\n            if\
-    \ *cap != C::ZERO && used.modify_bit(to, true) {\n                let df = Self::dfs(graph,\
-    \ to, t, used, ub.min(*cap));\n                if df != C::ZERO {\n          \
-    \          *cap -= df;\n                    graph[to][rev].cap += df;\n      \
-    \              graph[v] = adj;\n                    return df;\n             \
-    \   }\n            }\n        }\n        graph[v] = adj;\n        C::ZERO\n  \
-    \  }\n}\n"
+    \ *cap != C::ZERO && used.modify_bit(to, true) {\n                let df = self.dfs(to,\
+    \ t, used, ub.min(*cap));\n                if df != C::ZERO {\n              \
+    \      *cap -= df;\n                    self.graph[to][rev].cap += df;\n     \
+    \               self.graph[v] = adj;\n                    return df;\n       \
+    \         }\n            }\n        }\n        self.graph[v] = adj;\n        C::ZERO\n\
+    \    }\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/ds/bitset.rs
@@ -72,7 +76,7 @@ data:
   requiredBy:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs

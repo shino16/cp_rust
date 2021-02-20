@@ -27,21 +27,21 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/fenwick.rs\n"
-  code: "pub use crate::alg::arith::*;\n\n#[derive(Clone)]\npub struct FenwickTree<T:\
-    \ Copy, M: Monoid<T>> {\n    data: Vec<T>,\n    alg: M,\n}\n\nimpl<T: Copy, M:\
-    \ Monoid<T>> FenwickTree<T, M> {\n    pub fn new(mut data: Vec<T>, alg: M) ->\
-    \ Self {\n        let len = data.len();\n        data.insert(0, alg.unit());\n\
-    \        for i in 1..=len {\n            if i + lsb(i) <= len {\n            \
-    \    data[i + lsb(i)] = alg.op(data[i + lsb(i)], data[i]);\n            }\n  \
-    \      }\n        Self { data, alg }\n    }\n    pub fn len(&self) -> usize {\n\
-    \        self.data.len() - 1\n    }\n    pub fn clear(&mut self) {\n        for\
-    \ e in &mut self.data {\n            *e = self.alg.unit();\n        }\n    }\n\
-    \    pub fn add(&mut self, pos: usize, v: T) {\n        let mut pos = pos + 1;\n\
-    \        while pos < self.data.len() {\n            self.data[pos] = self.alg.op(self.data[pos],\
-    \ v);\n            pos += lsb(pos);\n        }\n    }\n    pub fn push(&mut self,\
-    \ v: T) {\n        self.data.push(self.alg.unit());\n        self.add(self.data.len()\
-    \ - 1, v);\n    }\n    pub fn ask_prefix(&self, mut r: usize) -> T {\n       \
-    \ let mut res = self.alg.unit();\n        while r != 0 {\n            res = self.alg.op(self.data[r],\
+  code: "pub use crate::alg::arith::*;\n\n#[derive(Clone)]\npub struct FenwickTree<T,\
+    \ M> {\n    data: Vec<T>,\n    alg: M,\n}\n\nimpl<T: Copy, M: Monoid<T>> FenwickTree<T,\
+    \ M> {\n    pub fn new(mut data: Vec<T>, alg: M) -> Self {\n        let len =\
+    \ data.len();\n        data.insert(0, alg.unit());\n        for i in 1..=len {\n\
+    \            if i + lsb(i) <= len {\n                data[i + lsb(i)] = alg.op(data[i\
+    \ + lsb(i)], data[i]);\n            }\n        }\n        Self { data, alg }\n\
+    \    }\n    pub fn len(&self) -> usize {\n        self.data.len() - 1\n    }\n\
+    \    pub fn clear(&mut self) {\n        for e in &mut self.data {\n          \
+    \  *e = self.alg.unit();\n        }\n    }\n    pub fn add(&mut self, pos: usize,\
+    \ v: T) {\n        let mut pos = pos + 1;\n        while pos < self.data.len()\
+    \ {\n            self.data[pos] = self.alg.op(self.data[pos], v);\n          \
+    \  pos += lsb(pos);\n        }\n    }\n    pub fn push(&mut self, v: T) {\n  \
+    \      self.data.push(self.alg.unit());\n        self.add(self.data.len() - 1,\
+    \ v);\n    }\n    pub fn ask_prefix(&self, mut r: usize) -> T {\n        let mut\
+    \ res = self.alg.unit();\n        while r != 0 {\n            res = self.alg.op(self.data[r],\
     \ res);\n            r -= lsb(r);\n        }\n        res\n    }\n    pub fn partition_point<F:\
     \ FnMut(T) -> bool>(&self, mut pred: F) -> usize {\n        let mut x = 0; //\
     \ pred(&self.ask_prefix(x)) == true\n        let mut w = self.data.len().next_power_of_two()\
@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:37:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

@@ -19,13 +19,12 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/segtree/lazy.rs\n"
   code: "pub use crate::alg::*;\n\nfn trunc(x: usize) -> usize { x >> x.trailing_zeros()\
-    \ }\n\n#[derive(Clone)]\npub struct LazySegmentTree<T: Copy, A: Copy, MT: Monoid<T>,\
-    \ MA: Monoid<A>, Apply>\nwhere\n    Apply: Fn(T, A) -> T,\n{\n    len: usize,\n\
-    \    log: u32,\n    data: Vec<(T, A)>,\n    on_alg: MT,\n    act_alg: MA,\n  \
-    \  apply: Apply,\n}\n\nimpl<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply:\
-    \ Fn(T, A) -> T>\n    LazySegmentTree<T, A, MT, MA, Apply>\n{\n    pub fn new(len:\
-    \ usize, on_alg: MT, act_alg: MA, apply: Apply) -> Self {\n        Self {\n  \
-    \          len,\n            log: len.next_power_of_two().trailing_zeros(),\n\
+    \ }\n\n#[derive(Clone)]\npub struct LazySegmentTree<T, A, MT, MA, Apply>\nwhere\n\
+    \    Apply: Fn(T, A) -> T,\n{\n    len: usize,\n    log: u32,\n    data: Vec<(T,\
+    \ A)>,\n    on_alg: MT,\n    act_alg: MA,\n    apply: Apply,\n}\n\nimpl<T: Copy,\
+    \ A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>\n    LazySegmentTree<T,\
+    \ A, MT, MA, Apply>\n{\n    pub fn new(len: usize, on_alg: MT, act_alg: MA, apply:\
+    \ Apply) -> Self {\n        Self {\n            len,\n            log: len.next_power_of_two().trailing_zeros(),\n\
     \            data: vec![(on_alg.unit(), act_alg.unit()); len * 2],\n         \
     \   on_alg,\n            act_alg,\n            apply,\n        }\n    }\n    pub\
     \ fn from_slice(slice: &[T], on_alg: MT, act_alg: MA, apply: Apply) -> Self {\n\
@@ -73,7 +72,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree/lazy.rs
   requiredBy: []
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:37:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

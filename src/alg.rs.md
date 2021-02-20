@@ -65,18 +65,16 @@ data:
     \ y: T, x: &mut T) { *x = self.op(*x, y); }\n}\n\npub trait Group<T: Copy>: Monoid<T>\
     \ {\n    fn inv(&self, x: T) -> T;\n    fn op_inv_to(&self, y: T, x: &mut T) {\
     \ *x = self.op(*x, self.inv(y)) }\n}\n\npub struct MonoidImpl<T: Copy, Unit: Fn()\
-    \ -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);\npub struct GroupImpl<T, Unit, Op,\
-    \ Inv>(pub Unit, pub Op, pub Inv)\nwhere\n    T: Copy,\n    Unit: Fn() -> T,\n\
-    \    Op: Fn(T, T) -> T,\n    Inv: Fn(T) -> T;\n\nimpl<T: Copy, Unit: Fn() -> T,\
-    \ Op: Fn(T, T) -> T> Monoid<T> for MonoidImpl<T, Unit, Op> {\n    fn unit(&self)\
-    \ -> T { (self.0)() }\n    fn op(&self, x: T, y: T) -> T { (self.1)(x, y) }\n\
-    }\n\nimpl<T, Unit, Op, Inv> Monoid<T> for GroupImpl<T, Unit, Op, Inv>\nwhere\n\
-    \    T: Copy,\n    Unit: Fn() -> T,\n    Op: Fn(T, T) -> T,\n    Inv: Fn(T) ->\
-    \ T,\n{\n    fn unit(&self) -> T { (self.0)() }\n    fn op(&self, x: T, y: T)\
-    \ -> T { (self.1)(x, y) }\n}\n\nimpl<T, Unit, Op, Inv> Group<T> for GroupImpl<T,\
-    \ Unit, Op, Inv>\nwhere\n    T: Copy,\n    Unit: Fn() -> T,\n    Op: Fn(T, T)\
-    \ -> T,\n    Inv: Fn(T) -> T,\n{\n    fn inv(&self, x: T) -> T { (self.2)(x) }\n\
-    }\n"
+    \ -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);\n\npub struct GroupImpl<T: Copy,\
+    \ Unit: Fn() -> T, Op: Fn(T, T) -> T, Inv>(pub Unit, pub Op, pub Inv)\nwhere\n\
+    \    Inv: Fn(T) -> T;\n\nimpl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T> Monoid<T>\
+    \ for MonoidImpl<T, Unit, Op> {\n    fn unit(&self) -> T { (self.0)() }\n    fn\
+    \ op(&self, x: T, y: T) -> T { (self.1)(x, y) }\n}\n\nimpl<T: Copy, Unit: Fn()\
+    \ -> T, Op: Fn(T, T) -> T, Inv> Monoid<T> for GroupImpl<T, Unit, Op, Inv>\nwhere\n\
+    \    Inv: Fn(T) -> T,\n{\n    fn unit(&self) -> T { (self.0)() }\n    fn op(&self,\
+    \ x: T, y: T) -> T { (self.1)(x, y) }\n}\n\nimpl<T: Copy, Unit: Fn() -> T, Op:\
+    \ Fn(T, T) -> T, Inv> Group<T> for GroupImpl<T, Unit, Op, Inv>\nwhere\n    Inv:\
+    \ Fn(T) -> T,\n{\n    fn inv(&self, x: T) -> T { (self.2)(x) }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/alg.rs
@@ -92,7 +90,7 @@ data:
   - src/ds/segtree.rs
   - src/graph/euler_tour.rs
   - src/graph/tree/reroot.rs
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs

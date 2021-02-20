@@ -31,7 +31,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/union_find_test.rs
   requiredBy: []
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/union_find_test.rs

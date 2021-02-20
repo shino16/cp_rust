@@ -19,26 +19,26 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/sparsetable.rs\n"
   code: "pub use crate::alg::*;\nuse crate::bits::*;\n\n#[derive(Clone)]\npub struct\
-    \ SparseTable<T: Copy, M: Monoid<T>> {\n    data: Vec<Vec<T>>,\n    alg: M,\n\
-    }\n\n/// M: Band (x * x == x)\nimpl<T: Copy, M: Monoid<T>> SparseTable<T, M> {\n\
-    \    pub fn new(data: Vec<T>, alg: M) -> Self {\n        let len = data.len();\n\
-    \        let height = len.ilog2() as usize;\n        let mut data = vec![data];\n\
-    \        for s in 1..=height {\n            let w = 1 << (s - 1);\n          \
-    \  let mut new_row = Vec::with_capacity(data[s - 1].len() - w);\n            for\
-    \ i in 0..data[s - 1].len() - w {\n                new_row.push(alg.op(data[s\
-    \ - 1][i], data[s - 1][i + w]));\n            }\n            data.push(new_row);\n\
-    \        }\n        Self { data, alg }\n    }\n    pub fn ask(&self, l: usize,\
-    \ r: usize) -> T {\n        if l == r {\n            self.alg.unit()\n       \
-    \ } else {\n            let s = (r - l).ilog2() as usize;\n            let w =\
-    \ 1 << s;\n            self.alg.op(self.data[s][l], self.data[s][r - w])\n   \
-    \     }\n    }\n}\n"
+    \ SparseTable<T, M> {\n    data: Vec<Vec<T>>,\n    alg: M,\n}\n\n/// M: Band (x\
+    \ * x == x)\nimpl<T: Copy, M: Monoid<T>> SparseTable<T, M> {\n    pub fn new(data:\
+    \ Vec<T>, alg: M) -> Self {\n        let len = data.len();\n        let height\
+    \ = len.ilog2() as usize;\n        let mut data = vec![data];\n        for s in\
+    \ 1..=height {\n            let w = 1 << (s - 1);\n            let mut new_row\
+    \ = Vec::with_capacity(data[s - 1].len() - w);\n            for i in 0..data[s\
+    \ - 1].len() - w {\n                new_row.push(alg.op(data[s - 1][i], data[s\
+    \ - 1][i + w]));\n            }\n            data.push(new_row);\n        }\n\
+    \        Self { data, alg }\n    }\n    pub fn ask(&self, l: usize, r: usize)\
+    \ -> T {\n        if l == r {\n            self.alg.unit()\n        } else {\n\
+    \            let s = (r - l).ilog2() as usize;\n            let w = 1 << s;\n\
+    \            self.alg.op(self.data[s][l], self.data[s][r - w])\n        }\n  \
+    \  }\n}\n"
   dependsOn:
   - src/alg.rs
   - src/bits.rs
   isVerificationFile: false
   path: src/ds/sparsetable.rs
   requiredBy: []
-  timestamp: '2021-02-17 07:58:47+09:00'
+  timestamp: '2021-02-20 13:37:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/sparsetable.rs
