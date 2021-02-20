@@ -14,11 +14,9 @@ pub trait Group<T: Copy>: Monoid<T> {
 }
 
 pub struct MonoidImpl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T>(pub Unit, pub Op);
-pub struct GroupImpl<T, Unit, Op, Inv>(pub Unit, pub Op, pub Inv)
+
+pub struct GroupImpl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T, Inv>(pub Unit, pub Op, pub Inv)
 where
-    T: Copy,
-    Unit: Fn() -> T,
-    Op: Fn(T, T) -> T,
     Inv: Fn(T) -> T;
 
 impl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T> Monoid<T> for MonoidImpl<T, Unit, Op> {
@@ -26,22 +24,16 @@ impl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T> Monoid<T> for MonoidImpl<T, Un
     fn op(&self, x: T, y: T) -> T { (self.1)(x, y) }
 }
 
-impl<T, Unit, Op, Inv> Monoid<T> for GroupImpl<T, Unit, Op, Inv>
+impl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T, Inv> Monoid<T> for GroupImpl<T, Unit, Op, Inv>
 where
-    T: Copy,
-    Unit: Fn() -> T,
-    Op: Fn(T, T) -> T,
     Inv: Fn(T) -> T,
 {
     fn unit(&self) -> T { (self.0)() }
     fn op(&self, x: T, y: T) -> T { (self.1)(x, y) }
 }
 
-impl<T, Unit, Op, Inv> Group<T> for GroupImpl<T, Unit, Op, Inv>
+impl<T: Copy, Unit: Fn() -> T, Op: Fn(T, T) -> T, Inv> Group<T> for GroupImpl<T, Unit, Op, Inv>
 where
-    T: Copy,
-    Unit: Fn() -> T,
-    Op: Fn(T, T) -> T,
     Inv: Fn(T) -> T,
 {
     fn inv(&self, x: T) -> T { (self.2)(x) }

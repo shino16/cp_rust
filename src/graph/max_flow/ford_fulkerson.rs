@@ -38,39 +38,52 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         self.graph.len() - 1
     }
     pub fn add_edge(&mut self, v: usize, w: usize, cap: C) {
-        let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());
-        self.graph[v].push(Edge { to: w, cap, rev: widx });
-        self.graph[w].push(Edge { to: v, cap: C::ZERO, rev: vidx });
+        if cap != C::ZERO {
+            let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());
+            self.graph[v].push(Edge { to: w, cap, rev: widx });
+            self.graph[w].push(Edge { to: v, cap: C::ZERO, rev: vidx });
+        }
     }
     pub fn solve(&mut self, s: usize, t: usize) -> C {
         let mut res = C::ZERO;
         let mut used = new_bitset(self.graph.len());
         loop {
             used.reset();
-            let f = Self::dfs(&mut self.graph, s, t, &mut used, C::MAX);
+            let f = self.dfs(s, t, &mut used, C::MAX);
             if f == C::ZERO {
                 return res;
             }
             res += f;
         }
     }
-    fn dfs(graph: &mut Vec<Vec<Edge<C>>>, v: usize, t: usize, used: &mut [u32], ub: C) -> C {
+    pub fn min_cut(&self) -> Vec<(usize, usize)> {
+        let mut res = Vec::new();
+        for v in 0..self.len() {
+            for e in &self.graph[v] {
+                if e.cap == C::ZERO {
+                    res.push((v, e.to));
+                }
+            }
+        }
+        res
+    }
+    fn dfs(&mut self, v: usize, t: usize, used: &mut [u32], ub: C) -> C {
         if v == t {
             return ub;
         }
-        let mut adj = std::mem::take(&mut graph[v]);
+        let mut adj = std::mem::take(&mut self.graph[v]);
         for &mut Edge { to, ref mut cap, rev } in &mut adj {
             if *cap != C::ZERO && used.modify_bit(to, true) {
-                let df = Self::dfs(graph, to, t, used, ub.min(*cap));
+                let df = self.dfs(to, t, used, ub.min(*cap));
                 if df != C::ZERO {
                     *cap -= df;
-                    graph[to][rev].cap += df;
-                    graph[v] = adj;
+                    self.graph[to][rev].cap += df;
+                    self.graph[v] = adj;
                     return df;
                 }
             }
         }
-        graph[v] = adj;
+        self.graph[v] = adj;
         C::ZERO
     }
 }

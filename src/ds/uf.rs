@@ -7,24 +7,23 @@ pub struct UnionFind {
 
 impl UnionFind {
     pub fn new(len: usize) -> Self {
-        let par: Vec<_> = (0..len).collect();
-        let size = vec![1; len];
-        Self { par, size, count: len }
+        Self { par: vec![!0; len], size: vec![1; len], count: len }
     }
-    pub fn len(&self) -> usize {
-        self.par.len()
+    pub fn clear(&mut self) {
+        self.par.iter_mut().for_each(|e| *e = !0);
+        self.size.iter_mut().for_each(|e| *e = 1);
+        self.count = self.len();
     }
+    pub fn len(&self) -> usize { self.par.len() }
     pub fn find(&mut self, x: usize) -> usize {
-        if self.par[x] == x {
+        if self.par[x] == !0 {
             x
         } else {
             self.par[x] = self.find(self.par[x]);
             self.par[x]
         }
     }
-    pub fn is_same(&mut self, x: usize, y: usize) -> bool {
-        self.find(x) == self.find(y)
-    }
+    pub fn is_same(&mut self, x: usize, y: usize) -> bool { self.find(x) == self.find(y) }
     pub fn size(&mut self, x: usize) -> usize {
         let root = self.find(x);
         self.size[root]
@@ -43,9 +42,7 @@ impl UnionFind {
             false
         }
     }
-    pub fn count(&self) -> usize {
-        self.count
-    }
+    pub fn count(&self) -> usize { self.count }
     pub fn push(&mut self) -> usize {
         let new = self.len();
         self.par.push(new);

@@ -4,18 +4,16 @@ use std::ops::*;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Default, Hash)]
 pub struct Saturate<T>(pub T);
 
+impl<T> From<T> for Saturate<T> { fn from(x: T) -> Self { Self(x) } }
+
 macro_rules! impl_ops {
     ($($t:ty),*) => { $(
-        impl Add for Saturate<$t> {
+        impl<T: Into<Saturate<$t>>> Add<T> for Saturate<$t> {
             type Output = Self;
-            fn add(self, rhs: Self) -> Self {
-                Self(self.0.saturating_add(rhs.0))
-            }
+            fn add(self, rhs: T) -> Self { Self(self.0.saturating_add(rhs.into().0)) }
         }
-        impl AddAssign for Saturate<$t> {
-            fn add_assign(&mut self, rhs: Self) {
-                *self = *self + rhs;
-            }
+        impl<T: Into<Saturate<$t>>> AddAssign<T> for Saturate<$t> {
+            fn add_assign(&mut self, rhs: T) { *self = *self + rhs; }
         }
     )* };
 }
