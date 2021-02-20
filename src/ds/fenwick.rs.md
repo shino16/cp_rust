@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-02-20 13:37:47+09:00'
+  timestamp: '2021-02-20 14:04:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

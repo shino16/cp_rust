@@ -61,7 +61,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/lazy_segtree_test.rs
   requiredBy: []
-  timestamp: '2021-02-20 13:37:47+09:00'
+  timestamp: '2021-02-20 14:04:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/lazy_segtree_test.rs

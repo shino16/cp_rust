@@ -36,10 +36,10 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/alg/arith.rs\n"
-  code: "pub use super::*;\npub use crate::num::*;\n\n#[derive(Default)]\npub struct\
-    \ Addition();\n\nimpl<T: Num> Monoid<T> for Addition {\n    fn unit(&self) ->\
-    \ T { T::ZERO }\n    fn op(&self, x: T, y: T) -> T { x.wrapping_add(y) }\n}\n\
-    impl<T: Num> Group<T> for Addition {\n    fn inv(&self, x: T) -> T { x.wrapping_neg()\
+  code: "pub use super::*;\npub use crate::num::*;\n\n#[derive(Default, Clone, Copy)]\n\
+    pub struct Addition();\n\nimpl<T: Num> Monoid<T> for Addition {\n    fn unit(&self)\
+    \ -> T { T::ZERO }\n    fn op(&self, x: T, y: T) -> T { x.wrapping_add(y) }\n\
+    }\nimpl<T: Num> Group<T> for Addition {\n    fn inv(&self, x: T) -> T { x.wrapping_neg()\
     \ }\n}\n"
   dependsOn:
   - src/alg.rs
@@ -51,7 +51,7 @@ data:
   - src/slice/cum.rs
   - src/ds/fenwick.rs
   - src/graph/euler_tour.rs
-  timestamp: '2021-02-20 13:28:01+09:00'
+  timestamp: '2021-02-20 14:04:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs
