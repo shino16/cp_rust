@@ -1,7 +1,7 @@
 pub use super::*;
 pub use crate::num::*;
 
-#[derive(Default)]
+#[derive(Default, Clone, Copy)]
 pub struct Addition();
 
 impl<T: Num> Monoid<T> for Addition {
