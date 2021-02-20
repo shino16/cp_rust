@@ -1,7 +1,7 @@
 pub use crate::alg::arith::*;
 
 #[derive(Clone)]
-pub struct FenwickTree<T: Copy, M: Monoid<T>> {
+pub struct FenwickTree<T, M> {
     data: Vec<T>,
     alg: M,
 }

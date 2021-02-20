@@ -5,7 +5,7 @@ use std::ops::Index;
 use std::slice::SliceIndex;
 
 #[derive(Clone)]
-pub struct SegmentTree<T: Copy, M: Monoid<T>> {
+pub struct SegmentTree<T, M> {
     len: usize,
     data: Vec<T>,
     alg: M,

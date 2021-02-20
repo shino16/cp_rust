@@ -3,7 +3,7 @@ pub use crate::alg::*;
 fn trunc(x: usize) -> usize { x >> x.trailing_zeros() }
 
 #[derive(Clone)]
-pub struct LazySegmentTree<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply>
+pub struct LazySegmentTree<T, A, MT, MA, Apply>
 where
     Apply: Fn(T, A) -> T,
 {

@@ -1,6 +1,6 @@
 pub use crate::alg::*;
 
-pub struct Swag<T: Copy, M: Monoid<T>> {
+pub struct Swag<T, M> {
     front: Vec<(T, T)>,
     front_prod: T,
     back: Vec<T>,

@@ -2,7 +2,7 @@ pub use crate::alg::*;
 use crate::bits::*;
 
 #[derive(Clone)]
-pub struct DisjointSparseTable<T: Copy, M: Monoid<T>> {
+pub struct DisjointSparseTable<T, M> {
     data: Vec<Vec<T>>,
     alg: M,
 }
