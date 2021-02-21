@@ -45,3 +45,10 @@ impl<T: Copy> SuffixArray<T> {
     pub fn nth(&self, i: usize) -> usize { self.sa[i] }
     pub fn rank(&self, i: usize) -> usize { self.rev[i] }
 }
+
+impl<T> std::ops::Deref for SuffixArray<T> {
+    type Target = [usize];
+    fn deref(&self) -> &Self::Target {
+        &self.sa[..]
+    }
+}

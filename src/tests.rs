@@ -164,13 +164,12 @@ mod tests {
                 let len = rng.next() as usize % 1000;
                 let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
                 v.extend_from_slice(&[0; 3]);
-                let mut sa = Vec::new();
-                suffix_array_impl(&v, &mut sa, modu as usize, |&v| v as usize);
+                let sa: &[usize] = &SuffixArray::new(v.clone(), 0, |v| v as usize);
                 let mut ans: Vec<_> = (0..=len).collect();
                 ans.sort_unstable_by_key(|&i| &v[i..]);
-                assert_eq!(sa, ans);
-                let lcp = lcp_impl(&v, &sa, |&v| v as usize);
-                for ((&i, &j), lcp) in sa.iter().skip(1).zip(&sa).zip(lcp) {
+                assert_eq!(sa, &ans);
+                let lcp = lcp_impl(&v, sa, |&v| v as usize);
+                for ((&i, &j), lcp) in sa.iter().skip(1).zip(sa).zip(lcp) {
                     assert_eq!(v[i..i + lcp], v[j..j + lcp]);
                     if i.max(j) + lcp < len {
                         assert_ne!(v[i..i + lcp + 1], v[j..j + lcp + 1]);
@@ -190,7 +189,7 @@ mod tests {
                     .take(len)
                     .collect();
                 let mut b = Vec::new();
-                count_sort(&a, &mut b, modu as usize, |&x| x.0 as usize);
+                count_sort(&a, &mut b, modu as usize, |x| x.0 as usize);
                 a.sort_by_key(|&x| x.0);
                 assert_eq!(a, b);
             }
