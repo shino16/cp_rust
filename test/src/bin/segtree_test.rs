@@ -14,7 +14,7 @@ fn main() {
     for _ in 0..q {
         let [c, x, y]: [usize; 3] = io.scan();
         if c == 0 {
-            st.exec(x, |v| *v = y as u32);
+            st.with(x, |v| *v = y as u32);
         } else {
             io.println(st.ask(x, y + 1));
         }

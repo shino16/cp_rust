@@ -27,6 +27,7 @@ pub mod rand;
 pub mod slice;
 pub mod stdio;
 pub mod u64;
+pub mod util;
 pub mod vec;
 pub mod zo;
 
