@@ -89,11 +89,12 @@ impl<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> Option<T
         }
         self.on_alg.op(resl, resr)
     }
-    pub fn exec<F: FnOnce(&mut T)>(&mut self, pos: usize, f: F) {
+    pub fn with<F: FnOnce(&mut T) -> R, R>(&mut self, pos: usize, f: F) -> R {
         self.flush(pos + self.len());
         let p = pos + self.len();
-        f(&mut self.data[p].0);
+        let r = f(&mut self.data[p].0);
         self.build(pos + self.len());
+        r
     }
     pub fn act_over(&mut self, l: usize, r: usize, actor: A) {
         self.flush(trunc(l + self.len()));

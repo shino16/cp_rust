@@ -35,10 +35,11 @@ impl<T: Copy, M: Monoid<T>> SegmentTree<T, M> {
         self.data[p] = self.alg.op(self.data[p], v);
         self.build(p);
     }
-    pub fn exec<F: FnOnce(&mut T)>(&mut self, pos: usize, f: F) {
+    pub fn with<F: FnOnce(&mut T) -> R>(&mut self, pos: usize, f: F) -> R {
         let p = pos + self.len();
-        f(&mut self.data[p]);
+        let r = f(&mut self.data[p]);
         self.build(p);
+        r
     }
     pub fn ask(&self, mut l: usize, mut r: usize) -> T {
         let (mut resl, mut resr) = (self.alg.unit(), self.alg.unit());
