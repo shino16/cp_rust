@@ -31,25 +31,25 @@ data:
     \ p != 0 {\n            self.data[p] = self.alg.op(self.data[p << 1], self.data[p\
     \ << 1 | 1]);\n            p >>= 1;\n        }\n    }\n    pub fn add(&mut self,\
     \ pos: usize, v: T) {\n        let p = pos + self.len();\n        self.data[p]\
-    \ = self.alg.op(self.data[p], v);\n        self.build(p);\n    }\n    pub fn exec<F:\
-    \ FnOnce(&mut T)>(&mut self, pos: usize, f: F) {\n        let p = pos + self.len();\n\
-    \        f(&mut self.data[p]);\n        self.build(p);\n    }\n    pub fn ask(&self,\
-    \ mut l: usize, mut r: usize) -> T {\n        let (mut resl, mut resr) = (self.alg.unit(),\
-    \ self.alg.unit());\n        l += self.len();\n        r += self.len();\n    \
-    \    while l < r {\n            if l & 1 != 0 {\n                resl = self.alg.op(resl,\
-    \ self.data[l]);\n                l += 1;\n            }\n            if r & 1\
-    \ != 0 {\n                resr = self.alg.op(self.data[r - 1], resr);\n      \
-    \          r -= 1;\n            }\n            l >>= 1;\n            r >>= 1;\n\
-    \        }\n        self.alg.op(resl, resr)\n    }\n}\n\nimpl<T: Copy, M: Monoid<T>,\
-    \ I: SliceIndex<[T]>> Index<I> for SegmentTree<T, M> {\n    type Output = I::Output;\n\
-    \    fn index(&self, idx: I) -> &Self::Output { &self.data[self.len()..][idx]\
-    \ }\n}\n"
+    \ = self.alg.op(self.data[p], v);\n        self.build(p);\n    }\n    pub fn with<F:\
+    \ FnOnce(&mut T) -> R, R>(&mut self, pos: usize, f: F) -> R {\n        let p =\
+    \ pos + self.len();\n        let r = f(&mut self.data[p]);\n        self.build(p);\n\
+    \        r\n    }\n    pub fn ask(&self, mut l: usize, mut r: usize) -> T {\n\
+    \        let (mut resl, mut resr) = (self.alg.unit(), self.alg.unit());\n    \
+    \    l += self.len();\n        r += self.len();\n        while l < r {\n     \
+    \       if l & 1 != 0 {\n                resl = self.alg.op(resl, self.data[l]);\n\
+    \                l += 1;\n            }\n            if r & 1 != 0 {\n       \
+    \         resr = self.alg.op(self.data[r - 1], resr);\n                r -= 1;\n\
+    \            }\n            l >>= 1;\n            r >>= 1;\n        }\n      \
+    \  self.alg.op(resl, resr)\n    }\n}\n\nimpl<T: Copy, M: Monoid<T>, I: SliceIndex<[T]>>\
+    \ Index<I> for SegmentTree<T, M> {\n    type Output = I::Output;\n    fn index(&self,\
+    \ idx: I) -> &Self::Output { &self.data[self.len()..][idx] }\n}\n"
   dependsOn:
   - src/alg.rs
   isVerificationFile: false
   path: src/ds/segtree.rs
   requiredBy: []
-  timestamp: '2021-02-20 13:37:47+09:00'
+  timestamp: '2021-02-22 02:21:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/alg.rs
     title: src/alg.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bits.rs
     title: src/bits.rs
   _extendedRequiredBy: []

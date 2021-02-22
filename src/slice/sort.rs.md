@@ -2,19 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: src/slice/sa.rs
-    title: src/slice/sa.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -22,25 +19,24 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice/sort.rs\n"
   code: "use std::mem::MaybeUninit;\n\npub fn count_sort_bytes(slice: &[u8], out:\
-    \ &mut Vec<u8>, max_key: usize) {\n    count_sort(slice, out, max_key, |&x| x\
-    \ as usize);\n}\n\npub fn count_sort<T: Clone, F: FnMut(&T) -> usize>(\n    slice:\
+    \ &mut Vec<u8>, max_key: usize) {\n    count_sort(slice, out, max_key, |x| x as\
+    \ usize);\n}\n\npub fn count_sort<T: Copy, F: FnMut(T) -> usize>(\n    slice:\
     \ &[T],\n    out: &mut Vec<T>,\n    max_key: usize,\n    mut key: F,\n) {\n  \
-    \  let mut count = vec![0; max_key + 1];\n    for e in slice {\n        count[key(e)]\
+    \  let mut count = vec![0; max_key + 1];\n    for &e in slice {\n        count[key(e)]\
     \ += 1;\n    }\n    for i in 0..max_key {\n        count[i + 1] += count[i];\n\
     \    }\n    out.clear();\n    out.reserve(slice.len());\n    {\n        // this\
     \ is safe\n        // refer to https://docs.rs/uninit/0.4.0/uninit/extension_traits/trait.VecCapacity.html#method.get_backing_buffer_with_leaking_writes\n\
     \        let out: &mut [MaybeUninit<T>] =\n            unsafe { std::slice::from_raw_parts_mut(out.as_mut_ptr()\
-    \ as _, slice.len()) };\n        for e in slice.iter().rev() {\n            count[key(e)]\
+    \ as _, slice.len()) };\n        for &e in slice.iter().rev() {\n            count[key(e)]\
     \ -= 1;\n            out[count[key(e)]] = MaybeUninit::new(e.clone());\n     \
     \   }\n    }\n    unsafe {\n        out.set_len(slice.len());\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/slice/sort.rs
   requiredBy:
-  - src/slice/sa.rs
   - src/tests.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-22 02:21:06+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
 documentation_of: src/slice/sort.rs

@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: src/fp.rs
-    title: src/fp.rs
-  - icon: ':question:'
-    path: src/num.rs
-    title: src/num.rs
-  - icon: ':question:'
-    path: src/zo.rs
-    title: src/zo.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,24 +11,21 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/fp/num.rs\n"
-  code: "pub use super::*;\nuse crate::num::*;\n\nimpl<M: Mod> Num for Fp<M> {\n \
-    \   fn wrapping_add(self, rhs: Self) -> Self {\n        self + rhs\n    }\n  \
-    \  fn wrapping_neg(self) -> Self {\n        -self\n    }\n}\n"
-  dependsOn:
-  - src/fp.rs
-  - src/num.rs
-  - src/zo.rs
+    RuntimeError: bundler is not specified: src/util.rs\n"
+  code: 'pub mod for_loop;
+
+    '
+  dependsOn: []
   isVerificationFile: false
-  path: src/fp/num.rs
+  path: src/util.rs
   requiredBy: []
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-02-22 02:21:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/fp/num.rs
+documentation_of: src/util.rs
 layout: document
 redirect_from:
-- /library/src/fp/num.rs
-- /library/src/fp/num.rs.html
-title: src/fp/num.rs
+- /library/src/util.rs
+- /library/src/util.rs.html
+title: src/util.rs
 ---

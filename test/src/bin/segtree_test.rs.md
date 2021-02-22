@@ -27,7 +27,7 @@ data:
     \    let (n, q): (usize, usize) = io.scan();\n\n    let inf = (1_u32 << 31) -\
     \ 1;\n\n    let mut st = SegmentTree::new(n, MonoidImpl(|| inf, |a, b| a.min(b)));\n\
     \n    for _ in 0..q {\n        let [c, x, y]: [usize; 3] = io.scan();\n      \
-    \  if c == 0 {\n            st.exec(x, |v| *v = y as u32);\n        } else {\n\
+    \  if c == 0 {\n            st.with(x, |v| *v = y as u32);\n        } else {\n\
     \            io.println(st.ask(x, y + 1));\n        }\n    }\n}\n"
   dependsOn:
   - src/alg.rs
@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/segtree_test.rs
   requiredBy: []
-  timestamp: '2021-02-20 13:37:47+09:00'
+  timestamp: '2021-02-22 02:21:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/segtree_test.rs

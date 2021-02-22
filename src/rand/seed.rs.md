@@ -8,22 +8,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/fxhash.rs
     title: src/fxhash.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
     path: test/src/bin/dfa_test.rs
     title: test/src/bin/dfa_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -43,8 +43,11 @@ data:
     mod detail {\n    pub fn seed() -> [u64; 4] {\n        [\n            // arbitrary\n\
     \            0x35fee63b_fd9f69cf,\n            0x9fd0680a_f9e37356,\n        \
     \    0x7454d5e3_d982527e,\n            0x35d1849a_77925163,\n        ]\n    }\n\
-    \    pub fn seed64() -> u64 {\n        0x17adfb20_0995921c\n    }\n}\n\npub use\
-    \ self::detail::*;\n"
+    \    pub fn seed64() -> u64 { 0x17adfb20_0995921c }\n}\n\npub use self::detail::*;\n\
+    \npub fn from_time() -> [u64; 4] {\n    use std::time::SystemTime;\n    let t\
+    \ = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos();\n\
+    \    unsafe {\n        std::mem::transmute([t, t.wrapping_mul(0xaa3c057f_bed7578e_6b62420c_f79932a5)])\n\
+    \    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/rand/seed.rs
@@ -53,8 +56,8 @@ data:
   - src/fxhash.rs
   - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-02-13 16:52:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-22 02:21:06+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
   - test/src/bin/dfa_test.rs

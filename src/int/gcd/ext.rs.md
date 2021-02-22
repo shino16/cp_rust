@@ -1,21 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
-    path: src/assign.rs
-    title: src/assign.rs
   - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
   - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
-    path: src/graph.rs
-    title: src/graph.rs
-  - icon: ':warning:'
-    path: src/graph/weighted.rs
-    title: src/graph/weighted.rs
   - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
@@ -35,34 +26,33 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/graph/dijkstra.rs\n"
-  code: "pub use super::weighted::*;\nuse crate::assign::*;\nuse crate::int::*;\n\
-    use std::cmp::Reverse;\nuse std::collections::BinaryHeap;\n\npub fn dijkstra<I:\
-    \ UInt, G: WGraph<I>>(g: &G, s: usize) -> Vec<I> {\n    let mut dist = vec![I::MAX;\
-    \ g.len()];\n    dist[s] = I::ZERO;\n    let mut togo: BinaryHeap<_> = vec![Reverse((I::ZERO,\
-    \ s))].into();\n    while let Some(Reverse((d, v))) = togo.pop() {\n        g.adj_w(v,\
-    \ |w, e| {\n            if assign_if(d + e, &mut dist[w], |x, y| x < y) {\n  \
-    \              togo.push(Reverse((d + e, w)));\n            }\n        });\n \
-    \   }\n    dist\n}\n"
+    RuntimeError: bundler is not specified: src/int/gcd/ext.rs\n"
+  code: "pub use crate::int::*;\n\n/// (x, y, g) where ax + by = g, x >= 0\npub fn\
+    \ extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I, I) {\n    // A = [a, x, y; b,\
+    \ u, v], k = [-1; a0; b0]\n    // A'= [a, x, y; 0, u, v] \\therefore a0*u + b0*v\
+    \ = 0\n    let (mut x, mut y, mut u, mut v) = (I::ONE, I::ZERO, I::ZERO, I::ONE);\n\
+    \    while !b.is_zero() {\n        let t = a / b;\n        a -= t * b;\n     \
+    \   x -= t * u;\n        y -= t * v;\n        std::mem::swap(&mut a, &mut b);\n\
+    \        std::mem::swap(&mut x, &mut u);\n        std::mem::swap(&mut y, &mut\
+    \ v);\n    }\n    if x < I::ZERO {\n        x += u;\n        y -= v;\n       \
+    \ // debug_assert_eq!(gcd(u, v), I::ONE);\n        debug_assert!(x + u >= I::ZERO);\n\
+    \    }\n    (x, y, a)\n}\n"
   dependsOn:
-  - src/assign.rs
   - src/bounded.rs
   - src/cast.rs
-  - src/graph.rs
-  - src/graph/weighted.rs
   - src/int.rs
   - src/num.rs
   - src/zo.rs
   isVerificationFile: false
-  path: src/graph/dijkstra.rs
+  path: src/int/gcd/ext.rs
   requiredBy: []
-  timestamp: '2021-02-16 22:07:36+09:00'
+  timestamp: '2021-02-21 16:57:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/graph/dijkstra.rs
+documentation_of: src/int/gcd/ext.rs
 layout: document
 redirect_from:
-- /library/src/graph/dijkstra.rs
-- /library/src/graph/dijkstra.rs.html
-title: src/graph/dijkstra.rs
+- /library/src/int/gcd/ext.rs
+- /library/src/int/gcd/ext.rs.html
+title: src/int/gcd/ext.rs
 ---

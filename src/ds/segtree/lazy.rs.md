@@ -51,28 +51,28 @@ data:
     \            }\n            if r & 1 != 0 {\n                r -= 1;\n       \
     \         resr = self.on_alg.op(self.data[r].0, resr);\n            }\n      \
     \      l >>= 1;\n            r >>= 1;\n        }\n        self.on_alg.op(resl,\
-    \ resr)\n    }\n    pub fn exec<F: FnOnce(&mut T)>(&mut self, pos: usize, f: F)\
-    \ {\n        self.flush(pos + self.len());\n        let p = pos + self.len();\n\
-    \        f(&mut self.data[p].0);\n        self.build(trunc(pos + self.len()));\n\
-    \    }\n    pub fn act_over(&mut self, l: usize, r: usize, actor: A) {\n     \
-    \   self.flush(trunc(l + self.len()));\n        self.flush(trunc(r + self.len())\
-    \ - 1);\n        {\n            let (mut l, mut r) = (l + self.len(), r + self.len());\n\
-    \            while l < r {\n                if l & 1 != 0 {\n                \
-    \    self.apply(l, actor);\n                    l += 1;\n                }\n \
-    \               if r & 1 != 0 {\n                    r -= 1;\n               \
-    \     self.apply(r, actor);\n                }\n                l >>= 1;\n   \
-    \             r >>= 1;\n            }\n        }\n        self.build(trunc(l +\
-    \ self.len()));\n        self.build(trunc(r + self.len()) - 1);\n    }\n    pub\
-    \ fn flush_all(&mut self) -> &[(T, A)] {\n        for p in 1..self.len() {\n \
-    \           self.apply(p << 1, self.data[p].1);\n            self.apply(p << 1\
-    \ | 1, self.data[p].1);\n            self.data[p].1 = self.act_alg.unit();\n \
-    \       }\n        &self.data[self.len()..]\n    }\n}\n"
+    \ resr)\n    }\n    pub fn with<F: FnOnce(&mut T) -> R, R>(&mut self, pos: usize,\
+    \ f: F) -> R {\n        self.flush(pos + self.len());\n        let p = pos + self.len();\n\
+    \        let r = f(&mut self.data[p].0);\n        self.build(trunc(pos + self.len()));\n\
+    \        r\n    }\n    pub fn act_over(&mut self, l: usize, r: usize, actor: A)\
+    \ {\n        self.flush(trunc(l + self.len()));\n        self.flush(trunc(r +\
+    \ self.len()) - 1);\n        {\n            let (mut l, mut r) = (l + self.len(),\
+    \ r + self.len());\n            while l < r {\n                if l & 1 != 0 {\n\
+    \                    self.apply(l, actor);\n                    l += 1;\n    \
+    \            }\n                if r & 1 != 0 {\n                    r -= 1;\n\
+    \                    self.apply(r, actor);\n                }\n              \
+    \  l >>= 1;\n                r >>= 1;\n            }\n        }\n        self.build(trunc(l\
+    \ + self.len()));\n        self.build(trunc(r + self.len()) - 1);\n    }\n   \
+    \ pub fn flush_all(&mut self) -> &[(T, A)] {\n        for p in 1..self.len() {\n\
+    \            self.apply(p << 1, self.data[p].1);\n            self.apply(p <<\
+    \ 1 | 1, self.data[p].1);\n            self.data[p].1 = self.act_alg.unit();\n\
+    \        }\n        &self.data[self.len()..]\n    }\n}\n"
   dependsOn:
   - src/alg.rs
   isVerificationFile: false
   path: src/ds/segtree/lazy.rs
   requiredBy: []
-  timestamp: '2021-02-20 13:37:47+09:00'
+  timestamp: '2021-02-21 16:57:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

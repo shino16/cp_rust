@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: src/ds/pool.rs
     title: src/ds/pool.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':warning:'
@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: src/stdio/buf.rs
     title: src/stdio/buf.rs
+  - icon: ':warning:'
+    path: src/util/for_loop.rs
+    title: src/util/for_loop.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -29,16 +32,17 @@ data:
     \ float;\npub mod fp;\npub mod func;\npub mod fxhash;\npub mod graph;\npub mod\
     \ hash;\npub mod int;\npub mod io;\npub mod io_interactive;\npub mod iter;\npub\
     \ mod make_vec;\npub mod math;\npub mod mint;\npub mod num;\npub mod poly;\npub\
-    \ mod rand;\npub mod slice;\npub mod stdio;\npub mod u64;\npub mod vec;\npub mod\
-    \ zo;\n\npub mod tests;\n\n#[cfg(debug_assertions)]\n#[macro_export]\nmacro_rules!\
-    \ dbg {\n    () => {\n        std::eprintln!(\"[{}:{}]\", std::file!(), std::line!());\n\
-    \    };\n    ($val:expr) => {\n        // Use of `match` here is intentional because\
-    \ it affects the lifetimes\n        // of temporaries - https://stackoverflow.com/a/48732525/1063961\n\
-    \        match $val {\n            tmp => {\n                std::eprintln!(\"\
-    [{}:{}] {} = {:?}\",\n                    std::file!(), std::line!(), std::stringify!($val),\
-    \ &tmp);\n                tmp\n            }\n        }\n    };\n    // Trailing\
-    \ comma with single argument is ignored\n    ($val:expr,) => { dbg!($val) };\n\
-    \    ($($val:expr),+ $(,)?) => {\n        ($(dbg!($val)),+,)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
+    \ mod rand;\npub mod slice;\npub mod stdio;\npub mod u64;\npub mod util;\npub\
+    \ mod vec;\npub mod zo;\n\npub mod tests;\n\n#[cfg(debug_assertions)]\n#[macro_export]\n\
+    macro_rules! dbg {\n    () => {\n        std::eprintln!(\"[{}:{}]\", std::file!(),\
+    \ std::line!());\n    };\n    ($val:expr) => {\n        // Use of `match` here\
+    \ is intentional because it affects the lifetimes\n        // of temporaries -\
+    \ https://stackoverflow.com/a/48732525/1063961\n        match $val {\n       \
+    \     tmp => {\n                std::eprintln!(\"[{}:{}] {} = {:?}\",\n      \
+    \              std::file!(), std::line!(), std::stringify!($val), &tmp);\n   \
+    \             tmp\n            }\n        }\n    };\n    // Trailing comma with\
+    \ single argument is ignored\n    ($val:expr,) => { dbg!($val) };\n    ($($val:expr),+\
+    \ $(,)?) => {\n        ($(dbg!($val)),+,)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
     #[macro_export]\nmacro_rules! dbg {\n    ($($x:expr),*) => { std::convert::identity(($($x),*))\
     \ }\n}\n"
   dependsOn: []
@@ -48,8 +52,9 @@ data:
   - src/stdio/buf.rs
   - src/mint.rs
   - src/ds/pool.rs
+  - src/util/for_loop.rs
   - src/stdio.rs
-  timestamp: '2021-02-13 20:22:55+09:00'
+  timestamp: '2021-02-22 02:21:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs
