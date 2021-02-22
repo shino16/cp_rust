@@ -164,10 +164,10 @@ mod tests {
                 let len = rng.next() as usize % 1000;
                 let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
                 v.extend_from_slice(&[0; 3]);
-                let sa: &[usize] = &SuffixArray::new(v.clone(), 0, |v| v as usize);
+                let sa: &[_] = &SuffixArray::new(v.clone(), 0, |v| v as usize);
                 let mut ans: Vec<_> = (0..=len).collect();
                 ans.sort_unstable_by_key(|&i| &v[i..]);
-                assert_eq!(sa, &ans);
+                assert_eq!(sa, &ans as &[_]);
                 let lcp = lcp_impl(&v, sa, |&v| v as usize);
                 for ((&i, &j), lcp) in sa.iter().skip(1).zip(sa).zip(lcp) {
                     assert_eq!(v[i..i + lcp], v[j..j + lcp]);
