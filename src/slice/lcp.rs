@@ -1,8 +1,8 @@
 pub fn lcp(t: &[u8], sa: &[usize]) -> Vec<usize> {
-    lcp_impl(t, sa, |&v| v as usize)
+    lcp_impl(t, sa, |v| v as usize)
 }
 
-pub fn lcp_impl<T, F: FnMut(&T) -> usize>(t: &[T], sa: &[usize], mut key: F) -> Vec<usize> {
+pub fn lcp_impl<T: Copy, F: FnMut(T) -> usize>(t: &[T], sa: &[usize], mut key: F) -> Vec<usize> {
     let n = sa.len() - 1;
     let mut rank = vec![0; n];
     for i in 1..n {
@@ -16,7 +16,7 @@ pub fn lcp_impl<T, F: FnMut(&T) -> usize>(t: &[T], sa: &[usize], mut key: F) -> 
             continue;
         }
         let j = sa[rank[i] + 1];
-        while i + k < n && j + k < n && key(&t[i + k]) == key(&t[j + k]) {
+        while i + k < n && j + k < n && key(t[i + k]) == key(t[j + k]) {
             k += 1;
         }
         lcp[rank[i]] = k;
