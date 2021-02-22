@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: src/ds/pool.rs
     title: src/ds/pool.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':warning:'
