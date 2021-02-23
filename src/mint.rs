@@ -5,7 +5,6 @@ use std::{fmt, iter, ops};
 
 pub mod conv;
 pub mod io;
-pub mod num;
 
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
     const M: u32;
@@ -75,8 +74,8 @@ macro_rules! impl_from_int {
     )* };
 }
 impl_from_int! {
-    (i8: i32), (i16: i32), (i32: i32), (i64: i64),
-    (u8: u32), (u16: u32), (u32: u32), (u64: u64),
+    (i8: i32), (i16: i32), (i32: i32), (i64: i64), (isize: i64),
+    (u8: u32), (u16: u32), (u32: u32), (u64: u64), (usize: u64),
 }
 
 impl<M: Mod, T: Into<Mint<M>>> ops::Add<T> for Mint<M> {

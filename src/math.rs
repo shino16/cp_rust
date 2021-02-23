@@ -1,4 +1,5 @@
 pub mod binom;
+pub mod convex;
 pub mod factorize;
 pub mod gcd;
 pub mod is_prime;

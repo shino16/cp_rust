@@ -16,7 +16,7 @@ pub trait Bits:
 }
 
 macro_rules! impl_bit {
-    ($($t:ty), *) => { $(
+    ($($t:ty),*) => { $(
         impl Bits for $t {
             fn trailing_zeros(self) -> u32 {
                 <$t>::trailing_zeros(self)

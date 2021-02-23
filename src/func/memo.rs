@@ -21,7 +21,7 @@ where
     }
 }
 
-pub fn memo<Arg: Eq + Hash, Ret, F>(f: F) -> Memo<F, Arg, Ret>
+pub fn memoize<Arg: Eq + Hash, Ret, F>(f: F) -> Memo<F, Arg, Ret>
 where
     F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret,
 {

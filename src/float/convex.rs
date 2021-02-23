@@ -1,12 +1,12 @@
 use super::*;
 
-/// return (argmin f, min f)
-pub fn convex_min<F: FnMut(Float) -> Float>(
+/// return (min f, argmin f)
+pub fn convex_min<F: FnMut(Float) -> T, T: PartialOrd>(
     mut l: Float,
     mut r: Float,
     e: Float,
     mut f: F,
-) -> (Float, Float) {
+) -> (T, Float) {
     const PHI: Float = 1.618_033_988_749_895;
     let k = ((r - l) / e).log(PHI) as u32 + 2;
 
@@ -30,5 +30,5 @@ pub fn convex_min<F: FnMut(Float) -> Float>(
             yml = f(ml);
         }
     }
-    (ml, yml)
+    (yml, ml)
 }

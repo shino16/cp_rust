@@ -8,13 +8,13 @@ pub trait Cum {
     where
         Self::Item: Num,
     {
-        self.cuml(Addition())
+        self.cuml(MonoidImpl(|| Self::Item::ZERO, |a, b| a + b))
     }
     fn cumr_sum(&self) -> Vec<Self::Item>
     where
         Self::Item: Num,
     {
-        self.cumr(Addition())
+        self.cumr(MonoidImpl(|| Self::Item::ZERO, |a, b| a + b))
     }
 }
 

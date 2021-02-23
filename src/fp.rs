@@ -6,7 +6,6 @@ use std::{cmp, fmt, iter, ops};
 
 pub mod conv;
 pub mod io;
-pub mod num;
 
 pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
     const P: u32;

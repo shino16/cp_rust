@@ -4,10 +4,16 @@ pub use crate::num::*;
 #[derive(Default, Clone, Copy)]
 pub struct Addition();
 
-impl<T: Num> Monoid<T> for Addition {
-    fn unit(&self) -> T { T::ZERO }
-    fn op(&self, x: T, y: T) -> T { x.wrapping_add(y) }
+macro_rules! impl_alg {
+    ($($t:ty),*) => { $(
+        impl Monoid<$t> for Addition {
+            fn unit(&self) -> $t { 0 }
+            fn op(&self, x: $t, y: $t) -> $t { x.wrapping_add(y) }
+        }
+        impl Group<$t> for Addition {
+            fn inv(&self, x: $t) -> $t { x.wrapping_neg() }
+        }
+    )* };
 }
-impl<T: Num> Group<T> for Addition {
-    fn inv(&self, x: T) -> T { x.wrapping_neg() }
-}
+
+impl_alg!(i8, i16, i32, i64, isize, u8, u16, u32, u64, usize);

@@ -1,16 +1,15 @@
-use crate::int::*;
-use crate::cast::*;
+use crate::num::*;
 
 pub struct Binom<T> {
     pub fact: Vec<T>,
     pub inv_fact: Vec<T>,
 }
 
-impl<I: Num + CastFrom<usize>> Binom<I> {
+impl<I: Num + From<usize>> Binom<I> {
     pub fn new(n: usize) -> Self {
         let mut fact = Vec::with_capacity(n + 1);
         let mut inv_fact = Vec::with_capacity(n + 1);
-        let n: I = n.as_();
+        let n: I = n.into();
         let (mut acc, mut now) = (I::ONE, I::ZERO);
         fact.push(I::ONE);
         while now != n {
@@ -28,8 +27,7 @@ impl<I: Num + CastFrom<usize>> Binom<I> {
         inv_fact.reverse();
         Self { fact, inv_fact }
     }
-    pub fn binom<J: CastTo<usize>>(&self, n: J, r: J) -> I {
-        let [n, r]: [usize; 2] = [n.as_(), r.as_()];
+    pub fn binom(&self, n: usize, r: usize) -> I {
         self.fact[n] * self.inv_fact[r] * self.inv_fact[n - r]
     }
 }

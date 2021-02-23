@@ -72,7 +72,7 @@ mod tests {
                     let a = fib[i - 1] + fib[i - 2];
                     fib.push(a % MOD);
                 }
-                let rhs = memo(|fib, n| {
+                let rhs = memoize(|fib, n| {
                     if n <= 1 {
                         1
                     } else {
