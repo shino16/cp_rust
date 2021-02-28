@@ -4,6 +4,7 @@ pub use crate::int::*;
 pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I) {
     // A = [a, x, y; b, u, v], k = [-1; a; b], Ak = 0
     let (mut x, mut u) = (I::ONE, I::ZERO);
+    let b0 = b;
     while !b.is_zero() {
         let t = a / b;
         a -= t * b;
@@ -12,7 +13,7 @@ pub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I) {
         std::mem::swap(&mut x, &mut u);
     }
     if x < I::ZERO {
-        x += u;
+        x += b0 / a;
     }
-    (x, a)
+    (a, x)
 }

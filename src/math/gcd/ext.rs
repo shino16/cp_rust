@@ -4,6 +4,7 @@ type IInt = i64;
 /// (g, x) where g = gcd(a, b), ax = g (mod b), 0 <= x < b/g
 pub fn extgcd(a: Int, b: Int) -> (Int, Int) {
     let (mut a, mut b) = (a as IInt, b as IInt);
+    let b0 = b;
     // A = [a, x, y; b, u, v], k = [-1; a; b], Ak = 0
     let (mut x, mut u) = (1, 0);
     while b != 0 {
@@ -14,8 +15,7 @@ pub fn extgcd(a: Int, b: Int) -> (Int, Int) {
         std::mem::swap(&mut x, &mut u);
     }
     if x < 0 {
-        x += u;
+        x += b0 / a;
     }
-    debug_assert!(0 <= x && x < u);
-    (x as Int, a as Int)
+    (a as Int, x as Int)
 }
