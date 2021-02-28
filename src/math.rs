@@ -1,5 +1,6 @@
 pub mod binom;
 pub mod convex;
+pub mod crt;
 pub mod factorize;
 pub mod gcd;
 pub mod is_prime;
