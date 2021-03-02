@@ -38,6 +38,10 @@ macro_rules! prtln {
 #[macro_export]
 macro_rules! scan {
     (@ $iter:expr $(,)?) => {};
+    (@ $iter:expr, mut $var:ident : $t:tt $($r:tt)*) => {
+        let mut $var = $crate::scan_value!($iter, $t);
+        $crate::scan!(@ $iter $($r)*)
+    };
     (@ $iter:expr, $var:ident : $t:tt $($r:tt)*) => {
         let $var = $crate::scan_value!($iter, $t);
         $crate::scan!(@ $iter $($r)*)

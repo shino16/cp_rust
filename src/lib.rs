@@ -51,9 +51,9 @@ macro_rules! dbg {
         }
     };
     // Trailing comma with single argument is ignored
-    ($val:expr,) => { dbg!($val) };
+    ($val:expr,) => { $crate::dbg!($val) };
     ($($val:expr),+ $(,)?) => {
-        ($(dbg!($val)),+,)
+        ($($crate::dbg!($val)),+,)
     };
 }
 

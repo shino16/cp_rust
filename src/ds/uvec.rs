@@ -1,4 +1,10 @@
+pub use crate::uvec;
 use std::ops::{Deref, DerefMut};
+
+#[macro_export]
+macro_rules! uvec {
+    ($($t:tt)*) => { UVec(vec![$($t)*]) };
+}
 
 #[derive(Clone)]
 #[repr(transparent)]
