@@ -1,45 +1,33 @@
-pub use crate::alg::arith::*;
+use crate::zo::*;
+use std::ops::Add;
 
-pub trait Cum {
-    type Item: Copy;
-    fn cuml<M: Monoid<Self::Item>>(&self, m: M) -> Vec<Self::Item>;
-    fn cumr<M: Monoid<Self::Item>>(&self, m: M) -> Vec<Self::Item>;
-    fn cuml_sum(&self) -> Vec<Self::Item>
-    where
-        Self::Item: Num,
-    {
-        self.cuml(MonoidImpl(|| Self::Item::ZERO, |a, b| a + b))
+pub fn cuml<T: Copy, F: FnMut(T, T) -> T>(slice: &[T], zero: T, mut op: F) -> Vec<T> {
+    let mut res = Vec::with_capacity(slice.len() + 1);
+    let mut tl = zero;
+    res.push(tl);
+    for &e in slice {
+        tl = op(tl, e);
+        res.push(tl);
     }
-    fn cumr_sum(&self) -> Vec<Self::Item>
-    where
-        Self::Item: Num,
-    {
-        self.cumr(MonoidImpl(|| Self::Item::ZERO, |a, b| a + b))
-    }
+    res
 }
 
-impl<T: Copy> Cum for [T] {
-    type Item = T;
-    fn cuml<M: Monoid<Self::Item>>(&self, m: M) -> Vec<Self::Item> {
-        let mut res = Vec::with_capacity(self.len() + 1);
-        let mut tl = m.unit();
+pub fn cumr<T: Copy, F: FnMut(T, T) -> T>(slice: &[T], zero: T, mut op: F) -> Vec<T> {
+    let mut res = Vec::with_capacity(slice.len() + 1);
+    let mut tl = zero;
+    res.push(tl);
+    for &e in slice.iter().rev() {
+        tl = op(e, tl);
         res.push(tl);
-        for e in self {
-            tl = m.op(tl, *e);
-            res.push(tl);
-        }
-        res
     }
+    res.reverse();
+    res
+}
 
-    fn cumr<M: Monoid<Self::Item>>(&self, m: M) -> Vec<Self::Item> {
-        let mut res = Vec::with_capacity(self.len() + 1);
-        let mut tl = m.unit();
-        res.push(tl);
-        for e in self.iter().rev() {
-            tl = m.op(*e, tl);
-            res.push(tl);
-        }
-        res.reverse();
-        res
-    }
+pub fn cuml_sum<T: Copy + ZeroOne + Add<T, Output = T>>(slice: &[T]) -> Vec<T> {
+    cuml(slice, T::ZERO, Add::add)
+}
+
+pub fn cumr_sum<T: Copy + ZeroOne + Add<T, Output = T>>(slice: &[T]) -> Vec<T> {
+    cumr(slice, T::ZERO, Add::add)
 }
