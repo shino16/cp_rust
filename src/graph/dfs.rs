@@ -6,7 +6,7 @@ pub mod cmpnt;
 /// f: (v, par)
 pub fn dfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize, mut f: F) {
     let mut visited = new_bitset(g.len());
-    visited.set_bit(s, true);
+    visited.set_bit(s);
     _dfs_impl(g, s, !0, &mut visited, &mut f);
 }
 
@@ -29,7 +29,7 @@ fn _dfs_impl<G: Graph, F: FnMut(usize, usize)>(
 ) {
     f(v, par);
     g.adj(v, |w| {
-        if visited.modify_bit(w, true) {
+        if visited.set_bit(w) {
             _dfs_impl(g, w, v, visited, f);
         }
     });

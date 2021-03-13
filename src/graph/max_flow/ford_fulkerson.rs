@@ -48,7 +48,7 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         let mut res = C::ZERO;
         let mut used = new_bitset(self.graph.len());
         loop {
-            used.reset();
+            used.clear();
             let f = self.dfs(s, t, &mut used, C::MAX);
             if f == C::ZERO {
                 return res;
@@ -73,7 +73,7 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         }
         let mut adj = std::mem::take(&mut self.graph[v]);
         for &mut Edge { to, ref mut cap, rev } in &mut adj {
-            if *cap != C::ZERO && used.modify_bit(to, true) {
+            if *cap != C::ZERO && used.set_bit(to) {
                 let df = self.dfs(to, t, used, ub.min(*cap));
                 if df != C::ZERO {
                     *cap -= df;

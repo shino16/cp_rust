@@ -28,7 +28,6 @@ mod detail {
 mod detail {
     pub fn seed() -> [u64; 4] {
         [
-            // arbitrary
             0x35fee63b_fd9f69cf,
             0x9fd0680a_f9e37356,
             0x7454d5e3_d982527e,

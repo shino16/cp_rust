@@ -19,13 +19,13 @@ pub fn dfs_io<G: Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {
     ) {
         f(In(v), par);
         g.adj(v, |w| {
-            if visited.modify_bit(w, true) {
+            if visited.set_bit(w) {
                 dfs_impl(g, w, v, visited, f);
             }
         });
         f(Out(v), par);
     }
     let mut visited = new_bitset(g.len());
-    visited.set_bit(s, true);
+    visited.set_bit(s);
     dfs_impl(g, s, !0, &mut visited, &mut f);
 }
