@@ -13,14 +13,14 @@ macro_rules! prtln {
     (@ $dst:expr, iter=$expr:expr, sep=$sep:expr) => { {
         let mut iter = $expr.into_iter();
         if let Some(expr) = iter.next() {
-            ::std::write!($dst, "{}", expr).unwrap();
-            for expr in iter { ::std::write!($dst, "{}{}", $sep, expr).unwrap(); }
+            std::write!($dst, "{}", expr).unwrap();
+            for expr in iter { std::write!($dst, "{}{}", $sep, expr).unwrap(); }
         }
         $crate::prtln!(@ $dst, "");
     } };
-    (@ $dst:expr, $expr:expr) => { ::std::writeln!($dst, "{}", $expr).unwrap(); };
+    (@ $dst:expr, $expr:expr) => { std::writeln!($dst, "{}", $expr).unwrap(); };
     (@ $dst:expr, $expr:expr, $($exprs:expr),*) => { {
-        ::std::write!($dst, "{} ", $expr).unwrap();
+        std::write!($dst, "{} ", $expr).unwrap();
         $crate::prtln!(@ $dst, $($exprs),*);
     } };
     (new $var:ident) => { let mut $var = stdout_buf(); };
@@ -52,13 +52,9 @@ macro_rules! scan {
     };
     (from $s:expr, $($r:tt)*) => { $crate::scan!(@ $s, $($r)*); };
     (new $var:ident, $($r:tt)*) => {
-        let s = {
-            use ::std::io::Read;
-            let mut s = String::new();
-            ::std::io::stdin().read_to_string(&mut s).unwrap();
-            s
-        };
-        let $var = &mut s.split_whitespace();
+        let mut __input = String::new();
+        std::io::Read::read_to_string(&mut std::io::stdin(), &mut __input).unwrap();
+        let $var = &mut __input.split_ascii_whitespace();
         $crate::scan!(@ $var, $($r)*);
     };
     ($($r:tt)*) => { $crate::scan!(new __scan, $($r)*); };
@@ -70,7 +66,7 @@ macro_rules! scan_value {
     ($iter:expr, [ $t:tt ; $len:expr ]) => {
         (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()
     };
-    ($iter:expr, bytes) => { $iter.next().as_bytes() };
+    ($iter:expr, [u8]) => { $iter.next().unwrap().as_bytes() };
     ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };
     ($iter:expr, $t:ty) => { $iter.next().unwrap().parse::<$t>().unwrap() };
 }

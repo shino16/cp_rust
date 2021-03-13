@@ -1,6 +1,7 @@
 pub type Int = usize;
 
-/// return (min f, argmin f)
+/// return (f(x), x) where f(x) is (locally) minimal
+// verification: https://codeforces.com/contest/1479/submission/109458067
 pub fn convex_min<F: FnMut(Int) -> T, T: Ord>(
     mut l: Int,
     mut r: Int,

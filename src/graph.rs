@@ -7,6 +7,7 @@ pub mod grid;
 pub mod io;
 pub mod max_flow;
 pub mod tree;
+pub mod tsort;
 pub mod weighted;
 
 pub trait Graph {
