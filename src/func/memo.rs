@@ -1,6 +1,7 @@
 use std::cell::RefCell;
-use std::collections::HashMap;
 use std::hash::Hash;
+// use std::collections::HashMap;
+use crate::fxhash::FxHashMap as HashMap;
 
 #[must_use]
 pub struct Memo<F, Arg, Ret>(F, RefCell<HashMap<Arg, Ret>>);
@@ -25,5 +26,5 @@ pub fn memoize<Arg: Eq + Hash, Ret, F>(f: F) -> Memo<F, Arg, Ret>
 where
     F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret,
 {
-    Memo(f, RefCell::new(HashMap::new()))
+    Memo(f, RefCell::new(HashMap::default()))
 }
