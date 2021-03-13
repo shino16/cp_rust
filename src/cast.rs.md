@@ -30,9 +30,6 @@ data:
     path: src/int/inv.rs
     title: src/int/inv.rs
   - icon: ':warning:'
-    path: src/math/binom.rs
-    title: src/math/binom.rs
-  - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
@@ -52,9 +49,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/cast.rs\n"
   code: "pub trait CastTo<T> {\n    fn cast_to(self) -> T;\n}\npub trait CastFrom<T>\
@@ -76,18 +73,17 @@ data:
   isVerificationFile: false
   path: src/cast.rs
   requiredBy:
-  - src/dfa.rs
-  - src/math/binom.rs
   - src/math/pow.rs
-  - src/draft/fpacc64.rs
-  - src/int/inv.rs
-  - src/int/bisect.rs
-  - src/int/gcd/ext.rs
-  - src/int/gcd.rs
-  - src/int/arith.rs
-  - src/tests.rs
-  - src/graph/dijkstra.rs
   - src/int.rs
+  - src/graph/dijkstra.rs
+  - src/draft/fpacc64.rs
+  - src/int/bisect.rs
+  - src/int/inv.rs
+  - src/int/gcd.rs
+  - src/int/gcd/ext.rs
+  - src/int/arith.rs
+  - src/dfa.rs
+  - src/tests.rs
   timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
   - icon: ':heavy_check_mark:'
@@ -10,13 +10,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -25,9 +28,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/draft/fpacc64.rs\n"
   code: "use crate::cast::*;\npub use crate::int::ZeroOne;\nuse crate::int::*;\nuse\
@@ -123,11 +126,12 @@ data:
   - src/int.rs
   - src/io.rs
   - src/num.rs
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/draft/fpacc64.rs
   requiredBy: []
-  timestamp: '2021-02-16 22:07:36+09:00'
+  timestamp: '2021-02-24 00:44:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/fpacc64.rs

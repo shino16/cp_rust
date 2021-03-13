@@ -3,12 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/dfa.rs
-    title: src/dfa.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fxhash.rs
-    title: src/fxhash.rs
-  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
   - icon: ':heavy_check_mark:'
@@ -18,16 +12,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/dfa_test.rs
-    title: test/src/bin/dfa_test.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/rand/seed.rs\n"
   code: "// Codeforces\n#[cfg(windows)]\nmod detail {\n    extern \"system\" {\n \
@@ -40,27 +31,23 @@ data:
     \ as *mut u8, std::mem::size_of_val(&v));\n                unsafe { v.assume_init()\
     \ }\n            }\n        )* };\n    }\n    def_seed! {\n        pub fn seed()\
     \ -> [u64; 4];\n        pub fn seed64() -> u64;\n    }\n}\n\n#[cfg(not(windows))]\n\
-    mod detail {\n    pub fn seed() -> [u64; 4] {\n        [\n            // arbitrary\n\
-    \            0x35fee63b_fd9f69cf,\n            0x9fd0680a_f9e37356,\n        \
-    \    0x7454d5e3_d982527e,\n            0x35d1849a_77925163,\n        ]\n    }\n\
-    \    pub fn seed64() -> u64 { 0x17adfb20_0995921c }\n}\n\npub use self::detail::*;\n\
-    \npub fn from_time() -> [u64; 4] {\n    use std::time::SystemTime;\n    let t\
-    \ = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos();\n\
+    mod detail {\n    pub fn seed() -> [u64; 4] {\n        [\n            0x35fee63b_fd9f69cf,\n\
+    \            0x9fd0680a_f9e37356,\n            0x7454d5e3_d982527e,\n        \
+    \    0x35d1849a_77925163,\n        ]\n    }\n    pub fn seed64() -> u64 { 0x17adfb20_0995921c\
+    \ }\n}\n\npub use self::detail::*;\n\npub fn from_time() -> [u64; 4] {\n    use\
+    \ std::time::SystemTime;\n    let t = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos();\n\
     \    unsafe {\n        std::mem::transmute([t, t.wrapping_mul(0xaa3c057f_bed7578e_6b62420c_f79932a5)])\n\
     \    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/rand/seed.rs
   requiredBy:
-  - src/rand/xoshiro256plus.rs
-  - src/fxhash.rs
-  - src/dfa.rs
   - src/tests.rs
-  timestamp: '2021-02-22 02:21:06+09:00'
+  - src/rand/xoshiro256plus.rs
+  timestamp: '2021-03-14 05:03:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
-  - test/src/bin/dfa_test.rs
 documentation_of: src/rand/seed.rs
 layout: document
 redirect_from:

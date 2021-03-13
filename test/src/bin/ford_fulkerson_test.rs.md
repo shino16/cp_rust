@@ -1,34 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/ford_fulkerson_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\n\
@@ -43,12 +46,13 @@ data:
   - src/graph/max_flow/ford_fulkerson.rs
   - src/io.rs
   - src/num.rs
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/ford_fulkerson_test.rs
   requiredBy: []
-  timestamp: '2021-02-20 13:28:01+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-03-14 05:03:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/src/bin/ford_fulkerson_test.rs
 layout: document

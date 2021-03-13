@@ -1,16 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -21,16 +24,16 @@ data:
     path: src/graph/max_flow/ford_fulkerson/edges.rs
     title: src/graph/max_flow/ford_fulkerson/edges.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/max_flow/ford_fulkerson.rs\n"
   code: "use crate::bounded::Bounded;\nuse crate::ds::bitset::*;\npub use crate::num::*;\n\
@@ -50,7 +53,7 @@ data:
     \ { to: w, cap, rev: widx });\n            self.graph[w].push(Edge { to: v, cap:\
     \ C::ZERO, rev: vidx });\n        }\n    }\n    pub fn solve(&mut self, s: usize,\
     \ t: usize) -> C {\n        let mut res = C::ZERO;\n        let mut used = new_bitset(self.graph.len());\n\
-    \        loop {\n            used.reset();\n            let f = self.dfs(s, t,\
+    \        loop {\n            used.clear();\n            let f = self.dfs(s, t,\
     \ &mut used, C::MAX);\n            if f == C::ZERO {\n                return res;\n\
     \            }\n            res += f;\n        }\n    }\n    pub fn min_cut(&self)\
     \ -> Vec<(usize, usize)> {\n        let mut res = Vec::new();\n        for v in\
@@ -60,7 +63,7 @@ data:
     \ t: usize, used: &mut [u32], ub: C) -> C {\n        if v == t {\n           \
     \ return ub;\n        }\n        let mut adj = std::mem::take(&mut self.graph[v]);\n\
     \        for &mut Edge { to, ref mut cap, rev } in &mut adj {\n            if\
-    \ *cap != C::ZERO && used.modify_bit(to, true) {\n                let df = self.dfs(to,\
+    \ *cap != C::ZERO && used.set_bit(to) {\n                let df = self.dfs(to,\
     \ t, used, ub.min(*cap));\n                if df != C::ZERO {\n              \
     \      *cap -= df;\n                    self.graph[to][rev].cap += df;\n     \
     \               self.graph[v] = adj;\n                    return df;\n       \
@@ -70,14 +73,15 @@ data:
   - src/bounded.rs
   - src/ds/bitset.rs
   - src/num.rs
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/graph/max_flow/ford_fulkerson.rs
   requiredBy:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
-  timestamp: '2021-02-20 13:28:01+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-03-14 05:03:05+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs
 documentation_of: src/graph/max_flow/ford_fulkerson.rs

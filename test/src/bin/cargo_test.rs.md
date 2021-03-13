@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -58,7 +58,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -68,9 +71,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/cargo_test.rs\n"
   code: "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\n\
@@ -102,11 +105,12 @@ data:
   - src/slice/sa.rs
   - src/slice/sort.rs
   - src/tests.rs
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-02-22 13:56:00+09:00'
+  timestamp: '2021-03-14 05:03:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

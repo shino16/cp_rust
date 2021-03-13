@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -18,9 +21,6 @@ data:
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
   - icon: ':warning:'
-    path: src/fp/num.rs
-    title: src/fp/num.rs
-  - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
   - icon: ':warning:'
@@ -32,7 +32,7 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/edmonds_karp/edge.rs
     title: src/graph/max_flow/edmonds_karp/edge.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
   - icon: ':warning:'
@@ -72,17 +72,11 @@ data:
     path: src/math/pow.rs
     title: src/math/pow.rs
   - icon: ':warning:'
-    path: src/mint/num.rs
-    title: src/mint/num.rs
-  - icon: ':warning:'
     path: src/num/field.rs
     title: src/num/field.rs
   - icon: ':warning:'
     path: src/poly.rs
     title: src/poly.rs
-  - icon: ':warning:'
-    path: src/slice/cum.rs
-    title: src/slice/cum.rs
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
@@ -96,7 +90,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/edmonds_karp_test.rs
     title: test/src/bin/edmonds_karp_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
   - icon: ':heavy_check_mark:'
@@ -111,69 +105,62 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/num.rs\n"
-  code: "pub use crate::zo::ZeroOne;\nuse std::fmt::*;\nuse std::ops::*;\n\npub mod\
-    \ field;\n\npub trait Num:\n    ZeroOne\n    + Add<Output = Self>\n    + AddAssign\n\
-    \    + Sub<Output = Self>\n    + SubAssign\n    + Mul<Output = Self>\n    + MulAssign\n\
-    \    + Div<Output = Self>\n    + DivAssign\n    + Debug\n    + Display\n{\n  \
-    \  fn wrapping_add(self, rhs: Self) -> Self;\n    fn wrapping_neg(self) -> Self;\n\
-    }\n\npub trait INum: Num + Neg<Output = Self> {}\n\nmacro_rules! impl_num {\n\
-    \    ($($t:ty),*) => { $(\n        impl Num for $t {\n            fn wrapping_add(self,\
-    \ rhs: Self) -> Self {\n                self.wrapping_add(rhs)\n            }\n\
-    \            fn wrapping_neg(self) -> Self {\n                self.wrapping_neg()\n\
-    \            }\n        }\n    )* };\n}\n\nimpl_num!(i32, i64, i128, isize, u32,\
-    \ u64, u128, usize);\n\nimpl<T: Num + Neg<Output = Self>> INum for T {}\n"
+  code: "use crate::util::trait_alias::*;\npub use crate::zo::ZeroOne;\nuse std::fmt::*;\n\
+    use std::ops::*;\n\npub mod field;\n\ntrait_alias!(pub trait Num =\n    ZeroOne\n\
+    \    + Add<Output = Self> + AddAssign\n    + Sub<Output = Self> + SubAssign\n\
+    \    + Mul<Output = Self> + MulAssign\n    + Div<Output = Self> + DivAssign\n\
+    \    + Debug\n    + Display);\n\ntrait_alias!(pub trait INum = Num + Neg<Output\
+    \ = Self>);\n"
   dependsOn:
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/num.rs
   requiredBy:
-  - src/poly.rs
-  - src/slice/cum.rs
-  - src/dfa.rs
-  - src/alg/arith.rs
   - src/math/binom.rs
   - src/math/pow.rs
-  - src/num/field.rs
-  - src/mint/num.rs
-  - src/draft/fpacc64.rs
-  - src/ds/fenwick.rs
-  - src/int/inv.rs
-  - src/int/bisect.rs
-  - src/int/gcd/ext.rs
-  - src/int/gcd.rs
-  - src/int/arith.rs
-  - src/fp/num.rs
-  - src/tests.rs
-  - src/graph/euler_tour.rs
+  - src/int.rs
   - src/graph/dijkstra.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/hlpp.rs
-  - src/graph/max_flow/edmonds_karp.rs
   - src/graph/max_flow/ford_fulkerson.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/graph/max_flow/edmonds_karp.rs
   - src/graph/max_flow/hlpp/edge.rs
-  - src/int.rs
-  timestamp: '2021-02-13 20:22:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/euler_tour.rs
+  - src/num/field.rs
+  - src/draft/fpacc64.rs
+  - src/int/bisect.rs
+  - src/int/inv.rs
+  - src/int/gcd.rs
+  - src/int/gcd/ext.rs
+  - src/int/arith.rs
+  - src/alg/arith.rs
+  - src/poly.rs
+  - src/ds/fenwick.rs
+  - src/dfa.rs
+  - src/tests.rs
+  timestamp: '2021-02-24 00:44:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/src/bin/edmonds_karp_test.rs
-  - test/src/bin/ford_fulkerson_test.rs
-  - test/src/bin/segtree_beats_test.rs
-  - test/src/bin/tree_dfs_io_test.rs
-  - test/src/bin/hlpp_test.rs
-  - test/src/bin/cargo_test.rs
-  - test/src/bin/dfa_test.rs
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/cargo_test.rs
+  - test/src/bin/tree_dfs_io_test.rs
+  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/hlpp_test.rs
+  - test/src/bin/dfa_test.rs
+  - test/src/bin/ford_fulkerson_test.rs
 documentation_of: src/num.rs
 layout: document
 redirect_from:

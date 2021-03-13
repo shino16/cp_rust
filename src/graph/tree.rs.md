@@ -11,9 +11,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':warning:'
-    path: src/graph/tree/reroot.rs
-    title: src/graph/tree/reroot.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
@@ -22,16 +19,18 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree.rs\n"
   code: 'pub mod dfs;
 
     pub mod dfs_io;
 
-    pub mod reroot;
+    pub mod pruefer;
+
+    // pub mod reroot;
 
     pub use super::*;
 
@@ -41,10 +40,9 @@ data:
   isVerificationFile: false
   path: src/graph/tree.rs
   requiredBy:
-  - src/graph/tree/reroot.rs
   - src/graph/tree/dfs.rs
   - src/graph/tree/dfs_io.rs
-  timestamp: '2021-02-13 16:52:06+09:00'
+  timestamp: '2021-03-14 02:25:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

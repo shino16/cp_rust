@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/lib.rs
     title: src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -14,9 +14,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint/io.rs
     title: src/mint/io.rs
-  - icon: ':warning:'
-    path: src/mint/num.rs
-    title: src/mint/num.rs
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
@@ -40,26 +37,26 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/mint.rs\n"
   code: "pub use crate::def_mod;\npub use crate::zo::ZeroOne;\nuse std::marker::PhantomData;\n\
-    use std::{fmt, iter, ops};\n\npub mod conv;\npub mod io;\npub mod num;\n\npub\
-    \ trait Mod: Default + Clone + Copy + PartialEq + Eq {\n    const M: u32;\n  \
-    \  const PHI: u32;\n}\n\n#[macro_export]\nmacro_rules! def_mod {\n    ($name:ident,\
-    \ $modulus:expr) => {\n        def_mod!($name, $modulus, $modulus - 1);\n    };\n\
-    \    ($name:ident, $modulus:expr, $phi:expr) => {\n        #[derive(Default, Clone,\
-    \ Copy, PartialEq, Eq, Debug)]\n        pub struct $name;\n        impl Mod for\
-    \ $name {\n            const M: u32 = $modulus;\n            const PHI: u32 =\
-    \ $phi;\n        }\n    };\n}\n\ndef_mod!(ModA, 1_000_000_007);\ndef_mod!(ModB,\
-    \ 998_244_353);\ndef_mod!(ModC, 1_012_924_417);\ndef_mod!(ModD, 924_844_033);\n\
-    \n#[derive(Default, Clone, Copy, PartialEq, Eq)]\npub struct Mint<M: Mod> {\n\
-    \    pub val: u32,\n    _m: PhantomData<M>,\n}\n\npub type MintA = Mint<ModA>;\n\
-    pub type MintB = Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\n\
-    pub type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n\
-    \    pub const M: u32 = M::M;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
+    use std::{fmt, iter, ops};\n\npub mod conv;\npub mod io;\n\npub trait Mod: Default\
+    \ + Clone + Copy + PartialEq + Eq {\n    const M: u32;\n    const PHI: u32;\n\
+    }\n\n#[macro_export]\nmacro_rules! def_mod {\n    ($name:ident, $modulus:expr)\
+    \ => {\n        def_mod!($name, $modulus, $modulus - 1);\n    };\n    ($name:ident,\
+    \ $modulus:expr, $phi:expr) => {\n        #[derive(Default, Clone, Copy, PartialEq,\
+    \ Eq, Debug)]\n        pub struct $name;\n        impl Mod for $name {\n     \
+    \       const M: u32 = $modulus;\n            const PHI: u32 = $phi;\n       \
+    \ }\n    };\n}\n\ndef_mod!(ModA, 1_000_000_007);\ndef_mod!(ModB, 998_244_353);\n\
+    def_mod!(ModC, 1_012_924_417);\ndef_mod!(ModD, 924_844_033);\n\n#[derive(Default,\
+    \ Clone, Copy, PartialEq, Eq)]\npub struct Mint<M: Mod> {\n    pub val: u32,\n\
+    \    _m: PhantomData<M>,\n}\n\npub type MintA = Mint<ModA>;\npub type MintB =\
+    \ Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\npub\
+    \ type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n \
+    \   pub const M: u32 = M::M;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
     \ as i64) as u32) }\n    pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData\
     \ } }\n    pub fn value(self) -> u32 { self.val }\n    pub fn pow(self, mut exp:\
     \ u32) -> Self {\n        if self.val == 0 && exp == 0 {\n            return Self::from_val(1);\n\
@@ -71,17 +68,17 @@ data:
     \ => { $(\n        impl<M: Mod> From<$t> for Mint<M> {\n            fn from(x:\
     \ $t) -> Self { Self::from_val((x as $via).rem_euclid(M::M as $via) as u32) }\n\
     \        }\n    )* };\n}\nimpl_from_int! {\n    (i8: i32), (i16: i32), (i32: i32),\
-    \ (i64: i64),\n    (u8: u32), (u16: u32), (u32: u32), (u64: u64),\n}\n\nimpl<M:\
-    \ Mod, T: Into<Mint<M>>> ops::Add<T> for Mint<M> {\n    type Output = Self;\n\
-    \    fn add(mut self, rhs: T) -> Self { self += rhs; self }\n}\nimpl<M: Mod, T:\
-    \ Into<Mint<M>>> ops::AddAssign<T> for Mint<M> {\n    fn add_assign(&mut self,\
-    \ rhs: T) {\n        self.val += rhs.into().val;\n        if self.val >= M::M\
-    \ { self.val -= M::M; }\n    }\n}\nimpl<M: Mod> ops::Neg for Mint<M> {\n    type\
-    \ Output = Self;\n    fn neg(self) -> Self { Mint::from_val(if self.val == 0 {\
-    \ 0 } else { M::M - self.val }) }\n}\nimpl<M: Mod, T: Into<Mint<M>>> ops::Sub<T>\
-    \ for Mint<M> {\n    type Output = Self;\n    fn sub(mut self, rhs: T) -> Self\
-    \ { self -= rhs; self }\n}\nimpl<M: Mod, T: Into<Mint<M>>> ops::SubAssign<T> for\
-    \ Mint<M> {\n    fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n\
+    \ (i64: i64), (isize: i64),\n    (u8: u32), (u16: u32), (u32: u32), (u64: u64),\
+    \ (usize: u64),\n}\n\nimpl<M: Mod, T: Into<Mint<M>>> ops::Add<T> for Mint<M> {\n\
+    \    type Output = Self;\n    fn add(mut self, rhs: T) -> Self { self += rhs;\
+    \ self }\n}\nimpl<M: Mod, T: Into<Mint<M>>> ops::AddAssign<T> for Mint<M> {\n\
+    \    fn add_assign(&mut self, rhs: T) {\n        self.val += rhs.into().val;\n\
+    \        if self.val >= M::M { self.val -= M::M; }\n    }\n}\nimpl<M: Mod> ops::Neg\
+    \ for Mint<M> {\n    type Output = Self;\n    fn neg(self) -> Self { Mint::from_val(if\
+    \ self.val == 0 { 0 } else { M::M - self.val }) }\n}\nimpl<M: Mod, T: Into<Mint<M>>>\
+    \ ops::Sub<T> for Mint<M> {\n    type Output = Self;\n    fn sub(mut self, rhs:\
+    \ T) -> Self { self -= rhs; self }\n}\nimpl<M: Mod, T: Into<Mint<M>>> ops::SubAssign<T>\
+    \ for Mint<M> {\n    fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n\
     \        if self.val < rhs.val { self.val += M::M; }\n        self.val -= rhs.val;\n\
     \    }\n}\nimpl<M: Mod, T: Into<Mint<M>>> ops::Mul<T> for Mint<M> {\n    type\
     \ Output = Self;\n    fn mul(self, rhs: T) -> Self {\n        let val = self.val\
@@ -107,18 +104,17 @@ data:
   isVerificationFile: false
   path: src/mint.rs
   requiredBy:
+  - src/tests.rs
   - src/mint/conv.rs
   - src/mint/io.rs
-  - src/mint/num.rs
-  - src/tests.rs
-  timestamp: '2021-02-22 02:21:06+09:00'
+  timestamp: '2021-03-06 13:39:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/cargo_test.rs
+  - test/src/bin/ntt_mint_test.rs
   - test/src/bin/dfa_test.rs
-  - test/src/bin/lazy_segtree_test.rs
 documentation_of: src/mint.rs
 layout: document
 redirect_from:

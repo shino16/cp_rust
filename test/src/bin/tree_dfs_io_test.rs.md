@@ -19,13 +19,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/graph/tree/dfs_io.rs
     title: src/graph/tree/dfs_io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -35,9 +38,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/778
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/tree_dfs_io_test.rs\n"
   code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/778\n\n\
@@ -58,11 +61,12 @@ data:
   - src/graph/tree/dfs_io.rs
   - src/io.rs
   - src/num.rs
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-02-20 14:04:23+09:00'
+  timestamp: '2021-03-14 02:25:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs

@@ -6,6 +6,9 @@ data:
     path: src/ds/pool.rs
     title: src/ds/pool.rs
   - icon: ':heavy_check_mark:'
+    path: src/ds/uvec.rs
+    title: src/ds/uvec.rs
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':warning:'
@@ -15,16 +18,22 @@ data:
     path: src/stdio/buf.rs
     title: src/stdio/buf.rs
   - icon: ':warning:'
+    path: src/util/assign_vec.rs
+    title: src/util/assign_vec.rs
+  - icon: ':warning:'
     path: src/util/for_loop.rs
     title: src/util/for_loop.rs
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/lib.rs\n"
   code: "pub mod alg;\npub mod assign;\npub mod bits;\npub mod bool;\npub mod bounded;\n\
@@ -34,27 +43,25 @@ data:
     \ mod make_vec;\npub mod math;\npub mod mint;\npub mod num;\npub mod poly;\npub\
     \ mod rand;\npub mod slice;\npub mod stdio;\npub mod u64;\npub mod util;\npub\
     \ mod vec;\npub mod zo;\n\npub mod tests;\n\n#[cfg(debug_assertions)]\n#[macro_export]\n\
-    macro_rules! dbg {\n    () => {\n        std::eprintln!(\"[{}:{}]\", std::file!(),\
-    \ std::line!());\n    };\n    ($val:expr) => {\n        // Use of `match` here\
-    \ is intentional because it affects the lifetimes\n        // of temporaries -\
-    \ https://stackoverflow.com/a/48732525/1063961\n        match $val {\n       \
-    \     tmp => {\n                std::eprintln!(\"[{}:{}] {} = {:?}\",\n      \
-    \              std::file!(), std::line!(), std::stringify!($val), &tmp);\n   \
-    \             tmp\n            }\n        }\n    };\n    // Trailing comma with\
-    \ single argument is ignored\n    ($val:expr,) => { dbg!($val) };\n    ($($val:expr),+\
-    \ $(,)?) => {\n        ($(dbg!($val)),+,)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
-    #[macro_export]\nmacro_rules! dbg {\n    ($($x:expr),*) => { std::convert::identity(($($x),*))\
+    macro_rules! dbg {\n    ($($val:expr),* $(,)?) => {\n        ($( match $val {\n\
+    \            tmp => {\n                std::eprintln!(\"[{}:{}] {} = {:?}\",\n\
+    \                    std::file!(), std::line!(), std::stringify!($val), &tmp);\n\
+    \                tmp\n            }\n        } ),*)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
+    #[macro_export]\nmacro_rules! dbg {\n    ($($x:expr),*) => { let _ = ($($x),*);\
     \ }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/lib.rs
   requiredBy:
-  - src/stdio/buf.rs
-  - src/mint.rs
-  - src/ds/pool.rs
-  - src/util/for_loop.rs
   - src/stdio.rs
-  timestamp: '2021-02-22 02:21:06+09:00'
+  - src/util/assign_vec.rs
+  - src/util/for_loop.rs
+  - src/util/trait_alias.rs
+  - src/ds/pool.rs
+  - src/ds/uvec.rs
+  - src/mint.rs
+  - src/stdio/buf.rs
+  timestamp: '2021-03-06 13:39:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

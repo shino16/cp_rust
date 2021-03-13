@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
   - icon: ':heavy_check_mark:'
@@ -13,9 +13,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/dfs_io.rs\n"
   code: "pub use super::*;\nuse crate::ds::bitset::*;\n\n#[derive(Debug)]\npub enum\
@@ -23,18 +23,17 @@ data:
     \ Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {\n    fn dfs_impl<G:\
     \ Graph, F: FnMut(InOut, usize)>(\n        g: &G,\n        v: usize,\n       \
     \ par: usize,\n        visited: &mut [u32],\n        f: &mut F,\n    ) {\n   \
-    \     f(In(v), par);\n        g.adj(v, |w| {\n            if visited.modify_bit(w,\
-    \ true) {\n                dfs_impl(g, w, v, visited, f);\n            }\n   \
-    \     });\n        f(Out(v), par);\n    }\n    let mut visited = new_bitset(g.len());\n\
-    \    visited.set_bit(s, true);\n    dfs_impl(g, s, !0, &mut visited, &mut f);\n\
-    }\n"
+    \     f(In(v), par);\n        g.adj(v, |w| {\n            if visited.set_bit(w)\
+    \ {\n                dfs_impl(g, w, v, visited, f);\n            }\n        });\n\
+    \        f(Out(v), par);\n    }\n    let mut visited = new_bitset(g.len());\n\
+    \    visited.set_bit(s);\n    dfs_impl(g, s, !0, &mut visited, &mut f);\n}\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
   isVerificationFile: false
   path: src/graph/dfs_io.rs
   requiredBy: []
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-03-14 05:03:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs_io.rs

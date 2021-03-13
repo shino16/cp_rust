@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/edmonds_karp_test.rs
     title: test/src/bin/edmonds_karp_test.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
   - icon: ':heavy_check_mark:'
@@ -60,13 +60,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/union_find_test.rs
     title: test/src/bin/union_find_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/io.rs\n"
   code: "pub mod graph;\nuse std::io::{stdout, BufWriter, Read, StdoutLock, Write};\n\
@@ -140,28 +140,28 @@ data:
   isVerificationFile: false
   path: src/io.rs
   requiredBy:
-  - src/mint/io.rs
-  - src/draft/fpacc64.rs
-  - src/io/graph.rs
   - src/fp/io.rs
+  - src/io/graph.rs
   - src/graph/io.rs
+  - src/draft/fpacc64.rs
+  - src/mint/io.rs
   timestamp: '2021-02-15 17:55:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/src/bin/edmonds_karp_test.rs
-  - test/src/bin/segtree_test.rs
-  - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/ford_fulkerson_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/ntt_garner_test.rs
-  - test/src/bin/segtree_beats_test.rs
-  - test/src/bin/tree_dfs_io_test.rs
-  - test/src/bin/hlpp_test.rs
-  - test/src/bin/union_find_test.rs
-  - test/src/bin/swag_test.rs
-  - test/src/bin/ntt_test.rs
-  - test/src/bin/dfa_test.rs
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/swag_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
+  - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/segtree_test.rs
+  - test/src/bin/tree_dfs_io_test.rs
+  - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/hlpp_test.rs
+  - test/src/bin/dfa_test.rs
+  - test/src/bin/ntt_test.rs
+  - test/src/bin/ntt_garner_test.rs
+  - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/union_find_test.rs
 documentation_of: src/io.rs
 layout: document
 redirect_from:

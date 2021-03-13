@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -55,7 +55,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/slice/sort.rs
     title: src/slice/sort.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/util/trait_alias.rs
+    title: src/util/trait_alias.rs
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -67,9 +70,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/tests.rs\n"
   code: "#[cfg(test)]\nmod tests {\n    mod fp {\n        use crate::fp::*;\n    \
@@ -102,7 +105,7 @@ data:
     \    #[test]\n            fn test_memo() {\n                const MOD: u32 = 1_000_000_007;\n\
     \                let mut fib = vec![1, 1];\n                for i in 2..=1000\
     \ {\n                    let a = fib[i - 1] + fib[i - 2];\n                  \
-    \  fib.push(a % MOD);\n                }\n                let rhs = memo(|fib,\
+    \  fib.push(a % MOD);\n                }\n                let rhs = memoize(|fib,\
     \ n| {\n                    if n <= 1 {\n                        1\n         \
     \           } else {\n                        (fib(n - 1) + fib(n - 2)) % MOD\n\
     \                    }\n                })\n                .call(1000);\n   \
@@ -176,11 +179,12 @@ data:
   - src/slice/perm.rs
   - src/slice/sa.rs
   - src/slice/sort.rs
+  - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-02-22 13:56:00+09:00'
+  timestamp: '2021-03-14 05:03:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
