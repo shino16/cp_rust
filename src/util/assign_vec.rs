@@ -1,9 +1,12 @@
-pub use crate::assign_vec;
+pub trait Assign {
+    type Item: Clone;
+    fn assign(&mut self, e: Self::Item, len: usize);
+}
 
-#[macro_export]
-macro_rules! assign_vec {
-    ($var:ident, [ $e:expr; $len:expr ]) => {
-        $var.clear();
-        $var.extend((0..$len).map(|_| $e.clone()));
+impl<T: Clone> Assign for Vec<T> {
+    type Item = T;
+    fn assign(&mut self, e: T, len: usize) {
+        self.clear();
+        self.extend((0..len).map(|_| e.clone()));
     }
 }
