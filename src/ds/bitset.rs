@@ -2,7 +2,7 @@ pub trait BitSet {
     fn get_bit(&self, i: usize) -> bool;
     fn set_bit(&mut self, i: usize) -> bool;
     fn negate(&mut self);
-    fn clear(&mut self);
+    fn reset(&mut self);
 }
 
 macro_rules! impl_bitset {
@@ -19,7 +19,7 @@ macro_rules! impl_bitset {
             fn negate(&mut self) {
                 *self = !*self;
             }
-            fn clear(&mut self) {
+            fn reset(&mut self) {
                 *self = 0;
             }
         }
@@ -40,9 +40,9 @@ impl BitSet for [u32] {
             x.negate()
         }
     }
-    fn clear(&mut self) {
+    fn reset(&mut self) {
         for x in self {
-            x.clear();
+            x.reset();
         }
     }
 }

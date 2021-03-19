@@ -48,7 +48,7 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         let mut res = C::ZERO;
         let mut used = new_bitset(self.graph.len());
         loop {
-            used.clear();
+            used.reset();
             let f = self.dfs(s, t, &mut used, C::MAX);
             if f == C::ZERO {
                 return res;
