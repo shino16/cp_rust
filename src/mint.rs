@@ -1,6 +1,7 @@
 pub use crate::def_mod;
 pub use crate::zo::ZeroOne;
 use std::marker::PhantomData;
+use std::str::FromStr;
 use std::{fmt, iter, ops};
 
 pub mod conv;
@@ -56,7 +57,9 @@ impl<M: Mod> Mint<M> {
         let mut b = self;
         let mut res = Self::from_val(1);
         while exp != 0 {
-            if exp % 2 == 1 { res *= b; }
+            if exp % 2 == 1 {
+                res *= b;
+            }
             b *= b;
             exp >>= 1;
         }
@@ -80,26 +83,38 @@ impl_from_int! {
 
 impl<M: Mod, T: Into<Mint<M>>> ops::Add<T> for Mint<M> {
     type Output = Self;
-    fn add(mut self, rhs: T) -> Self { self += rhs; self }
+    fn add(mut self, rhs: T) -> Self {
+        self += rhs;
+        self
+    }
 }
 impl<M: Mod, T: Into<Mint<M>>> ops::AddAssign<T> for Mint<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
-        if self.val >= M::M { self.val -= M::M; }
+        if self.val >= M::M {
+            self.val -= M::M;
+        }
     }
 }
 impl<M: Mod> ops::Neg for Mint<M> {
     type Output = Self;
-    fn neg(self) -> Self { Mint::from_val(if self.val == 0 { 0 } else { M::M - self.val }) }
+    fn neg(self) -> Self {
+        Mint::from_val(if self.val == 0 { 0 } else { M::M - self.val })
+    }
 }
 impl<M: Mod, T: Into<Mint<M>>> ops::Sub<T> for Mint<M> {
     type Output = Self;
-    fn sub(mut self, rhs: T) -> Self { self -= rhs; self }
+    fn sub(mut self, rhs: T) -> Self {
+        self -= rhs;
+        self
+    }
 }
 impl<M: Mod, T: Into<Mint<M>>> ops::SubAssign<T> for Mint<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
-        if self.val < rhs.val { self.val += M::M; }
+        if self.val < rhs.val {
+            self.val += M::M;
+        }
         self.val -= rhs.val;
     }
 }
@@ -115,13 +130,18 @@ impl<M: Mod, T: Into<Mint<M>>> ops::MulAssign<T> for Mint<M> {
 }
 impl<M: Mod, T: Into<Mint<M>>> ops::Div<T> for Mint<M> {
     type Output = Self;
-    fn div(mut self, rhs: T) -> Self { self /= rhs; self }
+    fn div(mut self, rhs: T) -> Self {
+        self /= rhs;
+        self
+    }
 }
 impl<M: Mod, T: Into<Mint<M>>> ops::DivAssign<T> for Mint<M> {
     fn div_assign(&mut self, rhs: T) { *self *= rhs.into().pow(M::PHI - 1); }
 }
 impl<M: Mod> iter::Sum for Mint<M> {
-    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::from_val(0), |b, x| b + x) }
+    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {
+        iter.fold(Self::from_val(0), |b, x| b + x)
+    }
 }
 impl<M: Mod> iter::Product for Mint<M> {
     fn product<I: Iterator<Item = Self>>(iter: I) -> Self {
@@ -133,6 +153,10 @@ impl<M: Mod> fmt::Debug for Mint<M> {
 }
 impl<M: Mod> fmt::Display for Mint<M> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
+}
+impl<M: Mod> FromStr for Mint<M> {
+    type Err = <u32 as FromStr>::Err;
+    fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::from) }
 }
 impl<M: Mod> ZeroOne for Mint<M> {
     const ZERO: Self = Self { val: 0, _m: PhantomData };
