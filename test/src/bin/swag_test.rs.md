@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/swag.rs
     title: src/ds/swag.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   _extendedRequiredBy: []

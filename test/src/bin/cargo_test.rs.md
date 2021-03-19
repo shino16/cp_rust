@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -58,10 +58,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-03-14 05:03:05+09:00'
+  timestamp: '2021-03-19 19:44:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

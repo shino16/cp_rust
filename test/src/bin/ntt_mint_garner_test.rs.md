@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
   - icon: ':heavy_check_mark:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint/io.rs
     title: src/mint/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -55,7 +55,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_mint_garner_test.rs
   requiredBy: []
-  timestamp: '2021-03-03 02:01:51+09:00'
+  timestamp: '2021-03-19 19:44:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_mint_garner_test.rs

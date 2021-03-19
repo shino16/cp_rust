@@ -13,13 +13,13 @@ data:
   - icon: ':warning:'
     path: src/graph/weighted.rs
     title: src/graph/weighted.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []

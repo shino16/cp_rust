@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -51,8 +51,8 @@ data:
   isVerificationFile: true
   path: test/src/bin/ford_fulkerson_test.rs
   requiredBy: []
-  timestamp: '2021-03-14 05:03:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-03-19 19:54:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ford_fulkerson_test.rs
 layout: document

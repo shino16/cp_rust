@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-03-03 02:01:51+09:00'
+  timestamp: '2021-03-19 19:44:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

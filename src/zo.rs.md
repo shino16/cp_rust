@@ -35,7 +35,7 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/edmonds_karp/edge.rs
     title: src/graph/max_flow/edmonds_karp/edge.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/ford_fulkerson.rs
     title: src/graph/max_flow/ford_fulkerson.rs
   - icon: ':warning:'
@@ -86,7 +86,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint/io.rs
     title: src/mint/io.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':warning:'
@@ -114,7 +114,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/edmonds_karp_test.rs
     title: test/src/bin/edmonds_karp_test.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
   - icon: ':heavy_check_mark:'
@@ -141,9 +141,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/tree_dfs_io_test.rs
     title: test/src/bin/tree_dfs_io_test.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -194,7 +194,7 @@ data:
   - src/num.rs
   - src/mint.rs
   timestamp: '2021-02-08 00:55:24+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/ntt_mint_garner_test.rs

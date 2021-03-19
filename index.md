@@ -25,7 +25,7 @@ data:
     - icon: ':warning:'
       path: src/bool.rs
       title: src/bool.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/bounded.rs
       title: src/bounded.rs
     - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/int.rs
       title: src/int.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/io.rs
       title: src/io.rs
     - icon: ':warning:'
@@ -88,7 +88,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/mint.rs
       title: src/mint.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/num.rs
       title: src/num.rs
     - icon: ':warning:'
@@ -118,7 +118,7 @@ data:
     - icon: ':warning:'
       path: src/vec.rs
       title: src/vec.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/zo.rs
       title: src/zo.rs
   - name: src/cmp
@@ -162,7 +162,7 @@ data:
       title: src/draft/linked_list/ptr.rs
   - name: src/ds
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/ds/bitset.rs
       title: src/ds/bitset.rs
     - icon: ':warning:'
@@ -289,7 +289,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/graph/max_flow/edmonds_karp.rs
       title: src/graph/max_flow/edmonds_karp.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/graph/max_flow/ford_fulkerson.rs
       title: src/graph/max_flow/ford_fulkerson.rs
     - icon: ':heavy_check_mark:'
@@ -468,7 +468,7 @@ data:
     - icon: ':warning:'
       path: src/util/for_loop.rs
       title: src/util/for_loop.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/util/trait_alias.rs
       title: src/util/trait_alias.rs
   verificationCategories:
@@ -483,7 +483,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/src/bin/edmonds_karp_test.rs
       title: test/src/bin/edmonds_karp_test.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/src/bin/ford_fulkerson_test.rs
       title: test/src/bin/ford_fulkerson_test.rs
     - icon: ':heavy_check_mark:'

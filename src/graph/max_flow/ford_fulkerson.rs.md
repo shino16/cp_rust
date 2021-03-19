@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -24,12 +24,12 @@ data:
     path: src/graph/max_flow/ford_fulkerson/edges.rs
     title: src/graph/max_flow/ford_fulkerson/edges.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/src/bin/ford_fulkerson_test.rs
     title: test/src/bin/ford_fulkerson_test.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -53,7 +53,7 @@ data:
     \ { to: w, cap, rev: widx });\n            self.graph[w].push(Edge { to: v, cap:\
     \ C::ZERO, rev: vidx });\n        }\n    }\n    pub fn solve(&mut self, s: usize,\
     \ t: usize) -> C {\n        let mut res = C::ZERO;\n        let mut used = new_bitset(self.graph.len());\n\
-    \        loop {\n            used.clear();\n            let f = self.dfs(s, t,\
+    \        loop {\n            used.reset();\n            let f = self.dfs(s, t,\
     \ &mut used, C::MAX);\n            if f == C::ZERO {\n                return res;\n\
     \            }\n            res += f;\n        }\n    }\n    pub fn min_cut(&self)\
     \ -> Vec<(usize, usize)> {\n        let mut res = Vec::new();\n        for v in\
@@ -80,8 +80,8 @@ data:
   requiredBy:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
-  timestamp: '2021-03-14 05:03:05+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-03-19 19:54:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ford_fulkerson_test.rs
 documentation_of: src/graph/max_flow/ford_fulkerson.rs

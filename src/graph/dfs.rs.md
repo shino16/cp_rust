@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/ds/bitset.rs
     title: src/ds/bitset.rs
   - icon: ':heavy_check_mark:'
@@ -39,7 +39,7 @@ data:
   path: src/graph/dfs.rs
   requiredBy:
   - src/graph/dfs/cmpnt.rs
-  timestamp: '2021-03-14 05:03:05+09:00'
+  timestamp: '2021-03-19 19:54:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs.rs

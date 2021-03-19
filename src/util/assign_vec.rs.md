@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: src/lib.rs
-    title: src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -15,14 +12,15 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/util/assign_vec.rs\n"
-  code: "pub use crate::assign_vec;\n\n#[macro_export]\nmacro_rules! assign_vec {\n\
-    \    ($var:ident, [ $($t:tt)* ]) => {\n        $var.clear();\n\n    }\n}"
-  dependsOn:
-  - src/lib.rs
+  code: "pub trait Assign {\n    type Item: Clone;\n    fn assign(&mut self, e: Self::Item,\
+    \ len: usize);\n}\n\nimpl<T: Clone> Assign for Vec<T> {\n    type Item = T;\n\
+    \    fn assign(&mut self, e: T, len: usize) {\n        self.clear();\n       \
+    \ self.extend((0..len).map(|_| e.clone()));\n    }\n}\n"
+  dependsOn: []
   isVerificationFile: false
   path: src/util/assign_vec.rs
   requiredBy: []
-  timestamp: '2021-03-06 13:39:22+09:00'
+  timestamp: '2021-03-19 19:57:04+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/util/assign_vec.rs

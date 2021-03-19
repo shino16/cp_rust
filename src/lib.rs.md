@@ -18,12 +18,9 @@ data:
     path: src/stdio/buf.rs
     title: src/stdio/buf.rs
   - icon: ':warning:'
-    path: src/util/assign_vec.rs
-    title: src/util/assign_vec.rs
-  - icon: ':warning:'
     path: src/util/for_loop.rs
     title: src/util/for_loop.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
   _extendedVerifiedWith: []
@@ -54,7 +51,6 @@ data:
   path: src/lib.rs
   requiredBy:
   - src/stdio.rs
-  - src/util/assign_vec.rs
   - src/util/for_loop.rs
   - src/util/trait_alias.rs
   - src/ds/pool.rs
