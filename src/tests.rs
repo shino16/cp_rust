@@ -46,7 +46,7 @@ mod tests {
                 let base: Mint17 = rng.next().into();
                 let k = rng.next() % 100;
                 let p = (0..k).map(|_| base).product::<Mint17>();
-                assert_eq!(p, base.pow(k as u32));
+                assert_eq!(p, base.pow(k as u64));
             }
         }
         #[test]

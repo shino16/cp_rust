@@ -50,7 +50,7 @@ impl<M: Mod> Mint<M> {
     pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M as i64) as u32) }
     pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData } }
     pub fn value(self) -> u32 { self.val }
-    pub fn pow(self, mut exp: u32) -> Self {
+    pub fn pow(self, mut exp: u64) -> Self {
         if self.val == 0 && exp == 0 {
             return Self::from_val(1);
         }
@@ -65,7 +65,7 @@ impl<M: Mod> Mint<M> {
         }
         res
     }
-    pub fn inv(self) -> Self { self.pow(M::PHI - 1) }
+    pub fn inv(self) -> Self { self.pow(M::PHI as u64 - 1) }
     pub fn modulus() -> u32 { M::M }
 }
 
@@ -136,7 +136,7 @@ impl<M: Mod, T: Into<Mint<M>>> ops::Div<T> for Mint<M> {
     }
 }
 impl<M: Mod, T: Into<Mint<M>>> ops::DivAssign<T> for Mint<M> {
-    fn div_assign(&mut self, rhs: T) { *self *= rhs.into().pow(M::PHI - 1); }
+    fn div_assign(&mut self, rhs: T) { *self *= rhs.into().pow(M::PHI as u64 - 1); }
 }
 impl<M: Mod> iter::Sum for Mint<M> {
     fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {

@@ -9,28 +9,12 @@ macro_rules! impl_ntt {
 
             type FpType = Mint<$modu>;
 
-            static mut ROOT: UVec<FpType> = UVec(Vec::new());
-            static mut INV_ROOT: UVec<FpType> = UVec(Vec::new());
-
-            /// reserve for n up to 2^k
-            pub fn reserve(k: usize) {
-                unsafe {
-                    if k <= ROOT.len() {
-                        return;
-                    }
-                    ROOT.resize(k, Default::default());
-                    INV_ROOT.resize(k, Default::default());
-                    let m = FpType::M - 1;
-                    let proot = FpType::from($prim);
-                    for i in 0..k {
-                        ROOT[i] = -proot.pow(m >> (i + 2));
-                        INV_ROOT[i] = ROOT[i].inv();
-                    }
-                }
-            }
-
             pub fn ntt(a: &mut UVec<FpType>) {
                 let n = a.len();
+                let r = FpType::new($prim);
+                let roots: Vec<_> = (0..n.trailing_zeros())
+                    .map(|i| -r.pow(((FpType::M - 1) >> (i + 2)) as u64))
+                    .collect();
                 let mut m = n >> 1;
                 while m != 0 {
                     let mut w = FpType::ONE;
@@ -41,7 +25,7 @@ macro_rules! impl_ntt {
                             a[i] = u + v;
                             a[i + m] = u - v;
                         }
-                        w *= unsafe { ROOT[t.trailing_zeros() as usize] };
+                        w *= roots[t.trailing_zeros() as usize];
                     }
                     m >>= 1;
                 }
@@ -49,6 +33,10 @@ macro_rules! impl_ntt {
 
             pub fn inv_ntt(a: &mut UVec<FpType>) {
                 let n = a.len();
+                let r = FpType::new($prim);
+                let inv_roots: Vec<_> = (0..n.trailing_zeros())
+                    .map(|i| -r.pow((FpType::M - 1 - ((FpType::M - 1) >> (i + 2))) as u64))
+                    .collect();
                 let mut m = 1;
                 while m < n {
                     let mut w = FpType::ONE;
@@ -59,7 +47,7 @@ macro_rules! impl_ntt {
                             a[i] = u + v;
                             a[i + m] = (u - v) * w;
                         }
-                        w *= unsafe { INV_ROOT[t.trailing_zeros() as usize] };
+                        w *= inv_roots[t.trailing_zeros() as usize];
                     }
                     m <<= 1;
                 }
@@ -73,7 +61,6 @@ macro_rules! impl_ntt {
                     std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros() - 1
                 }
                 let n: usize = 1 << ilog2(len * 2 - 1);
-                reserve(n.trailing_zeros() as usize);
                 a.resize(n, Default::default());
                 b.resize(n, Default::default());
                 ntt(a);
