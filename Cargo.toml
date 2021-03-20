@@ -8,10 +8,10 @@ publish = false
 default-run = "main"
 
 [dependencies]
-proconio = { version = "=0.3.6", features = ["derive"] }
+# proconio = { version = "=0.3.6", features = ["derive"] }
 
 [dev-dependencies]
-criterion = "0.3"
+# criterion = "0.3"
 
 [lib]
 name = "lib"
