@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: src/float/convex.rs
   requiredBy: []
-  timestamp: '2021-02-24 00:44:23+09:00'
+  timestamp: '2021-03-21 02:02:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/convex.rs

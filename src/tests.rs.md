@@ -1,74 +1,74 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bits.rs
     title: src/bits.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/func/memo.rs
     title: src/func/memo.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/iter/prod.rs
     title: src/iter/prod.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/slice/lcp.rs
     title: src/slice/lcp.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/slice/sa.rs
     title: src/slice/sa.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/slice/sort.rs
     title: src/slice/sort.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -95,7 +95,7 @@ data:
     \            use crate::rand::xoshiro256plus::*;\n            let mut rng = Xoshiro256plus::new();\n\
     \            for _ in 0..100 {\n                let base: Mint17 = rng.next().into();\n\
     \                let k = rng.next() % 100;\n                let p = (0..k).map(|_|\
-    \ base).product::<Mint17>();\n                assert_eq!(p, base.pow(k as u32));\n\
+    \ base).product::<Mint17>();\n                assert_eq!(p, base.pow(k as u64));\n\
     \            }\n        }\n        #[test]\n        fn test_inv() {\n        \
     \    use crate::rand::xoshiro256plus::*;\n            let mut rng = Xoshiro256plus::new();\n\
     \            for _ in 0..100 {\n                let a: Mint17 = rng.next().into();\n\
@@ -184,8 +184,8 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-03-19 19:44:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-03-22 00:48:45+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/src/bin/cargo_test.rs
 documentation_of: src/tests.rs

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/ds.rs
+    title: src/ds.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -15,25 +18,26 @@ data:
   code: "use std::ops::{Deref, DerefMut};\n\n#[repr(transparent)]\npub struct USlice<T>(pub\
     \ [T]);\n\nimpl<T> AsRef<USlice<T>> for [T] {\n    fn as_ref(&self) -> &USlice<T>\
     \ {\n        unsafe { &*(self as *const [T] as *const USlice<T>) }\n    }\n}\n\
-    \nimpl<T> AsMut<USlice<T>> for [T] {\n    fn as_mut(&mut self) -> &mut USlice<T>\
+    impl<T> AsMut<USlice<T>> for [T] {\n    fn as_mut(&mut self) -> &mut USlice<T>\
     \ {\n        unsafe { &mut *(self as *mut [T] as *mut USlice<T>) }\n    }\n}\n\
-    \nimpl<T> AsRef<[T]> for USlice<T> {\n    fn as_ref(&self) -> &[T] {\n       \
-    \ &self.0\n    }\n}\n\nimpl<T> AsMut<[T]> for USlice<T> {\n    fn as_mut(&mut\
-    \ self) -> &mut [T] {\n        &mut self.0\n    }\n}\n\nimpl<T> Deref for USlice<T>\
-    \ {\n    type Target = [T];\n    fn deref(&self) -> &Self::Target {\n        &self.0\n\
-    \    }\n}\n\nimpl<T> DerefMut for USlice<T> {\n    fn deref_mut(&mut self) ->\
-    \ &mut Self::Target {\n        &mut self.0\n    }\n}\n\n#[cfg(not(debug_assertions))]\n\
-    use std::ops::{Index, IndexMut};\n\n#[cfg(not(debug_assertions))]\nimpl<T> Index<usize>\
-    \ for USlice<T> {\n    type Output = T;\n    fn index(&self, index: usize) ->\
-    \ &Self::Output {\n        unsafe { self.0.get_unchecked(index) }\n    }\n}\n\n\
-    #[cfg(not(debug_assertions))]\nimpl<T> IndexMut<usize> for USlice<T> {\n    fn\
-    \ index_mut(&mut self, index: usize) -> &mut Self::Output {\n        unsafe {\
-    \ self.0.get_unchecked_mut(index) }\n    }\n}\n"
-  dependsOn: []
+    impl<T> AsRef<[T]> for USlice<T> { fn as_ref(&self) -> &[T] { &self.0 } }\nimpl<T>\
+    \ AsMut<[T]> for USlice<T> { fn as_mut(&mut self) -> &mut [T] { &mut self.0 }\
+    \ }\nimpl<T> Deref for USlice<T> {\n    type Target = [T];\n    fn deref(&self)\
+    \ -> &Self::Target { &self.0 }\n}\nimpl<T> DerefMut for USlice<T> {\n    fn deref_mut(&mut\
+    \ self) -> &mut Self::Target { &mut self.0 }\n}\n\n#[cfg(not(debug_assertions))]\n\
+    mod unchecked {\n    use super::*;\n    use std::ops::{Index, IndexMut};\n   \
+    \ use std::slice::SliceIndex;\n\n    impl<T, I: SliceIndex<[T]>> Index<I> for\
+    \ USlice<T> {\n        type Output = I::Output;\n        fn index(&self, index:\
+    \ I) -> &Self::Output {\n            unsafe { self.0.get_unchecked(index) }\n\
+    \        }\n    }\n    impl<T, I: SliceIndex<[T]>> IndexMut<I> for USlice<T> {\n\
+    \        fn index_mut(&mut self, index: I) -> &mut Self::Output {\n          \
+    \  unsafe { self.0.get_unchecked_mut(index) }\n        }\n    }\n}\n"
+  dependsOn:
+  - src/ds.rs
   isVerificationFile: false
   path: src/ds/uslice.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/uslice.rs

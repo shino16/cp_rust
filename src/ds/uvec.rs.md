@@ -45,8 +45,8 @@ data:
   code: "pub use crate::uvec;\nuse std::ops::{Deref, DerefMut};\n\n#[macro_export]\n\
     macro_rules! uvec {\n    ($($t:tt)*) => { UVec(vec![$($t)*]) };\n}\n\n#[derive(Clone)]\n\
     #[repr(transparent)]\npub struct UVec<T>(pub Vec<T>);\n\nimpl<T> UVec<T> { pub\
-    \ fn new() -> Self { Self(Vec::new()) } }\nimpl<T> AsRef<UVec<T>> for Vec<T> {\n\
-    \    fn as_ref(&self) -> &UVec<T> {\n        unsafe { &*(self as *const Vec<T>\
+    \ const fn new() -> Self { Self(Vec::new()) } }\nimpl<T> AsRef<UVec<T>> for Vec<T>\
+    \ {\n    fn as_ref(&self) -> &UVec<T> {\n        unsafe { &*(self as *const Vec<T>\
     \ as *const UVec<T>) }\n    }\n}\nimpl<T> AsMut<UVec<T>> for Vec<T> {\n    fn\
     \ as_mut(&mut self) -> &mut UVec<T> {\n        unsafe { &mut *(self as *mut Vec<T>\
     \ as *mut UVec<T>) }\n    }\n}\nimpl<T> AsRef<Vec<T>> for UVec<T> { fn as_ref(&self)\
@@ -71,7 +71,7 @@ data:
   - src/fp/conv.rs
   - src/ds/uvec2d.rs
   - src/mint/conv.rs
-  timestamp: '2021-03-06 13:39:22+09:00'
+  timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

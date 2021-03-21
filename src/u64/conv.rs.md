@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/fp.rs
     title: src/fp.rs
   - icon: ':heavy_check_mark:'
     path: src/fp/conv.rs
     title: src/fp/conv.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: src/u64/conv.rs
   requiredBy: []
-  timestamp: '2021-03-03 02:01:51+09:00'
+  timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/u64/conv.rs

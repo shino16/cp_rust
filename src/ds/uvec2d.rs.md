@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: src/ds/uvec2d.rs
   requiredBy: []
-  timestamp: '2021-03-03 02:01:51+09:00'
+  timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/uvec2d.rs

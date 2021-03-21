@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: src/draft/linked_list/ptr.rs
     title: src/draft/linked_list/ptr.rs
+  - icon: ':warning:'
+    path: src/ds/uslice.rs
+    title: src/ds/uslice.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
@@ -92,6 +95,7 @@ data:
   - src/draft/linked_list/iter.rs
   - src/ds/uvec.rs
   - src/ds/uvec2d.rs
+  - src/ds/uslice.rs
   - src/mint/conv.rs
   timestamp: '2021-02-09 16:24:56+09:00'
   verificationStatus: LIBRARY_ALL_AC

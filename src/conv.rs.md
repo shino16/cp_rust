@@ -38,7 +38,8 @@ data:
     RuntimeError: bundler is not specified: src/conv.rs\n"
   code: "pub trait Conv: Sized {\n    fn conv(mut lhs: Vec<Self>, mut rhs: Vec<Self>)\
     \ -> Vec<Self> {\n        Conv::conv_in_place(&mut lhs, &mut rhs);\n        lhs\n\
-    \    }\n    fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>);\n}\n"
+    \    }\n    /// results assigned in lhs\n    fn conv_in_place(lhs: &mut Vec<Self>,\
+    \ rhs: &mut Vec<Self>);\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/conv.rs
@@ -47,7 +48,7 @@ data:
   - src/fp/conv.rs
   - src/poly.rs
   - src/mint/conv.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

@@ -20,6 +20,8 @@ data:
     RuntimeError: bundler is not specified: src/float.rs\n"
   code: 'pub mod bisect;
 
+    pub mod conv;
+
     pub mod convex;
 
 
@@ -32,7 +34,7 @@ data:
   requiredBy:
   - src/float/convex.rs
   - src/float/bisect.rs
-  timestamp: '2020-12-10 17:35:58+09:00'
+  timestamp: '2021-03-21 02:02:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float.rs

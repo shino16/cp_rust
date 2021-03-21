@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: src/lib.rs
     title: src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy:
@@ -14,11 +14,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/mint/io.rs
     title: src/mint/io.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/tests.rs
     title: src/tests.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/src/bin/cargo_test.rs
     title: test/src/bin/cargo_test.rs
   - icon: ':heavy_check_mark:'
@@ -33,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ntt_mint_test.rs
     title: test/src/bin/ntt_mint_test.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -59,14 +59,14 @@ data:
     \    pub const M: u32 = M::M;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
     \ as i64) as u32) }\n    pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData\
     \ } }\n    pub fn value(self) -> u32 { self.val }\n    pub fn pow(self, mut exp:\
-    \ u32) -> Self {\n        if self.val == 0 && exp == 0 {\n            return Self::from_val(1);\n\
+    \ u64) -> Self {\n        if self.val == 0 && exp == 0 {\n            return Self::from_val(1);\n\
     \        }\n        let mut b = self;\n        let mut res = Self::from_val(1);\n\
     \        while exp != 0 {\n            if exp % 2 == 1 {\n                res\
     \ *= b;\n            }\n            b *= b;\n            exp >>= 1;\n        }\n\
-    \        res\n    }\n    pub fn inv(self) -> Self { self.pow(M::PHI - 1) }\n \
-    \   pub fn modulus() -> u32 { M::M }\n}\n\nmacro_rules! impl_from_int {\n    ($(($t:ty:\
-    \ $via:ty)),* $(,)?) => { $(\n        impl<M: Mod> From<$t> for Mint<M> {\n  \
-    \          fn from(x: $t) -> Self { Self::from_val((x as $via).rem_euclid(M::M\
+    \        res\n    }\n    pub fn inv(self) -> Self { self.pow(M::PHI as u64 - 1)\
+    \ }\n    pub fn modulus() -> u32 { M::M }\n}\n\nmacro_rules! impl_from_int {\n\
+    \    ($(($t:ty: $via:ty)),* $(,)?) => { $(\n        impl<M: Mod> From<$t> for\
+    \ Mint<M> {\n            fn from(x: $t) -> Self { Self::from_val((x as $via).rem_euclid(M::M\
     \ as $via) as u32) }\n        }\n    )* };\n}\nimpl_from_int! {\n    (i8: i32),\
     \ (i16: i32), (i32: i32), (i64: i64), (isize: i64),\n    (u8: u32), (u16: u32),\
     \ (u32: u32), (u64: u64), (usize: u64),\n}\n\nimpl<M: Mod, T: Into<Mint<M>>> ops::Add<T>\
@@ -90,18 +90,19 @@ data:
     \ T: Into<Mint<M>>> ops::Div<T> for Mint<M> {\n    type Output = Self;\n    fn\
     \ div(mut self, rhs: T) -> Self {\n        self /= rhs;\n        self\n    }\n\
     }\nimpl<M: Mod, T: Into<Mint<M>>> ops::DivAssign<T> for Mint<M> {\n    fn div_assign(&mut\
-    \ self, rhs: T) { *self *= rhs.into().pow(M::PHI - 1); }\n}\nimpl<M: Mod> iter::Sum\
-    \ for Mint<M> {\n    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {\n   \
-    \     iter.fold(Self::from_val(0), |b, x| b + x)\n    }\n}\nimpl<M: Mod> iter::Product\
-    \ for Mint<M> {\n    fn product<I: Iterator<Item = Self>>(iter: I) -> Self {\n\
-    \        iter.fold(Self::from_val(1), |b, x| b * x)\n    }\n}\nimpl<M: Mod> fmt::Debug\
-    \ for Mint<M> {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f)\
-    \ }\n}\nimpl<M: Mod> fmt::Display for Mint<M> {\n    fn fmt(&self, f: &mut fmt::Formatter)\
-    \ -> fmt::Result { self.val.fmt(f) }\n}\nimpl<M: Mod> FromStr for Mint<M> {\n\
-    \    type Err = <u32 as FromStr>::Err;\n    fn from_str(s: &str) -> Result<Self,\
-    \ Self::Err> { u32::from_str(s).map(Self::from) }\n}\nimpl<M: Mod> ZeroOne for\
-    \ Mint<M> {\n    const ZERO: Self = Self { val: 0, _m: PhantomData };\n    const\
-    \ ONE: Self = Self { val: 1, _m: PhantomData };\n}\n"
+    \ self, rhs: T) { *self *= rhs.into().pow(M::PHI as u64 - 1); }\n}\nimpl<M: Mod>\
+    \ iter::Sum for Mint<M> {\n    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self\
+    \ {\n        iter.fold(Self::from_val(0), |b, x| b + x)\n    }\n}\nimpl<M: Mod>\
+    \ iter::Product for Mint<M> {\n    fn product<I: Iterator<Item = Self>>(iter:\
+    \ I) -> Self {\n        iter.fold(Self::from_val(1), |b, x| b * x)\n    }\n}\n\
+    impl<M: Mod> fmt::Debug for Mint<M> {\n    fn fmt(&self, f: &mut fmt::Formatter)\
+    \ -> fmt::Result { self.val.fmt(f) }\n}\nimpl<M: Mod> fmt::Display for Mint<M>\
+    \ {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f)\
+    \ }\n}\nimpl<M: Mod> FromStr for Mint<M> {\n    type Err = <u32 as FromStr>::Err;\n\
+    \    fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::from)\
+    \ }\n}\nimpl<M: Mod> ZeroOne for Mint<M> {\n    const ZERO: Self = Self { val:\
+    \ 0, _m: PhantomData };\n    const ONE: Self = Self { val: 1, _m: PhantomData\
+    \ };\n}\n"
   dependsOn:
   - src/lib.rs
   - src/zo.rs
@@ -111,8 +112,8 @@ data:
   - src/tests.rs
   - src/mint/conv.rs
   - src/mint/io.rs
-  timestamp: '2021-03-19 19:44:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-03-22 00:48:45+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/ntt_mint_garner_test.rs
