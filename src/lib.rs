@@ -5,6 +5,7 @@ pub mod bool;
 pub mod bounded;
 pub mod cast;
 pub mod cmp;
+pub mod complex;
 pub mod conv;
 pub mod dfa;
 pub mod ds;
@@ -50,5 +51,5 @@ macro_rules! dbg {
 #[cfg(not(debug_assertions))]
 #[macro_export]
 macro_rules! dbg {
-    ($($x:expr),*) => { let _ = ($($x),*); }
+    ($($x:expr),*) => {};
 }

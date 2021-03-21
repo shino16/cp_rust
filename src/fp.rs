@@ -2,7 +2,7 @@
 
 pub use crate::zo::ZeroOne;
 use std::marker::PhantomData;
-use std::{cmp, fmt, iter, ops};
+use std::{cmp, fmt, iter, ops::*};
 
 pub mod conv;
 pub mod io;
@@ -111,32 +111,32 @@ impl<M: Mod> cmp::PartialEq for Fp<M> {
     }
 }
 impl<M: Mod> cmp::Eq for Fp<M> {}
-impl<M: Mod, T: Into<Fp<M>>> ops::AddAssign<T> for Fp<M> {
+impl<M: Mod, T: Into<Fp<M>>> AddAssign<T> for Fp<M> {
     fn add_assign(&mut self, rhs: T) {
         self.val += rhs.into().val;
         if self.val >= M::P * 2 { self.val -= M::P * 2; }
     }
 }
-impl<M: Mod, T: Into<Fp<M>>> ops::SubAssign<T> for Fp<M> {
+impl<M: Mod, T: Into<Fp<M>>> SubAssign<T> for Fp<M> {
     fn sub_assign(&mut self, rhs: T) {
         let rhs = rhs.into();
         if self.val < rhs.val { self.val += M::P * 2; }
         self.val -= rhs.val;
     }
 }
-impl<M: Mod, T: Into<Fp<M>>> ops::MulAssign<T> for Fp<M> {
+impl<M: Mod, T: Into<Fp<M>>> MulAssign<T> for Fp<M> {
     fn mul_assign(&mut self, rhs: T) {
         self.val = reduce::<M>(self.val as u64 * rhs.into().val as u64);
     }
 }
-impl<M: Mod, T: Into<Fp<M>>> ops::DivAssign<T> for Fp<M> {
+impl<M: Mod, T: Into<Fp<M>>> DivAssign<T> for Fp<M> {
     fn div_assign(&mut self, rhs: T) { *self *= rhs.into().inv(); }
 }
 macro_rules! impl_binop {
     ($(($Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),*) => { $(
-        impl<M: Mod, T: Into<Fp<M>>> ops::$Op<T> for Fp<M> {
+        impl<M: Mod, T: Into<Fp<M>>> $Op<T> for Fp<M> {
             type Output = Self;
-            fn $op(mut self, rhs: T) -> Self { ops::$OpAssign::$op_assign(&mut self, rhs); self }
+            fn $op(mut self, rhs: T) -> Self { self.$op_assign(rhs); self }
         }
     )* };
 }
@@ -146,7 +146,7 @@ impl_binop!(
     (Mul, mul, MulAssign, mul_assign),
     (Div, div, DivAssign, div_assign)
 );
-impl<M: Mod> ops::Neg for Fp<M> {
+impl<M: Mod> Neg for Fp<M> {
     type Output = Self;
     fn neg(self) -> Self { Fp::from_raw(M::P * 2 - self.val) }
 }

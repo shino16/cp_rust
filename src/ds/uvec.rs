@@ -10,7 +10,7 @@ macro_rules! uvec {
 #[repr(transparent)]
 pub struct UVec<T>(pub Vec<T>);
 
-impl<T> UVec<T> { pub fn new() -> Self { Self(Vec::new()) } }
+impl<T> UVec<T> { pub const fn new() -> Self { Self(Vec::new()) } }
 impl<T> AsRef<UVec<T>> for Vec<T> {
     fn as_ref(&self) -> &UVec<T> {
         unsafe { &*(self as *const Vec<T> as *const UVec<T>) }

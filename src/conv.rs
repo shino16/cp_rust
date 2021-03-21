@@ -3,5 +3,6 @@ pub trait Conv: Sized {
         Conv::conv_in_place(&mut lhs, &mut rhs);
         lhs
     }
+    /// results assigned in lhs
     fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>);
 }

@@ -1,4 +1,4 @@
-pub trait ZeroOne: Copy + Eq {
+pub trait ZeroOne: Copy + PartialEq {
     const ZERO: Self;
     fn is_zero(self) -> bool {
         self == Self::ZERO
@@ -16,3 +16,8 @@ macro_rules! impl_zo {
 }
 
 impl_zo!(i32, i64, i128, isize, u32, u64, u128, usize);
+
+impl ZeroOne for f64 {
+    const ZERO: Self = 0.0;
+    const ONE: Self = 1.0;
+}
