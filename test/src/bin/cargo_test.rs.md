@@ -1,74 +1,74 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bits.rs
     title: src/bits.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/bounded.rs
     title: src/bounded.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/cast.rs
     title: src/cast.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/fp.rs
     title: src/fp.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/func/memo.rs
     title: src/func/memo.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/iter.rs
     title: src/iter.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/iter/prod.rs
     title: src/iter/prod.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/make_vec.rs
     title: src/make_vec.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/slice/lcp.rs
     title: src/slice/lcp.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/slice/perm.rs
     title: src/slice/perm.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/slice/sa.rs
     title: src/slice/sa.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/slice/sort.rs
     title: src/slice/sort.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/tests.rs
     title: src/tests.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/util/trait_alias.rs
     title: src/util/trait_alias.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -111,7 +111,7 @@ data:
   path: test/src/bin/cargo_test.rs
   requiredBy: []
   timestamp: '2021-03-22 00:48:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs
 layout: document
