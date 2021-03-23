@@ -141,11 +141,10 @@ data:
     \ crate::rand::xoshiro256plus::*;\n                let mut rng = Xoshiro256plus::new();\n\
     \                let modu = rng.next() % 1000;\n                let len = rng.next()\
     \ as usize % 1000;\n                let mut v: Vec<_> = std::iter::repeat_with(||\
-    \ rng.next() % modu).take(len).collect();\n                v.extend_from_slice(&[0;\
-    \ 3]);\n                let mut sa = Vec::new();\n                suffix_array_impl(&v,\
-    \ &mut sa, modu as usize, |v| v as usize);\n                let mut ans: Vec<_>\
-    \ = (0..=len).collect();\n                ans.sort_unstable_by_key(|&i| &v[i..]);\n\
-    \                assert_eq!(sa, ans);\n                let lcp = lcp_impl(&v,\
+    \ rng.next() % modu + 1).take(len).collect();\n                let sa = suffix_array(&mut\
+    \ v, 0, modu + 1, |x| x as usize);\n                v.extend_from_slice(&[0; 3]);\n\
+    \                let mut ans: Vec<_> = (0..=len).collect();\n                ans.sort_unstable_by_key(|&i|\
+    \ &v[i..]);\n                assert_eq!(sa, ans);\n                let lcp = lcp_impl(&v,\
     \ &sa, |v| v as usize);\n                for ((&i, &j), lcp) in sa.iter().skip(1).zip(&sa).zip(lcp)\
     \ {\n                    assert_eq!(v[i..i + lcp], v[j..j + lcp]);\n         \
     \           if i.max(j) + lcp < len {\n                        assert_ne!(v[i..i\
@@ -184,7 +183,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-23 14:43:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs
