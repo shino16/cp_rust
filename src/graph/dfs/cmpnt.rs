@@ -1,5 +1,6 @@
 pub use super::*;
 
+/// dfs-ord
 pub fn components<G: Graph>(g: &G) -> Vec<Vec<usize>> {
     let mut visited = new_bitset(g.len());
     let mut groups = Vec::new();
