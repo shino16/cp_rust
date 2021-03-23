@@ -162,10 +162,9 @@ mod tests {
                 let mut rng = Xoshiro256plus::new();
                 let modu = rng.next() % 1000;
                 let len = rng.next() as usize % 1000;
-                let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu).take(len).collect();
+                let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu + 1).take(len).collect();
+                let sa = suffix_array(&mut v, 0, modu + 1, |x| x as usize);
                 v.extend_from_slice(&[0; 3]);
-                let mut sa = Vec::new();
-                suffix_array_impl(&v, &mut sa, modu as usize, |v| v as usize);
                 let mut ans: Vec<_> = (0..=len).collect();
                 ans.sort_unstable_by_key(|&i| &v[i..]);
                 assert_eq!(sa, ans);

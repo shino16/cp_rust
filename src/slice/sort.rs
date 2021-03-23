@@ -20,8 +20,7 @@ pub fn count_sort<T: Copy, F: FnMut(T) -> usize>(
     out.clear();
     out.reserve(slice.len());
     {
-        // this is safe
-        // refer to https://docs.rs/uninit/0.4.0/uninit/extension_traits/trait.VecCapacity.html#method.get_backing_buffer_with_leaking_writes
+        // SAFETY: https://docs.rs/uninit/0.4.0/uninit/extension_traits/trait.VecCapacity.html#method.get_backing_buffer_with_leaking_writes
         let out: &mut [MaybeUninit<T>] =
             unsafe { std::slice::from_raw_parts_mut(out.as_mut_ptr() as _, slice.len()) };
         for &e in slice.iter().rev() {
