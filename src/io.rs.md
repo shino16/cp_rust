@@ -6,8 +6,8 @@ data:
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
   - icon: ':warning:'
-    path: src/fp/io.rs
-    title: src/fp/io.rs
+    path: src/gf/io.rs
+    title: src/gf/io.rs
   - icon: ':warning:'
     path: src/graph/io.rs
     title: src/graph/io.rs
@@ -140,9 +140,9 @@ data:
   isVerificationFile: false
   path: src/io.rs
   requiredBy:
-  - src/fp/io.rs
   - src/io/graph.rs
   - src/graph/io.rs
+  - src/gf/io.rs
   - src/draft/fpacc64.rs
   - src/mint/io.rs
   timestamp: '2021-02-15 17:55:41+09:00'

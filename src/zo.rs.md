@@ -17,15 +17,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fp.rs
-    title: src/fp.rs
-  - icon: ':heavy_check_mark:'
-    path: src/fp/conv.rs
-    title: src/fp/conv.rs
   - icon: ':warning:'
-    path: src/fp/io.rs
-    title: src/fp/io.rs
+    path: src/float/conv.rs
+    title: src/float/conv.rs
+  - icon: ':heavy_check_mark:'
+    path: src/gf.rs
+    title: src/gf.rs
+  - icon: ':heavy_check_mark:'
+    path: src/gf/conv.rs
+    title: src/gf/conv.rs
+  - icon: ':warning:'
+    path: src/gf/io.rs
+    title: src/gf/io.rs
   - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
@@ -168,9 +171,8 @@ data:
   - src/math/binom.rs
   - src/math/pow.rs
   - src/complex.rs
+  - src/float/conv.rs
   - src/u64/conv.rs
-  - src/fp/conv.rs
-  - src/fp/io.rs
   - src/int.rs
   - src/graph/dijkstra.rs
   - src/graph/max_flow/edmonds_karp/edge.rs
@@ -182,8 +184,9 @@ data:
   - src/graph/max_flow/hlpp.rs
   - src/graph/euler_tour.rs
   - src/graph/weighted.rs
-  - src/fp.rs
   - src/num/field.rs
+  - src/gf/conv.rs
+  - src/gf/io.rs
   - src/draft/fpacc64.rs
   - src/int/bisect.rs
   - src/int/inv.rs
@@ -197,6 +200,7 @@ data:
   - src/tests.rs
   - src/mint/conv.rs
   - src/mint/io.rs
+  - src/gf.rs
   - src/num.rs
   - src/mint.rs
   timestamp: '2021-03-22 00:48:45+09:00'

@@ -35,33 +35,33 @@ data:
     RuntimeError: bundler is not specified: src/mint/conv.rs\n"
   code: "pub use super::*;\npub use crate::conv::*;\npub use crate::ds::uvec::*;\n\
     \nmacro_rules! impl_ntt {\n    ($module:ident, $modu:ty, $prim:expr) => {\n  \
-    \      pub mod $module {\n            use super::*;\n\n            type FpType\
-    \ = Mint<$modu>;\n\n            pub fn ntt(a: &mut UVec<FpType>) {\n         \
-    \       let n = a.len();\n                let r = FpType::new($prim);\n      \
+    \      pub mod $module {\n            use super::*;\n\n            type GfType\
+    \ = Mint<$modu>;\n\n            pub fn ntt(a: &mut UVec<GfType>) {\n         \
+    \       let n = a.len();\n                let r = GfType::new($prim);\n      \
     \          let roots: Vec<_> = (0..n.trailing_zeros())\n                    .map(|i|\
-    \ -r.pow(((FpType::M - 1) >> (i + 2)) as u64))\n                    .collect();\n\
+    \ -r.pow(((GfType::M - 1) >> (i + 2)) as u64))\n                    .collect();\n\
     \                let mut m = n >> 1;\n                while m != 0 {\n       \
-    \             let mut w = FpType::ONE;\n                    for (k, t) in (0..n).step_by(m\
+    \             let mut w = GfType::ONE;\n                    for (k, t) in (0..n).step_by(m\
     \ * 2).zip(1_u32..) {\n                        for i in k..k + m {\n         \
     \                   let u = a[i];\n                            let v = a[i + m]\
     \ * w;\n                            a[i] = u + v;\n                          \
     \  a[i + m] = u - v;\n                        }\n                        w *=\
     \ roots[t.trailing_zeros() as usize];\n                    }\n               \
     \     m >>= 1;\n                }\n            }\n\n            pub fn inv_ntt(a:\
-    \ &mut UVec<FpType>) {\n                let n = a.len();\n                let\
-    \ r = FpType::new($prim);\n                let inv_roots: Vec<_> = (0..n.trailing_zeros())\n\
-    \                    .map(|i| -r.pow((FpType::M - 1 - ((FpType::M - 1) >> (i +\
+    \ &mut UVec<GfType>) {\n                let n = a.len();\n                let\
+    \ r = GfType::new($prim);\n                let inv_roots: Vec<_> = (0..n.trailing_zeros())\n\
+    \                    .map(|i| -r.pow((GfType::M - 1 - ((GfType::M - 1) >> (i +\
     \ 2))) as u64))\n                    .collect();\n                let mut m =\
-    \ 1;\n                while m < n {\n                    let mut w = FpType::ONE;\n\
+    \ 1;\n                while m < n {\n                    let mut w = GfType::ONE;\n\
     \                    for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n    \
     \                    for i in k..k + m {\n                            let u =\
     \ a[i];\n                            let v = a[i + m];\n                     \
     \       a[i] = u + v;\n                            a[i + m] = (u - v) * w;\n \
     \                       }\n                        w *= inv_roots[t.trailing_zeros()\
     \ as usize];\n                    }\n                    m <<= 1;\n          \
-    \      }\n                let d = FpType::from(n as u32).inv();\n            \
+    \      }\n                let d = GfType::from(n as u32).inv();\n            \
     \    a.iter_mut().for_each(|e| *e *= d);\n            }\n\n            pub fn\
-    \ conv<'a, 'b>(a: &'a mut UVec<FpType>, b: &'b mut UVec<FpType>) {\n         \
+    \ conv<'a, 'b>(a: &'a mut UVec<GfType>, b: &'b mut UVec<GfType>) {\n         \
     \       let len = a.len() + b.len() - 1;\n                fn ilog2(n: usize) ->\
     \ u32 {\n                    std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros()\
     \ - 1\n                }\n                let n: usize = 1 << ilog2(len * 2 -\
@@ -69,7 +69,7 @@ data:
     \ Default::default());\n                ntt(a);\n                ntt(b);\n   \
     \             a.iter_mut().zip(b.iter()).for_each(|(a, b)| *a *= *b);\n      \
     \          b.clear();\n                inv_ntt(a);\n                a.truncate(len);\n\
-    \            }\n\n            impl Conv for FpType {\n                fn conv(mut\
+    \            }\n\n            impl Conv for GfType {\n                fn conv(mut\
     \ lhs: Vec<Self>, mut rhs: Vec<Self>) -> Vec<Self> {\n                    conv(lhs.as_mut(),\
     \ rhs.as_mut());\n                    lhs\n                }\n               \
     \ fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {\n             \
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-23 14:59:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

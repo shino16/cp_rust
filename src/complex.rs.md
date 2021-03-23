@@ -10,7 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/zo.rs
     title: src/zo.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/float/conv.rs
+    title: src/float/conv.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -58,7 +61,8 @@ data:
   - src/zo.rs
   isVerificationFile: false
   path: src/complex.rs
-  requiredBy: []
+  requiredBy:
+  - src/float/conv.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

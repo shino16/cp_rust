@@ -23,9 +23,12 @@ data:
   - icon: ':warning:'
     path: src/ds/uvec2d.rs
     title: src/ds/uvec2d.rs
+  - icon: ':warning:'
+    path: src/float/conv.rs
+    title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/fp/conv.rs
-    title: src/fp/conv.rs
+    path: src/gf/conv.rs
+    title: src/gf/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
@@ -87,8 +90,9 @@ data:
   isVerificationFile: false
   path: src/ds.rs
   requiredBy:
+  - src/float/conv.rs
   - src/u64/conv.rs
-  - src/fp/conv.rs
+  - src/gf/conv.rs
   - src/draft/linked_list.rs
   - src/draft/linked_list/inner_mut.rs
   - src/draft/linked_list/ptr.rs

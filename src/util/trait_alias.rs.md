@@ -21,6 +21,9 @@ data:
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
   - icon: ':warning:'
+    path: src/float/conv.rs
+    title: src/float/conv.rs
+  - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
   - icon: ':warning:'
@@ -128,6 +131,7 @@ data:
   - src/math/binom.rs
   - src/math/pow.rs
   - src/complex.rs
+  - src/float/conv.rs
   - src/int.rs
   - src/graph/dijkstra.rs
   - src/graph/max_flow/edmonds_karp/edge.rs
@@ -151,7 +155,7 @@ data:
   - src/dfa.rs
   - src/tests.rs
   - src/num.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-23 14:59:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

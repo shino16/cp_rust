@@ -11,11 +11,11 @@ data:
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
-    path: src/fp.rs
-    title: src/fp.rs
-  - icon: ':heavy_check_mark:'
     path: src/func/memo.rs
     title: src/func/memo.rs
+  - icon: ':heavy_check_mark:'
+    path: src/gf.rs
+    title: src/gf.rs
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
@@ -89,8 +89,8 @@ data:
   - src/bits.rs
   - src/bounded.rs
   - src/cast.rs
-  - src/fp.rs
   - src/func/memo.rs
+  - src/gf.rs
   - src/int.rs
   - src/int/gcd.rs
   - src/iter.rs
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-03-23 14:43:17+09:00'
+  timestamp: '2021-03-23 14:59:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

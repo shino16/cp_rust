@@ -24,6 +24,9 @@ data:
     path: src/ds/fenwick.rs
     title: src/ds/fenwick.rs
   - icon: ':warning:'
+    path: src/float/conv.rs
+    title: src/float/conv.rs
+  - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
   - icon: ':warning:'
@@ -132,6 +135,7 @@ data:
   - src/math/binom.rs
   - src/math/pow.rs
   - src/complex.rs
+  - src/float/conv.rs
   - src/int.rs
   - src/graph/dijkstra.rs
   - src/graph/max_flow/edmonds_karp/edge.rs

@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/float/conv.rs
+    title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/fp/conv.rs
-    title: src/fp/conv.rs
+    path: src/gf/conv.rs
+    title: src/gf/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
@@ -44,8 +47,9 @@ data:
   isVerificationFile: false
   path: src/conv.rs
   requiredBy:
+  - src/float/conv.rs
   - src/u64/conv.rs
-  - src/fp/conv.rs
+  - src/gf/conv.rs
   - src/poly.rs
   - src/mint/conv.rs
   timestamp: '2021-03-22 00:48:45+09:00'
