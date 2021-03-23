@@ -10,7 +10,7 @@ pub mod conv;
 pub mod dfa;
 pub mod ds;
 pub mod float;
-pub mod fp;
+pub mod gf;
 pub mod func;
 pub mod fxhash;
 pub mod graph;

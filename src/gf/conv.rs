@@ -7,17 +7,17 @@ macro_rules! impl_ntt {
         pub mod $module {
             use super::*;
 
-            type FpType = Fp<$modu>;
+            type GfType = Gf<$modu>;
 
-            pub fn ntt(a: &mut UVec<FpType>) {
+            pub fn ntt(a: &mut UVec<GfType>) {
                 let n = a.len();
-                let r = FpType::new($prim);
+                let r = GfType::new($prim);
                 let roots: Vec<_> = (0..n.trailing_zeros())
-                    .map(|i| -r.pow(((FpType::P - 1) >> (i + 2)) as u64))
+                    .map(|i| -r.pow(((GfType::P - 1) >> (i + 2)) as u64))
                     .collect();
                 let mut m = n >> 1;
                 while m != 0 {
-                    let mut w = FpType::ONE;
+                    let mut w = GfType::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
                             let u = a[i];
@@ -31,15 +31,15 @@ macro_rules! impl_ntt {
                 }
             }
 
-            pub fn inv_ntt(a: &mut UVec<FpType>) {
+            pub fn inv_ntt(a: &mut UVec<GfType>) {
                 let n = a.len();
-                let r = FpType::new($prim);
+                let r = GfType::new($prim);
                 let inv_roots: Vec<_> = (0..n.trailing_zeros())
-                    .map(|i| -r.pow((FpType::P - 1 - ((FpType::P - 1) >> (i + 2))) as u64))
+                    .map(|i| -r.pow((GfType::P - 1 - ((GfType::P - 1) >> (i + 2))) as u64))
                     .collect();
                 let mut m = 1;
                 while m < n {
-                    let mut w = FpType::ONE;
+                    let mut w = GfType::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
                             let u = a[i];
@@ -51,11 +51,11 @@ macro_rules! impl_ntt {
                     }
                     m <<= 1;
                 }
-                let d = FpType::from(n as u32).inv();
+                let d = GfType::from(n as u32).inv();
                 a.iter_mut().for_each(|e| *e *= d);
             }
 
-            pub fn conv<'a, 'b>(a: &'a mut UVec<FpType>, b: &'b mut UVec<FpType>) {
+            pub fn conv<'a, 'b>(a: &'a mut UVec<GfType>, b: &'b mut UVec<GfType>) {
                 let len = a.len() + b.len() - 1;
                 fn ilog2(n: usize) -> u32 {
                     std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros() - 1
@@ -71,7 +71,7 @@ macro_rules! impl_ntt {
                 a.truncate(len);
             }
 
-            impl Conv for FpType {
+            impl Conv for GfType {
                 fn conv(mut lhs: Vec<Self>, mut rhs: Vec<Self>) -> Vec<Self> {
                     conv(lhs.as_mut(), rhs.as_mut());
                     lhs
@@ -88,30 +88,30 @@ impl_ntt!(impl_b, ModB, 3);
 impl_ntt!(impl_c, ModC, 5);
 impl_ntt!(impl_d, ModD, 5);
 
-impl Conv for F17 {
+impl Conv for Gf17 {
     fn conv_in_place(lhs: &mut Vec<Self>, rhs: &mut Vec<Self>) {
-        let r12 = FpC::from(FpB::P).inv();
-        let r13 = FpD::from(FpB::P).inv();
-        let r23 = FpD::from(FpC::P).inv();
-        fn run<M: Mod>(lhs: &[F17], rhs: &[F17]) -> Vec<Fp<M>>
+        let r12 = GfC::from(GfB::P).inv();
+        let r13 = GfD::from(GfB::P).inv();
+        let r23 = GfD::from(GfC::P).inv();
+        fn run<M: Mod>(lhs: &[Gf17], rhs: &[Gf17]) -> Vec<Gf<M>>
         where
-            Fp<M>: Conv,
+            Gf<M>: Conv,
         {
-            let lhs = lhs.iter().map(|&e| Fp::from(e.value())).collect();
-            let rhs = rhs.iter().map(|&e| Fp::from(e.value())).collect();
+            let lhs = lhs.iter().map(|&e| Gf::from(e.value())).collect();
+            let rhs = rhs.iter().map(|&e| Gf::from(e.value())).collect();
             Conv::conv(lhs, rhs)
         }
-        let v1: Vec<FpB> = run(lhs, rhs);
-        let v2: Vec<FpC> = run(lhs, rhs);
-        let v3: Vec<FpD> = run(lhs, rhs);
+        let v1: Vec<GfB> = run(lhs, rhs);
+        let v2: Vec<GfC> = run(lhs, rhs);
+        let v3: Vec<GfD> = run(lhs, rhs);
         lhs.resize(v1.len(), Default::default());
         for (((e0, e1), e2), e3) in lhs.iter_mut().zip(v1).zip(v2).zip(v3) {
             let x1 = e1;
             let x2 = (e2 - x1.value()) * r12;
             let x3 = ((e3 - x1.value()) * r13 - x2.value()) * r23;
-            let mut x = FpA::from(x1.value());
-            x += FpA::from(x2.value()) * FpB::P;
-            x += FpA::from(x3.value()) * FpB::P * FpC::P;
+            let mut x = GfA::from(x1.value());
+            x += GfA::from(x2.value()) * GfB::P;
+            x += GfA::from(x3.value()) * GfB::P * GfC::P;
             *e0 = x.value().into();
         }
     }
