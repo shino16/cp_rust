@@ -50,7 +50,13 @@ impl<T: Num> Div for Complex<T> {
         Self::new(
             self.re * rhs.re + self.im * rhs.im,
             self.im * rhs.re - self.re * rhs.im,
-        )
+        ) / (rhs.re * rhs.re + rhs.im * rhs.im)
+    }
+}
+impl<T: Num> Div<T> for Complex<T> {
+    type Output = Self;
+    fn div(self, rhs: T) -> Self::Output {
+        Self::new(self.re / rhs, self.im / rhs)
     }
 }
 
