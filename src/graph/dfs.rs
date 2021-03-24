@@ -1,7 +1,7 @@
 pub use super::*;
 use crate::ds::bitset::*;
 
-pub mod cmpnt;
+pub mod cpnts;
 
 /// f: (v, par)
 pub fn dfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize, mut f: F) {
