@@ -90,24 +90,24 @@ data:
   isVerificationFile: false
   path: src/ds.rs
   requiredBy:
-  - src/float/conv.rs
   - src/u64/conv.rs
-  - src/gf/conv.rs
   - src/draft/linked_list.rs
-  - src/draft/linked_list/inner_mut.rs
   - src/draft/linked_list/ptr.rs
   - src/draft/linked_list/iter.rs
-  - src/ds/uvec.rs
-  - src/ds/uvec2d.rs
-  - src/ds/uslice.rs
+  - src/draft/linked_list/inner_mut.rs
   - src/mint/conv.rs
+  - src/gf/conv.rs
+  - src/float/conv.rs
+  - src/ds/uslice.rs
+  - src/ds/uvec2d.rs
+  - src/ds/uvec.rs
   timestamp: '2021-02-09 16:24:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/ntt_test.rs
   - test/src/bin/ntt_garner_test.rs
+  - test/src/bin/ntt_test.rs
+  - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
 documentation_of: src/ds.rs
 layout: document
 redirect_from:

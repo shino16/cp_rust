@@ -75,21 +75,21 @@ data:
   requiredBy:
   - src/graph/euler_tour.rs
   - src/alg/arith.rs
-  - src/ds/sparsetable.rs
-  - src/ds/segtree.rs
   - src/ds/swag.rs
-  - src/ds/fenwick.rs
+  - src/ds/segtree.rs
   - src/ds/disjointst.rs
+  - src/ds/fenwick.rs
   - src/ds/segtree/beats.rs
   - src/ds/segtree/lazy.rs
+  - src/ds/sparsetable.rs
   timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/lazy_segtree_test.rs
-  - test/src/bin/swag_test.rs
-  - test/src/bin/segtree_beats_test.rs
-  - test/src/bin/segtree_test.rs
   - test/src/bin/tree_dfs_io_test.rs
+  - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/segtree_test.rs
+  - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/swag_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

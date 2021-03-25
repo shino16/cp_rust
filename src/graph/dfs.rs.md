@@ -9,8 +9,8 @@ data:
     title: src/graph.rs
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: src/graph/dfs/cmpnt.rs
-    title: src/graph/dfs/cmpnt.rs
+    path: src/graph/dfs/cpnts.rs
+    title: src/graph/dfs/cpnts.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -21,7 +21,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/dfs.rs\n"
-  code: "pub use super::*;\nuse crate::ds::bitset::*;\n\npub mod cmpnt;\n\n/// f:\
+  code: "pub use super::*;\nuse crate::ds::bitset::*;\n\npub mod cpnts;\n\n/// f:\
     \ (v, par)\npub fn dfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize, mut\
     \ f: F) {\n    let mut visited = new_bitset(g.len());\n    visited.set_bit(s);\n\
     \    _dfs_impl(g, s, !0, &mut visited, &mut f);\n}\n\npub fn dfs_ord_par<G: Graph>(g:\
@@ -38,8 +38,8 @@ data:
   isVerificationFile: false
   path: src/graph/dfs.rs
   requiredBy:
-  - src/graph/dfs/cmpnt.rs
-  timestamp: '2021-03-19 19:54:30+09:00'
+  - src/graph/dfs/cpnts.rs
+  timestamp: '2021-03-24 23:44:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs.rs

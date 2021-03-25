@@ -283,8 +283,8 @@ data:
   - name: src/graph/dfs
     pages:
     - icon: ':warning:'
-      path: src/graph/dfs/cmpnt.rs
-      title: src/graph/dfs/cmpnt.rs
+      path: src/graph/dfs/cpnts.rs
+      title: src/graph/dfs/cpnts.rs
   - name: src/graph/max_flow/edmonds_karp
     pages:
     - icon: ':warning:'
@@ -328,6 +328,11 @@ data:
     - icon: ':warning:'
       path: src/graph/tree/reroot.rs
       title: src/graph/tree/reroot.rs
+  - name: src/graph/weighted
+    pages:
+    - icon: ':warning:'
+      path: src/graph/weighted/dfs.rs
+      title: src/graph/weighted/dfs.rs
   - name: src/int
     pages:
     - icon: ':warning:'

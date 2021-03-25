@@ -102,8 +102,8 @@ data:
   timestamp: '2021-03-23 14:59:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
 documentation_of: src/mint/conv.rs
 layout: document
 redirect_from:

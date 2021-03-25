@@ -35,8 +35,8 @@ data:
   isVerificationFile: false
   path: src/float.rs
   requiredBy:
-  - src/float/convex.rs
   - src/float/bisect.rs
+  - src/float/convex.rs
   - src/float/conv.rs
   timestamp: '2021-03-21 02:02:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS

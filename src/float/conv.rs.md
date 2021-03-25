@@ -87,7 +87,7 @@ data:
   isVerificationFile: false
   path: src/float/conv.rs
   requiredBy: []
-  timestamp: '2021-03-23 14:59:53+09:00'
+  timestamp: '2021-03-24 22:49:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/conv.rs

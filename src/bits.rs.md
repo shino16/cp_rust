@@ -47,15 +47,15 @@ data:
   isVerificationFile: false
   path: src/bits.rs
   requiredBy:
-  - src/int/gcd.rs
-  - src/ds/sparsetable.rs
-  - src/ds/disjointst.rs
   - src/tests.rs
+  - src/ds/disjointst.rs
+  - src/ds/sparsetable.rs
+  - src/int/gcd.rs
   timestamp: '2021-02-24 00:44:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
+  - test/src/bin/segtree_beats_test.rs
 documentation_of: src/bits.rs
 layout: document
 redirect_from:

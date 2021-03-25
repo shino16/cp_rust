@@ -50,8 +50,8 @@ data:
   path: src/lib.rs
   requiredBy:
   - src/stdio.rs
-  - src/util/for_loop.rs
   - src/util/trait_alias.rs
+  - src/util/for_loop.rs
   - src/ds/pool.rs
   - src/ds/uvec.rs
   - src/mint.rs

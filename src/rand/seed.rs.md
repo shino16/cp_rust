@@ -42,8 +42,8 @@ data:
   isVerificationFile: false
   path: src/rand/seed.rs
   requiredBy:
-  - src/tests.rs
   - src/rand/xoshiro256plus.rs
+  - src/tests.rs
   timestamp: '2021-03-14 05:03:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -44,17 +44,19 @@ data:
     \ rhs) }\n}\nimpl<T: Num> Div for Complex<T> {\n    type Output = Self;\n    fn\
     \ div(self, rhs: Self) -> Self::Output {\n        Self::new(\n            self.re\
     \ * rhs.re + self.im * rhs.im,\n            self.im * rhs.re - self.re * rhs.im,\n\
-    \        )\n    }\n}\n\nmacro_rules! impl_op_assign {\n    ($(($Op:ident, $op:ident,\
-    \ $OpAssign:ident, $op_assign:ident)),*) => { $(\n        impl<T: Num> $OpAssign\
-    \ for Complex<T> {\n            fn $op_assign(&mut self, rhs: Self) {\n      \
-    \          let x = Self::$op(unsafe { std::ptr::read(self) }, rhs);\n        \
-    \        *self = x;\n            }\n        }\n    )* };\n}\n\nimpl_op_assign!(\n\
-    \    (Add, add, AddAssign, add_assign),\n    (Sub, sub, SubAssign, sub_assign),\n\
-    \    (Mul, mul, MulAssign, mul_assign),\n    (Div, div, DivAssign, div_assign)\n\
-    );\n\nimpl<T: ZeroOne> ZeroOne for Complex<T> {\n    const ZERO: Self = Self {\
-    \ re: T::ZERO, im: T::ZERO };\n    const ONE: Self = Self { re: T::ONE, im: T::ZERO\
-    \ };\n}\n\nimpl<T: ZeroOne> From<T> for Complex<T> {\n    fn from(re: T) -> Self\
-    \ { Self { re, im: T::ZERO } }\n}\n"
+    \        ) / (rhs.re * rhs.re + rhs.im * rhs.im)\n    }\n}\nimpl<T: Num> Div<T>\
+    \ for Complex<T> {\n    type Output = Self;\n    fn div(self, rhs: T) -> Self::Output\
+    \ {\n        Self::new(self.re / rhs, self.im / rhs)\n    }\n}\n\nmacro_rules!\
+    \ impl_op_assign {\n    ($(($Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),*)\
+    \ => { $(\n        impl<T: Num> $OpAssign for Complex<T> {\n            fn $op_assign(&mut\
+    \ self, rhs: Self) {\n                let x = Self::$op(unsafe { std::ptr::read(self)\
+    \ }, rhs);\n                *self = x;\n            }\n        }\n    )* };\n\
+    }\n\nimpl_op_assign!(\n    (Add, add, AddAssign, add_assign),\n    (Sub, sub,\
+    \ SubAssign, sub_assign),\n    (Mul, mul, MulAssign, mul_assign),\n    (Div, div,\
+    \ DivAssign, div_assign)\n);\n\nimpl<T: ZeroOne> ZeroOne for Complex<T> {\n  \
+    \  const ZERO: Self = Self { re: T::ZERO, im: T::ZERO };\n    const ONE: Self\
+    \ = Self { re: T::ONE, im: T::ZERO };\n}\n\nimpl<T: ZeroOne> From<T> for Complex<T>\
+    \ {\n    fn from(re: T) -> Self { Self { re, im: T::ZERO } }\n}\n"
   dependsOn:
   - src/num.rs
   - src/util/trait_alias.rs
@@ -63,7 +65,7 @@ data:
   path: src/complex.rs
   requiredBy:
   - src/float/conv.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-24 22:49:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/complex.rs
