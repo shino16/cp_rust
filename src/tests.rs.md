@@ -14,8 +14,8 @@ data:
     path: src/func/memo.rs
     title: src/func/memo.rs
   - icon: ':heavy_check_mark:'
-    path: src/gf.rs
-    title: src/gf.rs
+    path: src/gfield.rs
+    title: src/gfield.rs
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
@@ -75,43 +75,44 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/tests.rs\n"
-  code: "#[cfg(test)]\nmod tests {\n    mod gf {\n        use crate::gf::*;\n    \
-    \    #[test]\n        fn test_pow() {\n            use crate::rand::xoshiro256plus::*;\n\
-    \            let mut rng = Xoshiro256plus::new();\n            assert_eq!(Gf17::new(2).pow(3),\
-    \ Gf17::new(8));\n            for _ in 0..100 {\n                let base: Gf17\
-    \ = rng.next().into();\n                let k = rng.next() % 100;\n          \
-    \      let p = (0..k).map(|_| base).product::<Gf17>();\n                assert_eq!(p,\
-    \ base.pow(k));\n            }\n        }\n        #[test]\n        fn test_inv()\
-    \ {\n            use crate::rand::xoshiro256plus::*;\n            let mut rng\
-    \ = Xoshiro256plus::new();\n            for _ in 0..100 {\n                let\
-    \ a: Gf17 = rng.next().into();\n                let b = a.inv();\n           \
-    \     assert!(a * b == Gf17::ONE, \"{} {}\", a, b);\n            }\n        }\n\
-    \    }\n\n    mod fp_naive {\n        use crate::mint::*;\n        #[test]\n \
-    \       fn test_mul() {\n            use crate::rand::xoshiro256plus::*;\n   \
-    \         let mut rng = Xoshiro256plus::new();\n            for _ in 0..100 {\n\
-    \                let a = rng.next() as u32 as u64;\n                let b = rng.next()\
-    \ as u32 as u64;\n                assert_eq!(Mint17::from(a) * b, Mint17::from(a\
-    \ * b));\n            }\n        }\n        #[test]\n        fn test_pow() {\n\
-    \            use crate::rand::xoshiro256plus::*;\n            let mut rng = Xoshiro256plus::new();\n\
-    \            for _ in 0..100 {\n                let base: Mint17 = rng.next().into();\n\
-    \                let k = rng.next() % 100;\n                let p = (0..k).map(|_|\
-    \ base).product::<Mint17>();\n                assert_eq!(p, base.pow(k as u64));\n\
-    \            }\n        }\n        #[test]\n        fn test_inv() {\n        \
-    \    use crate::rand::xoshiro256plus::*;\n            let mut rng = Xoshiro256plus::new();\n\
-    \            for _ in 0..100 {\n                let a: Mint17 = rng.next().into();\n\
-    \                let b = a.inv();\n                assert!(a * b == Mint17::ONE,\
-    \ \"{} * {} = {}\", a, b, a * b);\n            }\n        }\n    }\n\n    mod\
-    \ func {\n        mod memo {\n            use crate::func::memo::*;\n        \
-    \    #[test]\n            fn test_memo() {\n                const MOD: u32 = 1_000_000_007;\n\
-    \                let mut fib = vec![1, 1];\n                for i in 2..=1000\
-    \ {\n                    let a = fib[i - 1] + fib[i - 2];\n                  \
-    \  fib.push(a % MOD);\n                }\n                let rhs = memoize(|fib,\
-    \ n| {\n                    if n <= 1 {\n                        1\n         \
-    \           } else {\n                        (fib(n - 1) + fib(n - 2)) % MOD\n\
-    \                    }\n                })\n                .call(1000);\n   \
-    \             assert_eq!(fib[1000], rhs);\n            }\n        }\n    }\n\n\
-    \    mod iter {\n        use crate::iter::prod::*;\n        use crate::iter::*;\n\
-    \        #[test]\n        fn test() {\n            let lhs = (0..3).prod(b\"ab\"\
+  code: "#[cfg(test)]\nmod tests {\n    mod gfield {\n        use crate::gfield::*;\n\
+    \        #[test]\n        fn test_pow() {\n            use crate::rand::xoshiro256plus::*;\n\
+    \            let mut rng = Xoshiro256plus::new();\n            assert_eq!(GField17::new(2).pow(3),\
+    \ GField17::new(8));\n            for _ in 0..100 {\n                let base:\
+    \ GField17 = rng.next().into();\n                let k = rng.next() % 100;\n \
+    \               let p = (0..k).map(|_| base).product::<GField17>();\n        \
+    \        assert_eq!(p, base.pow(k));\n            }\n        }\n        #[test]\n\
+    \        fn test_inv() {\n            use crate::rand::xoshiro256plus::*;\n  \
+    \          let mut rng = Xoshiro256plus::new();\n            for _ in 0..100 {\n\
+    \                let a: GField17 = rng.next().into();\n                let b =\
+    \ a.inv();\n                assert!(a * b == GField17::ONE, \"{} {}\", a, b);\n\
+    \            }\n        }\n    }\n\n    mod fp_naive {\n        use crate::mint::*;\n\
+    \        #[test]\n        fn test_mul() {\n            use crate::rand::xoshiro256plus::*;\n\
+    \            let mut rng = Xoshiro256plus::new();\n            for _ in 0..100\
+    \ {\n                let a = rng.next() as u32 as u64;\n                let b\
+    \ = rng.next() as u32 as u64;\n                assert_eq!(Mint17::from(a) * b,\
+    \ Mint17::from(a * b));\n            }\n        }\n        #[test]\n        fn\
+    \ test_pow() {\n            use crate::rand::xoshiro256plus::*;\n            let\
+    \ mut rng = Xoshiro256plus::new();\n            for _ in 0..100 {\n          \
+    \      let base: Mint17 = rng.next().into();\n                let k = rng.next()\
+    \ % 100;\n                let p = (0..k).map(|_| base).product::<Mint17>();\n\
+    \                assert_eq!(p, base.pow(k as u64));\n            }\n        }\n\
+    \        #[test]\n        fn test_inv() {\n            use crate::rand::xoshiro256plus::*;\n\
+    \            let mut rng = Xoshiro256plus::new();\n            for _ in 0..100\
+    \ {\n                let a: Mint17 = rng.next().into();\n                let b\
+    \ = a.inv();\n                assert!(a * b == Mint17::ONE, \"{} * {} = {}\",\
+    \ a, b, a * b);\n            }\n        }\n    }\n\n    mod func {\n        mod\
+    \ memo {\n            use crate::func::memo::*;\n            #[test]\n       \
+    \     fn test_memo() {\n                const MOD: u32 = 1_000_000_007;\n    \
+    \            let mut fib = vec![1, 1];\n                for i in 2..=1000 {\n\
+    \                    let a = fib[i - 1] + fib[i - 2];\n                    fib.push(a\
+    \ % MOD);\n                }\n                let rhs = memoize(|fib, n| {\n \
+    \                   if n <= 1 {\n                        1\n                 \
+    \   } else {\n                        (fib(n - 1) + fib(n - 2)) % MOD\n      \
+    \              }\n                })\n                .call(1000);\n         \
+    \       assert_eq!(fib[1000], rhs);\n            }\n        }\n    }\n\n    mod\
+    \ iter {\n        use crate::iter::prod::*;\n        use crate::iter::*;\n   \
+    \     #[test]\n        fn test() {\n            let lhs = (0..3).prod(b\"ab\"\
     .to_vec()).collect_vec();\n            let rhs = vec![(0, b'a'), (0, b'b'), (1,\
     \ b'a'), (1, b'b'), (2, b'a'), (2, b'b')];\n            assert_eq!(lhs, rhs);\n\
     \        }\n    }\n\n    mod num {\n        use crate::int::*;\n        #[test]\n\
@@ -164,7 +165,7 @@ data:
   - src/bounded.rs
   - src/cast.rs
   - src/func/memo.rs
-  - src/gf.rs
+  - src/gfield.rs
   - src/int.rs
   - src/int/gcd.rs
   - src/iter.rs
@@ -183,7 +184,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-03-23 14:59:53+09:00'
+  timestamp: '2021-03-25 23:36:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

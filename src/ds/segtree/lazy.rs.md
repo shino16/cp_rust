@@ -22,7 +22,7 @@ data:
     \ }\n\n#[derive(Clone)]\npub struct LazySegmentTree<T, A, MT, MA, Apply>\nwhere\n\
     \    Apply: Fn(T, A) -> T,\n{\n    len: usize,\n    log: u32,\n    data: Vec<(T,\
     \ A)>,\n    on_alg: MT,\n    act_alg: MA,\n    apply: Apply,\n}\n\nimpl<T: Copy,\
-    \ A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>\n    LazySegmentTree<T,\
+    \ A: Copy + Eq, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>\n    LazySegmentTree<T,\
     \ A, MT, MA, Apply>\n{\n    pub fn new(len: usize, on_alg: MT, act_alg: MA, apply:\
     \ Apply) -> Self {\n        Self {\n            len,\n            log: len.next_power_of_two().trailing_zeros(),\n\
     \            data: vec![(on_alg.unit(), act_alg.unit()); len * 2],\n         \
@@ -34,8 +34,9 @@ data:
     \ {\n            data[i].0 = on_alg.op(data[i << 1].0, data[i << 1 | 1].0);\n\
     \        }\n        Self { len, log, data, on_alg, act_alg, apply }\n    }\n \
     \   pub fn len(&self) -> usize { self.len }\n    fn apply(&mut self, p: usize,\
-    \ actor: A) {\n        self.data[p].0 = (self.apply)(self.data[p].0, actor);\n\
-    \        self.act_alg.op_to(actor, &mut self.data[p].1);\n    }\n    fn flush(&mut\
+    \ actor: A) {\n        if actor == self.act_alg.unit() {\n            return;\n\
+    \        }\n        self.data[p].0 = (self.apply)(self.data[p].0, actor);\n  \
+    \      self.act_alg.op_to(actor, &mut self.data[p].1);\n    }\n    fn flush(&mut\
     \ self, p: usize) {\n        for s in (1..=self.log).rev() {\n            let\
     \ p = p >> s;\n            self.apply(p << 1, self.data[p].1);\n            self.apply(p\
     \ << 1 | 1, self.data[p].1);\n            self.data[p].1 = self.act_alg.unit();\n\
@@ -72,7 +73,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree/lazy.rs
   requiredBy: []
-  timestamp: '2021-02-21 16:57:52+09:00'
+  timestamp: '2021-03-25 23:36:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

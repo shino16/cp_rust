@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/rand/xorshift.rs
+    title: src/rand/xorshift.rs
   - icon: ':heavy_check_mark:'
     path: src/rand/xoshiro256plus.rs
     title: src/rand/xoshiro256plus.rs
@@ -42,6 +45,7 @@ data:
   isVerificationFile: false
   path: src/rand/seed.rs
   requiredBy:
+  - src/rand/xorshift.rs
   - src/rand/xoshiro256plus.rs
   - src/tests.rs
   timestamp: '2021-03-14 05:03:05+09:00'

@@ -56,8 +56,8 @@ data:
       path: src/fxhash.rs
       title: src/fxhash.rs
     - icon: ':heavy_check_mark:'
-      path: src/gf.rs
-      title: src/gf.rs
+      path: src/gfield.rs
+      title: src/gfield.rs
     - icon: ':heavy_check_mark:'
       path: src/graph.rs
       title: src/graph.rs
@@ -234,17 +234,17 @@ data:
     - icon: ':warning:'
       path: src/func/rec.rs
       title: src/func/rec.rs
-  - name: src/gf
+  - name: src/gfield
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/gf/conv.rs
-      title: src/gf/conv.rs
+      path: src/gfield/conv.rs
+      title: src/gfield/conv.rs
     - icon: ':warning:'
-      path: src/gf/io.rs
-      title: src/gf/io.rs
+      path: src/gfield/io.rs
+      title: src/gfield/io.rs
     - icon: ':warning:'
-      path: src/gf/num.rs
-      title: src/gf/num.rs
+      path: src/gfield/num.rs
+      title: src/gfield/num.rs
   - name: src/graph
     pages:
     - icon: ':warning:'

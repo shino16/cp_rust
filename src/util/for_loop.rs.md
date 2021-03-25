@@ -24,7 +24,7 @@ data:
   isVerificationFile: false
   path: src/util/for_loop.rs
   requiredBy: []
-  timestamp: '2021-03-23 14:59:53+09:00'
+  timestamp: '2021-03-25 23:36:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/util/for_loop.rs

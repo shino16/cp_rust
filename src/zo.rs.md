@@ -21,14 +21,14 @@ data:
     path: src/float/conv.rs
     title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/gf.rs
-    title: src/gf.rs
+    path: src/gfield.rs
+    title: src/gfield.rs
   - icon: ':heavy_check_mark:'
-    path: src/gf/conv.rs
-    title: src/gf/conv.rs
+    path: src/gfield/conv.rs
+    title: src/gfield/conv.rs
   - icon: ':warning:'
-    path: src/gf/io.rs
-    title: src/gf/io.rs
+    path: src/gfield/io.rs
+    title: src/gfield/io.rs
   - icon: ':warning:'
     path: src/graph/dijkstra.rs
     title: src/graph/dijkstra.rs
@@ -177,8 +177,7 @@ data:
   - src/mint/io.rs
   - src/mint/conv.rs
   - src/num.rs
-  - src/gf/io.rs
-  - src/gf/conv.rs
+  - src/gfield.rs
   - src/float/conv.rs
   - src/graph/weighted/dfs.rs
   - src/graph/weighted.rs
@@ -191,7 +190,6 @@ data:
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/dijkstra.rs
   - src/graph/euler_tour.rs
-  - src/gf.rs
   - src/math/binom.rs
   - src/math/pow.rs
   - src/complex.rs
@@ -207,6 +205,8 @@ data:
   - src/int/inv.rs
   - src/int/gcd/ext.rs
   - src/int/gcd.rs
+  - src/gfield/io.rs
+  - src/gfield/conv.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

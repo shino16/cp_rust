@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/gf.rs
-    title: src/gf.rs
-  - icon: ':heavy_check_mark:'
-    path: src/io.rs
-    title: src/io.rs
-  - icon: ':heavy_check_mark:'
-    path: src/zo.rs
-    title: src/zo.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,24 +11,19 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/gf/io.rs\n"
-  code: "pub use super::*;\nuse crate::io::*;\n\nimpl<M: Mod> Print for Gf<M> {\n\
-    \    fn print(w: &mut IO, x: Self) { w.print(x.value()); }\n}\nimpl<M: Mod> Scan\
-    \ for Gf<M> {\n    fn scan(io: &mut IO) -> Self { Self::new(io.scan()) }\n}\n"
-  dependsOn:
-  - src/gf.rs
-  - src/io.rs
-  - src/zo.rs
+    RuntimeError: bundler is not specified: src/gfield/num.rs\n"
+  code: ''
+  dependsOn: []
   isVerificationFile: false
-  path: src/gf/io.rs
+  path: src/gfield/num.rs
   requiredBy: []
-  timestamp: '2021-03-23 14:59:53+09:00'
+  timestamp: '2021-03-25 23:36:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/gf/io.rs
+documentation_of: src/gfield/num.rs
 layout: document
 redirect_from:
-- /library/src/gf/io.rs
-- /library/src/gf/io.rs.html
-title: src/gf/io.rs
+- /library/src/gfield/num.rs
+- /library/src/gfield/num.rs.html
+title: src/gfield/num.rs
 ---

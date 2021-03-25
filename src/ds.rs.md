@@ -27,8 +27,8 @@ data:
     path: src/float/conv.rs
     title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/gf/conv.rs
-    title: src/gf/conv.rs
+    path: src/gfield/conv.rs
+    title: src/gfield/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
@@ -96,11 +96,11 @@ data:
   - src/draft/linked_list/iter.rs
   - src/draft/linked_list/inner_mut.rs
   - src/mint/conv.rs
-  - src/gf/conv.rs
   - src/float/conv.rs
   - src/ds/uslice.rs
   - src/ds/uvec2d.rs
   - src/ds/uvec.rs
+  - src/gfield/conv.rs
   timestamp: '2021-02-09 16:24:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
