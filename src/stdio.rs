@@ -24,10 +24,10 @@ macro_rules! prtln {
         $crate::prtln!(@ $dst, $($exprs),*);
     } };
     (new $var:ident) => { let mut $var = stdout_buf(); };
-    (new $var:ident, $($t:tt)*) => { {
+    (new $var:ident, $($t:tt)*) => {
         $crate::prtln!(new $var);
         $crate::prtln!(to $var, $($t)*);
-    } };
+    };
     (to $var:ident, $($t:tt)*) => { {
         use std::io::Write;
         $crate::prtln!(@ $var, $($t)*);
@@ -66,7 +66,7 @@ macro_rules! scan_value {
     ($iter:expr, [ $t:tt ; $len:expr ]) => {
         (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()
     };
-    ($iter:expr, [u8]) => { $iter.next().unwrap().as_bytes() };
+    ($iter:expr, &[u8]) => { $iter.next().unwrap().as_bytes() };
     ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };
     ($iter:expr, $t:ty) => { $iter.next().unwrap().parse::<$t>().unwrap() };
 }
