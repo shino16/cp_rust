@@ -1,8 +1,10 @@
+use crate::rand::seed::*;
+
 pub struct Xorshift32(u32);
 
 impl Xorshift32 {
     pub fn new() -> Self {
-        Self(2_463_534_242)
+        Self(from_time()[0] as u32)
     }
     pub fn next(&mut self) -> u32 {
         let mut x = self.0;
@@ -18,7 +20,7 @@ pub struct Xorshift64(u64);
 
 impl Xorshift64 {
     pub fn new() -> Self {
-        Self(88_172_645_463_325_252)
+        Self(from_time()[0])
     }
     pub fn next(&mut self) -> u64 {
         let mut x = self.0;

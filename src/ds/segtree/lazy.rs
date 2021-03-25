@@ -15,7 +15,7 @@ where
     apply: Apply,
 }
 
-impl<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>
+impl<T: Copy, A: Copy + Eq, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>
     LazySegmentTree<T, A, MT, MA, Apply>
 {
     pub fn new(len: usize, on_alg: MT, act_alg: MA, apply: Apply) -> Self {
@@ -40,6 +40,9 @@ impl<T: Copy, A: Copy, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>
     }
     pub fn len(&self) -> usize { self.len }
     fn apply(&mut self, p: usize, actor: A) {
+        if actor == self.act_alg.unit() {
+            return;
+        }
         self.data[p].0 = (self.apply)(self.data[p].0, actor);
         self.act_alg.op_to(actor, &mut self.data[p].1);
     }

@@ -7,17 +7,17 @@ macro_rules! impl_ntt {
         pub mod $module {
             use super::*;
 
-            type GfType = Mint<$modu>;
+            type Type = Mint<$modu>;
 
-            pub fn ntt(a: &mut UVec<GfType>) {
+            pub fn ntt(a: &mut UVec<Type>) {
                 let n = a.len();
-                let r = GfType::new($prim);
+                let r = Type::new($prim);
                 let roots: Vec<_> = (0..n.trailing_zeros())
-                    .map(|i| -r.pow(((GfType::M - 1) >> (i + 2)) as u64))
+                    .map(|i| -r.pow(((Type::M - 1) >> (i + 2)) as u64))
                     .collect();
                 let mut m = n >> 1;
                 while m != 0 {
-                    let mut w = GfType::ONE;
+                    let mut w = Type::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
                             let u = a[i];
@@ -31,15 +31,15 @@ macro_rules! impl_ntt {
                 }
             }
 
-            pub fn inv_ntt(a: &mut UVec<GfType>) {
+            pub fn inv_ntt(a: &mut UVec<Type>) {
                 let n = a.len();
-                let r = GfType::new($prim);
+                let r = Type::new($prim);
                 let inv_roots: Vec<_> = (0..n.trailing_zeros())
-                    .map(|i| -r.pow((GfType::M - 1 - ((GfType::M - 1) >> (i + 2))) as u64))
+                    .map(|i| -r.pow((Type::M - 1 - ((Type::M - 1) >> (i + 2))) as u64))
                     .collect();
                 let mut m = 1;
                 while m < n {
-                    let mut w = GfType::ONE;
+                    let mut w = Type::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
                             let u = a[i];
@@ -51,11 +51,11 @@ macro_rules! impl_ntt {
                     }
                     m <<= 1;
                 }
-                let d = GfType::from(n as u32).inv();
+                let d = Type::from(n as u32).inv();
                 a.iter_mut().for_each(|e| *e *= d);
             }
 
-            pub fn conv<'a, 'b>(a: &'a mut UVec<GfType>, b: &'b mut UVec<GfType>) {
+            pub fn conv<'a, 'b>(a: &'a mut UVec<Type>, b: &'b mut UVec<Type>) {
                 let len = a.len() + b.len() - 1;
                 fn ilog2(n: usize) -> u32 {
                     std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros() - 1
@@ -71,7 +71,7 @@ macro_rules! impl_ntt {
                 a.truncate(len);
             }
 
-            impl Conv for GfType {
+            impl Conv for Type {
                 fn conv(mut lhs: Vec<Self>, mut rhs: Vec<Self>) -> Vec<Self> {
                     conv(lhs.as_mut(), rhs.as_mut());
                     lhs
