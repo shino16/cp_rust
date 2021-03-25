@@ -1,8 +1,6 @@
 pub use super::*;
 use crate::ds::bitset::*;
 
-pub mod cpnts;
-
 /// f: (v, par, w)
 pub fn dfs<W: Copy + Default, G: WGraph<W>, F: FnMut(usize, usize, W)>(
     g: &G,
