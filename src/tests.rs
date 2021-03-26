@@ -1,16 +1,16 @@
 #[cfg(test)]
 mod tests {
-    mod gfield {
-        use crate::gfield::*;
+    mod gf {
+        use crate::gf::*;
         #[test]
         fn test_pow() {
             use crate::rand::xoshiro256plus::*;
             let mut rng = Xoshiro256plus::new();
-            assert_eq!(GField17::new(2).pow(3), GField17::new(8));
+            assert_eq!(Gf17::new(2).pow(3), Gf17::new(8));
             for _ in 0..100 {
-                let base: GField17 = rng.next().into();
+                let base: Gf17 = rng.next().into();
                 let k = rng.next() % 100;
-                let p = (0..k).map(|_| base).product::<GField17>();
+                let p = (0..k).map(|_| base).product::<Gf17>();
                 assert_eq!(p, base.pow(k));
             }
         }
@@ -19,9 +19,9 @@ mod tests {
             use crate::rand::xoshiro256plus::*;
             let mut rng = Xoshiro256plus::new();
             for _ in 0..100 {
-                let a: GField17 = rng.next().into();
+                let a: Gf17 = rng.next().into();
                 let b = a.inv();
-                assert!(a * b == GField17::ONE, "{} {}", a, b);
+                assert!(a * b == Gf17::ONE, "{} {}", a, b);
             }
         }
     }
