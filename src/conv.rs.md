@@ -6,8 +6,8 @@ data:
     path: src/float/conv.rs
     title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/gfield/conv.rs
-    title: src/gfield/conv.rs
+    path: src/gf/conv.rs
+    title: src/gf/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
@@ -49,9 +49,9 @@ data:
   requiredBy:
   - src/u64/conv.rs
   - src/mint/conv.rs
+  - src/gf/conv.rs
   - src/float/conv.rs
   - src/poly.rs
-  - src/gfield/conv.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

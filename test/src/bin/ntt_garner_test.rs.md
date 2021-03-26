@@ -11,11 +11,11 @@ data:
     path: src/ds/uvec.rs
     title: src/ds/uvec.rs
   - icon: ':heavy_check_mark:'
-    path: src/gfield.rs
-    title: src/gfield.rs
+    path: src/gf.rs
+    title: src/gf.rs
   - icon: ':heavy_check_mark:'
-    path: src/gfield/conv.rs
-    title: src/gfield/conv.rs
+    path: src/gf/conv.rs
+    title: src/gf/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/io.rs
     title: src/io.rs
@@ -35,23 +35,23 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/ntt_garner_test.rs\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod_1000000007\n\
-    \nuse lib::gfield::conv::*;\nuse lib::io::*;\n\nfn main() {\n    let mut io =\
-    \ IO::new();\n    let (n, m) = io.scan();\n    let a = io.scan_vec::<GField17>(n);\n\
-    \    let b = io.scan_vec::<GField17>(m);\n    if (n, m) == (1, 1) {\n        io.println(a[0]\
+    \nuse lib::gf::conv::*;\nuse lib::io::*;\n\nfn main() {\n    let mut io = IO::new();\n\
+    \    let (n, m) = io.scan();\n    let a = io.scan_vec::<Gf17>(n);\n    let b =\
+    \ io.scan_vec::<Gf17>(m);\n    if (n, m) == (1, 1) {\n        io.println(a[0]\
     \ * b[0]);\n    } else {\n        io.iterln(Conv::conv(a, b).into_iter(), \" \"\
     );\n    }\n}\n"
   dependsOn:
   - src/conv.rs
   - src/ds.rs
   - src/ds/uvec.rs
-  - src/gfield.rs
-  - src/gfield/conv.rs
+  - src/gf.rs
+  - src/gf/conv.rs
   - src/io.rs
   - src/zo.rs
   isVerificationFile: true
   path: test/src/bin/ntt_garner_test.rs
   requiredBy: []
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-26 09:38:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_garner_test.rs

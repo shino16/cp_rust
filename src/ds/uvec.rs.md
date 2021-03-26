@@ -15,8 +15,8 @@ data:
     path: src/float/conv.rs
     title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
-    path: src/gfield/conv.rs
-    title: src/gfield/conv.rs
+    path: src/gf/conv.rs
+    title: src/gf/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/mint/conv.rs
     title: src/mint/conv.rs
@@ -72,10 +72,10 @@ data:
   requiredBy:
   - src/u64/conv.rs
   - src/mint/conv.rs
+  - src/gf/conv.rs
   - src/float/conv.rs
   - src/ds/uvec2d.rs
-  - src/gfield/conv.rs
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-26 09:38:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs

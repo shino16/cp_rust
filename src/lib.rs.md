@@ -35,8 +35,8 @@ data:
     RuntimeError: bundler is not specified: src/lib.rs\n"
   code: "pub mod alg;\npub mod assign;\npub mod bits;\npub mod bool;\npub mod bounded;\n\
     pub mod cast;\npub mod cmp;\npub mod complex;\npub mod conv;\npub mod dfa;\npub\
-    \ mod ds;\npub mod float;\npub mod gfield;\npub mod func;\npub mod fxhash;\npub\
-    \ mod graph;\npub mod hash;\npub mod int;\npub mod io;\npub mod io_interactive;\n\
+    \ mod ds;\npub mod float;\npub mod gf;\npub mod func;\npub mod fxhash;\npub mod\
+    \ graph;\npub mod hash;\npub mod int;\npub mod io;\npub mod io_interactive;\n\
     pub mod iter;\npub mod make_vec;\npub mod math;\npub mod mint;\npub mod num;\n\
     pub mod poly;\npub mod rand;\npub mod slice;\npub mod stdio;\npub mod u64;\npub\
     \ mod util;\npub mod vec;\npub mod zo;\n\npub mod tests;\n\n#[cfg(debug_assertions)]\n\
@@ -56,7 +56,7 @@ data:
   - src/ds/uvec.rs
   - src/mint.rs
   - src/stdio/buf.rs
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-26 09:38:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

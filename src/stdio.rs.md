@@ -59,7 +59,7 @@ data:
   path: src/stdio.rs
   requiredBy:
   - src/stdio/buf.rs
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-26 09:38:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/stdio.rs

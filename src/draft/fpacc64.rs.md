@@ -46,81 +46,79 @@ data:
     \ << 64) % $modu) as u32;\n        }\n    };\n}\n\ndef_mod!(ModA, 1_000_000_007,\
     \ 2_226_617_417);\ndef_mod!(ModB, 998_244_353, 998_244_351);\ndef_mod!(ModC, 1_012_924_417,\
     \ 1_012_924_415);\ndef_mod!(ModD, 924_844_033, 924_844_031);\n\n// modular arithmetics\n\
-    #[repr(transparent)]\n#[derive(Default, Clone, Copy)]\npub struct GField<M: Mod>\
-    \ {\n    val: u32,\n    _m: PhantomData<M>,\n}\n\npub type GFieldA = GField<ModA>;\n\
-    pub type GFieldB = GField<ModB>;\npub type GFieldC = GField<ModC>;\npub type GFieldD\
-    \ = GField<ModD>;\n\n/// mod 1_000_000_007\npub type GField17 = GFieldA;\n\n///\
-    \ mod 998_244_353\npub type GField99 = GFieldB;\n\nimpl<M: Mod> GField<M> {\n\
-    \    pub const P: u32 = M::P;\n    pub fn new(val: u32) -> Self {\n        GField::from_raw(reduce::<M>(val\
-    \ as u64 * M::R2 as u64))\n    }\n    fn from_raw(val: u32) -> Self {\n      \
-    \  GField { val, _m: PhantomData }\n    }\n    pub fn value(self) -> u32 {\n \
-    \       let v = reduce::<M>(self.val as u64);\n        if v >= M::P { v - M::P\
-    \ } else { v }\n    }\n    pub fn grow(self) -> GFieldGrow<M> {\n        GFieldGrow::from_raw((self.val\
-    \ as u64) << 32)\n    }\n    pub fn mul_unreduced<T: Into<Self>>(self, rhs: T)\
-    \ -> GFieldGrow<M> {\n        GFieldGrow::from_raw(self.val as u64 * rhs.into().val\
-    \ as u64)\n    }\n    pub fn pow<I: Int>(self, k: I) -> Self {\n        if self.val\
-    \ == 0 && k.is_zero() {\n            return Self::new(1);\n        }\n       \
-    \ let (mut e, mut k) = (self, k.rem_euclid((M::P - 1).as_()));\n        let mut\
-    \ res = Self::ONE;\n        while !k.is_zero() {\n            if !(k & 1.as_()).is_zero()\
-    \ {\n                res *= e;\n            }\n            e *= e;\n         \
-    \   k >>= 1;\n        }\n        res\n    }\n    pub fn inv(self) -> Self {\n\
-    \        let (mut a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32,\
-    \ 0, 1);\n        while b != 0 {\n            let t = a / b;\n            a -=\
-    \ t * b;\n            u -= t * v;\n            std::mem::swap(&mut a, &mut b);\n\
-    \            std::mem::swap(&mut u, &mut v);\n        }\n        debug_assert_eq!(a,\
-    \ 1);\n        if u < 0 {\n            debug_assert_eq!(v, M::P as i32);\n   \
-    \         u += v;\n        }\n        Self::new(u as u32)\n    }\n}\n\n#[derive(Default,\
-    \ Clone, Copy, PartialEq, Eq)]\npub struct GFieldGrow<M: Mod> {\n    val: u64,\n\
-    \    _m: PhantomData<M>,\n}\n\nimpl<M: Mod> GFieldGrow<M> {\n    const MOD: u64\
-    \ = (M::P as u64) << 32;\n    fn from_raw(val: u64) -> Self {\n        Self {\
-    \ val, _m: PhantomData }\n    }\n    pub fn reduce(self) -> GField<M> {\n    \
-    \    GField::from_raw(reduce::<M>(self.val))\n    }\n    pub fn value(self) ->\
-    \ u32 {\n        self.reduce().value()\n    }\n}\n\nimpl<M: Mod> ops::Add<Self>\
-    \ for GFieldGrow<M> {\n    type Output = Self;\n    fn add(mut self, rhs: Self)\
-    \ -> Self {\n        self += rhs;\n        self\n    }\n}\n\nimpl<M: Mod> ops::AddAssign<Self>\
-    \ for GFieldGrow<M> {\n    fn add_assign(&mut self, rhs: Self) {\n        self.val\
-    \ += rhs.val;\n        if self.val >= Self::MOD * 2 {\n            self.val -=\
-    \ Self::MOD * 2;\n        }\n    }\n}\n\nimpl<M: Mod> From<GFieldGrow<M>> for\
-    \ GField<M> {\n    fn from(v: GFieldGrow<M>) -> Self {\n        v.reduce()\n \
-    \   }\n}\n\nimpl<M: Mod, I: Int> From<I> for GField<M> {\n    fn from(x: I) ->\
-    \ Self {\n        Self::new(x.rem_euclid(M::P.as_()).as_())\n    }\n}\n\nimpl<M:\
-    \ Mod> cmp::PartialEq for GField<M> {\n    fn eq(&self, other: &Self) -> bool\
-    \ {\n        let val = |obj: &GField<M>| {\n            if obj.val >= M::P {\n\
-    \                obj.val - M::P\n            } else {\n                obj.val\n\
+    #[repr(transparent)]\n#[derive(Default, Clone, Copy)]\npub struct Gf<M: Mod> {\n\
+    \    val: u32,\n    _m: PhantomData<M>,\n}\n\npub type GfA = Gf<ModA>;\npub type\
+    \ GfB = Gf<ModB>;\npub type GfC = Gf<ModC>;\npub type GfD = Gf<ModD>;\n\n/// mod\
+    \ 1_000_000_007\npub type Gf17 = GfA;\n\n/// mod 998_244_353\npub type Gf99 =\
+    \ GfB;\n\nimpl<M: Mod> Gf<M> {\n    pub const P: u32 = M::P;\n    pub fn new(val:\
+    \ u32) -> Self {\n        Gf::from_raw(reduce::<M>(val as u64 * M::R2 as u64))\n\
+    \    }\n    fn from_raw(val: u32) -> Self {\n        Gf { val, _m: PhantomData\
+    \ }\n    }\n    pub fn value(self) -> u32 {\n        let v = reduce::<M>(self.val\
+    \ as u64);\n        if v >= M::P { v - M::P } else { v }\n    }\n    pub fn grow(self)\
+    \ -> GfGrow<M> {\n        GfGrow::from_raw((self.val as u64) << 32)\n    }\n \
+    \   pub fn mul_unreduced<T: Into<Self>>(self, rhs: T) -> GfGrow<M> {\n       \
+    \ GfGrow::from_raw(self.val as u64 * rhs.into().val as u64)\n    }\n    pub fn\
+    \ pow<I: Int>(self, k: I) -> Self {\n        if self.val == 0 && k.is_zero() {\n\
+    \            return Self::new(1);\n        }\n        let (mut e, mut k) = (self,\
+    \ k.rem_euclid((M::P - 1).as_()));\n        let mut res = Self::ONE;\n       \
+    \ while !k.is_zero() {\n            if !(k & 1.as_()).is_zero() {\n          \
+    \      res *= e;\n            }\n            e *= e;\n            k >>= 1;\n \
+    \       }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let (mut\
+    \ a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n      \
+    \  while b != 0 {\n            let t = a / b;\n            a -= t * b;\n     \
+    \       u -= t * v;\n            std::mem::swap(&mut a, &mut b);\n           \
+    \ std::mem::swap(&mut u, &mut v);\n        }\n        debug_assert_eq!(a, 1);\n\
+    \        if u < 0 {\n            debug_assert_eq!(v, M::P as i32);\n         \
+    \   u += v;\n        }\n        Self::new(u as u32)\n    }\n}\n\n#[derive(Default,\
+    \ Clone, Copy, PartialEq, Eq)]\npub struct GfGrow<M: Mod> {\n    val: u64,\n \
+    \   _m: PhantomData<M>,\n}\n\nimpl<M: Mod> GfGrow<M> {\n    const MOD: u64 = (M::P\
+    \ as u64) << 32;\n    fn from_raw(val: u64) -> Self {\n        Self { val, _m:\
+    \ PhantomData }\n    }\n    pub fn reduce(self) -> Gf<M> {\n        Gf::from_raw(reduce::<M>(self.val))\n\
+    \    }\n    pub fn value(self) -> u32 {\n        self.reduce().value()\n    }\n\
+    }\n\nimpl<M: Mod> ops::Add<Self> for GfGrow<M> {\n    type Output = Self;\n  \
+    \  fn add(mut self, rhs: Self) -> Self {\n        self += rhs;\n        self\n\
+    \    }\n}\n\nimpl<M: Mod> ops::AddAssign<Self> for GfGrow<M> {\n    fn add_assign(&mut\
+    \ self, rhs: Self) {\n        self.val += rhs.val;\n        if self.val >= Self::MOD\
+    \ * 2 {\n            self.val -= Self::MOD * 2;\n        }\n    }\n}\n\nimpl<M:\
+    \ Mod> From<GfGrow<M>> for Gf<M> {\n    fn from(v: GfGrow<M>) -> Self {\n    \
+    \    v.reduce()\n    }\n}\n\nimpl<M: Mod, I: Int> From<I> for Gf<M> {\n    fn\
+    \ from(x: I) -> Self {\n        Self::new(x.rem_euclid(M::P.as_()).as_())\n  \
+    \  }\n}\n\nimpl<M: Mod> cmp::PartialEq for Gf<M> {\n    fn eq(&self, other: &Self)\
+    \ -> bool {\n        let val = |obj: &Gf<M>| {\n            if obj.val >= M::P\
+    \ {\n                obj.val - M::P\n            } else {\n                obj.val\n\
     \            }\n        };\n        val(self) == val(other)\n    }\n}\n\nimpl<M:\
-    \ Mod> cmp::Eq for GField<M> {}\n\nimpl<M: Mod, T: Into<GField<M>>> ops::AddAssign<T>\
-    \ for GField<M> {\n    fn add_assign(&mut self, rhs: T) {\n        self.val +=\
-    \ rhs.into().val;\n        if self.val >= M::P * 2 {\n            self.val -=\
-    \ M::P * 2;\n        }\n    }\n}\nimpl<M: Mod, T: Into<GField<M>>> ops::SubAssign<T>\
-    \ for GField<M> {\n    fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n\
-    \        if self.val < rhs.val {\n            self.val += M::P * 2;\n        }\n\
-    \        self.val -= rhs.val;\n    }\n}\nimpl<M: Mod, T: Into<GField<M>>> ops::MulAssign<T>\
-    \ for GField<M> {\n    fn mul_assign(&mut self, rhs: T) {\n        *self = self.mul_unreduced(rhs).reduce();\n\
-    \    }\n}\nimpl<M: Mod, T: Into<GField<M>>> ops::DivAssign<T> for GField<M> {\n\
-    \    fn div_assign(&mut self, rhs: T) {\n        *self *= rhs.into().inv();\n\
-    \    }\n}\n\nmacro_rules! impl_binop {\n    ($(($Op:ident, $op:ident, $OpAssign:ident,\
-    \ $op_assign:ident)),*) => { $(\n        impl<M: Mod, T: Into<GField<M>>> ops::$Op<T>\
-    \ for GField<M> {\n            type Output = Self;\n            fn $op(mut self,\
-    \ rhs: T) -> Self {\n                ops::$OpAssign::$op_assign(&mut self, rhs);\
-    \ self\n            }\n        }\n    )* };\n}\n\nimpl_binop!(\n    (Add, add,\
-    \ AddAssign, add_assign),\n    (Sub, sub, SubAssign, sub_assign),\n    (Mul, mul,\
-    \ MulAssign, mul_assign),\n    (Div, div, DivAssign, div_assign)\n);\n\nimpl<M:\
-    \ Mod> ops::Neg for GField<M> {\n    type Output = Self;\n    fn neg(self) ->\
-    \ Self {\n        GField::from_raw(M::P * 2 - self.val)\n    }\n}\n\nimpl<M: Mod>\
-    \ iter::Sum for GField<M> {\n    fn sum<I: Iterator<Item = Self>>(iter: I) ->\
-    \ Self {\n        iter.fold(Self::ZERO, |b, x| b + x)\n    }\n}\n\nimpl<M: Mod>\
-    \ iter::Product for GField<M> {\n    fn product<I: Iterator<Item = Self>>(iter:\
-    \ I) -> Self {\n        iter.fold(Self::ONE, |b, x| b * x)\n    }\n}\n\nimpl<M:\
-    \ Mod> fmt::Debug for GField<M> {\n    fn fmt(&self, f: &mut fmt::Formatter) ->\
-    \ fmt::Result {\n        self.value().fmt(f)\n    }\n}\n\nimpl<M: Mod> fmt::Display\
-    \ for GField<M> {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {\n\
-    \        self.value().fmt(f)\n    }\n}\n\nimpl<M: Mod> ZeroOne for GField<M> {\n\
-    \    const ZERO: Self = Self { val: 0, _m: PhantomData };\n    const ONE: Self\
-    \ = Self {\n        val: M::P.wrapping_neg() % M::P,\n        _m: PhantomData,\n\
-    \    };\n}\n\nimpl<M: Mod> Num for GField<M> {\n    fn wrapping_neg(self) -> Self\
-    \ {\n        -self\n    }\n}\n\nimpl<M: Mod> Print for GField<M> {\n    fn print(w:\
+    \ Mod> cmp::Eq for Gf<M> {}\n\nimpl<M: Mod, T: Into<Gf<M>>> ops::AddAssign<T>\
+    \ for Gf<M> {\n    fn add_assign(&mut self, rhs: T) {\n        self.val += rhs.into().val;\n\
+    \        if self.val >= M::P * 2 {\n            self.val -= M::P * 2;\n      \
+    \  }\n    }\n}\nimpl<M: Mod, T: Into<Gf<M>>> ops::SubAssign<T> for Gf<M> {\n \
+    \   fn sub_assign(&mut self, rhs: T) {\n        let rhs = rhs.into();\n      \
+    \  if self.val < rhs.val {\n            self.val += M::P * 2;\n        }\n   \
+    \     self.val -= rhs.val;\n    }\n}\nimpl<M: Mod, T: Into<Gf<M>>> ops::MulAssign<T>\
+    \ for Gf<M> {\n    fn mul_assign(&mut self, rhs: T) {\n        *self = self.mul_unreduced(rhs).reduce();\n\
+    \    }\n}\nimpl<M: Mod, T: Into<Gf<M>>> ops::DivAssign<T> for Gf<M> {\n    fn\
+    \ div_assign(&mut self, rhs: T) {\n        *self *= rhs.into().inv();\n    }\n\
+    }\n\nmacro_rules! impl_binop {\n    ($(($Op:ident, $op:ident, $OpAssign:ident,\
+    \ $op_assign:ident)),*) => { $(\n        impl<M: Mod, T: Into<Gf<M>>> ops::$Op<T>\
+    \ for Gf<M> {\n            type Output = Self;\n            fn $op(mut self, rhs:\
+    \ T) -> Self {\n                ops::$OpAssign::$op_assign(&mut self, rhs); self\n\
+    \            }\n        }\n    )* };\n}\n\nimpl_binop!(\n    (Add, add, AddAssign,\
+    \ add_assign),\n    (Sub, sub, SubAssign, sub_assign),\n    (Mul, mul, MulAssign,\
+    \ mul_assign),\n    (Div, div, DivAssign, div_assign)\n);\n\nimpl<M: Mod> ops::Neg\
+    \ for Gf<M> {\n    type Output = Self;\n    fn neg(self) -> Self {\n        Gf::from_raw(M::P\
+    \ * 2 - self.val)\n    }\n}\n\nimpl<M: Mod> iter::Sum for Gf<M> {\n    fn sum<I:\
+    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::ZERO, |b,\
+    \ x| b + x)\n    }\n}\n\nimpl<M: Mod> iter::Product for Gf<M> {\n    fn product<I:\
+    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::ONE, |b,\
+    \ x| b * x)\n    }\n}\n\nimpl<M: Mod> fmt::Debug for Gf<M> {\n    fn fmt(&self,\
+    \ f: &mut fmt::Formatter) -> fmt::Result {\n        self.value().fmt(f)\n    }\n\
+    }\n\nimpl<M: Mod> fmt::Display for Gf<M> {\n    fn fmt(&self, f: &mut fmt::Formatter)\
+    \ -> fmt::Result {\n        self.value().fmt(f)\n    }\n}\n\nimpl<M: Mod> ZeroOne\
+    \ for Gf<M> {\n    const ZERO: Self = Self { val: 0, _m: PhantomData };\n    const\
+    \ ONE: Self = Self {\n        val: M::P.wrapping_neg() % M::P,\n        _m: PhantomData,\n\
+    \    };\n}\n\nimpl<M: Mod> Num for Gf<M> {\n    fn wrapping_neg(self) -> Self\
+    \ {\n        -self\n    }\n}\n\nimpl<M: Mod> Print for Gf<M> {\n    fn print(w:\
     \ &mut IO, x: Self) {\n        w.print(x.value());\n    }\n}\n\nimpl<M: Mod> Scan\
-    \ for GField<M> {\n    fn scan(io: &mut IO) -> Self {\n        Self::new(io.scan())\n\
+    \ for Gf<M> {\n    fn scan(io: &mut IO) -> Self {\n        Self::new(io.scan())\n\
     \    }\n}\n"
   dependsOn:
   - src/bounded.rs
@@ -133,7 +131,7 @@ data:
   isVerificationFile: false
   path: src/draft/fpacc64.rs
   requiredBy: []
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-26 09:38:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/fpacc64.rs
