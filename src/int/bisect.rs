@@ -1,6 +1,6 @@
 use super::*;
 
-pub fn bisect<I: Int, F: FnMut(I) -> bool>(mut l: I, mut r: I, mut pred: F) -> I {
+pub fn bisect<I: Int>(mut l: I, mut r: I, mut pred: impl FnMut(I) -> bool) -> I {
     let two = I::ONE + I::ONE;
     while l != r {
         let mid = (l + r) / two;

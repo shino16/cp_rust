@@ -8,10 +8,10 @@ pub enum InOut {
 
 pub use InOut::*;
 
-pub fn dfs_io<G: Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {
+pub fn dfs_io(g: &impl Graph, s: usize, mut f: impl FnMut(InOut, usize)) {
     let mut togo = vec![(s, !0)];
     while let Some((v, par)) = togo.pop() {
-        if  v > !v {
+        if v > !v {
             f(Out(!v), par);
         } else {
             f(In(v), par);

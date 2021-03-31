@@ -81,7 +81,7 @@ impl<T: Copy, A: Copy + Eq, MT: Monoid<T>, MA: Monoid<A>, Apply: Fn(T, A) -> T>
         }
         self.on_alg.op(resl, resr)
     }
-    pub fn with<F: FnOnce(&mut T) -> R, R>(&mut self, pos: usize, f: F) -> R {
+    pub fn with<R>(&mut self, pos: usize, f: impl FnOnce(&mut T) -> R) -> R {
         self.flush(pos + self.len());
         let p = pos + self.len();
         let r = f(&mut self.data[p].0);

@@ -12,13 +12,17 @@ pub mod weighted;
 
 pub trait Graph {
     fn len(&self) -> usize;
-    fn adj<F: FnMut(usize)>(&self, v: usize, f: F);
+    fn adj(&self, v: usize, f: impl FnMut(usize));
 }
 impl Graph for Vec<Vec<usize>> {
     fn len(&self) -> usize { self.len() }
-    fn adj<F: FnMut(usize)>(&self, v: usize, f: F) { self[v].iter().copied().for_each(f); }
+    fn adj(&self, v: usize, f: impl FnMut(usize)) {
+        self[v].iter().copied().for_each(f);
+    }
 }
 impl<W> Graph for Vec<Vec<(usize, W)>> {
     fn len(&self) -> usize { self.len() }
-    fn adj<F: FnMut(usize)>(&self, v: usize, mut f: F) { self[v].iter().for_each(|&(v, _)| f(v)) }
+    fn adj(&self, v: usize, mut f: impl FnMut(usize)) {
+        self[v].iter().for_each(|&(v, _)| f(v))
+    }
 }

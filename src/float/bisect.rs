@@ -1,10 +1,10 @@
 use super::*;
 
-pub fn bisect<F: FnMut(Float) -> bool>(
+pub fn bisect(
     mut l: Float,
     mut r: Float,
     e: Float,
-    mut pred: F,
+    mut pred: impl FnMut(Float) -> bool,
 ) -> Float {
     let k = ((r - l) / e).log2() as u32 + 2;
     for _ in 0..k {

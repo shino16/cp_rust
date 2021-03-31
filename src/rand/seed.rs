@@ -38,11 +38,3 @@ mod detail {
 }
 
 pub use self::detail::*;
-
-pub fn from_time() -> [u64; 4] {
-    use std::time::SystemTime;
-    let t = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos();
-    unsafe {
-        std::mem::transmute([t, t.wrapping_mul(0xaa3c057f_bed7578e_6b62420c_f79932a5)])
-    }
-}

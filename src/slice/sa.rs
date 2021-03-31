@@ -1,7 +1,7 @@
-pub fn sort_cyclic_shift<T: Copy + Default, F: FnMut(T) -> usize>(
+pub fn sort_cyclic_shift<T: Copy + Default>(
     s: &[T],
     max: T,
-    mut key: F,
+    mut key: impl FnMut(T) -> usize,
 ) -> Vec<usize> {
     let max_key = key(max);
     let len = s.len();
@@ -61,11 +61,11 @@ pub fn sort_cyclic_shift<T: Copy + Default, F: FnMut(T) -> usize>(
     p
 }
 
-pub fn suffix_array<T: Copy + Default, F: FnMut(T) -> usize>(
+pub fn suffix_array<T: Copy + Default>(
     s: &mut Vec<T>,
     zero: T,
     max: T,
-    key: F,
+    key: impl FnMut(T) -> usize,
 ) -> Vec<usize> {
     s.push(zero);
     let sa = sort_cyclic_shift(&s, max, key);

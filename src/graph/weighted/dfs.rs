@@ -2,28 +2,28 @@ pub use super::*;
 use crate::ds::bitset::*;
 
 /// f: (v, par, w)
-pub fn dfs<W: Copy + Default, G: WGraph<W>, F: FnMut(usize, usize, W)>(
-    g: &G,
+pub fn dfs<W: Copy + Default>(
+    g: &impl WGraph<W>,
     s: usize,
-    mut f: F,
+    mut f: impl FnMut(usize, usize, W),
 ) {
     let mut visited = new_bitset(g.len());
     visited.set_bit(s);
-    _dfs_impl(g, s, !0, W::default(), &mut visited, &mut f);
+    dfs_impl(g, s, !0, W::default(), &mut visited, &mut f);
 }
 
-fn _dfs_impl<W: Copy, G: WGraph<W>, F: FnMut(usize, usize, W)>(
-    g: &G,
+fn dfs_impl<W: Copy>(
+    g: &impl WGraph<W>,
     v: usize,
     par: usize,
     w: W,
     visited: &mut [u32],
-    f: &mut F,
+    f: &mut impl FnMut(usize, usize, W),
 ) {
     f(v, par, w);
     g.adj_w(v, |to, w| {
         if visited.set_bit(to) {
-            _dfs_impl(g, to, v, w, visited, f);
+            dfs_impl(g, to, v, w, visited, f);
         }
     });
 }

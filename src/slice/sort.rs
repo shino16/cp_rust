@@ -4,11 +4,11 @@ pub fn count_sort_bytes(slice: &[u8], out: &mut Vec<u8>, max_key: usize) {
     count_sort(slice, out, max_key, |x| x as usize);
 }
 
-pub fn count_sort<T: Copy, F: FnMut(T) -> usize>(
+pub fn count_sort<T: Copy>(
     slice: &[T],
     out: &mut Vec<T>,
     max_key: usize,
-    mut key: F,
+    mut key: impl FnMut(T) -> usize,
 ) {
     let mut count = vec![0; max_key + 1];
     for &e in slice {

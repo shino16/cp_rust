@@ -18,12 +18,13 @@ macro_rules! prtln {
         }
         $crate::prtln!(@ $dst, "");
     } };
+    (@ $dst:expr, $expr:expr, no eol) => { std::write!($dst, "{}", $expr).unwrap(); };
     (@ $dst:expr, $expr:expr) => { std::writeln!($dst, "{}", $expr).unwrap(); };
     (@ $dst:expr, $expr:expr, $($exprs:expr),*) => { {
         std::write!($dst, "{} ", $expr).unwrap();
         $crate::prtln!(@ $dst, $($exprs),*);
     } };
-    (new $var:ident) => { let mut $var = stdout_buf(); };
+    (new $var:ident $(,)?) => { let mut $var = stdout_buf(); };
     (new $var:ident, $($t:tt)*) => {
         $crate::prtln!(new $var);
         $crate::prtln!(to $var, $($t)*);
@@ -32,7 +33,10 @@ macro_rules! prtln {
         use std::io::Write;
         $crate::prtln!(@ $var, $($t)*);
     } };
-    ($($t:tt)*) => { $crate::prtln!(new __prtln, $($t)*); };
+    ($($t:tt)*) => { {
+        $crate::prtln!(new __prtln, $($t)*);
+        std::mem::drop(__prtln);
+    } };
 }
 
 #[macro_export]
@@ -66,7 +70,7 @@ macro_rules! scan_value {
     ($iter:expr, [ $t:tt ; $len:expr ]) => {
         (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()
     };
-    ($iter:expr, &[u8]) => { $iter.next().unwrap().as_bytes() };
+    ($iter:expr, bytes) => { $iter.next().unwrap().as_bytes() };
     ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };
     ($iter:expr, $t:ty) => { $iter.next().unwrap().parse::<$t>().unwrap() };
 }

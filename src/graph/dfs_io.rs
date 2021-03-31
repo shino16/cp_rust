@@ -9,13 +9,13 @@ pub enum InOut {
 
 pub use InOut::*;
 
-pub fn dfs_io<G: Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {
-    fn dfs_impl<G: Graph, F: FnMut(InOut, usize)>(
-        g: &G,
+pub fn dfs_io(g: &impl Graph, s: usize, mut f: impl FnMut(InOut, usize)) {
+    fn dfs_impl(
+        g: &impl Graph,
         v: usize,
         par: usize,
         visited: &mut [u32],
-        f: &mut F,
+        f: &mut impl FnMut(InOut, usize),
     ) {
         f(In(v), par);
         g.adj(v, |w| {

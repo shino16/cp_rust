@@ -1,7 +1,7 @@
 use crate::zo::*;
 use std::ops::Add;
 
-pub fn cuml<T: Copy, F: FnMut(T, T) -> T>(slice: &[T], zero: T, mut op: F) -> Vec<T> {
+pub fn cuml<T: Copy>(slice: &[T], zero: T, mut op: impl FnMut(T, T) -> T) -> Vec<T> {
     let mut res = Vec::with_capacity(slice.len() + 1);
     let mut tl = zero;
     res.push(tl);
@@ -12,7 +12,7 @@ pub fn cuml<T: Copy, F: FnMut(T, T) -> T>(slice: &[T], zero: T, mut op: F) -> Ve
     res
 }
 
-pub fn cumr<T: Copy, F: FnMut(T, T) -> T>(slice: &[T], zero: T, mut op: F) -> Vec<T> {
+pub fn cumr<T: Copy>(slice: &[T], zero: T, mut op: impl FnMut(T, T) -> T) -> Vec<T> {
     let mut res = Vec::with_capacity(slice.len() + 1);
     let mut tl = zero;
     res.push(tl);

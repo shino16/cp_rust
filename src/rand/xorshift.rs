@@ -4,7 +4,7 @@ pub struct Xorshift32(u32);
 
 impl Xorshift32 {
     pub fn new() -> Self {
-        Self(from_time()[0] as u32)
+        Self(seed64() as u32)
     }
     pub fn next(&mut self) -> u32 {
         let mut x = self.0;
@@ -20,7 +20,7 @@ pub struct Xorshift64(u64);
 
 impl Xorshift64 {
     pub fn new() -> Self {
-        Self(from_time()[0])
+        Self(seed64())
     }
     pub fn next(&mut self) -> u64 {
         let mut x = self.0;

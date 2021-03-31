@@ -1,4 +1,4 @@
-pub fn assign_if<T, F: Fn(&T, &T) -> bool>(v: T, var: &mut T, f: F) -> bool {
+pub fn assign_if<T>(v: T, var: &mut T, f: impl Fn(&T, &T) -> bool) -> bool {
     if f(&v, var) {
         *var = v;
         true

@@ -1,9 +1,9 @@
 pub trait Then: Sized {
-    fn then<T, F: FnOnce() -> T>(self, f: F) -> Option<T>;
+    fn then<T>(self, f: impl FnOnce() -> T) -> Option<T>;
 }
 
 impl Then for bool {
-    fn then<T, F: FnOnce() -> T>(self, f: F) -> Option<T> {
+    fn then<T>(self, f: impl FnOnce() -> T) -> Option<T> {
         if self { Some(f()) } else { None }
     }
 }

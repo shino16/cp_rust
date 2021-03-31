@@ -6,7 +6,7 @@ pub mod rle;
 pub mod sa;
 pub mod sort;
 
-pub fn partition_point<T, F: FnMut(&T) -> bool>(slice: &[T], mut pred: F) -> usize {
+pub fn partition_point<T>(slice: &[T], mut pred: impl FnMut(&T) -> bool) -> usize {
     let (mut l, mut r) = (0, slice.len()); // pred(slice[r]) == false
     while l != r {
         let mid = (l + r) / 2;

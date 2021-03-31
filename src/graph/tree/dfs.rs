@@ -1,7 +1,7 @@
 pub use super::*;
 
 /// f: (v, par)
-pub fn dfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize, mut f: F) {
+pub fn dfs(g: &impl Graph, s: usize, mut f: impl FnMut(usize, usize)) {
     let mut togo = vec![(s, !0)];
     while let Some((v, par)) = togo.pop() {
         f(v, par);
@@ -13,7 +13,7 @@ pub fn dfs<G: Graph, F: FnMut(usize, usize)>(g: &G, s: usize, mut f: F) {
     }
 }
 
-pub fn dfs_ord_par<G: Graph>(g: &G, s: usize) -> (Vec<usize>, Vec<usize>) {
+pub fn dfs_ord_par(g: &impl Graph, s: usize) -> (Vec<usize>, Vec<usize>) {
     let mut ord = Vec::with_capacity(g.len());
     let mut par = vec![!0; g.len()];
     dfs(g, s, |v, p| {

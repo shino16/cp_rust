@@ -2,7 +2,11 @@ pub fn lcp(t: &[u8], sa: &[usize]) -> Vec<usize> {
     lcp_impl(t, sa, |v| v as usize)
 }
 
-pub fn lcp_impl<T: Copy, F: FnMut(T) -> usize>(t: &[T], sa: &[usize], mut key: F) -> Vec<usize> {
+pub fn lcp_impl<T: Copy>(
+    t: &[T],
+    sa: &[usize],
+    mut key: impl FnMut(T) -> usize,
+) -> Vec<usize> {
     let n = sa.len() - 1;
     let mut rank = vec![0; n];
     for i in 1..n {

@@ -44,7 +44,7 @@ impl<T: Copy, M: Monoid<T>> FenwickTree<T, M> {
         }
         res
     }
-    pub fn partition_point<F: FnMut(T) -> bool>(&self, mut pred: F) -> usize {
+    pub fn partition_point(&self, mut pred: impl FnMut(T) -> bool) -> usize {
         let mut x = 0; // pred(&self.ask_prefix(x)) == true
         let mut w = self.data.len().next_power_of_two() >> 1;
         let mut l = self.alg.unit();

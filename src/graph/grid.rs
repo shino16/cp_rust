@@ -12,30 +12,18 @@ impl<F: Fn((usize, usize), (usize, usize)) -> bool> Grid<F> {
         let shift = w.next_power_of_two().trailing_zeros();
         Self { h, w, is_edge, shift }
     }
-    pub fn at(&self, r: usize, c: usize) -> usize {
-        (r << self.shift) + c
-    }
-    pub fn r(&self, v: usize) -> usize {
-        v >> self.shift
-    }
-    pub fn c(&self, v: usize) -> usize {
-        v & ((1 << self.shift) - 1)
-    }
+    pub fn at(&self, r: usize, c: usize) -> usize { (r << self.shift) + c }
+    pub fn r(&self, v: usize) -> usize { v >> self.shift }
+    pub fn c(&self, v: usize) -> usize { v & ((1 << self.shift) - 1) }
     pub fn pos(&self, v: usize) -> Option<(usize, usize)> {
         let (r, c) = (self.r(v), self.c(v));
-        if r < self.h && c < self.w {
-            Some((r, c))
-        } else {
-            None
-        }
+        if r < self.h && c < self.w { Some((r, c)) } else { None }
     }
 }
 
 impl<F: Fn((usize, usize), (usize, usize)) -> bool> Graph for Grid<F> {
-    fn len(&self) -> usize {
-        self.h << self.shift
-    }
-    fn adj<G: FnMut(usize)>(&self, v: usize, mut f: G) {
+    fn len(&self) -> usize { self.h << self.shift }
+    fn adj(&self, v: usize, mut f: impl FnMut(usize)) {
         if let Some((r, c)) = self.pos(v) {
             const DR: [usize; 4] = [1, !0, 0, 0];
             const DC: [usize; 4] = [0, 0, 1, !0];

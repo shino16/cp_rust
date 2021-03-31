@@ -149,7 +149,14 @@ impl<M: Mod> iter::Product for Mint<M> {
     }
 }
 impl<M: Mod> fmt::Debug for Mint<M> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let v = if self.val <= Self::M / 2 {
+            self.val as i32
+        } else {
+            self.val as i32 - Self::M as i32
+        };
+        v.fmt(f)
+    }
 }
 impl<M: Mod> fmt::Display for Mint<M> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f) }

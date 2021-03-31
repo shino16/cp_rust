@@ -11,15 +11,11 @@ fn is_accepted(v: &Vec<bool>) -> bool {
 }
 
 fn run<F, G, H, State: Clone + Ord, Alphabet: Clone>(
-    get_q: F,
-    is_accepted: G,
-    next_state: H,
+    get_q: impl FnOnce() -> Vec<State>,
+    is_accepted: impl Fn(&State) -> bool,
+    next_state: impl Fn(State, Alphabet) -> State,
     alphabet: &[Alphabet],
 ) -> Vec<BTreeSet<State>>
-where
-    F: FnOnce() -> Vec<State>,
-    G: Fn(&State) -> bool,
-    H: Fn(State, Alphabet) -> State,
 {
     let q = get_q();
     let (f, notf) = q

@@ -28,6 +28,10 @@ impl<I: Num + From<usize>> Binom<I> {
         Self { fact, inv_fact }
     }
     pub fn binom(&self, n: usize, r: usize) -> I {
-        self.fact[n] * self.inv_fact[r] * self.inv_fact[n - r]
+        if n < r {
+            I::ZERO
+        } else {
+            self.fact[n] * self.inv_fact[r] * self.inv_fact[n - r]
+        }
     }
 }

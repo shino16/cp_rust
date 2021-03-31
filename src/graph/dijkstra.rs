@@ -4,7 +4,7 @@ use crate::int::*;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
-pub fn dijkstra<I: UInt, G: WGraph<I>>(g: &G, s: usize) -> Vec<I> {
+pub fn dijkstra<I: UInt>(g: &impl WGraph<I>, s: usize) -> Vec<I> {
     let mut dist = vec![I::MAX; g.len()];
     dist[s] = I::ZERO;
     let mut togo: BinaryHeap<_> = vec![Reverse((I::ZERO, s))].into();

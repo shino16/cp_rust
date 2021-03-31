@@ -1,6 +1,6 @@
 pub use super::*;
 
-pub fn topological_sort<G: Graph>(g: &G) -> Option<Vec<usize>> {
+pub fn topological_sort(g: &impl Graph) -> Option<Vec<usize>> {
     let mut in_deg = vec![0; g.len()];
     for v in 0..g.len() {
         g.adj(v, |w| in_deg[w] += 1);

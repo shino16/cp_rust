@@ -4,7 +4,7 @@ pub struct Xoshiro256plus([u64; 4]);
 
 impl Xoshiro256plus {
     pub fn new() -> Self {
-        Self(from_time())
+        Self(seed())
     }
     pub fn next(&mut self) -> u64 {
         let s = &mut self.0;
