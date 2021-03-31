@@ -19,21 +19,21 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/dfs_io.rs\n"
   code: "pub use super::*;\nuse crate::ds::bitset::*;\n\n#[derive(Debug)]\npub enum\
-    \ InOut {\n    In(usize),\n    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G:\
-    \ Graph, F: FnMut(InOut, usize)>(g: &G, s: usize, mut f: F) {\n    fn dfs_impl<G:\
-    \ Graph, F: FnMut(InOut, usize)>(\n        g: &G,\n        v: usize,\n       \
-    \ par: usize,\n        visited: &mut [u32],\n        f: &mut F,\n    ) {\n   \
-    \     f(In(v), par);\n        g.adj(v, |w| {\n            if visited.set_bit(w)\
-    \ {\n                dfs_impl(g, w, v, visited, f);\n            }\n        });\n\
-    \        f(Out(v), par);\n    }\n    let mut visited = new_bitset(g.len());\n\
-    \    visited.set_bit(s);\n    dfs_impl(g, s, !0, &mut visited, &mut f);\n}\n"
+    \ InOut {\n    In(usize),\n    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io(g:\
+    \ &impl Graph, s: usize, mut f: impl FnMut(InOut, usize)) {\n    fn dfs_impl(\n\
+    \        g: &impl Graph,\n        v: usize,\n        par: usize,\n        visited:\
+    \ &mut [u32],\n        f: &mut impl FnMut(InOut, usize),\n    ) {\n        f(In(v),\
+    \ par);\n        g.adj(v, |w| {\n            if visited.set_bit(w) {\n       \
+    \         dfs_impl(g, w, v, visited, f);\n            }\n        });\n       \
+    \ f(Out(v), par);\n    }\n    let mut visited = new_bitset(g.len());\n    visited.set_bit(s);\n\
+    \    dfs_impl(g, s, !0, &mut visited, &mut f);\n}\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
   isVerificationFile: false
   path: src/graph/dfs_io.rs
   requiredBy: []
-  timestamp: '2021-03-19 19:54:30+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dfs_io.rs

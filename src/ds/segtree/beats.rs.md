@@ -54,8 +54,8 @@ data:
     \ self.data[l].0);\n                l += 1;\n            }\n            if r &\
     \ 1 != 0 {\n                r -= 1;\n                resr = self.on_alg.op(self.data[r].0,\
     \ resr);\n            }\n            l >>= 1;\n            r >>= 1;\n        }\n\
-    \        self.on_alg.op(resl, resr)\n    }\n    pub fn with<F: FnOnce(&mut T)\
-    \ -> R, R>(&mut self, pos: usize, f: F) -> R {\n        self.flush(pos + self.len());\n\
+    \        self.on_alg.op(resl, resr)\n    }\n    pub fn with<R>(&mut self, pos:\
+    \ usize, f: impl FnOnce(&mut T) -> R) -> R {\n        self.flush(pos + self.len());\n\
     \        let p = pos + self.len();\n        let r = f(&mut self.data[p].0);\n\
     \        self.build(pos + self.len());\n        r\n    }\n    pub fn act_over(&mut\
     \ self, l: usize, r: usize, actor: A) {\n        self.flush(trunc(l + self.len()));\n\
@@ -72,7 +72,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree/beats.rs
   requiredBy: []
-  timestamp: '2021-02-21 16:57:52+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs

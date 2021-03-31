@@ -31,8 +31,9 @@ data:
     \ while now != I::ZERO {\n            inv_fact.push(acc);\n            acc *=\
     \ now;\n            now -= I::ONE;\n        }\n        inv_fact.push(I::ONE);\n\
     \        inv_fact.reverse();\n        Self { fact, inv_fact }\n    }\n    pub\
-    \ fn binom(&self, n: usize, r: usize) -> I {\n        self.fact[n] * self.inv_fact[r]\
-    \ * self.inv_fact[n - r]\n    }\n}\n"
+    \ fn binom(&self, n: usize, r: usize) -> I {\n        if n < r {\n           \
+    \ I::ZERO\n        } else {\n            self.fact[n] * self.inv_fact[r] * self.inv_fact[n\
+    \ - r]\n        }\n    }\n}\n"
   dependsOn:
   - src/num.rs
   - src/util/trait_alias.rs
@@ -40,7 +41,7 @@ data:
   isVerificationFile: false
   path: src/math/binom.rs
   requiredBy: []
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/binom.rs

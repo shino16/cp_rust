@@ -28,13 +28,13 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/weighted.rs\n"
   code: "pub use super::*;\nuse crate::zo::ZeroOne;\n\npub mod dfs;\n\npub trait WGraph<W>:\
-    \ Graph {\n    fn adj_w<F: FnMut(usize, W)>(&self, v: usize, f: F);\n}\nimpl<T:\
-    \ ZeroOne> WGraph<T> for Vec<Vec<usize>> {\n    fn adj_w<F: FnMut(usize, T)>(&self,\
-    \ v: usize, mut f: F) {\n        self[v].iter().for_each(|&v| f(v, T::ONE));\n\
-    \    }\n}\nimpl WGraph<()> for Vec<Vec<usize>> {\n    fn adj_w<F: FnMut(usize,\
-    \ ())>(&self, v: usize, mut f: F) {\n        self[v].iter().for_each(|&v| f(v,\
-    \ ()));\n    }\n}\nimpl<W: Copy> WGraph<W> for Vec<Vec<(usize, W)>> {\n    fn\
-    \ adj_w<F: FnMut(usize, W)>(&self, v: usize, mut f: F) {\n        self[v].iter().for_each(|&(v,\
+    \ Graph {\n    fn adj_w(&self, v: usize, f: impl FnMut(usize, W));\n}\nimpl<T:\
+    \ ZeroOne> WGraph<T> for Vec<Vec<usize>> {\n    fn adj_w(&self, v: usize, mut\
+    \ f: impl FnMut(usize, T)) {\n        self[v].iter().for_each(|&v| f(v, T::ONE));\n\
+    \    }\n}\nimpl WGraph<()> for Vec<Vec<usize>> {\n    fn adj_w(&self, v: usize,\
+    \ mut f: impl FnMut(usize, ())) {\n        self[v].iter().for_each(|&v| f(v, ()));\n\
+    \    }\n}\nimpl<W: Copy> WGraph<W> for Vec<Vec<(usize, W)>> {\n    fn adj_w(&self,\
+    \ v: usize, mut f: impl FnMut(usize, W)) {\n        self[v].iter().for_each(|&(v,\
     \ w)| f(v, w));\n    }\n}\n"
   dependsOn:
   - src/graph.rs
@@ -45,7 +45,7 @@ data:
   - src/graph/weighted/dfs.rs
   - src/graph/dijkstra.rs
   - src/graph/euler_tour.rs
-  timestamp: '2021-03-24 23:44:55+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/weighted.rs

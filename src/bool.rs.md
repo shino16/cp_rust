@@ -12,14 +12,14 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/bool.rs\n"
-  code: "pub trait Then: Sized {\n    fn then<T, F: FnOnce() -> T>(self, f: F) ->\
-    \ Option<T>;\n}\n\nimpl Then for bool {\n    fn then<T, F: FnOnce() -> T>(self,\
-    \ f: F) -> Option<T> {\n        if self { Some(f()) } else { None }\n    }\n}\n"
+  code: "pub trait Then: Sized {\n    fn then<T>(self, f: impl FnOnce() -> T) -> Option<T>;\n\
+    }\n\nimpl Then for bool {\n    fn then<T>(self, f: impl FnOnce() -> T) -> Option<T>\
+    \ {\n        if self { Some(f()) } else { None }\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/bool.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/bool.rs

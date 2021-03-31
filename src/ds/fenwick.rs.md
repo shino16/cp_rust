@@ -45,19 +45,19 @@ data:
     \      self.data.push(self.alg.unit());\n        self.add(self.data.len() - 1,\
     \ v);\n    }\n    pub fn ask_prefix(&self, mut r: usize) -> T {\n        let mut\
     \ res = self.alg.unit();\n        while r != 0 {\n            res = self.alg.op(self.data[r],\
-    \ res);\n            r -= lsb(r);\n        }\n        res\n    }\n    pub fn partition_point<F:\
-    \ FnMut(T) -> bool>(&self, mut pred: F) -> usize {\n        let mut x = 0; //\
-    \ pred(&self.ask_prefix(x)) == true\n        let mut w = self.data.len().next_power_of_two()\
-    \ >> 1;\n        let mut l = self.alg.unit();\n        while w != 0 {\n      \
-    \      if x + w < self.data.len() && pred(self.alg.op(l, self.data[x + w])) {\n\
-    \                x += w;\n                l = self.alg.op(l, self.data[x + w]);\n\
-    \            }\n            w >>= 1;\n        }\n        x + 1\n    }\n    pub\
-    \ fn lower_bound(&self, v: T) -> usize\n    where\n        T: Ord,\n    {\n  \
-    \      self.partition_point(|x| x < v)\n    }\n    pub fn upper_bound(&self, v:\
-    \ T) -> usize\n    where\n        T: Ord,\n    {\n        self.partition_point(|x|\
-    \ x <= v)\n    }\n}\n\nimpl<T: Copy, M: Group<T>> FenwickTree<T, M> {\n    pub\
-    \ fn sub(&mut self, pos: usize, v: T) {\n        self.add(pos, self.alg.inv(v));\n\
-    \    }\n    pub fn ask(&self, l: usize, r: usize) -> T {\n        self.alg.op(self.alg.inv(self.ask_prefix(l)),\
+    \ res);\n            r -= lsb(r);\n        }\n        res\n    }\n    pub fn partition_point(&self,\
+    \ mut pred: impl FnMut(T) -> bool) -> usize {\n        let mut x = 0; // pred(&self.ask_prefix(x))\
+    \ == true\n        let mut w = self.data.len().next_power_of_two() >> 1;\n   \
+    \     let mut l = self.alg.unit();\n        while w != 0 {\n            if x +\
+    \ w < self.data.len() && pred(self.alg.op(l, self.data[x + w])) {\n          \
+    \      x += w;\n                l = self.alg.op(l, self.data[x + w]);\n      \
+    \      }\n            w >>= 1;\n        }\n        x + 1\n    }\n    pub fn lower_bound(&self,\
+    \ v: T) -> usize\n    where\n        T: Ord,\n    {\n        self.partition_point(|x|\
+    \ x < v)\n    }\n    pub fn upper_bound(&self, v: T) -> usize\n    where\n   \
+    \     T: Ord,\n    {\n        self.partition_point(|x| x <= v)\n    }\n}\n\nimpl<T:\
+    \ Copy, M: Group<T>> FenwickTree<T, M> {\n    pub fn sub(&mut self, pos: usize,\
+    \ v: T) {\n        self.add(pos, self.alg.inv(v));\n    }\n    pub fn ask(&self,\
+    \ l: usize, r: usize) -> T {\n        self.alg.op(self.alg.inv(self.ask_prefix(l)),\
     \ self.ask_prefix(r))\n    }\n}\n\nfn lsb(n: usize) -> usize {\n    n & (!n +\
     \ 1)\n}\n"
   dependsOn:
@@ -69,7 +69,7 @@ data:
   isVerificationFile: false
   path: src/ds/fenwick.rs
   requiredBy: []
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

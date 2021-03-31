@@ -15,12 +15,12 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice/cum.rs\n"
-  code: "use crate::zo::*;\nuse std::ops::Add;\n\npub fn cuml<T: Copy, F: FnMut(T,\
-    \ T) -> T>(slice: &[T], zero: T, mut op: F) -> Vec<T> {\n    let mut res = Vec::with_capacity(slice.len()\
+  code: "use crate::zo::*;\nuse std::ops::Add;\n\npub fn cuml<T: Copy>(slice: &[T],\
+    \ zero: T, mut op: impl FnMut(T, T) -> T) -> Vec<T> {\n    let mut res = Vec::with_capacity(slice.len()\
     \ + 1);\n    let mut tl = zero;\n    res.push(tl);\n    for &e in slice {\n  \
     \      tl = op(tl, e);\n        res.push(tl);\n    }\n    res\n}\n\npub fn cumr<T:\
-    \ Copy, F: FnMut(T, T) -> T>(slice: &[T], zero: T, mut op: F) -> Vec<T> {\n  \
-    \  let mut res = Vec::with_capacity(slice.len() + 1);\n    let mut tl = zero;\n\
+    \ Copy>(slice: &[T], zero: T, mut op: impl FnMut(T, T) -> T) -> Vec<T> {\n   \
+    \ let mut res = Vec::with_capacity(slice.len() + 1);\n    let mut tl = zero;\n\
     \    res.push(tl);\n    for &e in slice.iter().rev() {\n        tl = op(e, tl);\n\
     \        res.push(tl);\n    }\n    res.reverse();\n    res\n}\n\npub fn cuml_sum<T:\
     \ Copy + ZeroOne + Add<T, Output = T>>(slice: &[T]) -> Vec<T> {\n    cuml(slice,\
@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

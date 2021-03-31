@@ -17,7 +17,7 @@ data:
     // pub use crate::alg::*;
 
 
-    // pub fn rerooting_dp<G: Graph, T: Copy, M: Group<T>>(g: &G, s: usize, alg: M)
+    // pub fn rerooting_dp<T: Copy, M: Group<T>>(g: &impl Graph, s: usize, alg: M)
     -> Vec<T> {
 
     //     let mut state = vec![alg.unit(); g.len()];
@@ -79,7 +79,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/reroot.rs
   requiredBy: []
-  timestamp: '2021-03-06 13:39:22+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/reroot.rs

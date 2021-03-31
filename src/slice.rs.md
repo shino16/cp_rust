@@ -16,10 +16,10 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/slice.rs\n"
   code: "pub mod cum;\npub mod fill;\npub mod lcp;\npub mod perm;\npub mod rle;\n\
-    pub mod sa;\npub mod sort;\n\npub fn partition_point<T, F: FnMut(&T) -> bool>(slice:\
-    \ &[T], mut pred: F) -> usize {\n    let (mut l, mut r) = (0, slice.len()); //\
-    \ pred(slice[r]) == false\n    while l != r {\n        let mid = (l + r) / 2;\n\
-    \        let val = unsafe { slice.get_unchecked(mid) };\n        if pred(val)\
+    pub mod sa;\npub mod sort;\n\npub fn partition_point<T>(slice: &[T], mut pred:\
+    \ impl FnMut(&T) -> bool) -> usize {\n    let (mut l, mut r) = (0, slice.len());\
+    \ // pred(slice[r]) == false\n    while l != r {\n        let mid = (l + r) /\
+    \ 2;\n        let val = unsafe { slice.get_unchecked(mid) };\n        if pred(val)\
     \ {\n            l = mid + 1;\n        } else {\n            r = mid;\n      \
     \  }\n    }\n    r\n}\n\npub fn lower_bound<T: Ord>(slice: &[T], v: &T) -> usize\
     \ {\n    partition_point(slice, |x| x < v)\n}\n\npub fn upper_bound<T: Ord>(slice:\
@@ -29,7 +29,7 @@ data:
   path: src/slice.rs
   requiredBy:
   - src/hash.rs
-  timestamp: '2021-03-14 02:25:56+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice.rs

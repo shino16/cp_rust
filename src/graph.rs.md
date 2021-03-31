@@ -56,13 +56,13 @@ data:
     RuntimeError: bundler is not specified: src/graph.rs\n"
   code: "pub mod bfs;\npub mod dfs;\npub mod dfs_io;\npub mod dijkstra;\npub mod euler_tour;\n\
     pub mod grid;\npub mod io;\npub mod max_flow;\npub mod tree;\npub mod tsort;\n\
-    pub mod weighted;\n\npub trait Graph {\n    fn len(&self) -> usize;\n    fn adj<F:\
-    \ FnMut(usize)>(&self, v: usize, f: F);\n}\nimpl Graph for Vec<Vec<usize>> {\n\
-    \    fn len(&self) -> usize { self.len() }\n    fn adj<F: FnMut(usize)>(&self,\
-    \ v: usize, f: F) { self[v].iter().copied().for_each(f); }\n}\nimpl<W> Graph for\
-    \ Vec<Vec<(usize, W)>> {\n    fn len(&self) -> usize { self.len() }\n    fn adj<F:\
-    \ FnMut(usize)>(&self, v: usize, mut f: F) { self[v].iter().for_each(|&(v, _)|\
-    \ f(v)) }\n}\n"
+    pub mod weighted;\n\npub trait Graph {\n    fn len(&self) -> usize;\n    fn adj(&self,\
+    \ v: usize, f: impl FnMut(usize));\n}\nimpl Graph for Vec<Vec<usize>> {\n    fn\
+    \ len(&self) -> usize { self.len() }\n    fn adj(&self, v: usize, f: impl FnMut(usize))\
+    \ {\n        self[v].iter().copied().for_each(f);\n    }\n}\nimpl<W> Graph for\
+    \ Vec<Vec<(usize, W)>> {\n    fn len(&self) -> usize { self.len() }\n    fn adj(&self,\
+    \ v: usize, mut f: impl FnMut(usize)) {\n        self[v].iter().for_each(|&(v,\
+    \ _)| f(v))\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/graph.rs
@@ -80,7 +80,7 @@ data:
   - src/graph/tree/dfs.rs
   - src/graph/tree/dfs_io.rs
   - src/graph/tree.rs
-  timestamp: '2021-03-14 02:25:56+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

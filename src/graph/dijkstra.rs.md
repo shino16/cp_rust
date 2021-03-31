@@ -41,7 +41,7 @@ data:
     RuntimeError: bundler is not specified: src/graph/dijkstra.rs\n"
   code: "pub use super::weighted::*;\nuse crate::assign::*;\nuse crate::int::*;\n\
     use std::cmp::Reverse;\nuse std::collections::BinaryHeap;\n\npub fn dijkstra<I:\
-    \ UInt, G: WGraph<I>>(g: &G, s: usize) -> Vec<I> {\n    let mut dist = vec![I::MAX;\
+    \ UInt>(g: &impl WGraph<I>, s: usize) -> Vec<I> {\n    let mut dist = vec![I::MAX;\
     \ g.len()];\n    dist[s] = I::ZERO;\n    let mut togo: BinaryHeap<_> = vec![Reverse((I::ZERO,\
     \ s))].into();\n    while let Some(Reverse((d, v))) = togo.pop() {\n        g.adj_w(v,\
     \ |w, e| {\n            if assign_if(d + e, &mut dist[w], |x, y| x < y) {\n  \
@@ -60,7 +60,7 @@ data:
   isVerificationFile: false
   path: src/graph/dijkstra.rs
   requiredBy: []
-  timestamp: '2021-03-24 23:44:55+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dijkstra.rs

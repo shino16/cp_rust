@@ -34,9 +34,9 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/euler_tour.rs\n"
   code: "pub use super::weighted::*;\npub use crate::alg::arith::*;\n\npub fn euler_tour<T:\
-    \ Copy, M: Group<T>, G: WGraph<T>>(\n    g: &G,\n    s: usize,\n    alg: M,\n\
-    ) -> (Vec<T>, Vec<usize>, Vec<usize>, Vec<(usize, usize)>) {\n    let mut edges\
-    \ = Vec::with_capacity(g.len() * 2);\n    let mut togo = vec![(s, !0, alg.unit())];\n\
+    \ Copy>(\n    g: &impl WGraph<T>,\n    s: usize,\n    alg: impl Group<T>,\n) ->\
+    \ (Vec<T>, Vec<usize>, Vec<usize>, Vec<(usize, usize)>) {\n    let mut edges =\
+    \ Vec::with_capacity(g.len() * 2);\n    let mut togo = vec![(s, !0, alg.unit())];\n\
     \    togo.reserve(g.len() * 2);\n    let mut range = vec![(!0, !0); g.len()];\n\
     \    let mut us = Vec::with_capacity(g.len() * 2);\n    let mut vs = us.clone();\n\
     \    while let Some((v, par, e)) = togo.pop() {\n        if v > !v {\n       \
@@ -58,7 +58,7 @@ data:
   isVerificationFile: false
   path: src/graph/euler_tour.rs
   requiredBy: []
-  timestamp: '2021-03-24 23:44:55+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/euler_tour.rs

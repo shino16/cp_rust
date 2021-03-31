@@ -96,7 +96,9 @@ data:
     \ iter::Product for Mint<M> {\n    fn product<I: Iterator<Item = Self>>(iter:\
     \ I) -> Self {\n        iter.fold(Self::from_val(1), |b, x| b * x)\n    }\n}\n\
     impl<M: Mod> fmt::Debug for Mint<M> {\n    fn fmt(&self, f: &mut fmt::Formatter)\
-    \ -> fmt::Result { self.val.fmt(f) }\n}\nimpl<M: Mod> fmt::Display for Mint<M>\
+    \ -> fmt::Result {\n        let v = if self.val <= Self::M / 2 {\n           \
+    \ self.val as i32\n        } else {\n            self.val as i32 - Self::M as\
+    \ i32\n        };\n        v.fmt(f)\n    }\n}\nimpl<M: Mod> fmt::Display for Mint<M>\
     \ {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f)\
     \ }\n}\nimpl<M: Mod> FromStr for Mint<M> {\n    type Err = <u32 as FromStr>::Err;\n\
     \    fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::from)\
@@ -112,7 +114,7 @@ data:
   - src/mint/io.rs
   - src/mint/conv.rs
   - src/tests.rs
-  timestamp: '2021-03-26 09:38:33+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

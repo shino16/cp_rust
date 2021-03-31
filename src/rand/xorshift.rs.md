@@ -16,20 +16,19 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/rand/xorshift.rs\n"
   code: "use crate::rand::seed::*;\n\npub struct Xorshift32(u32);\n\nimpl Xorshift32\
-    \ {\n    pub fn new() -> Self {\n        Self(from_time()[0] as u32)\n    }\n\
-    \    pub fn next(&mut self) -> u32 {\n        let mut x = self.0;\n        x ^=\
-    \ x << 13;\n        x ^= x >> 17;\n        x ^= x << 5;\n        self.0 = x;\n\
-    \        x\n    }\n}\n\npub struct Xorshift64(u64);\n\nimpl Xorshift64 {\n   \
-    \ pub fn new() -> Self {\n        Self(from_time()[0])\n    }\n    pub fn next(&mut\
-    \ self) -> u64 {\n        let mut x = self.0;\n        x ^= x << 13;\n       \
-    \ x ^= x >> 7;\n        x ^= x << 17;\n        self.0 = x;\n        x\n    }\n\
-    }\n"
+    \ {\n    pub fn new() -> Self {\n        Self(seed64() as u32)\n    }\n    pub\
+    \ fn next(&mut self) -> u32 {\n        let mut x = self.0;\n        x ^= x <<\
+    \ 13;\n        x ^= x >> 17;\n        x ^= x << 5;\n        self.0 = x;\n    \
+    \    x\n    }\n}\n\npub struct Xorshift64(u64);\n\nimpl Xorshift64 {\n    pub\
+    \ fn new() -> Self {\n        Self(seed64())\n    }\n    pub fn next(&mut self)\
+    \ -> u64 {\n        let mut x = self.0;\n        x ^= x << 13;\n        x ^= x\
+    \ >> 7;\n        x ^= x << 17;\n        self.0 = x;\n        x\n    }\n}\n"
   dependsOn:
   - src/rand/seed.rs
   isVerificationFile: false
   path: src/rand/xorshift.rs
   requiredBy: []
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/rand/xorshift.rs

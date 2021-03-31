@@ -15,7 +15,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tsort.rs\n"
-  code: "pub use super::*;\n\npub fn topological_sort<G: Graph>(g: &G) -> Option<Vec<usize>>\
+  code: "pub use super::*;\n\npub fn topological_sort(g: &impl Graph) -> Option<Vec<usize>>\
     \ {\n    let mut in_deg = vec![0; g.len()];\n    for v in 0..g.len() {\n     \
     \   g.adj(v, |w| in_deg[w] += 1);\n    }\n    let mut stack = Vec::with_capacity(g.len());\n\
     \    for v in 0..g.len() {\n        if in_deg[v] == 0 {\n            stack.push(v);\n\
@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: src/graph/tsort.rs
   requiredBy: []
-  timestamp: '2021-03-14 02:25:56+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tsort.rs

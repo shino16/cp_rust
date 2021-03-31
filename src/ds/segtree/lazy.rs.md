@@ -52,12 +52,12 @@ data:
     \            }\n            if r & 1 != 0 {\n                r -= 1;\n       \
     \         resr = self.on_alg.op(self.data[r].0, resr);\n            }\n      \
     \      l >>= 1;\n            r >>= 1;\n        }\n        self.on_alg.op(resl,\
-    \ resr)\n    }\n    pub fn with<F: FnOnce(&mut T) -> R, R>(&mut self, pos: usize,\
-    \ f: F) -> R {\n        self.flush(pos + self.len());\n        let p = pos + self.len();\n\
-    \        let r = f(&mut self.data[p].0);\n        self.build(trunc(pos + self.len()));\n\
-    \        r\n    }\n    pub fn act_over(&mut self, l: usize, r: usize, actor: A)\
-    \ {\n        self.flush(trunc(l + self.len()));\n        self.flush(trunc(r +\
-    \ self.len()) - 1);\n        {\n            let (mut l, mut r) = (l + self.len(),\
+    \ resr)\n    }\n    pub fn with<R>(&mut self, pos: usize, f: impl FnOnce(&mut\
+    \ T) -> R) -> R {\n        self.flush(pos + self.len());\n        let p = pos\
+    \ + self.len();\n        let r = f(&mut self.data[p].0);\n        self.build(trunc(pos\
+    \ + self.len()));\n        r\n    }\n    pub fn act_over(&mut self, l: usize,\
+    \ r: usize, actor: A) {\n        self.flush(trunc(l + self.len()));\n        self.flush(trunc(r\
+    \ + self.len()) - 1);\n        {\n            let (mut l, mut r) = (l + self.len(),\
     \ r + self.len());\n            while l < r {\n                if l & 1 != 0 {\n\
     \                    self.apply(l, actor);\n                    l += 1;\n    \
     \            }\n                if r & 1 != 0 {\n                    r -= 1;\n\
@@ -73,7 +73,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree/lazy.rs
   requiredBy: []
-  timestamp: '2021-03-25 23:36:43+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

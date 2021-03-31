@@ -37,10 +37,7 @@ data:
     mod detail {\n    pub fn seed() -> [u64; 4] {\n        [\n            0x35fee63b_fd9f69cf,\n\
     \            0x9fd0680a_f9e37356,\n            0x7454d5e3_d982527e,\n        \
     \    0x35d1849a_77925163,\n        ]\n    }\n    pub fn seed64() -> u64 { 0x17adfb20_0995921c\
-    \ }\n}\n\npub use self::detail::*;\n\npub fn from_time() -> [u64; 4] {\n    use\
-    \ std::time::SystemTime;\n    let t = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos();\n\
-    \    unsafe {\n        std::mem::transmute([t, t.wrapping_mul(0xaa3c057f_bed7578e_6b62420c_f79932a5)])\n\
-    \    }\n}\n"
+    \ }\n}\n\npub use self::detail::*;\n"
   dependsOn: []
   isVerificationFile: false
   path: src/rand/seed.rs
@@ -48,7 +45,7 @@ data:
   - src/rand/xorshift.rs
   - src/rand/xoshiro256plus.rs
   - src/tests.rs
-  timestamp: '2021-03-14 05:03:05+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

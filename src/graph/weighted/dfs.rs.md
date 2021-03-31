@@ -25,14 +25,13 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/weighted/dfs.rs\n"
   code: "pub use super::*;\nuse crate::ds::bitset::*;\n\n/// f: (v, par, w)\npub fn\
-    \ dfs<W: Copy + Default, G: WGraph<W>, F: FnMut(usize, usize, W)>(\n    g: &G,\n\
-    \    s: usize,\n    mut f: F,\n) {\n    let mut visited = new_bitset(g.len());\n\
-    \    visited.set_bit(s);\n    _dfs_impl(g, s, !0, W::default(), &mut visited,\
-    \ &mut f);\n}\n\nfn _dfs_impl<W: Copy, G: WGraph<W>, F: FnMut(usize, usize, W)>(\n\
-    \    g: &G,\n    v: usize,\n    par: usize,\n    w: W,\n    visited: &mut [u32],\n\
-    \    f: &mut F,\n) {\n    f(v, par, w);\n    g.adj_w(v, |to, w| {\n        if\
-    \ visited.set_bit(to) {\n            _dfs_impl(g, to, v, w, visited, f);\n   \
-    \     }\n    });\n}\n"
+    \ dfs<W: Copy + Default>(\n    g: &impl WGraph<W>,\n    s: usize,\n    mut f:\
+    \ impl FnMut(usize, usize, W),\n) {\n    let mut visited = new_bitset(g.len());\n\
+    \    visited.set_bit(s);\n    dfs_impl(g, s, !0, W::default(), &mut visited, &mut\
+    \ f);\n}\n\nfn dfs_impl<W: Copy>(\n    g: &impl WGraph<W>,\n    v: usize,\n  \
+    \  par: usize,\n    w: W,\n    visited: &mut [u32],\n    f: &mut impl FnMut(usize,\
+    \ usize, W),\n) {\n    f(v, par, w);\n    g.adj_w(v, |to, w| {\n        if visited.set_bit(to)\
+    \ {\n            dfs_impl(g, to, v, w, visited, f);\n        }\n    });\n}\n"
   dependsOn:
   - src/ds/bitset.rs
   - src/graph.rs
@@ -41,7 +40,7 @@ data:
   isVerificationFile: false
   path: src/graph/weighted/dfs.rs
   requiredBy: []
-  timestamp: '2021-03-25 18:00:49+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/weighted/dfs.rs

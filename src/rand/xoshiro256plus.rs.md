@@ -22,10 +22,10 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/rand/xoshiro256plus.rs\n"
   code: "use crate::rand::seed::*;\n\npub struct Xoshiro256plus([u64; 4]);\n\nimpl\
-    \ Xoshiro256plus {\n    pub fn new() -> Self {\n        Self(from_time())\n  \
-    \  }\n    pub fn next(&mut self) -> u64 {\n        let s = &mut self.0;\n    \
-    \    let t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n     \
-    \   s[1] ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = s[3].rotate_left(45);\n\
+    \ Xoshiro256plus {\n    pub fn new() -> Self {\n        Self(seed())\n    }\n\
+    \    pub fn next(&mut self) -> u64 {\n        let s = &mut self.0;\n        let\
+    \ t = s[1] << 17;\n        s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1]\
+    \ ^= s[2];\n        s[0] ^= s[3];\n        s[2] ^= t;\n        s[3] = s[3].rotate_left(45);\n\
     \        s[0].wrapping_add(s[3])\n    }\n    /// skip 2^128 steps\n    pub fn\
     \ split(&mut self) -> Self {\n        static JUMP: [u64; 4] =\n            [0x180ec6d33cfd0aba,\
     \ 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc4529b1661c];\n        let mut\
@@ -40,7 +40,7 @@ data:
   path: src/rand/xoshiro256plus.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-03-14 05:03:05+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

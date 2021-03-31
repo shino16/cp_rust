@@ -22,20 +22,20 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/dfs_io.rs\n"
   code: "pub use super::*;\n\n#[derive(Debug)]\npub enum InOut {\n    In(usize),\n\
-    \    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io<G: Graph, F: FnMut(InOut,\
-    \ usize)>(g: &G, s: usize, mut f: F) {\n    let mut togo = vec![(s, !0)];\n  \
-    \  while let Some((v, par)) = togo.pop() {\n        if  v > !v {\n           \
-    \ f(Out(!v), par);\n        } else {\n            f(In(v), par);\n           \
-    \ togo.push((!v, par));\n            g.adj(v, |w| {\n                if w != par\
-    \ {\n                    togo.push((w, v));\n                }\n            });\n\
-    \        }\n    }\n}\n"
+    \    Out(usize),\n}\n\npub use InOut::*;\n\npub fn dfs_io(g: &impl Graph, s: usize,\
+    \ mut f: impl FnMut(InOut, usize)) {\n    let mut togo = vec![(s, !0)];\n    while\
+    \ let Some((v, par)) = togo.pop() {\n        if v > !v {\n            f(Out(!v),\
+    \ par);\n        } else {\n            f(In(v), par);\n            togo.push((!v,\
+    \ par));\n            g.adj(v, |w| {\n                if w != par {\n        \
+    \            togo.push((w, v));\n                }\n            });\n        }\n\
+    \    }\n}\n"
   dependsOn:
   - src/graph.rs
   - src/graph/tree.rs
   isVerificationFile: false
   path: src/graph/tree/dfs_io.rs
   requiredBy: []
-  timestamp: '2021-03-14 02:25:56+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

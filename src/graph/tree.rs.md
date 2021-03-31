@@ -42,7 +42,7 @@ data:
   requiredBy:
   - src/graph/tree/dfs.rs
   - src/graph/tree/dfs_io.rs
-  timestamp: '2021-03-14 02:25:56+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

@@ -27,17 +27,19 @@ data:
     \ = $expr.into_iter();\n        if let Some(expr) = iter.next() {\n          \
     \  std::write!($dst, \"{}\", expr).unwrap();\n            for expr in iter { std::write!($dst,\
     \ \"{}{}\", $sep, expr).unwrap(); }\n        }\n        $crate::prtln!(@ $dst,\
-    \ \"\");\n    } };\n    (@ $dst:expr, $expr:expr) => { std::writeln!($dst, \"\
-    {}\", $expr).unwrap(); };\n    (@ $dst:expr, $expr:expr, $($exprs:expr),*) =>\
-    \ { {\n        std::write!($dst, \"{} \", $expr).unwrap();\n        $crate::prtln!(@\
-    \ $dst, $($exprs),*);\n    } };\n    (new $var:ident) => { let mut $var = stdout_buf();\
-    \ };\n    (new $var:ident, $($t:tt)*) => {\n        $crate::prtln!(new $var);\n\
-    \        $crate::prtln!(to $var, $($t)*);\n    };\n    (to $var:ident, $($t:tt)*)\
-    \ => { {\n        use std::io::Write;\n        $crate::prtln!(@ $var, $($t)*);\n\
-    \    } };\n    ($($t:tt)*) => { $crate::prtln!(new __prtln, $($t)*); };\n}\n\n\
-    #[macro_export]\nmacro_rules! scan {\n    (@ $iter:expr $(,)?) => {};\n    (@\
-    \ $iter:expr, mut $var:ident : $t:tt $($r:tt)*) => {\n        let mut $var = $crate::scan_value!($iter,\
-    \ $t);\n        $crate::scan!(@ $iter $($r)*)\n    };\n    (@ $iter:expr, $var:ident\
+    \ \"\");\n    } };\n    (@ $dst:expr, $expr:expr, no eol) => { std::write!($dst,\
+    \ \"{}\", $expr).unwrap(); };\n    (@ $dst:expr, $expr:expr) => { std::writeln!($dst,\
+    \ \"{}\", $expr).unwrap(); };\n    (@ $dst:expr, $expr:expr, $($exprs:expr),*)\
+    \ => { {\n        std::write!($dst, \"{} \", $expr).unwrap();\n        $crate::prtln!(@\
+    \ $dst, $($exprs),*);\n    } };\n    (new $var:ident $(,)?) => { let mut $var\
+    \ = stdout_buf(); };\n    (new $var:ident, $($t:tt)*) => {\n        $crate::prtln!(new\
+    \ $var);\n        $crate::prtln!(to $var, $($t)*);\n    };\n    (to $var:ident,\
+    \ $($t:tt)*) => { {\n        use std::io::Write;\n        $crate::prtln!(@ $var,\
+    \ $($t)*);\n    } };\n    ($($t:tt)*) => { {\n        $crate::prtln!(new __prtln,\
+    \ $($t)*);\n        std::mem::drop(__prtln);\n    } };\n}\n\n#[macro_export]\n\
+    macro_rules! scan {\n    (@ $iter:expr $(,)?) => {};\n    (@ $iter:expr, mut $var:ident\
+    \ : $t:tt $($r:tt)*) => {\n        let mut $var = $crate::scan_value!($iter, $t);\n\
+    \        $crate::scan!(@ $iter $($r)*)\n    };\n    (@ $iter:expr, $var:ident\
     \ : $t:tt $($r:tt)*) => {\n        let $var = $crate::scan_value!($iter, $t);\n\
     \        $crate::scan!(@ $iter $($r)*)\n    };\n    (@ $iter:expr, $pat:pat in\
     \ $t:tt $($r:tt)*) => {\n        let $pat = $crate::scan_value!($iter, $t);\n\
@@ -49,7 +51,7 @@ data:
     \ __scan, $($r)*); };\n}\n\n#[macro_export]\nmacro_rules! scan_value {\n    ($iter:expr,\
     \ ( $($t:tt),* )) => { ( $($crate::scan_value!($iter, $t)),* ) };\n    ($iter:expr,\
     \ [ $t:tt ; $len:expr ]) => {\n        (0..$len).map(|_| $crate::scan_value!($iter,\
-    \ $t)).collect::<Vec<_>>()\n    };\n    ($iter:expr, &[u8]) => { $iter.next().unwrap().as_bytes()\
+    \ $t)).collect::<Vec<_>>()\n    };\n    ($iter:expr, bytes) => { $iter.next().unwrap().as_bytes()\
     \ };\n    ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };\n\
     \    ($iter:expr, $t:ty) => { $iter.next().unwrap().parse::<$t>().unwrap() };\n\
     }\n"
@@ -59,7 +61,7 @@ data:
   path: src/stdio.rs
   requiredBy:
   - src/stdio/buf.rs
-  timestamp: '2021-03-26 09:38:33+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/stdio.rs

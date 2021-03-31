@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: src/stdio/buf.rs
   requiredBy: []
-  timestamp: '2021-03-26 09:38:33+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/stdio/buf.rs

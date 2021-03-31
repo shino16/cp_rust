@@ -31,9 +31,9 @@ data:
     \ p != 0 {\n            self.data[p] = self.alg.op(self.data[p << 1], self.data[p\
     \ << 1 | 1]);\n            p >>= 1;\n        }\n    }\n    pub fn add(&mut self,\
     \ pos: usize, v: T) {\n        let p = pos + self.len();\n        self.data[p]\
-    \ = self.alg.op(self.data[p], v);\n        self.build(p);\n    }\n    pub fn with<F:\
-    \ FnOnce(&mut T) -> R, R>(&mut self, pos: usize, f: F) -> R {\n        let p =\
-    \ pos + self.len();\n        let r = f(&mut self.data[p]);\n        self.build(p);\n\
+    \ = self.alg.op(self.data[p], v);\n        self.build(p);\n    }\n    pub fn with<R>(&mut\
+    \ self, pos: usize, f: impl FnOnce(&mut T) -> R) -> R {\n        let p = pos +\
+    \ self.len();\n        let r = f(&mut self.data[p]);\n        self.build(p);\n\
     \        r\n    }\n    pub fn ask(&self, mut l: usize, mut r: usize) -> T {\n\
     \        let (mut resl, mut resr) = (self.alg.unit(), self.alg.unit());\n    \
     \    l += self.len();\n        r += self.len();\n        while l < r {\n     \
@@ -49,7 +49,7 @@ data:
   isVerificationFile: false
   path: src/ds/segtree.rs
   requiredBy: []
-  timestamp: '2021-02-22 02:21:06+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_test.rs

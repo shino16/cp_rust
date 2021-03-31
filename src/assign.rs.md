@@ -15,7 +15,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/assign.rs\n"
-  code: "pub fn assign_if<T, F: Fn(&T, &T) -> bool>(v: T, var: &mut T, f: F) -> bool\
+  code: "pub fn assign_if<T>(v: T, var: &mut T, f: impl Fn(&T, &T) -> bool) -> bool\
     \ {\n    if f(&v, var) {\n        *var = v;\n        true\n    } else {\n    \
     \    false\n    }\n}\n\npub fn chmin<T: Ord>(v: T, var: &mut T) -> bool {\n  \
     \  assign_if(v, var, |x, y| x < y)\n}\n\npub fn chmax<T: Ord>(v: T, var: &mut\
@@ -25,7 +25,7 @@ data:
   path: src/assign.rs
   requiredBy:
   - src/graph/dijkstra.rs
-  timestamp: '2021-02-13 16:52:06+09:00'
+  timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/assign.rs
