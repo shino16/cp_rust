@@ -11,9 +11,6 @@ data:
     path: src/dfa.rs
     title: src/dfa.rs
   - icon: ':heavy_check_mark:'
-    path: src/fxhash.rs
-    title: src/fxhash.rs
-  - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':heavy_check_mark:'
@@ -72,7 +69,6 @@ data:
   - src/bounded.rs
   - src/cast.rs
   - src/dfa.rs
-  - src/fxhash.rs
   - src/int.rs
   - src/io.rs
   - src/mint.rs
@@ -83,7 +79,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/dfa_test.rs
   requiredBy: []
-  timestamp: '2021-04-03 12:04:20+09:00'
+  timestamp: '2021-04-03 13:43:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/dfa_test.rs

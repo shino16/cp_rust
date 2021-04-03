@@ -50,9 +50,6 @@ data:
       path: src/func.rs
       title: src/func.rs
     - icon: ':heavy_check_mark:'
-      path: src/fxhash.rs
-      title: src/fxhash.rs
-    - icon: ':heavy_check_mark:'
       path: src/gf.rs
       title: src/gf.rs
     - icon: ':heavy_check_mark:'

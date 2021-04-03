@@ -14,9 +14,6 @@ data:
     path: src/func/memo.rs
     title: src/func/memo.rs
   - icon: ':heavy_check_mark:'
-    path: src/fxhash.rs
-    title: src/fxhash.rs
-  - icon: ':heavy_check_mark:'
     path: src/gf.rs
     title: src/gf.rs
   - icon: ':heavy_check_mark:'
@@ -167,7 +164,6 @@ data:
   - src/bounded.rs
   - src/cast.rs
   - src/func/memo.rs
-  - src/fxhash.rs
   - src/gf.rs
   - src/int.rs
   - src/int/gcd.rs
@@ -187,7 +183,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-04-03 12:04:20+09:00'
+  timestamp: '2021-04-03 13:43:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

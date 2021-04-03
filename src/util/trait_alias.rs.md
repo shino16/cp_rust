@@ -151,7 +151,7 @@ data:
   - src/graph/euler_tour.rs
   - src/int.rs
   - src/dfa.rs
-  timestamp: '2021-04-03 11:26:56+09:00'
+  timestamp: '2021-04-03 12:55:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

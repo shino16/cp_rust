@@ -30,7 +30,7 @@ data:
   isVerificationFile: false
   path: src/ds/pool.rs
   requiredBy: []
-  timestamp: '2021-04-03 11:26:56+09:00'
+  timestamp: '2021-04-03 12:55:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/pool.rs
