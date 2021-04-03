@@ -1,4 +1,5 @@
 use lib2::fxhash::*;
+// (otherwise) use std::collections::HashMap;
 use crate::int::*;
 use std::cmp::Ordering;
 use std::hash::Hash;

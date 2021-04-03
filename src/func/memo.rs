@@ -1,6 +1,7 @@
 use std::cell::RefCell;
 use std::hash::Hash;
 use lib2::fxhash::*;
+// (otherwise) use std::collections::HashMap;
 
 #[must_use]
 pub struct Memo<F, Arg, Ret>(F, RefCell<HashMap<Arg, Ret>>);
