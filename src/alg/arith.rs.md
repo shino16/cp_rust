@@ -51,13 +51,13 @@ data:
   isVerificationFile: false
   path: src/alg/arith.rs
   requiredBy:
-  - src/graph/euler_tour.rs
   - src/ds/fenwick.rs
+  - src/graph/euler_tour.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/tree_dfs_io_test.rs
 documentation_of: src/alg/arith.rs
 layout: document
 redirect_from:

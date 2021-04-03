@@ -31,7 +31,7 @@ data:
   isVerificationFile: false
   path: src/gf/io.rs
   requiredBy: []
-  timestamp: '2021-03-26 09:38:33+09:00'
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/gf/io.rs

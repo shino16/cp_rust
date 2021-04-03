@@ -56,19 +56,20 @@ data:
     \ P: u32 = M::P;\n    pub const ZERO: Self = ZeroOne::ZERO;\n    pub const ONE:\
     \ Self = ZeroOne::ONE;\n    pub fn new(val: u32) -> Self { val.into() }\n    pub\
     \ fn zero() -> Self { Self::ZERO }\n    pub fn one() -> Self { Self::ONE }\n \
-    \   fn from_raw(val: u32) -> Self { Gf { val, _m: PhantomData } }\n    pub fn\
-    \ value(self) -> u32 {\n        let v = reduce::<M>(self.val as u64);\n      \
-    \  if v >= M::P { v - M::P } else { v }\n    }\n    pub fn pow(mut self, mut k:\
-    \ u64) -> Self {\n        if self.val == 0 && k == 0 { return Self::new(1); }\n\
-    \        k %= (M::P - 1) as u64;\n        let mut res = Self::ONE;\n        while\
-    \ !k.is_zero() {\n            if k % 2 != 0 { res *= self; }\n            self\
-    \ *= self; k >>= 1;\n        }\n        res\n    }\n    pub fn inv(self) -> Self\
-    \ {\n        let (mut a, mut b, mut u, mut v) = (M::P as i32, self.value() as\
-    \ i32, 0, 1);\n        while b != 0 {\n            let t = a / b;\n          \
-    \  a -= t * b; u -= t * v;\n            std::mem::swap(&mut a, &mut b); std::mem::swap(&mut\
-    \ u, &mut v);\n        }\n        debug_assert_eq!(a, 1);\n        if u < 0 {\
-    \ debug_assert_eq!(v, M::P as i32); u += v; }\n        Self::new(u as u32)\n \
-    \   }\n}\nimpl<M: Mod> From<u32> for Gf<M> {\n    fn from(x: u32) -> Self { Gf::from_raw(reduce::<M>(x\
+    \   pub fn is_zero(&self) -> bool { *self == Self::ZERO }\n    fn from_raw(val:\
+    \ u32) -> Self { Gf { val, _m: PhantomData } }\n    pub fn value(self) -> u32\
+    \ {\n        let v = reduce::<M>(self.val as u64);\n        if v >= M::P { v -\
+    \ M::P } else { v }\n    }\n    pub fn pow(mut self, mut k: u64) -> Self {\n \
+    \       if self.val == 0 && k == 0 { return Self::new(1); }\n        k %= (M::P\
+    \ - 1) as u64;\n        let mut res = Self::ONE;\n        while !k.is_zero() {\n\
+    \            if k % 2 != 0 { res *= self; }\n            self *= self; k >>= 1;\n\
+    \        }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let (mut\
+    \ a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n      \
+    \  while b != 0 {\n            let t = a / b;\n            a -= t * b; u -= t\
+    \ * v;\n            std::mem::swap(&mut a, &mut b); std::mem::swap(&mut u, &mut\
+    \ v);\n        }\n        debug_assert_eq!(a, 1);\n        if u < 0 { debug_assert_eq!(v,\
+    \ M::P as i32); u += v; }\n        Self::new(u as u32)\n    }\n}\nimpl<M: Mod>\
+    \ From<u32> for Gf<M> {\n    fn from(x: u32) -> Self { Gf::from_raw(reduce::<M>(x\
     \ as u64 * M::R2 as u64)) }\n}\nmacro_rules! impl_from_int {\n    ($($t:ty),*)\
     \ => { $(\n        impl<M: Mod> From<$t> for Gf<M> {\n            fn from(x: $t)\
     \ -> Self {\n                Gf::from_raw(reduce::<M>(x.rem_euclid(M::P as _)\
@@ -110,10 +111,10 @@ data:
   path: src/gf.rs
   requiredBy:
   - src/u64/conv.rs
-  - src/gf/io.rs
-  - src/gf/conv.rs
   - src/tests.rs
-  timestamp: '2021-03-26 09:38:33+09:00'
+  - src/gf/conv.rs
+  - src/gf/io.rs
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

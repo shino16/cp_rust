@@ -60,7 +60,7 @@ data:
   path: src/graph/io.rs
   requiredBy:
   - src/io/graph.rs
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/io.rs

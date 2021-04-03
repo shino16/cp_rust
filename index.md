@@ -34,9 +34,6 @@ data:
     - icon: ':warning:'
       path: src/cmp.rs
       title: src/cmp.rs
-    - icon: ':warning:'
-      path: src/complex.rs
-      title: src/complex.rs
     - icon: ':heavy_check_mark:'
       path: src/conv.rs
       title: src/conv.rs
@@ -226,6 +223,11 @@ data:
     - icon: ':warning:'
       path: src/float/convex.rs
       title: src/float/convex.rs
+  - name: src/float/conv
+    pages:
+    - icon: ':warning:'
+      path: src/float/conv/complex.rs
+      title: src/float/conv/complex.rs
   - name: src/func
     pages:
     - icon: ':heavy_check_mark:'

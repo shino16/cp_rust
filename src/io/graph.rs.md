@@ -27,7 +27,7 @@ data:
   isVerificationFile: false
   path: src/io/graph.rs
   requiredBy: []
-  timestamp: '2021-02-15 17:55:41+09:00'
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/io/graph.rs

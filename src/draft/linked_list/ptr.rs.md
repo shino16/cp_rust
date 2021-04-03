@@ -4,9 +4,6 @@ data:
   - icon: ':warning:'
     path: src/draft/linked_list.rs
     title: src/draft/linked_list.rs
-  - icon: ':heavy_check_mark:'
-    path: src/ds.rs
-    title: src/ds.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -56,11 +53,10 @@ data:
     \     self.list.as_mut().len -= 1;\n        Some(val)\n    }\n}\n"
   dependsOn:
   - src/draft/linked_list.rs
-  - src/ds.rs
   isVerificationFile: false
   path: src/draft/linked_list/ptr.rs
   requiredBy: []
-  timestamp: '2021-02-09 16:24:56+09:00'
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/linked_list/ptr.rs

@@ -11,9 +11,6 @@ data:
   - icon: ':warning:'
     path: src/ds/uvec2d.rs
     title: src/ds/uvec2d.rs
-  - icon: ':warning:'
-    path: src/float/conv.rs
-    title: src/float/conv.rs
   - icon: ':heavy_check_mark:'
     path: src/gf/conv.rs
     title: src/gf/conv.rs
@@ -71,17 +68,16 @@ data:
   path: src/ds/uvec.rs
   requiredBy:
   - src/u64/conv.rs
+  - src/ds/uvec2d.rs
   - src/mint/conv.rs
   - src/gf/conv.rs
-  - src/float/conv.rs
-  - src/ds/uvec2d.rs
-  timestamp: '2021-03-26 09:38:33+09:00'
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/ntt_garner_test.rs
   - test/src/bin/ntt_test.rs
   - test/src/bin/ntt_mint_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
 documentation_of: src/ds/uvec.rs
 layout: document
 redirect_from:

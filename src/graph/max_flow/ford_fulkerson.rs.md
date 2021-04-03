@@ -78,8 +78,8 @@ data:
   isVerificationFile: false
   path: src/graph/max_flow/ford_fulkerson.rs
   requiredBy:
-  - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

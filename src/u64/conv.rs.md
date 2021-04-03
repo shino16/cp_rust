@@ -39,7 +39,7 @@ data:
     \            let rhs = rhs.iter().map(|&e| Gf::from(e)).collect();\n         \
     \   Conv::conv(lhs, rhs)\n        }\n        let v1: Vec<GfB> = run(lhs, rhs);\n\
     \        let v2: Vec<GfC> = run(lhs, rhs);\n        let v3: Vec<GfD> = run(lhs,\
-    \ rhs);\n        lhs.resize(v1.len(), Default::default());\n        for (((e0,\
+    \ rhs);\n        lhs.resize_with(v1.len(), Default::default);\n        for (((e0,\
     \ e1), e2), e3) in lhs.iter_mut().zip(v1).zip(v2).zip(v3) {\n            let x1\
     \ = e1;\n            let x2 = (e2 - x1.value()) * r12;\n            let x3 = ((e3\
     \ - x1.value()) * r13 - x2.value()) * r23;\n            let mut x = x1.value()\
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: src/u64/conv.rs
   requiredBy: []
-  timestamp: '2021-03-26 09:38:33+09:00'
+  timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/u64/conv.rs
