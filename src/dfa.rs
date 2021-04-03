@@ -1,4 +1,4 @@
-use crate::fxhash::*;
+use lib2::fxhash::*;
 use crate::int::*;
 use std::cmp::Ordering;
 use std::hash::Hash;

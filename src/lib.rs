@@ -11,7 +11,6 @@ pub mod ds;
 pub mod float;
 pub mod gf;
 pub mod func;
-pub mod fxhash;
 pub mod graph;
 pub mod hash;
 pub mod int;
