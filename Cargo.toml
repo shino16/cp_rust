@@ -8,10 +8,11 @@ publish = false
 default-run = "main"
 
 [dependencies]
+lib2 = { git = "https://github.com/shino16/cp_rust_sub.git" }
 # proconio = { version = "=0.3.6", features = ["derive"] }
 
 [dev-dependencies]
-# criterion = "0.3"
+criterion = "0.3"
 
 [lib]
 name = "lib"
