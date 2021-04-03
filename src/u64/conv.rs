@@ -17,7 +17,7 @@ impl Conv for u64 {
         let v1: Vec<GfB> = run(lhs, rhs);
         let v2: Vec<GfC> = run(lhs, rhs);
         let v3: Vec<GfD> = run(lhs, rhs);
-        lhs.resize(v1.len(), Default::default());
+        lhs.resize_with(v1.len(), Default::default);
         for (((e0, e1), e2), e3) in lhs.iter_mut().zip(v1).zip(v2).zip(v3) {
             let x1 = e1;
             let x2 = (e2 - x1.value()) * r12;

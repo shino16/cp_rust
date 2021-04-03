@@ -70,7 +70,7 @@ impl IO {
 
 pub struct Iter<'a, T> {
     io: &'a mut IO,
-    _m: PhantomData<T>,
+    _m: PhantomData<&'a T>,
 }
 
 impl<T: Scan> Iterator for Iter<'_, T> {

@@ -4,7 +4,7 @@ use std::io::{stdout, BufWriter, StdoutLock};
 
 pub fn stdout_buf() -> BufWriter<StdoutLock<'static>> {
     let out = Box::leak(Box::new(stdout()));
-    BufWriter::with_capacity(1 << 25, out.lock())
+    BufWriter::new(out.lock())
 }
 
 #[macro_export]
@@ -43,10 +43,12 @@ macro_rules! prtln {
 macro_rules! scan {
     (@ $iter:expr $(,)?) => {};
     (@ $iter:expr, mut $var:ident : $t:tt $($r:tt)*) => {
+        #[allow(non_snake_case)]
         let mut $var = $crate::scan_value!($iter, $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (@ $iter:expr, $var:ident : $t:tt $($r:tt)*) => {
+        #[allow(non_snake_case)]
         let $var = $crate::scan_value!($iter, $t);
         $crate::scan!(@ $iter $($r)*)
     };

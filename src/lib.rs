@@ -5,7 +5,6 @@ pub mod bool;
 pub mod bounded;
 pub mod cast;
 pub mod cmp;
-pub mod complex;
 pub mod conv;
 pub mod dfa;
 pub mod ds;

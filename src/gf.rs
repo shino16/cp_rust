@@ -58,6 +58,7 @@ impl<M: Mod> Gf<M> {
     pub fn new(val: u32) -> Self { val.into() }
     pub fn zero() -> Self { Self::ZERO }
     pub fn one() -> Self { Self::ONE }
+    pub fn is_zero(&self) -> bool { *self == Self::ZERO }
     fn from_raw(val: u32) -> Self { Gf { val, _m: PhantomData } }
     pub fn value(self) -> u32 {
         let v = reduce::<M>(self.val as u64);

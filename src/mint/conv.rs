@@ -11,6 +11,7 @@ macro_rules! impl_ntt {
 
             pub fn ntt(a: &mut UVec<Type>) {
                 let n = a.len();
+                assert_eq!(n.count_ones(), 1);
                 let r = Type::new($prim);
                 let roots: Vec<_> = (0..n.trailing_zeros())
                     .map(|i| -r.pow(((Type::M - 1) >> (i + 2)) as u64))
@@ -20,8 +21,7 @@ macro_rules! impl_ntt {
                     let mut w = Type::ONE;
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
-                            let u = a[i];
-                            let v = a[i + m] * w;
+                            let (u, v) = (a[i], a[i + m] * w);
                             a[i] = u + v;
                             a[i + m] = u - v;
                         }
@@ -33,6 +33,7 @@ macro_rules! impl_ntt {
 
             pub fn inv_ntt(a: &mut UVec<Type>) {
                 let n = a.len();
+                assert_eq!(n.count_ones(), 1);
                 let r = Type::new($prim);
                 let inv_roots: Vec<_> = (0..n.trailing_zeros())
                     .map(|i| -r.pow((Type::M - 1 - ((Type::M - 1) >> (i + 2))) as u64))
@@ -55,14 +56,14 @@ macro_rules! impl_ntt {
                 a.iter_mut().for_each(|e| *e *= d);
             }
 
-            pub fn conv<'a, 'b>(a: &'a mut UVec<Type>, b: &'b mut UVec<Type>) {
+            pub fn conv(a: &mut UVec<Type>, b: &mut UVec<Type>) {
                 let len = a.len() + b.len() - 1;
                 fn ilog2(n: usize) -> u32 {
                     std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros() - 1
                 }
                 let n: usize = 1 << ilog2(len * 2 - 1);
-                a.resize(n, Default::default());
-                b.resize(n, Default::default());
+                a.resize_with(n, Default::default);
+                b.resize_with(n, Default::default);
                 ntt(a);
                 ntt(b);
                 a.iter_mut().zip(b.iter()).for_each(|(a, b)| *a *= *b);
@@ -104,7 +105,7 @@ impl Conv for Mint17 {
         let v1: Vec<MintB> = run(lhs, rhs);
         let v2: Vec<MintC> = run(lhs, rhs);
         let v3: Vec<MintD> = run(lhs, rhs);
-        lhs.resize(v1.len(), Default::default());
+        lhs.resize_with(v1.len(), Default::default);
         for (((e0, e1), e2), e3) in lhs.iter_mut().zip(v1).zip(v2).zip(v3) {
             let x1 = e1;
             let x2 = (e2 - x1.value()) * r12;
