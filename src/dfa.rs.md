@@ -8,6 +8,9 @@ data:
     path: src/cast.rs
     title: src/cast.rs
   - icon: ':heavy_check_mark:'
+    path: src/fxhash.rs
+    title: src/fxhash.rs
+  - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
   - icon: ':heavy_check_mark:'
@@ -33,10 +36,9 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/dfa.rs\n"
-  code: "use std::collections::HashMap;\n// use crate::fxhash::FxHashMap as HashMap;\n\
-    use crate::int::*;\nuse std::cmp::Ordering;\nuse std::hash::Hash;\n\npub const\
-    \ DIGITS: &[u8] = b\"0123456789\";\n\npub trait Dfa {\n    type Alphabet;\n  \
-    \  type State;\n    fn init(&self) -> Self::State;\n    fn next(&self, s: Self::State,\
+  code: "use crate::fxhash::*;\nuse crate::int::*;\nuse std::cmp::Ordering;\nuse std::hash::Hash;\n\
+    \npub const DIGITS: &[u8] = b\"0123456789\";\n\npub trait Dfa {\n    type Alphabet;\n\
+    \    type State;\n    fn init(&self) -> Self::State;\n    fn next(&self, s: Self::State,\
     \ a: Self::Alphabet, i: usize) -> Self::State;\n    fn accept(&self, s: Self::State)\
     \ -> bool;\n    fn successful(&self, _: Self::State) -> bool { false }\n    fn\
     \ unsuccessful(&self, _: Self::State) -> bool { false }\n    fn count<I: Num>(&self,\
@@ -99,6 +101,7 @@ data:
   dependsOn:
   - src/bounded.rs
   - src/cast.rs
+  - src/fxhash.rs
   - src/int.rs
   - src/num.rs
   - src/util/trait_alias.rs
@@ -106,7 +109,7 @@ data:
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-04-03 12:04:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs
