@@ -37,8 +37,8 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/gf.rs\n"
   code: "// modular arithmetics\n\nuse crate::zo::ZeroOne;\nuse std::marker::PhantomData;\n\
-    use std::{cmp, fmt, iter, ops::*, str};\n\npub mod conv;\npub mod io;\n\npub trait\
-    \ Mod: Default + Clone + Copy + PartialEq + Eq {\n    const P: u32;\n    const\
+    use std::{cmp, fmt, iter, ops::*, str};\n\npub mod conv;\npub mod dynamic;\npub\
+    \ mod io;\n\npub trait Mod: Default + Clone + Copy {\n    const P: u32;\n    const\
     \ K: u32; // -1 / P mod 2^32\n    const R2: u32; // 2^64 mod P\n}\n\n// montgomery\
     \ reduction (x -> x / 2^32 mod P)\nfn reduce<M: Mod>(x: u64) -> u32 {\n    let\
     \ s = M::K.wrapping_mul(x as u32);\n    ((x + s as u64 * M::P as u64) >> 32) as\
@@ -114,7 +114,7 @@ data:
   - src/tests.rs
   - src/gf/conv.rs
   - src/gf/io.rs
-  timestamp: '2021-04-03 11:26:56+09:00'
+  timestamp: '2021-04-04 11:43:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

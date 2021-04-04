@@ -239,6 +239,9 @@ data:
       path: src/gf/conv.rs
       title: src/gf/conv.rs
     - icon: ':warning:'
+      path: src/gf/dynamic.rs
+      title: src/gf/dynamic.rs
+    - icon: ':warning:'
       path: src/gf/io.rs
       title: src/gf/io.rs
   - name: src/graph

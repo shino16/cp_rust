@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: src/gf/dynamic.rs
+    title: src/gf/dynamic.rs
+  - icon: ':warning:'
     path: src/math/crt.rs
     title: src/math/crt.rs
   _extendedVerifiedWith: []
@@ -28,6 +31,7 @@ data:
   path: src/math/gcd/ext.rs
   requiredBy:
   - src/math/crt.rs
+  - src/gf/dynamic.rs
   timestamp: '2021-02-28 10:03:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

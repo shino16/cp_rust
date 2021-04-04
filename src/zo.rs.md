@@ -24,6 +24,9 @@ data:
     path: src/gf/conv.rs
     title: src/gf/conv.rs
   - icon: ':warning:'
+    path: src/gf/dynamic.rs
+    title: src/gf/dynamic.rs
+  - icon: ':warning:'
     path: src/gf/io.rs
     title: src/gf/io.rs
   - icon: ':warning:'
@@ -201,6 +204,7 @@ data:
   - src/int.rs
   - src/slice/cum.rs
   - src/dfa.rs
+  - src/gf/dynamic.rs
   - src/gf/conv.rs
   - src/gf/io.rs
   timestamp: '2021-03-22 00:48:45+09:00'
