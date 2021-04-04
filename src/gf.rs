@@ -5,9 +5,10 @@ use std::marker::PhantomData;
 use std::{cmp, fmt, iter, ops::*, str};
 
 pub mod conv;
+pub mod dynamic;
 pub mod io;
 
-pub trait Mod: Default + Clone + Copy + PartialEq + Eq {
+pub trait Mod: Default + Clone + Copy {
     const P: u32;
     const K: u32; // -1 / P mod 2^32
     const R2: u32; // 2^64 mod P
