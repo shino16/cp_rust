@@ -50,9 +50,9 @@ data:
     \ 2_226_617_417);\ndef_prime!(ModB, 998_244_353, 998_244_351);\ndef_prime!(ModC,\
     \ 1_012_924_417, 1_012_924_415);\ndef_prime!(ModD, 924_844_033, 924_844_031);\n\
     \n#[repr(transparent)]\n#[derive(Default, Clone, Copy)]\npub struct Gf<M: Mod>\
-    \ {\n    val: u32,\n    _m: PhantomData<M>,\n}\n\npub type GfA = Gf<ModA>;\npub\
-    \ type GfB = Gf<ModB>;\npub type GfC = Gf<ModC>;\npub type GfD = Gf<ModD>;\npub\
-    \ type Gf17 = GfA;\npub type Gf99 = GfB;\n\nimpl<M: Mod> Gf<M> {\n    pub const\
+    \ {\n    val: u32,\n    _m: PhantomData<*const M>,\n}\n\npub type GfA = Gf<ModA>;\n\
+    pub type GfB = Gf<ModB>;\npub type GfC = Gf<ModC>;\npub type GfD = Gf<ModD>;\n\
+    pub type Gf17 = GfA;\npub type Gf99 = GfB;\n\nimpl<M: Mod> Gf<M> {\n    pub const\
     \ P: u32 = M::P;\n    pub const ZERO: Self = ZeroOne::ZERO;\n    pub const ONE:\
     \ Self = ZeroOne::ONE;\n    pub fn new(val: u32) -> Self { val.into() }\n    pub\
     \ fn zero() -> Self { Self::ZERO }\n    pub fn one() -> Self { Self::ONE }\n \
@@ -114,7 +114,7 @@ data:
   - src/tests.rs
   - src/gf/conv.rs
   - src/gf/io.rs
-  timestamp: '2021-04-04 11:43:54+09:00'
+  timestamp: '2021-04-05 10:12:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

@@ -53,7 +53,7 @@ data:
     \ $phi;\n        }\n    };\n}\n\ndef_mod!(ModA, 1_000_000_007);\ndef_mod!(ModB,\
     \ 998_244_353);\ndef_mod!(ModC, 1_012_924_417);\ndef_mod!(ModD, 924_844_033);\n\
     \n#[derive(Default, Clone, Copy, PartialEq, Eq)]\npub struct Mint<M: Mod> {\n\
-    \    pub val: u32,\n    _m: PhantomData<M>,\n}\n\npub type MintA = Mint<ModA>;\n\
+    \    pub val: u32,\n    _m: PhantomData<*const M>,\n}\n\npub type MintA = Mint<ModA>;\n\
     pub type MintB = Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\n\
     pub type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n\
     \    pub const M: u32 = M::M;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
@@ -114,7 +114,7 @@ data:
   - src/tests.rs
   - src/mint/conv.rs
   - src/mint/io.rs
-  timestamp: '2021-04-03 12:55:22+09:00'
+  timestamp: '2021-04-05 10:12:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
