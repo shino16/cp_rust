@@ -60,7 +60,7 @@ def_dyn_mod!(DefaultMod, default_mod);
 #[derive(Default, Clone, Copy)]
 pub struct DynGf<M: DMod = DefaultMod> {
     val: u32,
-    _m: PhantomData<M>,
+    _m: PhantomData<*const M>,
 }
 
 impl<M: DMod> DynGf<M> {

@@ -35,7 +35,7 @@ def_mod!(ModD, 924_844_033);
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
 pub struct Mint<M: Mod> {
     pub val: u32,
-    _m: PhantomData<M>,
+    _m: PhantomData<*const M>,
 }
 
 pub type MintA = Mint<ModA>;

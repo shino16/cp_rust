@@ -42,7 +42,7 @@ def_prime!(ModD, 924_844_033, 924_844_031);
 #[derive(Default, Clone, Copy)]
 pub struct Gf<M: Mod> {
     val: u32,
-    _m: PhantomData<M>,
+    _m: PhantomData<*const M>,
 }
 
 pub type GfA = Gf<ModA>;
