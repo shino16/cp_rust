@@ -9,6 +9,9 @@ data:
     title: src/lib.rs
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: src/ds/sparse_table.rs
+    title: src/ds/sparse_table.rs
+  - icon: ':warning:'
     path: src/ds/uvec2d.rs
     title: src/ds/uvec2d.rs
   - icon: ':heavy_check_mark:'
@@ -69,9 +72,10 @@ data:
   requiredBy:
   - src/u64/conv.rs
   - src/ds/uvec2d.rs
+  - src/ds/sparse_table.rs
   - src/mint/conv.rs
   - src/gf/conv.rs
-  timestamp: '2021-04-03 12:55:22+09:00'
+  timestamp: '2021-04-06 23:05:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

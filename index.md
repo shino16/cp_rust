@@ -181,8 +181,8 @@ data:
       path: src/ds/segtree.rs
       title: src/ds/segtree.rs
     - icon: ':warning:'
-      path: src/ds/sparsetable.rs
-      title: src/ds/sparsetable.rs
+      path: src/ds/sparse_table.rs
+      title: src/ds/sparse_table.rs
     - icon: ':heavy_check_mark:'
       path: src/ds/swag.rs
       title: src/ds/swag.rs

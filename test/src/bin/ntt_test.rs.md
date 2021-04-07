@@ -51,7 +51,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_test.rs
   requiredBy: []
-  timestamp: '2021-04-05 10:12:48+09:00'
+  timestamp: '2021-04-06 23:05:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_test.rs

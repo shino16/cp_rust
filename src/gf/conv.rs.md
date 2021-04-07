@@ -104,7 +104,7 @@ data:
   path: src/gf/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-04-05 10:12:48+09:00'
+  timestamp: '2021-04-06 23:05:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs

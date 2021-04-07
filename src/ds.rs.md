@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: src/ds/sparse_table.rs
+    title: src/ds/sparse_table.rs
+  - icon: ':warning:'
     path: src/ds/uslice.rs
     title: src/ds/uslice.rs
   - icon: ':heavy_check_mark:'
@@ -56,7 +59,7 @@ data:
 
     pub mod segtree;
 
-    pub mod sparsetable;
+    pub mod sparse_table;
 
     pub mod swag;
 
@@ -79,9 +82,10 @@ data:
   - src/ds/uvec.rs
   - src/ds/uslice.rs
   - src/ds/uvec2d.rs
+  - src/ds/sparse_table.rs
   - src/mint/conv.rs
   - src/gf/conv.rs
-  timestamp: '2021-02-09 16:24:56+09:00'
+  timestamp: '2021-04-06 23:05:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

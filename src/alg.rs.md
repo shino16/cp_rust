@@ -21,8 +21,8 @@ data:
     path: src/ds/segtree/lazy.rs
     title: src/ds/segtree/lazy.rs
   - icon: ':warning:'
-    path: src/ds/sparsetable.rs
-    title: src/ds/sparsetable.rs
+    path: src/ds/sparse_table.rs
+    title: src/ds/sparse_table.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/swag.rs
     title: src/ds/swag.rs
@@ -74,12 +74,12 @@ data:
   path: src/alg.rs
   requiredBy:
   - src/ds/disjointst.rs
-  - src/ds/sparsetable.rs
   - src/ds/swag.rs
   - src/ds/fenwick.rs
   - src/ds/segtree.rs
   - src/ds/segtree/lazy.rs
   - src/ds/segtree/beats.rs
+  - src/ds/sparse_table.rs
   - src/alg/arith.rs
   - src/graph/euler_tour.rs
   timestamp: '2021-02-20 13:28:01+09:00'

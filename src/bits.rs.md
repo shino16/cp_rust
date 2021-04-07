@@ -6,8 +6,8 @@ data:
     path: src/ds/disjointst.rs
     title: src/ds/disjointst.rs
   - icon: ':warning:'
-    path: src/ds/sparsetable.rs
-    title: src/ds/sparsetable.rs
+    path: src/ds/sparse_table.rs
+    title: src/ds/sparse_table.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -48,7 +48,7 @@ data:
   path: src/bits.rs
   requiredBy:
   - src/ds/disjointst.rs
-  - src/ds/sparsetable.rs
+  - src/ds/sparse_table.rs
   - src/tests.rs
   - src/int/gcd.rs
   timestamp: '2021-02-24 00:44:23+09:00'
