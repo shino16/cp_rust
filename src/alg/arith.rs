@@ -2,7 +2,7 @@ pub use super::*;
 pub use crate::num::*;
 
 #[derive(Default, Clone, Copy)]
-pub struct Addition();
+pub struct Addition;
 
 macro_rules! impl_alg {
     ($($t:ty),*) => { $(

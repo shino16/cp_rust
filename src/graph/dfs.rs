@@ -3,7 +3,6 @@ use crate::ds::bitset::*;
 
 pub mod cpnts;
 
-/// f: (v, par)
 pub fn dfs(g: &impl Graph, s: usize, mut f: impl FnMut(usize, usize)) {
     let mut visited = new_bitset(g.len());
     visited.set_bit(s);
@@ -18,6 +17,15 @@ pub fn dfs_ord_par(g: &impl Graph, s: usize) -> (Vec<usize>, Vec<usize>) {
         par[v] = p;
     });
     (ord, par)
+}
+
+pub fn dfs_all(g: &impl Graph, mut f: impl FnMut(usize, usize)) {
+    let mut visited = new_bitset(g.len());
+    for s in 0..g.len() {
+        if visited.set_bit(s) {
+            dfs_impl(g, s, !0, &mut visited, &mut f);
+        }
+    }
 }
 
 fn dfs_impl(

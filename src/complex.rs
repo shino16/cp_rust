@@ -1,6 +1,6 @@
+use crate::float::*;
 use crate::num::*;
 use crate::zo::*;
-use crate::float::*;
 use std::fmt::Debug;
 use std::ops::*;
 
@@ -15,7 +15,9 @@ impl<T: Num> Complex<T> {
     pub const ONE: Self = Self { re: T::ONE, im: T::ZERO };
     pub fn is_zero(&self) -> bool { *self == Self::ZERO }
     pub fn new(re: T, im: T) -> Self { Self { re, im } }
-    pub fn conj(self) -> Self where T: Neg<Output=T> { Self::new(self.re, -self.im) }
+    pub fn conj(self) -> Self where T: Neg<Output = T> {
+        Self::new(self.re, -self.im)
+    }
 }
 impl Complex<Float> {
     pub fn from_polar(r: Float, theta: Float) -> Self {
@@ -37,24 +39,26 @@ impl<T: Num> Sub for Complex<T> {
 impl<T: Num> Mul for Complex<T> {
     type Output = Self;
     fn mul(self, rhs: Self) -> Self::Output {
-        Self::new(
-            self.re * rhs.re - self.im * rhs.im,
-            self.re * rhs.im + self.im * rhs.re,
-        )
+        Self::new(self.re * rhs.re - self.im * rhs.im, self.re * rhs.im + self.im * rhs.re)
     }
 }
 impl<T: Num> Mul<T> for Complex<T> {
     type Output = Self;
     fn mul(self, rhs: T) -> Self::Output { Self::new(self.re * rhs, self.im * rhs) }
 }
-impl<T: Num> Div<T> for Complex<T> {
+impl<T: Num> Div for Complex<T> {
     type Output = Self;
-    fn div(self, rhs: T) -> Self::Output {
-        Self::new(self.re / rhs, self.im / rhs)
+    fn div(self, rhs: Self) -> Self::Output {
+        Self::new(self.re * rhs.re + self.im * rhs.im, self.im * rhs.re - self.re * rhs.im)
+            / (rhs.re * rhs.re + rhs.im * rhs.im)
     }
 }
+impl<T: Num> Div<T> for Complex<T> {
+    type Output = Self;
+    fn div(self, rhs: T) -> Self::Output { Self::new(self.re / rhs, self.im / rhs) }
+}
 macro_rules! impl_op_assign {
-    ($(($Rhs:ident, $Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),*) => { $(
+    ($(($Rhs:ident, $Op:ident, $op:ident, $OpAssign:ident, $op_assign:ident)),* $(,)?) => { $(
         impl<T: Num> $OpAssign<$Rhs> for Complex<T> {
             fn $op_assign(&mut self, rhs: $Rhs) {
                 let x = Self::$op(unsafe { std::ptr::read(self) }, rhs);
@@ -68,7 +72,8 @@ impl_op_assign!(
     (Self, Sub, sub, SubAssign, sub_assign),
     (Self, Mul, mul, MulAssign, mul_assign),
     (T, Mul, mul, MulAssign, mul_assign),
-    (T, Div, div, DivAssign, div_assign)
+    (Self, Div, div, DivAssign, div_assign),
+    (T, Div, div, DivAssign, div_assign),
 );
 impl<T: ZeroOne> ZeroOne for Complex<T> {
     const ZERO: Self = Self { re: T::ZERO, im: T::ZERO };

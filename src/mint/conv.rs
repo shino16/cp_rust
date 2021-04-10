@@ -58,10 +58,7 @@ macro_rules! impl_ntt {
 
             pub fn conv(a: &mut UVec<Type>, b: &mut UVec<Type>) {
                 let len = a.len() + b.len() - 1;
-                fn ilog2(n: usize) -> u32 {
-                    std::mem::size_of::<usize>() as u32 * 8 - n.leading_zeros() - 1
-                }
-                let n: usize = 1 << ilog2(len * 2 - 1);
+                let n = len.next_power_of_two();
                 a.resize_with(n, Default::default);
                 b.resize_with(n, Default::default);
                 ntt(a);

@@ -1,9 +1,9 @@
 use super::*;
+use crate::bits::*;
 
-pub fn bisect<I: Int>(mut l: I, mut r: I, mut pred: impl FnMut(I) -> bool) -> I {
-    let two = I::ONE + I::ONE;
+pub fn bisect<I: Int + Bits>(mut l: I, mut r: I, mut pred: impl FnMut(I) -> bool) -> I {
     while l != r {
-        let mid = (l + r) / two;
+        let mid = (l & r) | (l ^ r) >> 1;
         if pred(mid) {
             l = mid + I::ONE;
         } else {
