@@ -1,5 +1,4 @@
 pub mod conv;
-use std::u64;
 
 // 70x faster than naive multiplication in u128 on 64bit cpu
 /// a,b <= modu <= 7.2e18
