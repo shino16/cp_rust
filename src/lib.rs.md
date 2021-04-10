@@ -28,22 +28,22 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/lib.rs\n"
   code: "pub mod alg;\npub mod assign;\npub mod bits;\npub mod bool;\npub mod bounded;\n\
-    pub mod cast;\npub mod cmp;\npub mod conv;\npub mod dfa;\npub mod ds;\npub mod\
-    \ float;\npub mod gf;\npub mod func;\npub mod graph;\npub mod hash;\npub mod int;\n\
-    pub mod io;\npub mod io_interactive;\npub mod iter;\npub mod make_vec;\npub mod\
-    \ math;\npub mod mint;\npub mod num;\npub mod poly;\npub mod rand;\npub mod slice;\n\
-    pub mod stdio;\npub mod u64;\npub mod util;\npub mod vec;\npub mod zo;\n\npub\
-    \ mod tests;\n\n#[cfg(debug_assertions)]\n#[macro_export]\nmacro_rules! dbg {\n\
-    \    ($($val:expr),* $(,)?) => {\n        ($( match $val {\n            tmp =>\
-    \ {\n                std::eprintln!(\"[{}:{}] {} = {:?}\",\n                 \
-    \   std::file!(), std::line!(), std::stringify!($val), &tmp);\n              \
-    \  tmp\n            }\n        } ),*)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
+    pub mod cast;\npub mod cmp;\npub mod comp;\npub mod complex;\npub mod conv;\n\
+    pub mod dfa;\npub mod ds;\npub mod float;\npub mod func;\npub mod gf;\npub mod\
+    \ graph;\npub mod int;\npub mod io;\npub mod io_interactive;\npub mod iter;\n\
+    pub mod make_vec;\npub mod math;\npub mod mint;\npub mod num;\npub mod poly;\n\
+    pub mod rand;\npub mod slice;\npub mod stdio;\npub mod u64;\npub mod util;\npub\
+    \ mod vec;\npub mod zo;\n\npub mod tests;\n\n#[cfg(debug_assertions)]\n#[macro_export]\n\
+    macro_rules! dbg {\n    ($($val:expr),* $(,)?) => {\n        ($( match $val {\n\
+    \            tmp => {\n                std::eprintln!(\"[{}:{}] {} = {:?}\",\n\
+    \                    std::file!(), std::line!(), std::stringify!($val), &tmp);\n\
+    \                tmp\n            }\n        } ),*)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n\
     #[macro_export]\nmacro_rules! dbg {\n    ($($x:expr),*) => {};\n}\n"
   dependsOn: []
   isVerificationFile: false
@@ -56,7 +56,7 @@ data:
   - src/util/trait_alias.rs
   - src/util/for_loop.rs
   - src/stdio/buf.rs
-  timestamp: '2021-04-03 12:55:22+09:00'
+  timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/lib.rs

@@ -38,9 +38,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/778
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/tree_dfs_io_test.rs\n"
   code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/778\n\n\
@@ -48,7 +48,7 @@ data:
     fn main() {\n    let mut io = IO::new();\n    let n = io.scan();\n    let mut\
     \ graph = vec![Vec::new(); n];\n    for v in 1..n {\n        let p: usize = io.scan();\n\
     \        graph[p].push(v);\n        graph[v].push(p);\n    }\n    let mut fwk\
-    \ = FenwickTree::new(vec![0; n], Addition());\n    let mut ans = 0;\n    dfs_io(&graph,\
+    \ = FenwickTree::new(vec![0; n], Addition);\n    let mut ans = 0;\n    dfs_io(&graph,\
     \ 0, |v, _| match v {\n        In(v) => {\n            ans += fwk.ask_prefix(v)\
     \ as u64;\n            fwk.add(v, 1_u32);\n        },\n        Out(v) => fwk.sub(v,\
     \ 1),\n    });\n    io.println(ans);\n}\n"
@@ -66,7 +66,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-04-03 11:26:56+09:00'
+  timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs

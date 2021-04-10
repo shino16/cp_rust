@@ -31,9 +31,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.2/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/gf/conv.rs\n"
   code: "pub use super::*;\npub use crate::conv::*;\npub use crate::ds::uvec::*;\n\
@@ -66,9 +66,7 @@ data:
     \            let d = Type::from(n as u32).inv();\n                a.iter_mut().for_each(|e|\
     \ *e *= d);\n            }\n\n            pub fn conv(a: &mut UVec<Type>, b: &mut\
     \ UVec<Type>) {\n                let len = a.len() + b.len() - 1;\n          \
-    \      fn ilog2(n: usize) -> u32 {\n                    std::mem::size_of::<usize>()\
-    \ as u32 * 8 - n.leading_zeros() - 1\n                }\n                let n:\
-    \ usize = 1 << ilog2(len * 2 - 1);\n                a.resize_with(n, Default::default);\n\
+    \      let n = len.next_power_of_two();\n                a.resize_with(n, Default::default);\n\
     \                b.resize_with(n, Default::default);\n                ntt(a);\n\
     \                ntt(b);\n                a.iter_mut().zip(b.iter()).for_each(|(a,\
     \ b)| *a *= *b);\n                b.clear();\n                inv_ntt(a);\n  \
@@ -104,7 +102,7 @@ data:
   path: src/gf/conv.rs
   requiredBy:
   - src/u64/conv.rs
-  timestamp: '2021-04-06 23:05:21+09:00'
+  timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs
