@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: src/math/is_prime.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-04-10 17:49:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/is_prime.rs
