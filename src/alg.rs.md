@@ -6,11 +6,11 @@ data:
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':warning:'
-    path: src/ds/disjointst.rs
-    title: src/ds/disjointst.rs
+    path: src/ds/dst.rs
+    title: src/ds/dst.rs
   - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
+    path: src/ds/fwk.rs
+    title: src/ds/fwk.rs
   - icon: ':heavy_check_mark:'
     path: src/ds/segtree.rs
     title: src/ds/segtree.rs
@@ -73,13 +73,13 @@ data:
   isVerificationFile: false
   path: src/alg.rs
   requiredBy:
-  - src/ds/disjointst.rs
   - src/ds/swag.rs
-  - src/ds/fenwick.rs
   - src/ds/segtree.rs
   - src/ds/segtree/lazy.rs
   - src/ds/segtree/beats.rs
   - src/ds/sparse_table.rs
+  - src/ds/fwk.rs
+  - src/ds/dst.rs
   - src/alg/arith.rs
   - src/graph/euler_tour.rs
   timestamp: '2021-02-20 13:28:01+09:00'

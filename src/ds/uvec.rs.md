@@ -79,7 +79,7 @@ data:
   - src/ds/sparse_table.rs
   - src/mint/conv.rs
   - src/gf/conv.rs
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

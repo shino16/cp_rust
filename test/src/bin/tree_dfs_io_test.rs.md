@@ -8,8 +8,8 @@ data:
     path: src/alg/arith.rs
     title: src/alg/arith.rs
   - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
+    path: src/ds/fwk.rs
+    title: src/ds/fwk.rs
   - icon: ':heavy_check_mark:'
     path: src/graph.rs
     title: src/graph.rs
@@ -44,9 +44,9 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: test/src/bin/tree_dfs_io_test.rs\n"
   code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/778\n\n\
-    use lib::ds::fenwick::*;\nuse lib::graph::tree::dfs_io::*;\nuse lib::io::*;\n\n\
-    fn main() {\n    let mut io = IO::new();\n    let n = io.scan();\n    let mut\
-    \ graph = vec![Vec::new(); n];\n    for v in 1..n {\n        let p: usize = io.scan();\n\
+    use lib::ds::fwk::*;\nuse lib::graph::tree::dfs_io::*;\nuse lib::io::*;\n\nfn\
+    \ main() {\n    let mut io = IO::new();\n    let n = io.scan();\n    let mut graph\
+    \ = vec![Vec::new(); n];\n    for v in 1..n {\n        let p: usize = io.scan();\n\
     \        graph[p].push(v);\n        graph[v].push(p);\n    }\n    let mut fwk\
     \ = FenwickTree::new(vec![0; n], Addition);\n    let mut ans = 0;\n    dfs_io(&graph,\
     \ 0, |v, _| match v {\n        In(v) => {\n            ans += fwk.ask_prefix(v)\
@@ -55,7 +55,7 @@ data:
   dependsOn:
   - src/alg.rs
   - src/alg/arith.rs
-  - src/ds/fenwick.rs
+  - src/ds/fwk.rs
   - src/graph.rs
   - src/graph/tree.rs
   - src/graph/tree/dfs_io.rs
@@ -66,7 +66,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/tree_dfs_io_test.rs
   requiredBy: []
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/tree_dfs_io_test.rs

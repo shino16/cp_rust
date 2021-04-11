@@ -15,8 +15,8 @@ data:
     title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
+    path: src/ds/fwk.rs
+    title: src/ds/fwk.rs
   - icon: ':warning:'
     path: src/graph/euler_tour.rs
     title: src/graph/euler_tour.rs
@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: src/alg/arith.rs
   requiredBy:
-  - src/ds/fenwick.rs
+  - src/ds/fwk.rs
   - src/graph/euler_tour.rs
   timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: LIBRARY_ALL_AC

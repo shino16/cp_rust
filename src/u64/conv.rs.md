@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: src/u64/conv.rs
   requiredBy: []
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/u64/conv.rs

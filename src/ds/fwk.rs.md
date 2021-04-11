@@ -29,7 +29,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/ds/fenwick.rs\n"
+    RuntimeError: bundler is not specified: src/ds/fwk.rs\n"
   code: "pub use crate::alg::arith::*;\n\n#[derive(Clone)]\npub struct FenwickTree<T,\
     \ M> {\n    data: Vec<T>,\n    alg: M,\n}\n\nimpl<T: Copy, M: Monoid<T>> FenwickTree<T,\
     \ M> {\n    pub fn new(mut data: Vec<T>, alg: M) -> Self {\n        let len =\
@@ -67,16 +67,16 @@ data:
   - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
-  path: src/ds/fenwick.rs
+  path: src/ds/fwk.rs
   requiredBy: []
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs
-documentation_of: src/ds/fenwick.rs
+documentation_of: src/ds/fwk.rs
 layout: document
 redirect_from:
-- /library/src/ds/fenwick.rs
-- /library/src/ds/fenwick.rs.html
-title: src/ds/fenwick.rs
+- /library/src/ds/fwk.rs
+- /library/src/ds/fwk.rs.html
+title: src/ds/fwk.rs
 ---

@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: src/ds/disjointst.rs
-    title: src/ds/disjointst.rs
+    path: src/ds/dst.rs
+    title: src/ds/dst.rs
   - icon: ':warning:'
     path: src/ds/sparse_table.rs
     title: src/ds/sparse_table.rs
@@ -50,8 +50,8 @@ data:
   isVerificationFile: false
   path: src/bits.rs
   requiredBy:
-  - src/ds/disjointst.rs
   - src/ds/sparse_table.rs
+  - src/ds/dst.rs
   - src/tests.rs
   - src/int/bisect.rs
   - src/int/gcd.rs

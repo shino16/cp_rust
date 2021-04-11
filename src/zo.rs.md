@@ -15,8 +15,8 @@ data:
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
   - icon: ':heavy_check_mark:'
-    path: src/ds/fenwick.rs
-    title: src/ds/fenwick.rs
+    path: src/ds/fwk.rs
+    title: src/ds/fwk.rs
   - icon: ':warning:'
     path: src/float/conv.rs
     title: src/float/conv.rs
@@ -177,7 +177,7 @@ data:
   - src/float/conv.rs
   - src/u64/conv.rs
   - src/draft/fpacc64.rs
-  - src/ds/fenwick.rs
+  - src/ds/fwk.rs
   - src/num/field.rs
   - src/alg/arith.rs
   - src/poly.rs

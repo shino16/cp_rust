@@ -17,7 +17,7 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/ds/disjointst.rs\n"
+    RuntimeError: bundler is not specified: src/ds/dst.rs\n"
   code: "pub use crate::alg::*;\nuse crate::bits::*;\n\n#[derive(Clone)]\npub struct\
     \ DisjointSparseTable<T, M> {\n    data: Vec<Vec<T>>,\n    alg: M,\n}\n\nimpl<T:\
     \ Copy, M: Monoid<T>> DisjointSparseTable<T, M> {\n    pub fn new(data: Vec<T>,\
@@ -39,15 +39,15 @@ data:
   - src/alg.rs
   - src/bits.rs
   isVerificationFile: false
-  path: src/ds/disjointst.rs
+  path: src/ds/dst.rs
   requiredBy: []
-  timestamp: '2021-02-24 00:44:23+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/ds/disjointst.rs
+documentation_of: src/ds/dst.rs
 layout: document
 redirect_from:
-- /library/src/ds/disjointst.rs
-- /library/src/ds/disjointst.rs.html
-title: src/ds/disjointst.rs
+- /library/src/ds/dst.rs
+- /library/src/ds/dst.rs.html
+title: src/ds/dst.rs
 ---

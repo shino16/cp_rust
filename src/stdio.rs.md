@@ -27,14 +27,15 @@ data:
     \ let Some(expr) = iter.next() {\n            std::write!($dst, \"{}\", expr).unwrap();\n\
     \            for expr in iter { std::write!($dst, \"{}{}\", $sep, expr).unwrap();\
     \ }\n        }\n        $crate::prtln!(@ $dst, \"\");\n    } };\n    (@ $dst:expr,\
-    \ $expr:expr, no eol) => { std::write!($dst, \"{}\", $expr).unwrap(); };\n   \
-    \ (@ $dst:expr, $expr:expr) => { std::writeln!($dst, \"{}\", $expr).unwrap();\
-    \ };\n    (@ $dst:expr, $expr:expr, $($exprs:expr),*) => { {\n        std::write!($dst,\
-    \ \"{} \", $expr).unwrap();\n        $crate::prtln!(@ $dst, $($exprs),*);\n  \
-    \  } };\n    (new $var:ident $(,)?) => { let mut $var = stdout_buf(); };\n   \
-    \ (new $var:ident, $($t:tt)*) => {\n        $crate::prtln!(new $var);\n      \
-    \  $crate::prtln!(to $var, $($t)*);\n    };\n    (to $var:ident, $($t:tt)*) =>\
-    \ { {\n        use std::io::Write;\n        $crate::prtln!(@ $var, $($t)*);\n\
+    \ bytes=$expr:expr) => {\n        $crate::prtln!(@ $dst, std::str::from_utf8($expr).unwrap());\n\
+    \    };\n    (@ $dst:expr, $expr:expr, no eol) => { std::write!($dst, \"{}\",\
+    \ $expr).unwrap(); };\n    (@ $dst:expr, $expr:expr) => { std::writeln!($dst,\
+    \ \"{}\", $expr).unwrap(); };\n    (@ $dst:expr, $expr:expr, $($t:tt)*) => { {\n\
+    \        std::write!($dst, \"{} \", $expr).unwrap();\n        $crate::prtln!(@\
+    \ $dst, $($t),*);\n    } };\n    (new $var:ident $(,)?) => { let mut $var = stdout_buf();\
+    \ };\n    (new $var:ident, $($t:tt)*) => {\n        $crate::prtln!(new $var);\n\
+    \        $crate::prtln!(to $var, $($t)*);\n    };\n    (to $var:ident, $($t:tt)*)\
+    \ => { {\n        use std::io::Write;\n        $crate::prtln!(@ $var, $($t)*);\n\
     \    } };\n    ($($t:tt)*) => { {\n        $crate::prtln!(new __prtln, $($t)*);\n\
     \        std::mem::drop(__prtln);\n    } };\n}\n\n#[macro_export]\nmacro_rules!\
     \ scan {\n    (@ $iter:expr $(,)?) => {};\n    (@ $iter:expr, mut $var:ident :\
@@ -61,7 +62,7 @@ data:
   path: src/stdio.rs
   requiredBy:
   - src/stdio/buf.rs
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/stdio.rs

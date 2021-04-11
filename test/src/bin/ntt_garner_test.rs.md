@@ -51,7 +51,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/ntt_garner_test.rs
   requiredBy: []
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/ntt_garner_test.rs

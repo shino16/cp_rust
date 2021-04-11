@@ -166,11 +166,11 @@ data:
       path: src/ds/bitset.rs
       title: src/ds/bitset.rs
     - icon: ':warning:'
-      path: src/ds/disjointst.rs
-      title: src/ds/disjointst.rs
+      path: src/ds/dst.rs
+      title: src/ds/dst.rs
     - icon: ':heavy_check_mark:'
-      path: src/ds/fenwick.rs
-      title: src/ds/fenwick.rs
+      path: src/ds/fwk.rs
+      title: src/ds/fwk.rs
     - icon: ':warning:'
       path: src/ds/idx.rs
       title: src/ds/idx.rs
