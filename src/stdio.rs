@@ -18,11 +18,14 @@ macro_rules! prtln {
         }
         $crate::prtln!(@ $dst, "");
     } };
+    (@ $dst:expr, bytes=$expr:expr) => {
+        $crate::prtln!(@ $dst, std::str::from_utf8($expr).unwrap());
+    };
     (@ $dst:expr, $expr:expr, no eol) => { std::write!($dst, "{}", $expr).unwrap(); };
     (@ $dst:expr, $expr:expr) => { std::writeln!($dst, "{}", $expr).unwrap(); };
-    (@ $dst:expr, $expr:expr, $($exprs:expr),*) => { {
+    (@ $dst:expr, $expr:expr, $($t:tt)*) => { {
         std::write!($dst, "{} ", $expr).unwrap();
-        $crate::prtln!(@ $dst, $($exprs),*);
+        $crate::prtln!(@ $dst, $($t),*);
     } };
     (new $var:ident $(,)?) => { let mut $var = stdout_buf(); };
     (new $var:ident, $($t:tt)*) => {

@@ -1,6 +1,6 @@
 pub mod bitset;
-pub mod disjointst;
-pub mod fenwick;
+pub mod dst;
+pub mod fwk;
 pub mod idx;
 pub mod list;
 pub mod pool;
