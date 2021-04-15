@@ -20,10 +20,10 @@ pub fn partition_point<T>(slice: &[T], mut pred: impl FnMut(&T) -> bool) -> usiz
     r
 }
 
-pub fn lower_bound<T: Ord>(slice: &[T], v: &T) -> usize {
+pub fn lower_bound<T: PartialOrd>(slice: &[T], v: &T) -> usize {
     partition_point(slice, |x| x < v)
 }
 
-pub fn upper_bound<T: Ord>(slice: &[T], v: &T) -> usize {
+pub fn upper_bound<T: PartialOrd>(slice: &[T], v: &T) -> usize {
     partition_point(slice, |x| x <= v)
 }

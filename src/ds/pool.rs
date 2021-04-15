@@ -4,6 +4,13 @@ pub trait Pool<T> {
     fn alloc() -> *mut T;
 }
 
+struct Alloc;
+impl<T> Pool<T> for Alloc {
+    fn alloc() -> *mut T {
+        unsafe { std::alloc::alloc(std::alloc::Layout::new::<T>()) as *mut T }
+    }
+}
+
 #[macro_export]
 macro_rules! pool {
     ($ident:ident : [$ty:ty; $len:expr] $(,)?) => {

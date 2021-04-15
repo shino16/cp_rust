@@ -1,3 +1,4 @@
+pub mod bf;
 pub mod bfs;
 pub mod dfs;
 pub mod dfs_io;

@@ -2,6 +2,7 @@ pub use super::*;
 use crate::ds::bitset::*;
 
 pub mod cpnts;
+pub mod weighted;
 
 pub fn dfs(g: &impl Graph, s: usize, mut f: impl FnMut(usize, usize)) {
     let mut visited = new_bitset(g.len());

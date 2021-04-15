@@ -9,22 +9,24 @@ pub fn stdout_buf() -> BufWriter<StdoutLock<'static>> {
 
 #[macro_export]
 macro_rules! prtln {
-    (@ $dst:expr, iter=$expr:expr) => { $crate::prtln!(@ $dst, iter=$expr, sep=" "); };
-    (@ $dst:expr, iter=$expr:expr, sep=$sep:expr) => { {
-        let mut iter = $expr.into_iter();
+    (@ $dst:expr, iter=$v:expr) => { $crate::prtln!(@ $dst, iter=$v, sep=" "); };
+    (@ $dst:expr, iter=$v:expr, sep=$sep:expr) => { {
+        let mut iter = $v.into_iter();
         if let Some(expr) = iter.next() {
             std::write!($dst, "{}", expr).unwrap();
-            for expr in iter { std::write!($dst, "{}{}", $sep, expr).unwrap(); }
+            for v in iter { std::write!($dst, "{}{}", $sep, v).unwrap(); }
         }
         $crate::prtln!(@ $dst, "");
     } };
-    (@ $dst:expr, bytes=$expr:expr) => {
-        $crate::prtln!(@ $dst, std::str::from_utf8($expr).unwrap());
+    (@ $dst:expr, bytes=$v:expr) => {
+        $crate::prtln!(@ $dst, std::str::from_utf8(&$v).unwrap());
     };
-    (@ $dst:expr, $expr:expr, no eol) => { std::write!($dst, "{}", $expr).unwrap(); };
-    (@ $dst:expr, $expr:expr) => { std::writeln!($dst, "{}", $expr).unwrap(); };
-    (@ $dst:expr, $expr:expr, $($t:tt)*) => { {
-        std::write!($dst, "{} ", $expr).unwrap();
+    (@ $dst:expr, YesNo=$v:expr) => { $crate::prtln!(@ $dst, if $v { "Yes" } else { "No" }); };
+    (@ $dst:expr, YESNO=$v:expr) => { $crate::prtln!(@ $dst, if $v { "YES" } else { "NO" }); };
+    (@ $dst:expr, $v:expr, no eol) => { std::write!($dst, "{}", $v).unwrap(); };
+    (@ $dst:expr, $v:expr) => { std::writeln!($dst, "{}", $v).unwrap(); };
+    (@ $dst:expr, $v:expr, $($t:tt)*) => { {
+        std::write!($dst, "{} ", $v).unwrap();
         $crate::prtln!(@ $dst, $($t),*);
     } };
     (new $var:ident $(,)?) => { let mut $var = stdout_buf(); };
@@ -76,6 +78,25 @@ macro_rules! scan_value {
         (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()
     };
     ($iter:expr, bytes) => { $iter.next().unwrap().as_bytes() };
+    ($iter:expr, [u8]) => { $iter.next().unwrap().as_bytes().to_vec() };
+    ($iter:expr, [char]) => { $iter.next().unwrap().chars().collect::<Vec<_>>() };
     ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };
+    (@graph $iter:expr, $n:expr, $m:expr) => { {
+        let mut graph = vec![Vec::new(); $n];
+        for _ in 0..$m {
+            let (a, b) = $crate::scan_value!($iter, (usize1, usize1));
+            graph[a].push(b);
+            graph[b].push(a);
+        }
+        graph
+    } };
+    ($iter:expr, graph) => { {
+        let (n, m) = $crate::scan_value!($iter, (usize, usize));
+        $crate::scan_value!(@graph $iter, n, m)
+    } };
+    ($iter:expr, tree) => { {
+        let n = $crate::scan_value!($iter, usize);
+        $crate::scan_value!(@graph $iter, n, n - 1)
+    } };
     ($iter:expr, $t:ty) => { $iter.next().unwrap().parse::<$t>().unwrap() };
 }

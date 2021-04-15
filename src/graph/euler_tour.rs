@@ -1,11 +1,11 @@
 pub use super::weighted::*;
 pub use crate::alg::arith::*;
 
-pub fn euler_tour<T: Copy>(
-    g: &impl WGraph<T>,
+pub fn euler_tour<G: WGraph>(
+    g: &G,
     s: usize,
-    alg: impl Group<T>,
-) -> (Vec<T>, Vec<usize>, Vec<usize>, Vec<(usize, usize)>) {
+    alg: impl Group<G::W>,
+) -> (Vec<G::W>, Vec<usize>, Vec<usize>, Vec<(usize, usize)>) where G::W: Copy {
     let mut edges = Vec::with_capacity(g.len() * 2);
     let mut togo = vec![(s, !0, alg.unit())];
     togo.reserve(g.len() * 2);
