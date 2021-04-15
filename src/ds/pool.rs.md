@@ -16,9 +16,11 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/ds/pool.rs\n"
   code: "pub use crate::pool;\n\npub trait Pool<T> {\n    fn alloc() -> *mut T;\n\
-    }\n\n#[macro_export]\nmacro_rules! pool {\n    ($ident:ident : [$ty:ty; $len:expr]\
-    \ $(,)?) => {\n        struct $ident;\n        impl Pool<$ty> for $ident {\n \
-    \           fn alloc() -> *mut $ty {\n                use std::mem::MaybeUninit\
+    }\n\nstruct Alloc;\nimpl<T> Pool<T> for Alloc {\n    fn alloc() -> *mut T {\n\
+    \        unsafe { std::alloc::alloc(std::alloc::Layout::new::<T>()) as *mut T\
+    \ }\n    }\n}\n\n#[macro_export]\nmacro_rules! pool {\n    ($ident:ident : [$ty:ty;\
+    \ $len:expr] $(,)?) => {\n        struct $ident;\n        impl Pool<$ty> for $ident\
+    \ {\n            fn alloc() -> *mut $ty {\n                use std::mem::MaybeUninit\
     \ as MU;\n                use std::sync::atomic::{AtomicUsize, Ordering};\n\n\
     \                static mut DATA: MU<[MU<$ty>; $len]> = MU::uninit();\n      \
     \          static IDX: AtomicUsize = AtomicUsize::new(0);\n                let\
@@ -30,7 +32,7 @@ data:
   isVerificationFile: false
   path: src/ds/pool.rs
   requiredBy: []
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-15 22:29:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/ds/pool.rs

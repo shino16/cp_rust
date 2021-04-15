@@ -8,9 +8,6 @@ data:
   - icon: ':warning:'
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
-  - icon: ':warning:'
-    path: src/graph/dijkstra.rs
-    title: src/graph/dijkstra.rs
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
@@ -81,7 +78,6 @@ data:
   - src/int/gcd/ext.rs
   - src/int/bisect.rs
   - src/int/gcd.rs
-  - src/graph/dijkstra.rs
   - src/int.rs
   - src/dfa.rs
   timestamp: '2021-02-08 00:55:24+09:00'

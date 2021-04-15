@@ -27,8 +27,8 @@ data:
     path: src/ds/swag.rs
     title: src/ds/swag.rs
   - icon: ':warning:'
-    path: src/graph/euler_tour.rs
-    title: src/graph/euler_tour.rs
+    path: src/graph/tree/euler_tour.rs
+    title: src/graph/tree/euler_tour.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
@@ -81,7 +81,7 @@ data:
   - src/ds/fwk.rs
   - src/ds/dst.rs
   - src/alg/arith.rs
-  - src/graph/euler_tour.rs
+  - src/graph/tree/euler_tour.rs
   timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

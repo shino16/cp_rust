@@ -21,15 +21,16 @@ data:
     \ // pred(slice[r]) == false\n    while l != r {\n        let mid = (l + r) /\
     \ 2;\n        let val = unsafe { slice.get_unchecked(mid) };\n        if pred(val)\
     \ {\n            l = mid + 1;\n        } else {\n            r = mid;\n      \
-    \  }\n    }\n    r\n}\n\npub fn lower_bound<T: Ord>(slice: &[T], v: &T) -> usize\
-    \ {\n    partition_point(slice, |x| x < v)\n}\n\npub fn upper_bound<T: Ord>(slice:\
-    \ &[T], v: &T) -> usize {\n    partition_point(slice, |x| x <= v)\n}\n"
+    \  }\n    }\n    r\n}\n\npub fn lower_bound<T: PartialOrd>(slice: &[T], v: &T)\
+    \ -> usize {\n    partition_point(slice, |x| x < v)\n}\n\npub fn upper_bound<T:\
+    \ PartialOrd>(slice: &[T], v: &T) -> usize {\n    partition_point(slice, |x| x\
+    \ <= v)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/slice.rs
   requiredBy:
   - src/comp.rs
-  timestamp: '2021-03-31 15:51:17+09:00'
+  timestamp: '2021-04-15 22:29:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice.rs

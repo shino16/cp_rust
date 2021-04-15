@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: src/graph/dijkstra.rs
-    title: src/graph/dijkstra.rs
+    path: src/graph/dist.rs
+    title: src/graph/dist.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -24,7 +24,7 @@ data:
   isVerificationFile: false
   path: src/assign.rs
   requiredBy:
-  - src/graph/dijkstra.rs
+  - src/graph/dist.rs
   timestamp: '2021-03-31 15:51:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

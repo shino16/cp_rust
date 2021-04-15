@@ -18,12 +18,12 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/dfs.rs\n"
-  code: "pub use super::*;\n\n/// f: (v, par)\npub fn dfs(g: &impl Graph, s: usize,\
-    \ mut f: impl FnMut(usize, usize)) {\n    let mut togo = vec![(s, !0)];\n    while\
-    \ let Some((v, par)) = togo.pop() {\n        f(v, par);\n        g.adj(v, |w|\
-    \ {\n            if w != par {\n                togo.push((w, v));\n         \
-    \   }\n        });\n    }\n}\n\npub fn dfs_ord_par(g: &impl Graph, s: usize) ->\
-    \ (Vec<usize>, Vec<usize>) {\n    let mut ord = Vec::with_capacity(g.len());\n\
+  code: "pub use super::*;\n\npub mod weighted;\n\n/// f: (v, par)\npub fn dfs(g:\
+    \ &impl Graph, s: usize, mut f: impl FnMut(usize, usize)) {\n    let mut togo\
+    \ = vec![(s, !0)];\n    while let Some((v, par)) = togo.pop() {\n        f(v,\
+    \ par);\n        g.adj(v, |w| {\n            if w != par {\n                togo.push((w,\
+    \ v));\n            }\n        });\n    }\n}\n\npub fn dfs_ord_par(g: &impl Graph,\
+    \ s: usize) -> (Vec<usize>, Vec<usize>) {\n    let mut ord = Vec::with_capacity(g.len());\n\
     \    let mut par = vec![!0; g.len()];\n    dfs(g, s, |v, p| {\n        ord.push(v);\n\
     \        par[v] = p;\n    });\n    (ord, par)\n}\n"
   dependsOn:
@@ -32,7 +32,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/dfs.rs
   requiredBy: []
-  timestamp: '2021-03-31 15:51:17+09:00'
+  timestamp: '2021-04-16 00:20:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dfs.rs

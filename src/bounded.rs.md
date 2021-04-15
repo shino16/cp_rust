@@ -9,8 +9,11 @@ data:
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
   - icon: ':warning:'
-    path: src/graph/dijkstra.rs
-    title: src/graph/dijkstra.rs
+    path: src/graph/bf.rs
+    title: src/graph/bf.rs
+  - icon: ':warning:'
+    path: src/graph/dist.rs
+    title: src/graph/dist.rs
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/edmonds_karp.rs
     title: src/graph/max_flow/edmonds_karp.rs
@@ -108,7 +111,8 @@ data:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/edmonds_karp/edge.rs
-  - src/graph/dijkstra.rs
+  - src/graph/dist.rs
+  - src/graph/bf.rs
   - src/int.rs
   - src/dfa.rs
   timestamp: '2021-02-08 00:55:24+09:00'

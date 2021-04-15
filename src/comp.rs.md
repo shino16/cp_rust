@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: src/comp.rs
   requiredBy: []
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-15 22:29:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/comp.rs

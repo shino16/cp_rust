@@ -33,11 +33,11 @@ data:
     path: src/gf/io.rs
     title: src/gf/io.rs
   - icon: ':warning:'
-    path: src/graph/dijkstra.rs
-    title: src/graph/dijkstra.rs
+    path: src/graph/bf.rs
+    title: src/graph/bf.rs
   - icon: ':warning:'
-    path: src/graph/euler_tour.rs
-    title: src/graph/euler_tour.rs
+    path: src/graph/dist.rs
+    title: src/graph/dist.rs
   - icon: ':heavy_check_mark:'
     path: src/graph/max_flow/edmonds_karp.rs
     title: src/graph/max_flow/edmonds_karp.rs
@@ -60,11 +60,11 @@ data:
     path: src/graph/max_flow/hlpp/edge.rs
     title: src/graph/max_flow/hlpp/edge.rs
   - icon: ':warning:'
-    path: src/graph/weighted.rs
-    title: src/graph/weighted.rs
+    path: src/graph/tree/dist.rs
+    title: src/graph/tree/dist.rs
   - icon: ':warning:'
-    path: src/graph/weighted/dfs.rs
-    title: src/graph/weighted/dfs.rs
+    path: src/graph/tree/euler_tour.rs
+    title: src/graph/tree/euler_tour.rs
   - icon: ':heavy_check_mark:'
     path: src/int.rs
     title: src/int.rs
@@ -191,7 +191,8 @@ data:
   - src/int/bisect.rs
   - src/int/gcd.rs
   - src/gf.rs
-  - src/graph/weighted/dfs.rs
+  - src/graph/tree/dist.rs
+  - src/graph/tree/euler_tour.rs
   - src/graph/max_flow/hlpp/edge.rs
   - src/graph/max_flow/edmonds_karp.rs
   - src/graph/max_flow/hlpp.rs
@@ -199,9 +200,8 @@ data:
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/edmonds_karp/edge.rs
-  - src/graph/dijkstra.rs
-  - src/graph/weighted.rs
-  - src/graph/euler_tour.rs
+  - src/graph/dist.rs
+  - src/graph/bf.rs
   - src/mint.rs
   - src/mint/conv.rs
   - src/mint/io.rs

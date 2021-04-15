@@ -245,6 +245,9 @@ data:
   - name: src/graph
     pages:
     - icon: ':warning:'
+      path: src/graph/bf.rs
+      title: src/graph/bf.rs
+    - icon: ':warning:'
       path: src/graph/bfs.rs
       title: src/graph/bfs.rs
     - icon: ':warning:'
@@ -254,11 +257,8 @@ data:
       path: src/graph/dfs_io.rs
       title: src/graph/dfs_io.rs
     - icon: ':warning:'
-      path: src/graph/dijkstra.rs
-      title: src/graph/dijkstra.rs
-    - icon: ':warning:'
-      path: src/graph/euler_tour.rs
-      title: src/graph/euler_tour.rs
+      path: src/graph/dist.rs
+      title: src/graph/dist.rs
     - icon: ':warning:'
       path: src/graph/grid.rs
       title: src/graph/grid.rs
@@ -282,6 +282,9 @@ data:
     - icon: ':warning:'
       path: src/graph/dfs/cpnts.rs
       title: src/graph/dfs/cpnts.rs
+    - icon: ':warning:'
+      path: src/graph/dfs/weighted.rs
+      title: src/graph/dfs/weighted.rs
   - name: src/graph/max_flow/edmonds_karp
     pages:
     - icon: ':warning:'
@@ -311,6 +314,11 @@ data:
     - icon: ':warning:'
       path: src/graph/max_flow/hlpp/edge.rs
       title: src/graph/max_flow/hlpp/edge.rs
+  - name: src/graph/tree/dfs
+    pages:
+    - icon: ':warning:'
+      path: src/graph/tree/dfs/weighted.rs
+      title: src/graph/tree/dfs/weighted.rs
   - name: src/graph/tree
     pages:
     - icon: ':warning:'
@@ -320,16 +328,17 @@ data:
       path: src/graph/tree/dfs_io.rs
       title: src/graph/tree/dfs_io.rs
     - icon: ':warning:'
+      path: src/graph/tree/dist.rs
+      title: src/graph/tree/dist.rs
+    - icon: ':warning:'
+      path: src/graph/tree/euler_tour.rs
+      title: src/graph/tree/euler_tour.rs
+    - icon: ':warning:'
       path: src/graph/tree/pruefer.rs
       title: src/graph/tree/pruefer.rs
     - icon: ':warning:'
       path: src/graph/tree/reroot.rs
       title: src/graph/tree/reroot.rs
-  - name: src/graph/weighted
-    pages:
-    - icon: ':warning:'
-      path: src/graph/weighted/dfs.rs
-      title: src/graph/weighted/dfs.rs
   - name: src/int
     pages:
     - icon: ':warning:'

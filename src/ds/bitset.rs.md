@@ -12,6 +12,9 @@ data:
     path: src/graph/dfs/cpnts.rs
     title: src/graph/dfs/cpnts.rs
   - icon: ':warning:'
+    path: src/graph/dfs/weighted.rs
+    title: src/graph/dfs/weighted.rs
+  - icon: ':warning:'
     path: src/graph/dfs_io.rs
     title: src/graph/dfs_io.rs
   - icon: ':heavy_check_mark:'
@@ -23,9 +26,6 @@ data:
   - icon: ':warning:'
     path: src/graph/max_flow/ford_fulkerson/edges.rs
     title: src/graph/max_flow/ford_fulkerson/edges.rs
-  - icon: ':warning:'
-    path: src/graph/weighted/dfs.rs
-    title: src/graph/weighted/dfs.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/ford_fulkerson_test.rs
@@ -59,12 +59,12 @@ data:
   isVerificationFile: false
   path: src/ds/bitset.rs
   requiredBy:
-  - src/graph/weighted/dfs.rs
   - src/graph/bfs.rs
   - src/graph/max_flow/ford_fulkerson/edges.rs
   - src/graph/max_flow/ford_fulkerson/edge.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/dfs/cpnts.rs
+  - src/graph/dfs/weighted.rs
   - src/graph/dfs.rs
   - src/graph/dfs_io.rs
   timestamp: '2021-03-19 19:54:30+09:00'

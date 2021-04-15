@@ -24,9 +24,6 @@ data:
     path: src/draft/fpacc64.rs
     title: src/draft/fpacc64.rs
   - icon: ':warning:'
-    path: src/graph/dijkstra.rs
-    title: src/graph/dijkstra.rs
-  - icon: ':warning:'
     path: src/int/arith.rs
     title: src/int/arith.rs
   - icon: ':warning:'
@@ -102,7 +99,6 @@ data:
   - src/int/gcd/ext.rs
   - src/int/bisect.rs
   - src/int/gcd.rs
-  - src/graph/dijkstra.rs
   - src/dfa.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC

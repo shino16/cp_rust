@@ -18,8 +18,8 @@ data:
     path: src/ds/fwk.rs
     title: src/ds/fwk.rs
   - icon: ':warning:'
-    path: src/graph/euler_tour.rs
-    title: src/graph/euler_tour.rs
+    path: src/graph/tree/euler_tour.rs
+    title: src/graph/tree/euler_tour.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/src/bin/lazy_segtree_test.rs
@@ -52,7 +52,7 @@ data:
   path: src/alg/arith.rs
   requiredBy:
   - src/ds/fwk.rs
-  - src/graph/euler_tour.rs
+  - src/graph/tree/euler_tour.rs
   timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
