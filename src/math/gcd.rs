@@ -4,6 +4,7 @@ type UInt = u64;
 pub mod ext;
 
 pub fn gcd(a: Int, b: Int) -> Int { ugcd(a.abs() as _, b.abs() as _) as _ }
+pub fn lcm(a: Int, b: Int) -> Int { a / gcd(a, b) * b }
 
 pub fn ugcd(mut a: UInt, mut b: UInt) -> UInt {
     if a == 0 {
@@ -24,3 +25,4 @@ pub fn ugcd(mut a: UInt, mut b: UInt) -> UInt {
     }
     a << a_shift.min(b_shift)
 }
+pub fn ulcm(a: UInt, b: UInt) -> UInt { a / ugcd(a, b) * b }

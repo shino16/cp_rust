@@ -1,10 +1,11 @@
 pub use super::weighted::*;
 use crate::assign::*;
-use crate::int::*;
+use crate::bounded::*;
+use crate::num::*;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
-pub fn dijkstra<G: WGraph>(g: &G, s: usize) -> Vec<G::W> where G::W: Int {
+pub fn dijkstra<G: WGraph>(g: &G, s: usize) -> Vec<G::W> where G::W: Num + Bounded {
     let mut dist = vec![G::W::MAX; g.len()];
     dist[s] = G::W::ZERO;
     let mut togo: BinaryHeap<_> = vec![Reverse((G::W::ZERO, s))].into();

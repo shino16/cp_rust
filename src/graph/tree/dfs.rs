@@ -1,5 +1,7 @@
 pub use super::*;
 
+pub mod weighted;
+
 /// f: (v, par)
 pub fn dfs(g: &impl Graph, s: usize, mut f: impl FnMut(usize, usize)) {
     let mut togo = vec![(s, !0)];
