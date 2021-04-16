@@ -1,4 +1,5 @@
 pub mod binom;
+pub mod bm;
 pub mod convex;
 pub mod crt;
 pub mod factorize;
