@@ -14,6 +14,8 @@ data:
     RuntimeError: bundler is not specified: src/math.rs\n"
   code: 'pub mod binom;
 
+    pub mod bm;
+
     pub mod convex;
 
     pub mod crt;
@@ -35,7 +37,7 @@ data:
   isVerificationFile: false
   path: src/math.rs
   requiredBy: []
-  timestamp: '2021-02-28 09:49:33+09:00'
+  timestamp: '2021-04-17 01:05:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math.rs

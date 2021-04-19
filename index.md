@@ -383,6 +383,9 @@ data:
       path: src/math/binom.rs
       title: src/math/binom.rs
     - icon: ':warning:'
+      path: src/math/bm.rs
+      title: src/math/bm.rs
+    - icon: ':warning:'
       path: src/math/convex.rs
       title: src/math/convex.rs
     - icon: ':warning:'

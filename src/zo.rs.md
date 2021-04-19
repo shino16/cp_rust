@@ -87,6 +87,9 @@ data:
     path: src/math/binom.rs
     title: src/math/binom.rs
   - icon: ':warning:'
+    path: src/math/bm.rs
+    title: src/math/bm.rs
+  - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
@@ -185,6 +188,7 @@ data:
   - src/num.rs
   - src/math/pow.rs
   - src/math/binom.rs
+  - src/math/bm.rs
   - src/int/arith.rs
   - src/int/inv.rs
   - src/int/gcd/ext.rs

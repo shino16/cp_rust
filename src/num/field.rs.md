@@ -12,6 +12,9 @@ data:
     title: src/zo.rs
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: src/math/bm.rs
+    title: src/math/bm.rs
+  - icon: ':warning:'
     path: src/poly.rs
     title: src/poly.rs
   _extendedVerifiedWith: []
@@ -38,6 +41,7 @@ data:
   path: src/num/field.rs
   requiredBy:
   - src/poly.rs
+  - src/math/bm.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
