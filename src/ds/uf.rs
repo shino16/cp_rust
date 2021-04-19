@@ -1,53 +1,52 @@
 #[derive(Clone)]
 pub struct UnionFind {
-    par: Vec<usize>,
-    size: Vec<usize>,
+    par_or_size: Vec<usize>,
     count: usize,
 }
 
 impl UnionFind {
     pub fn new(len: usize) -> Self {
-        Self { par: vec![!0; len], size: vec![1; len], count: len }
+        let par_or_size = vec![1_usize.wrapping_neg(); len];
+        Self { par_or_size, count: len }
     }
     pub fn clear(&mut self) {
-        self.par.iter_mut().for_each(|e| *e = !0);
-        self.size.iter_mut().for_each(|e| *e = 1);
+        self.par_or_size.iter_mut().for_each(|t| *t = 1_usize.wrapping_neg());
         self.count = self.len();
     }
-    pub fn len(&self) -> usize { self.par.len() }
+    pub fn len(&self) -> usize {
+        self.par_or_size.len()
+    }
     pub fn find(&mut self, x: usize) -> usize {
-        if self.par[x] == !0 {
+        if self.par_or_size[x] >> 31 != 0 {
             x
         } else {
-            self.par[x] = self.find(self.par[x]);
-            self.par[x]
+            self.par_or_size[x] = self.find(self.par_or_size[x]);
+            self.par_or_size[x]
         }
     }
-    pub fn is_same(&mut self, x: usize, y: usize) -> bool { self.find(x) == self.find(y) }
+    pub fn is_same(&mut self, x: usize, y: usize) -> bool {
+        self.find(x) == self.find(y)
+    }
     pub fn size(&mut self, x: usize) -> usize {
         let root = self.find(x);
-        self.size[root]
+        self.par_or_size[root].wrapping_neg()
     }
     pub fn unite(&mut self, x: usize, y: usize) -> bool {
         let (mut x, mut y) = (self.find(x), self.find(y));
         if x != y {
-            if self.size[x] < self.size[y] {
+            if self.par_or_size[x] > self.par_or_size[y] {
                 std::mem::swap(&mut x, &mut y);
             }
-            self.par[y] = x;
-            self.size[x] += self.size[y];
+            self.par_or_size[x] = self.par_or_size[x].wrapping_add(self.par_or_size[y]);
+            self.par_or_size[y] = x;
             self.count -= 1;
             true
         } else {
             false
         }
     }
-    pub fn count(&self) -> usize { self.count }
-    pub fn push(&mut self) -> usize {
-        let new = self.len();
-        self.par.push(new);
-        self.size.push(1);
-        new
+    pub fn count(&self) -> usize {
+        self.count
     }
     pub fn groups(&mut self) -> Vec<Vec<usize>> {
         let mut groups = vec![Vec::new(); self.len()];

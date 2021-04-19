@@ -1,5 +1,6 @@
 pub use crate::prtln;
 pub use crate::scan;
+pub use  std::io::Write;
 use std::io::{stdout, BufWriter, StdoutLock};
 
 pub fn stdout_buf() -> BufWriter<StdoutLock<'static>> {
@@ -35,7 +36,6 @@ macro_rules! prtln {
         $crate::prtln!(to $var, $($t)*);
     };
     (to $var:ident, $($t:tt)*) => { {
-        use std::io::Write;
         $crate::prtln!(@ $var, $($t)*);
     } };
     ($($t:tt)*) => { {
