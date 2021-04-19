@@ -12,32 +12,15 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math.rs\n"
-  code: 'pub mod binom;
-
-    pub mod bm;
-
-    pub mod convex;
-
-    pub mod crt;
-
-    pub mod factorize;
-
-    pub mod gcd;
-
-    pub mod is_prime;
-
-    pub mod modpow;
-
-    pub mod pow;
-
-    pub mod primes;
-
-    '
+  code: "pub mod binom;\npub mod bm;\npub mod convex;\npub mod crt;\npub mod factorize;\n\
+    pub mod gcd;\npub mod is_prime;\npub mod modpow;\npub mod pow;\npub mod primes;\n\
+    \npub fn abs_diff<T: PartialOrd + std::ops::Sub<T, Output = T>>(a: T, b: T) ->\
+    \ T {\n    if a < b { b - a } else { a - b }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/math.rs
   requiredBy: []
-  timestamp: '2021-04-17 01:05:25+09:00'
+  timestamp: '2021-04-19 13:13:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math.rs

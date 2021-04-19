@@ -18,9 +18,9 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/stdio.rs\n"
-  code: "pub use crate::prtln;\npub use crate::scan;\nuse std::io::{stdout, BufWriter,\
-    \ StdoutLock};\n\npub fn stdout_buf() -> BufWriter<StdoutLock<'static>> {\n  \
-    \  let out = Box::leak(Box::new(stdout()));\n    BufWriter::new(out.lock())\n\
+  code: "pub use crate::prtln;\npub use crate::scan;\npub use  std::io::Write;\nuse\
+    \ std::io::{stdout, BufWriter, StdoutLock};\n\npub fn stdout_buf() -> BufWriter<StdoutLock<'static>>\
+    \ {\n    let out = Box::leak(Box::new(stdout()));\n    BufWriter::new(out.lock())\n\
     }\n\n#[macro_export]\nmacro_rules! prtln {\n    (@ $dst:expr, iter=$v:expr) =>\
     \ { $crate::prtln!(@ $dst, iter=$v, sep=\" \"); };\n    (@ $dst:expr, iter=$v:expr,\
     \ sep=$sep:expr) => { {\n        let mut iter = $v.into_iter();\n        if let\
@@ -37,32 +37,32 @@ data:
     \  $crate::prtln!(@ $dst, $($t),*);\n    } };\n    (new $var:ident $(,)?) => {\
     \ let mut $var = stdout_buf(); };\n    (new $var:ident, $($t:tt)*) => {\n    \
     \    $crate::prtln!(new $var);\n        $crate::prtln!(to $var, $($t)*);\n   \
-    \ };\n    (to $var:ident, $($t:tt)*) => { {\n        use std::io::Write;\n   \
-    \     $crate::prtln!(@ $var, $($t)*);\n    } };\n    ($($t:tt)*) => { {\n    \
-    \    $crate::prtln!(new __prtln, $($t)*);\n        std::mem::drop(__prtln);\n\
-    \    } };\n}\n\n#[macro_export]\nmacro_rules! scan {\n    (@ $iter:expr $(,)?)\
-    \ => {};\n    (@ $iter:expr, mut $var:ident : $t:tt $($r:tt)*) => {\n        #[allow(non_snake_case)]\n\
-    \        let mut $var = $crate::scan_value!($iter, $t);\n        $crate::scan!(@\
-    \ $iter $($r)*)\n    };\n    (@ $iter:expr, $var:ident : $t:tt $($r:tt)*) => {\n\
-    \        #[allow(non_snake_case)]\n        let $var = $crate::scan_value!($iter,\
-    \ $t);\n        $crate::scan!(@ $iter $($r)*)\n    };\n    (@ $iter:expr, $pat:pat\
-    \ in $t:tt $($r:tt)*) => {\n        let $pat = $crate::scan_value!($iter, $t);\n\
-    \        $crate::scan!(@ $iter $($r)*)\n    };\n    (from $s:expr, $($r:tt)*)\
-    \ => { $crate::scan!(@ $s, $($r)*); };\n    (new $var:ident, $($r:tt)*) => {\n\
-    \        let mut __input = String::new();\n        std::io::Read::read_to_string(&mut\
-    \ std::io::stdin(), &mut __input).unwrap();\n        let $var = &mut __input.split_ascii_whitespace();\n\
-    \        $crate::scan!(@ $var, $($r)*);\n    };\n    ($($r:tt)*) => { $crate::scan!(new\
-    \ __scan, $($r)*); };\n}\n\n#[macro_export]\nmacro_rules! scan_value {\n    ($iter:expr,\
-    \ ( $($t:tt),* )) => { ( $($crate::scan_value!($iter, $t)),* ) };\n    ($iter:expr,\
-    \ [ $t:tt ; $len:expr ]) => {\n        (0..$len).map(|_| $crate::scan_value!($iter,\
-    \ $t)).collect::<Vec<_>>()\n    };\n    ($iter:expr, bytes) => { $iter.next().unwrap().as_bytes()\
-    \ };\n    ($iter:expr, [u8]) => { $iter.next().unwrap().as_bytes().to_vec() };\n\
-    \    ($iter:expr, [char]) => { $iter.next().unwrap().chars().collect::<Vec<_>>()\
-    \ };\n    ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };\n\
-    \    (@graph $iter:expr, $n:expr, $m:expr) => { {\n        let mut graph = vec![Vec::new();\
-    \ $n];\n        for _ in 0..$m {\n            let (a, b) = $crate::scan_value!($iter,\
-    \ (usize1, usize1));\n            graph[a].push(b);\n            graph[b].push(a);\n\
-    \        }\n        graph\n    } };\n    ($iter:expr, graph) => { {\n        let\
+    \ };\n    (to $var:ident, $($t:tt)*) => { {\n        $crate::prtln!(@ $var, $($t)*);\n\
+    \    } };\n    ($($t:tt)*) => { {\n        $crate::prtln!(new __prtln, $($t)*);\n\
+    \        std::mem::drop(__prtln);\n    } };\n}\n\n#[macro_export]\nmacro_rules!\
+    \ scan {\n    (@ $iter:expr $(,)?) => {};\n    (@ $iter:expr, mut $var:ident :\
+    \ $t:tt $($r:tt)*) => {\n        #[allow(non_snake_case)]\n        let mut $var\
+    \ = $crate::scan_value!($iter, $t);\n        $crate::scan!(@ $iter $($r)*)\n \
+    \   };\n    (@ $iter:expr, $var:ident : $t:tt $($r:tt)*) => {\n        #[allow(non_snake_case)]\n\
+    \        let $var = $crate::scan_value!($iter, $t);\n        $crate::scan!(@ $iter\
+    \ $($r)*)\n    };\n    (@ $iter:expr, $pat:pat in $t:tt $($r:tt)*) => {\n    \
+    \    let $pat = $crate::scan_value!($iter, $t);\n        $crate::scan!(@ $iter\
+    \ $($r)*)\n    };\n    (from $s:expr, $($r:tt)*) => { $crate::scan!(@ $s, $($r)*);\
+    \ };\n    (new $var:ident, $($r:tt)*) => {\n        let mut __input = String::new();\n\
+    \        std::io::Read::read_to_string(&mut std::io::stdin(), &mut __input).unwrap();\n\
+    \        let $var = &mut __input.split_ascii_whitespace();\n        $crate::scan!(@\
+    \ $var, $($r)*);\n    };\n    ($($r:tt)*) => { $crate::scan!(new __scan, $($r)*);\
+    \ };\n}\n\n#[macro_export]\nmacro_rules! scan_value {\n    ($iter:expr, ( $($t:tt),*\
+    \ )) => { ( $($crate::scan_value!($iter, $t)),* ) };\n    ($iter:expr, [ $t:tt\
+    \ ; $len:expr ]) => {\n        (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()\n\
+    \    };\n    ($iter:expr, bytes) => { $iter.next().unwrap().as_bytes() };\n  \
+    \  ($iter:expr, [u8]) => { $iter.next().unwrap().as_bytes().to_vec() };\n    ($iter:expr,\
+    \ [char]) => { $iter.next().unwrap().chars().collect::<Vec<_>>() };\n    ($iter:expr,\
+    \ usize1) => { $crate::scan_value!($iter, usize) - 1 };\n    (@graph $iter:expr,\
+    \ $n:expr, $m:expr) => { {\n        let mut graph = vec![Vec::new(); $n];\n  \
+    \      for _ in 0..$m {\n            let (a, b) = $crate::scan_value!($iter, (usize1,\
+    \ usize1));\n            graph[a].push(b);\n            graph[b].push(a);\n  \
+    \      }\n        graph\n    } };\n    ($iter:expr, graph) => { {\n        let\
     \ (n, m) = $crate::scan_value!($iter, (usize, usize));\n        $crate::scan_value!(@graph\
     \ $iter, n, m)\n    } };\n    ($iter:expr, tree) => { {\n        let n = $crate::scan_value!($iter,\
     \ usize);\n        $crate::scan_value!(@graph $iter, n, n - 1)\n    } };\n   \
@@ -73,7 +73,7 @@ data:
   path: src/stdio.rs
   requiredBy:
   - src/stdio/buf.rs
-  timestamp: '2021-04-15 22:29:55+09:00'
+  timestamp: '2021-04-19 13:13:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/stdio.rs
