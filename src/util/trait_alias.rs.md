@@ -62,9 +62,6 @@ data:
   - icon: ':warning:'
     path: src/int/arith.rs
     title: src/int/arith.rs
-  - icon: ':warning:'
-    path: src/int/bisect.rs
-    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -80,6 +77,9 @@ data:
   - icon: ':warning:'
     path: src/math/bm.rs
     title: src/math/bm.rs
+  - icon: ':warning:'
+    path: src/math/mat.rs
+    title: src/math/mat.rs
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
@@ -137,47 +137,47 @@ data:
   isVerificationFile: false
   path: src/util/trait_alias.rs
   requiredBy:
-  - src/complex.rs
-  - src/float/conv.rs
-  - src/draft/fpacc64.rs
-  - src/ds/fwk.rs
-  - src/num/field.rs
-  - src/alg/arith.rs
-  - src/poly.rs
-  - src/tests.rs
-  - src/num.rs
+  - src/math/mat.rs
+  - src/math/bm.rs
   - src/math/pow.rs
   - src/math/binom.rs
-  - src/math/bm.rs
-  - src/int/arith.rs
-  - src/int/inv.rs
+  - src/num.rs
+  - src/alg/arith.rs
+  - src/int.rs
+  - src/num/field.rs
+  - src/draft/fpacc64.rs
+  - src/poly.rs
   - src/int/gcd/ext.rs
-  - src/int/bisect.rs
+  - src/int/arith.rs
   - src/int/gcd.rs
-  - src/graph/tree/dist.rs
-  - src/graph/tree/euler_tour.rs
-  - src/graph/max_flow/hlpp/edge.rs
-  - src/graph/max_flow/edmonds_karp.rs
-  - src/graph/max_flow/hlpp.rs
-  - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/ford_fulkerson/edge.rs
-  - src/graph/max_flow/ford_fulkerson.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/int/inv.rs
+  - src/dfa.rs
+  - src/float/conv.rs
+  - src/tests.rs
+  - src/ds/fwk.rs
+  - src/complex.rs
   - src/graph/dist.rs
   - src/graph/bf.rs
-  - src/int.rs
-  - src/dfa.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/max_flow/ford_fulkerson.rs
+  - src/graph/max_flow/hlpp/edge.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/tree/euler_tour.rs
+  - src/graph/tree/dist.rs
   timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/edmonds_karp_test.rs
   - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/hlpp_test.rs
+  - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/hlpp_test.rs
-  - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/dfa_test.rs
-  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/tree_dfs_io_test.rs
 documentation_of: src/util/trait_alias.rs
 layout: document
 redirect_from:

@@ -90,6 +90,9 @@ data:
     path: src/math/bm.rs
     title: src/math/bm.rs
   - icon: ':warning:'
+    path: src/math/mat.rs
+    title: src/math/mat.rs
+  - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
@@ -176,60 +179,61 @@ data:
   isVerificationFile: false
   path: src/zo.rs
   requiredBy:
-  - src/complex.rs
-  - src/float/conv.rs
-  - src/u64/conv.rs
-  - src/draft/fpacc64.rs
-  - src/ds/fwk.rs
-  - src/num/field.rs
-  - src/alg/arith.rs
-  - src/poly.rs
-  - src/tests.rs
-  - src/num.rs
+  - src/math/mat.rs
+  - src/math/bm.rs
   - src/math/pow.rs
   - src/math/binom.rs
-  - src/math/bm.rs
-  - src/int/arith.rs
-  - src/int/inv.rs
-  - src/int/gcd/ext.rs
-  - src/int/bisect.rs
-  - src/int/gcd.rs
-  - src/gf.rs
-  - src/graph/tree/dist.rs
-  - src/graph/tree/euler_tour.rs
-  - src/graph/max_flow/hlpp/edge.rs
-  - src/graph/max_flow/edmonds_karp.rs
-  - src/graph/max_flow/hlpp.rs
-  - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/ford_fulkerson/edge.rs
-  - src/graph/max_flow/ford_fulkerson.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
-  - src/graph/dist.rs
-  - src/graph/bf.rs
-  - src/mint.rs
+  - src/num.rs
+  - src/alg/arith.rs
+  - src/int.rs
+  - src/num/field.rs
   - src/mint/conv.rs
   - src/mint/io.rs
-  - src/int.rs
-  - src/slice/cum.rs
-  - src/dfa.rs
-  - src/gf/dynamic.rs
+  - src/draft/fpacc64.rs
+  - src/mint.rs
+  - src/poly.rs
+  - src/int/bisect.rs
+  - src/int/gcd/ext.rs
+  - src/int/arith.rs
+  - src/int/gcd.rs
+  - src/int/inv.rs
   - src/gf/conv.rs
   - src/gf/io.rs
+  - src/gf/dynamic.rs
+  - src/dfa.rs
+  - src/u64/conv.rs
+  - src/gf.rs
+  - src/float/conv.rs
+  - src/slice/cum.rs
+  - src/tests.rs
+  - src/ds/fwk.rs
+  - src/complex.rs
+  - src/graph/dist.rs
+  - src/graph/bf.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/max_flow/ford_fulkerson.rs
+  - src/graph/max_flow/hlpp/edge.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/tree/euler_tour.rs
+  - src/graph/tree/dist.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/ntt_test.rs
   - test/src/bin/ford_fulkerson_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
+  - test/src/bin/hlpp_test.rs
+  - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/hlpp_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
+  - test/src/bin/dfa_test.rs
+  - test/src/bin/ntt_mint_test.rs
   - test/src/bin/ntt_garner_test.rs
   - test/src/bin/tree_dfs_io_test.rs
-  - test/src/bin/dfa_test.rs
-  - test/src/bin/ntt_test.rs
-  - test/src/bin/edmonds_karp_test.rs
-  - test/src/bin/ntt_mint_test.rs
 documentation_of: src/zo.rs
 layout: document
 redirect_from:

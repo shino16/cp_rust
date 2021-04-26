@@ -73,23 +73,23 @@ data:
   isVerificationFile: false
   path: src/alg.rs
   requiredBy:
+  - src/alg/arith.rs
   - src/ds/swag.rs
-  - src/ds/segtree.rs
   - src/ds/segtree/lazy.rs
   - src/ds/segtree/beats.rs
+  - src/ds/segtree.rs
   - src/ds/sparse_table.rs
   - src/ds/fwk.rs
   - src/ds/dst.rs
-  - src/alg/arith.rs
   - src/graph/tree/euler_tour.rs
   timestamp: '2021-02-20 13:28:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/segtree_test.rs
   - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/swag_test.rs
   - test/src/bin/tree_dfs_io_test.rs
-  - test/src/bin/segtree_test.rs
 documentation_of: src/alg.rs
 layout: document
 redirect_from:

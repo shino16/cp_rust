@@ -41,9 +41,6 @@ data:
   - icon: ':warning:'
     path: src/int/arith.rs
     title: src/int/arith.rs
-  - icon: ':warning:'
-    path: src/int/bisect.rs
-    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -96,34 +93,33 @@ data:
   isVerificationFile: false
   path: src/bounded.rs
   requiredBy:
-  - src/draft/fpacc64.rs
-  - src/tests.rs
   - src/math/pow.rs
-  - src/int/arith.rs
-  - src/int/inv.rs
+  - src/int.rs
+  - src/draft/fpacc64.rs
   - src/int/gcd/ext.rs
-  - src/int/bisect.rs
+  - src/int/arith.rs
   - src/int/gcd.rs
-  - src/graph/max_flow/hlpp/edge.rs
-  - src/graph/max_flow/edmonds_karp.rs
-  - src/graph/max_flow/hlpp.rs
-  - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/ford_fulkerson/edge.rs
-  - src/graph/max_flow/ford_fulkerson.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/int/inv.rs
+  - src/dfa.rs
+  - src/tests.rs
   - src/graph/dist.rs
   - src/graph/bf.rs
-  - src/int.rs
-  - src/dfa.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/max_flow/ford_fulkerson.rs
+  - src/graph/max_flow/hlpp/edge.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/graph/max_flow/edmonds_karp.rs
   timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/edmonds_karp_test.rs
   - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/hlpp_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/hlpp_test.rs
   - test/src/bin/dfa_test.rs
-  - test/src/bin/edmonds_karp_test.rs
 documentation_of: src/bounded.rs
 layout: document
 redirect_from:

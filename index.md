@@ -401,6 +401,9 @@ data:
       path: src/math/is_prime.rs
       title: src/math/is_prime.rs
     - icon: ':warning:'
+      path: src/math/mat.rs
+      title: src/math/mat.rs
+    - icon: ':warning:'
       path: src/math/modpow.rs
       title: src/math/modpow.rs
     - icon: ':warning:'

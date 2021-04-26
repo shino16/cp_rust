@@ -26,9 +26,6 @@ data:
   - icon: ':warning:'
     path: src/int/arith.rs
     title: src/int/arith.rs
-  - icon: ':warning:'
-    path: src/int/bisect.rs
-    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -91,16 +88,15 @@ data:
   isVerificationFile: false
   path: src/int.rs
   requiredBy:
-  - src/draft/fpacc64.rs
-  - src/tests.rs
   - src/math/pow.rs
-  - src/int/arith.rs
-  - src/int/inv.rs
+  - src/draft/fpacc64.rs
   - src/int/gcd/ext.rs
-  - src/int/bisect.rs
+  - src/int/arith.rs
   - src/int/gcd.rs
+  - src/int/inv.rs
   - src/dfa.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  - src/tests.rs
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs

@@ -49,13 +49,13 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy:
-  - src/ds/pool.rs
-  - src/ds/uvec.rs
-  - src/mint.rs
-  - src/stdio.rs
-  - src/util/trait_alias.rs
-  - src/util/for_loop.rs
   - src/stdio/buf.rs
+  - src/mint.rs
+  - src/ds/uvec.rs
+  - src/ds/pool.rs
+  - src/stdio.rs
+  - src/util/for_loop.rs
+  - src/util/trait_alias.rs
   timestamp: '2021-04-10 17:00:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

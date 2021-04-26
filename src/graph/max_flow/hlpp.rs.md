@@ -113,7 +113,7 @@ data:
   path: src/graph/max_flow/hlpp.rs
   requiredBy:
   - src/graph/max_flow/hlpp/edge.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/hlpp_test.rs

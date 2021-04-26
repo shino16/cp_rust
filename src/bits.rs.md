@@ -50,11 +50,11 @@ data:
   isVerificationFile: false
   path: src/bits.rs
   requiredBy:
-  - src/ds/sparse_table.rs
-  - src/ds/dst.rs
-  - src/tests.rs
   - src/int/bisect.rs
   - src/int/gcd.rs
+  - src/tests.rs
+  - src/ds/sparse_table.rs
+  - src/ds/dst.rs
   timestamp: '2021-02-24 00:44:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

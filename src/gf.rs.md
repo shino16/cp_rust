@@ -110,16 +110,16 @@ data:
   isVerificationFile: false
   path: src/gf.rs
   requiredBy:
-  - src/u64/conv.rs
-  - src/tests.rs
   - src/gf/conv.rs
   - src/gf/io.rs
+  - src/u64/conv.rs
+  - src/tests.rs
   timestamp: '2021-04-05 10:12:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/ntt_test.rs
   - test/src/bin/cargo_test.rs
   - test/src/bin/ntt_garner_test.rs
-  - test/src/bin/ntt_test.rs
 documentation_of: src/gf.rs
 layout: document
 redirect_from:

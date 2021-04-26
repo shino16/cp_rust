@@ -14,9 +14,6 @@ data:
   - icon: ':warning:'
     path: src/int/arith.rs
     title: src/int/arith.rs
-  - icon: ':warning:'
-    path: src/int/bisect.rs
-    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -70,16 +67,15 @@ data:
   isVerificationFile: false
   path: src/cast.rs
   requiredBy:
-  - src/draft/fpacc64.rs
-  - src/tests.rs
   - src/math/pow.rs
-  - src/int/arith.rs
-  - src/int/inv.rs
-  - src/int/gcd/ext.rs
-  - src/int/bisect.rs
-  - src/int/gcd.rs
   - src/int.rs
+  - src/draft/fpacc64.rs
+  - src/int/gcd/ext.rs
+  - src/int/arith.rs
+  - src/int/gcd.rs
+  - src/int/inv.rs
   - src/dfa.rs
+  - src/tests.rs
   timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

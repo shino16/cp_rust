@@ -65,9 +65,6 @@ data:
   - icon: ':warning:'
     path: src/int/arith.rs
     title: src/int/arith.rs
-  - icon: ':warning:'
-    path: src/int/bisect.rs
-    title: src/int/bisect.rs
   - icon: ':heavy_check_mark:'
     path: src/int/gcd.rs
     title: src/int/gcd.rs
@@ -83,6 +80,9 @@ data:
   - icon: ':warning:'
     path: src/math/bm.rs
     title: src/math/bm.rs
+  - icon: ':warning:'
+    path: src/math/mat.rs
+    title: src/math/mat.rs
   - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
@@ -130,57 +130,57 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/num.rs\n"
   code: "use crate::util::trait_alias::*;\npub use crate::zo::ZeroOne;\nuse std::fmt::*;\n\
-    use std::ops::*;\n\npub mod field;\n\ntrait_alias!(pub trait Num =\n    ZeroOne\n\
-    \    + Add<Output = Self> + AddAssign\n    + Sub<Output = Self> + SubAssign\n\
-    \    + Mul<Output = Self> + MulAssign\n    + Div<Output = Self> + DivAssign\n\
-    \    + Debug\n    + Display);\n\ntrait_alias!(pub trait INum = Num + Neg<Output\
-    \ = Self>);\n"
+    use std::ops::*;\n\npub mod field;\n\ntrait_alias!(pub trait Ring =\n    ZeroOne\n\
+    \    + Add<Output = Self> + AddAssign\n    + Mul<Output = Self> + MulAssign\n\
+    \    + Debug\n    + Display);\n\ntrait_alias!(pub trait Num =\n    Ring\n    +\
+    \ Sub<Output = Self> + SubAssign\n    + Div<Output = Self> + DivAssign);\n\ntrait_alias!(pub\
+    \ trait INum = Num + Neg<Output = Self>);\n"
   dependsOn:
   - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/num.rs
   requiredBy:
-  - src/complex.rs
-  - src/float/conv.rs
-  - src/draft/fpacc64.rs
-  - src/ds/fwk.rs
-  - src/num/field.rs
-  - src/alg/arith.rs
-  - src/poly.rs
-  - src/tests.rs
+  - src/math/mat.rs
+  - src/math/bm.rs
   - src/math/pow.rs
   - src/math/binom.rs
-  - src/math/bm.rs
-  - src/int/arith.rs
-  - src/int/inv.rs
+  - src/alg/arith.rs
+  - src/int.rs
+  - src/num/field.rs
+  - src/draft/fpacc64.rs
+  - src/poly.rs
   - src/int/gcd/ext.rs
-  - src/int/bisect.rs
+  - src/int/arith.rs
   - src/int/gcd.rs
-  - src/graph/tree/dist.rs
-  - src/graph/tree/euler_tour.rs
-  - src/graph/max_flow/hlpp/edge.rs
-  - src/graph/max_flow/edmonds_karp.rs
-  - src/graph/max_flow/hlpp.rs
-  - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/ford_fulkerson/edge.rs
-  - src/graph/max_flow/ford_fulkerson.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/int/inv.rs
+  - src/dfa.rs
+  - src/float/conv.rs
+  - src/tests.rs
+  - src/ds/fwk.rs
+  - src/complex.rs
   - src/graph/dist.rs
   - src/graph/bf.rs
-  - src/int.rs
-  - src/dfa.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/max_flow/ford_fulkerson.rs
+  - src/graph/max_flow/hlpp/edge.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
+  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/tree/euler_tour.rs
+  - src/graph/tree/dist.rs
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/edmonds_karp_test.rs
   - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/hlpp_test.rs
+  - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/hlpp_test.rs
-  - test/src/bin/tree_dfs_io_test.rs
   - test/src/bin/dfa_test.rs
-  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/tree_dfs_io_test.rs
 documentation_of: src/num.rs
 layout: document
 redirect_from:

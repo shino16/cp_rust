@@ -105,8 +105,8 @@ data:
   timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_garner_test.rs
   - test/src/bin/ntt_test.rs
+  - test/src/bin/ntt_garner_test.rs
 documentation_of: src/gf/conv.rs
 layout: document
 redirect_from:

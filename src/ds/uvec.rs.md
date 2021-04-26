@@ -73,19 +73,19 @@ data:
   isVerificationFile: false
   path: src/ds/uvec.rs
   requiredBy:
-  - src/float/conv.rs
-  - src/u64/conv.rs
-  - src/ds/uvec2d.rs
-  - src/ds/sparse_table.rs
   - src/mint/conv.rs
   - src/gf/conv.rs
+  - src/u64/conv.rs
+  - src/float/conv.rs
+  - src/ds/uvec2d.rs
+  - src/ds/sparse_table.rs
   timestamp: '2021-04-11 12:36:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/ntt_garner_test.rs
   - test/src/bin/ntt_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/ntt_garner_test.rs
 documentation_of: src/ds/uvec.rs
 layout: document
 redirect_from:

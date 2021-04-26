@@ -56,7 +56,8 @@ data:
     \    pub val: u32,\n    _m: PhantomData<*const M>,\n}\n\npub type MintA = Mint<ModA>;\n\
     pub type MintB = Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\n\
     pub type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n\
-    \    pub const M: u32 = M::M;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
+    \    pub const M: u32 = M::M;\n    pub const ZERO: Self = ZeroOne::ZERO;\n   \
+    \ pub const ONE: Self = ZeroOne::ONE;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
     \ as i64) as u32) }\n    pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData\
     \ } }\n    pub fn value(self) -> u32 { self.val }\n    pub fn pow(self, mut exp:\
     \ u64) -> Self {\n        if self.val == 0 && exp == 0 {\n            return Self::from_val(1);\n\
@@ -111,15 +112,15 @@ data:
   isVerificationFile: false
   path: src/mint.rs
   requiredBy:
-  - src/tests.rs
   - src/mint/conv.rs
   - src/mint/io.rs
-  timestamp: '2021-04-10 17:00:13+09:00'
+  - src/tests.rs
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/cargo_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/dfa_test.rs
   - test/src/bin/ntt_mint_test.rs
 documentation_of: src/mint.rs

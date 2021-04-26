@@ -43,7 +43,7 @@ data:
   isVerificationFile: false
   path: src/math/bm.rs
   requiredBy: []
-  timestamp: '2021-04-17 01:05:25+09:00'
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/bm.rs

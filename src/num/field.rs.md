@@ -30,7 +30,11 @@ data:
   code: 'pub use super::*;
 
 
-    trait_alias!(pub trait Field = INum + Div<Self, Output = Self> + DivAssign<Self>);
+    /// exact division
+
+    pub trait Field: INum {}
+
+    impl Field for f64 {}
 
     '
   dependsOn:
@@ -40,9 +44,9 @@ data:
   isVerificationFile: false
   path: src/num/field.rs
   requiredBy:
-  - src/poly.rs
   - src/math/bm.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  - src/poly.rs
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/num/field.rs

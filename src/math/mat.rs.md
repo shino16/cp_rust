@@ -2,12 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/bounded.rs
-    title: src/bounded.rs
-  - icon: ':heavy_check_mark:'
-    path: src/graph/max_flow/edmonds_karp.rs
-    title: src/graph/max_flow/edmonds_karp.rs
-  - icon: ':heavy_check_mark:'
     path: src/num.rs
     title: src/num.rs
   - icon: ':heavy_check_mark:'
@@ -26,31 +20,32 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/graph/max_flow/edmonds_karp/edge.rs\n"
-  code: "pub use super::*;\n\n#[derive(Clone, Copy, Debug)]\npub struct Edge<C: Num\
-    \ + Bounded> {\n    pub from: usize,\n    pub to: usize,\n    pub cap: C,\n  \
-    \  pub flow: C,\n}\n\nimpl<C: Num + Bounded> EdmondsKarp<C> {\n    pub fn get_edge(&self,\
-    \ v: usize, idx: usize) -> Edge<C> {\n        let e = self.graph[v][idx];\n  \
-    \      let rev = self.graph[e.to][e.rev];\n        Edge { from: v, to: e.to, cap:\
-    \ e.cap + rev.cap, flow: rev.cap }\n    }\n    pub fn get_edges_from(&self, v:\
-    \ usize) -> Vec<Edge<C>> {\n        (0..self.graph[v].len()).map(|idx| self.get_edge(v,\
-    \ idx)).collect()\n    }\n}\n"
+    RuntimeError: bundler is not specified: src/math/mat.rs\n"
+  code: "use crate::num::*;\n\npub type Mat<T> = Vec<Vec<T>>;\n\npub fn eye<T: Ring>(n:\
+    \ usize) -> Mat<T> {\n    let mut res = vec![vec![T::ZERO; n]; n];\n    for i\
+    \ in 0..n {\n        res[i][i] = T::ONE;\n    }\n    res\n}\n\npub fn mat_mul<T:\
+    \ Ring>(a: &Mat<T>, b: &Mat<T>) -> Mat<T> {\n    let mut res = vec![vec![T::ZERO;\
+    \ b[0].len()]; a.len()];\n    for (res, a) in res.iter_mut().zip(a) {\n      \
+    \  for (&a, b) in a.iter().zip(b) {\n            for (res, &b) in res.iter_mut().zip(b)\
+    \ {\n                *res += a * b;\n            }\n        }\n    }\n    res\n\
+    }\n\npub fn mat_pow<T: Ring>(mut e: Mat<T>, mut k: u64) -> Mat<T> {\n    let mut\
+    \ res = eye(e.len());\n    while k != 0 {\n        if k % 2 != 0 {\n         \
+    \   res = mat_mul(&res, &e);\n        }\n        e = mat_mul(&e, &e);\n      \
+    \  k /= 2;\n    }\n    res\n}\n"
   dependsOn:
-  - src/bounded.rs
-  - src/graph/max_flow/edmonds_karp.rs
   - src/num.rs
   - src/util/trait_alias.rs
   - src/zo.rs
   isVerificationFile: false
-  path: src/graph/max_flow/edmonds_karp/edge.rs
+  path: src/math/mat.rs
   requiredBy: []
   timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/graph/max_flow/edmonds_karp/edge.rs
+documentation_of: src/math/mat.rs
 layout: document
 redirect_from:
-- /library/src/graph/max_flow/edmonds_karp/edge.rs
-- /library/src/graph/max_flow/edmonds_karp/edge.rs.html
-title: src/graph/max_flow/edmonds_karp/edge.rs
+- /library/src/math/mat.rs
+- /library/src/math/mat.rs.html
+title: src/math/mat.rs
 ---

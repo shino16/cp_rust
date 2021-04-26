@@ -53,7 +53,7 @@ data:
   requiredBy:
   - src/ds/fwk.rs
   - src/graph/tree/euler_tour.rs
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

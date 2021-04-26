@@ -23,8 +23,8 @@ data:
   isVerificationFile: false
   path: src/draft/linked_list.rs
   requiredBy:
-  - src/draft/linked_list/inner_mut.rs
   - src/draft/linked_list/ptr.rs
+  - src/draft/linked_list/inner_mut.rs
   timestamp: '2021-04-03 11:26:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -44,8 +44,8 @@ data:
   isVerificationFile: false
   path: src/graph/tree.rs
   requiredBy:
-  - src/graph/tree/dfs.rs
   - src/graph/tree/dfs_io.rs
+  - src/graph/tree/dfs.rs
   timestamp: '2021-04-16 00:20:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
