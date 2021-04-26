@@ -1,3 +1,5 @@
 pub use super::*;
 
-trait_alias!(pub trait Field = INum + Div<Self, Output = Self> + DivAssign<Self>);
+/// exact division
+pub trait Field: INum {}
+impl Field for f64 {}

@@ -5,10 +5,10 @@ pub struct Binom<T> {
     pub inv_fact: Vec<T>,
 }
 
-impl<I: Num + From<usize>> Binom<I> {
-    pub fn new(n: usize) -> Self {
-        let mut fact = Vec::with_capacity(n + 1);
-        let mut inv_fact = Vec::with_capacity(n + 1);
+impl<I: Num + From<u32>> Binom<I> {
+    pub fn new(n: u32) -> Self {
+        let mut fact = Vec::with_capacity(n as usize + 1);
+        let mut inv_fact = Vec::with_capacity(n as usize + 1);
         let n: I = n.into();
         let (mut acc, mut now) = (I::ONE, I::ZERO);
         fact.push(I::ONE);
@@ -27,11 +27,11 @@ impl<I: Num + From<usize>> Binom<I> {
         inv_fact.reverse();
         Self { fact, inv_fact }
     }
-    pub fn binom(&self, n: usize, r: usize) -> I {
+    pub fn call(&self, n: u32, r: u32) -> I {
         if n < r {
             I::ZERO
         } else {
-            self.fact[n] * self.inv_fact[r] * self.inv_fact[n - r]
+            self.fact[n as usize] * self.inv_fact[r as usize] * self.inv_fact[(n - r) as usize]
         }
     }
 }

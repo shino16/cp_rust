@@ -5,13 +5,16 @@ use std::ops::*;
 
 pub mod field;
 
-trait_alias!(pub trait Num =
+trait_alias!(pub trait Ring =
     ZeroOne
     + Add<Output = Self> + AddAssign
-    + Sub<Output = Self> + SubAssign
     + Mul<Output = Self> + MulAssign
-    + Div<Output = Self> + DivAssign
     + Debug
     + Display);
+
+trait_alias!(pub trait Num =
+    Ring
+    + Sub<Output = Self> + SubAssign
+    + Div<Output = Self> + DivAssign);
 
 trait_alias!(pub trait INum = Num + Neg<Output = Self>);

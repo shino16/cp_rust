@@ -1,5 +1,6 @@
 pub use crate::prtln;
 pub use crate::scan;
+pub use crate::scan_value;
 pub use  std::io::Write;
 use std::io::{stdout, BufWriter, StdoutLock};
 
@@ -28,7 +29,7 @@ macro_rules! prtln {
     (@ $dst:expr, $v:expr) => { std::writeln!($dst, "{}", $v).unwrap(); };
     (@ $dst:expr, $v:expr, $($t:tt)*) => { {
         std::write!($dst, "{} ", $v).unwrap();
-        $crate::prtln!(@ $dst, $($t),*);
+        $crate::prtln!(@ $dst, $($t)*);
     } };
     (new $var:ident $(,)?) => { let mut $var = stdout_buf(); };
     (new $var:ident, $($t:tt)*) => {
@@ -49,16 +50,16 @@ macro_rules! scan {
     (@ $iter:expr $(,)?) => {};
     (@ $iter:expr, mut $var:ident : $t:tt $($r:tt)*) => {
         #[allow(non_snake_case)]
-        let mut $var = $crate::scan_value!($iter, $t);
+        let mut $var = $crate::scan_value!($iter.into_iter(), $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (@ $iter:expr, $var:ident : $t:tt $($r:tt)*) => {
         #[allow(non_snake_case)]
-        let $var = $crate::scan_value!($iter, $t);
+        let $var = $crate::scan_value!($iter.into_iter(), $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (@ $iter:expr, $pat:pat in $t:tt $($r:tt)*) => {
-        let $pat = $crate::scan_value!($iter, $t);
+        let $pat = $crate::scan_value!($iter.into_iter(), $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (from $s:expr, $($r:tt)*) => { $crate::scan!(@ $s, $($r)*); };
@@ -88,7 +89,7 @@ macro_rules! scan_value {
             graph[a].push(b);
             graph[b].push(a);
         }
-        graph
+        ($n, graph)
     } };
     ($iter:expr, graph) => { {
         let (n, m) = $crate::scan_value!($iter, (usize, usize));
