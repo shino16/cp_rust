@@ -7,7 +7,7 @@ Rust 競プロライブラリ
 
 [`shino16/cargo-auto-bundle`](https://github.com/shino16/cargo-auto-bundle) と使うことを想定しています。
 
-ライセンスの都合で、一部のコードを `lib2` クレート（[`shino16/cp_rust_sub`](https://github.com/shino16/cp_rust_sub) ）に分離しています。
+ライセンスの都合で、一部のコードを `lib2` クレート（[`shino16/cp_rust_sub`](https://github.com/shino16/cp_rust_sub)）に分離しています。
 
 ## ライセンス
 
