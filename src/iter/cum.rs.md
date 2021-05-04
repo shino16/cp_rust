@@ -2,11 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/ds/bitset.rs
-    title: src/ds/bitset.rs
-  - icon: ':heavy_check_mark:'
-    path: src/graph.rs
-    title: src/graph.rs
+    path: src/zo.rs
+    title: src/zo.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,27 +14,26 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/graph/bfs.rs\n"
-  code: "use std::collections::VecDeque;\n\npub use super::*;\nuse crate::ds::bitset::*;\n\
-    \n/// f: (v, par)\npub fn bfs(g: &impl Graph, s: usize, mut f: impl FnMut(usize,\
-    \ usize)) {\n    let mut visited = new_bitset(g.len());\n    let mut togo: VecDeque<_>\
-    \ = vec![s].into();\n    visited.set_bit(s);\n    f(s, !0);\n    while let Some(v)\
-    \ = togo.pop_front() {\n        g.adj(v, |w| {\n            if visited.set_bit(w)\
-    \ {\n                f(w, v);\n                togo.push_back(w);\n          \
-    \  }\n        });\n    }\n}\n"
+    RuntimeError: bundler is not specified: src/iter/cum.rs\n"
+  code: "use crate::zo::*;\n\npub trait Cumsum: Sized + Iterator {\n    fn cumsum(self)\
+    \ -> Vec<Self::Item>\n    where\n        Self::Item: Copy + ZeroOne + std::ops::Add<Output\
+    \ = Self::Item>,\n    {\n        let (lb, _) = self.size_hint();\n        let\
+    \ mut res = Vec::with_capacity(lb + 1);\n        let mut sum = Self::Item::ZERO;\n\
+    \        res.push(sum);\n        for v in self {\n            sum = sum + v;\n\
+    \            res.push(sum);\n        }\n        res\n    }\n}\n\nimpl<T: Sized\
+    \ + Iterator> Cumsum for T {}\n"
   dependsOn:
-  - src/ds/bitset.rs
-  - src/graph.rs
+  - src/zo.rs
   isVerificationFile: false
-  path: src/graph/bfs.rs
+  path: src/iter/cum.rs
   requiredBy: []
   timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/graph/bfs.rs
+documentation_of: src/iter/cum.rs
 layout: document
 redirect_from:
-- /library/src/graph/bfs.rs
-- /library/src/graph/bfs.rs.html
-title: src/graph/bfs.rs
+- /library/src/iter/cum.rs
+- /library/src/iter/cum.rs.html
+title: src/iter/cum.rs
 ---

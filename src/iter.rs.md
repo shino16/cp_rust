@@ -21,19 +21,18 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/iter.rs\n"
-  code: "pub mod either;\npub mod pow;\npub mod prod;\n\npub trait Itertools: Iterator\
-    \ {\n    fn collect_vec(self) -> Vec<Self::Item>\n    where\n        Self: Sized,\n\
-    \    {\n        self.collect()\n    }\n}\n\nimpl<I: Iterator> Itertools for I\
-    \ {}\n\n#[macro_export]\nmacro_rules! iprod {\n    ($head:expr) => {\n       \
-    \ $head.into_iter()\n    };\n    ($head:expr, $($tail:expr),*) => (\n        $head.into_iter().flat_map(|e|\
-    \ {\n            std::iter::repeat(e).zip(iprod!($($tail),*))\n        })\n  \
-    \  );\n}\n"
+  code: "pub mod either;\npub mod cum;\npub mod pow;\npub mod prod;\n\npub trait Itertools:\
+    \ Sized + Iterator {\n    fn collect_vec(self) -> Vec<Self::Item> {\n        self.collect()\n\
+    \    }\n}\n\nimpl<I: Iterator> Itertools for I {}\n\n#[macro_export]\nmacro_rules!\
+    \ iprod {\n    ($head:expr) => {\n        $head.into_iter()\n    };\n    ($head:expr,\
+    \ $($tail:expr),*) => (\n        $head.into_iter().flat_map(|e| {\n          \
+    \  std::iter::repeat(e).zip(iprod!($($tail),*))\n        })\n    );\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/iter.rs
   requiredBy:
   - src/tests.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/segtree_beats_test.rs

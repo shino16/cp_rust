@@ -35,7 +35,7 @@ data:
   path: src/graph/tree/dfs/weighted.rs
   requiredBy:
   - src/graph/tree/dist.rs
-  timestamp: '2021-04-16 00:20:17+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dfs/weighted.rs

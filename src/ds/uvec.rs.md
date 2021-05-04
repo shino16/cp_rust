@@ -79,7 +79,7 @@ data:
   - src/float/conv.rs
   - src/ds/uvec2d.rs
   - src/ds/sparse_table.rs
-  timestamp: '2021-04-11 12:36:47+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_test.rs

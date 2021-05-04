@@ -23,15 +23,15 @@ data:
     \ let mut res = Vec::with_capacity(slice.len() + 1);\n    let mut tl = zero;\n\
     \    res.push(tl);\n    for &e in slice.iter().rev() {\n        tl = op(e, tl);\n\
     \        res.push(tl);\n    }\n    res.reverse();\n    res\n}\n\npub fn cuml_sum<T:\
-    \ Copy + ZeroOne + Add<T, Output = T>>(slice: &[T]) -> Vec<T> {\n    cuml(slice,\
-    \ T::ZERO, Add::add)\n}\n\npub fn cumr_sum<T: Copy + ZeroOne + Add<T, Output =\
-    \ T>>(slice: &[T]) -> Vec<T> {\n    cumr(slice, T::ZERO, Add::add)\n}\n"
+    \ Copy + ZeroOne + Add<Output = T>>(slice: &[T]) -> Vec<T> {\n    cuml(slice,\
+    \ T::ZERO, Add::add)\n}\n\npub fn cumr_sum<T: Copy + ZeroOne + Add<Output = T>>(slice:\
+    \ &[T]) -> Vec<T> {\n    cumr(slice, T::ZERO, Add::add)\n}\n"
   dependsOn:
   - src/zo.rs
   isVerificationFile: false
   path: src/slice/cum.rs
   requiredBy: []
-  timestamp: '2021-03-31 15:51:17+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/slice/cum.rs

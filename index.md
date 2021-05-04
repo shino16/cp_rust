@@ -92,6 +92,9 @@ data:
       path: src/num.rs
       title: src/num.rs
     - icon: ':warning:'
+      path: src/perm.rs
+      title: src/perm.rs
+    - icon: ':warning:'
       path: src/poly.rs
       title: src/poly.rs
     - icon: ':warning:'
@@ -368,6 +371,9 @@ data:
       title: src/io/graph.rs
   - name: src/iter
     pages:
+    - icon: ':warning:'
+      path: src/iter/cum.rs
+      title: src/iter/cum.rs
     - icon: ':warning:'
       path: src/iter/either.rs
       title: src/iter/either.rs

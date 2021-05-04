@@ -115,7 +115,7 @@ data:
   - src/mint/conv.rs
   - src/mint/io.rs
   - src/tests.rs
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/lazy_segtree_test.rs

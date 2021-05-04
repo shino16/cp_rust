@@ -167,7 +167,7 @@ data:
   - src/graph/max_flow/edmonds_karp.rs
   - src/graph/tree/euler_tour.rs
   - src/graph/tree/dist.rs
-  timestamp: '2021-04-10 17:00:13+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs

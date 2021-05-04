@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: src/lib.rs
-    title: src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,23 +11,21 @@ data:
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
-    RuntimeError: bundler is not specified: src/util/for_loop.rs\n"
-  code: "pub use crate::for_loop;\n\n#[macro_export]\nmacro_rules! for_loop {\n  \
-    \  ($init:stmt; $cond:expr; $upd:stmt; $block:block) => {\n        $init\n   \
-    \     while $cond {\n            $block\n            $upd\n        }\n    };\n\
+    RuntimeError: bundler is not specified: src/perm.rs\n"
+  code: "pub fn perm_inv(p: &[usize]) -> Vec<usize> {\n    let mut res = vec![!0;\
+    \ p.len()];\n    for i in 0..p.len() {\n        res[p[i]] = i;\n    }\n    res\n\
     }\n"
-  dependsOn:
-  - src/lib.rs
+  dependsOn: []
   isVerificationFile: false
-  path: src/util/for_loop.rs
+  path: src/perm.rs
   requiredBy: []
   timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/util/for_loop.rs
+documentation_of: src/perm.rs
 layout: document
 redirect_from:
-- /library/src/util/for_loop.rs
-- /library/src/util/for_loop.rs.html
-title: src/util/for_loop.rs
+- /library/src/perm.rs
+- /library/src/perm.rs.html
+title: src/perm.rs
 ---

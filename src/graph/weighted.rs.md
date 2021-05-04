@@ -36,10 +36,12 @@ data:
   code: "pub use super::*;\n\npub trait WGraph: Graph {\n    type W;\n    fn adj_w(&self,\
     \ v: usize, f: impl FnMut(usize, Self::W));\n}\nimpl WGraph for Vec<Vec<usize>>\
     \ {\n    type W = usize;\n    fn adj_w(&self, v: usize, mut f: impl FnMut(usize,\
-    \ Self::W)) {\n        self[v].iter().for_each(|&v| f(v, 1));\n    }\n}\nimpl<W:\
-    \ Copy> WGraph for Vec<Vec<(usize, W)>> {\n    type W = W;\n    fn adj_w(&self,\
-    \ v: usize, mut f: impl FnMut(usize, W)) {\n        self[v].iter().for_each(|&(v,\
-    \ w)| f(v, w));\n    }\n}\n"
+    \ Self::W)) {\n        self[v].iter().for_each(|&v| f(v, 1));\n    }\n}\nimpl<W>\
+    \ Graph for Vec<Vec<(usize, W)>> {\n    fn len(&self) -> usize { self.len() }\n\
+    \    fn adj(&self, v: usize, mut f: impl FnMut(usize)) {\n        self[v].iter().for_each(|&(v,\
+    \ _)| f(v))\n    }\n}\nimpl<W: Copy> WGraph for Vec<Vec<(usize, W)>> {\n    type\
+    \ W = W;\n    fn adj_w(&self, v: usize, mut f: impl FnMut(usize, W)) {\n     \
+    \   self[v].iter().for_each(|&(v, w)| f(v, w));\n    }\n}\n"
   dependsOn:
   - src/graph.rs
   isVerificationFile: false
@@ -51,7 +53,7 @@ data:
   - src/graph/tree/dist.rs
   - src/graph/tree/dfs/weighted.rs
   - src/graph/dfs/weighted.rs
-  timestamp: '2021-04-16 00:20:17+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/weighted.rs

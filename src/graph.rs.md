@@ -68,10 +68,7 @@ data:
     pub mod weighted;\n\npub trait Graph {\n    fn len(&self) -> usize;\n    fn adj(&self,\
     \ v: usize, f: impl FnMut(usize));\n}\nimpl Graph for Vec<Vec<usize>> {\n    fn\
     \ len(&self) -> usize { self.len() }\n    fn adj(&self, v: usize, f: impl FnMut(usize))\
-    \ {\n        self[v].iter().copied().for_each(f);\n    }\n}\nimpl<W> Graph for\
-    \ Vec<Vec<(usize, W)>> {\n    fn len(&self) -> usize { self.len() }\n    fn adj(&self,\
-    \ v: usize, mut f: impl FnMut(usize)) {\n        self[v].iter().for_each(|&(v,\
-    \ _)| f(v))\n    }\n}\n"
+    \ {\n        self[v].iter().copied().for_each(f);\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/graph.rs
@@ -92,7 +89,7 @@ data:
   - src/graph/tree/dfs/weighted.rs
   - src/graph/dfs/cpnts.rs
   - src/graph/dfs/weighted.rs
-  timestamp: '2021-04-16 00:20:17+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/tree_dfs_io_test.rs

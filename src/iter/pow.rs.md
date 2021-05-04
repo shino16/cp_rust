@@ -12,7 +12,7 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/iter/pow.rs\n"
-  code: "/// pow_iter(0..10, 8): 700 ms (AtC) / 900 ms (CF)\npub fn pow_iter<I: Iterator\
+  code: "// pow_iter(0..10, 8): 700 ms (AtC) / 900 ms (CF)\npub fn pow_iter<I: Iterator\
     \ + Clone>(iter: I, k: usize) -> IterPow<I> {\n    IterPow {\n        iters: vec![iter.clone();\
     \ k],\n        iters0: vec![iter; k],\n        state: Vec::with_capacity(k),\n\
     \    }\n}\n\npub struct IterPow<I: Iterator + Clone> {\n    iters: Vec<I>,\n \
@@ -29,7 +29,7 @@ data:
   isVerificationFile: false
   path: src/iter/pow.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/iter/pow.rs

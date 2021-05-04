@@ -84,6 +84,9 @@ data:
     path: src/int/inv.rs
     title: src/int/inv.rs
   - icon: ':warning:'
+    path: src/iter/cum.rs
+    title: src/iter/cum.rs
+  - icon: ':warning:'
     path: src/math/binom.rs
     title: src/math/binom.rs
   - icon: ':warning:'
@@ -204,6 +207,7 @@ data:
   - src/u64/conv.rs
   - src/gf.rs
   - src/float/conv.rs
+  - src/iter/cum.rs
   - src/slice/cum.rs
   - src/tests.rs
   - src/ds/fwk.rs
