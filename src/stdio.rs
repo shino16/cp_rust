@@ -78,9 +78,9 @@ macro_rules! scan_value {
     ($iter:expr, [ $t:tt ; $len:expr ]) => {
         (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()
     };
-    ($iter:expr, bytes) => { $iter.next().unwrap().as_bytes() };
-    ($iter:expr, [u8]) => { $iter.next().unwrap().as_bytes().to_vec() };
-    ($iter:expr, [char]) => { $iter.next().unwrap().chars().collect::<Vec<_>>() };
+    ($iter:expr, bytes) => { $iter.next().expect("no input").as_bytes() };
+    ($iter:expr, [u8]) => { $iter.next().expect("no input").as_bytes().to_vec() };
+    ($iter:expr, [char]) => { $iter.next().expect("no input").chars().collect::<Vec<_>>() };
     ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };
     (@graph $iter:expr, $n:expr, $m:expr) => { {
         let mut graph = vec![Vec::new(); $n];
@@ -99,5 +99,24 @@ macro_rules! scan_value {
         let n = $crate::scan_value!($iter, usize);
         $crate::scan_value!(@graph $iter, n, n - 1)
     } };
-    ($iter:expr, $t:ty) => { $iter.next().unwrap().parse::<$t>().unwrap() };
+    ($iter:expr, $t:ty) => { $iter.next().expect("no input").parse::<$t>().expect("parse error") };
+}
+
+#[cfg(debug_assertions)]
+#[macro_export]
+macro_rules! dbg {
+    ($($val:expr),* $(,)?) => {
+        ($( match $val {
+            tmp => {
+                std::eprintln!(":{}> {} = {:?}", std::line!(), std::stringify!($val), &tmp);
+                tmp
+            }
+        } ),*)
+    };
+}
+
+#[cfg(not(debug_assertions))]
+#[macro_export]
+macro_rules! dbg {
+    ($($x:expr),*) => {};
 }

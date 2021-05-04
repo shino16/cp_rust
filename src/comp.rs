@@ -1,7 +1,9 @@
 use crate::slice::*;
 use std::collections::HashMap;
 use std::hash::Hash;
+use std::ops::Deref;
 
+#[derive(Debug, Clone)]
 pub struct Compress<T: Ord>(Vec<T>);
 
 impl<T: Ord> Compress<T> {
@@ -17,8 +19,13 @@ impl<T: Ord> Compress<T> {
         i
     }
     pub fn restore(&self, i: usize) -> &T { &self.0[i] }
-    pub fn cache_al(&self) -> HashMap<T, usize> where T: Clone + Hash {
+    pub fn cache_all(&self) -> HashMap<T, usize> where T: Clone + Hash {
         self.0.iter().cloned().zip(0..).collect()
     }
     pub fn into_inner(self) -> Vec<T> { self.0 }
+}
+
+impl<T: Ord> Deref for Compress<T> {
+    type Target = [T];
+    fn deref(&self) -> &Self::Target { &self.0 }
 }

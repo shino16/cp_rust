@@ -1,4 +1,4 @@
-/// pow_iter(0..10, 8): 700 ms (AtC) / 900 ms (CF)
+// pow_iter(0..10, 8): 700 ms (AtC) / 900 ms (CF)
 pub fn pow_iter<I: Iterator + Clone>(iter: I, k: usize) -> IterPow<I> {
     IterPow {
         iters: vec![iter.clone(); k],

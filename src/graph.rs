@@ -20,9 +20,3 @@ impl Graph for Vec<Vec<usize>> {
         self[v].iter().copied().for_each(f);
     }
 }
-impl<W> Graph for Vec<Vec<(usize, W)>> {
-    fn len(&self) -> usize { self.len() }
-    fn adj(&self, v: usize, mut f: impl FnMut(usize)) {
-        self[v].iter().for_each(|&(v, _)| f(v))
-    }
-}

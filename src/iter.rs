@@ -1,12 +1,10 @@
 pub mod either;
+pub mod cum;
 pub mod pow;
 pub mod prod;
 
-pub trait Itertools: Iterator {
-    fn collect_vec(self) -> Vec<Self::Item>
-    where
-        Self: Sized,
-    {
+pub trait Itertools: Sized + Iterator {
+    fn collect_vec(self) -> Vec<Self::Item> {
         self.collect()
     }
 }
