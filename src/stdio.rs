@@ -1,6 +1,6 @@
 pub use crate::prtln;
 pub use crate::scan;
-pub use crate::scan_value;
+pub use crate::parse;
 pub use  std::io::Write;
 use std::io::{stdout, BufWriter, StdoutLock};
 
@@ -50,16 +50,16 @@ macro_rules! scan {
     (@ $iter:expr $(,)?) => {};
     (@ $iter:expr, mut $var:ident : $t:tt $($r:tt)*) => {
         #[allow(non_snake_case)]
-        let mut $var = $crate::scan_value!($iter.into_iter(), $t);
+        let mut $var = $crate::parse!($iter.into_iter(), $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (@ $iter:expr, $var:ident : $t:tt $($r:tt)*) => {
         #[allow(non_snake_case)]
-        let $var = $crate::scan_value!($iter.into_iter(), $t);
+        let $var = $crate::parse!($iter.into_iter(), $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (@ $iter:expr, $pat:pat in $t:tt $($r:tt)*) => {
-        let $pat = $crate::scan_value!($iter.into_iter(), $t);
+        let $pat = $crate::parse!($iter.into_iter(), $t);
         $crate::scan!(@ $iter $($r)*)
     };
     (from $s:expr, $($r:tt)*) => { $crate::scan!(@ $s, $($r)*); };
@@ -73,33 +73,34 @@ macro_rules! scan {
 }
 
 #[macro_export]
-macro_rules! scan_value {
-    ($iter:expr, ( $($t:tt),* )) => { ( $($crate::scan_value!($iter, $t)),* ) };
+macro_rules! parse {
+    ($iter:expr, ( $($t:tt),* )) => { ( $($crate::parse!($iter, $t)),* ) };
     ($iter:expr, [ $t:tt ; $len:expr ]) => {
-        (0..$len).map(|_| $crate::scan_value!($iter, $t)).collect::<Vec<_>>()
+        (0..$len).map(|_| $crate::parse!($iter, $t)).collect::<Vec<_>>()
     };
     ($iter:expr, bytes) => { $iter.next().expect("no input").as_bytes() };
     ($iter:expr, [u8]) => { $iter.next().expect("no input").as_bytes().to_vec() };
     ($iter:expr, [char]) => { $iter.next().expect("no input").chars().collect::<Vec<_>>() };
-    ($iter:expr, usize1) => { $crate::scan_value!($iter, usize) - 1 };
+    ($iter:expr, usize1) => { $crate::parse!($iter, usize) - 1 };
     (@graph $iter:expr, $n:expr, $m:expr) => { {
         let mut graph = vec![Vec::new(); $n];
         for _ in 0..$m {
-            let (a, b) = $crate::scan_value!($iter, (usize1, usize1));
+            let (a, b) = $crate::parse!($iter, (usize1, usize1));
             graph[a].push(b);
             graph[b].push(a);
         }
         ($n, graph)
     } };
     ($iter:expr, graph) => { {
-        let (n, m) = $crate::scan_value!($iter, (usize, usize));
-        $crate::scan_value!(@graph $iter, n, m)
+        let (n, m) = $crate::parse!($iter, (usize, usize));
+        $crate::parse!(@graph $iter, n, m)
     } };
     ($iter:expr, tree) => { {
-        let n = $crate::scan_value!($iter, usize);
-        $crate::scan_value!(@graph $iter, n, n - 1)
+        let n = $crate::parse!($iter, usize);
+        $crate::parse!(@graph $iter, n, n - 1)
     } };
     ($iter:expr, $t:ty) => { $iter.next().expect("no input").parse::<$t>().expect("parse error") };
+    ($iter:expr) => { $iter.next().expect("no input").parse().expect("parse error") };
 }
 
 #[cfg(debug_assertions)]
