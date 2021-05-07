@@ -85,10 +85,10 @@ data:
     \ {\n            use crate::rand::xoshiro256plus::*;\n            let mut rng\
     \ = Xoshiro256plus::new();\n            for _ in 0..100 {\n                let\
     \ a: Gf17 = rng.next().into();\n                let b = a.inv();\n           \
-    \     assert!(a * b == Gf17::ONE, \"{} {}\", a, b);\n            }\n        }\n\
-    \    }\n\n    mod fp_naive {\n        use crate::mint::*;\n        #[test]\n \
-    \       fn test_mul() {\n            use crate::rand::xoshiro256plus::*;\n   \
-    \         let mut rng = Xoshiro256plus::new();\n            for _ in 0..100 {\n\
+    \     assert!(a * b == Gf17::one(), \"{} {}\", a, b);\n            }\n       \
+    \ }\n    }\n\n    mod fp_naive {\n        use crate::mint::*;\n        #[test]\n\
+    \        fn test_mul() {\n            use crate::rand::xoshiro256plus::*;\n  \
+    \          let mut rng = Xoshiro256plus::new();\n            for _ in 0..100 {\n\
     \                let a = rng.next() as u32 as u64;\n                let b = rng.next()\
     \ as u32 as u64;\n                assert_eq!(Mint17::from(a) * b, Mint17::from(a\
     \ * b));\n            }\n        }\n        #[test]\n        fn test_pow() {\n\
@@ -99,7 +99,7 @@ data:
     \            }\n        }\n        #[test]\n        fn test_inv() {\n        \
     \    use crate::rand::xoshiro256plus::*;\n            let mut rng = Xoshiro256plus::new();\n\
     \            for _ in 0..100 {\n                let a: Mint17 = rng.next().into();\n\
-    \                let b = a.inv();\n                assert!(a * b == Mint17::ONE,\
+    \                let b = a.inv();\n                assert!(a * b == Mint17::one(),\
     \ \"{} * {} = {}\", a, b, a * b);\n            }\n        }\n    }\n\n    mod\
     \ func {\n        mod memo {\n            use crate::func::memo::*;\n        \
     \    #[test]\n            fn test_memo() {\n                const MOD: u32 = 1_000_000_007;\n\
@@ -115,9 +115,9 @@ data:
     .to_vec()).collect_vec();\n            let rhs = vec![(0, b'a'), (0, b'b'), (1,\
     \ b'a'), (1, b'b'), (2, b'a'), (2, b'b')];\n            assert_eq!(lhs, rhs);\n\
     \        }\n    }\n\n    mod num {\n        use crate::int::*;\n        #[test]\n\
-    \        fn types() {\n            assert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);\n\
-    \            assert_eq!(<i32 as Int>::Unsigned::ZERO, 0_u32);\n            assert_eq!(<u32\
-    \ as Int>::Signed::ZERO, 0_i32);\n            assert_eq!(<u32 as Int>::Unsigned::ZERO,\
+    \        fn types() {\n            assert_eq!(<i32 as Int>::Signed::zero(), 0_i32);\n\
+    \            assert_eq!(<i32 as Int>::Unsigned::zero(), 0_u32);\n            assert_eq!(<u32\
+    \ as Int>::Signed::zero(), 0_i32);\n            assert_eq!(<u32 as Int>::Unsigned::zero(),\
     \ 0_u32);\n        }\n    }\n\n    mod make_vec {\n        use crate::make_vec::*;\n\
     \        #[test]\n        fn test() {\n            let v = make_vec((3, (5, 8)),\
     \ \"foo\");\n            assert_eq!(v, vec![vec![vec![\"foo\"; 8]; 5]; 3]);\n\
@@ -183,7 +183,7 @@ data:
   isVerificationFile: false
   path: src/tests.rs
   requiredBy: []
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/cargo_test.rs

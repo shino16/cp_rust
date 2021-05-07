@@ -31,7 +31,7 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph/tree/dist.rs\n"
   code: "pub use super::dfs::weighted::*;\nuse crate::num::*;\n\npub fn dist<G: WGraph>(g:\
-    \ &G, s: usize) -> Vec<G::W> where G::W: Num + Default {\n    let mut dist = vec![G::W::ZERO;\
+    \ &G, s: usize) -> Vec<G::W> where G::W: Num + Default {\n    let mut dist = vec![G::W::zero();\
     \ g.len()];\n    dfs(g, s, |v, p, w| if p != !0 {\n        dist[v] = dist[p] +\
     \ w;\n    });\n    dist\n}\n"
   dependsOn:
@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: src/graph/tree/dist.rs
   requiredBy: []
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/tree/dist.rs

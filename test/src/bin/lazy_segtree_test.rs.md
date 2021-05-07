@@ -43,12 +43,12 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum\n\
     \nuse lib::alg::arith::*;\nuse lib::ds::segtree::lazy::*;\nuse lib::io::*;\nuse\
     \ lib::mint::io::*;\n\nfn main() {\n    let mut io = IO::new();\n    let [n, q]:\
-    \ [usize; 2] = io.scan();\n    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();\n\
+    \ [usize; 2] = io.scan();\n    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::one())).collect::<Vec<_>>();\n\
     \    let mut ds = LazySegmentTree::from_slice(\n        &a,\n        MonoidImpl(||\
-    \ (Mint99::ZERO, Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),\n        MonoidImpl(||\
-    \ (Mint99::ONE, Mint99::ZERO), |(a, b), (c, d)| (a * c, b * c + d)),\n       \
-    \ |(x, w), (a, b)| (a * x + b * w, w),\n    );\n    for _ in 0..q {\n        let\
-    \ t: u32 = io.scan();\n        if t == 0 {\n            ds.act_over(io.scan(),\
+    \ (Mint99::zero(), Mint99::zero()), |(a, s), (b, t)| (a + b, s + t)),\n      \
+    \  MonoidImpl(|| (Mint99::one(), Mint99::zero()), |(a, b), (c, d)| (a * c, b *\
+    \ c + d)),\n        |(x, w), (a, b)| (a * x + b * w, w),\n    );\n    for _ in\
+    \ 0..q {\n        let t: u32 = io.scan();\n        if t == 0 {\n            ds.act_over(io.scan(),\
     \ io.scan(), io.scan());\n        } else {\n            let ans = ds.ask(io.scan(),\
     \ io.scan()).0;\n            io.println(ans);\n        }\n    }\n}\n\n// f(x)\
     \ = ax + b\n// g(x) = cx + d\n// g(f(x)) = acx + bc + d\n"
@@ -65,7 +65,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/lazy_segtree_test.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/lazy_segtree_test.rs

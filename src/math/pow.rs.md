@@ -31,9 +31,10 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math/pow.rs\n"
   code: "use crate::int::*;\n\n#[inline(always)]\npub fn pow<T: Num, K: UInt>(mut\
-    \ e: T, mut k: K) -> T {\n    let mut res = T::ONE;\n    let two = K::ONE + K::ONE;\n\
-    \    while k != K::ZERO {\n        if k % two != K::ZERO {\n            res *=\
-    \ e;\n        }\n        e *= e;\n        k /= two;\n    }\n    res\n}\n"
+    \ e: T, mut k: K) -> T {\n    let mut res = T::one();\n    let two = K::one()\
+    \ + K::one();\n    while k != K::zero() {\n        if k % two != K::zero() {\n\
+    \            res *= e;\n        }\n        e *= e;\n        k /= two;\n    }\n\
+    \    res\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/cast.rs
@@ -44,7 +45,7 @@ data:
   isVerificationFile: false
   path: src/math/pow.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/pow.rs

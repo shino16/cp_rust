@@ -53,21 +53,20 @@ data:
     \ {\n    val: u32,\n    _m: PhantomData<*const M>,\n}\n\npub type GfA = Gf<ModA>;\n\
     pub type GfB = Gf<ModB>;\npub type GfC = Gf<ModC>;\npub type GfD = Gf<ModD>;\n\
     pub type Gf17 = GfA;\npub type Gf99 = GfB;\n\nimpl<M: Mod> Gf<M> {\n    pub const\
-    \ P: u32 = M::P;\n    pub const ZERO: Self = ZeroOne::ZERO;\n    pub const ONE:\
-    \ Self = ZeroOne::ONE;\n    pub fn new(val: u32) -> Self { val.into() }\n    pub\
-    \ fn zero() -> Self { Self::ZERO }\n    pub fn one() -> Self { Self::ONE }\n \
-    \   pub fn is_zero(&self) -> bool { *self == Self::ZERO }\n    fn from_raw(val:\
+    \ P: u32 = M::P;\n    pub fn zero() -> Self { ZeroOne::zero() }\n    pub fn one()\
+    \ -> Self { ZeroOne::one() }\n    pub fn new(val: u32) -> Self { val.into() }\n\
+    \    pub fn is_zero(&self) -> bool { *self == Self::zero() }\n    fn from_raw(val:\
     \ u32) -> Self { Gf { val, _m: PhantomData } }\n    pub fn value(self) -> u32\
     \ {\n        let v = reduce::<M>(self.val as u64);\n        if v >= M::P { v -\
     \ M::P } else { v }\n    }\n    pub fn pow(mut self, mut k: u64) -> Self {\n \
     \       if self.val == 0 && k == 0 { return Self::new(1); }\n        k %= (M::P\
-    \ - 1) as u64;\n        let mut res = Self::ONE;\n        while !k.is_zero() {\n\
-    \            if k % 2 != 0 { res *= self; }\n            self *= self; k >>= 1;\n\
-    \        }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let (mut\
-    \ a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n      \
-    \  while b != 0 {\n            let t = a / b;\n            a -= t * b; u -= t\
-    \ * v;\n            std::mem::swap(&mut a, &mut b); std::mem::swap(&mut u, &mut\
-    \ v);\n        }\n        debug_assert_eq!(a, 1);\n        if u < 0 { debug_assert_eq!(v,\
+    \ - 1) as u64;\n        let mut res = Self::one();\n        while !k.is_zero()\
+    \ {\n            if k % 2 != 0 { res *= self; }\n            self *= self; k >>=\
+    \ 1;\n        }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let\
+    \ (mut a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n \
+    \       while b != 0 {\n            let t = a / b;\n            a -= t * b; u\
+    \ -= t * v;\n            std::mem::swap(&mut a, &mut b); std::mem::swap(&mut u,\
+    \ &mut v);\n        }\n        debug_assert_eq!(a, 1);\n        if u < 0 { debug_assert_eq!(v,\
     \ M::P as i32); u += v; }\n        Self::new(u as u32)\n    }\n}\nimpl<M: Mod>\
     \ From<u32> for Gf<M> {\n    fn from(x: u32) -> Self { Gf::from_raw(reduce::<M>(x\
     \ as u64 * M::R2 as u64)) }\n}\nmacro_rules! impl_from_int {\n    ($($t:ty),*)\
@@ -95,16 +94,17 @@ data:
     \    (Div, div, DivAssign, div_assign)\n);\nimpl<M: Mod> Neg for Gf<M> {\n   \
     \ type Output = Self;\n    fn neg(self) -> Self { Gf::from_raw(M::P * 2 - self.val)\
     \ }\n}\nimpl<M: Mod> iter::Sum for Gf<M> {\n    fn sum<I: Iterator<Item = Self>>(iter:\
-    \ I) -> Self { iter.fold(Self::ZERO, |b, x| b + x) }\n}\nimpl<M: Mod> iter::Product\
-    \ for Gf<M> {\n    fn product<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::ONE,\
+    \ I) -> Self { iter.fold(Self::zero(), |b, x| b + x) }\n}\nimpl<M: Mod> iter::Product\
+    \ for Gf<M> {\n    fn product<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::one(),\
     \ |b, x| b * x) }\n}\nimpl<M: Mod> fmt::Debug for Gf<M> {\n    fn fmt(&self, f:\
     \ &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }\n}\nimpl<M: Mod>\
     \ fmt::Display for Gf<M> {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result\
     \ { self.value().fmt(f) }\n}\nimpl<M: Mod> str::FromStr for Gf<M> {\n    type\
     \ Err = <u32 as str::FromStr>::Err;\n    fn from_str(s: &str) -> Result<Self,\
     \ Self::Err> { u32::from_str(s).map(Self::new) }\n}\nimpl<M: Mod> ZeroOne for\
-    \ Gf<M> {\n    const ZERO: Self = Self { val: 0, _m: PhantomData };\n    const\
-    \ ONE: Self = Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData };\n}\n"
+    \ Gf<M> {\n    fn zero() -> Self { Self { val: 0, _m: PhantomData } }\n    fn\
+    \ one() -> Self { Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData } }\n\
+    }\n"
   dependsOn:
   - src/zo.rs
   isVerificationFile: false
@@ -114,7 +114,7 @@ data:
   - src/tests.rs
   - src/gf/io.rs
   - src/gf/conv.rs
-  timestamp: '2021-04-05 10:12:48+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs

@@ -89,12 +89,12 @@ data:
     \ &X, n: usize, alphabet: &[X::Alphabet]) -> I\nwhere\n    X::Alphabet: Copy,\n\
     \    X::State: Eq + Hash + Copy,\n{\n    let mut dp = HashMap::<X::State, I>::default();\n\
     \    let mut dp2 = HashMap::<X::State, I>::default();\n    dp.insert(dfa.init(),\
-    \ I::ONE);\n    for i in 0..n {\n        dp2.clear();\n        for (s, k) in dp.drain()\
-    \ {\n            for &a in alphabet {\n                let s1 = dfa.next(s, a,\
-    \ i);\n                if dfa.unsuccessful(s1) {\n                    continue;\n\
-    \                }\n                *dp2.entry(s1).or_insert(I::ZERO) += k;\n\
+    \ I::one());\n    for i in 0..n {\n        dp2.clear();\n        for (s, k) in\
+    \ dp.drain() {\n            for &a in alphabet {\n                let s1 = dfa.next(s,\
+    \ a, i);\n                if dfa.unsuccessful(s1) {\n                    continue;\n\
+    \                }\n                *dp2.entry(s1).or_insert(I::zero()) += k;\n\
     \            }\n        }\n        std::mem::swap(&mut dp, &mut dp2);\n    }\n\
-    \    let mut sum = I::ZERO;\n    for (s, k) in dp {\n        if dfa.accept(s)\
+    \    let mut sum = I::zero();\n    for (s, k) in dp {\n        if dfa.accept(s)\
     \ {\n            sum += k;\n        }\n    }\n    sum\n}\n"
   dependsOn:
   - src/bounded.rs
@@ -106,7 +106,7 @@ data:
   isVerificationFile: false
   path: src/dfa.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

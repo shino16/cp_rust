@@ -30,12 +30,13 @@ data:
   code: "pub use crate::conv::*;\npub use crate::num::field::*;\n\npub trait Poly:\
     \ Field + Conv {}\nimpl<T: Field + Conv> Poly for T {}\n\n// TODO\n\npub fn inv<T:\
     \ Poly>(f: Vec<T>, need: usize) -> Vec<T> {\n    let (mut f2, mut inv2) = (Vec::new(),\
-    \ Vec::new());\n    let mut inv = vec![T::ONE / f[0]];\n    let mut deg = 1;\n\
+    \ Vec::new());\n    let mut inv = vec![T::one() / f[0]];\n    let mut deg = 1;\n\
     \    while deg < need {\n        deg *= 2;\n        f2.clone_from(&f);\n     \
     \   inv2.clone_from(&inv);\n        f2.truncate(deg);\n        Conv::conv_in_place(&mut\
     \ f2, &mut inv2);\n        f2.truncate(deg);\n        for e in &mut f2 {\n   \
-    \         *e = -*e;\n        }\n        f2[0] += T::ONE + T::ONE;\n        Conv::conv_in_place(&mut\
-    \ inv, &mut f2);\n        inv.truncate(deg);\n    }\n    inv\n}"
+    \         *e = -*e;\n        }\n        f2[0] += T::one() + T::one();\n      \
+    \  Conv::conv_in_place(&mut inv, &mut f2);\n        inv.truncate(deg);\n    }\n\
+    \    inv\n}"
   dependsOn:
   - src/conv.rs
   - src/num.rs
@@ -45,7 +46,7 @@ data:
   isVerificationFile: false
   path: src/poly.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/poly.rs

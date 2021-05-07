@@ -36,12 +36,12 @@ data:
   code: "pub use super::weighted::*;\nuse crate::assign::*;\nuse crate::bounded::*;\n\
     use crate::num::*;\nuse std::cmp::Reverse;\nuse std::collections::BinaryHeap;\n\
     \npub fn dijkstra<G: WGraph>(g: &G, s: usize) -> Vec<G::W> where G::W: Num + Bounded\
-    \ {\n    let mut dist = vec![G::W::MAX; g.len()];\n    dist[s] = G::W::ZERO;\n\
-    \    let mut togo: BinaryHeap<_> = vec![Reverse((G::W::ZERO, s))].into();\n  \
-    \  while let Some(Reverse((d, v))) = togo.pop() {\n        g.adj_w(v, |w, e| {\n\
-    \            if assign_if(d + e, &mut dist[w], |x, y| x < y) {\n             \
-    \   togo.push(Reverse((d + e, w)));\n            }\n        });\n    }\n    dist\n\
-    }\n"
+    \ {\n    let mut dist = vec![G::W::MAX; g.len()];\n    dist[s] = G::W::zero();\n\
+    \    let mut togo: BinaryHeap<_> = vec![Reverse((G::W::zero(), s))].into();\n\
+    \    while let Some(Reverse((d, v))) = togo.pop() {\n        g.adj_w(v, |w, e|\
+    \ {\n            if assign_if(d + e, &mut dist[w], |x, y| x < y) {\n         \
+    \       togo.push(Reverse((d + e, w)));\n            }\n        });\n    }\n \
+    \   dist\n}\n"
   dependsOn:
   - src/assign.rs
   - src/bounded.rs
@@ -53,7 +53,7 @@ data:
   isVerificationFile: false
   path: src/graph/dist.rs
   requiredBy: []
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/dist.rs

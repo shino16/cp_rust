@@ -22,9 +22,9 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math/mat.rs\n"
   code: "use crate::num::*;\n\npub type Mat<T> = Vec<Vec<T>>;\n\npub fn eye<T: Ring>(n:\
-    \ usize) -> Mat<T> {\n    let mut res = vec![vec![T::ZERO; n]; n];\n    for i\
-    \ in 0..n {\n        res[i][i] = T::ONE;\n    }\n    res\n}\n\npub fn mat_mul<T:\
-    \ Ring>(a: &Mat<T>, b: &Mat<T>) -> Mat<T> {\n    let mut res = vec![vec![T::ZERO;\
+    \ usize) -> Mat<T> {\n    let mut res = vec![vec![T::zero(); n]; n];\n    for\
+    \ i in 0..n {\n        res[i][i] = T::one();\n    }\n    res\n}\n\npub fn mat_mul<T:\
+    \ Ring>(a: &Mat<T>, b: &Mat<T>) -> Mat<T> {\n    let mut res = vec![vec![T::zero();\
     \ b[0].len()]; a.len()];\n    for (res, a) in res.iter_mut().zip(a) {\n      \
     \  for (&a, b) in a.iter().zip(b) {\n            for (res, &b) in res.iter_mut().zip(b)\
     \ {\n                *res += a * b;\n            }\n        }\n    }\n    res\n\
@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: src/math/mat.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/mat.rs

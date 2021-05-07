@@ -40,13 +40,13 @@ data:
     pub use crate::zo::*;\n\npub type Num = Complex<Float>;\npub const TAU: Float\
     \ = 6.28318530717958647692528676655900577;\n\npub fn fft(a: &mut UVec<Num>) {\n\
     \    let n = a.len();\n    assert_eq!(n & (n - 1), 0);\n    let mut m = n >> 1;\n\
-    \    while m != 0 {\n        let mut w = Num::ONE;\n        for (k, t) in (0..n).step_by(m\
+    \    while m != 0 {\n        let mut w = Num::one();\n        for (k, t) in (0..n).step_by(m\
     \ * 2).zip(1_u32..) {\n            for i in k..k + m {\n                let (u,\
     \ v) = (a[i], a[i + m] * w);\n                a[i] = u + v;\n                a[i\
     \ + m] = u - v;\n            }\n            w *= -Num::from_polar(1.0, TAU / (1\
     \ << (t.trailing_zeros() + 2)) as Float);\n        }\n        m >>= 1;\n    }\n\
     }\n\npub fn inv_fft(a: &mut UVec<Num>) {\n    let n = a.len();\n    assert_eq!(n\
-    \ & (n - 1), 0);\n    let mut m = 1;\n    while m < n {\n        let mut w = Num::ONE;\n\
+    \ & (n - 1), 0);\n    let mut m = 1;\n    while m < n {\n        let mut w = Num::one();\n\
     \        for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n            for i\
     \ in k..k + m {\n                let (u, v) = (a[i], a[i + m]);\n            \
     \    a[i] = u + v;\n                a[i + m] = (u - v) * w;\n            }\n \
@@ -78,7 +78,7 @@ data:
   isVerificationFile: false
   path: src/float/conv.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/float/conv.rs

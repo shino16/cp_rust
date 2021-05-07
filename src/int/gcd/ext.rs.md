@@ -32,11 +32,11 @@ data:
     RuntimeError: bundler is not specified: src/int/gcd/ext.rs\n"
   code: "pub use crate::int::*;\n\n/// (g, x) where g = gcd(a, b), ax = g (mod b),\
     \ 0 <= x < b/g\npub fn extgcd<I: IInt>(mut a: I, mut b: I) -> (I, I) {\n    //\
-    \ A = [a, x, y; b, u, v], k = [-1; a; b], Ak = 0\n    let (mut x, mut u) = (I::ONE,\
-    \ I::ZERO);\n    let b0 = b;\n    while !b.is_zero() {\n        let t = a / b;\n\
-    \        a -= t * b;\n        x -= t * u;\n        std::mem::swap(&mut a, &mut\
-    \ b);\n        std::mem::swap(&mut x, &mut u);\n    }\n    if x < I::ZERO {\n\
-    \        x += b0 / a;\n    }\n    (a, x)\n}\n"
+    \ A = [a, x, y; b, u, v], k = [-1; a; b], Ak = 0\n    let (mut x, mut u) = (I::one(),\
+    \ I::zero());\n    let b0 = b;\n    while !b.is_zero() {\n        let t = a /\
+    \ b;\n        a -= t * b;\n        x -= t * u;\n        std::mem::swap(&mut a,\
+    \ &mut b);\n        std::mem::swap(&mut x, &mut u);\n    }\n    if x < I::zero()\
+    \ {\n        x += b0 / a;\n    }\n    (a, x)\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/cast.rs
@@ -47,7 +47,7 @@ data:
   isVerificationFile: false
   path: src/int/gcd/ext.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/gcd/ext.rs

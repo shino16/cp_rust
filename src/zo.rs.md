@@ -171,13 +171,12 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/zo.rs\n"
-  code: "pub trait ZeroOne: Copy + PartialEq {\n    const ZERO: Self;\n    fn is_zero(self)\
-    \ -> bool {\n        self == Self::ZERO\n    }\n    const ONE: Self;\n}\n\nmacro_rules!\
+  code: "pub trait ZeroOne: Copy + PartialEq {\n    fn zero() -> Self;\n    fn one()\
+    \ -> Self;\n    fn is_zero(self) -> bool { self == Self::zero() }\n}\n\nmacro_rules!\
     \ impl_zo {\n    ($($t:ty),*) => { $(\n        impl ZeroOne for $t {\n       \
-    \     const ZERO: Self = 0;\n            const ONE: Self = 1;\n        }\n   \
-    \ )* };\n}\n\nimpl_zo!(i32, i64, i128, isize, u32, u64, u128, usize);\n\nimpl\
-    \ ZeroOne for f64 {\n    const ZERO: Self = 0.0;\n    const ONE: Self = 1.0;\n\
-    }\n"
+    \     fn zero() -> Self { 0 as $t }\n            fn one() -> Self { 1 as $t }\n\
+    \        }\n    )* };\n}\n\nimpl_zo!(i32, i64, i128, isize, u32, u64, u128, usize,\
+    \ f32, f64);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/zo.rs
@@ -223,7 +222,7 @@ data:
   - src/gf/io.rs
   - src/gf/conv.rs
   - src/mint.rs
-  timestamp: '2021-03-22 00:48:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/hlpp_test.rs

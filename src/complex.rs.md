@@ -30,11 +30,11 @@ data:
   code: "use crate::float::*;\nuse crate::num::*;\nuse crate::zo::*;\nuse std::fmt::Debug;\n\
     use std::ops::*;\n\n#[derive(Default, Clone, Copy, PartialEq, Eq)]\npub struct\
     \ Complex<T> {\n    pub re: T,\n    pub im: T,\n}\n\nimpl<T: Num> Complex<T> {\n\
-    \    pub const ZERO: Self = Self { re: T::ZERO, im: T::ZERO };\n    pub const\
-    \ ONE: Self = Self { re: T::ONE, im: T::ZERO };\n    pub fn is_zero(&self) ->\
-    \ bool { *self == Self::ZERO }\n    pub fn new(re: T, im: T) -> Self { Self {\
-    \ re, im } }\n    pub fn conj(self) -> Self where T: Neg<Output = T> {\n     \
-    \   Self::new(self.re, -self.im)\n    }\n}\nimpl Complex<Float> {\n    pub fn\
+    \    pub fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }\n    pub\
+    \ fn one() -> Self { Self { re: T::one(), im: T::zero() } }\n    pub fn is_zero(&self)\
+    \ -> bool { *self == Self::zero() }\n    pub fn new(re: T, im: T) -> Self { Self\
+    \ { re, im } }\n    pub fn conj(self) -> Self where T: Neg<Output = T> {\n   \
+    \     Self::new(self.re, -self.im)\n    }\n}\nimpl Complex<Float> {\n    pub fn\
     \ from_polar(r: Float, theta: Float) -> Self {\n        Self { re: r * theta.cos(),\
     \ im: r * theta.sin() }\n    }\n}\nimpl<T: INum> Neg for Complex<T> {\n    type\
     \ Output = Self;\n    fn neg(self) -> Self::Output { Self::new(self.re.neg(),\
@@ -61,12 +61,12 @@ data:
     \ sub_assign),\n    (Self, Mul, mul, MulAssign, mul_assign),\n    (T, Mul, mul,\
     \ MulAssign, mul_assign),\n    (Self, Div, div, DivAssign, div_assign),\n    (T,\
     \ Div, div, DivAssign, div_assign),\n);\nimpl<T: ZeroOne> ZeroOne for Complex<T>\
-    \ {\n    const ZERO: Self = Self { re: T::ZERO, im: T::ZERO };\n    const ONE:\
-    \ Self = Self { re: T::ONE, im: T::ZERO };\n}\nimpl<T: ZeroOne> From<T> for Complex<T>\
-    \ {\n    fn from(re: T) -> Self { Self { re, im: T::ZERO } }\n}\nimpl Debug for\
-    \ Complex<Float> {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result\
-    \ {\n        f.write_fmt(format_args!(\"{:.2} + {:.2}i\", self.re, self.im))\n\
-    \    }\n}\n"
+    \ {\n    fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }\n    fn one()\
+    \ -> Self { Self { re: T::one(), im: T::zero() } }\n}\nimpl<T: ZeroOne> From<T>\
+    \ for Complex<T> {\n    fn from(re: T) -> Self { Self { re, im: T::zero() } }\n\
+    }\nimpl Debug for Complex<Float> {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>)\
+    \ -> std::fmt::Result {\n        f.write_fmt(format_args!(\"{:.2} + {:.2}i\",\
+    \ self.re, self.im))\n    }\n}\n"
   dependsOn:
   - src/float.rs
   - src/num.rs
@@ -76,7 +76,7 @@ data:
   path: src/complex.rs
   requiredBy:
   - src/float/conv.rs
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/complex.rs

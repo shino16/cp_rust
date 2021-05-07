@@ -46,7 +46,7 @@ data:
   requiredBy:
   - src/poly.rs
   - src/math/bm.rs
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/num/field.rs

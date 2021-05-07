@@ -44,23 +44,23 @@ data:
     \        self.graph.len() - 1\n    }\n    pub fn add_edge(&mut self, v: usize,\
     \ w: usize, cap: C) {\n        let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());\n\
     \        self.graph[v].push(Edge { to: w, cap, rev: widx });\n        self.graph[w].push(Edge\
-    \ { to: v, cap: C::ZERO, rev: vidx });\n    }\n    pub fn solve(&mut self, s:\
-    \ usize, t: usize) -> C {\n        let mut res = C::ZERO;\n        let mut track\
+    \ { to: v, cap: C::zero(), rev: vidx });\n    }\n    pub fn solve(&mut self, s:\
+    \ usize, t: usize) -> C {\n        let mut res = C::zero();\n        let mut track\
     \ = vec![!0; self.len()];\n        let mut togo = VecDeque::new();\n        loop\
     \ {\n            for e in &mut track {\n                *e = !0;\n           \
     \ }\n            togo.clear();\n            togo.push_back((s, C::MAX));\n   \
-    \         let mut df = C::ZERO;\n            while let Some((v, ub)) = togo.pop_front()\
+    \         let mut df = C::zero();\n            while let Some((v, ub)) = togo.pop_front()\
     \ {\n                for &Edge { to, cap, rev } in &self.graph[v] {\n        \
-    \            if cap != C::ZERO && track[to] == !0 {\n                        track[to]\
-    \ = rev;\n                        if to == t {\n                            df\
-    \ = ub.min(cap);\n                            break;\n                       \
-    \ }\n                        togo.push_back((to, ub.min(cap)));\n            \
-    \        }\n                }\n            }\n            if df == C::ZERO {\n\
-    \                return res;\n            }\n            res += df;\n        \
-    \    let mut v = t;\n            while v != s {\n                let &mut Edge\
-    \ { to, ref mut cap, rev } = &mut self.graph[v][track[v]];\n                *cap\
-    \ += df;\n                self.graph[to][rev].cap -= df;\n                v =\
-    \ to;\n            }\n        }\n    }\n}\n"
+    \            if cap != C::zero() && track[to] == !0 {\n                      \
+    \  track[to] = rev;\n                        if to == t {\n                  \
+    \          df = ub.min(cap);\n                            break;\n           \
+    \             }\n                        togo.push_back((to, ub.min(cap)));\n\
+    \                    }\n                }\n            }\n            if df ==\
+    \ C::zero() {\n                return res;\n            }\n            res +=\
+    \ df;\n            let mut v = t;\n            while v != s {\n              \
+    \  let &mut Edge { to, ref mut cap, rev } = &mut self.graph[v][track[v]];\n  \
+    \              *cap += df;\n                self.graph[to][rev].cap -= df;\n \
+    \               v = to;\n            }\n        }\n    }\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/num.rs
@@ -70,7 +70,7 @@ data:
   path: src/graph/max_flow/edmonds_karp.rs
   requiredBy:
   - src/graph/max_flow/edmonds_karp/edge.rs
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/edmonds_karp_test.rs

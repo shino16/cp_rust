@@ -56,18 +56,19 @@ data:
     \    pub val: u32,\n    _m: PhantomData<*const M>,\n}\n\npub type MintA = Mint<ModA>;\n\
     pub type MintB = Mint<ModB>;\npub type MintC = Mint<ModC>;\npub type MintD = Mint<ModD>;\n\
     pub type Mint17 = MintA;\npub type Mint99 = MintB;\n\nimpl<M: Mod> Mint<M> {\n\
-    \    pub const M: u32 = M::M;\n    pub const ZERO: Self = ZeroOne::ZERO;\n   \
-    \ pub const ONE: Self = ZeroOne::ONE;\n    pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M\
-    \ as i64) as u32) }\n    pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData\
-    \ } }\n    pub fn value(self) -> u32 { self.val }\n    pub fn pow(self, mut exp:\
-    \ u64) -> Self {\n        if self.val == 0 && exp == 0 {\n            return Self::from_val(1);\n\
-    \        }\n        let mut b = self;\n        let mut res = Self::from_val(1);\n\
-    \        while exp != 0 {\n            if exp % 2 == 1 {\n                res\
-    \ *= b;\n            }\n            b *= b;\n            exp >>= 1;\n        }\n\
-    \        res\n    }\n    pub fn inv(self) -> Self { self.pow(M::PHI as u64 - 1)\
-    \ }\n    pub fn modulus() -> u32 { M::M }\n}\n\nmacro_rules! impl_from_int {\n\
-    \    ($(($t:ty: $via:ty)),* $(,)?) => { $(\n        impl<M: Mod> From<$t> for\
-    \ Mint<M> {\n            fn from(x: $t) -> Self { Self::from_val((x as $via).rem_euclid(M::M\
+    \    pub const M: u32 = M::M;\n    pub fn zero() -> Self { ZeroOne::zero() }\n\
+    \    pub fn one() -> Self { ZeroOne::one() }\n    pub fn new(val: i64) -> Self\
+    \ { Self::from_val(val.rem_euclid(M::M as i64) as u32) }\n    pub fn from_val(val:\
+    \ u32) -> Self { Mint { val, _m: PhantomData } }\n    pub fn value(self) -> u32\
+    \ { self.val }\n    pub fn pow(self, mut exp: u64) -> Self {\n        if self.val\
+    \ == 0 && exp == 0 {\n            return Self::from_val(1);\n        }\n     \
+    \   let mut b = self;\n        let mut res = Self::from_val(1);\n        while\
+    \ exp != 0 {\n            if exp % 2 == 1 {\n                res *= b;\n     \
+    \       }\n            b *= b;\n            exp >>= 1;\n        }\n        res\n\
+    \    }\n    pub fn inv(self) -> Self { self.pow(M::PHI as u64 - 1) }\n    pub\
+    \ fn modulus() -> u32 { M::M }\n}\n\nmacro_rules! impl_from_int {\n    ($(($t:ty:\
+    \ $via:ty)),* $(,)?) => { $(\n        impl<M: Mod> From<$t> for Mint<M> {\n  \
+    \          fn from(x: $t) -> Self { Self::from_val((x as $via).rem_euclid(M::M\
     \ as $via) as u32) }\n        }\n    )* };\n}\nimpl_from_int! {\n    (i8: i32),\
     \ (i16: i32), (i32: i32), (i64: i64), (isize: i64),\n    (u8: u32), (u16: u32),\
     \ (u32: u32), (u64: u64), (usize: u64),\n}\n\nimpl<M: Mod, T: Into<Mint<M>>> ops::Add<T>\
@@ -103,9 +104,9 @@ data:
     \ {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.val.fmt(f)\
     \ }\n}\nimpl<M: Mod> FromStr for Mint<M> {\n    type Err = <u32 as FromStr>::Err;\n\
     \    fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::from)\
-    \ }\n}\nimpl<M: Mod> ZeroOne for Mint<M> {\n    const ZERO: Self = Self { val:\
-    \ 0, _m: PhantomData };\n    const ONE: Self = Self { val: 1, _m: PhantomData\
-    \ };\n}\n"
+    \ }\n}\nimpl<M: Mod> ZeroOne for Mint<M> {\n    fn zero() -> Self { Self { val:\
+    \ 0, _m: PhantomData } }\n    fn one() -> Self { Self { val: 1, _m: PhantomData\
+    \ } }\n}\n"
   dependsOn:
   - src/lib.rs
   - src/zo.rs
@@ -115,7 +116,7 @@ data:
   - src/mint/io.rs
   - src/mint/conv.rs
   - src/tests.rs
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

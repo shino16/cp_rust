@@ -32,7 +32,7 @@ data:
     RuntimeError: bundler is not specified: src/graph/bf.rs\n"
   code: "pub use super::weighted::*;\npub use crate::bounded::*;\nuse crate::num::*;\n\
     \npub fn bellman_ford<G: WGraph>(g: &G, s: usize) -> Option<Vec<G::W>> where G::W:\
-    \ INum + Bounded {\n    let mut d = vec![G::W::MAX; g.len()];\n    d[s] = G::W::ZERO;\n\
+    \ INum + Bounded {\n    let mut d = vec![G::W::MAX; g.len()];\n    d[s] = G::W::zero();\n\
     \    for _ in 0..g.len() {\n        let mut done = false;\n        for v in 0..g.len()\
     \ {\n            if d[v] == G::W::MAX {\n                continue;\n         \
     \   }\n            g.adj_w(v, |to, w| if d[to] > d[v] + w {\n                d[to]\
@@ -48,7 +48,7 @@ data:
   isVerificationFile: false
   path: src/graph/bf.rs
   requiredBy: []
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/graph/bf.rs

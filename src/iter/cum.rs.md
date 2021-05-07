@@ -18,7 +18,7 @@ data:
   code: "use crate::zo::*;\n\npub trait Cumsum: Sized + Iterator {\n    fn cumsum(self)\
     \ -> Vec<Self::Item>\n    where\n        Self::Item: Copy + ZeroOne + std::ops::Add<Output\
     \ = Self::Item>,\n    {\n        let (lb, _) = self.size_hint();\n        let\
-    \ mut res = Vec::with_capacity(lb + 1);\n        let mut sum = Self::Item::ZERO;\n\
+    \ mut res = Vec::with_capacity(lb + 1);\n        let mut sum = Self::Item::zero();\n\
     \        res.push(sum);\n        for v in self {\n            sum = sum + v;\n\
     \            res.push(sum);\n        }\n        res\n    }\n}\n\nimpl<T: Sized\
     \ + Iterator> Cumsum for T {}\n"
@@ -27,7 +27,7 @@ data:
   isVerificationFile: false
   path: src/iter/cum.rs
   requiredBy: []
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/iter/cum.rs

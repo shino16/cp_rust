@@ -41,9 +41,9 @@ data:
     \         let r = Type::new($prim);\n                let roots: Vec<_> = (0..n.trailing_zeros())\n\
     \                    .map(|i| -r.pow(((Type::M - 1) >> (i + 2)) as u64))\n   \
     \                 .collect();\n                let mut m = n >> 1;\n         \
-    \       while m != 0 {\n                    let mut w = Type::ONE;\n         \
-    \           for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n             \
-    \           for i in k..k + m {\n                            let (u, v) = (a[i],\
+    \       while m != 0 {\n                    let mut w = Type::one();\n       \
+    \             for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n           \
+    \             for i in k..k + m {\n                            let (u, v) = (a[i],\
     \ a[i + m] * w);\n                            a[i] = u + v;\n                \
     \            a[i + m] = u - v;\n                        }\n                  \
     \      w *= roots[t.trailing_zeros() as usize];\n                    }\n     \
@@ -53,12 +53,12 @@ data:
     \                let inv_roots: Vec<_> = (0..n.trailing_zeros())\n           \
     \         .map(|i| -r.pow((Type::M - 1 - ((Type::M - 1) >> (i + 2))) as u64))\n\
     \                    .collect();\n                let mut m = 1;\n           \
-    \     while m < n {\n                    let mut w = Type::ONE;\n            \
-    \        for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n                \
-    \        for i in k..k + m {\n                            let u = a[i];\n    \
-    \                        let v = a[i + m];\n                            a[i] =\
-    \ u + v;\n                            a[i + m] = (u - v) * w;\n              \
-    \          }\n                        w *= inv_roots[t.trailing_zeros() as usize];\n\
+    \     while m < n {\n                    let mut w = Type::one();\n          \
+    \          for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {\n              \
+    \          for i in k..k + m {\n                            let u = a[i];\n  \
+    \                          let v = a[i + m];\n                            a[i]\
+    \ = u + v;\n                            a[i + m] = (u - v) * w;\n            \
+    \            }\n                        w *= inv_roots[t.trailing_zeros() as usize];\n\
     \                    }\n                    m <<= 1;\n                }\n    \
     \            let d = Type::from(n as u32).inv();\n                a.iter_mut().for_each(|e|\
     \ *e *= d);\n            }\n\n            pub fn conv(a: &mut UVec<Type>, b: &mut\
@@ -98,7 +98,7 @@ data:
   isVerificationFile: false
   path: src/mint/conv.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_mint_garner_test.rs

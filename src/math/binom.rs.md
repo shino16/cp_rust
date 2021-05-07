@@ -25,13 +25,13 @@ data:
     \ inv_fact: Vec<T>,\n}\n\nimpl<I: Num + From<u32>> Binom<I> {\n    pub fn new(n:\
     \ u32) -> Self {\n        let mut fact = Vec::with_capacity(n as usize + 1);\n\
     \        let mut inv_fact = Vec::with_capacity(n as usize + 1);\n        let n:\
-    \ I = n.into();\n        let (mut acc, mut now) = (I::ONE, I::ZERO);\n       \
-    \ fact.push(I::ONE);\n        while now != n {\n            now += I::ONE;\n \
-    \           acc *= now;\n            fact.push(acc);\n        }\n        acc =\
-    \ I::ONE / acc;\n        while now != I::ZERO {\n            inv_fact.push(acc);\n\
-    \            acc *= now;\n            now -= I::ONE;\n        }\n        inv_fact.push(I::ONE);\n\
+    \ I = n.into();\n        let (mut acc, mut now) = (I::one(), I::zero());\n   \
+    \     fact.push(I::one());\n        while now != n {\n            now += I::one();\n\
+    \            acc *= now;\n            fact.push(acc);\n        }\n        acc\
+    \ = I::one() / acc;\n        while now != I::zero() {\n            inv_fact.push(acc);\n\
+    \            acc *= now;\n            now -= I::one();\n        }\n        inv_fact.push(I::one());\n\
     \        inv_fact.reverse();\n        Self { fact, inv_fact }\n    }\n    pub\
-    \ fn call(&self, n: u32, r: u32) -> I {\n        if n < r {\n            I::ZERO\n\
+    \ fn call(&self, n: u32, r: u32) -> I {\n        if n < r {\n            I::zero()\n\
     \        } else {\n            self.fact[n as usize] * self.inv_fact[r as usize]\
     \ * self.inv_fact[(n - r) as usize]\n        }\n    }\n}\n"
   dependsOn:
@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: src/math/binom.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/binom.rs

@@ -60,10 +60,10 @@ data:
     \ GfGrow::from_raw(self.val as u64 * rhs.into().val as u64)\n    }\n    pub fn\
     \ pow<I: Int>(self, k: I) -> Self {\n        if self.val == 0 && k.is_zero() {\n\
     \            return Self::new(1);\n        }\n        let (mut e, mut k) = (self,\
-    \ k.rem_euclid((M::P - 1).as_()));\n        let mut res = Self::ONE;\n       \
-    \ while !k.is_zero() {\n            if !(k & 1.as_()).is_zero() {\n          \
-    \      res *= e;\n            }\n            e *= e;\n            k >>= 1;\n \
-    \       }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let (mut\
+    \ k.rem_euclid((M::P - 1).as_()));\n        let mut res = Self::one();\n     \
+    \   while !k.is_zero() {\n            if !(k & 1.as_()).is_zero() {\n        \
+    \        res *= e;\n            }\n            e *= e;\n            k >>= 1;\n\
+    \        }\n        res\n    }\n    pub fn inv(self) -> Self {\n        let (mut\
     \ a, mut b, mut u, mut v) = (M::P as i32, self.value() as i32, 0, 1);\n      \
     \  while b != 0 {\n            let t = a / b;\n            a -= t * b;\n     \
     \       u -= t * v;\n            std::mem::swap(&mut a, &mut b);\n           \
@@ -106,9 +106,9 @@ data:
     \ mul_assign),\n    (Div, div, DivAssign, div_assign)\n);\n\nimpl<M: Mod> ops::Neg\
     \ for Gf<M> {\n    type Output = Self;\n    fn neg(self) -> Self {\n        Gf::from_raw(M::P\
     \ * 2 - self.val)\n    }\n}\n\nimpl<M: Mod> iter::Sum for Gf<M> {\n    fn sum<I:\
-    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::ZERO, |b,\
+    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::zero(), |b,\
     \ x| b + x)\n    }\n}\n\nimpl<M: Mod> iter::Product for Gf<M> {\n    fn product<I:\
-    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::ONE, |b,\
+    \ Iterator<Item = Self>>(iter: I) -> Self {\n        iter.fold(Self::one(), |b,\
     \ x| b * x)\n    }\n}\n\nimpl<M: Mod> fmt::Debug for Gf<M> {\n    fn fmt(&self,\
     \ f: &mut fmt::Formatter) -> fmt::Result {\n        self.value().fmt(f)\n    }\n\
     }\n\nimpl<M: Mod> fmt::Display for Gf<M> {\n    fn fmt(&self, f: &mut fmt::Formatter)\
@@ -131,7 +131,7 @@ data:
   isVerificationFile: false
   path: src/draft/fpacc64.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/draft/fpacc64.rs

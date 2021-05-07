@@ -22,15 +22,15 @@ data:
     \ r: I, mut pred: impl FnMut(I) -> bool) -> I\nwhere\n    I: Bits + ZeroOne +\
     \ std::ops::Add<I, Output = I> + std::fmt::Debug,\n{\n    while l != r {\n   \
     \     let mid = (l & r) + ((l ^ r) >> 1);\n        if pred(mid) {\n          \
-    \  l = mid + I::ONE;\n        } else {\n            r = mid;\n        }\n    }\n\
-    \    r\n}\n"
+    \  l = mid + I::one();\n        } else {\n            r = mid;\n        }\n  \
+    \  }\n    r\n}\n"
   dependsOn:
   - src/bits.rs
   - src/zo.rs
   isVerificationFile: false
   path: src/int/bisect.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/bisect.rs

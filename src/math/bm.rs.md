@@ -25,15 +25,15 @@ data:
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/math/bm.rs\n"
   code: "use crate::num::field::*;\n\npub fn berlekamp_massey<T: Field>(s: &[T]) ->\
-    \ Vec<T> {\n    let (mut c, mut b) = (vec![T::ZERO; s.len()], vec![T::ZERO; s.len()]);\n\
-    \    c[0] = T::ONE;\n    b[0] = T::ONE;\n    let mut db = T::ONE;\n    let mut\
-    \ m = 0;\n    for n in 0..s.len() {\n        m += 1;\n        let dc = (0..=n).fold(T::ZERO,\
-    \ |d, i| d + c[i] * s[n - i]);\n        if dc != T::ZERO {\n            let k\
-    \ = dc / db;\n            for i in (m..s.len()).rev() {\n                b[i]\
-    \ = c[i] - k * b[i - m];\n            }\n            b[..m].copy_from_slice(&c[..m]);\n\
+    \ Vec<T> {\n    let (mut c, mut b) = (vec![T::zero(); s.len()], vec![T::zero();\
+    \ s.len()]);\n    c[0] = T::one();\n    b[0] = T::one();\n    let mut db = T::one();\n\
+    \    let mut m = 0;\n    for n in 0..s.len() {\n        m += 1;\n        let dc\
+    \ = (0..=n).fold(T::zero(), |d, i| d + c[i] * s[n - i]);\n        if dc != T::zero()\
+    \ {\n            let k = dc / db;\n            for i in (m..s.len()).rev() {\n\
+    \                b[i] = c[i] - k * b[i - m];\n            }\n            b[..m].copy_from_slice(&c[..m]);\n\
     \            std::mem::swap(&mut b, &mut c);\n            db = dc;\n         \
-    \   m = 0;\n        }\n    }\n    while c.last() == Some(&T::ZERO) {\n       \
-    \ c.pop();\n    }\n    c.remove(0);\n    c.iter_mut().for_each(|c| *c = -*c);\n\
+    \   m = 0;\n        }\n    }\n    while c.last() == Some(&T::zero()) {\n     \
+    \   c.pop();\n    }\n    c.remove(0);\n    c.iter_mut().for_each(|c| *c = -*c);\n\
     \    c\n}\n"
   dependsOn:
   - src/num.rs
@@ -43,7 +43,7 @@ data:
   isVerificationFile: false
   path: src/math/bm.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math/bm.rs

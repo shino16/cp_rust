@@ -30,11 +30,11 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/int/arith.rs\n"
-  code: "use super::*;\n\npub fn floor_sqrt<I: UInt>(n: I) -> I {\n    if n == I::ZERO\
-    \ {\n        I::ZERO\n    } else {\n        let x = n.as_::<f64>().sqrt().round().as_();\n\
-    \        (x + n / x) / (I::ONE + I::ONE)\n    }\n}\n\npub fn ceil_sqrt<I: UInt>(n:\
-    \ I) -> I {\n    if n == I::ZERO {\n        I::ZERO\n    } else {\n        floor_sqrt(n\
-    \ - I::ONE) + I::ONE\n    }\n}\n"
+  code: "use super::*;\n\npub fn floor_sqrt<I: UInt>(n: I) -> I {\n    if n == I::zero()\
+    \ {\n        I::zero()\n    } else {\n        let x = n.as_::<f64>().sqrt().round().as_();\n\
+    \        (x + n / x) / (I::one() + I::one())\n    }\n}\n\npub fn ceil_sqrt<I:\
+    \ UInt>(n: I) -> I {\n    if n == I::zero() {\n        I::zero()\n    } else {\n\
+    \        floor_sqrt(n - I::one()) + I::one()\n    }\n}\n"
   dependsOn:
   - src/bounded.rs
   - src/cast.rs
@@ -45,7 +45,7 @@ data:
   isVerificationFile: false
   path: src/int/arith.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/int/arith.rs

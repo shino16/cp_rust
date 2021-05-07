@@ -96,7 +96,7 @@ data:
   - src/int/gcd/ext.rs
   - src/int/arith.rs
   - src/tests.rs
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-07 12:42:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs
