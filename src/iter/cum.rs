@@ -7,7 +7,7 @@ pub trait Cumsum: Sized + Iterator {
     {
         let (lb, _) = self.size_hint();
         let mut res = Vec::with_capacity(lb + 1);
-        let mut sum = Self::Item::ZERO;
+        let mut sum = Self::Item::zero();
         res.push(sum);
         for v in self {
             sum = sum + v;

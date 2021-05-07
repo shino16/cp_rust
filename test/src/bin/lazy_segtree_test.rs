@@ -8,11 +8,11 @@ use lib::mint::io::*;
 fn main() {
     let mut io = IO::new();
     let [n, q]: [usize; 2] = io.scan();
-    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::ONE)).collect::<Vec<_>>();
+    let a = io.scan_iter::<Mint99>(n).map(|a| (a, Mint99::one())).collect::<Vec<_>>();
     let mut ds = LazySegmentTree::from_slice(
         &a,
-        MonoidImpl(|| (Mint99::ZERO, Mint99::ZERO), |(a, s), (b, t)| (a + b, s + t)),
-        MonoidImpl(|| (Mint99::ONE, Mint99::ZERO), |(a, b), (c, d)| (a * c, b * c + d)),
+        MonoidImpl(|| (Mint99::zero(), Mint99::zero()), |(a, s), (b, t)| (a + b, s + t)),
+        MonoidImpl(|| (Mint99::one(), Mint99::zero()), |(a, b), (c, d)| (a * c, b * c + d)),
         |(x, w), (a, b)| (a * x + b * w, w),
     );
     for _ in 0..q {

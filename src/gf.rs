@@ -54,12 +54,10 @@ pub type Gf99 = GfB;
 
 impl<M: Mod> Gf<M> {
     pub const P: u32 = M::P;
-    pub const ZERO: Self = ZeroOne::ZERO;
-    pub const ONE: Self = ZeroOne::ONE;
+    pub fn zero() -> Self { ZeroOne::zero() }
+    pub fn one() -> Self { ZeroOne::one() }
     pub fn new(val: u32) -> Self { val.into() }
-    pub fn zero() -> Self { Self::ZERO }
-    pub fn one() -> Self { Self::ONE }
-    pub fn is_zero(&self) -> bool { *self == Self::ZERO }
+    pub fn is_zero(&self) -> bool { *self == Self::zero() }
     fn from_raw(val: u32) -> Self { Gf { val, _m: PhantomData } }
     pub fn value(self) -> u32 {
         let v = reduce::<M>(self.val as u64);
@@ -68,7 +66,7 @@ impl<M: Mod> Gf<M> {
     pub fn pow(mut self, mut k: u64) -> Self {
         if self.val == 0 && k == 0 { return Self::new(1); }
         k %= (M::P - 1) as u64;
-        let mut res = Self::ONE;
+        let mut res = Self::one();
         while !k.is_zero() {
             if k % 2 != 0 { res *= self; }
             self *= self; k >>= 1;
@@ -149,10 +147,10 @@ impl<M: Mod> Neg for Gf<M> {
     fn neg(self) -> Self { Gf::from_raw(M::P * 2 - self.val) }
 }
 impl<M: Mod> iter::Sum for Gf<M> {
-    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::ZERO, |b, x| b + x) }
+    fn sum<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::zero(), |b, x| b + x) }
 }
 impl<M: Mod> iter::Product for Gf<M> {
-    fn product<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::ONE, |b, x| b * x) }
+    fn product<I: Iterator<Item = Self>>(iter: I) -> Self { iter.fold(Self::one(), |b, x| b * x) }
 }
 impl<M: Mod> fmt::Debug for Gf<M> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { self.value().fmt(f) }
@@ -165,6 +163,6 @@ impl<M: Mod> str::FromStr for Gf<M> {
     fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::new) }
 }
 impl<M: Mod> ZeroOne for Gf<M> {
-    const ZERO: Self = Self { val: 0, _m: PhantomData };
-    const ONE: Self = Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData };
+    fn zero() -> Self { Self { val: 0, _m: PhantomData } }
+    fn one() -> Self { Self { val: M::P.wrapping_neg() % M::P, _m: PhantomData } }
 }

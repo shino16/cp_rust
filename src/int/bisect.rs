@@ -8,7 +8,7 @@ where
     while l != r {
         let mid = (l & r) + ((l ^ r) >> 1);
         if pred(mid) {
-            l = mid + I::ONE;
+            l = mid + I::one();
         } else {
             r = mid;
         }

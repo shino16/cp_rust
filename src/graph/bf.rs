@@ -4,7 +4,7 @@ use crate::num::*;
 
 pub fn bellman_ford<G: WGraph>(g: &G, s: usize) -> Option<Vec<G::W>> where G::W: INum + Bounded {
     let mut d = vec![G::W::MAX; g.len()];
-    d[s] = G::W::ZERO;
+    d[s] = G::W::zero();
     for _ in 0..g.len() {
         let mut done = false;
         for v in 0..g.len() {

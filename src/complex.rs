@@ -11,9 +11,9 @@ pub struct Complex<T> {
 }
 
 impl<T: Num> Complex<T> {
-    pub const ZERO: Self = Self { re: T::ZERO, im: T::ZERO };
-    pub const ONE: Self = Self { re: T::ONE, im: T::ZERO };
-    pub fn is_zero(&self) -> bool { *self == Self::ZERO }
+    pub fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }
+    pub fn one() -> Self { Self { re: T::one(), im: T::zero() } }
+    pub fn is_zero(&self) -> bool { *self == Self::zero() }
     pub fn new(re: T, im: T) -> Self { Self { re, im } }
     pub fn conj(self) -> Self where T: Neg<Output = T> {
         Self::new(self.re, -self.im)
@@ -76,11 +76,11 @@ impl_op_assign!(
     (T, Div, div, DivAssign, div_assign),
 );
 impl<T: ZeroOne> ZeroOne for Complex<T> {
-    const ZERO: Self = Self { re: T::ZERO, im: T::ZERO };
-    const ONE: Self = Self { re: T::ONE, im: T::ZERO };
+    fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }
+    fn one() -> Self { Self { re: T::one(), im: T::zero() } }
 }
 impl<T: ZeroOne> From<T> for Complex<T> {
-    fn from(re: T) -> Self { Self { re, im: T::ZERO } }
+    fn from(re: T) -> Self { Self { re, im: T::zero() } }
 }
 impl Debug for Complex<Float> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

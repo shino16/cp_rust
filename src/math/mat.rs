@@ -3,15 +3,15 @@ use crate::num::*;
 pub type Mat<T> = Vec<Vec<T>>;
 
 pub fn eye<T: Ring>(n: usize) -> Mat<T> {
-    let mut res = vec![vec![T::ZERO; n]; n];
+    let mut res = vec![vec![T::zero(); n]; n];
     for i in 0..n {
-        res[i][i] = T::ONE;
+        res[i][i] = T::one();
     }
     res
 }
 
 pub fn mat_mul<T: Ring>(a: &Mat<T>, b: &Mat<T>) -> Mat<T> {
-    let mut res = vec![vec![T::ZERO; b[0].len()]; a.len()];
+    let mut res = vec![vec![T::zero(); b[0].len()]; a.len()];
     for (res, a) in res.iter_mut().zip(a) {
         for (&a, b) in a.iter().zip(b) {
             for (res, &b) in res.iter_mut().zip(b) {

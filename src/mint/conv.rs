@@ -18,7 +18,7 @@ macro_rules! impl_ntt {
                     .collect();
                 let mut m = n >> 1;
                 while m != 0 {
-                    let mut w = Type::ONE;
+                    let mut w = Type::one();
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
                             let (u, v) = (a[i], a[i + m] * w);
@@ -40,7 +40,7 @@ macro_rules! impl_ntt {
                     .collect();
                 let mut m = 1;
                 while m < n {
-                    let mut w = Type::ONE;
+                    let mut w = Type::one();
                     for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
                         for i in k..k + m {
                             let u = a[i];

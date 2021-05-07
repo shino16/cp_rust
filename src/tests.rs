@@ -21,7 +21,7 @@ mod tests {
             for _ in 0..100 {
                 let a: Gf17 = rng.next().into();
                 let b = a.inv();
-                assert!(a * b == Gf17::ONE, "{} {}", a, b);
+                assert!(a * b == Gf17::one(), "{} {}", a, b);
             }
         }
     }
@@ -56,7 +56,7 @@ mod tests {
             for _ in 0..100 {
                 let a: Mint17 = rng.next().into();
                 let b = a.inv();
-                assert!(a * b == Mint17::ONE, "{} * {} = {}", a, b, a * b);
+                assert!(a * b == Mint17::one(), "{} * {} = {}", a, b, a * b);
             }
         }
     }
@@ -100,10 +100,10 @@ mod tests {
         use crate::int::*;
         #[test]
         fn types() {
-            assert_eq!(<i32 as Int>::Signed::ZERO, 0_i32);
-            assert_eq!(<i32 as Int>::Unsigned::ZERO, 0_u32);
-            assert_eq!(<u32 as Int>::Signed::ZERO, 0_i32);
-            assert_eq!(<u32 as Int>::Unsigned::ZERO, 0_u32);
+            assert_eq!(<i32 as Int>::Signed::zero(), 0_i32);
+            assert_eq!(<i32 as Int>::Unsigned::zero(), 0_u32);
+            assert_eq!(<u32 as Int>::Signed::zero(), 0_i32);
+            assert_eq!(<u32 as Int>::Unsigned::zero(), 0_u32);
         }
     }
 

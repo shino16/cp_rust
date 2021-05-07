@@ -8,7 +8,7 @@ impl<T: Field + Conv> Poly for T {}
 
 pub fn inv<T: Poly>(f: Vec<T>, need: usize) -> Vec<T> {
     let (mut f2, mut inv2) = (Vec::new(), Vec::new());
-    let mut inv = vec![T::ONE / f[0]];
+    let mut inv = vec![T::one() / f[0]];
     let mut deg = 1;
     while deg < need {
         deg *= 2;
@@ -20,7 +20,7 @@ pub fn inv<T: Poly>(f: Vec<T>, need: usize) -> Vec<T> {
         for e in &mut f2 {
             *e = -*e;
         }
-        f2[0] += T::ONE + T::ONE;
+        f2[0] += T::one() + T::one();
         Conv::conv_in_place(&mut inv, &mut f2);
         inv.truncate(deg);
     }

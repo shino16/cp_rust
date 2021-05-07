@@ -38,19 +38,19 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         self.graph.len() - 1
     }
     pub fn add_edge(&mut self, v: usize, w: usize, cap: C) {
-        if cap != C::ZERO {
+        if cap != C::zero() {
             let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());
             self.graph[v].push(Edge { to: w, cap, rev: widx });
-            self.graph[w].push(Edge { to: v, cap: C::ZERO, rev: vidx });
+            self.graph[w].push(Edge { to: v, cap: C::zero(), rev: vidx });
         }
     }
     pub fn solve(&mut self, s: usize, t: usize) -> C {
-        let mut res = C::ZERO;
+        let mut res = C::zero();
         let mut used = new_bitset(self.graph.len());
         loop {
             used.reset();
             let f = self.dfs(s, t, &mut used, C::MAX);
-            if f == C::ZERO {
+            if f == C::zero() {
                 return res;
             }
             res += f;
@@ -60,7 +60,7 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         let mut res = Vec::new();
         for v in 0..self.len() {
             for e in &self.graph[v] {
-                if e.cap == C::ZERO {
+                if e.cap == C::zero() {
                     res.push((v, e.to));
                 }
             }
@@ -73,9 +73,9 @@ impl<C: Num + Bounded> FordFulkerson<C> {
         }
         let mut adj = std::mem::take(&mut self.graph[v]);
         for &mut Edge { to, ref mut cap, rev } in &mut adj {
-            if *cap != C::ZERO && used.set_bit(to) {
+            if *cap != C::zero() && used.set_bit(to) {
                 let df = self.dfs(to, t, used, ub.min(*cap));
-                if df != C::ZERO {
+                if df != C::zero() {
                     *cap -= df;
                     self.graph[to][rev].cap += df;
                     self.graph[v] = adj;
@@ -84,6 +84,6 @@ impl<C: Num + Bounded> FordFulkerson<C> {
             }
         }
         self.graph[v] = adj;
-        C::ZERO
+        C::zero()
     }
 }

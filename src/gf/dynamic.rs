@@ -65,10 +65,9 @@ pub struct DynGf<M: DMod = DefaultMod> {
 
 impl<M: DMod> DynGf<M> {
     pub unsafe fn set_mod(p: u32) { M::set_mod(p); }
-    pub const ZERO: Self = Self { val: 0, _m: PhantomData };
     pub fn new(val: u32) -> Self { val.into() }
-    pub fn zero() -> Self { Self::from_raw(0) }
-    pub fn one() -> Self { 1.into() }
+    pub fn zero() -> Self { ZeroOne::zero() }
+    pub fn one() -> Self { ZeroOne::one() }
     fn from_raw(val: u32) -> Self { Self { val, _m: PhantomData } }
     pub fn value(self) -> u32 {
         let v = reduce::<M>(self.val as u64);
@@ -172,4 +171,8 @@ impl<M: DMod> fmt::Display for DynGf<M> {
 impl<M: DMod> str::FromStr for DynGf<M> {
     type Err = <u32 as str::FromStr>::Err;
     fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::new) }
+}
+impl<M: DMod> ZeroOne for DynGf<M> {
+    fn zero() -> Self { Self::from_raw(0) }
+    fn one() -> Self { 1.into() }
 }

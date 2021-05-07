@@ -12,7 +12,7 @@ pub fn fft(a: &mut UVec<Num>) {
     assert_eq!(n & (n - 1), 0);
     let mut m = n >> 1;
     while m != 0 {
-        let mut w = Num::ONE;
+        let mut w = Num::one();
         for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
             for i in k..k + m {
                 let (u, v) = (a[i], a[i + m] * w);
@@ -30,7 +30,7 @@ pub fn inv_fft(a: &mut UVec<Num>) {
     assert_eq!(n & (n - 1), 0);
     let mut m = 1;
     while m < n {
-        let mut w = Num::ONE;
+        let mut w = Num::one();
         for (k, t) in (0..n).step_by(m * 2).zip(1_u32..) {
             for i in k..k + m {
                 let (u, v) = (a[i], a[i + m]);

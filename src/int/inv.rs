@@ -1,7 +1,7 @@
 pub use super::*;
 
 pub fn inv<I: Int>(a: I, modu: I) -> I {
-    let [zero, one]: [I::Signed; 2] = [I::Signed::ZERO, I::Signed::ONE];
+    let [zero, one]: [I::Signed; 2] = [I::Signed::zero(), I::Signed::one()];
     let [mut a, mut b, mut u, mut v]: [I::Signed; 4] = [a.as_(), modu.as_(), one, zero];
     while b != zero {
         let t = a / b;

@@ -31,7 +31,7 @@ impl<C: Num + Bounded> Hlpp<C> {
         Self {
             graph: vec![Vec::new(); len],
             height: vec![len; len],
-            excess: vec![C::ZERO; len],
+            excess: vec![C::zero(); len],
             count: vec![0; len * 2],
             todo: vec![Vec::new(); len * 2],
             height_inv: vec![Vec::new(); len * 2],
@@ -55,15 +55,15 @@ impl<C: Num + Bounded> Hlpp<C> {
     pub fn add_edge(&mut self, v: usize, w: usize, cap: C) {
         let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());
         self.graph[v].push(InnerEdge { to: w, cap, rev: widx });
-        self.graph[w].push(InnerEdge { to: v, cap: C::ZERO, rev: vidx });
+        self.graph[w].push(InnerEdge { to: v, cap: C::zero(), rev: vidx });
     }
     fn push(&mut self, v: usize, idx: usize, init: bool) {
         let InnerEdge { to, ref mut cap, rev } = self.graph[v][idx];
-        debug_assert!(self.excess[v] > C::ZERO);
+        debug_assert!(self.excess[v] > C::zero());
         if !init {
             debug_assert!(self.height[v] == self.height[to] + 1);
         }
-        if *cap == C::ZERO {
+        if *cap == C::zero() {
             return;
         }
         let df = self.excess[v].min(*cap);
@@ -112,13 +112,13 @@ impl<C: Num + Bounded> Hlpp<C> {
         }
     }
     fn discharge(&mut self, v: usize) {
-        while self.excess[v] > C::ZERO {
+        while self.excess[v] > C::zero() {
             let mut min = !0;
             for i in 0..self.graph[v].len() {
-                if self.graph[v][i].cap > C::ZERO {
+                if self.graph[v][i].cap > C::zero() {
                     if self.height[v] > self.height[self.graph[v][i].to] {
                         self.push(v, i, false);
-                        if self.excess[v] == C::ZERO {
+                        if self.excess[v] == C::zero() {
                             return;
                         }
                     } else {
@@ -141,7 +141,7 @@ impl<C: Num + Bounded> Hlpp<C> {
         while let Some(v) = bfs.pop_front() {
             h = self.height[v];
             for &InnerEdge { to, cap: _, rev } in &self.graph[v] {
-                if self.height[to] == self.len() && self.graph[to][rev].cap > C::ZERO {
+                if self.height[to] == self.len() && self.graph[to][rev].cap > C::zero() {
                     self.height[to] = h + 1;
                     bfs.push_back(to);
                 }
@@ -153,14 +153,14 @@ impl<C: Num + Bounded> Hlpp<C> {
             self.count[h] += 1;
             self.idx[v] = self.height_inv[h].len();
             self.height_inv[h].push(v);
-            if self.excess[v] > C::ZERO {
+            if self.excess[v] > C::zero() {
                 self.todo[h].push(v);
             }
         }
     }
     pub fn solve(&mut self, s: usize, t: usize) -> C {
         if s == t {
-            return C::ZERO;
+            return C::zero();
         }
         self.init(s, t);
         self.highest_active = self.todo.len();

@@ -76,7 +76,7 @@ impl<M: Mod> Gf<M> {
             return Self::new(1);
         }
         let (mut e, mut k) = (self, k.rem_euclid((M::P - 1).as_()));
-        let mut res = Self::ONE;
+        let mut res = Self::one();
         while !k.is_zero() {
             if !(k & 1.as_()).is_zero() {
                 res *= e;
@@ -222,13 +222,13 @@ impl<M: Mod> ops::Neg for Gf<M> {
 
 impl<M: Mod> iter::Sum for Gf<M> {
     fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::ZERO, |b, x| b + x)
+        iter.fold(Self::zero(), |b, x| b + x)
     }
 }
 
 impl<M: Mod> iter::Product for Gf<M> {
     fn product<I: Iterator<Item = Self>>(iter: I) -> Self {
-        iter.fold(Self::ONE, |b, x| b * x)
+        iter.fold(Self::one(), |b, x| b * x)
     }
 }
 

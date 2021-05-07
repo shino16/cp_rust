@@ -1,23 +1,16 @@
 pub trait ZeroOne: Copy + PartialEq {
-    const ZERO: Self;
-    fn is_zero(self) -> bool {
-        self == Self::ZERO
-    }
-    const ONE: Self;
+    fn zero() -> Self;
+    fn one() -> Self;
+    fn is_zero(self) -> bool { self == Self::zero() }
 }
 
 macro_rules! impl_zo {
     ($($t:ty),*) => { $(
         impl ZeroOne for $t {
-            const ZERO: Self = 0;
-            const ONE: Self = 1;
+            fn zero() -> Self { 0 as $t }
+            fn one() -> Self { 1 as $t }
         }
     )* };
 }
 
-impl_zo!(i32, i64, i128, isize, u32, u64, u128, usize);
-
-impl ZeroOne for f64 {
-    const ZERO: Self = 0.0;
-    const ONE: Self = 1.0;
-}
+impl_zo!(i32, i64, i128, isize, u32, u64, u128, usize, f32, f64);

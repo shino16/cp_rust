@@ -40,10 +40,10 @@ impl<C: Num + Bounded> EdmondsKarp<C> {
     pub fn add_edge(&mut self, v: usize, w: usize, cap: C) {
         let (vidx, widx) = (self.graph[v].len(), self.graph[w].len());
         self.graph[v].push(Edge { to: w, cap, rev: widx });
-        self.graph[w].push(Edge { to: v, cap: C::ZERO, rev: vidx });
+        self.graph[w].push(Edge { to: v, cap: C::zero(), rev: vidx });
     }
     pub fn solve(&mut self, s: usize, t: usize) -> C {
-        let mut res = C::ZERO;
+        let mut res = C::zero();
         let mut track = vec![!0; self.len()];
         let mut togo = VecDeque::new();
         loop {
@@ -52,10 +52,10 @@ impl<C: Num + Bounded> EdmondsKarp<C> {
             }
             togo.clear();
             togo.push_back((s, C::MAX));
-            let mut df = C::ZERO;
+            let mut df = C::zero();
             while let Some((v, ub)) = togo.pop_front() {
                 for &Edge { to, cap, rev } in &self.graph[v] {
-                    if cap != C::ZERO && track[to] == !0 {
+                    if cap != C::zero() && track[to] == !0 {
                         track[to] = rev;
                         if to == t {
                             df = ub.min(cap);
@@ -65,7 +65,7 @@ impl<C: Num + Bounded> EdmondsKarp<C> {
                     }
                 }
             }
-            if df == C::ZERO {
+            if df == C::zero() {
                 return res;
             }
             res += df;

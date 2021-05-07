@@ -47,8 +47,8 @@ pub type Mint99 = MintB;
 
 impl<M: Mod> Mint<M> {
     pub const M: u32 = M::M;
-    pub const ZERO: Self = ZeroOne::ZERO;
-    pub const ONE: Self = ZeroOne::ONE;
+    pub fn zero() -> Self { ZeroOne::zero() }
+    pub fn one() -> Self { ZeroOne::one() }
     pub fn new(val: i64) -> Self { Self::from_val(val.rem_euclid(M::M as i64) as u32) }
     pub fn from_val(val: u32) -> Self { Mint { val, _m: PhantomData } }
     pub fn value(self) -> u32 { self.val }
@@ -168,6 +168,6 @@ impl<M: Mod> FromStr for Mint<M> {
     fn from_str(s: &str) -> Result<Self, Self::Err> { u32::from_str(s).map(Self::from) }
 }
 impl<M: Mod> ZeroOne for Mint<M> {
-    const ZERO: Self = Self { val: 0, _m: PhantomData };
-    const ONE: Self = Self { val: 1, _m: PhantomData };
+    fn zero() -> Self { Self { val: 0, _m: PhantomData } }
+    fn one() -> Self { Self { val: 1, _m: PhantomData } }
 }

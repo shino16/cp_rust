@@ -129,7 +129,7 @@ where
 {
     let mut dp = HashMap::<X::State, I>::default();
     let mut dp2 = HashMap::<X::State, I>::default();
-    dp.insert(dfa.init(), I::ONE);
+    dp.insert(dfa.init(), I::one());
     for i in 0..n {
         dp2.clear();
         for (s, k) in dp.drain() {
@@ -138,12 +138,12 @@ where
                 if dfa.unsuccessful(s1) {
                     continue;
                 }
-                *dp2.entry(s1).or_insert(I::ZERO) += k;
+                *dp2.entry(s1).or_insert(I::zero()) += k;
             }
         }
         std::mem::swap(&mut dp, &mut dp2);
     }
-    let mut sum = I::ZERO;
+    let mut sum = I::zero();
     for (s, k) in dp {
         if dfa.accept(s) {
             sum += k;

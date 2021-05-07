@@ -25,9 +25,9 @@ pub fn cumr<T: Copy>(slice: &[T], zero: T, mut op: impl FnMut(T, T) -> T) -> Vec
 }
 
 pub fn cuml_sum<T: Copy + ZeroOne + Add<Output = T>>(slice: &[T]) -> Vec<T> {
-    cuml(slice, T::ZERO, Add::add)
+    cuml(slice, T::zero(), Add::add)
 }
 
 pub fn cumr_sum<T: Copy + ZeroOne + Add<Output = T>>(slice: &[T]) -> Vec<T> {
-    cumr(slice, T::ZERO, Add::add)
+    cumr(slice, T::zero(), Add::add)
 }
