@@ -79,9 +79,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/bounded.rs\n"
   code: "pub trait Bounded: Ord {\n    const MIN: Self;\n    const MAX: Self;\n}\n\
@@ -93,33 +93,33 @@ data:
   isVerificationFile: false
   path: src/bounded.rs
   requiredBy:
-  - src/math/pow.rs
   - src/int.rs
   - src/draft/fpacc64.rs
+  - src/dfa.rs
+  - src/math/pow.rs
+  - src/int/inv.rs
+  - src/int/gcd.rs
   - src/int/gcd/ext.rs
   - src/int/arith.rs
-  - src/int/gcd.rs
-  - src/int/inv.rs
-  - src/dfa.rs
-  - src/tests.rs
-  - src/graph/dist.rs
-  - src/graph/bf.rs
-  - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/ford_fulkerson/edge.rs
-  - src/graph/max_flow/hlpp.rs
+  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/hlpp/edge.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
-  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/dist.rs
+  - src/graph/bf.rs
+  - src/tests.rs
   timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/edmonds_karp_test.rs
-  - test/src/bin/ford_fulkerson_test.rs
   - test/src/bin/hlpp_test.rs
+  - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/dfa_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/dfa_test.rs
 documentation_of: src/bounded.rs
 layout: document
 redirect_from:

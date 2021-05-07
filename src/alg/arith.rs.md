@@ -31,9 +31,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/alg/arith.rs\n"
   code: "pub use super::*;\npub use crate::num::*;\n\n#[derive(Default, Clone, Copy)]\n\
@@ -51,13 +51,13 @@ data:
   isVerificationFile: false
   path: src/alg/arith.rs
   requiredBy:
-  - src/ds/fwk.rs
   - src/graph/tree/euler_tour.rs
+  - src/ds/fwk.rs
   timestamp: '2021-04-26 15:43:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/lazy_segtree_test.rs
   - test/src/bin/tree_dfs_io_test.rs
+  - test/src/bin/lazy_segtree_test.rs
 documentation_of: src/alg/arith.rs
 layout: document
 redirect_from:

@@ -43,9 +43,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/cast.rs\n"
   code: "pub trait CastTo<T> {\n    fn cast_to(self) -> T;\n}\npub trait CastFrom<T>\
@@ -67,21 +67,21 @@ data:
   isVerificationFile: false
   path: src/cast.rs
   requiredBy:
-  - src/math/pow.rs
   - src/int.rs
   - src/draft/fpacc64.rs
+  - src/dfa.rs
+  - src/math/pow.rs
+  - src/int/inv.rs
+  - src/int/gcd.rs
   - src/int/gcd/ext.rs
   - src/int/arith.rs
-  - src/int/gcd.rs
-  - src/int/inv.rs
-  - src/dfa.rs
   - src/tests.rs
   timestamp: '2021-02-08 00:55:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/src/bin/dfa_test.rs
   - test/src/bin/segtree_beats_test.rs
   - test/src/bin/cargo_test.rs
-  - test/src/bin/dfa_test.rs
 documentation_of: src/cast.rs
 layout: document
 redirect_from:

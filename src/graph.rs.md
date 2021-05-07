@@ -58,9 +58,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/graph.rs\n"
   code: "pub mod bf;\npub mod bfs;\npub mod dfs;\npub mod dfs_io;\npub mod dist;\n\
@@ -73,22 +73,22 @@ data:
   isVerificationFile: false
   path: src/graph.rs
   requiredBy:
-  - src/graph/grid.rs
-  - src/graph/dfs_io.rs
-  - src/graph/bfs.rs
-  - src/graph/tree.rs
-  - src/graph/dist.rs
-  - src/graph/bf.rs
-  - src/graph/tsort.rs
   - src/graph/dfs.rs
-  - src/graph/weighted.rs
-  - src/graph/tree/euler_tour.rs
-  - src/graph/tree/dfs_io.rs
-  - src/graph/tree/dist.rs
   - src/graph/tree/dfs.rs
   - src/graph/tree/dfs/weighted.rs
+  - src/graph/tree/dist.rs
+  - src/graph/tree/dfs_io.rs
+  - src/graph/tree/euler_tour.rs
   - src/graph/dfs/cpnts.rs
   - src/graph/dfs/weighted.rs
+  - src/graph/tsort.rs
+  - src/graph/weighted.rs
+  - src/graph/dist.rs
+  - src/graph/grid.rs
+  - src/graph/dfs_io.rs
+  - src/graph/bf.rs
+  - src/graph/tree.rs
+  - src/graph/bfs.rs
   timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

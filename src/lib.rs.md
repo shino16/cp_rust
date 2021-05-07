@@ -28,9 +28,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/lib.rs\n"
   code: 'pub mod alg;
@@ -107,13 +107,13 @@ data:
   isVerificationFile: false
   path: src/lib.rs
   requiredBy:
-  - src/stdio/buf.rs
-  - src/mint.rs
-  - src/ds/uvec.rs
-  - src/ds/pool.rs
   - src/stdio.rs
-  - src/util/for_loop.rs
+  - src/stdio/buf.rs
+  - src/ds/pool.rs
+  - src/ds/uvec.rs
   - src/util/trait_alias.rs
+  - src/util/for_loop.rs
+  - src/mint.rs
   timestamp: '2021-05-04 17:50:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

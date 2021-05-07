@@ -166,9 +166,9 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes: {}
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.4/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/zo.rs\n"
   code: "pub trait ZeroOne: Copy + PartialEq {\n    const ZERO: Self;\n    fn is_zero(self)\
@@ -182,62 +182,62 @@ data:
   isVerificationFile: false
   path: src/zo.rs
   requiredBy:
-  - src/math/mat.rs
-  - src/math/bm.rs
-  - src/math/pow.rs
-  - src/math/binom.rs
-  - src/num.rs
-  - src/alg/arith.rs
-  - src/int.rs
-  - src/num/field.rs
-  - src/mint/conv.rs
-  - src/mint/io.rs
-  - src/draft/fpacc64.rs
-  - src/mint.rs
-  - src/poly.rs
-  - src/int/bisect.rs
-  - src/int/gcd/ext.rs
-  - src/int/arith.rs
-  - src/int/gcd.rs
-  - src/int/inv.rs
-  - src/gf/conv.rs
-  - src/gf/io.rs
-  - src/gf/dynamic.rs
-  - src/dfa.rs
-  - src/u64/conv.rs
-  - src/gf.rs
-  - src/float/conv.rs
   - src/iter/cum.rs
+  - src/poly.rs
+  - src/int.rs
+  - src/draft/fpacc64.rs
+  - src/dfa.rs
   - src/slice/cum.rs
-  - src/tests.rs
-  - src/ds/fwk.rs
-  - src/complex.rs
-  - src/graph/dist.rs
-  - src/graph/bf.rs
-  - src/graph/max_flow/ford_fulkerson/edges.rs
-  - src/graph/max_flow/ford_fulkerson/edge.rs
-  - src/graph/max_flow/hlpp.rs
+  - src/u64/conv.rs
+  - src/math/mat.rs
+  - src/math/pow.rs
+  - src/math/bm.rs
+  - src/math/binom.rs
+  - src/num/field.rs
+  - src/float/conv.rs
+  - src/gf.rs
+  - src/int/inv.rs
+  - src/int/gcd.rs
+  - src/int/gcd/ext.rs
+  - src/int/bisect.rs
+  - src/int/arith.rs
+  - src/num.rs
+  - src/graph/tree/dist.rs
+  - src/graph/tree/euler_tour.rs
+  - src/graph/max_flow/edmonds_karp.rs
+  - src/graph/max_flow/edmonds_karp/edge.rs
   - src/graph/max_flow/ford_fulkerson.rs
   - src/graph/max_flow/hlpp/edge.rs
-  - src/graph/max_flow/edmonds_karp/edge.rs
-  - src/graph/max_flow/edmonds_karp.rs
-  - src/graph/tree/euler_tour.rs
-  - src/graph/tree/dist.rs
+  - src/graph/max_flow/ford_fulkerson/edge.rs
+  - src/graph/max_flow/ford_fulkerson/edges.rs
+  - src/graph/max_flow/hlpp.rs
+  - src/graph/dist.rs
+  - src/graph/bf.rs
+  - src/ds/fwk.rs
+  - src/alg/arith.rs
+  - src/complex.rs
+  - src/mint/io.rs
+  - src/mint/conv.rs
+  - src/tests.rs
+  - src/gf/dynamic.rs
+  - src/gf/io.rs
+  - src/gf/conv.rs
+  - src/mint.rs
   timestamp: '2021-03-22 00:48:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/src/bin/edmonds_karp_test.rs
-  - test/src/bin/ntt_test.rs
-  - test/src/bin/ford_fulkerson_test.rs
   - test/src/bin/hlpp_test.rs
-  - test/src/bin/lazy_segtree_test.rs
-  - test/src/bin/segtree_beats_test.rs
-  - test/src/bin/cargo_test.rs
-  - test/src/bin/ntt_mint_garner_test.rs
-  - test/src/bin/dfa_test.rs
-  - test/src/bin/ntt_mint_test.rs
   - test/src/bin/ntt_garner_test.rs
+  - test/src/bin/ntt_mint_garner_test.rs
   - test/src/bin/tree_dfs_io_test.rs
+  - test/src/bin/ford_fulkerson_test.rs
+  - test/src/bin/ntt_test.rs
+  - test/src/bin/edmonds_karp_test.rs
+  - test/src/bin/ntt_mint_test.rs
+  - test/src/bin/dfa_test.rs
+  - test/src/bin/segtree_beats_test.rs
+  - test/src/bin/lazy_segtree_test.rs
+  - test/src/bin/cargo_test.rs
 documentation_of: src/zo.rs
 layout: document
 redirect_from:
