@@ -10,9 +10,9 @@ pub mod gcd;
 pub mod inv;
 pub mod saturate;
 
-pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bounded + PrimCast {
-    type Signed: IInt + CastFrom<Self> + CastTo<Self>;
-    type Unsigned: UInt + CastFrom<Self> + CastTo<Self>;
+pub trait Int: Num + Ord + Rem<Output = Self> + RemAssign + Bounded + PrimInt {
+    type Signed: IInt + CastFrom<Self> + Cast<Self>;
+    type Unsigned: UInt + CastFrom<Self> + Cast<Self>;
     fn abs(self) -> Self::Unsigned;
     fn rem_euclid(self, rhs: Self::Unsigned) -> Self::Unsigned;
 }
@@ -46,3 +46,10 @@ macro_rules! impl_int {
 }
 
 impl_int!({ i32, i64, i128, isize }, { u32, u64, u128, usize });
+
+pub trait As: Sized {
+    fn as_<T: CastFrom<Self>>(self) -> T { T::cast_from(self) }
+    fn into_<T: From<Self>>(self) -> T { T::from(self) }
+}
+
+impl<T> As for T {}

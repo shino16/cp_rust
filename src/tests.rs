@@ -4,8 +4,8 @@ mod tests {
         use crate::gf::*;
         #[test]
         fn test_pow() {
-            use crate::rand::xoshiro256plus::*;
-            let mut rng = Xoshiro256plus::new();
+            use crate::rand::xorshift::*;
+            let mut rng = Xorshift64::new();
             assert_eq!(Gf17::new(2).pow(3), Gf17::new(8));
             for _ in 0..100 {
                 let base: Gf17 = rng.next().into();
@@ -16,8 +16,8 @@ mod tests {
         }
         #[test]
         fn test_inv() {
-            use crate::rand::xoshiro256plus::*;
-            let mut rng = Xoshiro256plus::new();
+            use crate::rand::xorshift::*;
+            let mut rng = Xorshift64::new();
             for _ in 0..100 {
                 let a: Gf17 = rng.next().into();
                 let b = a.inv();
@@ -30,8 +30,8 @@ mod tests {
         use crate::mint::*;
         #[test]
         fn test_mul() {
-            use crate::rand::xoshiro256plus::*;
-            let mut rng = Xoshiro256plus::new();
+            use crate::rand::xorshift::*;
+            let mut rng = Xorshift64::new();
             for _ in 0..100 {
                 let a = rng.next() as u32 as u64;
                 let b = rng.next() as u32 as u64;
@@ -40,8 +40,8 @@ mod tests {
         }
         #[test]
         fn test_pow() {
-            use crate::rand::xoshiro256plus::*;
-            let mut rng = Xoshiro256plus::new();
+            use crate::rand::xorshift::*;
+            let mut rng = Xorshift64::new();
             for _ in 0..100 {
                 let base: Mint17 = rng.next().into();
                 let k = rng.next() % 100;
@@ -51,8 +51,8 @@ mod tests {
         }
         #[test]
         fn test_inv() {
-            use crate::rand::xoshiro256plus::*;
-            let mut rng = Xoshiro256plus::new();
+            use crate::rand::xorshift::*;
+            let mut rng = Xorshift64::new();
             for _ in 0..100 {
                 let a: Mint17 = rng.next().into();
                 let b = a.inv();
@@ -134,6 +134,19 @@ mod tests {
                 }
             }
         }
+        mod sqrt {
+            use crate::math::sqrt::*;
+            #[test]
+            fn test_sqrt() {
+                let mut rng = crate::rand::xorshift::Xorshift64::new();
+                for _ in 0..20 {
+                    let n = rng.next() / 2;
+                    let (s, t) = (floor_sqrt(n), ceil_sqrt(n));
+                    assert!(s * s <= n && n < (s + 1) * (s + 1));
+                    assert!((t - 1) * (t - 1) < n && n <= t * t);
+                }
+            }
+        }
     }
 
     mod slice {
@@ -158,8 +171,8 @@ mod tests {
             use crate::slice::lcp::*;
             #[test]
             fn suffix_array_lcp_test() {
-                use crate::rand::xoshiro256plus::*;
-                let mut rng = Xoshiro256plus::new();
+                use crate::rand::xorshift::*;
+                let mut rng = Xorshift64::new();
                 let modu = rng.next() % 1000;
                 let len = rng.next() as usize % 1000;
                 let mut v: Vec<_> = std::iter::repeat_with(|| rng.next() % modu + 1).take(len).collect();
@@ -181,8 +194,8 @@ mod tests {
             use crate::slice::sort::*;
             #[test]
             fn test_count_sort() {
-                use crate::rand::xoshiro256plus::*;
-                let mut rng = Xoshiro256plus::new();
+                use crate::rand::xorshift::*;
+                let mut rng = Xorshift64::new();
                 let len = rng.next() as usize % 100;
                 let modu = rng.next() % len as u64 + 50;
                 let mut a: Vec<_> = std::iter::repeat_with(|| (rng.next() % modu, rng.next()))
