@@ -68,19 +68,14 @@ data:
     \ tree) => { {\n        let n = $crate::parse!($iter, usize);\n        $crate::parse!(@graph\
     \ $iter, n, n - 1)\n    } };\n    ($iter:expr, $t:ty) => { $iter.next().expect(\"\
     no input\").parse::<$t>().expect(\"parse error\") };\n    ($iter:expr) => { $iter.next().expect(\"\
-    no input\").parse().expect(\"parse error\") };\n}\n\n#[cfg(debug_assertions)]\n\
-    #[macro_export]\nmacro_rules! dbg {\n    ($($val:expr),* $(,)?) => {\n       \
-    \ ($( match $val {\n            tmp => {\n                std::eprintln!(\":{}>\
-    \ {} = {:?}\", std::line!(), std::stringify!($val), &tmp);\n                tmp\n\
-    \            }\n        } ),*)\n    };\n}\n\n#[cfg(not(debug_assertions))]\n#[macro_export]\n\
-    macro_rules! dbg {\n    ($($x:expr),*) => {};\n}\n"
+    no input\").parse().expect(\"parse error\") };\n}\n"
   dependsOn:
   - src/lib.rs
   isVerificationFile: false
   path: src/stdio.rs
   requiredBy:
   - src/stdio/buf.rs
-  timestamp: '2021-05-07 10:04:47+09:00'
+  timestamp: '2021-05-17 11:32:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/stdio.rs

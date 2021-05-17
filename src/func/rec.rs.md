@@ -12,16 +12,15 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/func/rec.rs\n"
-  code: "#[must_use]\npub struct Recurse<F>(F);\n\nimpl<F> Recurse<F> {\n    pub fn\
-    \ call<Arg, Ret>(&self, arg: Arg) -> Ret\n    where\n        F: Fn(&dyn Fn(Arg)\
-    \ -> Ret, Arg) -> Ret,\n    {\n        self.0(&|arg| self.call(arg), arg)\n  \
-    \  }\n}\n\npub fn recurse<Arg, Ret, F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret>(f:\
-    \ F) -> Recurse<F> {\n    Recurse(f)\n}\n"
+  code: "pub fn recurse<A, R, F>(f: F) -> impl Fn(A) -> R\nwhere\n    F: Fn(&dyn Fn(A)\
+    \ -> R, A) -> R,\n{\n    fn fix<A, R, F>(f: &F, a: A) -> R\n    where\n      \
+    \  F: Fn(&dyn Fn(A) -> R, A) -> R,\n    {\n        f(&|a: A| fix::<A, R, F>(f,\
+    \ a), a)\n    }\n    move |a: A| fix::<A, R, F>(&f, a)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/func/rec.rs
   requiredBy: []
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-05-17 11:32:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/func/rec.rs

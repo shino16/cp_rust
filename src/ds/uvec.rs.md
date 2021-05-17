@@ -79,7 +79,7 @@ data:
   - src/ds/uvec2d.rs
   - src/mint/conv.rs
   - src/gf/conv.rs
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-17 11:32:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/ntt_garner_test.rs

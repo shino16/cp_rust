@@ -32,6 +32,9 @@ data:
     path: src/make_vec.rs
     title: src/make_vec.rs
   - icon: ':heavy_check_mark:'
+    path: src/math/sqrt.rs
+    title: src/math/sqrt.rs
+  - icon: ':heavy_check_mark:'
     path: src/mint.rs
     title: src/mint.rs
   - icon: ':heavy_check_mark:'
@@ -41,8 +44,8 @@ data:
     path: src/rand/seed.rs
     title: src/rand/seed.rs
   - icon: ':heavy_check_mark:'
-    path: src/rand/xoshiro256plus.rs
-    title: src/rand/xoshiro256plus.rs
+    path: src/rand/xorshift.rs
+    title: src/rand/xorshift.rs
   - icon: ':heavy_check_mark:'
     path: src/slice/lcp.rs
     title: src/slice/lcp.rs
@@ -96,10 +99,11 @@ data:
   - src/iter.rs
   - src/iter/prod.rs
   - src/make_vec.rs
+  - src/math/sqrt.rs
   - src/mint.rs
   - src/num.rs
   - src/rand/seed.rs
-  - src/rand/xoshiro256plus.rs
+  - src/rand/xorshift.rs
   - src/slice/lcp.rs
   - src/slice/perm.rs
   - src/slice/sa.rs
@@ -110,7 +114,7 @@ data:
   isVerificationFile: true
   path: test/src/bin/cargo_test.rs
   requiredBy: []
-  timestamp: '2021-05-07 12:42:34+09:00'
+  timestamp: '2021-05-17 15:14:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/src/bin/cargo_test.rs

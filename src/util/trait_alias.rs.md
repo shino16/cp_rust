@@ -167,7 +167,7 @@ data:
   - src/alg/arith.rs
   - src/complex.rs
   - src/tests.rs
-  timestamp: '2021-05-04 17:50:45+09:00'
+  timestamp: '2021-05-17 11:32:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/hlpp_test.rs

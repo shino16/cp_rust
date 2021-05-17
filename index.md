@@ -418,6 +418,9 @@ data:
     - icon: ':warning:'
       path: src/math/primes.rs
       title: src/math/primes.rs
+    - icon: ':heavy_check_mark:'
+      path: src/math/sqrt.rs
+      title: src/math/sqrt.rs
   - name: src/math/gcd
     pages:
     - icon: ':warning:'
@@ -444,10 +447,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/rand/seed.rs
       title: src/rand/seed.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/rand/xorshift.rs
       title: src/rand/xorshift.rs
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/rand/xoshiro256plus.rs
       title: src/rand/xoshiro256plus.rs
   - name: src/slice

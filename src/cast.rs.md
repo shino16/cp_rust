@@ -24,6 +24,9 @@ data:
     path: src/int/inv.rs
     title: src/int/inv.rs
   - icon: ':warning:'
+    path: src/math/binom.rs
+    title: src/math/binom.rs
+  - icon: ':warning:'
     path: src/math/pow.rs
     title: src/math/pow.rs
   - icon: ':heavy_check_mark:'
@@ -48,21 +51,17 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/user_defined.py\"\
     , line 68, in bundle\n    raise RuntimeError('bundler is not specified: {}'.format(path.as_posix()))\n\
     RuntimeError: bundler is not specified: src/cast.rs\n"
-  code: "pub trait CastTo<T> {\n    fn cast_to(self) -> T;\n}\npub trait CastFrom<T>\
-    \ {\n    fn cast_from(src: T) -> Self;\n}\n\nimpl<T, U: CastTo<T>> CastFrom<U>\
-    \ for T {\n    fn cast_from(src: U) -> Self {\n        U::cast_to(src)\n    }\n\
-    }\n\nmacro_rules! impl_prim {\n    ($($ts:ty),*) => {\n        impl_asint!({ $($ts),*\
-    \ } => { $($ts),* });\n        pub trait PrimCast where $(Self: CastTo<$ts>),*,\
-    \ $(Self: CastFrom<$ts>),* {}\n        $( impl PrimCast for $ts {} )*\n    }\n\
-    }\n\nmacro_rules! impl_asint {\n    ({ $t:ty } => { $($us:ty),* }) => { $(\n \
-    \       impl CastTo<$us> for $t {\n            fn cast_to(self) -> $us {\n   \
-    \             self as $us\n            }\n        }\n    )* };\n    ({ $t:ty,\
-    \ $($ts:ty),* } => { $($us:ty),* }) => {\n        impl_asint!({ $t } => { $($us),*\
-    \ });\n        impl_asint!({ $($ts),* } => { $($us),* });\n    };\n}\n\nimpl_prim!(i32,\
-    \ i64, i128, isize, u32, u64, u128, usize, f32, f64);\n\npub trait As: Sized {\n\
-    \    fn as_<T: CastFrom<Self>>(self) -> T {\n        T::cast_from(self)\n    }\n\
-    \    fn into_<T: From<Self>>(self) -> T {\n        T::from(self)\n    }\n}\n\n\
-    impl<T> As for T {}\n"
+  code: "pub trait Cast<T> { fn cast(self) -> T; }\npub trait CastFrom<T> { fn cast_from(src:\
+    \ T) -> Self; }\n\nimpl<T, U: Cast<T>> CastFrom<U> for T {\n    fn cast_from(src:\
+    \ U) -> Self { U::cast(src) }\n}\n\nmacro_rules! impl_prim {\n    ($($ts:ty),*)\
+    \ => {\n        impl_asint!({ $($ts),* } => { $($ts),* });\n        pub trait\
+    \ PrimInt where $(Self: Cast<$ts>),*, $(Self: CastFrom<$ts>),* {}\n        $(\
+    \ impl PrimInt for $ts {} )*\n    }\n}\n\nmacro_rules! impl_asint {\n    ({ $t:ty\
+    \ } => { $($us:ty),* }) => { $(\n        impl Cast<$us> for $t { fn cast(self)\
+    \ -> $us { self as $us } }\n    )* };\n    ({ $t:ty, $($ts:ty),* } => { $($us:ty),*\
+    \ }) => {\n        impl_asint!({ $t } => { $($us),* });\n        impl_asint!({\
+    \ $($ts),* } => { $($us),* });\n    };\n}\n\nimpl_prim!(i32, i64, i128, isize,\
+    \ u32, u64, u128, usize);\n"
   dependsOn: []
   isVerificationFile: false
   path: src/cast.rs
@@ -71,12 +70,13 @@ data:
   - src/draft/fpacc64.rs
   - src/dfa.rs
   - src/math/pow.rs
+  - src/math/binom.rs
   - src/int/inv.rs
   - src/int/gcd.rs
   - src/int/gcd/ext.rs
   - src/int/arith.rs
   - src/tests.rs
-  timestamp: '2021-02-08 00:55:24+09:00'
+  timestamp: '2021-05-17 15:14:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/src/bin/dfa_test.rs

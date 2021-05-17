@@ -14,13 +14,13 @@ data:
     RuntimeError: bundler is not specified: src/math.rs\n"
   code: "pub mod binom;\npub mod bm;\npub mod convex;\npub mod crt;\npub mod factorize;\n\
     pub mod gcd;\npub mod is_prime;\npub mod mat;\npub mod modpow;\npub mod pow;\n\
-    pub mod primes;\n\npub fn abs_diff<T: PartialOrd + std::ops::Sub<T, Output = T>>(a:\
-    \ T, b: T) -> T {\n    if a < b { b - a } else { a - b }\n}\n"
+    pub mod primes;\npub mod sqrt;\n\npub fn abs_diff<T: PartialOrd + std::ops::Sub<T,\
+    \ Output = T>>(a: T, b: T) -> T {\n    if a < b { b - a } else { a - b }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/math.rs
   requiredBy: []
-  timestamp: '2021-04-26 15:43:03+09:00'
+  timestamp: '2021-05-17 15:14:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/math.rs

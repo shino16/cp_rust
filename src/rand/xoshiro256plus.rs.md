@@ -4,17 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/rand/seed.rs
     title: src/rand/seed.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: src/tests.rs
-    title: src/tests.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/src/bin/cargo_test.rs
-    title: test/src/bin/cargo_test.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes: {}
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
@@ -38,12 +32,10 @@ data:
   - src/rand/seed.rs
   isVerificationFile: false
   path: src/rand/xoshiro256plus.rs
-  requiredBy:
-  - src/tests.rs
-  timestamp: '2021-03-31 15:51:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/src/bin/cargo_test.rs
+  requiredBy: []
+  timestamp: '2021-05-17 15:14:26+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/rand/xoshiro256plus.rs
 layout: document
 redirect_from:
