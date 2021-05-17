@@ -102,22 +102,3 @@ macro_rules! parse {
     ($iter:expr, $t:ty) => { $iter.next().expect("no input").parse::<$t>().expect("parse error") };
     ($iter:expr) => { $iter.next().expect("no input").parse().expect("parse error") };
 }
-
-#[cfg(debug_assertions)]
-#[macro_export]
-macro_rules! dbg {
-    ($($val:expr),* $(,)?) => {
-        ($( match $val {
-            tmp => {
-                std::eprintln!(":{}> {} = {:?}", std::line!(), std::stringify!($val), &tmp);
-                tmp
-            }
-        } ),*)
-    };
-}
-
-#[cfg(not(debug_assertions))]
-#[macro_export]
-macro_rules! dbg {
-    ($($x:expr),*) => {};
-}

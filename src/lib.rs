@@ -33,3 +33,23 @@ pub mod vec;
 pub mod zo;
 
 pub mod tests;
+
+#[cfg(debug_assertions)]
+#[macro_export]
+macro_rules! dbg {
+    ($($val:expr),* $(,)?) => {
+        ($( match $val {
+            tmp => {
+                std::eprintln!("[{}:{}] {} = {:?}",
+                    std::file!(), std::line!(), std::stringify!($val), &tmp);
+                tmp
+            }
+        } ),*)
+    };
+}
+
+#[cfg(not(debug_assertions))]
+#[macro_export]
+macro_rules! dbg {
+    ($($x:expr),*) => { std::convert::identity(($($x),*)) }
+}

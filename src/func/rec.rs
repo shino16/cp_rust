@@ -1,15 +1,12 @@
-#[must_use]
-pub struct Recurse<F>(F);
-
-impl<F> Recurse<F> {
-    pub fn call<Arg, Ret>(&self, arg: Arg) -> Ret
+pub fn recurse<A, R, F>(f: F) -> impl Fn(A) -> R
+where
+    F: Fn(&dyn Fn(A) -> R, A) -> R,
+{
+    fn fix<A, R, F>(f: &F, a: A) -> R
     where
-        F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret,
+        F: Fn(&dyn Fn(A) -> R, A) -> R,
     {
-        self.0(&|arg| self.call(arg), arg)
+        f(&|a: A| fix::<A, R, F>(f, a), a)
     }
-}
-
-pub fn recurse<Arg, Ret, F: Fn(&dyn Fn(Arg) -> Ret, Arg) -> Ret>(f: F) -> Recurse<F> {
-    Recurse(f)
+    move |a: A| fix::<A, R, F>(&f, a)
 }
